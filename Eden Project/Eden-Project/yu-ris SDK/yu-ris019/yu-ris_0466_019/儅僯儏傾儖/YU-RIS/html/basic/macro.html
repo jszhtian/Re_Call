@@ -1,0 +1,90 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="./top.html">概要</A>＞マクロ</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="./basic.html">[基本文法]</A>
+　<A HREF="./variable.html">[変数]</A>
+　<A HREF="./svariable.html">[システム変数]</A>
+　<A HREF="./macro.html">[マクロ]</A>
+　<A HREF="./layer.html">[ＣＧレイヤ]</A>
+　<A HREF="./task.html">[タスク]</A>
+　<A HREF="./input.html">[入力]</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■マクロ</FONT>
+<FONT CLASS=t20>
+
+※マクロの定義方法や機能の詳細は、「その他命令」→「MACRO」をご覧ください。
+
+
+
+マクロ機能を使えば、記述の面倒なコマンドや、繰り返し何度も使うようなコマンドを
+簡単に記述できるようになります。
+定義は macro.yst ファイル内で行います。定義の仕方は、
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[<FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>マクロ名</FONT> <FONT CLASS=t62>STR</FONT>="<FONT CLASS=t65>マクロ文字列</FONT>"]</FONT></B>
+
+となります。定義したマクロを使用する場合は、
+
+　　<B><FONT CLASS=t60><FONT CLASS=t62>\</FONT>[<FONT CLASS=t63>マクロ名</FONT>]</FONT></B>
+
+と記述します。
+
+※マクロ名として使える文字は、半角の英数字、アンダーバー、および全角文字です。
+( 例：\CGLOAD , \CG_LOAD , \CG_LOAD_1, \画像読込 )
+ただし、半角文字の次に全角文字がつく名前は使用できません。( 例：\abc１２３ )
+
+
+　例：　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[<FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>TC</FONT> <FONT CLASS=t62>STR</FONT>="<FONT CLASS=t65>TEXT[X=20 Y=360 SIZE=24]</FONT>"]</FONT></B>
+
+このように定義した場合、スクリプトファイル中に
+
+　　<B><FONT CLASS=t60><FONT CLASS=t62>\</FONT>[<FONT CLASS=t63>TC</FONT>]</FONT></B>
+
+という記述があった場合、
+
+　　<B><FONT CLASS=t60><FONT CLASS=t65>TEXT[X=20 Y=360 SIZE=24]</FONT></FONT></B>
+
+という記述に変換されて実行されます。
+
+
+場合によっては、角括弧の記述を省略することが出来ます。
+たとえば、マクロ名に続く文字が全角文字の場合は、角括弧を省略できます。
+
+　例：　<B><FONT CLASS=t60>\ABCあいうえお</FONT></B>
+
+
+また、行末での記述においても省略できます。
+
+　例：　<B><FONT CLASS=t60>CG[ID=BG X=5]\ABC</FONT></B>
+
+
+ユーリスでは、<U>デフォルトで登録されているマクロ(システムマクロ)</U>が存在します。
+これを使用すると、テキストの記述で特に役立ちます。
+<B><FONT CLASS=t60>
+　\[r]　(改行マクロ)
+　\[p]　(改ページマクロ)
+　\[c]　(クリック待ちマクロ)
+</FONT></B>
+
+　例：　<B><FONT CLASS=t60>あいうえお\[r]かきくけこ\[c]さしすせそ\[p]たちつてと\[r]</FONT></B>
+
+のように記述します。
+この場合はマクロ名に続く文字が全角文字ですので、下のように角括弧の省略が可能です。
+
+　例：　<B><FONT CLASS=t60>あいうえお\rかきくけこ\cさしすせそ\pたちつてと\r</FONT></B>
+
+
+
+</FONT></B>
+</FONT>
+
+
+</BODY></HTML>

@@ -1,0 +1,151 @@
+﻿#pragma once
+
+#define WIN32_LEAN_AND_MEAN             // 从 Windows 头文件中排除极少使用的内容
+// Windows 头文件
+#include <windows.h>
+#include <fstream>
+#include <iostream>
+#include <vector>
+#include <map>
+#include <fstream>
+#include "detours.h"
+#include <Psapi.h>
+#pragma comment(lib, "ntdll.lib")
+#pragma comment(lib, "Psapi.lib")
+using namespace std;
+static DWORD BaseAddr = (DWORD)GetModuleHandle(NULL);
+//static ofstream TXT("TXT.txt");
+static LPWSTR ctowJIS(char* str)
+{
+	DWORD dwMinSize;
+	dwMinSize = MultiByteToWideChar(932, 0, str, -1, NULL, 0); //计算长度
+	LPWSTR out = new wchar_t[dwMinSize];
+	MultiByteToWideChar(932, 0, str, -1, out, dwMinSize);//转换
+	return out;
+}
+
+static char* wtocGBK(LPCTSTR str)
+{
+	DWORD dwMinSize;
+	dwMinSize = WideCharToMultiByte(936, NULL, str, -1, NULL, 0, NULL, FALSE); //计算长度
+	char* out = new char[dwMinSize];
+	WideCharToMultiByte(936, NULL, str, -1, out, dwMinSize, NULL, FALSE);//转换
+	return out;
+}
+
+static void make_console() {
+	AllocConsole();
+	freopen("CONOUT$", "w", stdout);
+	freopen("CONIN$", "r", stdin);
+	cout << "Open Console Success!" << endl;
+}
+
+static char* wtoc(LPCTSTR str)
+{
+	DWORD dwMinSize;
+	dwMinSize = WideCharToMultiByte(CP_ACP, NULL, str, -1, NULL, 0, NULL, FALSE);
+	char* bbb = new char[dwMinSize];
+	WideCharToMultiByte(CP_ACP, NULL, str, -1, bbb, dwMinSize, NULL, FALSE);
+	return bbb;
+}
+
+static char* wtocUTF(LPCTSTR str)
+{
+	DWORD dwMinSize;
+	dwMinSize = WideCharToMultiByte(CP_UTF8, NULL, str, -1, NULL, 0, NULL, FALSE); //计算长度
+	char* out = new char[dwMinSize];
+	WideCharToMultiByte(CP_UTF8, NULL, str, -1, out, dwMinSize, NULL, FALSE);//转换
+	return out;
+}
+
+static LPWSTR ctowUTF(char* str)
+{
+	DWORD dwMinSize;
+	dwMinSize = MultiByteToWideChar(CP_UTF8, 0, str, -1, NULL, 0); //计算长度
+	LPWSTR out = new wchar_t[dwMinSize];
+	MultiByteToWideChar(CP_UTF8, 0, str, -1, out, dwMinSize);//转换
+	return out;
+}
+
+static bool Hook(PVOID addr, PVOID func)
+{
+	DetourTransactionBegin();
+	DetourUpdateThread(GetCurrentThread());
+	DetourAttach(&addr, func);
+	if (DetourTransactionCommit() != NOERROR)
+		return false;
+	return true;
+}
+
+static BOOL IATPatch(LPCSTR szDllName, PROC pfnOrg, PROC pfnNew)
+{
+	HMODULE hmod;
+	LPCSTR szLibName;
+	PIMAGE_IMPORT_DESCRIPTOR pImportDesc;
+	PIMAGE_THUNK_DATA pThunk;
+	DWORD dwOldProtect, dwRVA;
+	PBYTE pAddr;
+
+	hmod = GetModuleHandleW(NULL);
+	pAddr = (PBYTE)hmod;
+	pAddr += *((DWORD*)&pAddr[0x3C]);
+	dwRVA = *((DWORD*)&pAddr[0x80]);
+
+	pImportDesc = (PIMAGE_IMPORT_DESCRIPTOR)((DWORD)hmod + dwRVA);
+
+	for (; pImportDesc->Name; pImportDesc++)
+	{
+		szLibName = (LPCSTR)((DWORD)hmod + pImportDesc->Name);
+		if (!stricmp(szLibName, szDllName))
+		{
+			pThunk = (PIMAGE_THUNK_DATA)((DWORD)hmod + pImportDesc->FirstThunk);
+			for (; pThunk->u1.Function; pThunk++)
+			{
+				if (pThunk->u1.Function == (DWORD)pfnOrg)
+				{
+					VirtualProtect((LPVOID)&pThunk->u1.Function, 4, PAGE_EXECUTE_READWRITE, &dwOldProtect);
+					pThunk->u1.Function = (DWORD)pfnNew;
+					VirtualProtect((LPVOID)&pThunk->u1.Function, 4, dwOldProtect, &dwOldProtect);
+					return TRUE;
+				}
+			}
+		}
+	}
+	return FALSE;
+}
+
+
+
+static BOOL IATFinder(LPCSTR szDllName, PROC pfnOrg)
+{
+	HMODULE hmod;
+	LPCSTR szLibName;
+	PIMAGE_IMPORT_DESCRIPTOR pImportDesc;
+	PIMAGE_THUNK_DATA pThunk;
+	DWORD dwOldProtect, dwRVA;
+	PBYTE pAddr;
+
+	hmod = GetModuleHandleW(NULL);
+	pAddr = (PBYTE)hmod;
+	pAddr += *((DWORD*)&pAddr[0x3C]);
+	dwRVA = *((DWORD*)&pAddr[0x80]);
+
+	pImportDesc = (PIMAGE_IMPORT_DESCRIPTOR)((DWORD)hmod + dwRVA);
+
+	for (; pImportDesc->Name; pImportDesc++)
+	{
+		szLibName = (LPCSTR)((DWORD)hmod + pImportDesc->Name);
+		if (!stricmp(szLibName, szDllName))
+		{
+			pThunk = (PIMAGE_THUNK_DATA)((DWORD)hmod + pImportDesc->FirstThunk);
+			for (; pThunk->u1.Function; pThunk++)
+			{
+				if (pThunk->u1.Function == (DWORD)pfnOrg)
+				{
+					return TRUE;
+				}
+			}
+		}
+	}
+	return FALSE;
+}

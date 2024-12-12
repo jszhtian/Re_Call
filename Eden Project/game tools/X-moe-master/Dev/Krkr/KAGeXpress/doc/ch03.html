@@ -1,0 +1,93 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>第 3 章 KAGeXpress使用入门</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="index.html" title="KCDDP KAGeXpress 3.0 使用手册">
+<link rel="up" href="index.html" title="KCDDP KAGeXpress 3.0 使用手册">
+<link rel="prev" href="ch02-8.html" title="2.8. 关于渐变的类型、参数和使用">
+<link rel="next" href="ch03-2.html" title="3.2. 文字显示与控制">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">第 3 章 KAGeXpress使用入门</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch02-8.html">上一页</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="ch03-2.html">下一页</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="chapter" lang="zh-CN">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="ch03"></a>第 3 章 KAGeXpress使用入门</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch03.html#ch03-1">3.1. 建立新工程</a></span></dt>
+<dt><span class="sect1"><a href="ch03-2.html">3.2. 文字显示与控制</a></span></dt>
+<dt><span class="sect1"><a href="ch03-3.html">3.3. 使用背景和前景</a></span></dt>
+<dt><span class="sect1"><a href="ch03-4.html">3.4. 播放音效、音乐</a></span></dt>
+<dt><span class="sect1"><a href="ch03-5.html">3.5. 控制剧本流程</a></span></dt>
+<dt><span class="sect1"><a href="ch03-6.html">3.6. 调试与发布</a></span></dt>
+</dl>
+</div>
+<p>本章主要介绍KAGeXpress系统的基本使用方法和基本命令。利用本章介绍的知识，基本可以满足用户制作一个最简单AVG游戏的需求。</p>
+<div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[提示]" src="images/tip.png"></td>
+<th align="left">提示</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>对于KAGeXpress的原用户，建议您粗略翻看本章。KAGeXpress 3为保持接口的易用和精简进行了重新的设计。您可能需要特别注意新旧接口之间的差别。</p>
+<p>对于官方KAG系统的用户，建议您阅读本章。如果您自己以前没有使用过封装，您将领略到KAGeXpress的设计给您带来的便捷、优雅。如果您以前曾经设计过自己的封装命令，KAGeXpress的命令设计也一定能够带给您新的启发。</p>
+</td></tr>
+</table></div>
+<div class="sect1" lang="zh-CN">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ch03-1"></a>3.1. 建立新工程</h2></div></div></div>
+<p>对于Windows NT/2000/XP/2003/Vista的用户，我们推荐使用自带的新工程建立向导建立工程。</p>
+<div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[提示]" src="images/tip.png"></td>
+<th align="left">提示</th>
+</tr>
+<tr><td align="left" valign="top">
+<p>下面是无法使用向导的用户可以使用的方法。</p>
+<p>建立一个空白目录，拷贝开发包下的Template目录到这个空白目录并把Template改名为Data。</p>
+<p>之后，请拷贝开发包中的Krkr.exe、krflash.dll、krmovie.dll到这个包含Data目录的新建目录下。<span class="emphasis"><em>请注意，拷贝后Krkr.exe等文件与Data目录应该在同一个目录下。</em></span>
+				</p>
+</td></tr>
+</table></div>
+<p>在工程目录下，尝试运行Krkr.exe，如果出现图示的信息，说明新建工程已经成功了。</p>
+<div class="figure">
+<a name="fig3-1"></a><div class="figure-contents"><div><img src="figure/RunTpl.jpg" alt="KAGeXpress工程模版成功执行的输出"></div></div>
+<p class="title"><b>图 3.1. KAGeXpress工程模版成功执行的输出</b></p>
+</div>
+<br class="figure-break">
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch02-8.html">上一页</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="ch03-2.html">下一页</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">2.8. 关于渐变的类型、参数和使用 </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
+<td width="40%" align="right" valign="top"> 3.2. 文字显示与控制</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

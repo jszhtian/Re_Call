@@ -1,0 +1,208 @@
+﻿#include "framework.h"
+#include "detours.h"
+#include <iostream>
+#pragma comment(lib, "detours.lib")
+using namespace std;
+DWORD BaseAddr = (DWORD)GetModuleHandle(NULL);
+
+PVOID g_pOldCreateFontIndirectA = NULL;
+typedef int (WINAPI* PfuncCreateFontIndirectA)(LOGFONTA* lplf);
+int WINAPI NewCreateFontIndirectA(LOGFONTA* lplf)
+{
+	if (strcmp((lplf->lfFaceName), "俵俽 僑僔僢僋") == 0)
+		strcpy(lplf->lfFaceName, "黑体");
+	else if (strcmp((lplf->lfFaceName), "俵俽 柧挬") == 0)
+		strcpy(lplf->lfFaceName, "仿宋");
+
+	return ((PfuncCreateFontIndirectA)g_pOldCreateFontIndirectA)(lplf);
+}
+
+void APIHook()
+{
+	DetourTransactionBegin();
+	DetourUpdateThread(GetCurrentThread());
+	g_pOldCreateFontIndirectA = DetourFindFunction("GDI32.dll", "CreateFontIndirectA");
+	DetourAttach(&g_pOldCreateFontIndirectA, NewCreateFontIndirectA);
+	DetourTransactionCommit();
+}
+
+DWORD MNG_Buffer = NULL;
+
+DWORD FileSize = 0;
+char* FileBuff = nullptr;
+//Need alloc mem by yourself.
+void __stdcall EdenReadFile(char* FileName)
+{
+	if (FileName)
+	{
+		//cout << "EdenReadFile:ReadFileName:" << FileName << endl;
+		char OutNme[MAX_PATH];
+		sprintf(OutNme, "%s%s", "sorakoi_cn\\", FileName);
+		FILE* f = fopen(OutNme, "rb");
+		if (f != NULL)
+		{
+			fseek(f, 0, SEEK_END);
+			FileSize = ftell(f);
+			fseek(f, 0, SEEK_SET);
+			FileBuff = (char*)malloc(FileSize);
+			if (FileBuff != NULL && FileSize != 0)
+			{
+				fread(FileBuff, FileSize, 1, f);
+				cout << "EdenReadFile:ReadOutFile:" << (char*)FileName << endl;
+			}
+			fclose(f);
+		}
+	}
+}
+
+void __stdcall EdenFileReplace(char* Buffer)
+{
+	if (FileSize != 0)
+	{
+		memcpy(Buffer, FileBuff, FileSize);
+		free(FileBuff);
+		FileSize = 0;
+	}
+}
+
+PVOID GetFileNameAddr = NULL;
+__declspec(naked) void GetFileName()
+{
+	_asm
+	{
+		pushfd
+		pushad
+		push edx
+		call EdenReadFile
+		popad
+		popfd
+		jmp GetFileNameAddr
+	}
+}
+
+PVOID GetNormalFileBufferAddr = NULL;
+__declspec(naked) void GetNormalFileBuffer()
+{
+	_asm
+	{
+		pushfd
+		pushad
+		push EDX
+		call EdenFileReplace
+		popad
+		popfd
+		jmp GetNormalFileBufferAddr
+	}
+}
+
+PVOID GetMNGImageBufferAddr = NULL;
+__declspec(naked) void GetMNGImageBuffer()
+{
+	_asm
+	{
+		pushfd
+		pushad
+		mov MNG_Buffer, ECX
+		popad
+		popfd
+		jmp GetMNGImageBufferAddr
+	}
+}
+
+PVOID ReadMNGImageFileAddr = NULL;
+__declspec(naked) void ReadMNGImageFile()
+{
+	_asm
+	{
+		pushfd
+		pushad
+		push MNG_Buffer
+		call EdenFileReplace
+		popad
+		popfd
+		jmp ReadMNGImageFileAddr
+	}
+}
+
+PVOID AllocMemAddr = NULL;
+__declspec(naked) void AllocMem()
+{
+	_asm
+	{
+		cmp     FileSize, 0;
+		je have;
+		mov     ebx, FileSize;
+	have:
+		jmp AllocMemAddr;
+	}
+}
+
+PVOID AllocMemAdd2 = NULL;
+__declspec(naked) void AllocMem2()
+{
+	_asm
+	{
+		cmp     FileSize, 0;
+		je have;
+		mov     ebx, FileSize;
+	have:
+		jmp AllocMemAdd2;
+	}
+}
+
+void EdenReadFileSuppost()
+{
+	GetFileNameAddr = (PVOID)(BaseAddr + 0xF3C21);
+	GetNormalFileBufferAddr = (PVOID)(BaseAddr + 0xF1944);
+	GetMNGImageBufferAddr = (PVOID)(BaseAddr + 0xF18A2);
+	ReadMNGImageFileAddr = (PVOID)(BaseAddr + 0xF18A9);
+	AllocMemAddr = (PVOID)(BaseAddr + 0xF188E);
+	AllocMemAdd2 = (PVOID)(BaseAddr + 0xF18FA);
+
+	cout << hex << BaseAddr << endl;
+	cout << hex << GetFileNameAddr << endl;
+	cout << hex << GetNormalFileBufferAddr << endl;
+	cout << hex << GetMNGImageBufferAddr << endl;
+	cout << hex << ReadMNGImageFileAddr << endl;
+	cout << hex << AllocMemAddr << endl;
+
+	DetourTransactionBegin();
+	DetourAttach((void**)&GetFileNameAddr, GetFileName);
+	DetourAttach((void**)&GetNormalFileBufferAddr, GetNormalFileBuffer);
+	DetourAttach((void**)&GetMNGImageBufferAddr, GetMNGImageBuffer);
+	DetourAttach((void**)&ReadMNGImageFileAddr, ReadMNGImageFile);
+	DetourAttach((void**)&AllocMemAddr, AllocMem);
+	DetourAttach((void**)&AllocMemAdd2, AllocMem2);
+	if (DetourTransactionCommit() != NOERROR)
+		MessageBox(NULL, L"启动失败", L"启动失败", MB_OK);
+}
+
+static void make_console() {
+	AllocConsole();
+	freopen("CONOUT$", "w", stdout);
+	freopen("CONIN$", "r", stdin);
+	cout << "Console\n" << endl;
+}
+
+BOOL APIENTRY DllMain(HMODULE hModule,
+	DWORD ul_reason_for_call,
+	LPVOID lpReserved)
+{
+	switch (ul_reason_for_call)
+	{
+	case DLL_PROCESS_ATTACH:
+		make_console();
+		APIHook();
+		EdenReadFileSuppost();
+	case DLL_THREAD_ATTACH:
+	case DLL_THREAD_DETACH:
+	case DLL_PROCESS_DETACH:
+		break;
+	}
+	return TRUE;
+}
+
+extern "C" __declspec(dllexport) void AyamiKaze(void)
+{
+	return;
+}

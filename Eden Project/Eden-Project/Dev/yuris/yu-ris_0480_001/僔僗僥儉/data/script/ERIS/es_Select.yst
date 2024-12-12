@@ -1,0 +1,1242 @@
+//=========================================================================
+//
+//■選択肢
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@es.SELD(\.SEL.MAX+1)]	//
+	S_INT[@es.SELD.FLAG]			//
+
+	S_STR[$SELP.TX(21)]				//[パラメータ]選択肢文字列
+	S_STR[$SELP.GO(21)]				//[パラメータ]選択肢飛び先
+	S_INT[@SELP.A(21)]				//[パラメータ]選択の可否
+	S_INT[@SELP.E(21)]				//[パラメータ]選択肢の存在有無
+	S_INT[@SELP.CG.X(21)]			//[パラメータ]
+	S_INT[@SELP.CG.Y(21)]			//[パラメータ]
+	S_INT[@SELP.TX.X(21)]			//[パラメータ]
+	S_INT[@SELP.TX.Y(21)]			//[パラメータ]
+
+	S_STR[$SEL.TX(21)]				//選択肢文字列
+	S_STR[$SEL.GO(21)]				//選択肢飛び先
+	S_INT[@SEL.A(21)]				//選択の可否
+	S_INT[@SEL.E(21)]				//選択肢の存在有無
+	S_INT[@SEL.LIST(21)]			//選択肢の順番
+	S_INT[@SEL.AL(21)]				//選択肢既読フラグ
+	S_INT[@SEL.CG.X(21)]			//選択肢画像座標X
+	S_INT[@SEL.CG.Y(21)]			//選択肢画像座標Y
+	S_INT[@SEL.TX.X(21)]			//選択肢文字座標X
+	S_INT[@SEL.TX.Y(21)]			//選択肢文字座標Y
+
+	S_INT[@SEL.N]					//選択肢番号
+	S_INT[@SEL.TIME]				//選択肢番号
+	S_INT[@SEL.RND]					//選択肢ランダム表示
+	S_STR[$SEL.AFTER(2)]			//選択肢選択直後、終了直前のGOSUBによる飛び先
+
+	S_STR[$TX.DEFSTR]
+	S_STR[$TX.AL.DEFSTR]
+	S_STR[$TX.NA.DEFSTR]
+
+
+	S_INT[@SEL.TX.SX]
+	S_INT[@SEL.TX.SY]
+	S_INT[@SEL.TX.COLOR]
+	S_INT[@SEL.TX.COLOR2]
+	S_INT[@SEL.TX.SHADE.X]
+	S_INT[@SEL.TX.SHADE.Y]
+	S_INT[@SEL.TX.SHADE.COLOR]
+	S_INT[@SEL.TX.OUTLINE.COLOR]
+
+	S_INT[@SEL.TX.AL.SX]
+	S_INT[@SEL.TX.AL.SY]
+	S_INT[@SEL.TX.AL.COLOR]
+	S_INT[@SEL.TX.AL.COLOR2]
+	S_INT[@SEL.TX.AL.SHADE.X]
+	S_INT[@SEL.TX.AL.SHADE.Y]
+	S_INT[@SEL.TX.AL.SHADE.COLOR]
+	S_INT[@SEL.TX.AL.OUTLINE.COLOR]
+
+	S_INT[@SEL.TX.NA.SX]
+	S_INT[@SEL.TX.NA.SY]
+	S_INT[@SEL.TX.NA.COLOR]
+	S_INT[@SEL.TX.NA.COLOR2]
+	S_INT[@SEL.TX.NA.SHADE.X]
+	S_INT[@SEL.TX.NA.SHADE.Y]
+	S_INT[@SEL.TX.NA.SHADE.COLOR]
+	S_INT[@SEL.TX.NA.OUTLINE.COLOR]
+
+
+	S_INT[@SEL.RET]					//何番目のパラメータにあたる選択肢を選んだか
+	S_INT[@SEL.RET2]				//表示上、何番目の選択肢を選んだか
+
+	S_INT[@SEL.AUTOFLAG]			//オートモードで選択肢に入ってきたか
+	S_INT[@SEL.SKIPFLAG]			//スキップモードで選択肢に入ってきたか
+
+//	S_INT[@SEL.CurNo]
+	S_INT[@SEL.Num]
+
+	S_INT[@mStartTime]
+
+	S_INT[@cou]
+}
+
+
+
+//=========================================================================
+//■ボタン表示非表示処理
+//=========================================================================
+#=ES.SEL.BTLOOP
+{
+	STR[$BID="ES.SEL."]
+
+	IF[@es.SEL.HIDE==0 && @es.SCENARIOSTOP==0]
+	{
+		LOOP[SET=8]
+		{
+			\BT.ES21("ES.SEL.BTN.SEL", @_LC)
+			\BT.ES21("ES.SEL.BTN.BAR", @_LC)
+			\BT.ES21("ES.SEL.TIP.TX", @_LC)
+			\BT.ES21("ES.SEL.TIP.CG1", @_LC)
+			\BT.ES21("ES.SEL.TIP.CG2", @_LC)
+			\BT.ES21("ES.SEL.TIP.CG3", @_LC)
+		}
+		LOOPEND[]
+	}
+	ELSE[]
+	{
+		LOOP[SET=8]
+		{
+			\BT.ES20("ES.SEL.BTN.SEL", @_LC)
+			\BT.ES20("ES.SEL.BTN.BAR", @_LC)
+			\BT.ES20("ES.SEL.TIP.TX", @_LC)
+			\BT.ES20("ES.SEL.TIP.CG1", @_LC)
+			\BT.ES20("ES.SEL.TIP.CG2", @_LC)
+			\BT.ES20("ES.SEL.TIP.CG3", @_LC)
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+
+//=========================================================================
+//■選択肢
+//=========================================================================
+#=ES.SELMODE
+{
+/*
+	IF[@es.SELMODE]
+	{
+		// シナリオタスクを一時停止
+//		\es.TXTASK.SN.E0
+
+		//
+//		@es.LOADTHRU = 0
+
+		// 選択肢
+		@es.B4.SEL.NO = 0
+
+		GOSUB[#=ES.SEL]
+
+		// スクリプト位置を記憶
+//		\SCRIPTPOS_SAVE
+
+		// シナリオタスク再開
+//		\es.TXTASK.SN.E1
+	}
+	IFEND[]
+*/
+
+	return[]
+}
+
+
+//=========================================================================
+//■選択肢
+//=========================================================================
+#=ES.SEL
+{
+	//----------------------------------------------------------------
+	// 文字情報取得
+	//----------------------------------------------------------------
+		STR[$str="＜選択肢＞"]
+		GOSUB[#=es.TX.SETTASK pstr=$str]
+		\LOG.W.NMTXVO("", $str, $_RSTR(1))
+
+
+	//----------------------------------------------------------------
+	// 文字情報取得
+	//----------------------------------------------------------------
+		$TX.DEFSTR = $T(22,11)
+		GOSUB[#=es.TDDEF.SEARCH pstr=$TX.DEFSTR]
+		@SEL.TX.SX = @_RINT(1) / 65536			//文字Ｘサイズ
+		@SEL.TX.SY = @_RINT(1) % 65536			//文字Ｙサイズ
+		@SEL.TX.COLOR  = @_RINT(2)				//文字色１
+		@SEL.TX.COLOR2 = @_RINT(3)				//文字色２
+		@SEL.TX.SHADE.X = @_RINT(5) / 65536		//文字影座標Ｘ
+		@SEL.TX.SHADE.Y = @_RINT(5) % 65536		//文字影座標Ｙ
+		@SEL.TX.SHADE.COLOR = @_RINT(6)			//文字影色
+		@SEL.TX.OUTLINE.COLOR = @_RINT(7)		//文字袋文字色
+
+		$TX.AL.DEFSTR = $T(22,12)
+		GOSUB[#=es.TDDEF.SEARCH pstr=$TX.AL.DEFSTR]
+		@SEL.TX.AL.SX = @_RINT(1) / 65536		//[選択済]文字Ｘサイズ
+		@SEL.TX.AL.SY = @_RINT(1) % 65536		//[選択済]文字Ｙサイズ
+		@SEL.TX.AL.COLOR  = @_RINT(2)			//[選択済]文字色１
+		@SEL.TX.AL.COLOR2 = @_RINT(3)			//[選択済]文字色２
+		@SEL.TX.AL.SHADE.X = @_RINT(5) / 65536	//[選択済]文字影座標Ｘ
+		@SEL.TX.AL.SHADE.Y = @_RINT(5) % 65536	//[選択済]文字影座標Ｙ
+		@SEL.TX.AL.SHADE.COLOR = @_RINT(6)		//[選択済]文字影色
+		@SEL.TX.AL.OUTLINE.COLOR = @_RINT(7)	//[選択済]文字袋文字色
+
+		$TX.NA.DEFSTR = $T(22,13)
+		GOSUB[#=es.TDDEF.SEARCH pstr=$TX.NA.DEFSTR]
+		@SEL.TX.NA.SX = @_RINT(1) / 65536		//[選択不可時]文字Ｘサイズ
+		@SEL.TX.NA.SY = @_RINT(1) % 65536		//[選択不可時]文字Ｙサイズ
+		@SEL.TX.NA.COLOR  = @_RINT(2)			//[選択不可時]文字色１
+		@SEL.TX.NA.COLOR2 = @_RINT(3)			//[選択不可時]文字色２
+		@SEL.TX.NA.SHADE.X = @_RINT(5) / 65536	//[選択不可時]文字影座標Ｘ
+		@SEL.TX.NA.SHADE.Y = @_RINT(5) % 65536	//[選択不可時]文字影座標Ｙ
+		@SEL.TX.NA.SHADE.COLOR = @_RINT(6)		//[選択不可時]文字影色
+		@SEL.TX.NA.OUTLINE.COLOR = @_RINT(7)	//[選択不可時]文字袋文字色
+
+
+
+	@SEL.Num = 0
+
+	INT[@AUTOSAVE.LOADTHRU]
+	IF[@es.LOADTHRU]
+		@AUTOSAVE.LOADTHRU=1
+	IFEND[]
+
+///rin
+	IF[$es.RIN.LFNAME!=""]
+	{
+		LOAD[FILE=$es.RIN.LFNAME DNO=0005 LET=@L()]	// データ
+		LOAD[FILE=$es.RIN.LFNAME DNO=0006 LET=$L()]	// データ
+
+		$es.RIN.LFNAME=""
+	}
+	IFEND[]
+
+	@es.LOADTHRU = 0
+
+
+	//----------------------------------------------------------------
+	// ウェイト ※名前消す
+	//----------------------------------------------------------------
+//		WAIT[FRAME=1]
+
+	//----------------------------------------------------------------
+	// 非アクティブなら点滅させる
+	//----------------------------------------------------------------
+		INT[@FW_TIME=500]
+		INT[@FW_COUNT=5]
+	///x
+
+	//----------------------------------------------------------------
+	// 一時セーブ
+	//----------------------------------------------------------------
+		\SAVE(@es.sdprevselno+1, 2) //0=save,1=qsave,2=prevselsave
+
+	//----------------------------------------------------------------
+	// オートモード状態、スキップモード状態の取得
+	//----------------------------------------------------------------
+//		@SEL.AUTOFLAG = @es.TX.AUTO
+//		@SEL.SKIPFLAG = @es.TX.SKIP
+
+	//----------------------------------------------------------------
+	// 変数初期化
+	//----------------------------------------------------------------
+		@SEL.RET = 0
+		$es.SEL.GO = ""
+
+//		@es.TX.SKIP = 0
+
+	//----------------------------------------------------------------
+	// フェイスウィンドウ非表示
+	//----------------------------------------------------------------
+	//	GOSUB[#=es.FaceWindow.Disabled]
+
+
+	//----------------------------------------------------------------
+	// パラメータを受け取る
+	//----------------------------------------------------------------
+		LOOP[SET=(20)]
+		{
+			//選択肢ジャンプラベルが無ければ、受取終了
+		//	IF[$SELP.GO(@_LC)==""] LOOPBREAK[] IFEND[]
+			IF[$SELP.TX(@_LC)==""] LOOPBREAK[] IFEND[]
+
+			//項目が存在無効なら、受け取らずに次の項目へ
+			IF[@SELP.E(@_LC)==1] LOOPCONTINUE[] IFEND[]
+
+			//受け取る
+			@SEL.Num+=1
+			IF[@SEL.Num>=10] \_mes("選択肢の数が多すぎます。", "エラー") END[] IFEND[]
+
+			$SEL.TX(@SEL.Num)	= $SELP.TX(@_LC)
+			$SEL.GO(@SEL.Num)	= $SELP.GO(@_LC)
+			@SEL.A(@SEL.Num)	= @SELP.A(@_LC)
+			@SEL.E(@SEL.Num)	= @SELP.E(@_LC)
+			@SEL.LIST(@SEL.Num)	= @_LC
+			@SEL.CG.X(@SEL.Num)	= @SELP.CG.X(@_LC)
+			@SEL.CG.Y(@SEL.Num)	= @SELP.CG.Y(@_LC)
+			@SEL.TX.X(@SEL.Num)	= @SELP.TX.X(@_LC)
+			@SEL.TX.Y(@SEL.Num)	= @SELP.TX.Y(@_LC)
+
+			//------------------------------------------------------------------------
+			// まだ一度も通っていない選択肢か否か
+			//------------------------------------------------------------------------
+				@SEL.AL(@SEL.Num) = 0
+				IF[@SEL.N>0] //選択肢番号1以上
+				{
+					@SEL.AL(@SEL.Num) = (@es.SELD(@SEL.N) / @es.POW2(@_LC)) & 1
+				}
+				IFEND[]
+
+		}
+		LOOPEND[]
+/*		LOOP[SET=(20)]
+		{
+			IF[@_LC<=@SEL.Num] LOOPCONTINUE[] IFEND[]
+			$SEL.TX(@_LC)	= ""
+			$SEL.GO(@_LC)	= ""
+			@SEL.A(@_LC)	= 0
+			@SEL.E(@_LC)	= 0
+			@SEL.LIST(@_LC)	= 0
+			@SEL.CG.X(@_LC)	= 0
+			@SEL.CG.Y(@_LC)	= 0
+			@SEL.TX.X(@_LC)	= 0
+			@SEL.TX.Y(@_LC)	= 0
+		}
+		LOOPEND[]
+*/
+		IF[@SEL.Num==0] \_mes("選択肢の項目が正しく設定されていません。", "エラー") END[] IFEND[]
+
+
+	//----------------------------------------------------------------
+	// 表示される順番をバラバラにする
+	//----------------------------------------------------------------
+		INT[@mTempRET]
+
+		IF[@SEL.RND]
+		{
+			LOOP[SET=@SEL.Num]
+			{
+				\_rnd(1, @SEL.Num)(@mTempRET)
+				\_swapstr( $SEL.TX(@_LC) , $SEL.TX(@mTempRET) )
+				\_swapstr( $SEL.GO(@_LC) , $SEL.GO(@mTempRET) )
+				\_swapval( @SEL.A(@_LC) , @SEL.A(@mTempRET) )
+				\_swapval( @SEL.E(@_LC) , @SEL.E(@mTempRET) )
+				\_swapval( @SEL.LIST(@_LC) , @SEL.LIST(@mTempRET) )
+				\_swapval( @SEL.AL(@_LC) , @SEL.AL(@mTempRET) )
+				\_swapval( @SEL.CG.X(@_LC) , @SEL.CG.X(@mTempRET) )
+				\_swapval( @SEL.CG.Y(@_LC) , @SEL.CG.Y(@mTempRET) )
+				\_swapval( @SEL.TX.X(@_LC) , @SEL.TX.X(@mTempRET) )
+				\_swapval( @SEL.TX.Y(@_LC) , @SEL.TX.Y(@mTempRET) )
+			}
+			LOOPEND[]
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	// 選択肢バー作成＆表示
+	//----------------------------------------------------------------
+		\BTDEF.LOAD(ES.SEL, @SEL.Num)
+		\BT.N1(ES.GAMEMAIN.BTN.VOICE)
+
+	//----------------------------------------------------------------
+	// キーオペ設定
+	//----------------------------------------------------------------
+	//	GOSUB[#=es.BT.CURSOR.UD.SET.SET pstr="ES.SEL.BTN.BAR" pint2=1        pstr3="ES.SEL.BTN.BAR" pint4=@SEL.Num   pstr5="ES.SEL.BTN.BAR" pint6=2]
+	//	GOSUB[#=es.BT.CURSOR.UD.SET.SET pstr="ES.SEL.BTN.BAR" pint2=@SEL.Num pstr3="ES.SEL.BTN.BAR" pint4=@SEL.Num-1 pstr5="ES.SEL.BTN.BAR" pint6=1]
+
+
+	//----------------------------------------------------------------
+	// 選択肢描画
+	//----------------------------------------------------------------
+	//	@SEL.CurNo=1
+		GOSUB[#=ES.SEL.REF]
+		GOSUB[#=es.BT.DRAW]
+
+	//----------------------------------------------------------------
+	// 若干フェードして出す
+	//----------------------------------------------------------------
+		INT[@mLC]
+		LOOP[SET=4]
+		{
+			@mLC=@_LC
+
+			LOOP[SET=(20)]
+			{
+				\BT.A.SET("ES.SEL.BTN.SEL", @_LC, @mLC*64)
+				\BT.A.SET("ES.SEL.BTN.BAR", @_LC, @mLC*64)
+				\BT.A.SET("ES.SEL.TIP.CG1", @_LC, @mLC*64)
+				\BT.A.SET("ES.SEL.TIP.CG2", @_LC, @mLC*64)
+				\BT.A.SET("ES.SEL.TIP.CG3", @_LC, @mLC*64)
+				IF[@SEL.A(@_LC)]
+					\BT.A.SET("ES.SEL.TIP.TX", @_LC, @T(22,14)*@mLC/4)
+				ELSE[]
+					\BT.A.SET("ES.SEL.TIP.TX", @_LC, 256*@mLC/4)
+				IFEND[]
+			}
+			LOOPEND[]
+
+			WAIT[FRAME=1]
+		}
+		LOOPEND[]
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		@mStartTime=@_OS_TIME(1)
+
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+/*
+	IF[@es.RPMODE==0]
+	{
+		IF[@AUTOSAVE.LOADTHRU==0] //ロード時で無ければ、オートセーブする
+		{
+			\AUTOSAVE.SS
+			\AUTOSAVE(1)
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+		@AUTOSAVE.LOADTHRU=0
+*/
+
+
+	return[]
+}
+
+
+#=ES.SEL.QUIT
+{
+
+	//----------------------------------------------------------------
+	// 選択肢決定直後処理
+	//----------------------------------------------------------------
+		IF[$SEL.AFTER(0)!=""]
+			\_gosub($SEL.AFTER(0), @SEL.Num, @SEL.RET2)
+		ELSE[]
+			\_gosub(ES.SEL.OKEXEC, @SEL.Num, @SEL.RET2)
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// 選択肢選択フラグセット
+	//----------------------------------------------------------------
+		IF[@es.RPMODE==0] //回想中でなければ
+		{
+			IF[(@es.SELD(@SEL.N) & @es.POW2(@SEL.RET))==0]
+			{
+				@es.SELD.FLAG=1
+				@es.SELD(@SEL.N) |= @es.POW2(@SEL.RET) //特定bitに1を立てる
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// ログに選択結果を出力する
+	//----------------------------------------------------------------
+		IF[@T(22,05)]
+		{
+			STR[$str]
+
+			IF[@SEL.RET]
+				$str="＜選択肢："+$SEL.TX(@SEL.RET2)+"＞"
+			ELSE[]
+				$str="＜選択肢：未選択＞"
+			IFEND[]
+
+			GOSUB[#=es.TX.SETTASK pstr=$str]
+			\LOG.W.NMTXVO("", $str, $_RSTR(1))
+			\LOG.ADD
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	// ログ記録
+	//----------------------------------------------------------------
+		STR[$sr]
+		\_strleft($SEL.GO(@SEL.RET2), 4)($sr)
+		IF[$sr=="jump"]
+			\_log("■■■■■"+$SEL.TX(@SEL.RET2)+" "+$SEL.GO(@SEL.RET2))
+		ELSE[]
+			\_log("＜選択肢："+$SEL.TX(@SEL.RET2)+"＞ "+$SEL.GO(@SEL.RET2))
+		//	\_log("＜選択肢："+"＞")
+		IFEND[]
+
+
+		//@es.SELR = @SEL.RET
+		//$es.SELSTR = $SEL.TX(@SEL.RET2)
+
+
+	//----------------------------------------------------------------
+	// 選択肢／後処理
+	//----------------------------------------------------------------
+		GOSUB[#=ES.SEL.ENDEXEC PINT=@SEL.Num]
+
+
+	//----------------------------------------------------------------
+	// 一時ファイルをコピー
+	//----------------------------------------------------------------
+		\SAVECOPY(@es.sdprevselno+1, @es.sdprevselno)
+
+
+	//----------------------------------------------------------------
+	// スクリプト位置を記憶する
+	//----------------------------------------------------------------
+		\SCRIPTPOS_SAVE
+
+
+	return[]
+}
+
+
+//============================================================================
+//
+//■選択肢描画
+//
+//============================================================================
+#=ES.SEL.REF
+{
+	INT[@No]
+	INT[@sel_sx]
+	INT[@sel_sy]
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		INT[@barnum]
+		@barnum=@SEL.Num
+		\_range(@barnum,, (20))
+		IF[@T(22,03)==0] @barnum=0 IFEND[]
+		LOOP[SET=(20)]
+		{
+			@SEL.CG.X(@_LC) = @T(22,01)
+			@SEL.CG.Y(@_LC) = (@T(22,02) - @barnum * @T(22,04) / 2) + @T(22,04)*(@_LC-1)
+
+			//ボタンサイズ取得
+			GOSUB[#=es.BT.SXY.GET pstr="ES.SEL.TIP.TX" pint2=@_LC]
+			@sel_sx=@_RINT(1)
+			@sel_sy=@_RINT(2)
+
+			\_strlen($SEL.TX(@_LC))
+
+			//文字サイズ
+			IF[@SEL.A(@_LC)==0] // 選択可.
+			{
+				IF[@SEL.AL(@_LC)==0 || @es.GSD(110,08)==0]	// まだ一度も通っていない選択肢
+				{
+					@SEL.TX.X(@_LC) = (@sel_sx / 2) - (@_RINT(1) * @SEL.TX.SX / 2)
+					@SEL.TX.Y(@_LC) = (@sel_sy - @SEL.TX.SY) / 2 - 1
+				}
+				ELSE[]
+				{
+					@SEL.TX.X(@_LC) = (@sel_sx / 2) - (@_RINT(1) * @SEL.TX.AL.SX / 2)
+					@SEL.TX.Y(@_LC) = (@sel_sy - @SEL.TX.AL.SY) / 2 - 1
+				}
+				IFEND[]
+			}
+			ELSE[]
+			{
+					@SEL.TX.X(@_LC) = (@sel_sx / 2) - (@_RINT(1) * @SEL.TX.NA.SX / 2)
+					@SEL.TX.Y(@_LC) = (@sel_sy - @SEL.TX.NA.SY) / 2 - 1
+			}
+			IFEND[]
+
+		}
+		LOOPEND[]
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		LOOP[SET=(20)]
+		{
+
+			//	@No = (@SEL.CurNo-1)*8 + @_LC
+				@No = @_LC
+
+				IF[@No > @SEL.Num]
+				{
+					\BT.ES0("ES.SEL.BTN.SEL", @_LC)
+					\BT.ES0("ES.SEL.BTN.BAR", @_LC)
+					\BT.ES0("ES.SEL.TIP.TX", @_LC)
+					\BT.ES0("ES.SEL.TIP.CG1", @_LC)
+					\BT.ES0("ES.SEL.TIP.CG2", @_LC)
+					\BT.ES0("ES.SEL.TIP.CG3", @_LC)
+					LOOPCONTINUE[]
+				}
+				IFEND[]
+
+				\BT.ES1("ES.SEL.BTN.SEL", @_LC)
+				\BT.ES1("ES.SEL.BTN.BAR", @_LC)
+				\BT.ES1("ES.SEL.TIP.TX", @_LC)
+				\BT.ES1("ES.SEL.TIP.CG1", @_LC)
+				\BT.ES1("ES.SEL.TIP.CG2", @_LC)
+				\BT.ES1("ES.SEL.TIP.CG3", @_LC)
+		//		\BT.X.SET("ES.SEL.BTN.SEL", @_LC, @SEL.CG.X(@_LC))
+		//		\BT.Y.SET("ES.SEL.BTN.SEL", @_LC, @SEL.CG.Y(@_LC))
+				\BT.X.SET("ES.SEL.BTN.BAR", @_LC, @SEL.CG.X(@_LC))
+				\BT.Y.SET("ES.SEL.BTN.BAR", @_LC, @SEL.CG.Y(@_LC))
+				\BT.X.SET("ES.SEL.TIP.TX", @_LC, @SEL.CG.X(@_LC))
+				\BT.Y.SET("ES.SEL.TIP.TX", @_LC, @SEL.CG.Y(@_LC))
+
+				\BT.X.SET("ES.SEL.TIP.CG1", @_LC, @SEL.CG.X(@_LC)+@T(22,31))
+				\BT.Y.SET("ES.SEL.TIP.CG1", @_LC, @SEL.CG.Y(@_LC)+@T(22,32))
+				\BT.X.SET("ES.SEL.TIP.CG2", @_LC, @SEL.CG.X(@_LC)+@T(22,33))
+				\BT.Y.SET("ES.SEL.TIP.CG2", @_LC, @SEL.CG.Y(@_LC)+@T(22,34))
+				\BT.X.SET("ES.SEL.TIP.CG3", @_LC, @SEL.CG.X(@_LC)+@T(22,35))
+				\BT.Y.SET("ES.SEL.TIP.CG3", @_LC, @SEL.CG.Y(@_LC)+@T(22,36))
+
+
+				//文字サイズ
+				IF[@SEL.A(@_LC)==0] // 選択可.
+				{
+					IF[@SEL.AL(@_LC)==0 || @es.GSD(110,08)==0]	// まだ一度も通っていない選択肢
+					{
+						\FONT.SIZE( @SEL.TX.SX, @SEL.TX.SY )
+					}
+					ELSE[]					// 一度通った選択肢
+					{
+						\FONT.SIZE( @SEL.TX.AL.SX, @SEL.TX.AL.SY )
+					}
+					IFEND[]
+				}
+				ELSE[] // 選択不可.
+				{
+					\FONT.SIZE( @SEL.TX.NA.SX, @SEL.TX.NA.SY )
+				}
+				IFEND[]
+
+				//文字色、グラデーション
+				IF[@SEL.A(@_LC)==0] // 選択可.
+				{
+					IF[@SEL.AL(@_LC)==0 || @es.GSD(110,08)==0]	// まだ一度も通っていない選択肢
+					{
+						\FONT.COLOR( @SEL.TX.COLOR )
+						IF[@es.GSD(115,15)==1] \FONT.COLOR( @SEL.TX.COLOR, @SEL.TX.COLOR2 ) IFEND[]
+					}
+					ELSE[]					// 一度通った選択肢
+					{
+						\FONT.COLOR( @SEL.TX.AL.COLOR )
+						IF[@es.GSD(115,15)==1] \FONT.COLOR( @SEL.TX.AL.COLOR, @SEL.TX.AL.COLOR2 ) IFEND[]
+					}
+					IFEND[]
+				}
+				ELSE[] // 選択不可.
+				{
+					\FONT.COLOR( @SEL.TX.NA.COLOR )
+					IF[@es.GSD(115,15)==1] \FONT.COLOR( @SEL.TX.NA.COLOR, @SEL.TX.NA.COLOR2 ) IFEND[]
+				}
+				IFEND[]
+
+				// 文字影色
+				IF[@es.GSD(115,09)]
+				{
+					IF[@SEL.A(@_LC)==0] // 選択可.
+					{
+						IF[@SEL.AL(@_LC)==0 || @es.GSD(110,08)==0]	// まだ一度も通っていない選択肢
+						{
+							\FONT.SHADE( @SEL.TX.SHADE.X, @SEL.TX.SHADE.Y, @SEL.TX.SHADE.COLOR )
+						}
+						ELSE[]					// 一度通った選択肢
+						{
+							\FONT.SHADE( @SEL.TX.AL.SHADE.X, @SEL.TX.AL.SHADE.Y, @SEL.TX.AL.SHADE.COLOR )
+						}
+						IFEND[]
+					}
+					ELSE[] // 選択不可.
+					{
+						\FONT.SHADE( @SEL.TX.NA.SHADE.X, @SEL.TX.NA.SHADE.Y, @SEL.TX.NA.SHADE.COLOR )
+					}
+					IFEND[]
+				}
+				IFEND[]
+
+				//袋文字
+				IF[@es.GSD(115,08)]
+				{
+					IF[@SEL.A(@_LC)==0] // 選択可.
+					{
+						IF[@SEL.AL(@_LC)==0 || @es.GSD(110,08)==0]	// まだ一度も通っていない選択肢
+						{
+							\FONT.OUTLINE( @SEL.TX.OUTLINE.COLOR )
+						}
+						ELSE[]					// 一度通った選択肢
+						{
+							\FONT.OUTLINE( @SEL.TX.AL.OUTLINE.COLOR )
+						}
+						IFEND[]
+					}
+					ELSE[] // 選択不可.
+					{
+						\FONT.OUTLINE( @SEL.TX.NA.OUTLINE.COLOR )
+					}
+					IFEND[]
+				}
+				IFEND[]
+
+				//太字
+				IF[@es.GSD(115,14)] \FONT.BOLD( 1 ) IFEND[]
+
+				//座標
+				\FONT.XY( @SEL.TX.X(@_LC), @SEL.TX.Y(@_LC) )
+
+				//描画
+				\BT.CGCLEAR("ES.SEL.TIP.TX", @_LC)
+				\BT.FONT.DRAW("ES.SEL.TIP.TX", @_LC, $SEL.TX(@No) )
+
+		}
+		LOOPEND[]
+
+	//--------------------------------------------------------------------------------
+	// 
+	//--------------------------------------------------------------------------------
+		LOOP[SET=(20)]
+		{
+			IF[@SEL.A(@_LC)]
+			{
+				\BT.N1("ES.SEL.BTN.SEL", @_LC)
+				\BT.N1("ES.SEL.BTN.BAR", @_LC)
+				\BT.N1("ES.SEL.TIP.CG1", @_LC)
+				\BT.N1("ES.SEL.TIP.CG2", @_LC)
+				\BT.N1("ES.SEL.TIP.CG3", @_LC)
+				\BT.A.SET("ES.SEL.TIP.TX", @_LC, @T(22,14))
+			}
+			ELSE[]
+			{
+				\BT.N0("ES.SEL.BTN.SEL", @_LC)
+				\BT.N0("ES.SEL.BTN.BAR", @_LC)
+				\BT.N0("ES.SEL.TIP.CG1", @_LC)
+				\BT.N0("ES.SEL.TIP.CG2", @_LC)
+				\BT.N0("ES.SEL.TIP.CG3", @_LC)
+				\BT.A.SET("ES.SEL.TIP.TX", @_LC, 256)
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+
+
+	return[]
+}
+
+
+#=ES.SEL.INIT
+{
+	@es.SELMODE = 0
+
+	@SEL.AUTOFLAG = 0
+	@SEL.SKIPFLAG = 0
+
+	return[]
+}
+
+
+//============================================================================
+//
+//■終了処理
+//
+//============================================================================
+#=ES.SEL.ENDEXEC
+{
+	INT[@num=@_PINT(1)]
+
+	//----------------------------------------------------------------
+	// 終了直前処理
+	//----------------------------------------------------------------
+		IF[$SEL.AFTER(1)!=""]
+			\_gosub($SEL.AFTER(1), @num)
+		ELSE[]
+			\_gosub(ES.SEL.ENDPREV, @num)
+		IFEND[]
+
+	//----------------------------------------------------------------
+	// ＣＧレイヤ削除
+	//----------------------------------------------------------------
+		\BT.END(ES.SEL)
+
+	//----------------------------------------------------------------
+	// フラグを０に初期化
+	//----------------------------------------------------------------
+		LOOP[SET=(20)]
+		{
+			$SELP.TX(@_LC)=""
+			$SELP.GO(@_LC)=""
+			@SELP.E(@_LC)=0
+			@SELP.A(@_LC)=0
+			@SELP.CG.X(@_LC)=0
+			@SELP.CG.Y(@_LC)=0
+			@SELP.TX.X(@_LC)=0
+			@SELP.TX.Y(@_LC)=0
+			$SEL.TX(@_LC)=""
+			$SEL.GO(@_LC)=""
+			@SEL.E(@_LC)=0
+			@SEL.A(@_LC)=0
+			@SEL.CG.X(@_LC)=0
+			@SEL.CG.Y(@_LC)=0
+			@SEL.TX.X(@_LC)=0
+			@SEL.TX.Y(@_LC)=0
+		}
+		LOOPEND[]
+
+		$SEL.AFTER(0)=""
+		$SEL.AFTER(1)=""
+		@SEL.TIME=0
+		@SEL.RND=0
+		@SEL.N=0
+
+
+	//----------------------------------------------------------------
+	// オートモードを解除するか否か
+	//----------------------------------------------------------------
+		IF[@es.GSD(110,06)==1] //オートモードを継続する設定である.
+		{
+			@es.TX.AUTO = @SEL.AUTOFLAG
+		}
+		ELSE[]
+		{
+			@es.TX.AUTO = 0 //強制的にオートモード解除
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	// スキップを解除するか否か
+	//----------------------------------------------------------------
+		IF[@es.GSD(110,07)==1] //スキップを継続する設定である.
+		{
+			@es.TX.SKIP = @SEL.SKIPFLAG
+
+			///xスキップ継続のための暫定措置.
+			@_KEYLAST=0
+			@_MOUSELAST=0
+		}
+		ELSE[]
+		{
+			@es.TX.SKIP = 0 //強制的にスキップモード解除
+		}
+		IFEND[]
+
+
+	return[]
+}
+
+
+//============================================================================
+//■選択肢の一時的非表示
+//============================================================================
+#=ES.SEL.HIDE
+{
+	@es.SEL.HIDE = 1
+	return[]
+}
+
+
+//============================================================================
+//■選択肢の表示
+//============================================================================
+#=ES.SEL.APPEAR
+{
+	@es.SEL.HIDE = 0
+	return[]
+}
+
+
+#=ES.SEL.BTN.SEL.ON
+#=ES.SEL.BTN.BAR.ON
+{
+	INT[@no=@_PINT(1)]
+
+	INT[@mA=256]
+	INT[@mA2]
+
+	//バーを連打できないように
+//	\BT.W0.ALL(ES.SEL)
+
+	//----------------------------------------------------------------
+	// 点滅演出
+	//----------------------------------------------------------------
+		LOOP[SET=@T(22,21)]
+		{
+			@mA-=90
+			IF[@mA<0] @mA=0 IFEND[]
+
+			//非表示
+			LOOP[SET=(20)]
+			{
+				IF[@_LC==@no]
+				{
+					\BT.A.SET("ES.SEL.BTN.SEL", @_LC, 96)
+					\BT.A.SET("ES.SEL.BTN.BAR", @_LC, 96)
+					\BT.A.SET("ES.SEL.TIP.TX", @_LC, 96)
+					\BT.A.SET("ES.SEL.TIP.CG1", @_LC, 96)
+					\BT.A.SET("ES.SEL.TIP.CG2", @_LC, 96)
+					\BT.A.SET("ES.SEL.TIP.CG3", @_LC, 96)
+				}
+				ELSE[]
+				{
+			//		\BT.A.SET("ES.SEL.BTN.SEL", @_LC, @mA)
+			//		\BT.A.SET("ES.SEL.BTN.BAR", @_LC, @mA)
+			//		\BT.A.SET("ES.SEL.TIP.TX", @_LC, @mA)
+			//		\BT.A.SET("ES.SEL.TIP.CG1", @_LC, @mA)
+			//		\BT.A.SET("ES.SEL.TIP.CG2", @_LC, @mA)
+			//		\BT.A.SET("ES.SEL.TIP.CG3", @_LC, @mA)
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+
+			WAIT[TIME=@T(22,22)]
+
+			@mA-=90
+			IF[@mA<0] @mA=0 IFEND[]
+
+			//表示
+			LOOP[SET=(20)]
+			{
+				IF[@_LC==@no]
+				{
+					\BT.A.SET("ES.SEL.BTN.SEL", @_LC, 256)
+					\BT.A.SET("ES.SEL.BTN.BAR", @_LC, 256)
+					\BT.A.SET("ES.SEL.TIP.TX", @_LC, 256)
+					\BT.A.SET("ES.SEL.TIP.CG1", @_LC, 256)
+					\BT.A.SET("ES.SEL.TIP.CG2", @_LC, 256)
+					\BT.A.SET("ES.SEL.TIP.CG3", @_LC, 256)
+				}
+				ELSE[]
+				{
+			//		\BT.A.SET("ES.SEL.BTN.SEL", @_LC, @mA)
+			//		\BT.A.SET("ES.SEL.BTN.BAR", @_LC, @mA)
+			//		\BT.A.SET("ES.SEL.TIP.TX", @_LC, @mA)
+			//		\BT.A.SET("ES.SEL.TIP.CG1", @_LC, @mA)
+			//		\BT.A.SET("ES.SEL.TIP.CG2", @_LC, @mA)
+			//		\BT.A.SET("ES.SEL.TIP.CG3", @_LC, @mA)
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+
+			WAIT[TIME=@T(22,22)]
+
+		}
+		LOOPEND[]
+
+	//	WAIT[TIME=100]
+
+
+/*
+		//フェードアウト
+		LOOP[SET=4]
+		{
+			@mA=256-64*@_LC
+			IF[@mA<0] @mA=0 IFEND[]
+
+			@mA2=256-64*@_LC
+			IF[@mA2<0] @mA2=0 IFEND[]
+
+			LOOP[SET=(20)]
+			{
+				\BT.A.SET("ES.SEL.BTN.SEL", @_LC, @mA)
+				\BT.A.SET("ES.SEL.BTN.BAR", @_LC, @mA)
+				\BT.A.SET("ES.SEL.TIP.TX", @_LC, @mA2)
+				\BT.A.SET("ES.SEL.TIP.CG1", @_LC, @mA)
+				\BT.A.SET("ES.SEL.TIP.CG2", @_LC, @mA)
+				\BT.A.SET("ES.SEL.TIP.CG3", @_LC, @mA)
+			}
+			LOOPEND[]
+
+			WAIT[FRAME=1]
+		}
+		LOOPEND[]
+*/
+
+	//----------------------------------------------------------------
+	// オートモード状態、スキップモード状態の取得
+	//----------------------------------------------------------------
+		@SEL.AUTOFLAG = @es.TX.AUTO
+		@SEL.SKIPFLAG = @es.TX.SKIP
+
+//	\_dmes($(@no)+"番を選択しました。")
+
+@es.SELMODE = 0
+
+	@SEL.RET  = @SEL.LIST(@no)
+	@SEL.RET2 = @no
+	$es.SEL.GO= $SEL.GO(@no)
+
+	@SEL.NO = @no
+	@es.B4.SEL.NO = @no
+
+	GOSUB[#=ES.SEL.QUIT]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■(SAVE)選択肢情報保存
+//--------------------------------------------------------------------
+#=ES.SEL.SAVE
+{
+	INT[@No=@_PINT(1)]
+	SAVE[DNO=@No    SET=@SEL.RET]		// 選んだ選択肢
+	SAVE[DNO=@No+01 SET=@SEL.N]			// 選択肢番号
+	SAVE[DNO=@No+02 SET=@SELP.A()]		// 選択の可否
+	SAVE[DNO=@No+03 SET=@SELP.E()]		// 選択肢の存在有無
+	SAVE[DNO=@No+04 SET=$SELP.GO()]		// 選択肢ジャンプ先
+	SAVE[DNO=@No+05 SET=$SELP.TX()]		// ファイル名
+	SAVE[DNO=@No+06 SET=@SEL.A()]		// 選択の可否
+	SAVE[DNO=@No+07 SET=@SEL.E()]		// 選択肢の存在有無
+	SAVE[DNO=@No+08 SET=$SEL.GO()]		// 選択肢ジャンプ先
+	SAVE[DNO=@No+09 SET=$SEL.TX()]		// ファイル名
+	SAVE[DNO=@No+10 SET=$es.SEL.GO]		// ジャンプラベル
+	SAVE[DNO=@No+11 SET=$SEL.AFTER()]	// ジャンプラベル2
+	SAVE[DNO=@No+12 SET=$es.GO.T]		// ジャンプラベル(TRUE)
+	SAVE[DNO=@No+13 SET=$es.GO.F]		// ジャンプラベル(FALSE)
+	SAVE[DNO=@No+14 SET=$es.GOSUB.T]	// ジャンプラベル(TRUE)
+	SAVE[DNO=@No+15 SET=$es.GOSUB.F]	// ジャンプラベル(FALSE)
+	SAVE[DNO=@No+16 SET=$es.SN.GOSUBLBL()]	//
+	SAVE[DNO=@No+17 SET=@es.SN.GOSUBNEST]	//
+
+	return[]
+}
+
+#=ES.SEL.FILESAVE
+{
+	INT[@mRET]
+	FILEINFO[EXIST=1 FILE=$es.SAVEPATH+"seld.sd" LET=@mRET]
+	IF[@mRET==0 || @es.SELD.FLAG] //ファイルが消えてるかフラグ更新されているなら
+		@es.SELD.FLAG=0
+		SAVE[DNO=1 SET=@es.SELD()]
+		SAVE[FILE="seld.sd"]
+	IFEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■(LOAD)選択肢情報読込
+//--------------------------------------------------------------------
+#=ES.SEL.LOAD
+{
+	STR[$fn=$_PSTR(1)]
+	INT[@No=@_PINT(2)]
+	LOAD[FILE=$fn DNO=@No    LET=@SEL.RET]		// 選んだ選択肢
+	LOAD[FILE=$fn DNO=@No+01 LET=@SEL.N]		// 選択肢番号
+	LOAD[FILE=$fn DNO=@No+02 LET=@SELP.A()]		// 選択の可否
+	LOAD[FILE=$fn DNO=@No+03 LET=@SELP.E()]		// 選択肢の存在有無
+	LOAD[FILE=$fn DNO=@No+04 LET=$SELP.GO()]	// 選択肢ジャンプ先
+	LOAD[FILE=$fn DNO=@No+05 LET=$SELP.TX()]	// ファイル名
+	LOAD[FILE=$fn DNO=@No+06 LET=@SEL.A()]		// 選択の可否
+	LOAD[FILE=$fn DNO=@No+07 LET=@SEL.E()]		// 選択肢の存在有無
+	LOAD[FILE=$fn DNO=@No+08 LET=$SEL.GO()]		// 選択肢ジャンプ先
+	LOAD[FILE=$fn DNO=@No+09 LET=$SEL.TX()]		// ファイル名
+	LOAD[FILE=$fn DNO=@No+10 LET=$es.SEL.GO]	// ジャンプラベル
+	LOAD[FILE=$fn DNO=@No+11 LET=$SEL.AFTER()]	// ジャンプラベル2
+	LOAD[FILE=$fn DNO=@No+12 LET=$es.GO.T]		// ジャンプラベル(TRUE)
+	LOAD[FILE=$fn DNO=@No+13 LET=$es.GO.F]		// ジャンプラベル(FALSE)
+	LOAD[FILE=$fn DNO=@No+14 LET=$es.GOSUB.T]	// ジャンプラベル(TRUE)
+	LOAD[FILE=$fn DNO=@No+15 LET=$es.GOSUB.F]	// ジャンプラベル(FALSE)
+	LOAD[FILE=$fn DNO=@No+16 LET=$es.SN.GOSUBLBL()]	//
+	LOAD[FILE=$fn DNO=@No+17 LET=@es.SN.GOSUBNEST]	//
+
+	return[]
+}
+
+#=ES.SEL.FILELOAD
+{
+	INT[@mRET]
+	FILEINFO[EXIST=1 FILE=$es.SAVEPATH+"seld.sd" LET=@mRET]
+	IF[@mRET]
+	{
+		LOAD[FILE="seld.sd" DNO=1 LET=@es.SELD()]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//////
+
+
+//△選択肢文字列取得 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=ES.SEL.STR.GET
+{
+//	return[rstr=$SELP.TX(1) rstr2=$SELP.TX(2) rstr3=$SELP.TX(3) rstr4=$SELP.TX(4) rstr5=$SELP.TX(5) rstr6=$SELP.TX(6) rstr7=$SELP.TX(7) rstr8=$SELP.TX(8) rstr9=$SELP.TX(9) rstr10=$SELP.TX(10)] //Pは×
+	return[rstr=$SEL.TX(1) rstr2=$SEL.TX(2) rstr3=$SEL.TX(3) rstr4=$SEL.TX(4) rstr5=$SEL.TX(5) rstr6=$SEL.TX(6) rstr7=$SEL.TX(7) rstr8=$SEL.TX(8) rstr9=$SEL.TX(9) rstr10=$SEL.TX(10)]
+}
+
+
+//////
+
+
+//▼選択肢モードON ＆ 選択肢文字列セット @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=ES.SEL.SET
+{
+	IF[$_PSTR(1)!="" || $_PSTR(2)!="" || $_PSTR(3)!="" || $_PSTR(4)!="" || $_PSTR(5)!="" || $_PSTR(6)!="" || $_PSTR(7)!="" || $_PSTR(8)!="" || $_PSTR(9)!="" || $_PSTR(10)!=""]
+	{
+		$SELP.TX(1)=$_PSTR(1)
+		$SELP.TX(2)=$_PSTR(2)
+		$SELP.TX(3)=$_PSTR(3)
+		$SELP.TX(4)=$_PSTR(4)
+		$SELP.TX(5)=$_PSTR(5)
+		$SELP.TX(6)=$_PSTR(6)
+		$SELP.TX(7)=$_PSTR(7)
+		$SELP.TX(8)=$_PSTR(8)
+		$SELP.TX(9)=$_PSTR(9)
+		$SELP.TX(10)=$_PSTR(10)
+	}
+	IFEND[]
+
+	GOSUB[#=es.Voice.DataInit]
+
+	\BT.N1(ES.GAMEMAIN.BTN.VOICE)
+
+	@es.SELMODE=1
+
+	@es.B4.SEL.NO = 0
+
+	GOSUB[#=ES.SEL]
+
+	LOOP[]
+	{
+		IF[@_DEBUGMODE>=1] //デバッグ用機能
+		{
+/*
+			//全てA=1に
+			IF[@_KEY_F10==1]
+			{
+				LOOP[SET=@SEL.Num] @SEL.A(@_LC)=0 LOOPEND[] //1と0逆転注意.
+				GOSUB[#=ES.SEL.REF]
+			}
+			IFEND[]
+*/
+/*
+			//自動選択処理
+			IF[@es.SELAUTOFLAG==1 && @es.SELNO>0 && @es.SELAUTO(@es.SELAUTOPLAYNUM, @es.SELNO)>0]
+			{
+				\_log2("No."+$(@es.SELNO)+" 選択肢＞"+$(@es.SELAUTO(@es.SELAUTOPLAYNUM, @es.SELNO))+"番["+$SEL.TX(@es.SELAUTO(@es.SELAUTOPLAYNUM, @es.SELNO))+"]を選択")
+
+				@No = @es.SELAUTO(@es.SELAUTOPLAYNUM, @es.SELNO)
+				@es.SELNO=0
+
+				@SEL.RET  = @SEL.LIST(@No)
+				@SEL.RET2 = @No
+				$es.SEL.GO= $SEL.GO(@No)
+				LOOPBREAK[]
+			}
+			IFEND[]
+*/
+		}
+		IFEND[]
+
+		//制限時間カウント
+		IF[@es.SCENARIOSTOP==0]
+		{
+			IF[@SEL.TIME>0 && @_OS_TIME(1)-@mStartTime>=@SEL.TIME] LOOPBREAK[] IFEND[]
+		}
+		IFEND[]
+
+		IF[@es.SELMODE==0] LOOPBREAK[] IFEND[]
+
+		WAIT[FRAME=1]
+	}
+	LOOPEND[]
+
+///x4
+//	\AC(0)\AP(1)\P
+//	\AC(1)
+//	\P\NC\NR\NP
+
+	return[]
+}
+
+
+//▼選択肢文字列セット @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=ES.SEL.TX.SET
+{
+	INT[@No=@_PINT(1)]
+
+	$SELP.TX(@No)  =$_PSTR(2)
+	@SELP.TX.X(@No)=@_PINT(3)
+	@SELP.TX.Y(@No)=@_PINT(4)
+
+	return[]
+}
+
+//▼選択肢、存在の有無の設定 (注意：１＝無) @@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=ES.SEL.E
+{
+	LOOP[SET=8] @SELP.E(@_LC)=1-@_PINT(@_LC) LOOPEND[]
+	return[]
+}
+
+//▼選択肢、選択の可否の設定 (注意：１＝否) @@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=ES.SEL.A
+{
+	LOOP[SET=8] @SELP.A(@_LC)=1-@_PINT(@_LC) LOOPEND[]
+	return[]
+}
+
+//▼選択肢のGOジャンプ先の設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=ES.SEL.GO
+{
+	LOOP[SET=8] $SELP.GO(@_LC) = $_PSTR(@_LC) LOOPEND[]
+	return[]
+}
+
+//▼選択肢選択直後にGOSUBジャンプするラベルの設定 @@@@@@@@@@@@@@@@@@@@
+//
+#=ES.SEL.AFTER
+{
+	$SEL.AFTER(0) = $_PSTR(1)
+	$SEL.AFTER(1) = $_PSTR(2)
+	return[]
+}
+
+//▼選択肢の制限時間の設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=ES.SEL.TIME
+{
+	@SEL.TIME = @_PINT(1)
+	return[]
+}
+
+//▼選択肢のランダム設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=ES.SEL.RND
+{
+	@SEL.RND = @_PINT(1)
+	return[]
+}
+
+//▼選択肢番号の設定 (0～29) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=ES.SEL.N
+{
+	@SEL.N = @_PINT(1)
+	return[]
+}
+
+

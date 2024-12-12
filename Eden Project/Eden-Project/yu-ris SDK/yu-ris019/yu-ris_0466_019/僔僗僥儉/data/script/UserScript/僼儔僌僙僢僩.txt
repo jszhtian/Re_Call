@@ -1,0 +1,91 @@
+//--------------------------------------------------------------------
+//
+// フラグセット
+//
+//--------------------------------------------------------------------
+#=FLAG_SET
+
+
+
+\SEL.GO(FLAG_CG, FLAG_RP, FLAG_MV, FLAG_BGM, SCENARIO_MAIN)
+\SEL(ＣＧ鑑賞フラグセット, シーン鑑賞フラグセット, ムービー鑑賞フラグセット, ＢＧＭ鑑賞フラグセット, 戻る)
+
+
+
+//--------------- ＣＧ
+#=FLAG_CG
+
+\SEL.GO(FLAG_CG_SET, FLAG_CG_RESET, FLAG_SET)
+\SEL(全フラグセット, 全フラグリセット, 戻る)
+
+#=FLAG_CG_SET
+
+\CG.SETALL(1)
+全フラグセットしました。
+\GO(FLAG_SET)
+
+#=FLAG_CG_RESET
+
+\CG.SETALL(0)
+全フラグリセットしました。
+\GO(FLAG_SET)
+
+
+//--------------- ＲＰ
+#=FLAG_RP
+
+\SEL.GO(FLAG_RP_SET, FLAG_RP_RESET, FLAG_SET)
+\SEL(全フラグセット, 全フラグリセット, 戻る)
+
+#=FLAG_RP_SET
+
+\RP.SETALL(1)
+全フラグセットしました。
+\GO(FLAG_SET)
+
+#=FLAG_RP_RESET
+
+\RP.SETALL(0)
+全フラグリセットしました。
+\GO(FLAG_SET)
+
+
+//--------------- ＭＶ
+#=FLAG_MV
+
+\SEL.GO(FLAG_MV_SET, FLAG_MV_RESET, FLAG_SET)
+\SEL(全フラグセット, 全フラグリセット, 戻る)
+
+#=FLAG_MV_SET
+
+\MV.SETALL(1)
+全フラグセットしました。
+\GO(FLAG_SET)
+
+#=FLAG_MV_RESET
+
+\MV.SETALL(0)
+全フラグリセットしました。
+\GO(FLAG_SET)
+
+
+//--------------- ＢＧＭ
+#=FLAG_BGM
+
+\SEL.GO(FLAG_BGM_SET, FLAG_BGM_RESET, FLAG_SET)
+\SEL(全フラグセット, 全フラグリセット, 戻る)
+
+#=FLAG_BGM_SET
+
+\BGM.SETALL(1)
+全フラグセットしました。
+\GO(FLAG_SET)
+
+#=FLAG_BGM_RESET
+
+\BGM.SETALL(0)
+全フラグリセットしました。
+\GO(FLAG_SET)
+
+
+

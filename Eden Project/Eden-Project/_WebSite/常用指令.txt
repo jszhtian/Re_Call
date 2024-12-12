@@ -1,0 +1,5 @@
+使用前确保操作文件夹为当前文件夹
+添加文章：hexo new post "article title"
+生成静态网页：hexo g
+预览：hexo s -p 5000 然后浏览器打开localhost:5000
+上传网页：hexo d

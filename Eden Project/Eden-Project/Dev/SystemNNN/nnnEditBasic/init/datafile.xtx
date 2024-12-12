@@ -1,0 +1,55 @@
+modename datafile
+
+picPrintType 0
+commentPrintFlag 0
+textPrintFlag 1
+
+basePrintFlag 1
+filenameLoadBase ta_loadslot
+filenameSaveBase ta_saveslot
+
+
+
+
+
+areaSizeX 156
+areaSizeY 114
+picSizeX 132
+picSizeY 74
+picPrintX 12
+picPrintY 12
+
+
+selectPrintX 0
+selectPrintY 0
+selectSizeX 156
+selectSizeY 114
+
+saveTimePrintFlag 1
+fileNameSaveTimeFont ta_suuji8x16
+saveTimePrintX 22
+saveTimePrintY 116
+saveTimeFontSizeX 8
+saveTimeFontSizeY 16
+saveTimeFontNextX 8
+
+gameYearPrintFlag 0
+gameDatePrintFlag 0
+
+
+selectPrintMode 0
+selectColorR 255
+selectColorG 255
+selectColorB 200
+selectColorPercent 70
+
+fileNameError ta_dummy
+fileNameBad   ta_dummy
+fileNameOld   ta_dummy
+
+errorPrintX 12
+errorPrintY 12
+badPrintX 12
+badPrintY 12
+oldPrintX 12
+oldPrintY 12

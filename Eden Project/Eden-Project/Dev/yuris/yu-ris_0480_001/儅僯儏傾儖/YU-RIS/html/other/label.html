@@ -1,0 +1,54 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">その他命令</A>＞LABEL［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="label.html">LABEL［］</A>
+　<A HREF="labelinfo.html">LABELINFO［］</A>
+　<A HREF="macro.html">MACRO［］</A>
+　<A HREF="dialog.html">DIALOG［］</A>
+　<A HREF="tray.html">TRAY［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=500 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■ラベル設定命令 LABEL[ ]</FONT>
+<FONT CLASS=t20>
+
+ラベルを設定します。この命令は特別にコマンドの記述を省略することができます。
+
+<FONT CLASS=t40>LABEL[#="<FONT CLASS=t70>ラベル名</FONT>"]</FONT>
+
+省略して、
+
+<FONT CLASS=t40>#<FONT CLASS=t40>ラベル名</FONT></FONT>
+<FONT CLASS=t40>#=<FONT CLASS=t40>ラベル名</FONT></FONT>
+<FONT CLASS=t40>#=<FONT CLASS=t40>"ラベル名"</FONT></FONT>
+
+と記述することも出来ます。
+
+
+ラベルを設定した地点へ、GO 命令や GOSUB 命令などでその地点へジャンプする事が
+出来るようになります。また、TASK 命令によるタスクの生成時にもラベルを使用します。
+
+同じファイル内はもちろん、他のファイルも含めて、２つ以上の同じ名前のラベルを
+作ることは現状では出来ません。
+これは今後のバージョンアップにおいて、少し改良を行う予定です。
+
+</FONT></TD>
+<TD WIDTH=280 VALIGN=TOP>
+<IMG SRC="../img/label_001.jpg" WIDTH=279 HEIGHT=210><BR><BR>
+</TD></TR></TABLE>
+
+
+</BODY></HTML>

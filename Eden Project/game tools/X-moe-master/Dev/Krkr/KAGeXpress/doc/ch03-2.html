@@ -1,0 +1,132 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>3.2. 文字显示与控制</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="index.html" title="KCDDP KAGeXpress 3.0 使用手册">
+<link rel="up" href="ch03.html" title="第 3 章 KAGeXpress使用入门">
+<link rel="prev" href="ch03.html" title="第 3 章 KAGeXpress使用入门">
+<link rel="next" href="ch03-3.html" title="3.3. 使用背景和前景">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">3.2. 文字显示与控制</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch03.html">上一页</a> </td>
+<th width="60%" align="center">第 3 章 KAGeXpress使用入门</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch03-3.html">下一页</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="sect1" lang="zh-CN">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ch03-2"></a>3.2. 文字显示与控制</h2></div></div></div>
+<p>KAG允许有多个文字层同时存在。但是默认只用其中的一个来描绘剧本的文字。这个层将会拥有message这个别名。</p>
+<p>正常情况下，默认的文字层是message0。这种情况下可以用message0，也可以用message来访问这个层。</p>
+<p>默认文字层的尺寸在config.tjs中可以设置，同时也可以通过position（见下）指令设置。</p>
+<p>KAGeXpress预置了3种不同的文字层格式，可以通过相关的KAG指令调用。详情见下表。</p>
+<div class="table">
+<a name="tab3-1"></a><p class="title"><b>表 3.1. KAGeXpress的预设文字层参数</b></p>
+<div class="table-contents"><table summary="KAGeXpress的预设文字层参数" border="0" style="border-collapse: collapse;border-top: 0.5pt solid ; border-bottom: 0.5pt solid ; border-left: 0.5pt solid ; border-right: 0.5pt solid ; ">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">名称</th>
+<th style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">调用命令名</th>
+<th style="border-bottom: 0.5pt solid ; ">说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">全屏文字层</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">menul</td>
+<td style="border-bottom: 0.5pt solid ; ">覆盖全屏，背景完全透明的文字层。locate命令的定位将准确定位在屏幕的对应像素上。适合用于菜单、系统界面、字幕等场合。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">电子小说文字层</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">val</td>
+<td style="border-bottom: 0.5pt solid ; ">覆盖屏幕大部分，有不透明效果的文字层。适合电子小说类游戏（例如Fate、Toheart）使用。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; ">AVG文字层</td>
+<td style="border-right: 0.5pt solid ; ">advl</td>
+<td style="">覆盖屏幕下半部分，有不透明效果的文字层。一般用于单句对话为主的场合，适合对话型AVG类游戏使用。</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><p>预设的文字层设置可以在System\Textset.ks中找到并修改，不同种类的预设文字层可以通过命令调用在同一个游戏中交替使用。</p>
+<p>
+				<span class="emphasis"><em>KAG没有被包含在命令、注释及分段标签等特殊内容中的文字全部会被当作文字内容处理，显示在默认的文字层中。</em></span>默认设置下，message0为这个文字层。</p>
+<div class="example">
+<a name="ex3-1"></a><p class="title"><b>例 3.1. 文字显示</b></p>
+<div class="example-contents">
+<pre class="programlisting">*start
+这样输入文本，就会被当作文字输出。</pre>
+<p>执行效果：</p>
+<div><img src="figure/ex3-1.jpg"></div>
+</div>
+</div>
+<br class="example-break"><p>剧本文件中，行尾键入的Enter自动会被忽略。<span class="emphasis"><em>如果需要换行，请在需要换行的地方加入指令r。</em></span>
+			</p>
+<p>
+				<span class="emphasis"><em>在文中需要等待点击的时候，请加入指令l。</em></span>KAG执行到这个指令的时候默认将会显示一个闪烁的记号，并等待点击。</p>
+<p>
+				<span class="emphasis"><em>行末等待点击并换行请按照[l][r]这个顺序。否则等待的记号将显示在下一行。</em></span>
+			</p>
+<div class="example">
+<a name="ex3-2"></a><p class="title"><b>例 3.2. 换行及等待点击</b></p>
+<div class="example-contents">
+<pre class="programlisting">*start
+这是第一行，[l][r]
+要看到第二行请点击鼠标。</pre>
+<p>点击鼠标前：</p>
+<div><img src="figure/ex3-2-1.jpg"></div>
+<p>点击鼠标后：</p>
+<div><img src="figure/ex3-2-2.jpg"></div>
+</div>
+</div>
+<br class="example-break"><p>
+				<span class="emphasis"><em>换页时等待点击请使用指令p。</em></span>请注意默认[p]执行之后页面将被清空。</p>
+<div class="example">
+<a name="ex3-3"></a><p class="title"><b>例 3.3. 换页功能</b></p>
+<div class="example-contents">
+<pre class="programlisting">*start
+这是第一行，[l][r]
+要看到第二行请点击鼠标。[l][r]
+第三行就到了页尾。[p]
+这里是新的一页。</pre>
+<p>点击鼠标前：</p>
+<div><img src="figure/ex3-3-1.jpg"></div>
+<p>点击鼠标后：</p>
+<div><img src="figure/ex3-3-2.jpg"></div>
+</div>
+</div>
+<br class="example-break"><p>清除所有文字可以使用指令er。但因为在一页结束（p标记）后会自动清屏，所以这个命令并不多用。</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch03.html">上一页</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch03.html">上一级</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch03-3.html">下一页</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">第 3 章 KAGeXpress使用入门 </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
+<td width="40%" align="right" valign="top"> 3.3. 使用背景和前景</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<RootNamespace>Majiro</RootNamespace>
+		<LangVersion>preview</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CsvHelper" Version="27.0.2" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+	</ItemGroup>
+
+	<Import Project="..\VToolBase\Core\Core.projitems" Label="Shared" />
+
+	<PropertyGroup>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'!='Debug'">
+		<TransformOnBuild>true</TransformOnBuild>
+		<OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
+		<TransformOutOfDateOnly>false</TransformOutOfDateOnly>
+	</PropertyGroup>
+</Project>

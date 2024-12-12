@@ -1,0 +1,38 @@
+;――――――――――――――――――――――――――――――――――――――
+;
+;	カナルート
+;
+;――――――――――――――――――――――――――――――――――――――
+.route カナルート
+
+.call sinarioTORM1
+.call sinarioTORM2
+.call sinarioTORM3
+.call sinarioTORM4
+.call sinarioTORM5
+.call sinarioTORM6
+.call sinarioTORM7
+.call sinarioTORM8
+.call sinarioTORM9
+.call sinarioTORM10
+.call sinarioTORM11
+.call sinarioTORM12
+.call sinarioTORM13
+.call sinarioTORM14
+.call sinarioTORM15
+.call sinarioTORM16
+.call sinarioTORM17
+.call sinarioTORM18
+.call sinarioTORM19
+.call sinarioTORM20
+.call sinarioTORM21
+.call sinarioTORM22
+.call sinarioTORM23
+.call sinarioTORM24
+.call sinarioTORM25
+.call sinarioTORM26
+.staffroll kana
+.call sinarioTORM27
+
+? カナクリア = 1
+.load title

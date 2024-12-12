@@ -1,0 +1,37 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>print</h2>
+<h3>print &lt;effect&gt;</h3>
+<p>
+Draws to the screen utilizing designated effect.<br>
+<br>
+You may designate the effect to use in one of two ways:<br>
+１）By effect tag<br>
+　　　　0…draws only to memory, not to screen<br>
+　　　　1…instantaneous display<br>
+　　　　>1…the tag of an effect defined by the "effect" command<br>
+　　　　EX）bg "test.jpg",0<br>
+　　　　ld c,"testman.jpg",1<br>
+　　　　cl c,3<br>
+<br>
+２）Direct designation<br>
+　　　　Use the same parameters as the "effect" command to directly designate an effect<br>
+　　　　EX）bg "test.jpg",10,1000<br>
+　　　　ld "testman.jpg",15,2000,"mask.bmp"<br>
+ <br>
+</p>
+
+</body>
+</html>

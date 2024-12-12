@@ -1,0 +1,565 @@
+{
+	"Header": {
+		"Magic": [
+			89,
+			83,
+			84,
+			66
+		],
+		"Version": 555,
+		"InstCnt": 26,
+		"CodeSize": 104,
+		"ArgSize": 552,
+		"ResourceSize": 461,
+		"OffSize": 104,
+		"Resv": 0
+	},
+	"Insts": [
+		{
+			"Op": 83,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQPoT"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 83,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQPsT"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 50,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQPwT"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 25,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQP0T"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "RggAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 44,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAQ=="
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 0,
+					"Res": {
+						"Type": 0
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 0,
+					"Res": {
+						"Type": 0
+					},
+					"ResInfo": 13,
+					"ResOffset": 241
+				}
+			]
+		},
+		{
+			"Op": 55,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQBkRQgEAASsAAA=="
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 0,
+					"Res": {
+						"Type": 0
+					},
+					"ResInfo": 12,
+					"ResOffset": 241
+				}
+			]
+		},
+		{
+			"Op": 53,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQPwT"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQDAAQgEAAS0AAA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 44,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQKMQSAMAQPwTKQEAAEIBAAU9AABWAwBArhBIAwBA/BMpAQAAQgEAAD0AACYAAFYDAEDIEEgDAED8EykBAABXAgDgAD4AACYAAFYDAEAAEUgDAED8EykBAABCAQAAPgAAJgAA"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 0,
+					"Res": {
+						"Type": 0
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 0,
+					"Res": {
+						"Type": 0
+					},
+					"ResInfo": 11,
+					"ResOffset": 241
+				}
+			]
+		},
+		{
+			"Op": 53,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQP0T"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQPUQSAMAQPwTKQEAAA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 44,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQP0TQgEAAD4AAA=="
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 0,
+					"Res": {
+						"Type": 0
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 0,
+					"Res": {
+						"Type": 0
+					},
+					"ResInfo": 10,
+					"ResOffset": 241
+				}
+			]
+		},
+		{
+			"Op": 48,
+			"Unk": 0,
+			"Args": []
+		},
+		{
+			"Op": 48,
+			"Unk": 0,
+			"Args": []
+		},
+		{
+			"Op": 58,
+			"Unk": 0,
+			"Args": []
+		},
+		{
+			"Op": 48,
+			"Unk": 0,
+			"Args": []
+		},
+		{
+			"Op": 79,
+			"Unk": 0,
+			"Args": []
+		},
+		{
+			"Op": 50,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQP4T"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQDUAQgEAASkBAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 50,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQP8T"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 53,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQMYQSAMAQP4TKQEAAA=="
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 53,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQMcQSAMAQP4TKQEAAA=="
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 53,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQP0QSAMAQP4TKQEAAA=="
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 53,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQP4QSAMAQP4TKQEAAA=="
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 43,
+			"Unk": 1056,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "ImVzLlNQLkNHTE9BREVYRUMi"
+					}
+				},
+				{
+					"Value": 1,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQP4T"
+					}
+				},
+				{
+					"Value": 34,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "JKcQ"
+					}
+				},
+				{
+					"Value": 3,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAg=="
+					}
+				},
+				{
+					"Value": 4,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQP8T"
+					}
+				}
+			]
+		},
+		{
+			"Op": 43,
+			"Unk": 8,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "ImVzLlNQLklORk8uQ0hBTkdFIg=="
+					}
+				},
+				{
+					"Value": 1,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQP4T"
+					}
+				}
+			]
+		},
+		{
+			"Op": 43,
+			"Unk": 24,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "ImVzLlNQLkRSQVci"
+					}
+				},
+				{
+					"Value": 1,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQP4T"
+					}
+				},
+				{
+					"Value": 2,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAA=="
+					}
+				},
+				{
+					"Value": 3,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 79,
+			"Unk": 0,
+			"Args": []
+		},
+		{
+			"Op": 13,
+			"Unk": 0,
+			"Args": []
+		}
+	],
+	"Offs": [
+		2,
+		3,
+		14,
+		16,
+		19,
+		21,
+		23,
+		27,
+		31,
+		33,
+		113,
+		116,
+		118,
+		120,
+		122,
+		130,
+		131,
+		134,
+		135,
+		137,
+		138,
+		142,
+		145,
+		150,
+		152,
+		157
+	]
+}

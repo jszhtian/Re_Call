@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\allSimpleWipe.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeAdd.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeBeach.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeCenter.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeChecker.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeCircle.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeclock.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecommon.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecurtain.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecurtain2.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeDoor.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeGaza.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeGrav.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeHahen.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeHeart.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMekuri.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMove.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMozaic.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMulti.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeNaname.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeNurikae.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeoverrap.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipePage.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRadical.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRandomStrip.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRaster.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeShape.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeslide1.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeslide2.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeSlot.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeStar.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeSudare.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTogari.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTokoroten.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTurnStar.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipewarp1.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeWTogari.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipezebra.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeZoom.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\allSimpleWipe.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeAdd.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeAddSub.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeBeach.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeCenter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeChecker.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeCircle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeclock.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecommon.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecurtain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecurtain2.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeDoor.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeGaza.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeGrav.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeHahen.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeHeart.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMekuri.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMove.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMozaic.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMulti.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeNaname.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeNurikae.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeoverrap.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipePage.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRadical.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRandomStrip.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRaster.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeShape.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeslide1.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeslide2.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeSlot.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeStar.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeSudare.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTogari.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTokoroten.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTurnStar.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipewarp1.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeWTogari.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipezebra.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeZoom.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeZoom1.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

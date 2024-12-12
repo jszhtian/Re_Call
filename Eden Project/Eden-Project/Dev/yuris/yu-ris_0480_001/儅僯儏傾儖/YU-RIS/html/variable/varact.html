@@ -1,0 +1,114 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">変数系命令</A>＞VARACT［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="int.html">INT［］</A>
+　<A HREF="flt.html">FLT［］</A>
+　<A HREF="str.html">STR［］</A>
+　<A HREF="g_int.html">G_INT［］</A>
+　<A HREF="g_flt.html">G_FLT［］</A>
+　<A HREF="g_str.html">G_STR［］</A>
+　<A HREF="s_int.html">S_INT［］</A>
+　<A HREF="s_flt.html">S_FLT［］</A>
+　<A HREF="s_str.html">S_STR［］</A>
+　<A HREF="let.html">LET［］</A>
+　<A HREF="varact.html">VARACT［］</A>
+　<A HREF="varinfo.html">VARINFO［］</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■変数加工命令 VARACT[ ]</FONT>
+<FONT CLASS=t20>
+
+変数を別の型に変換したり、文字列変数を加工したりする命令です。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>SET = ＠変数名 (＄変数名)</FONT></TD><TD><FONT CLASS=t40>変換したい変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LET = ＠変数名 (＄変数名)</FONT></TD><TD><FONT CLASS=t40>値/文字列を格納する変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>COPY = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字列変数の一部をコピーしたい場合１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CUT = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字列変数の一部を切り抜きたい場合１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>TYPE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>変数を別の型に変換したい場合１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>UPPER = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字列（半角のみ）を全て大文字に変換したい場合１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>UPPER2 = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字列（半角と全角）を全て大文字に変換したい場合１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LOWER = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字列（半角のみ）を全て小文字に変換したい場合１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LOWER2 = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字列（半角と全角）を全て小文字に変換したい場合１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>HANTOZEN = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字列を半角から全角に変換したい場合１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>ZENTOHAN = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字列を全角から半角に変換したい場合１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>POS = 値</FONT></TD><TD><FONT CLASS=t40>文字列の指定開始位置を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LENGTH = 値</FONT></TD><TD><FONT CLASS=t40>文字列の指定開始位置からの範囲文字数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DIMSIZE = 値</FONT></TD><TD><FONT CLASS=t40>一次元配列のサイズを指定サイズに変更する</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PUSH = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>一次元配列の任意の要素をずらし、挿入する</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>POP = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>一次元配列の任意の要素を削除し、つめる</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] 変数＠Ａを、文字列変数に変換して、＄Ｂに格納する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARACT</FONT>[<FONT CLASS=t62>TYPE</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@A</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$B</FONT>]</FONT></B>
+
+
+[2] 文字列変数＄Ｂを、数値変数に変換して、＠Ａに格納する。
+
+　　※文字列変数に入っている文字は、半角数字のみでなければいけません。(β版仕様)
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARACT</FONT>[<FONT CLASS=t62>TYPE</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>$B</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@A</FONT>]</FONT></B>
+
+
+[3] 文字列変数＄Ａの文字列を、全て小文字に変換して、＄Ｂに格納する。（半角文字のみ対象）
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARACT</FONT>[<FONT CLASS=t62>LOWER</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>$A</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$B</FONT>]</FONT></B>
+
+
+[4] 文字列変数＄Ａの文字を、全て小文字に変換して、＄Ｂに格納する。（半角文字および全角文字対象）
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARACT</FONT>[<FONT CLASS=t62>LOWER2</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>$A</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$B</FONT>]</FONT></B>
+
+
+[5] 文字列変数＄Ａの、３文字目から５文字分の文字を、＄Ｂに格納する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARACT</FONT>[<FONT CLASS=t62>COPY</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>$A</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$B</FONT> <FONT CLASS=t62>POS</FONT>=<FONT CLASS=t63>3</FONT> <FONT CLASS=t62>LENGTH</FONT>=<FONT CLASS=t63>5</FONT>]</FONT></B>
+
+
+[6] 文字列変数＄Ａの、３文字目から５文字分を切り抜いた分の文字を、＄Ｂに格納する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARACT</FONT>[<FONT CLASS=t62>CUT</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>$A</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$B</FONT> <FONT CLASS=t62>POS</FONT>=<FONT CLASS=t63>3</FONT> <FONT CLASS=t62>LENGTH</FONT>=<FONT CLASS=t63>5</FONT>]</FONT></B>
+
+
+[7] 文字列変数＄Ａに含まれる半角文字を全て全角文字に変換し、＄Ｂに格納する。
+
+　　※半角カナは全角カナに変換されます。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARACT</FONT>[<FONT CLASS=t62>HANTOZEN</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>$A</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$B</FONT>]</FONT></B>
+
+
+[8] 文字列変数＄Ａに含まれる全角文字を全て半角文字に変換（変換可能な文字だけ）し、＄Ｂに格納する。
+
+　　※全角カナは半角カナには変換されません。(半角カナはYU-RIS上では使用非推奨のため)
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARACT</FONT>[<FONT CLASS=t62>ZENTOHAN</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>$A</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$B</FONT>]</FONT></B>
+
+
+[9] １次元配列変数＠Ａの配列サイズを500に変更する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARACT</FONT>[<FONT CLASS=t62>DIMSIZE</FONT>=<FONT CLASS=t63>500</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@A()</FONT>]</FONT></B>
+
+
+[10] １次元配列変数＠Ａの配列サイズを現在のサイズから1増やす。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARACT</FONT>[<FONT CLASS=t62>DIMSIZE</FONT>+=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@A()</FONT>]</FONT></B>
+
+
+
+</FONT>
+
+
+</BODY></HTML>

@@ -1,0 +1,183 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="./top.html">概要</A>＞変数</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="./basic.html">[基本文法]</A>
+　<A HREF="./variable.html">[変数]</A>
+　<A HREF="./svariable.html">[システム変数]</A>
+　<A HREF="./macro.html">[マクロ]</A>
+　<A HREF="./layer.html">[ＣＧレイヤ]</A>
+　<A HREF="./task.html">[タスク]</A>
+　<A HREF="./input.html">[入力]</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■変数</FONT>
+<FONT CLASS=t20>
+
+<FONT CLASS=t60><U>●変数とは</U></FONT>
+
+変数とは、ひと言で言うと数値を入れておく箱のようなものです。
+
+
+<FONT CLASS=t60><U>●変数の『型』と『種類』</U></FONT>
+
+ユーリスでは、変数には以下の３つの『型』があります。
+
+    ・INT （整数型。-9223372036854775808～9223372036854775807 の範囲の値が扱えます。64bit精度です）
+    ・FLT （実数型。これ、といった範囲はないのですが結構精度はあります。64bit精度です）
+    ・STR （文字列型。半角および全角文字が格納できます）
+
+そして、変数の『種類』としては以下の２種類があります。
+
+    ・グローバル変数 （全てのファイルからその変数が使用できる）
+    ・ローカル変数 （変数を宣言したファイル内でのみ使用できる）
+
+
+<FONT CLASS=t60><U>●書き方</U></FONT>
+
+書き方としては、変数名の先頭に＠をつけます。
+
+    <B><FONT CLASS=t43>@変数名</FONT></B>
+
+文字列変数の場合は、変数名の先頭に＄をつけます。
+
+    <B><FONT CLASS=t43>$変数名</FONT></B>
+
+この変数を式の中に記述することが出来ます。
+
+    <B><FONT CLASS=t40><FONT CLASS=t44>CG</FONT>[<FONT CLASS=t42>ID</FONT>=<FONT CLASS=t43>BG</FONT> <FONT CLASS=t42>X</FONT>=<FONT CLASS=t43>@A</FONT> <FONT CLASS=t42>Y</FONT>=<FONT CLASS=t43>@B</FONT> <FONT CLASS=t42>FILE</FONT>=<FONT CLASS=t43>$FILENAME</FONT>]</FONT></B>
+
+
+変数はまず最初に宣言しないと使用することが出来ません。
+宣言する際、グローバル変数を宣言するかローカル変数を宣言するかで、宣言する場所やコマンドが
+変わってきます。
+
+グローバル変数を宣言する場合、global.ystファイルの中で宣言しなくてはなりません。
+そして、宣言するために使用するコマンドは、G_INT, G_FLT, G_STR となります。
+
+　　<B><FONT CLASS=t40><FONT CLASS=t44>G_INT</FONT>[<FONT CLASS=t43>@A</FONT>=<FONT CLASS=t43>5</FONT>]</FONT><FONT CLASS=t20>　　←整数型の変数Ａを宣言し、初期値として５を代入</FONT></B>
+　　<B><FONT CLASS=t40><FONT CLASS=t44>G_FLT</FONT>[<FONT CLASS=t43>@B</FONT>]</FONT><FONT CLASS=t20>　　←実数型の変数Ｂを宣言し、初期値を省略した場合０が代入される</FONT></B>
+　　<B><FONT CLASS=t40><FONT CLASS=t44>G_STR</FONT>[<FONT CLASS=t43>$F</FONT>]</FONT><FONT CLASS=t20>　　←文字列型の変数Ｆを宣言し、初期値を省略した場合空の文字列が代入される</FONT></B>
+
+
+また、ローカル変数を宣言する場合、任意のファイルで記述する事が出来ます。
+宣言に使用するコマンドは、INT, FLT, STR となります。
+
+　　<B><FONT CLASS=t40><FONT CLASS=t44>INT</FONT>[<FONT CLASS=t43>@A</FONT>=<FONT CLASS=t43>3</FONT>]</FONT></B>
+　　<B><FONT CLASS=t40><FONT CLASS=t44>FLT</FONT>[<FONT CLASS=t43>@C</FONT>]</FONT></B>
+　　<B><FONT CLASS=t40><FONT CLASS=t44>STR</FONT>[<FONT CLASS=t43>$F</FONT>]</FONT></B>
+
+
+変数名の一文字目に「 ＿ 」アンダーバーを使うことは出来ません。
+システム変数用に予約されている為です。
+
+システム変数とは、システムが自動的に用意する変数で、例えば日付情報や
+キー押下状態などの情報などが格納されています。
+詳しくは「システム変数」の項目を参照ください。
+
+
+
+<FONT CLASS=t60><U>●配列変数を使う</U></FONT>
+
+ユーリスでは配列変数が使用できます。
+β版では８次元までの配列を扱うことが出来ます。
+
+宣言の仕方は以下のようになります。
+
+[例１] 要素を０～９まで１０個もつ一次元配列の変数Ａを宣言し、全ての要素の初期値を０にする
+
+　　<B><FONT CLASS=t40><FONT CLASS=t44>INT</FONT>[<FONT CLASS=t43>@A</FONT>(10)]</FONT></B>
+
+[例２] 二次元配列の変数Ｂを宣言し、全ての要素の初期値を５にする
+
+　　<B><FONT CLASS=t40><FONT CLASS=t44>INT</FONT>[<FONT CLASS=t43>@B</FONT>(10,5)=<FONT CLASS=t43>5</FONT>]</FONT></B>
+
+[例３] 二次元配列の文字列変数Ｓを宣言し、全ての要素に「GAME」という文字列を格納する。
+
+　　<B><FONT CLASS=t40><FONT CLASS=t44>STR</FONT>[<FONT CLASS=t43>$S</FONT>(10,5)=<FONT CLASS=t43>"GAME"</FONT>]</FONT></B>
+
+
+
+<FONT CLASS=t60><U>●変数に値を入れる</U></FONT>
+
+正式には LET命令 というのを使いますが、コマンドの記述を省略して
+以下のように記述できます。
+
+[例１] 変数Ａに５を代入する
+
+　　<B><FONT CLASS=t40><FONT CLASS=t43>@A</FONT>=<FONT CLASS=t43>5</FONT></FONT></B>
+
+[例２] 配列変数Ｂ（２，３）に式の結果を代入する
+
+　　<B><FONT CLASS=t40><FONT CLASS=t43>@B</FONT>(2,3)=<FONT CLASS=t43>4+@A*3</FONT></FONT></B>
+
+[例３] 変数Ｃに１０を加算する
+
+　　<B><FONT CLASS=t40><FONT CLASS=t43>@C</FONT>=<FONT CLASS=t43>@C</FONT>+<FONT CLASS=t43>10</FONT></FONT></B>　　または　　<B><FONT CLASS=t40><FONT CLASS=t43>@C</FONT>+=<FONT CLASS=t43>10</FONT></FONT></B>
+
+[例４] 変数Ｄを２で割る
+
+　　<B><FONT CLASS=t40><FONT CLASS=t43>@D</FONT>=<FONT CLASS=t43>@D</FONT>/<FONT CLASS=t43>2</FONT></FONT></B>　　または　　<B><FONT CLASS=t40><FONT CLASS=t43>@D</FONT>/=<FONT CLASS=t43>2</FONT></FONT></B>
+
+[例５] 変数Ｅを５で割り、その余りを代入する
+
+　　<B><FONT CLASS=t40><FONT CLASS=t43>@E</FONT>=<FONT CLASS=t43>@E</FONT>%<FONT CLASS=t43>5</FONT></FONT></B>　　または　　<B><FONT CLASS=t40><FONT CLASS=t43>@E</FONT>%=<FONT CLASS=t43>5</FONT></FONT></B>
+
+[例６] 文字列変数Ｓに「ＡＢＣ」と「．ＢＭＰ」を連結して格納する
+
+　　<B><FONT CLASS=t40><FONT CLASS=t43>$S</FONT>=<FONT CLASS=t43>"ABC"</FONT>+<FONT CLASS=t43>".BMP"</FONT></FONT></B>
+
+[例７] 文字列変数Ｓに「ＡＢＣ」と文字列変数Ｆに格納された文字列を連結して格納する
+
+　　<B><FONT CLASS=t40><FONT CLASS=t43>$S</FONT>=<FONT CLASS=t43>"ABC"</FONT>+<FONT CLASS=t43>$F</FONT></FONT></B>
+
+
+
+<FONT CLASS=t60><U>●数値型／文字列型を変換する</U></FONT>
+
+式の中で、「数値型を文字列型」に変換したり、「文字列型を数値型」に変換したりすることができます。
+それぞれ、「＄（）」、「＠（）」を使用します。（※ver0.281より仕様変更されました）
+
+[例１] 数値変数Ｂの123という値を、文字列型に変換し、文字列変数Ａに格納する。
+
+　　<B><FONT CLASS=t43>STR[$A]</FONT></B>
+　　<B><FONT CLASS=t43>INT[@B=123]</FONT></B>
+　　<B><FONT CLASS=t43>$A=$(@B)</FONT></B>
+
+[例２] 文字列変数Ｂの「123」という文字列を、数値型に変換し、数値変数Ａに格納する。
+
+　　<B><FONT CLASS=t43>INT[@A]</FONT></B>
+　　<B><FONT CLASS=t43>STR[$B="123"]</FONT></B>
+　　<B><FONT CLASS=t43>@A=@($B)</FONT></B>
+
+以上のように利用できます。
+また、式も書くことができます。
+
+[例３] @B*2+1 の値を、文字列型に変換し、文字列変数Ａに格納する。
+
+　　<B><FONT CLASS=t43>STR[$A]</FONT></B>
+　　<B><FONT CLASS=t43>INT[@B=123]</FONT></B>
+　　<B><FONT CLASS=t43>$A=$(@B*2+1)</FONT></B>
+
+[例４] "123"+"45"の文字列を、数値型に変換し、数値変数Ａに格納する。
+　　　※数値変数Ａには 12345 の値が入ります。
+
+　　<B><FONT CLASS=t43>INT[@A]</FONT></B>
+　　<B><FONT CLASS=t43>@A=@("123"+"45")</FONT></B>
+
+
+※文字列変数を数値変数に変換する際、もし文字列変数の中に、数値化できない文字列が存在していた場合、
+代入結果は不確定となります。(β版仕様)
+
+
+</FONT></TD>
+
+
+</BODY></HTML>

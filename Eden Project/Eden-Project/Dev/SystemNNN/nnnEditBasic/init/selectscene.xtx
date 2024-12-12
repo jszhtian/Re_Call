@@ -1,0 +1,62 @@
+modename selectscene
+
+enterFadeInType 2
+enterFadeInTime 5
+
+filenameBG sys_selectscene_bg
+
+filenameFuta ta_selectscene_futa
+
+selectPrintMode 1
+
+miniPicTransFlag 0
+
+blockNumberX 5
+blockNumberY 3
+
+printX 100
+printY 100
+nextX 200
+nextY 130
+sizeX 180
+sizeY 110
+
+picPrintX 10
+picPrintY 10
+
+cursorPrintX 0
+cursorPrintY 0
+cursorSizeX 180
+cursorSizeY 110
+
+totalPercentPrintFlag 1
+fileNameTotalPercent ta_suuji48x48
+totalPercentPrintX 600
+totalPercentPrintY 29
+totalPercentFontSizeX 48
+totalPercentFontSizeY 48
+totalPercentFontNextX 48
+
+pagePrintFlag 1
+filenamePageFont ta_av_suuji24x24
+pageFontSizeX 24
+pageFontSizeY 24
+pageFontNextX 24
+pagePrintX 134
+pagePrintY 541
+
+pageMaxPrintFlag 0
+slashPrintFlag 0
+pageUpZeroPrintFlag 0
+
+selectSound 5
+
+bgmNumber 11
+bgmRestartFlag 0
+
+picMustPrintPercent 5
+
+
+useCommonBackSetup 1
+useCommonUpDownSetup 1
+

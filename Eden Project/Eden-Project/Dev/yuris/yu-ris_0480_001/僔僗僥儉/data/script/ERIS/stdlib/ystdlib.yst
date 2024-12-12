@@ -1,0 +1,1357 @@
+//============================================================================
+//
+// YU-RIS標準ライブラリ
+//
+//============================================================================
+
+//============================================================================
+//
+// ■ _STRLEFT : 文字の左側から指定文字分取得する
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+// @_PINT(2) : 取得する文字数
+//
+// 戻り値
+// $_RSTR(1) : 文字列
+//
+//============================================================================
+#=es._strleft
+{
+	STR[$s]
+	INT[@gl=@_PINT(2)]
+	IF[@gl>0]
+		INT[@l]
+		VARINFO[LENGTH=1 SET=$_PSTR(1) LET=@l]
+		IF[@l>0]
+			IF[@gl>@l] @gl=@l IFEND[]
+			VARACT[COPY=1 SET=$_PSTR(1) LET=$s POS=1 LENGTH=@gl]
+		IFEND[]
+	IFEND[]
+
+	return[rstr=$s]
+}
+
+
+//============================================================================
+//
+// ■ _STRMID : 文字の指定位置から指定文字分取得する
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+// @_PINT(2) : 左側からの指定位置
+// @_PINT(3) : 取得する文字数
+//
+// 戻り値
+// $_RSTR(1) : 文字列
+//
+//============================================================================
+#=es._strmid
+{
+	STR[$s]
+	INT[@p=@_PINT(2)]
+	INT[@gl=@_PINT(3)]
+
+	INT[@l]
+	VARINFO[LENGTH=1 SET=$_PSTR(1) LET=@l]
+	IF[@l>0]
+		IF[@p>0 && @p<=@l && @gl>0]
+			IF[@gl>@l-@p+1] @gl=@l-@p+1 IFEND[]
+			VARACT[COPY=1 SET=$_PSTR(1) LET=$s POS=@p LENGTH=@gl]
+		IFEND[]
+	IFEND[]
+
+	return[rstr=$s]
+}
+
+
+//============================================================================
+//
+// ■ _STRRIGHT : 文字の右側から指定文字分取得する
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+// @_PINT(2) : 取得する文字数
+//
+// 戻り値
+// $_RSTR(1) : 文字列
+//
+//============================================================================
+#=es._strright
+{
+	STR[$s]
+	INT[@gl=@_PINT(2)]
+	IF[@gl>0]
+		INT[@l]
+		VARINFO[LENGTH=1 SET=$_PSTR(1) LET=@l]
+		IF[@l>0]
+			IF[@gl>@l] @gl=@l IFEND[]
+			VARACT[COPY=1 SET=$_PSTR(1) LET=$s POS=(@l-@gl+1) LENGTH=@gl]
+		IFEND[]
+	IFEND[]
+
+	return[rstr=$s]
+}
+
+
+//============================================================================
+//
+// ■ _STRINS : 文字列の指定した位置の後ろに文字列を挿入する
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+// $_PSTR(2) : 挿入する文字列
+// @_PINT(3) : 挿入する位置
+//
+// 戻り値
+// $_RSTR(1) : 文字列
+//
+//============================================================================
+#=es._strins
+{
+	INT[@l]
+	VARINFO[LENGTH=1 SET=$_PSTR(1) LET=@l]
+
+	STR[$s1]
+	STR[$s2]
+	INT[@gl=@_PINT(3)]
+	IF[@gl==0] @gl=1 IFEND[]
+	IF[@l>0]
+		IF[@gl>@l] @gl=@l IFEND[]
+		VARACT[COPY=1 SET=$_PSTR(1) LET=$s1 POS=1 LENGTH=@gl]
+	IFEND[]
+	@gl=@l-@gl
+	IF[@l>0 && @gl>0]
+		IF[@gl>@l] @gl=@l IFEND[]
+		VARACT[COPY=1 SET=$_PSTR(1) LET=$s2 POS=(@l-@gl+1) LENGTH=@gl]
+	IFEND[]
+
+	return[rstr=$s1+$_PSTR(2)+$s2]
+}
+
+
+//============================================================================
+//
+// ■ _STRDEL : 文字列の指定した位置から指定文字数分削除して詰める
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+// @_PINT(2) : 削除開始位置
+// @_PINT(3) : 削除文字数
+//
+// 戻り値
+// $_RSTR(1) : 文字列
+//
+//============================================================================
+#=es._strdel
+{
+	INT[@l1]
+	VARINFO[LENGTH=1 SET=$_PSTR(1) LET=@l1]
+
+	INT[@p1=@_PINT(2)]
+	IF[@p1<1] @p1=1 IFEND[]
+	IF[@p1>@l1+1] @p1=@l1+1 IFEND[]
+
+	INT[@pl=@_PINT(3)]
+	IF[@p1+@pl>@l1+1] @pl=@l1-@p1+1 IFEND[]
+
+	STR[$s1]
+	STR[$s2]
+	IF[@p1>1] VARACT[COPY=1 SET=$_PSTR(1) LET=$s1 POS=1 LENGTH=@p1-1] IFEND[]
+	IF[@p1+@pl<=@l1] VARACT[COPY=1 SET=$_PSTR(1) LET=$s2 POS=@p1+@pl LENGTH=@l1-(@p1+@pl)+1] IFEND[]
+
+	return[rstr=$s1+$s2]
+}
+
+
+//============================================================================
+//
+// ■ _STRREPLACE : 文字列の指定した位置の文字列を別の文字列に置き換える
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+// $_PSTR(2) : 置き換える文字列
+// @_PINT(3) : 置き換える位置
+//
+// 戻り値
+// $_RSTR(1) : 文字列
+//
+//============================================================================
+#=es._strreplace
+{
+	INT[@l1]
+	INT[@l2]
+	VARINFO[LENGTH=1 SET=$_PSTR(1) LET=@l1]
+	VARINFO[LENGTH=1 SET=$_PSTR(2) LET=@l2]
+
+	INT[@p1=@_PINT(3)]
+	IF[@p1>@l1+1] @p1=@l1+1 IFEND[]
+
+	STR[$s1]
+	STR[$s2]
+	IF[@p1>1] VARACT[COPY=1 SET=$_PSTR(1) LET=$s1 POS=1 LENGTH=@p1-1] IFEND[]
+	IF[@p1+@l2-1<@l1] VARACT[COPY=1 SET=$_PSTR(1) LET=$s2 POS=@p1+@l2 LENGTH=@l1-(@p1+@l2)+1] IFEND[]
+
+	return[rstr=$s1+$_PSTR(2)+$s2]
+}
+
+
+//============================================================================
+//
+// ■ _STRSPLIT.NUM : 文字列を分割する(指定した文字数毎)
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+// @_PINT(2) : ｎ文字毎に分割
+//
+// 戻り値
+// $_RSTR(1)～$_RSTR(10) : 文字数毎に分割した文字列
+//
+//============================================================================
+#=es._strsplit.num
+{
+	\_strlen($_PSTR(1))
+	INT[@mLen=@_RINT(1)]
+	INT[@mNum=@_PINT(2)]
+	STR[$s(11)]
+	INT[@LC]
+
+	LOOP[SET=10]
+	{
+		IF[@mLen>=@mNum*(@_LC-1)+1 && @mLen<=@mNum*(@_LC)]
+		{
+			@LC = @_LC
+			LOOP[SET=(@LC-1)] VARACT[COPY=1 SET=$_PSTR(1) LET=$s(@_LC) POS=@mNum*(@_LC-1)+1 LENGTH=@mNum] LOOPEND[]
+			VARACT[COPY=1 SET=$_PSTR(1) LET=$s(@LC) POS=@mNum*(@LC-1)+1 LENGTH=@mLen-(@mNum*(@LC-1))]
+			LOOPBREAK[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	IF[@mLen>=@mNum*(10)+1]
+	{
+		LOOP[SET=10] VARACT[COPY=1 SET=$_PSTR(1) LET=$s(@_LC) POS=@mNum*(@_LC-1)+1 LENGTH=@mNum] LOOPEND[]
+	}
+	IFEND[]
+
+	return[rstr=$s(1) rstr2=$s(2) rstr3=$s(3) rstr4=$s(4) rstr5=$s(5) rstr6=$s(6) rstr7=$s(7) rstr8=$s(8) rstr9=$s(9) rstr10=$s(10)]
+}
+
+
+//============================================================================
+//
+// ■ _STRSPLIT.STR : 文字列を分割する(指定した文字毎)
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+// $_PSTR(2) : 区切り文字
+//
+// 戻り値
+// $_RSTR(1)～$_RSTR(10) : 文字数毎に分割した文字列
+//
+//============================================================================
+#=es._strsplit.str
+{
+	\_strlen($_PSTR(1))
+	INT[@mLen=@_RINT(1)]
+	STR[$s(11)]
+	INT[@Snum=1]
+
+	INT[@start=1]
+	INT[@ptr]
+
+	LOOP[]
+	{
+		@ptr += 1
+		IF[@ptr > @mLen] LOOPBREAK[] IFEND[]
+
+		\_strmid($_PSTR(1),@ptr,1)
+		IF[$_RSTR(1)==$_PSTR(2)]
+		{
+	//		IF[@ptr>@start] //区切り文字が連続した場合無視する.
+			{
+				\_strmid($_PSTR(1),@start,@ptr-@start)($s(@Snum))
+				@Snum+=1
+				IF[@Snum>10] LOOPBREAK[] IFEND[]
+			}
+	//		IFEND[]
+
+			@start=@ptr+1
+		}
+		IFEND[]
+
+	}
+	LOOPEND[]
+
+	IF[@ptr && @Snum<=10 && @ptr>@start]
+	{
+		\_strmid($_PSTR(1),@start,@ptr-@start)($s(@Snum))
+	}
+	IFEND[]
+
+	return[rstr=$s(1) rstr2=$s(2) rstr3=$s(3) rstr4=$s(4) rstr5=$s(5) rstr6=$s(6) rstr7=$s(7) rstr8=$s(8) rstr9=$s(9) rstr10=$s(10)]
+}
+
+
+//============================================================================
+//
+// ■ _INTTOSTR : INT 型を STR 型に変換
+//
+// パラメータ
+// @_PINT(1) : 変換する値
+// @_PINT(2) : 何桁として変換するか (例: 123 を 5 桁 → 00123 となる）
+// @_PINT(3) : 桁数に関して @_PINT(1) < @_PINT(2) だった場合、左端に0を付加するか否か(1==する)
+//
+// 戻り値
+// $_RSTR(1) : 変換した文字列
+//
+//============================================================================
+#=es._inttostr
+{
+	STR[$str]
+	INT[@val  = @_PINT(1)]
+	INT[@keta = @_PINT(2)]
+	INT[@zero = @_PINT(3)]
+	INT[@len]
+
+	IF[@keta<0]
+	{
+		\_mes("[es.IntToStr] 設定された桁数が不正です。") END[]
+	}
+	ELSE[@keta==0]
+	{
+		$str=$(@val)
+	}
+	ELSE[@val>=0 || @keta==1]
+	{
+		$str = $(@val)
+		\_strright($str, @keta)($str)
+
+		\_strlen($str)
+		@len = @keta - @_RINT(1)
+		IF[@len<0] @len=0 IFEND[]
+
+		IF[@zero==1]
+			LOOP[SET=@len] $str="0"+$str LOOPEND[]
+		ELSE[]
+			LOOP[SET=@len] $str=" "+$str LOOPEND[]
+		IFEND[]
+
+	}
+	ELSE[]
+	{
+		@val = -@val
+
+		$str = $(@val)
+		\_strright($str, @keta-1)($str)
+
+		\_strlen($str)
+		@len = @keta - @_RINT(1) - 1
+		IF[@len<0] @len=0 IFEND[]
+
+		IF[@zero==1]
+			LOOP[SET=@len] $str="0"+$str LOOPEND[]
+			$str="-"+$str
+		ELSE[]
+			$str="-"+$str
+			LOOP[SET=@len] $str=" "+$str LOOPEND[]
+		IFEND[]
+
+	}
+	IFEND[]
+
+	return[rstr=$str]
+}
+
+
+//============================================================================
+//
+// ■ _STRUPPER : 文字列の小文字を大文字に変換
+//
+// パラメータ
+// $_PSTR(1) : 変換する文字列
+// @_PINT(2) : 0=半角のみ対象/1=半角全角対象
+//
+// 戻り値
+// $_RSTR(1) : 変換した文字列
+//
+//============================================================================
+#=es._strupper
+{
+	STR[$s]
+	IF[@_PINT(2)==1]
+		VARACT[UPPER2=1 SET=$_PSTR(1) LET=$s]
+	ELSE[]
+		VARACT[UPPER=1 SET=$_PSTR(1) LET=$s]
+	IFEND[]
+
+	return[rstr=$s]
+}
+
+
+//============================================================================
+//
+// ■ _STRLOWER : 文字列の大文字を小文字に変換
+//
+// パラメータ
+// $_PSTR(1) : 変換する文字列
+// @_PINT(2) : 0=半角のみ対象/1=半角全角対象
+//
+// 戻り値
+// $_RSTR(1) : 変換した文字列
+//
+//============================================================================
+#=es._strlower
+{
+	STR[$s]
+	IF[@_PINT(2)==1]
+		VARACT[LOWER2=1 SET=$_PSTR(1) LET=$s]
+	ELSE[]
+		VARACT[LOWER=1 SET=$_PSTR(1) LET=$s]
+	IFEND[]
+
+	return[rstr=$s]
+}
+
+
+//============================================================================
+//
+// ■ _STRLEN : 文字数を調べる
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+//
+// 戻り値
+// @_RINT(1) : 文字数
+//
+//============================================================================
+#=es._strlen
+{
+	INT[@s]
+	VARINFO[LENGTH=1 SET=$_PSTR(1) LET=@s]
+
+	return[rint=@s]
+}
+
+
+//====================================================================
+//
+// ■ _STRRND : 指定したパラメータ文字列群から、ランダムでいずれかの文字列を返す
+//
+// パラメータ
+// $_PSTR(1)～$_PSTR(10) : 文字列
+//
+// 戻り値
+// $_RSTR(1) : いずれかの文字列
+//
+//====================================================================
+#=es._strrnd
+{
+	INT[@num]
+	INT[@r]
+	STR[$str]
+
+	//パラメータの数を調べる
+	LOOP[SET=10]
+	{
+		IF[$_PSTR(@_LC)==""] LOOPBREAK[] IFEND[]
+		@num+=1
+	}
+	LOOPEND[]
+
+	//パラメータあれば
+	IF[@num>0]
+	{
+		MATH[RND=1 LET=@r SET=1 SET2=@num]
+		$str=$_PSTR(@r)
+	}
+	IFEND[]
+
+	return[rstr=$str]
+}
+
+
+//====================================================================
+//
+// ■ _STRTYPE : 文字が半角か全角か調べる
+//
+// パラメータ
+// $_PSTR(1) : 文字
+//
+// 戻り値
+// @_RINT(1) : 1=(半角)／2=(全角)
+//
+//====================================================================
+#=es._strtype
+{
+	INT[@r]
+	VARINFO[STRTYPE=1 SET=$_PSTR(1) LET=@r]
+	@r%=10 //１桁目だけを見る.
+
+	return[rint=@r]
+}
+
+
+//====================================================================
+//
+// ■ _FINDSTRLEFT : 文字列を左から調べて最初に出てきた指定文字の場所を取得する
+//                   指定文字が存在しなかった場合０が返る。
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+// $_PSTR(2) : 指定文字
+//
+// 戻り値
+// @_RINT(1) : 左から何文字目かを表す値
+//
+//====================================================================
+#=es._findstrleft
+{
+	STR[$c]INT[@p]INT[@l]
+	VARINFO[LENGTH=1 SET=$_PSTR(1) LET=@l]
+
+	LOOP[SET=@l]
+	{
+		VARACT[COPY=1 SET=$_PSTR(1) LET=$c POS=@_LC LENGTH=1]
+		IF[$c==$_PSTR(2)] @p=@_LC LOOPBREAK[] IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@p]
+}
+
+
+//====================================================================
+//
+// ■ _FINDSTRRIGHT : 文字列を右から調べて最初に出てきた指定文字の場所を取得する
+//                    指定文字が存在しなかった場合０が返る。
+//
+// パラメータ
+// $_PSTR(1) : 文字列
+// $_PSTR(2) : 指定文字
+//
+// 戻り値
+// @_RINT(1) : 左(※注意)から何文字目かを表す値
+//
+//====================================================================
+#=es._findstrright
+{
+	STR[$c]INT[@p]INT[@l]
+	VARINFO[LENGTH=1 SET=$_PSTR(1) LET=@l]
+
+	LOOP[SET=@l]
+	{
+		VARACT[COPY=1 SET=$_PSTR(1) LET=$c POS=@l-@_LC+1 LENGTH=1]
+		IF[$c==$_PSTR(2)] @p=@l-@_LC+1 LOOPBREAK[] IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@p]
+}
+
+
+//====================================================================
+//
+// ■ _RND : ランダム値取得
+//
+// パラメータ
+// @_PINT(1) : 下限値
+// @_PINT(2) : 上限値
+//
+// 戻り値
+// @_RINT(1) : ランダム値
+//
+//====================================================================
+#=es._rnd
+{
+	INT[@r]
+	MATH[RND=1 SET=@_PINT(1) SET2=@_PINT(2) LET=@r]
+
+	return[RINT=@r]
+}
+
+
+//====================================================================
+//
+// ■ _SQRT : 平方根取得
+//
+// パラメータ
+// @_PFLT(1) : 値
+//
+// 戻り値
+// @_RFLT(1) : 値
+//
+//====================================================================
+#=es._sqrt
+{
+	FLT[@r]
+	MATH[SQRT=1 SET=@_PFLT(1) LET=@r]
+
+	return[RFLT=@r]
+}
+
+
+//====================================================================
+//
+// ■ _SWAPVAL : 値の交換
+//
+// パラメータ
+// @_PINT(1) : 値１
+// @_PINT(2) : 値２
+//
+// 戻り値
+// @_RINT(1) : 値２
+// @_RINT(2) : 値１
+//
+//====================================================================
+#=es._swapval
+{
+	INT[@a=@_PINT(1)]INT[@b=@_PINT(2)]
+
+	return[RINT=@b RINT2=@a]
+}
+
+
+//====================================================================
+//
+// ■ _SWAPSTR : 文字列の交換
+//
+// パラメータ
+// $_PSTR(1) : 文字列１
+// $_PSTR(2) : 文字列２
+//
+// 戻り値
+// $_RSTR(1) : 文字列２
+// $_RSTR(2) : 文字列１
+//
+//====================================================================
+#=es._swapstr
+{
+	STR[$a=$_PSTR(1)]STR[$b=$_PSTR(2)]
+
+	return[RSTR=$b RSTR2=$a]
+}
+
+
+//====================================================================
+//
+// ■ _MES : メッセージダイアログ表示
+//
+// パラメータ
+// @_PINT(1) : 0:文字列の出力, 1:INTの出力, 2:FLTの出力
+// $_PSTR(2) : 表示文字列
+// $_PSTR(3) : キャプション
+//
+// 戻り値
+// なし
+//
+//====================================================================
+#=es._mes
+{
+	STR[$s]
+	IF[@_PINT(1)==0]
+		$s=$_PSTR(2)
+	ELSE[@_PINT(1)==1]
+		$s=$(@_PINT(2))
+	ELSE[@_PINT(1)==2]
+		$s=$(@_PFLT(2))
+	IFEND[]
+
+	DIALOG[STR=$s CAPTION=$_PSTR(3)]
+
+	return[]
+}
+
+
+//====================================================================
+//
+// ■ _TXSIZE : テキストサイズを変える
+//
+// パラメータ
+// @_PINT(1) : テキストサイズX
+// @_PINT(2) : テキストサイズY
+//
+// 戻り値
+// @_RINT(1) : 変数する前のテキストサイズX
+// @_RINT(2) : 変数する前のテキストサイズY
+//
+//====================================================================
+#=es._txsize
+{
+	INT[@rsx]FONTINFO[SX=1 LET=@rsx]
+	INT[@rsy]FONTINFO[SY=1 LET=@rsy]
+	INT[@sx=@_PINT(1)]
+	INT[@sy=@_PINT(2)]
+	IF[@sy<1] @sy=@sx IFEND[]
+	FONT[SX=@sx SY=@sy]
+
+	return[rint=@rsx rint2=@rsy]
+}
+
+
+//====================================================================
+//
+// ■ _TXCOLOR : テキスト色を変える
+//
+// パラメータ
+// @_PINT(1) : テキスト色1( 0～0xffffff)
+// @_PINT(2) : テキスト色2(-1～0xffffff)
+//
+// 戻り値
+// @_RINT(1) : 変数する前のテキスト色1
+// @_RINT(2) : 変数する前のテキスト色2
+//
+//====================================================================
+#=es._txcolor
+{
+	INT[@s]INT[@s2]
+	FONTINFO[COLOR=1 LET=@s]
+	FONTINFO[COLOR2=1 LET=@s2]
+	IF[@_PINT(1)>= 0 && @_PINT(1)<=0xffffff] FONT[COLOR=@_PINT(1)] IFEND[]
+	IF[@_PINT(2)>=-1 && @_PINT(2)<=0xffffff] FONT[COLOR2=@_PINT(2)] IFEND[]
+
+	return[rint=@s rint2=@s2]
+}
+
+
+//====================================================================
+//
+// ■ _TXFONT : フォントを変える
+//
+// パラメータ
+// $_PSTR(1) : フォント名
+//
+// 戻り値
+// $_RSTR(1) : 変数する前のフォント名
+//
+//====================================================================
+#=es._txfont
+{
+	STR[$n]
+	FONTINFO[NAME=1 LET=$n]
+	FONT[NAME=$_PSTR(1)]
+
+	return[rstr=$n]
+}
+
+
+//====================================================================
+//
+// ■ _TASK : タスクを生成する
+//
+// パラメータ
+// $_PSTR(1) : タスク名
+// $_PSTR(2) : 開始ラベル
+// @_PINT(3) : タスクＺ値
+// @_PINT(4) : @_TINT(1)へ渡す値
+// @_PINT(5) : @_TINT(2)へ渡す値
+// @_PINT(6) : @_TINT(3)へ渡す値
+// @_PINT(7) : @_TINT(4)へ渡す値
+//
+// 戻り値
+// @_RINT(1) : フラグ(1=成功/0=既に存在していた)
+//
+//====================================================================
+#=es._task
+{
+	GOSUB[#=es._task.info.exist PSTR=$_PSTR(1)]
+	IF[@_RINT(1)==0] TASK[ID=$_PSTR(1) #=$_PSTR(2) Z=@_PINT(3) TINT=@_PINT(4) TINT2=@_PINT(5) TINT3=@_PINT(6) TINT4=@_PINT(7)] IFEND[]
+
+	return[rint=@_RINT(1)]
+}
+
+
+//====================================================================
+//
+// ■ _TASK.PAUSE : 指定したタスクを一時停止する
+//
+// パラメータ
+// $_PSTR(1) : タスク名
+//
+// 戻り値
+// @_RINT(1) : フラグ(1=成功/0=存在しなかった)
+//
+//====================================================================
+#=es._task.pause
+{
+	INT[@r]
+	IF[$_PSTR(1)==""]
+	{
+		TASK[E=0]
+		@r=1
+	}
+	ELSE[]
+	{
+		GOSUB[#=es._task.info.exist PSTR=$_PSTR(1)]
+		IF[@_RINT(1)]
+		{
+			TASK[ID=$_PSTR(1) E=0]
+			@r=1
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[rint=@r]
+}
+
+
+//====================================================================
+//
+// ■ _TASK.RESUME : 指定したタスクを再開する
+//
+// パラメータ
+// $_PSTR(1) : タスク名
+//
+// 戻り値
+// @_RINT(1) : フラグ(1=成功/0=存在しなかった)
+//
+//====================================================================
+#=es._task.resume
+{
+	INT[@r]
+	IF[$_PSTR(1)==""]
+	{
+		TASK[E=1]
+		@r=1
+	}
+	ELSE[]
+	{
+		GOSUB[#=es._task.info.exist PSTR=$_PSTR(1)]
+		IF[@_RINT(1)]
+		{
+			TASK[ID=$_PSTR(1) E=1]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[rint=@r]
+}
+
+
+//====================================================================
+//
+// ■ _TASK.END : 指定したタスクを終了する
+//
+// パラメータ
+// $_PSTR(1) : タスク名
+//
+// 戻り値
+// @_RINT(1) : フラグ(1=成功/0=存在しなかった)
+//
+//====================================================================
+#=es._task.end
+{
+	INT[@r]
+	IF[$_PSTR(1)==""]
+	{
+		TASKEND[]
+		@r=1
+	}
+	ELSE[]
+	{
+		GOSUB[#=es._task.info.exist PSTR=$_PSTR(1)]
+		IF[@_RINT(1)]
+		{
+			TASKEND[ID=$_PSTR(1)]
+			@r=1
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[rint=@r]
+}
+
+
+//====================================================================
+//
+// ■ _TASK.INFO : 指定タスクの実行ファイル名,ファイル番号,行数を取得
+//
+// パラメータ
+// $_PSTR(1) : タスク名
+// @_PINT(2) : GOSUBネスト０の各種情報取得するなら 1 をセット
+//
+// 戻り値
+// $_RSTR(1) : ファイル名
+// @_RINT(2) : ファイル番号
+// @_RINT(3) : スクリプト行数
+// @_RINT(4) : スクリプト行数（テキスト行のみカウント）
+// @_RINT(5) : 次音声フラグ
+//
+//====================================================================
+#=es._task.info
+{
+	STR[$fn]INT[@no]INT[@li]INT[@tli]INT[@tnv]
+
+	IF[$_PSTR(1)!=""]
+	{
+		GOSUB[#=es._task.info.exist PSTR=$_PSTR(1)]
+		IF[@_RINT(1)]
+		{
+			IF[@_PINT(2)==0]
+			{
+				TASKINFO[ID=$_PSTR(1) FILE=1 LET=$fn]
+				TASKINFO[ID=$_PSTR(1) FILENO=1 LET=@no]
+				TASKINFO[ID=$_PSTR(1) LINE=1 LET=@li]
+			}
+			ELSE[]
+			{
+				TASKINFO[ID=$_PSTR(1) FILE0=1 LET=$fn]
+				TASKINFO[ID=$_PSTR(1) FILENO0=1 LET=@no]
+				TASKINFO[ID=$_PSTR(1) LINE0=1 LET=@li]
+			}
+			IFEND[]
+
+			TASKINFO[ID=$_PSTR(1) TEXTLINE=1 LET=@tli]
+			TASKINFO[ID=$_PSTR(1) NEXTVOICE=1 LET=@tnv]
+		}
+		IFEND[]
+	}
+	ELSE[]
+	{
+		IF[@_PINT(2)==0]
+		{
+			TASKINFO[FILE=1 LET=$fn]
+			TASKINFO[FILENO=1 LET=@no]
+			TASKINFO[LINE=1 LET=@li]
+		}
+		ELSE[]
+		{
+			TASKINFO[FILE0=1 LET=$fn]
+			TASKINFO[FILENO0=1 LET=@no]
+			TASKINFO[LINE0=1 LET=@li]
+		}
+		IFEND[]
+
+		TASKINFO[TEXTLINE=1 LET=@tli]
+		TASKINFO[NEXTVOICE=1 LET=@tnv]
+	}
+	IFEND[]
+
+	return[rstr=$fn rint2=@no rint3=@li rint4=@tli rint5=@tnv]
+}
+
+
+//====================================================================
+//
+// ■ _TASK.INFO.EXIST : 指定したタスク名が存在しているか否かを調べる
+//
+// パラメータ
+// $_PSTR(1) : タスク名
+//
+// 戻り値
+// @_RINT(1) : フラグ(1=存在している/0=存在していない)
+//
+//====================================================================
+#=es._task.info.exist
+{
+	INT[@r]
+	TASKINFO[ID=$_PSTR(1) EXIST=1 LET=@r]
+
+	return[rint=@r]
+}
+
+
+//====================================================================
+//
+// ■ _LABEL.INFO.EXIST : 指定したラベルが存在しているか否かを調べる
+//
+// パラメータ
+// $_PSTR(1) : ラベル名
+//
+// 戻り値
+// @_RINT(1) : フラグ(1=存在している/0=存在していない)
+//
+//====================================================================
+#=es._label.info.exist
+{
+	INT[@r]
+	LABELINFO[#=$_PSTR(1) EXIST=1 LET=@r]
+
+	return[rint=@r]
+}
+
+
+//====================================================================
+//
+// ■ _FILE.INFO.EXIST : 指定したファイルが存在しているか否かを調べる
+//
+// パラメータ
+// $_PSTR(1) : ファイル名
+//
+// 戻り値
+// @_RINT(1) : フラグ(1=存在している/0=存在していない)
+//
+//====================================================================
+#=es._file.info.exist
+{
+	INT[@r]
+	FILEINFO[FILE=$_PSTR(1) EXIST=1 LET=@r]
+
+	return[rint=@r]
+}
+
+
+//============================================================================
+//
+// ■ _CG.BLOCKDIV.NO : 画像をブロック分割し、左上から順に指定番目の画像を取り出す
+//
+//$_PSTR(1):取出元レイヤ
+//$_PSTR(2):出力レイヤ (※省略した場合は取出元レイヤに出力)
+//@_PINT(3):X分割サイズ
+//@_PINT(4):Y分割サイズ
+//@_PINT(5):何番目を取り出すか(0～n)
+//
+//============================================================================
+#=es._cg.blockdiv.no
+{
+	INT[@bsx]CGINFO[ID=$_PSTR(1) SX=1 LET=@bsx]
+	INT[@numx = (@bsx / @_PINT(3))]
+	INT[@lx=(@_PINT(5) % @numx)*@_PINT(3)]
+	INT[@ly=(@_PINT(5) / @numx)*@_PINT(4)]
+
+	IF[$_PSTR(2)==""]
+		CGACT[ID=$_PSTR(1)               SIZE=1 X=@lx Y=@ly X2=@lx+@_PINT(3)-1 Y2=@ly+@_PINT(4)-1 SX=@_PINT(3) SY=@_PINT(4)]
+	ELSE[]
+		CGACT[ID=$_PSTR(1) ID2=$_PSTR(2) SIZE=1 X=@lx Y=@ly X2=@lx+@_PINT(3)-1 Y2=@ly+@_PINT(4)-1 SX=@_PINT(3) SY=@_PINT(4)]
+	IFEND[]
+
+	return[]
+}
+
+
+//============================================================================
+//
+// ■ _CG.BLOCKDIV.NUM : 画像をブロック分割して何個に分割できるか取得する
+//
+//$_PSTR(1):取出元レイヤ
+//@_PINT(2):X分割サイズ
+//@_PINT(3):Y分割サイズ
+//
+//============================================================================
+#=es._cg.blockdiv.num
+{
+	INT[@bsx]CGINFO[ID=$_PSTR(1) SX=1 LET=@bsx]
+	INT[@bsy]CGINFO[ID=$_PSTR(1) SY=1 LET=@bsy]
+	INT[@numx = (@bsx / @_PINT(2))]
+	INT[@numy = (@bsy / @_PINT(3))]
+
+	return[rint=@numx*@numy]
+}
+
+
+//====================================================================
+//
+// ■ _CG.EXIST : 指定した画像ファイルが存在しているか否かを調べる
+//
+// パラメータ
+// $_PSTR(1) : ファイル名
+//
+// 戻り値
+// @_RINT(1) : フラグ(1=存在している/0=存在していない)
+//
+//====================================================================
+#=es._cg.exist
+{
+	INT[@c]
+	INT[@r]
+
+	FILEINFO[FILE=$_PSTR(1)+".bmp" EXIST=1 LET=@c];@r|=@c
+	FILEINFO[FILE=$_PSTR(1)+".png" EXIST=1 LET=@c];@r|=@c
+	FILEINFO[FILE=$_PSTR(1)+".jpg" EXIST=1 LET=@c];@r|=@c
+	FILEINFO[FILE=$_PSTR(1)+".gif" EXIST=1 LET=@c];@r|=@c
+	FILEINFO[FILE=$_PSTR(1)+".psb" EXIST=1 LET=@c];@r|=@c
+	FILEINFO[FILE=$_PSTR(1)        EXIST=1 LET=@c];@r|=@c
+
+//	FILEINFO[CGFILE=$_PSTR(1)        EXIST=1 LET=@c];@r|=@c
+
+	return[rint=@r]
+}
+
+
+//====================================================================
+//
+// ■ _SOUND.EXIST : 指定したサウンドファイルが存在しているか否かを調べる
+//
+// パラメータ
+// $_PSTR(1) : ファイル名
+//
+// 戻り値
+// @_RINT(1) : フラグ(1=存在している/0=存在していない)
+//
+//====================================================================
+#=es._sound.exist
+{
+	INT[@c]
+	INT[@r]
+	FILEINFO[FILE=$_PSTR(1)+".wav" EXIST=1 LET=@c];@r|=@c
+	FILEINFO[FILE=$_PSTR(1)+".ogg" EXIST=1 LET=@c];@r|=@c
+	FILEINFO[FILE=$_PSTR(1)        EXIST=1 LET=@c];@r|=@c
+
+	return[rint=@r]
+}
+
+
+
+/*
+//====================================================================
+//
+// ■ _FONTWIDTH : 現在のフォントにおける文字幅を取得する
+//
+// パラメータ
+// $_PSTR(1) : 文字
+//
+// 戻り値
+// @_RINT(1) : 幅
+//
+//====================================================================
+#=es._fontwidth
+{
+	INT[@w]
+
+	return[rint=@w]
+}
+*/
+
+
+
+//====================================================================
+//
+// ■ _MENU.INFO.A : メニューの表示状態を取得する
+//
+// パラメータ
+// $_PSTR(1) : メニューＩＤ
+//
+// 戻り値
+// @_RINT(1) : 1(=表示)／0(=非表示)
+//
+//====================================================================
+#=es._menu.info.a
+{
+	INT[@r]
+	MENUINFO[ID=$_PSTR(1) LET=@r A=1]
+
+	return[rint=@r]
+}
+
+
+
+//====================================================================
+//
+//■ダイアログ表示処理
+//
+//====================================================================
+#=es.DIALOG.SET
+{
+	STR[$Str = $_PSTR(1)]
+	STR[$Cap = $_PSTR(2)]
+
+	DIALOG[STR=$Str CAPTION=$Cap]
+
+	return[]
+}
+
+#=es.DIALOG.YESNO.SET
+{
+	STR[$Str = $_PSTR(1)]
+	STR[$Cap = $_PSTR(2)]
+	INT[@Def = @_PINT(3)]
+	INT[@Ret]
+
+	DIALOG[YESNO=1 STR=$Str CAPTION=$Cap DEFBUTTON=@Def LET=@Ret]
+
+	return[rint=@Ret]
+}
+
+#=es.DIALOG.YESNOCANCEL.SET
+{
+	STR[$Str = $_PSTR(1)]
+	STR[$Cap = $_PSTR(2)]
+	INT[@Def = @_PINT(3)]
+	INT[@Ret]
+
+	DIALOG[YESNOCANCEL=1 STR=$Str CAPTION=$Cap DEFBUTTON=@Def LET=@Ret]
+
+	return[rint=@Ret]
+}
+
+#=es.DIALOG.OKCANCEL.SET
+{
+	STR[$Str = $_PSTR(1)]
+	STR[$Cap = $_PSTR(2)]
+	INT[@Def = @_PINT(3)]
+	INT[@Ret]
+
+	DIALOG[OKCANCEL=1 STR=$Str CAPTION=$Cap DEFBUTTON=@Def LET=@Ret]
+
+	return[rint=@Ret]
+}
+
+
+//====================================================================
+//
+//■入力処理
+//
+//====================================================================
+#=es.INPUT.STR.SET
+{
+	STR[$Str = $_PSTR(1)]
+	STR[$Def = $_PSTR(2)]
+	STR[$Cap = $_PSTR(3)]
+	STR[$Ret]
+
+	DIALOG[INPUT=1 STR=$Str DEFSTR=$Def CAPTION=$Cap LETSTR=$Ret]
+
+	return[rstr=$Ret]
+}
+
+
+
+//====================================================================
+//
+// ■ _STRTOCODE : 文字列からキー／マウスコードへ変換する
+//
+// パラメータ
+// $_PSTR(1) : キー文字列
+//
+// 戻り値
+// @_RINT(1) : キー／マウスコード
+//
+//====================================================================
+#=es._strtocode
+{
+	STR[$s=$_PSTR(1)]
+	INT[@r]
+
+	  IF[$s=="MOUSE_L"] @r=@_CODE_MOUSE_L
+	ELSE[$s=="MOUSE_R"] @r=@_CODE_MOUSE_R
+	ELSE[$s=="MOUSE_M"] @r=@_CODE_MOUSE_M
+	ELSE[$s=="MOUSE_U"] @r=@_CODE_MOUSE_U
+	ELSE[$s=="MOUSE_D"] @r=@_CODE_MOUSE_D
+	ELSE[$s=="A"] @r=@_CODE_A
+	ELSE[$s=="B"] @r=@_CODE_B
+	ELSE[$s=="C"] @r=@_CODE_C
+	ELSE[$s=="D"] @r=@_CODE_D
+	ELSE[$s=="E"] @r=@_CODE_E
+	ELSE[$s=="F"] @r=@_CODE_F
+	ELSE[$s=="G"] @r=@_CODE_G
+	ELSE[$s=="H"] @r=@_CODE_H
+	ELSE[$s=="I"] @r=@_CODE_I
+	ELSE[$s=="J"] @r=@_CODE_J
+	ELSE[$s=="K"] @r=@_CODE_K
+	ELSE[$s=="L"] @r=@_CODE_L
+	ELSE[$s=="M"] @r=@_CODE_M
+	ELSE[$s=="N"] @r=@_CODE_N
+	ELSE[$s=="O"] @r=@_CODE_O
+	ELSE[$s=="P"] @r=@_CODE_P
+	ELSE[$s=="Q"] @r=@_CODE_Q
+	ELSE[$s=="R"] @r=@_CODE_R
+	ELSE[$s=="S"] @r=@_CODE_S
+	ELSE[$s=="T"] @r=@_CODE_T
+	ELSE[$s=="U"] @r=@_CODE_U
+	ELSE[$s=="V"] @r=@_CODE_V
+	ELSE[$s=="W"] @r=@_CODE_W
+	ELSE[$s=="X"] @r=@_CODE_X
+	ELSE[$s=="Y"] @r=@_CODE_Y
+	ELSE[$s=="Z"] @r=@_CODE_Z
+	ELSE[$s=="0"] @r=@_CODE_0
+	ELSE[$s=="1"] @r=@_CODE_1
+	ELSE[$s=="2"] @r=@_CODE_2
+	ELSE[$s=="3"] @r=@_CODE_3
+	ELSE[$s=="4"] @r=@_CODE_4
+	ELSE[$s=="5"] @r=@_CODE_5
+	ELSE[$s=="6"] @r=@_CODE_6
+	ELSE[$s=="7"] @r=@_CODE_7
+	ELSE[$s=="8"] @r=@_CODE_8
+	ELSE[$s=="9"] @r=@_CODE_9
+	ELSE[$s=="F1"] @r=@_CODE_F1
+	ELSE[$s=="F2"] @r=@_CODE_F2
+	ELSE[$s=="F3"] @r=@_CODE_F3
+	ELSE[$s=="F4"] @r=@_CODE_F4
+	ELSE[$s=="F5"] @r=@_CODE_F5
+	ELSE[$s=="F6"] @r=@_CODE_F6
+	ELSE[$s=="F7"] @r=@_CODE_F7
+	ELSE[$s=="F8"] @r=@_CODE_F8
+	ELSE[$s=="F9"] @r=@_CODE_F9
+	ELSE[$s=="F10"] @r=@_CODE_F10
+	ELSE[$s=="F11"] @r=@_CODE_F11
+	ELSE[$s=="F12"] @r=@_CODE_F12
+	ELSE[$s=="F13"] @r=@_CODE_F13
+	ELSE[$s=="F14"] @r=@_CODE_F14
+	ELSE[$s=="F15"] @r=@_CODE_F15
+	ELSE[$s=="F16"] @r=@_CODE_F16
+	ELSE[$s=="F17"] @r=@_CODE_F17
+	ELSE[$s=="F18"] @r=@_CODE_F18
+	ELSE[$s=="F19"] @r=@_CODE_F19
+	ELSE[$s=="F20"] @r=@_CODE_F20
+	ELSE[$s=="F21"] @r=@_CODE_F21
+	ELSE[$s=="F22"] @r=@_CODE_F22
+	ELSE[$s=="F23"] @r=@_CODE_F23
+	ELSE[$s=="F24"] @r=@_CODE_F24
+	ELSE[$s=="NUM0"] @r=@_CODE_NUM0
+	ELSE[$s=="NUM1"] @r=@_CODE_NUM1
+	ELSE[$s=="NUM2"] @r=@_CODE_NUM2
+	ELSE[$s=="NUM3"] @r=@_CODE_NUM3
+	ELSE[$s=="NUM4"] @r=@_CODE_NUM4
+	ELSE[$s=="NUM5"] @r=@_CODE_NUM5
+	ELSE[$s=="NUM6"] @r=@_CODE_NUM6
+	ELSE[$s=="NUM7"] @r=@_CODE_NUM7
+	ELSE[$s=="NUM8"] @r=@_CODE_NUM8
+	ELSE[$s=="NUM9"] @r=@_CODE_NUM9
+	ELSE[$s=="NUMADD"] @r=@_CODE_NUMADD
+	ELSE[$s=="NUMSUB"] @r=@_CODE_NUMSUB
+	ELSE[$s=="NUMMUL"] @r=@_CODE_NUMMUL
+	ELSE[$s=="NUMDIV"] @r=@_CODE_NUMDIV
+	ELSE[$s=="NUMDEC"] @r=@_CODE_NUMDEC
+	ELSE[$s=="BS"] @r=@_CODE_BS
+	ELSE[$s=="TAB"] @r=@_CODE_TAB
+	ELSE[$s=="ENTER"] @r=@_CODE_ENTER
+	ELSE[$s=="SPACE"] @r=@_CODE_SPACE
+	ELSE[$s=="SHIFT"] @r=@_CODE_SHIFT
+	ELSE[$s=="CTRL"] @r=@_CODE_CTRL
+	ELSE[$s=="ALT"] @r=@_CODE_ALT
+	ELSE[$s=="LEFT"] @r=@_CODE_LEFT
+	ELSE[$s=="RIGHT"] @r=@_CODE_RIGHT
+	ELSE[$s=="UP"] @r=@_CODE_UP
+	ELSE[$s=="DOWN"] @r=@_CODE_DOWN
+	ELSE[$s=="INSERT"] @r=@_CODE_INSERT
+	ELSE[$s=="DELETE"] @r=@_CODE_DELETE
+	ELSE[$s=="HELP"] @r=@_CODE_HELP
+	ELSE[$s=="SCROLL"] @r=@_CODE_SCROLL
+	ELSE[$s=="NUMLOCK"] @r=@_CODE_NUMLOCK
+	ELSE[$s=="ESC"] @r=@_CODE_ESC
+	ELSE[$s=="PAGEUP"] @r=@_CODE_PAGEUP
+	ELSE[$s=="PAGEDOWN"] @r=@_CODE_PAGEDOWN
+	ELSE[$s=="HYPHEN"] @r=@_CODE_HYPHEN
+	ELSE[$s=="CIRCUMFLEX"] @r=@_CODE_CIRCUMFLEX
+	ELSE[$s=="YEN"] @r=@_CODE_YEN
+	ELSE[$s=="AT"] @r=@_CODE_AT
+	ELSE[$s=="LEFTBRACKET"] @r=@_CODE_LEFTBRACKET
+	ELSE[$s=="RIGHTBRACKET"] @r=@_CODE_RIGHTBRACKET
+	ELSE[$s=="SEMICOLON"] @r=@_CODE_SEMICOLON
+	ELSE[$s=="COLON"] @r=@_CODE_COLON
+	ELSE[$s=="COMMA"] @r=@_CODE_COMMA
+	ELSE[$s=="PERIOD"] @r=@_CODE_PERIOD
+	ELSE[$s=="SLASH"] @r=@_CODE_SLASH
+	ELSE[$s=="BACKSLASH"] @r=@_CODE_BACKSLASH
+	ELSE[$s=="HOME"] @r=@_CODE_HOME
+	ELSE[$s=="END"] @r=@_CODE_END
+
+	ELSE[$s=="PAD1_LEFT"] @r=384
+	ELSE[$s=="PAD1_RIGHT"] @r=384+1
+	ELSE[$s=="PAD1_UP"] @r=384+2
+	ELSE[$s=="PAD1_DOWN"] @r=384+3
+	ELSE[$s=="PAD1_1"] @r=384+4
+	ELSE[$s=="PAD1_2"] @r=384+5
+	ELSE[$s=="PAD1_3"] @r=384+6
+	ELSE[$s=="PAD1_4"] @r=384+7
+
+	IFEND[]
+
+	return[rint=@r]
+}
+
+

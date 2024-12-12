@@ -1,0 +1,1542 @@
+//=========================================================================
+//
+//■ＣＧモード シーン
+//
+//=========================================================================
+
+//■スタティック変数
+{
+	S_STR[$BID="ES.CGMODE."]
+
+	S_INT[@D.NUM]
+
+	S_INT[@D.FLAG(\.CGMODE.MAX+1)]
+	S_STR[$D.FILE(\.CGMODE.MAX+1)]
+	S_INT[@D.LABEL(\.CGMODE.MAX+1)]
+	S_INT[@D.GROUP(\.CGMODE.MAX+1)]
+	S_INT[@D.NO(\.CGMODE.MAX+1)]
+	S_INT[@D.PAT(\.CGMODE.MAX+1)]
+//	S_INT[@D.CHK(\.CGMODE.MAX+1)]
+
+	S_STR[$TMP.FILE(100)]
+	S_STR[$TMP.THUMB]
+	S_INT[@TMP.PAT]
+
+
+	S_INT[@DCG.NUM] //鑑賞数
+	S_INT[@DCG.MAX] //総数
+	S_INT[@CG.MAX]  //ゞ
+
+	S_INT[@PLATENO(\.CGMODE.CG.MAX+1, \.CGMODE.SBN.MAX+1)]
+	S_INT[@GRP.NO]
+	S_INT[@GRP.NUM=1]
+	S_INT[@PAGE.NO]
+	S_INT[@PAGE.NUM]
+	S_INT[@CG.NO]
+	S_INT[@CG.NUM]
+
+	S_INT[@VIEW.NO]
+	S_INT[@VIEW.MODE]
+	S_INT[@VIEW.SIZE]
+	S_STR[$VIEW.PATH(2)]
+
+	S_INT[@THUMB.NUM]
+
+	S_INT[@Z.NUM  =60000000000000+3]
+
+	S_INT[@es.CGMODE.GRP]  //鑑賞バック用
+	S_INT[@es.CGMODE.PAGE] //鑑賞バック用
+
+	S_INT[@FlagMax]
+	S_INT[@FlagNum]
+
+	S_INT[@FadeTime]
+	S_INT[@FirstViewFlag]
+
+}
+
+
+//----------------------------------------------------------------
+//■LOOP
+//----------------------------------------------------------------
+#=ES.CGMODE.LOOP
+{
+	IF[@es.STATE==0]
+	{
+		@es.STATE=1
+	}
+	IFEND[]
+	IF[@es.STATE==1] //INIT
+	{
+		@GRP.NO=1
+		@PAGE.NO=1
+
+		@THUMB.NUM=@T(30,03)
+
+		//ＢＧＭ処理
+		\BGM($T(30,02))
+
+		//----------------------------------------------------------------
+		// 
+		//----------------------------------------------------------------
+			$VIEW.PATH(0) = $T(38,02)	//大
+			$VIEW.PATH(1) = $T(38,02)	//小
+		//	$VIEW.PATH(1) = "cgsys3/"	//小
+
+		//----------------------------------------------------------------
+		// 初期化
+		//----------------------------------------------------------------
+			GOSUB[#=ES.CGMODE.CGINIT]
+
+		@es.STATE =2
+		@es.STATE2=(400) //フェード時間
+	}
+	IFEND[]
+	IF[@es.STATE==2] //
+	{
+		//----------------------------------------------------------------
+		// ページ更新
+		//----------------------------------------------------------------
+			GOSUB[#=ES.CGMODE.REF]
+
+		@FirstViewFlag=0
+
+		@es.STATE=3
+	}
+	IFEND[]
+	IF[@es.STATE==3] //FADE
+	{
+		\SS.FADE(@es.STATE2)
+		@es.STATE=100
+	}
+	IFEND[]
+
+
+	IF[@es.STATE==101] //CG-VIEW-INIT
+	{
+			//----------------------------------------------------------------
+			// スクリーンショット
+			//----------------------------------------------------------------
+				\es.CGTSS  //1まずは最前面にSS
+				\es.CGSSS  //2それをまたSS
+				\es.CGTDEL //3最前面削除
+
+			//----------------------------------------------------------------
+			// ボタン非表示
+			//----------------------------------------------------------------
+				\BT.ACTIVEGROUP.ADD( 2 )
+
+			//----------------------------------------------------------------
+			// 各種画像非表示
+			//----------------------------------------------------------------
+				GOSUB[#=es.CGMODE.Num.Hide]
+
+			//----------------------------------------------------------------
+			// 鑑賞レイヤ生成
+			//----------------------------------------------------------------
+				CG[ID="_CGTMP"+$(001) Z=@es.Z.SS+010+(001) E=1 A=256 FILE=""]
+				CGACT[ID="_CGTMP"+$(001) RECTPAINT3=1 SET=0x00000000]
+
+
+			@VIEW.MODE=0
+			@VIEW.NO=0
+			@VIEW.SIZE=1 //0=Normal,1=Half
+			@FadeTime=@T(30,06)
+
+			GOSUB[#=es.CGMODE.CHANGE pint=1 pint2=3 pint3=1] //pint…+1方向, pint2…ＣＧ差分番号(3), pint3…連続で次へ
+
+	}
+	IFEND[]
+
+	//
+	IF[@es.STATE==201] //CG-VIEW-LOOP
+	{
+			//--------------------------------------------- スクロール
+		//	GOSUB[#=es.CGMODE.VIEW.SCROLL pint=@VIEW.NO]
+			GOSUB[#=es.CGMODE.VIEW.SCROLL pint=001]
+
+	}
+	IFEND[]
+
+
+	IF[@es.STATE==202] //拡大率切り替え後のフェード
+	{
+			GOSUB[#=cgmode.fade pint=999 pint2=200]
+
+			CGACT[ID="_CGTMP"+$(999) ID2="_CGTMP"+$(001) COPY2=1]
+			CGEND[ID="_CGTMP"+$(999)]
+			CG[ID="_CGTMP"+$(001) X=0 Y=0]
+			GOSUB[#=es.CGMODE.VIEW.SCROLL pint=001]
+
+		@es.STATE=201
+	}
+	IFEND[]
+
+	IF[@es.STATE==301] //ダイアログ消す
+	{
+		@VIEW.MODE=0
+		@es.STATE=201
+	}
+	IFEND[]
+
+	IF[@es.STATE==302] //ダイアログ表示
+	{
+		@VIEW.MODE=1
+		@es.STATE=201
+	}
+	IFEND[]
+
+	IF[@es.STATE==901] //CG-VIEW-END
+	{
+		//スクリーンショット
+		\es.CGTSS
+
+		//----------------------------------------------------------------
+		// ボタンセット
+		//----------------------------------------------------------------
+			\BT.ACTIVEGROUP.ADD( -2 )
+
+		//----------------------------------------------------------------
+		// 
+		//----------------------------------------------------------------
+		//	LOOP[SET=100] CGEND[ID="_CGTMP"+$(@_LC)] LOOPEND[]
+			CGEND[ID="_CGTMP"+$(001)]
+
+		//----------------------------------------------------------------
+		// チップ表示
+		//----------------------------------------------------------------
+			GOSUB[#=es.CGMODE.Num.Show]
+
+
+		//@CG.NO から @PAGE.NO 算出する
+		@PAGE.NO = ((@CG.NO-1) / @THUMB.NUM)+1
+
+		IF[0] //鑑賞モードから戻る時、鑑賞モードへ移行した時点のページに戻るようにする
+		{
+			@GRP.NO  = @es.CGMODE.GRP	//鑑賞バック用
+			@PAGE.NO = @es.CGMODE.PAGE	//鑑賞バック用
+		}
+		IFEND[]
+
+	//	GOSUB[#=ES.CGMODE.REF]
+
+		//
+		\BT.ON($BID+"BTN.GROUP", @GRP.NO)
+
+		\BT.ON($BID+"BTN.PAGE", @PAGE.NO)
+
+		@es.STATE =2
+		@es.STATE2=@T(30,08)
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+
+//-----------------------------------------------------------------
+//■各種画像初期化
+//-----------------------------------------------------------------
+#=ES.CGMODE.CGINIT
+{
+	//----------------------------------------------------------------
+	// 数字読込
+	//----------------------------------------------------------------
+		GOSUB[#=es.CGMODE.Num.Load]
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		GOSUB[#=es.CGMODE.CG.VIEW.GET]	@DCG.NUM = @_RINT(1)	//鑑賞数
+		GOSUB[#=es.CGMODE.CG.MAX.GET]	@DCG.MAX = @_RINT(1)	//総数
+
+	//----------------------------------------------------------------
+	//
+	//----------------------------------------------------------------
+		\BT.ON($BID+"BTN.GROUP", @GRP.NO)
+
+		\BT.ON($BID+"BTN.PAGE", @PAGE.NO)
+
+		\BT.ON($BID+"BTN.TAB.CGMODE") //CGMODEタブ
+
+	return[]
+}
+
+
+
+//-----------------------------------------------------------------
+//■鑑賞情報取得
+//@_PINT(1):グループ番号
+//-----------------------------------------------------------------
+#=ES.CGMODE.GETINFO
+{
+	INT[@grp=@_PINT(1)] //情報取得するグループ番号
+
+	//---------------------------------------------------------------------
+	// 初期化
+	//---------------------------------------------------------------------
+		INT[@mLC]
+		LOOP[SET=\.CGMODE.CG.MAX]
+		{
+			@mLC = @_LC
+			LOOP[SET=\.CGMODE.SBN.MAX] @PLATENO(@mLC-1, @_LC-1)=0 LOOPEND[]
+		}
+		LOOPEND[]
+
+	//---------------------------------------------------------------------
+	// 条件が合うものを登録していく.
+	//---------------------------------------------------------------------
+		@CG.NUM  = 0
+		@FlagMax = 0
+		@FlagNum = 0
+
+		LOOP[SET=@D.NUM]
+		{
+			IF[@D.GROUP(@_LC)==@grp]
+			{
+				@PLATENO(@D.NO(@_LC), @D.PAT(@_LC)) = @_LC
+
+				//最大NOを調べる.
+				IF[@CG.NUM < @D.NO(@_LC)] @CG.NUM=@D.NO(@_LC) IFEND[]
+
+				//
+				IF[@D.NO(@_LC)>0 && @D.PAT(@_LC)>0] @FlagMax+=1 IFEND[]
+				IF[@D.FLAG(@_LC)>0] @FlagNum+=1 IFEND[]
+
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+
+		//ページ数を取得
+		@PAGE.NUM = (@CG.NUM+@THUMB.NUM-1) / @THUMB.NUM
+		IF[@PAGE.NUM==0] @PAGE.NUM=1 IFEND[]
+
+	return[]
+}
+
+
+
+//-----------------------------------------------------------------
+//■ページ更新
+//-----------------------------------------------------------------
+#=ES.CGMODE.REF
+{
+	//---------------------------------------------------------------------
+	// 鑑賞情報取得
+	//---------------------------------------------------------------------
+		GOSUB[#=ES.CGMODE.GETINFO pint=@GRP.NO]
+
+//立ち絵表示を切り替える場合
+/*
+	LOOP[SET=(99)] \BT.ES0($BID+"TIP.CHARA", @_LC) LOOPEND[]
+//	IF[@GRP.NO==1]
+	IF[0]
+		IF[@PAGE.NO==1] \BT.ES1($BID+"TIP.CHARA", 1) IFEND[]
+		IF[@PAGE.NO==2] \BT.ES1($BID+"TIP.CHARA", 9) IFEND[]
+	ELSE[]
+		\BT.ES1($BID+"TIP.CHARA", @GRP.NO)
+	IFEND[]
+*/
+
+	//---------------------------------------------------------------------
+	// 表示
+	//---------------------------------------------------------------------
+		INT[@x]INT[@y]
+		INT[@CGViewNum]
+		INT[@CGNum]
+		INT[@exist]
+
+		LOOP[SET=@THUMB.NUM]
+		{
+			GOSUB[#=es.BT.A0 pstr=$BID+"BTN.PLATE" pint2=@_LC]
+			GOSUB[#=es.BT.A0 pstr=$BID+"BTN.THUMB" pint2=@_LC]
+			\BT.CGCLEAR($BID+"BTN.THUMB", @_LC)
+			\BT.CGCLEAR.OVER($BID+"BTN.THUMB", @_LC)
+
+			//数字一旦非表示
+			\NM.E0(100+@_LC*2)
+			\NM.E0(100+@_LC*2-1)
+			//スラッシュ表示
+			CG[ID="es.CGMODE.MK"+$(100+@_LC) E=0]
+
+			IF[@PLATENO((@PAGE.NO-1)*@THUMB.NUM+@_LC,0)>0]
+		//	IF[@PLATENO((@PAGE.NO-1)*@THUMB.NUM+@_LC,0)>=0] //テスト用
+			{
+				GOSUB[#=es.BT.A1 pstr=$BID+"BTN.PLATE" pint2=@_LC]
+				GOSUB[#=es.BT.A1 pstr=$BID+"BTN.THUMB" pint2=@_LC]
+
+				//ＣＧ鑑賞チェック
+				GOSUB[#=es.CGMODE.CG.VIEW.CHK pint=(@PAGE.NO-1)*@THUMB.NUM+@_LC]
+				@CGViewNum = @_RINT(1)
+
+				//ベースＣＧ含め差分ＣＧが何枚あるかチェック
+				GOSUB[#=es.CGMODE.CG.NUM.GET PINT=(@PAGE.NO-1)*@THUMB.NUM+@_LC]
+				@CGNum = @_RINT(1)
+
+				IF[@CGViewNum>0]
+		//		IF[@CGViewNum>=0] //テスト用
+				{
+					CG[ID="_TMP_OF" Z=1 E=0 FILE=$T(30,01)+$D.FILE(@PLATENO((@PAGE.NO-1)*@THUMB.NUM+@_LC,0)) ]
+					CG[ID="_TMP_OV" Z=1 E=0 FILE=""]
+					CGACT[ID="_TMP_OF" ID2="_TMP_OV" COPY2=1]
+					CGACT[ID="_TMP_OF" AKARUSA=1 SET=@T(30,04)*128/256]
+					CGACT[ID="_TMP_OV" AKARUSA=1 SET=@T(30,05)*128/256]
+					\BT.ID.OFF.GET($BID+"BTN.THUMB", @_LC)
+			CGINFO[ID=$_RSTR(1) EXIST=1 LET=@exist]IF[@exist]
+					CGACT[ID="_TMP_OF" ID2=$_RSTR(1) MERGE2=1 X=0 Y=0]
+			IFEND[]
+					\BT.ID.OVER.GET($BID+"BTN.THUMB", @_LC)
+			CGINFO[ID=$_RSTR(1) EXIST=1 LET=@exist]IF[@exist]
+					CGACT[ID="_TMP_OV" ID2=$_RSTR(1) MERGE2=1 X=0 Y=0]
+			IFEND[]
+					CGEND[ID="_TMP_OF"]
+					CGEND[ID="_TMP_OV"]
+
+					//数字表示
+					\NM.VAL.SET(100+@_LC*2  , @CGViewNum)
+					\NM.VAL.SET(100+@_LC*2-1, @CGNum)
+					//スラッシュ表示
+					CG[ID="es.CGMODE.MK"+$(100+@_LC) E=1]
+
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+
+	//----------------------------------------------------------------
+	// 数字表示
+	//----------------------------------------------------------------
+		GOSUB[#=es.CGMODE.Num1 PINT=@PAGE.NO PINT2=@PAGE.NUM]
+		GOSUB[#=es.CGMODE.Num2 PINT=@DCG.NUM PINT2=@DCG.MAX]	//鑑賞数、鑑賞率
+		GOSUB[#=es.CGMODE.Num2G PINT=@FlagNum PINT2=@FlagMax]	//鑑賞数、鑑賞率(グループ毎)
+
+	//----------------------------------------------------------------
+	// ←→ボタン有効無効
+	//----------------------------------------------------------------
+		IF[@PAGE.NO==1]
+			\BT.N1($BID+"BTN.PREVPAGE")
+		ELSE[]
+			\BT.N0($BID+"BTN.PREVPAGE")
+		IFEND[]
+		IF[@PAGE.NO==@PAGE.NUM]
+			\BT.N1($BID+"BTN.NEXTPAGE")
+		ELSE[]
+			\BT.N0($BID+"BTN.NEXTPAGE")
+		IFEND[]
+
+	//即表示されるように
+	GOSUB[#=es.BT.DRAW]
+
+
+	return[]
+}
+
+
+//=========================================================================
+//
+//■ＣＧ鑑賞処理
+//
+//=========================================================================
+#=es.CGMODE.CHANGE
+{
+
+	INT[@PLUS = @_PINT(1)]	//+1…順, -1…逆
+	INT[@MODE = @_PINT(2)]	//何が変わったか  1…グループ, 2…ＣＧ番号, 3…ＣＧ差分番号
+	INT[@LOOP = @_PINT(3)]	//0…終端で終了, 1…上のMODEで指定したものをループする, 2…連続して次へ進む
+	@LOOP %= 3
+
+	//鑑賞終了時にここに戻る
+	INT[@mGRP.NO  = @GRP.NO]
+	INT[@mCG.NO   = @CG.NO]
+	INT[@mVIEW.NO = @VIEW.NO]
+
+	IF[@MODE==1] @VIEW.NO=\.CGMODE.SBN.MAX;@CG.NO=@CG.NUM+1 IFEND[]	//グループ
+	IF[@MODE==2] @VIEW.NO=\.CGMODE.SBN.MAX                  IFEND[]	//ＣＧ番号
+	IF[@MODE==3]                                            IFEND[]	//ＣＧ差分番号
+
+
+	INT[@r]
+
+
+	//
+	LOOP[]
+	{
+
+		//====================================================================
+		// ループ
+		//====================================================================
+		IF[@LOOP==0 || @LOOP==1]
+		{
+			IF[@PLUS<0 && @MODE==3] @VIEW.NO-=1 ELSE[] @VIEW.NO+=1 IFEND[]
+
+			//-------------------------------------------------------- ＋
+			IF[@PLUS>0]
+			{
+					IF[@VIEW.NO >= \.CGMODE.SBN.MAX]
+					{
+						@VIEW.NO=1
+						IF[@MODE==3] @r=1 IFEND[] //終端で終了
+						IF[@MODE==2] @CG.NO+=1 IFEND[] //グループ変更/ＣＧ番号変更
+						IF[@MODE==1] @CG.NO+=1 IFEND[] //グループ変更/ＣＧ番号変更
+
+						IF[@CG.NO > @CG.NUM]
+						{
+							@CG.NO=1
+							IF[@MODE==2] @r=1 IFEND[] //終端で終了
+							IF[@MODE==1] //グループ変更
+							{
+								LOOP[]
+								{
+									@GRP.NO+=1
+									IF[@GRP.NO > @GRP.NUM]
+									{
+										@GRP.NO=1
+										@r=1 //終端で終了
+									}
+									IFEND[]
+
+									GOSUB[#=ES.CGMODE.GETINFO pint=@GRP.NO]
+									IF[@CG.NUM>0] LOOPBREAK[] IFEND[]
+								}
+								LOOPEND[]
+							}
+							IFEND[]
+						}
+						IFEND[]
+					}
+					IFEND[]
+
+			}
+			IFEND[]
+			//-------------------------------------------------------- －
+			IF[@PLUS<0]
+			{
+					IF[@VIEW.NO < 1]
+					{
+						@VIEW.NO=\.CGMODE.SBN.MAX-1
+						IF[@MODE==3] @r=1 IFEND[] //終端で終了
+					}
+					IFEND[]
+					IF[@VIEW.NO >= \.CGMODE.SBN.MAX]
+					{
+						@VIEW.NO=1
+						IF[@MODE==3] @r=1 IFEND[] //終端で終了
+						IF[@MODE==2] @CG.NO-=1 IFEND[] //グループ変更/ＣＧ番号変更
+						IF[@MODE==1] @CG.NO+=1 IFEND[] //グループ変更/ＣＧ番号変更
+
+						IF[@CG.NO < 1]
+						{
+							@CG.NO=@CG.NUM
+							IF[@MODE==2] @r=1 IFEND[] //終端で終了
+						}
+						IFEND[]
+						IF[@CG.NO > @CG.NUM]
+						{
+							@CG.NO=1
+							IF[@MODE==2] @r=1 IFEND[] //終端で終了
+							IF[@MODE==1] //グループ変更
+							{
+								LOOP[]
+								{
+									@GRP.NO-=1
+									IF[@GRP.NO < 1]
+									{
+										@GRP.NO=@GRP.NUM
+										@r=1 //終端で終了
+									}
+									IFEND[]
+
+									GOSUB[#=ES.CGMODE.GETINFO pint=@GRP.NO]
+									IF[@CG.NUM>0] LOOPBREAK[] IFEND[]
+								}
+								LOOPEND[]
+							}
+							IFEND[]
+						}
+						IFEND[]
+
+					}
+					IFEND[]
+
+			}
+			IFEND[]
+
+		}
+		IFEND[]
+		//====================================================================
+		// 連続して次へ
+		//====================================================================
+		IF[@LOOP==2]
+		{
+			@VIEW.NO+=@PLUS
+
+			IF[@VIEW.NO >= \.CGMODE.SBN.MAX]
+			{
+				@VIEW.NO=1
+
+				@CG.NO+=1
+				IF[@CG.NO > @CG.NUM]
+				{
+					@CG.NO=1
+
+					LOOP[]
+					{
+						@GRP.NO+=1
+						IF[@GRP.NO > @GRP.NUM] @GRP.NO=1 IFEND[]
+
+						GOSUB[#=ES.CGMODE.GETINFO pint=@GRP.NO]
+						IF[@CG.NUM>0] LOOPBREAK[] IFEND[]
+					}
+					LOOPEND[]
+				}
+				IFEND[]
+			}
+			IFEND[]
+			IF[@VIEW.NO < 1]
+			{
+				@VIEW.NO=\.CGMODE.SBN.MAX-1
+
+				@CG.NO-=1
+				IF[@CG.NO < 1]
+				{
+					@CG.NO=@CG.NUM
+
+					LOOP[]
+					{
+						@GRP.NO-=1
+						IF[@GRP.NO < 1] @GRP.NO=@GRP.NUM IFEND[]
+
+						GOSUB[#=ES.CGMODE.GETINFO pint=@GRP.NO]
+						IF[@CG.NUM>0] LOOPBREAK[] IFEND[]
+					}
+					LOOPEND[]
+				}
+				IFEND[]
+			}
+			IFEND[]
+
+		}
+		IFEND[]
+
+
+		IF[@LOOP==0 && @r==1] LOOPBREAK[] IFEND[]
+
+
+		//現在アクティブな番号にＣＧが存在するかどうか
+		//
+//		IF[@D.FLAG( @PLATENO((@CG.NO % @THUMB.NUM)+1, @VIEW.NO) )>0]
+		IF[@D.FLAG( @PLATENO(@CG.NO, @VIEW.NO) )>0]
+		{
+
+				//ＣＧ読込
+				GOSUB[#=cgmode.load]
+				IF[@_RINT(1)] LOOPCONTINUE[] IFEND[] //CG無かったら次へ
+
+				//フェード
+			//	GOSUB[#=cgmode.fade pint=@VIEW.NO pint2=@FadeTime]
+				GOSUB[#=cgmode.fade pint=999 pint2=@FadeTime]
+				CGACT[ID="_CGTMP"+$(999) ID2="_CGTMP"+$(001) COPY2=1]
+				CGEND[ID="_CGTMP"+$(999)]
+			//	CG[ID="_CGTMP"+$(001) X=0 Y=0]
+				GOSUB[#=es.CGMODE.VIEW.SCROLL pint=001]
+
+				//前のレイヤ削除
+			//	IF[@VIEW.NO>1] CGEND[ID="_CGTMP"+$(@VIEW.NO-1)] IFEND[]
+
+				//
+				IF[@FirstViewFlag==0] \es.CGSDEL;@FirstViewFlag=1 IFEND[]
+
+				//２枚目以降はクロスフェード時間
+				@FadeTime = @T(30,07)
+
+				//スクロール処理＋クリック待ち
+				@es.STATE = 201
+
+				LOOPBREAK[]
+
+		}
+		IFEND[]
+
+	}
+	LOOPEND[]
+
+
+	IF[@LOOP==1] @r=0 IFEND[]
+
+	IF[@r==1]
+	{
+		//鑑賞終了時にここに戻る
+		@GRP.NO  = @mGRP.NO
+		@CG.NO   = @mCG.NO
+		@VIEW.NO = @mVIEW.NO
+	}
+	IFEND[]
+
+	return[rint=@r] //1で鑑賞終了
+}
+
+
+
+//
+#=cgmode.load
+{
+	STR[$CURFN = $VIEW.PATH(@VIEW.SIZE)+$D.FILE(@PLATENO(@CG.NO, @VIEW.NO))] //@VIEW.NOでOK
+	CG[ID="_CGTMP"+$(999) Z=@es.Z.SS+010+(999) E=1 A=0 FILE=$CURFN]
+
+	IF[@_DEBUGMODE>=1] IF[@es.GSD(141,02)==0] WINDOW[NO=0 CAPTION=$CURFN] IFEND[] IFEND[]
+	//\_dmes($CURFN)
+
+//1x1なら飛ばす
+INT[@ret]INT[@sx]INT[@sy]
+CGINFO[ID="_CGTMP"+$(999) SX=1 LET=@sx]
+CGINFO[ID="_CGTMP"+$(999) SY=1 LET=@sy]
+IF[@sx==1 && @sy==1] @ret=1 IFEND[]
+
+/*
+	INT[@sx]INT[@sy]
+	IF[@VIEW.SIZE]
+	{
+		CGINFO[ID=_CGTMP NO=@vno SX=1 LET=@sx]
+		CGINFO[ID=_CGTMP NO=@vno SY=1 LET=@sy]
+	//	CGACT[ID=_CGTMP NO=@vno SIZE4=1 SX=@sx/2 SY=@sy/2]
+	//	CGACT[ID=_CGTMP NO=@vno SIZE3=1 SX=@sx/2 SY=@sy/2]
+	}
+	IFEND[]
+*/
+	return[rint=@ret]
+}
+
+#=cgmode.fade
+{
+	INT[@FTIME=@_PINT(2)]
+	INT[@time=@_OS_TIME(1)]
+	INT[@mA]
+
+	LOOP[]
+	{
+		GOSUB[#=es.CGMODE.VIEW.SCROLL pint=001]
+
+		@mA=((@_OS_TIME(1)-@time)*256/(@FTIME))
+		IF[@mA>256] @mA=256 IFEND[]
+		CG[ID="_CGTMP"+$(999) A=@mA Z=@es.Z.SS+010+100]
+
+		WAIT[FRAME=1]
+
+		IF[@mA==256] LOOPBREAK[] IFEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+#=es.CGMODE.VIEW.SCROLL
+{
+	INT[@marginX=@es.GSX/10]
+	INT[@marginY=@es.GSY/10]
+
+	INT[@MX = @_MOUSE_X]
+	INT[@MY = @_MOUSE_Y]
+
+	IF[@MX<          @marginX] @MX=          @marginX IFEND[]
+	IF[@MX>@es.GSX-1-@marginX] @MX=@es.GSX-1-@marginX IFEND[]
+	IF[@MY<          @marginY] @MY=          @marginY IFEND[]
+	IF[@MY>@es.GSY-1-@marginY] @MY=@es.GSY-1-@marginY IFEND[]
+
+	@MX-=@marginX
+	@MY-=@marginY
+
+	//表示座標割合
+	INT[@perX = (@MX*1000/(@es.GSX-@marginX*2))]
+	INT[@perY = (@MY*1000/(@es.GSY-@marginY*2))]
+
+	INT[@sx]INT[@sy]
+	INT[@dx]INT[@dy] //可動範囲
+
+	//Ａ:下のレイヤ
+		CGINFO[ID="_CGTMP"+$(001) SX=1 LET=@sx]
+		CGINFO[ID="_CGTMP"+$(001) SY=1 LET=@sy]
+		@dx = @sx-@es.GSX
+		@dy = @sy-@es.GSY
+		IF[@dx>=0] CG[ID="_CGTMP"+$(001) X=-@dx*@perX/1000] IFEND[]
+		IF[@dy>=0] CG[ID="_CGTMP"+$(001) Y=-@dy*@perY/1000] IFEND[]
+
+	//Ｂ:上のレイヤ
+		CGINFO[ID="_CGTMP"+$(999) SX=1 LET=@sx]
+		CGINFO[ID="_CGTMP"+$(999) SY=1 LET=@sy]
+		@dx = @sx-@es.GSX
+		@dy = @sy-@es.GSY
+		IF[@dx>=0] CG[ID="_CGTMP"+$(999) X=-@dx*@perX/1000] IFEND[]
+		IF[@dy>=0] CG[ID="_CGTMP"+$(999) Y=-@dy*@perY/1000] IFEND[]
+
+	return[]
+}
+
+
+
+//=========================================================================
+//■ラベルジャンプ処理
+//=========================================================================
+#=es.CGMODE.JUMP
+{
+	//--------------------------------------------
+	// 各種画像消去
+	//--------------------------------------------
+		GOSUB[#=ES.CGMODE.END]
+
+	//--------------------------------------------
+	// 数字非表示
+	//--------------------------------------------
+		GOSUB[#=es.CGMODE.Num.Hide]
+
+	//--------------------------------------------
+	// フェードアウト
+	//--------------------------------------------
+
+	//--------------------------------------------
+	// ウェイト
+	//--------------------------------------------
+		WAIT[FRAME=60]
+
+	//--------------------------------------------
+	// シナリオシーンへ
+	//--------------------------------------------
+		@es.RPMODE = 2	// 回想モードON
+
+	return[]
+}
+
+//----------------------------------------------------------------------------
+//■総鑑賞数を計算
+//----------------------------------------------------------------------------
+#=es.CGMODE.CG.VIEW.GET
+{
+	INT[@r]
+
+	LOOP[SET=@D.NUM]
+	{
+		//IF[@D.CHK(@_LC)>0] @r+=1 IFEND[]
+		IF[@D.PAT(@_LC)>0 && @D.FLAG(@_LC)>0] @r+=1 IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@r]
+}
+
+//-------------------------------------------------------------------------
+//■指定したＣＧに関して、ベースＣＧ含め差分ＣＧが何枚あるのかチェック
+//-------------------------------------------------------------------------
+#=es.CGMODE.CG.NUM.GET
+{
+	INT[@r]
+
+	LOOP[SET=\.CGMODE.SBN.MAX-1]
+	{
+		IF[@PLATENO(@_PINT(1), @_LC)>0] @r+=1 IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@r]
+}
+
+
+//-------------------------------------------------------------------------
+//■指定したＣＧに関して、ベースＣＧ含め差分ＣＧを何枚鑑賞したかチェック
+//-------------------------------------------------------------------------
+#=es.CGMODE.CG.VIEW.CHK
+{
+	INT[@r]
+
+	LOOP[SET=\.CGMODE.SBN.MAX-1]
+	{
+	//	IF[@D.CHK( @PLATENO(@_PINT(1), @_LC) ) > 0] @r+=1 IFEND[]
+		IF[@D.FLAG( @PLATENO(@_PINT(1), @_LC) ) > 0] @r+=1 IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@r]
+}
+
+
+
+//----------------------------------------------------------------------------
+//■ＣＧモード画像登録
+//----------------------------------------------------------------------------
+#=es.CGMODE.CG.SET
+{
+	@TMP.PAT+=1
+	\_strlower($_PSTR(1))($TMP.FILE( @TMP.PAT ))	//小文字にして登録
+	return[]
+}
+
+#=es.CGMODE.THUMB.SET
+{
+	$TMP.THUMB = $_PSTR(1)
+	return[]
+}
+
+#=es.CGMODE.DEF.SET
+{
+	//グループ最大番号取得
+	IF[@GRP.NUM<@_PINT(1)] @GRP.NUM=@_PINT(1) IFEND[]
+
+	//サムネイル登録
+	@D.NUM+=1
+
+	\_strlower($TMP.THUMB)
+	IF[$_RSTR(3)!=""] \_strlower($_PSTR(3)) IFEND[]
+	$D.FILE( @D.NUM )  = $_RSTR(1) //小文字にして登録
+	@D.GROUP( @D.NUM ) = @_PINT(1)
+	@D.NO( @D.NUM )    = @_PINT(2)
+	@D.PAT( @D.NUM )   = 0
+	@D.LABEL( @D.NUM ) = 0
+
+	LOOP[SET=@TMP.PAT]
+	{
+		@D.NUM+=1
+		$D.FILE( @D.NUM )  = $TMP.FILE(@_LC)
+		@D.GROUP( @D.NUM ) = @_PINT(1)
+		@D.NO( @D.NUM )    = @_PINT(2)
+		@D.PAT( @D.NUM )   = @_LC
+		@D.LABEL( @D.NUM ) = @_PINT(4)
+	}
+	LOOPEND[]
+
+	@CG.MAX += @TMP.PAT
+	@TMP.PAT = 0
+
+	$TMP.THUMB = ""
+
+	return[]
+}
+
+
+//----------------------------------------------------------------------------
+//■鑑賞フラグ登録
+//----------------------------------------------------------------------------
+#=es.CGMODE.CG.FLAG.SET
+{
+//	IF[@es.RPMODE==0]
+	{
+		STR[$fn]
+		\_strlower($_PSTR(1))($fn) //小文字にして比較
+
+//\_dmes("チェックします。"+$fn)
+		LOOP[SET=@D.NUM]
+		{
+			IF[@D.PAT( @_LC )>0]
+			{
+				IF[$fn==$D.FILE(@_LC)]
+				{
+				//	\_dmes("["+$fn+"] 発見しました。")
+					@D.FLAG(@_LC) = 1  //鑑賞フラグON
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+	}
+//	IFEND[]
+
+	return[]
+}
+
+
+//----------------------------------------------------------------------------
+//■鑑賞フラグ強制ON/OFF
+//----------------------------------------------------------------------------
+#=es.CGMODE.CG.SETALL
+{
+	IF[@_PINT(1)==0 || @_PINT(1)==1]
+	{
+		LOOP[SET=@D.NUM]
+		{
+			IF[@D.PAT( @_LC )>0]
+			{
+				@D.FLAG(@_LC) = @_PINT(1)  //鑑賞フラグON/OFF
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//----------------------------------------------------------------------------
+//■鑑賞フラグ登録チェック
+//----------------------------------------------------------------------------
+#=es.CGMODE.CG.FLAG.CHK
+{
+	INT[@ret]
+
+//	IF[@es.RPMODE==0]
+	{
+		STR[$fn]
+		\_strlower($_PSTR(1))($fn) //小文字にして比較
+
+//\_dmes("チェックします。"+$fn)
+		LOOP[SET=@D.NUM]
+		{
+			IF[@D.PAT( @_LC )>0]
+			{
+				IF[$fn==$D.FILE(@_LC)]
+				{
+					@ret=@D.FLAG(@_LC)
+				//	\_dmes("["+$fn+"] 発見しました。")
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+	}
+//	IFEND[]
+
+	return[rint=@ret]
+}
+
+
+
+#=ES.CGMODE.END
+{
+	//各種画像消去
+
+		//数値画像
+		GOSUB[#=es.CGMODE.Num.End]
+
+	return[]
+}
+
+
+//------------------------------------------------
+//■ページ数表示
+//------------------------------------------------
+#=es.CGMODE.Num1
+{
+	INT[@Num1=@_PINT(1)]
+	INT[@Num2=@_PINT(2)]
+
+	\NM.VAL.SET(11, @Num1)	//現在の頁
+	\NM.VAL.SET(12, @Num2)	//総頁数
+
+	return[]
+}
+
+//------------------------------------------------
+//■鑑賞数、鑑賞率表示
+//------------------------------------------------
+#=es.CGMODE.Num2
+{
+	INT[@Num1=@_PINT(1)]
+	INT[@Num2=@_PINT(2)]
+	INT[@VAL=@Num1*100/@Num2]
+	FLT[@f=@Num1*100.0/@Num2];IF[@f>0 && @f<2.0] @VAL=1 IFEND[] // 0<n<2の時を1にする調整.
+
+	\NM.VAL.SET(13, @Num1)	//鑑賞数
+	\NM.VAL.SET(14, @Num2)	//総数
+	\NM.VAL.SET(15, @VAL)	//鑑賞率
+
+	return[]
+}
+
+//------------------------------------------------
+//■鑑賞数、鑑賞率表示(グループ毎)
+//------------------------------------------------
+#=es.CGMODE.Num2G
+{
+	INT[@Num1=@_PINT(1)]
+	INT[@Num2=@_PINT(2)]
+	INT[@VAL=@Num1*100/@Num2]
+	FLT[@f=@Num1*100.0/@Num2];IF[@f>0 && @f<2.0] @VAL=1 IFEND[] // 0<n<2の時を1にする調整.
+
+	\NM.VAL.SET(16, @Num1)	//鑑賞数
+	\NM.VAL.SET(17, @Num2)	//総数
+	\NM.VAL.SET(18, @VAL)	//鑑賞率
+
+	return[]
+}
+
+//------------------------------------------------
+//■数字画像読込
+//------------------------------------------------
+#=es.CGMODE.Num.Load
+{
+	INT[@x]INT[@y]
+
+	LOOP[SET=@THUMB.NUM]
+	{
+		//プレート位置取得.
+		GOSUB[#=es.BT.XY.GET pstr=$BID+"BTN.PLATE" pint2=@_LC]
+		@x=@_RINT(1)
+		@y=@_RINT(2)
+
+		//差分鑑賞数
+		\NM.CG($T(30,11))
+		\NM.XYZ(@T(30,12)+@x, @T(30,13)+@y, @Z.NUM)
+		\NM.SX(@T(30,14))
+		\NM.DIG(@T(30,15), @T(30,16))
+		\NM.RANGE(0,99)
+		\NM.SET(100+@_LC*2)
+
+		//全差分数
+		\NM.CG($T(30,17))
+		\NM.XYZ(@T(30,18)+@x, @T(30,19)+@y, @Z.NUM)
+		\NM.SX(@T(30,20))
+		\NM.DIG(@T(30,21), @T(30,22))
+		\NM.RANGE(0,99)
+		\NM.SET(100+@_LC*2-1)
+
+		CG[ID="es.CGMODE.MK"+$(100+@_LC) X=@T(30,72)+@x Y=@T(30,73)+@y Z=@Z.NUM E=0 FILE=$T(30,71)]	//スラッシュ
+	}
+	LOOPEND[]
+
+	//現在のページ
+	\NM.CG($T(30,23))
+	\NM.XYZ(@T(30,24), @T(30,25), @Z.NUM)
+	\NM.SX(@T(30,26))
+	\NM.DIG(@T(30,27), @T(30,28))
+	\NM.RANGE(0,99)
+	\NM.SET(11)
+
+	//総ページ
+	\NM.CG($T(30,29))
+	\NM.XYZ(@T(30,30), @T(30,31), @Z.NUM)
+	\NM.SX(@T(30,32))
+	\NM.DIG(@T(30,33), @T(30,34))
+	\NM.RANGE(0,99)
+	\NM.SET(12)
+
+	//鑑賞数
+	\NM.CG($T(30,35))
+	\NM.XYZ(@T(30,36), @T(30,37), @Z.NUM)
+	\NM.SX(@T(30,38))
+	\NM.DIG(@T(30,39), @T(30,40))
+	\NM.RANGE(0,9999)
+	\NM.SET(13)
+
+	//総数
+	\NM.CG($T(30,41))
+	\NM.XYZ(@T(30,42), @T(30,43), @Z.NUM)
+	\NM.SX(@T(30,44))
+	\NM.DIG(@T(30,45), @T(30,46))
+	\NM.RANGE(0,9999)
+	\NM.SET(14)
+
+	//鑑賞率
+	\NM.CG($T(30,47))
+	\NM.XYZ(@T(30,48), @T(30,49), @Z.NUM)
+	\NM.SX(@T(30,50))
+	\NM.DIG(@T(30,51), @T(30,52))
+	\NM.RANGE(0,100)
+	\NM.SET(15)
+
+	//鑑賞数(グループ毎)
+	\NM.CG($T(30,53))
+	\NM.XYZ(@T(30,54), @T(30,55), @Z.NUM)
+	\NM.SX(@T(30,56))
+	\NM.DIG(@T(30,57), @T(30,58))
+	\NM.RANGE(0,9999)
+	\NM.SET(16)
+
+	//総数(グループ毎)
+	\NM.CG($T(30,59))
+	\NM.XYZ(@T(30,60), @T(30,61), @Z.NUM)
+	\NM.SX(@T(30,62))
+	\NM.DIG(@T(30,63), @T(30,64))
+	\NM.RANGE(0,9999)
+	\NM.SET(17)
+
+	//鑑賞率(グループ毎)
+	\NM.CG($T(30,65))
+	\NM.XYZ(@T(30,66), @T(30,67), @Z.NUM)
+	\NM.SX(@T(30,68))
+	\NM.DIG(@T(30,69), @T(30,70))
+	\NM.RANGE(0,100)
+	\NM.SET(18)
+
+	return[]
+}
+
+
+//------------------------------------------------
+//■数値画像表示
+//------------------------------------------------
+#=es.CGMODE.Num.Show
+{
+	LOOP[SET=@THUMB.NUM] CG[ID="es.CGMODE.MK"+$(100+@_LC) A=256] LOOPEND[]
+	return[]
+}
+
+
+//------------------------------------------------
+//■数値画像非表示
+//------------------------------------------------
+#=es.CGMODE.Num.Hide
+{
+	LOOP[SET=@THUMB.NUM] CG[ID="es.CGMODE.MK"+$(100+@_LC) A=0] LOOPEND[]
+	LOOP[SET=8] \NM.E0(11+@_LC-1) LOOPEND[]
+	LOOP[SET=@THUMB.NUM]
+		\NM.E0(100+@_LC*2)
+		\NM.E0(100+@_LC*2-1)
+	LOOPEND[]
+	return[]
+}
+
+//------------------------------------------------
+//■画像消去
+//------------------------------------------------
+#=es.CGMODE.Num.End
+{
+	LOOP[SET=@THUMB.NUM] CGEND[ID="es.CGMODE.MK"+$(100+@_LC)] LOOPEND[]
+	LOOP[SET=8] \NM.DEL(11+@_LC-1) LOOPEND[]
+	LOOP[SET=@THUMB.NUM]
+		\NM.DEL(100+@_LC*2  )
+		\NM.DEL(100+@_LC*2-1)
+	LOOPEND[]
+	return[]
+}
+
+
+//------------------------------------------------
+//■セーブ
+//------------------------------------------------
+#=es.CGMODE.FILESAVE
+{
+	SAVE[DNO=@_PINT(1) SET=@D.FLAG()]
+	return[]
+}
+
+//------------------------------------------------
+//■ロード
+//------------------------------------------------
+#=es.CGMODE.FILELOAD
+{
+	LOAD[FILE="gsd.sd" DNO=@_PINT(1) LET=@D.FLAG()]
+	return[]
+}
+
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[タブ・ＣＧ]ボタン -----------------------------------------------
+//
+#=ES.CGMODE.BTN.TAB.CGMODE.INIT
+{
+	\BT.ON($es.BID); return[]
+}
+
+//■[タブ・回想]ボタン -----------------------------------------------
+//
+#=ES.CGMODE.BTN.TAB.RPMODE.ON
+{
+	\es.S.GO("ES.RPMODE", 1, 0); return[]
+}
+
+//■[タブ・ＢＧＭ]ボタン ---------------------------------------------
+//
+#=ES.CGMODE.BTN.TAB.BGMMODE.ON
+{
+	\es.S.GO("ES.BGMMODE", 1, 0); return[]
+}
+
+//■[タブ・ムービー]ボタン -------------------------------------------
+//
+#=ES.CGMODE.BTN.TAB.MVMODE.ON
+{
+	\es.S.GO("ES.MVMODE", 1, 0); return[]
+}
+
+//■[グループ]ボタン -------------------------------------------------
+//
+#=ES.CGMODE.BTN.GROUP.INIT
+{
+	@GRP.NO  = 1
+	@PAGE.NO = 1
+	IF[@es.CGMODE.GRP  > 0] @GRP.NO  = @es.CGMODE.GRP  IFEND[]
+	IF[@es.CGMODE.PAGE > 0] @PAGE.NO = @es.CGMODE.PAGE IFEND[]
+	@es.CGMODE.GRP  = 0
+	@es.CGMODE.PAGE = 0
+
+	\BT.ON($BID+"BTN.GROUP", @GRP.NO)
+
+	return[]
+}
+
+#=ES.CGMODE.BTN.GROUP.ON
+{
+	@GRP.NO  = @_PINT(1)
+	@PAGE.NO = 1
+
+	GOSUB[#=ES.CGMODE.REF]
+
+	return[]
+}
+
+//■[サムネイル]ボタン -----------------------------------------------
+//
+#=ES.CGMODE.BTN.THUMB.ON
+{
+	INT[@mLC=@_PINT(1)]
+
+	GOSUB[#=es.CGMODE.CG.VIEW.CHK pint=(@PAGE.NO-1)*@THUMB.NUM+@mLC]
+	IF[@_RINT(1)>0]
+	{
+		IF[@D.LABEL(@PLATENO((@PAGE.NO-1)*@THUMB.NUM+@mLC, 1))]
+		{
+			@es.CGMODE.GRP  = @GRP.NO  //鑑賞バック用
+			@es.CGMODE.PAGE = @PAGE.NO //鑑賞バック用
+			@CG.NO = (@PAGE.NO-1)*@THUMB.NUM+@mLC
+
+			\es.STARTLABEL( $D.FILE(@PLATENO(@CG.NO, 1)) )
+
+			GOSUB[#=es.CGMODE.JUMP]
+		}
+		ELSE[$D.FILE(@PLATENO((@PAGE.NO-1)*@THUMB.NUM+@mLC, 1))!=""]
+		{
+			@es.CGMODE.GRP  = @GRP.NO  //鑑賞バック用
+			@es.CGMODE.PAGE = @PAGE.NO //鑑賞バック用
+			@CG.NO = (@PAGE.NO-1)*@THUMB.NUM+@mLC
+
+//\_dmes("CG.NO="+$(@CG.NO))
+
+			@es.STATE=101
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//■[前のページ]ボタン -----------------------------------------------
+//
+#=ES.CGMODE.BTN.PREVPAGE.ON
+{
+	IF[@PAGE.NO>1]
+	{
+		@PAGE.NO-=1
+		GOSUB[#=ES.CGMODE.REF]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//■[次のページ]ボタン -----------------------------------------------
+//
+#=ES.CGMODE.BTN.NEXTPAGE.ON
+{
+	IF[@PAGE.NO < @PAGE.NUM]
+	{
+		@PAGE.NO+=1
+		GOSUB[#=ES.CGMODE.REF]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//■[ページ]ボタン -----------------------------------------------
+//
+#=ES.CGMODE.BTN.PAGE.ON
+{
+	IF[@_PINT(1)>=1 && @_PINT(1)<=@PAGE.NUM]
+	{
+		@PAGE.NO=@_PINT(1)
+		GOSUB[#=ES.CGMODE.REF]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//■[戻る]ボタン -----------------------------------------------------
+//
+#=ES.CGMODE.BTN.BACK.ON
+{
+	@es.BGMMODE = 0
+
+	\es.S.RETURN
+	return[]
+}
+
+
+
+//■[前のグループへ]ボタン -------------------------------------------
+//
+#=ES.CGMODE.BTN.VIEW.PREVGRP.ON
+{
+	INT[@no=@_PINT(1)]
+
+	IF[@VIEW.MODE==0]
+		GOSUB[#=es.CGMODE.CHANGE pint=-1 pint2=1 pint3=@no] //pint…-1方向, pint2…グループ番号(1), pint3…ループ/次へ
+		IF[@_RINT(1)] @es.STATE=901 IFEND[]
+	ELSE[]
+		@es.STATE=301	//ダイアログ消す
+	IFEND[]
+
+	return[]
+}
+
+//■[次のグループへ]ボタン -------------------------------------------
+//
+#=ES.CGMODE.BTN.VIEW.NEXTGRP.ON
+{
+	INT[@no=@_PINT(1)]
+
+	IF[@VIEW.MODE==0]
+		GOSUB[#=es.CGMODE.CHANGE pint=1 pint2=1 pint3=@no] //pint…+1方向, pint2…グループ番号(1), pint3…ループ/次へ
+		IF[@_RINT(1)] @es.STATE=901 IFEND[]
+	ELSE[]
+		@es.STATE=301	//ダイアログ消す
+	IFEND[]
+
+	return[]
+}
+
+//■[前の画像へ]ボタン -----------------------------------------------
+//
+#=ES.CGMODE.BTN.VIEW.PREVCG.ON
+{
+	INT[@no=@_PINT(1)]
+
+	IF[@VIEW.MODE==0]
+		GOSUB[#=es.CGMODE.CHANGE pint=-1 pint2=2 pint3=@no] //pint…-1方向, pint2…ＣＧ番号(2), pint3…ループ/次へ
+		IF[@_RINT(1)] @es.STATE=901 IFEND[]
+	ELSE[]
+		@es.STATE=301	//ダイアログ消す
+	IFEND[]
+
+	return[]
+}
+
+//■[次の画像へ]ボタン -----------------------------------------------
+//
+#=ES.CGMODE.BTN.VIEW.NEXTCG.ON
+{
+	INT[@no=@_PINT(1)]
+
+	IF[@VIEW.MODE==0]
+		GOSUB[#=es.CGMODE.CHANGE pint=1 pint2=2 pint3=@no] //pint…+1方向, pint2…ＣＧ番号(2), pint3…ループ/次へ
+		IF[@_RINT(1)] @es.STATE=901 IFEND[]
+	ELSE[]
+		@es.STATE=301	//ダイアログ消す
+	IFEND[]
+
+	return[]
+}
+
+//■[前の差分画像へ]ボタン -------------------------------------------
+//
+#=ES.CGMODE.BTN.VIEW.PREVSBN.ON
+{
+	INT[@no=@_PINT(1)]
+
+	IF[@VIEW.MODE==0]
+		GOSUB[#=es.CGMODE.CHANGE pint=-1 pint2=3 pint3=@no] //pint…-1方向, pint2…ＣＧ差分番号(3), pint3…ループ/次へ
+		IF[@_RINT(1)] @es.STATE=901 IFEND[]
+	ELSE[]
+		@es.STATE=301	//ダイアログ消す
+	IFEND[]
+
+	return[]
+}
+
+//■[次の差分画像へ]ボタン -------------------------------------------
+//
+#=ES.CGMODE.BTN.VIEW.NEXTSBN.ON
+{
+	INT[@no=@_PINT(1)]
+
+	IF[@VIEW.MODE==0]
+		GOSUB[#=es.CGMODE.CHANGE pint=1 pint2=3 pint3=@no] //pint…+1方向, pint2…ＣＧ差分番号(3), pint3…ループ/次へ
+		IF[@_RINT(1)] @es.STATE=901 IFEND[]
+	ELSE[]
+		@es.STATE=301	//ダイアログ消す
+	IFEND[]
+
+	return[]
+}
+
+//■[戻る]ボタン -----------------------------------------------------
+//
+#=ES.CGMODE.BTN.VIEW.BACK.ON
+{
+//	IF[@VIEW.MODE==1]
+	IF[1]
+		@es.STATE=901	//ＣＧ一覧モードに戻る
+	ELSE[]
+		@es.STATE=302	//ダイアログ表示
+	IFEND[]
+
+	return[]
+}
+
+
+//■[DBG.SETALL]ボタン -----------------------------------------------
+//
+#=ES.CGMODE.BTN.DBG.SETALL.ON
+{
+	IF[@_DEBUGMODE]
+	{
+		INT[@ret]
+		\DIALOG.YESNO(@ret, "全部登録します。よろしいですか？", "デバッグ機能", 1)
+		IF[@ret==1]
+		{
+			\CG.SETALL(1)
+			\UI.RELOAD(ES.CGMODE)	//UI読み込み直し
+			GOSUB[#=ES.CGMODE.CGINIT]
+			GOSUB[#=ES.CGMODE.REF]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//■[DBG.RESETALL]ボタン ---------------------------------------------
+//
+#=ES.CGMODE.BTN.DBG.RESETALL.ON
+{
+	IF[@_DEBUGMODE]
+	{
+		INT[@ret]
+		\DIALOG.YESNO(@ret, "全部削除します。よろしいですか？", "デバッグ機能", 1)
+		IF[@ret==1]
+		{
+			\CG.SETALL(0)
+			\UI.RELOAD(ES.CGMODE)	//UI読み込み直し
+			GOSUB[#=ES.CGMODE.CGINIT]
+			GOSUB[#=ES.CGMODE.REF]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//////
+
+
+//△ＣＧモード画像総数 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.CGMODE.CG.MAX.GET
+{
+	return[rint=@CG.MAX]
+}
+
+

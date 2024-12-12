@@ -1,0 +1,346 @@
+{
+	"Header": {
+		"Magic": [
+			89,
+			83,
+			84,
+			66
+		],
+		"Version": 555,
+		"InstCnt": 16,
+		"CodeSize": 64,
+		"ArgSize": 324,
+		"ResourceSize": 244,
+		"OffSize": 64,
+		"Resv": 0
+	},
+	"Insts": [
+		{
+			"Op": 50,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QOwR"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQDUAQgEAASkBAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 44,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQKMQSAMAQOwRKQEAAEIBAAU9AAA="
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 0,
+					"Res": {
+						"Type": 0
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 0,
+					"Res": {
+						"Type": 0
+					},
+					"ResInfo": 2,
+					"ResOffset": 43
+				}
+			]
+		},
+		{
+			"Op": 48,
+			"Unk": 0,
+			"Args": []
+		},
+		{
+			"Op": 79,
+			"Unk": 0,
+			"Args": []
+		},
+		{
+			"Op": 43,
+			"Unk": 512,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "ImVzLl9zdHJsb3dlciI="
+					}
+				},
+				{
+					"Value": 33,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "JDcA"
+					}
+				}
+			]
+		},
+		{
+			"Op": 92,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "JO0R"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "JD4A"
+					}
+				}
+			]
+		},
+		{
+			"Op": 50,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QO4R"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQDUAQgEAAikBAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 50,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QO8R"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQDUAQgEAAykBAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 25,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QPAR"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "VgMAQDYAQgEABCkBAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 92,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "JPER"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "IiI="
+					}
+				}
+			]
+		},
+		{
+			"Op": 50,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QPIR"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 43,
+			"Unk": 528,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "ImVzLl9zdHJsZWZ0Ig=="
+					}
+				},
+				{
+					"Value": 33,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "JO0R"
+					}
+				},
+				{
+					"Value": 2,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEABQ=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 53,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "JPER"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "JD4A"
+					}
+				}
+			]
+		},
+		{
+			"Op": 53,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQPIR"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAQ=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 79,
+			"Unk": 8,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "SAMAQPIR"
+					}
+				}
+			]
+		},
+		{
+			"Op": 13,
+			"Unk": 0,
+			"Args": []
+		}
+	],
+	"Offs": [
+		4,
+		6,
+		62,
+		64,
+		71,
+		72,
+		74,
+		75,
+		76,
+		78,
+		79,
+		80,
+		80,
+		101,
+		103,
+		107
+	]
+}

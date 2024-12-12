@@ -1,0 +1,310 @@
+<!--------------------------------------------------------------------------->  
+<!--                           INTRODUCTION                                
+
+ The Code Project article submission template (HTML version)
+
+Using this template will help us post your article sooner. To use, just 
+follow the 3 easy steps below:
+ 
+     1. Fill in the article description details
+     2. Add links to your images and downloads
+     3. Include the main article text
+
+That's all there is to it! All formatting will be done by our submission
+scripts and style sheets. 
+
+-->  
+<!--------------------------------------------------------------------------->  
+<!--                        IGNORE THIS SECTION                            -->
+<html>
+<head>
+<title>The Code Project</title>
+<Style>
+BODY, P, TD { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt }
+H2,H3,H4,H5 { color: #ff9900; font-weight: bold; }
+H2 { font-size: 13pt; }
+H3 { font-size: 12pt; }
+H4 { font-size: 10pt; color: black; }
+PRE { BACKGROUND-COLOR: #FBEDBB; FONT-FAMILY: "Courier New", Courier, mono; WHITE-SPACE: pre; }
+CODE { COLOR: #990000; FONT-FAMILY: "Courier New", Courier, mono; }
+</style>
+<link rel="stylesheet" type=text/css href="http://www.codeproject.com/styles/global.css">
+</head>
+<body bgcolor="#FFFFFF" color=#000000>
+<!--------------------------------------------------------------------------->  
+
+
+<!-------------------------------     STEP 1      --------------------------->
+<!--  Fill in the details (CodeProject will reformat this section for you) -->
+
+<pre>
+Title:       ReHash
+Author:      Dominik Reichl 
+Email:       dominik.reichl@t-online.de
+Environment: VC++ 5.0-7.0, NT 4.0, Win95/98/ME, Win2k, WinXP
+Keywords:    Hash, Security, Cryptography, Win32
+Level:       Intermediate&quot;
+Description: A console-based hash calculator. Supported algorithms: CRC-16, CRC-16-CCITT, CRC-32, FCS-16, FCS-32, GHash-32-3, GHash-32-5, GOST-Hash, HAVAL-5-256, MD2, MD4, MD5, SHA-1, SHA-256, SHA-384, SHA-512, Tiger.
+Section      Cpp
+SubSection   Cryptography
+</pre>
+
+<!-------------------------------     STEP 2      --------------------------->
+<!--  Include download and sample image information.                       --> 
+
+<ul class=download>
+<li><a href="rehash_exe.zip">Download Win32 executable - 167 Kb </a></li>
+<li><a href="rehash_src.zip">Download source code - 276 Kb</a></li>
+</ul>
+
+<p><img src="rehash.jpg" alt="ReHash screenshot" width="572px" height="341px"></p>
+
+<!-------------------------------     STEP 3      --------------------------->
+<!--  Add the article text. Please use simple formatting (<h2>, <p> etc)   --> 
+<br>
+<h2>Contents</h2>
+<ul>
+<li><a href="#reintro">Introduction</a></li>
+<li><a href="#realgos">Supported algorithms</a></li>
+<li><a href="#reusage">Usage</a></li>
+<li><a href="#rethanks">Thanks / acknowledgements</a></li>
+</ul>
+
+<br>
+<h2><a name="reintro">Introduction</a></h2>
+
+ReHash is a free, open source console-based hash calculator.<br><br>
+You can disable hash algorithms selectively per command-line if you don't need
+or like them, you can choose if you want to use recursive directory scanning or not.<br><br>
+This tool is ideal for webmasters who wish to provide their users hash values of
+their (downloadable) files. The complete hashing process can be automated by using a
+shell/batch script. No additional user interaction is needed (i.e. the program
+won't ask for anything, it's just using the command-line).
+<br><br>
+ReHash is distributed under the terms of the GNU General Public License v2.
+<br><br>
+<br>
+<h2><a name="realgos">Supported algorithms</a></h2>
+
+The current version of ReHash supports the following hash algorithms:<br><br>
+
+<table width="100%" border="1">
+<tr bgColor="#F0F0F0">
+<td><center><b>Algorithm</b></center></td>
+<td><center><b>Standard</b></center></td>
+<td><center><b>Inventor</b></center></td>
+<td><center><b>Hash Digest Size</b></center></td>
+</tr>
+
+<tr><td>CRC-16</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><div align="right">16 bits</div></td></tr>
+
+<tr bgColor="#F0F0F0"><td>CRC-16-CCITT</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><div align="right">16 bits</div></td></tr>
+
+<tr><td>CRC-32</td>
+<td>ANSI X3.66, FIPS PUB 71</td>
+<td>&nbsp;</td>
+<td><div align="right">32 bits</div></td></tr>
+
+<tr bgColor="#F0F0F0"><td>FCS-16</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><div align="right">16 bits</div></td></tr>
+
+<tr><td>FCS-32</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><div align="right">32 bits</div></td></tr>
+
+<tr bgColor="#F0F0F0"><td>GHash (GHash-32-3, GHash-32-5)</td>
+<td>-</td>
+<td>-</td>
+<td><div align="right">32 bits</div></td></tr>
+
+<tr><td>GOST-Hash</td>
+<td>R 34.11-94</td>
+<td>&nbsp;</td>
+<td><div align="right">256 bits</div></td></tr>
+
+<tr bgColor="#F0F0F0"><td>HAVAL (5 passes, 256 bits)</td>
+<td>&nbsp;</td>
+<td>Zheng, Pieprzyk,<br>Seberry</td>
+<td><div align="right">256 bits</div></td></tr>
+
+<tr><td>MD2</td>
+<td>RFC 1319</td>
+<td>Rivest</td>
+<td><div align="right">128 bits</div></td></tr>
+
+<tr bgColor="#F0F0F0"><td>MD4</td>
+<td>RFC 1320</td>
+<td>Rivest</td>
+<td><div align="right">128 bits</div></td></tr>
+
+<tr><td>MD5</td>
+<td>RFC 1321</td>
+<td>Rivest</td>
+<td><div align="right">128 bits</div></td></tr>
+
+<tr bgColor="#F0F0F0"><td>SHA-1</td>
+<td>FIPS PUB 180-1</td>
+<td>NIST/NSA</td>
+<td><div align="right">160 bits</div></td></tr>
+
+<tr><td>SHA-2 (SHA256/SHA384/SHA512)</td>
+<td>&nbsp;</td>
+<td>NIST/NSA</td>
+<td><div align="right">256/384/512 bits</div></td></tr>
+
+<tr bgColor="#F0F0F0"><td>SizeHash-32</td>
+<td>-</td>
+<td>-</td>
+<td><div align="right">32 bits</div></td></tr>
+
+<tr><td>Tiger</td>
+<td>&nbsp;</td>
+<td>Anderson, Biham</td>
+<td><div align="right">192 bits</div></td></tr>
+
+</table>
+
+<br><br>
+
+<h2><a name="reusage">Usage</a></h2>
+<pre>rehash.exe [options] filespec [&gt; outputfile]</pre>
+<br>
+The command-line is parsed from the left to the right. So if you execute ReHash like this:
+<pre>rehash.exe -all -none *.*</pre>
+it will output nothing, because you first activate all algorithms and then deactivate them
+all.<br><br>
+<br>
+<b>Some usage examples:</b><br><br>
+
+Hash all INI files in C:\Windows (including subdirectories) using all hash algorithms:
+<pre>rehash.exe C:\Windows\*.ini</pre><br>
+
+Hash all INI files in C:\Windows (excluding subdirectories) using all hash algorithms:
+<pre>rehash.exe -norecur C:\Windows</pre><br>
+
+Hash all BAT files on C:\ (including subdirectories) using only MD5 and SHA-1
+(remember command-line is parsed from the left to the right):
+<pre>rehash.exe -none -md5 -sha1 C:\*.bat</pre><br>
+
+Hash all files in C:\Temp (excluding subdirectories) using only the GOST algorithm:
+<pre>rehash.exe -norecur -none -gost C:\Temp\*</pre><br>
+
+Hash all ZIP files in C:\homepage (including subdirectories) using only the MD5 algorithm
+and output the hashes to C:\homepage\downloads\hashes.txt:
+<pre>rehash.exe -none -md5 C:\homepage\*.zip &gt; C:\homepage\downloads\hashes.txt</pre><br>
+
+
+<b>All options:</b><br><br>
+
+<table width="100%" border="1">
+<tr bgColor="#F0F0F0">
+<td width="25%"><center><b>Option</b></center></td>
+<td><center><b>Description</b></center></td>
+</tr>
+
+<tr><td>-help / -h / -?/<br>-version / -v</td>
+<td>Print some information about ReHash.</td></tr>
+
+<tr><td>-fullpath / -f</td>
+<td>Output the full paths of hashed files.</td></tr>
+
+<tr><td>-nopath</td>
+<td>Just output the filenames of hashed files, not the full paths to the files.</td></tr>
+
+<tr><td>-rcrsv / -recur / -r</td>
+<td>Recursive scanning. Scan all files in the specified path including files in
+subdirectories.</td></tr>
+
+<tr><td>-norcrsv / -norecur</td>
+<td>Disable recursive scanning. Scan only the files in the specified path not
+including subdirectories.</td></tr>
+
+<tr><td>-all / -a</td>
+<td>Enable all algorithms.</td></tr>
+
+<tr><td>-none / -n</td>
+<td>Disable all algorithms.</td></tr>
+
+<tr><td>-crc16 / -nocrc16</td>
+<td>Enable/disable the CRC-16 algorithm.</td></tr>
+
+<tr><td>-crc16c / -nocrc16c</td>
+<td>Enable/disable the CRC-16-CCITT algorithm.</td></tr>
+
+<tr><td>-crc32 / -nocrc32</td>
+<td>Enable/disable the CRC-32 algorithm.</td></tr>
+
+<tr><td>-fcs16 / -nofcs16</td>
+<td>Enable/disable the FCS-16 algorithm.</td></tr>
+
+<tr><td>-fcs32 / -nofcs32</td>
+<td>Enable/disable the FCS-32 algorithm.</td></tr>
+
+<tr><td>-ghash3 / -noghash3</td>
+<td>Enable/disable the GHash-3 algorithm.</td></tr>
+
+<tr><td>-ghash5 / -noghash5</td>
+<td>Enable/disable the GHash-5 algorithm.</td></tr>
+
+<tr><td>-gost / -nogost</td>
+<td>Enable/disable the GOST-Hash algorithm.</td></tr>
+
+<tr><td>-haval / -nohaval</td>
+<td>Enable/disable the HAVAL-5-256 algorithm.</td></tr>
+
+<tr><td>-md2 / -nomd2</td>
+<td>Enable/disable the MD2 algorithm.</td></tr>
+<tr><td>-md4 / -nomd4</td>
+<td>Enable/disable the MD4 algorithm.</td></tr>
+<tr><td>-md5 / -nomd5</td>
+<td>Enable/disable the MD5 algorithm.</td></tr>
+
+<tr><td>-sha1 / -nosha1</td>
+<td>Enable/disable the SHA-1 algorithm.</td></tr>
+<tr><td>-sha256 / -nosha256</td>
+<td>Enable/disable the SHA-256 algorithm.</td></tr>
+<tr><td>-sha384 / -nosha384</td>
+<td>Enable/disable the SHA-384 algorithm.</td></tr>
+<tr><td>-sha512 / -nosha512</td>
+<td>Enable/disable the SHA-512 algorithm.</td></tr>
+
+<tr><td>-size32 / -nosize32</td>
+<td>Enable/disable the Size-32 algorithm (simply the byte-count of the message).</td></tr>
+
+<tr><td>-tiger / -notiger</td>
+<td>Enable/disable the TIGER algorithm.</td></tr>
+
+</table>
+<br><br>
+
+<h2><a name="rethanks">Thanks / acknowledgements</a></h2>
+Thanks to (no particular order):
+<ul>
+<li>Markku-Juhani O. Saarinen - GOST-Hash implementation</li>
+<li>Yuliang Zheng - HAVAL implementation</li>
+<li>Wei Dai - implementations of various algorithms</li>
+<li>Dr Brian Gladman - SHA-1/SHA-2 implementation</li>
+<li>Tom St Denis - Tiger implementation</li>
+</ul>
+
+<br>
+<h2>History</h2>
+<ul>
+<li><b>12 April 2003 - v1.0</b><br>
+First public release</li>
+</ul>
+
+<br>
+
+<!-------------------------------    That's it!   --------------------------->
+</body>
+</html>

@@ -1,0 +1,9 @@
+//BaseTool
+
+#ifndef __BASE_TOOL__
+#define __BASE_TOOL__
+
+int BF_Search(const char *src, const char *dst);
+void convFilePath(const char *src, char *dst);
+
+#endif 

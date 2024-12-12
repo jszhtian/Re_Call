@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_ver2_Win7|Win32">
+      <Configuration>Debug_ver2_Win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Win7|Win32">
+      <Configuration>Debug_Win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_ver2_win7|Win32">
+      <Configuration>Release_ver2_win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Win7|Win32">
+      <Configuration>Release_Win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{99738C00-F8B5-4FE1-8995-13242911DD5F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>nyanPictureLib2012</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>nyanPictureLib2017D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">
+    <TargetName>nyanPictureLib2017D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">
+    <TargetName>nyanPictureLib2017_ver2_win7D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+    <TargetName>nyanPictureLib2017</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+    <TargetName>nyanPictureLib2017</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+    <TargetName>nyanPictureLib2017_ver2_win7</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\addBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\addSubBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\BLT.H" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\BLT256.H" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\blt256Beta.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\bltBeta.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\changeTransLucentBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\colorAddBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\colorBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\genshoku16.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\gradationShapeBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\GREYBLT.H" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\GREYBLT2.H" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\jpegdecoder.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\lightBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\maskBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\negaBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\overrapBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\pngLoader.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\REDBLT.H" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\sepiaBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\shapeBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\stretchAddSubBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\stretchBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\transLucentBlt.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\transLucentBlt0.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\transLucentBlt2.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\transLucentBlt3.h" />
+    <ClInclude Include="..\..\systemNNN\nyanPictureLib\yuvChangeBlt.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\addBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\addSubBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\allPicture.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\BLT.CPP" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\BLT256.CPP" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\blt256Beta.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\bltBeta.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\changeTransLucentBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\colorAddBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\colorBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\genshoku16.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\gradationShapeBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\GREYBLT.CPP" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\GREYBLT2.CPP" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\jpegdecoder.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\lightBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\maskBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\negaBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\overrapBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\Picture.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\pngLoader.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\REDBLT.CPP" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\sepiaBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\shapeBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\stretchAddSubBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\stretchBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\transLucentBlt.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\transLucentBlt0.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\transLucentBlt2.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\transLucentBlt3.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanPictureLib\yuvChangeBlt.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,100 @@
+modename save
+
+commentInputFlag 1
+filenameDialog2 ta_dummydialog
+dialogOk2FileName ta_dummy
+dialogCancel2FileName ta_dummy
+
+
+dialogX2 240
+dialogY2 180
+dialogSizeX2 320
+dialogSizeY2 240
+
+dialogOk2PrintX 20
+dialogOk2PrintY 180
+dialogOk2SizeX 80
+dialogOk2SizeY 40
+
+dialogCancel2PrintX 180
+dialogCancel2PrintY 180
+dialogCancel2SizeX 80
+dialogCancel2SizeY 40
+
+
+
+enterFadeInType 2
+enterFadeInTime 5
+enterFadeInSkipOkFlag 1
+enterFadeInColorR 0
+enterFadeInColorG 0
+enterFadeInColorB 0
+createExitScreenFlag 1
+fillExitScreenFlag 1
+
+
+
+backScriptFlag 0
+backScriptName backscript
+backscriptloopflag 1
+
+fileNameBG sys_save_bg
+
+useCommonBackSetup 1
+useCommonUpDownSetup 1
+
+
+fileNamePageFont ta_suuji24x24
+pagePrintFlag 1
+pageKeta 2
+pagePrintX 137
+pagePrintY 538
+pageFontSizeX 24
+pageFontSizeY 24
+pageFontNextX 24
+pageMaxPrintFlag 0
+slashPrintFlag 0
+pageUpZeroPrintFlag 0
+
+blockNumberX 4
+blockNumberY 3
+printX 52
+printY 120
+nextX 180
+nextY 150
+
+page 10
+
+warningPrintFlag 1
+filenameDialog ta_dummydialog
+dialogOkFileName ta_dummy
+dialogCancelFileName ta_dummy
+
+
+dialogX 240
+dialogY 180
+dialogSizeX 320
+dialogSizeY 240
+
+dialogOkPrintX 20
+dialogOkPrintY 180
+dialogOkSizeX 80
+dialogOkSizeY 40
+
+dialogCancelPrintX 180
+dialogCancelPrintY 180
+dialogCancelSizeX 80
+dialogCancelSizeY 40
+
+
+dialogOkClickSound 1
+dialogCancelClickSound 3
+
+dialogOkClickTime 1
+dialogCancelClickTime 1
+
+saveSound 5
+warningSound 7
+
+ClickTime 1
+

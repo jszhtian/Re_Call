@@ -1,0 +1,15 @@
+CPU Disasm
+Address               Hex dump                  Command                                      Comments
+0102B441              |> /8A440D DC             |/mov al,byte ptr [ecx+ebp-24]
+0102B445              |. |8D52 01               ||lea edx,[edx+1]
+0102B448              |. |3042 FF               ||xor byte ptr [edx-1],al
+0102B44B              |. |41                    ||inc ecx
+0102B44C              |. |81E1 0F000080         ||and ecx,8000000F
+0102B452              |. |79 05                 ||jns short 0102B459
+0102B454              |. |49                    ||dec ecx
+0102B455              |. |83C9 F0               ||or ecx,FFFFFFF0
+0102B458              |. |41                    ||inc ecx
+
+0xB5, 0x24, 0x4A, 0x26, 0xAF, 0xEE, 0x8A, 0xCE,
+0x67, 0x0C, 0x71, 0x08, 0x21, 0x7E, 0x6D, 0x27, 0x75, 0xAD, 0x18, 0x04, 0xD9, 0xB1, 0xEC, 0x00,
+0x4C, 0xF3, 0x38, 0x00, 0xFC, 0xFB, 0x33, 0x01

@@ -1,0 +1,786 @@
+{
+	"Header": {
+		"Magic": [
+			89,
+			83,
+			84,
+			66
+		],
+		"Version": 555,
+		"InstCnt": 34,
+		"CodeSize": 136,
+		"ArgSize": 792,
+		"ResourceSize": 555,
+		"OffSize": 136,
+		"Resv": 0
+	},
+	"Insts": [
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QHoS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAZA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QHsS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QHwS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QH0S"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QH4S"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QH8S"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QIAS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QIES"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAA=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "QIIS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 16,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "QIMS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "RggAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 16,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "QIQS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "RggAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 16,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "QIUS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "RggAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 16,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "QIYS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 2,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "RggAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QIcS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QIgS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QIkS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QIoS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QIsS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QIwS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QI0S"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 18,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "JI4S"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "IiI="
+					}
+				}
+			]
+		},
+		{
+			"Op": 18,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "JI8S"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "IiI="
+					}
+				}
+			]
+		},
+		{
+			"Op": 18,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "JJAS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "IiI="
+					}
+				}
+			]
+		},
+		{
+			"Op": 18,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "JJES"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "IiI="
+					}
+				}
+			]
+		},
+		{
+			"Op": 18,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "JJIS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "IiI="
+					}
+				}
+			]
+		},
+		{
+			"Op": 18,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "JJMS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "IiI="
+					}
+				}
+			]
+		},
+		{
+			"Op": 18,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 86,
+						"Res": "JJQS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "IiI="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QJUS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QJYS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "TAgAAAAAAAAAAAA="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QJcS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEACw=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QJgS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEADQ=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QJkS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAg=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 17,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 72,
+						"Res": "QJoS"
+					}
+				},
+				{
+					"Value": 0,
+					"Type": 1,
+					"Res": {
+						"Type": 0,
+						"ResRaw": "QgEAAQ=="
+					}
+				}
+			]
+		},
+		{
+			"Op": 13,
+			"Unk": 0,
+			"Args": []
+		}
+	],
+	"Offs": [
+		2,
+		3,
+		5,
+		6,
+		7,
+		8,
+		10,
+		11,
+		12,
+		14,
+		15,
+		16,
+		17,
+		19,
+		20,
+		22,
+		23,
+		24,
+		25,
+		26,
+		27,
+		28,
+		29,
+		30,
+		31,
+		32,
+		33,
+		35,
+		37,
+		38,
+		40,
+		41,
+		43,
+		45
+	]
+}

@@ -1,0 +1,383 @@
+//============================================================================
+//
+//■ERIS 日付処理
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@DATE.YEAR=0]
+	S_INT[@DATE.MONTH=1]
+	S_INT[@DATE.DAY=1]
+	S_INT[@DATE.WEEK=0]
+	S_INT[@DATE.HOUR=0]
+	S_INT[@DATE.MIN=0]
+	S_INT[@DATE.SEC=0]
+
+	S_INT[@DATEP.YEAR =-1]
+	S_INT[@DATEP.MONTH=-1]
+	S_INT[@DATEP.DAY  =-1]
+	S_STR[$DATEP.WEEK =""]
+	S_INT[@DATEP.HOUR =-1]
+	S_INT[@DATEP.MIN  =-1]
+	S_INT[@DATEP.SEC  =-1]
+
+}
+
+
+//--------------------------------------------------------------------
+//■画像セット
+//--------------------------------------------------------------------
+#=es.DATE
+{
+	//----------------------------------------------------------------
+	// 機能無効なら飛ばす
+	//----------------------------------------------------------------
+		IF[@T(10,01)==0] GO[#=es.DATE.LEnd] IFEND[]
+
+	//----------------------------------------------------------------
+	// パラメータ解析
+	//----------------------------------------------------------------
+		IF[@_PINT(1)!=-1] \DATE.MONTH(@_PINT(1)) IFEND[]
+		IF[@_PINT(2)!=-1] \DATE.DAY(@_PINT(2)) IFEND[]
+		IF[$_PSTR(3)!=""] \DATE.WEEK($_PSTR(3)) IFEND[]
+
+		IF[@DATEP.YEAR !=-1] @DATE.YEAR =@DATEP.YEAR  IFEND[]
+		IF[@DATEP.MONTH!=-1] @DATE.MONTH=@DATEP.MONTH IFEND[]
+		IF[@DATEP.DAY  !=-1] @DATE.DAY  =@DATEP.DAY   IFEND[]
+		IF[$DATEP.WEEK=="日" || $DATEP.WEEK=="SUN"] @DATE.WEEK=0 IFEND[]
+		IF[$DATEP.WEEK=="月" || $DATEP.WEEK=="MON"] @DATE.WEEK=1 IFEND[]
+		IF[$DATEP.WEEK=="火" || $DATEP.WEEK=="TUE"] @DATE.WEEK=2 IFEND[]
+		IF[$DATEP.WEEK=="水" || $DATEP.WEEK=="WED"] @DATE.WEEK=3 IFEND[]
+		IF[$DATEP.WEEK=="木" || $DATEP.WEEK=="THU"] @DATE.WEEK=4 IFEND[]
+		IF[$DATEP.WEEK=="金" || $DATEP.WEEK=="FRI"] @DATE.WEEK=5 IFEND[]
+		IF[$DATEP.WEEK=="土" || $DATEP.WEEK=="SAT"] @DATE.WEEK=6 IFEND[]
+		IF[@DATEP.HOUR !=-1] @DATE.HOUR =@DATEP.HOUR  IFEND[]
+		IF[@DATEP.MIN  !=-1] @DATE.MIN  =@DATEP.MIN   IFEND[]
+		IF[@DATEP.SEC  !=-1] @DATE.SEC  =@DATEP.SEC   IFEND[]
+
+
+	@es.LSD(031,01)=@DATE.YEAR
+	@es.LSD(031,02)=@DATE.MONTH
+	@es.LSD(031,03)=@DATE.DAY
+	@es.LSD(031,04)=@DATE.WEEK
+	@es.LSD(031,05)=@DATE.HOUR
+	@es.LSD(031,06)=@DATE.MIN
+	@es.LSD(031,07)=@DATE.SEC
+
+	//----------------------------------------------------------------
+	// 画像読込
+	//----------------------------------------------------------------
+
+		GOSUB[#=es.DATE.DEL] //一旦削除
+
+		//-------------------------------------------------- 年
+		STR[$fn=$T(10,11)]
+		IF[$fn!=""]
+		{
+			IF[@T(10,15)==4 && (@T(10,16) || @DATE.YEAR/1000)]
+			{
+				\_inttostr((@DATE.YEAR/1000)%10, 1)
+				$fn=$T(10,11)+$_RSTR(1)
+
+				\BTDEF.GROUP("ES.GAMEMAIN")
+				\BT.GROUP(1)
+				\BT.CGSYS($fn)
+				\BT.XY(@T(10,13)+@T(10,12)*0, @T(10,14))
+				\BT.Z(101)
+				\BT.SET(TIP.DATE.YEAR, 1)
+			}
+			IFEND[]
+
+			IF[@T(10,15)==4 && (@T(10,16) || @DATE.YEAR/100)]
+			{
+				\_inttostr((@DATE.YEAR/100)%10, 1)
+				$fn=$T(10,11)+$_RSTR(1)
+
+				\BTDEF.GROUP("ES.GAMEMAIN")
+				\BT.GROUP(1)
+				\BT.CGSYS($fn)
+				\BT.XY(@T(10,13)+@T(10,12)*1, @T(10,14))
+				\BT.Z(101)
+				\BT.SET(TIP.DATE.YEAR, 2)
+			}
+			IFEND[]
+
+			IF[@T(10,16) || @DATE.YEAR/10]
+			{
+				\_inttostr((@DATE.YEAR/10)%10, 1)
+				$fn=$T(10,11)+$_RSTR(1)
+
+				\BTDEF.GROUP("ES.GAMEMAIN")
+				\BT.GROUP(1)
+				\BT.CGSYS($fn)
+				\BT.XY(@T(10,13)+@T(10,12)*2, @T(10,14))
+				\BT.Z(101)
+				\BT.SET(TIP.DATE.YEAR, 3)
+			}
+			IFEND[]
+
+			\_inttostr((@DATE.YEAR)%10, 1)
+			$fn=$T(10,11)+$_RSTR(1)
+
+			\BTDEF.GROUP("ES.GAMEMAIN")
+			\BT.GROUP(1)
+			\BT.CGSYS($fn)
+			\BT.XY(@T(10,13)+@T(10,12)*3, @T(10,14))
+			\BT.Z(101)
+			\BT.SET(TIP.DATE.YEAR, 4)
+		}
+		IFEND[]
+
+		//-------------------------------------------------- 月
+		$fn=$T(10,21)
+		IF[$fn!=""]
+		{
+			IF[@T(10,25) || @DATE.MONTH/10]
+			{
+				\_inttostr((@DATE.MONTH/10)%10, 1)
+				$fn=$T(10,21)+$_RSTR(1)
+
+				\BTDEF.GROUP("ES.GAMEMAIN")
+				\BT.GROUP(1)
+				\BT.CGSYS($fn)
+				\BT.XY(@T(10,23)+@T(10,22)*0, @T(10,24))
+				\BT.Z(101)
+				\BT.SET(TIP.DATE.MONTH, 1)
+			}
+			IFEND[]
+
+			\_inttostr((@DATE.MONTH)%10, 1)
+			$fn=$T(10,21)+$_RSTR(1)
+
+			\BTDEF.GROUP("ES.GAMEMAIN")
+			\BT.GROUP(1)
+			\BT.CGSYS($fn)
+			\BT.XY(@T(10,23)+@T(10,22)*1, @T(10,24))
+			\BT.Z(101)
+			\BT.SET(TIP.DATE.MONTH, 2)
+		}
+		IFEND[]
+
+		//-------------------------------------------------- 日
+		$fn=$T(10,31)
+		IF[$fn!=""]
+		{
+			IF[@T(10,35) || @DATE.DAY/10]
+			{
+				\_inttostr((@DATE.DAY/10)%10, 1)
+				$fn=$T(10,31)+$_RSTR(1)
+
+				\BTDEF.GROUP("ES.GAMEMAIN")
+				\BT.GROUP(1)
+				\BT.CGSYS($fn)
+				\BT.XY(@T(10,33)+@T(10,32)*0, @T(10,34))
+				\BT.Z(101)
+				\BT.SET(TIP.DATE.DAY, 1)
+			}
+			IFEND[]
+
+			\_inttostr((@DATE.DAY)%10, 1)
+			$fn=$T(10,31)+$_RSTR(1)
+
+			\BTDEF.GROUP("ES.GAMEMAIN")
+			\BT.GROUP(1)
+			\BT.CGSYS($fn)
+			\BT.XY(@T(10,33)+@T(10,32)*1, @T(10,34))
+			\BT.Z(101)
+			\BT.SET(TIP.DATE.DAY, 2)
+		}
+		IFEND[]
+
+		//-------------------------------------------------- 週
+		$fn=$T(10,41)
+		IF[$fn!=""]
+		{
+			STR[$ws(7)]
+			$ws(0)="sun";$ws(1)="mon";$ws(2)="tue";$ws(3)="wed"
+			$ws(4)="thu";$ws(5)="fri";$ws(6)="sat"
+			$fn=$T(10,41)+$ws(@DATE.WEEK)
+
+			\BTDEF.GROUP("ES.GAMEMAIN")
+			\BT.GROUP(1)
+			\BT.CGSYS($fn)
+			\BT.XY(@T(10,42), @T(10,43))
+			\BT.Z(101)
+			\BT.SET(TIP.DATE.WEEK)
+		}
+		IFEND[]
+
+		//-------------------------------------------------- 時
+		$fn=$T(10,51)
+		IF[$fn!=""]
+		{
+			IF[@T(10,55) || @DATE.HOUR/10]
+			{
+				\_inttostr((@DATE.HOUR/10)%10, 1)
+				$fn=$T(10,51)+$_RSTR(1)
+
+				\BTDEF.GROUP("ES.GAMEMAIN")
+				\BT.GROUP(1)
+				\BT.CGSYS($fn)
+				\BT.XY(@T(10,53)+@T(10,52)*0, @T(10,54))
+				\BT.Z(101)
+				\BT.SET(TIP.DATE.HOUR, 1)
+			}
+			IFEND[]
+
+			\_inttostr((@DATE.HOUR)%10, 1)
+			$fn=$T(10,51)+$_RSTR(1)
+
+			\BTDEF.GROUP("ES.GAMEMAIN")
+			\BT.GROUP(1)
+			\BT.CGSYS($fn)
+			\BT.XY(@T(10,53)+@T(10,52)*1, @T(10,54))
+			\BT.Z(101)
+			\BT.SET(TIP.DATE.HOUR, 2)
+		}
+		IFEND[]
+
+		//-------------------------------------------------- 分
+		$fn=$T(10,61)
+		IF[$fn!=""]
+		{
+			IF[@T(10,65) || @DATE.MIN/10]
+			{
+				\_inttostr((@DATE.MIN/10)%10, 1)
+				$fn=$T(10,61)+$_RSTR(1)
+
+				\BTDEF.GROUP("ES.GAMEMAIN")
+				\BT.GROUP(1)
+				\BT.CGSYS($fn)
+				\BT.XY(@T(10,63)+@T(10,62)*0,@T(10,64))
+				\BT.Z(101)
+				\BT.SET(TIP.DATE.MIN, 1)
+			}
+			IFEND[]
+
+			\_inttostr((@DATE.MIN)%10, 1)
+			$fn=$T(10,61)+$_RSTR(1)
+
+			\BTDEF.GROUP("ES.GAMEMAIN")
+			\BT.GROUP(1)
+			\BT.CGSYS($fn)
+			\BT.XY(@T(10,63)+@T(10,62)*1,@T(10,64))
+			\BT.Z(101)
+			\BT.SET(TIP.DATE.MIN, 2)
+		}
+		IFEND[]
+
+		//-------------------------------------------------- 秒
+		$fn=$T(10,71)
+		IF[$fn!=""]
+		{
+			IF[@T(10,75) || @DATE.SEC/10]
+			{
+				\_inttostr((@DATE.SEC/10)%10, 1)
+				$fn=$T(10,71)+$_RSTR(1)
+
+				\BTDEF.GROUP("ES.GAMEMAIN")
+				\BT.GROUP(1)
+				\BT.CGSYS($fn)
+				\BT.XY(@T(10,73)+@T(10,72)*0,@T(10,74))
+				\BT.Z(101)
+				\BT.SET(TIP.DATE.SEC, 1)
+			}
+			IFEND[]
+
+			\_inttostr((@DATE.SEC)%10, 1)
+			$fn=$T(10,71)+$_RSTR(1)
+
+			\BTDEF.GROUP("ES.GAMEMAIN")
+			\BT.GROUP(1)
+			\BT.CGSYS($fn)
+			\BT.XY(@T(10,73)+@T(10,72)*1,@T(10,74))
+			\BT.Z(101)
+			\BT.SET(TIP.DATE.SEC, 2)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	// パラメータ初期化
+	//----------------------------------------------------------------
+		@DATEP.YEAR  = -1
+		@DATEP.MONTH = -1
+		@DATEP.DAY   = -1
+		$DATEP.WEEK  = ""
+		@DATEP.HOUR  = -1
+		@DATEP.MIN   = -1
+		@DATEP.SEC   = -1
+
+
+	#=es.DATE.LEnd
+
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■日付ウィンドウ有効無効(ユーザー)
+//----------------------------------------------------------------
+#=es.DATE.EU
+{
+	@es.LSD(031,10)=@_PINT(1)
+	return[]
+}
+
+//----------------------------------------------------------------
+//■日付ウィンドウレイヤ消去
+//----------------------------------------------------------------
+#=es.DATE.DEL
+{
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.YEAR", 1)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.YEAR", 2)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.YEAR", 3)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.YEAR", 4)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.MONTH", 1)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.MONTH", 2)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.DAY", 1)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.DAY", 2)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.WEEK")
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.HOUR", 1)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.HOUR", 2)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.MIN", 1)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.MIN", 2)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.SEC", 1)
+	\BT.END("ES.GAMEMAIN", "ES.GAMEMAIN.TIP.DATE.SEC", 2)
+
+	return[]
+}
+
+
+//////
+
+
+//▼個別設定・年 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.DATE.YEAR.SET { @DATEP.YEAR = @_PINT(1); return[] }
+
+//▼個別設定・月 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.DATE.MONTH.SET { @DATEP.MONTH = @_PINT(1); return[] }
+
+//▼個別設定・日 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.DATE.DAY.SET { @DATEP.DAY = @_PINT(1); return[] }
+
+//▼個別設定・週 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.DATE.WEEK.SET { $DATEP.WEEK = $_PSTR(1); return[] }
+
+//▼個別設定・時 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.DATE.HOUR.SET { @DATEP.HOUR = @_PINT(1); return[] }
+
+//▼個別設定・分 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.DATE.MIN.SET { @DATEP.MIN = @_PINT(1); return[] }
+
+//▼個別設定・秒 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.DATE.SEC.SET { @DATEP.SEC = @_PINT(1); return[] }
+
+

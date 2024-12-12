@@ -1,0 +1,8 @@
+;mode800
+*define
+numalias IS_PRINT_INFORMATION,0
+game
+*start
+mov %0,1
+nsamake
+click

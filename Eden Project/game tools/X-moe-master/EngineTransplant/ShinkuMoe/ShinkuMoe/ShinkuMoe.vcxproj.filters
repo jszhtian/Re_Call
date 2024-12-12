@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="VirtualMachine">
+      <UniqueIdentifier>{ae986234-ef45-43b8-a1b0-663f9ab2acd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{23bd4eb4-7a7b-4b3c-88f7-f0e0f02eeaac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graph">
+      <UniqueIdentifier>{cf832ba5-cfb1-4c6a-9b04-fa296234cfa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemAPI">
+      <UniqueIdentifier>{df3766ee-8ebc-40da-affe-d8b77ee6c6c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{b98b4a35-8eb5-457d-b817-98faf7eea1ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Media">
+      <UniqueIdentifier>{ea702a15-605e-4ef3-befd-72032b122e94}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="VirtualMachine\CoroutineManager.cpp">
+      <Filter>VirtualMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="VirtualMachine\ScriptEngine.cpp">
+      <Filter>VirtualMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="VirtualMachine\VarInfo.cpp">
+      <Filter>VirtualMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="ShinkuToAnz.cpp" />
+    <ClCompile Include="SystemAPI\DebugAPI.cpp">
+      <Filter>SystemAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemAPI\OtherAPI.cpp">
+      <Filter>SystemAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemAPI\ThreadAPI.cpp">
+      <Filter>SystemAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\ErrorLog.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Nikaido.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph\Rect.cpp">
+      <Filter>Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemAPI\SoundAPI.cpp">
+      <Filter>SystemAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Media\SoundManager.cpp">
+      <Filter>Media</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\FileManager.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Anz.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualMachine\CoroutineManager.h">
+      <Filter>VirtualMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualMachine\ScriptEngine.h">
+      <Filter>VirtualMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualMachine\ScriptObject.h">
+      <Filter>VirtualMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualMachine\VarInfo.h">
+      <Filter>VirtualMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualMachine\GlobalVarManager.h">
+      <Filter>VirtualMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualMachine\ArrayManager.h">
+      <Filter>VirtualMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemAPI\DebugAPI.h">
+      <Filter>SystemAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemAPI\OtherAPI.h">
+      <Filter>SystemAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemAPI\ThreadAPI.h">
+      <Filter>SystemAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\ErrorLog.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Mutex.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Nikaido.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph\Rect.h">
+      <Filter>Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph\Surface.h">
+      <Filter>Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemAPI\SoundAPI.h">
+      <Filter>SystemAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Media\SoundManager.h">
+      <Filter>Media</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\FileManager.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

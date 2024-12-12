@@ -1,0 +1,47 @@
+地址=7C4F0000
+大小=00001000
+页面信息=424f2013168b.dll
+分配类型=IMG
+当前保护=-R---
+初始保护=ERWC-
+
+
+10008A50-10000000+7C4F0000
+
+50AA9B78-7BA10000+10000000
+
+
+03052170
+
+1>class UnorderedMap	size(32):
+1>	+---
+1> 0	| +--- (base class std::unordered_map<int,int,struct std::hash<int>,struct std::equal_to<int>,class std::allocator<struct std::pair<int const ,int> > >)
+1> 0	| | +--- (base class std::_Hash<class std::_Umap_traits<int,int,class std::_Uhash_compare<int,struct std::hash<int>,struct std::equal_to<int> >,class std::allocator<struct std::pair<int const ,int> >,0> >)
+1> 0	| | | ?$_Umap_traits@HHV?$_Uhash_compare@HU?$hash@H@std@@U?$equal_to@H@2@@std@@V?$allocator@U?$pair@$$CBHH@std@@@2@$0A@ _Traitsobj
+1> 4	| | | ?$list@U?$pair@$$CBHH@std@@V?$allocator@U?$pair@$$CBHH@std@@@2@ _List
+1>12	| | | ?$_Hash_vec@V?$allocator@V?$_List_unchecked_iterator@V?$_List_val@U?$_List_simple_types@U?$pair@$$CBHH@std@@@std@@@std@@@std@@@std@@ _Vec
+1>24	| | | _Mask
+1>28	| | | _Maxidx
+1>	| | +---
+1>	| +---
+1>	+---
+
+1>class TJS::tTJSVariantString_S	size(64):
+1>	+---
+1> 0	| RefCount
+1> 4	| LongString
+1> 8	| ShortString
+1>52	| Length
+1>56	| HeapFlag
+1>60	| Hint
+1>	+---
+
+1>class TJS::tTJSVariant_S	size(12):
+1>	+---
+1> 0	| tTJSVariantClosure_S Object
+1> 0	| Integer
+1> 0	| Real
+1> 0	| String
+1> 0	| Octet
+1> 8	| tTJSVariantType vt
+1>	+---

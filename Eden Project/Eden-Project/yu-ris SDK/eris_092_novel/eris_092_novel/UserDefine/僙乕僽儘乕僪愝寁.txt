@@ -1,0 +1,521 @@
+//============================================================================
+//
+// ERIS セーブロード画面設計
+//
+//
+//・ERIS ver0.70  006→007 変更点
+//    ・各種設定に \SL.PAGE.NUM, \SL.PLATE.NUM を追加
+//    ・各種設定の \SL.SAVE.～ , \SL.QSAVE.～ , \SL.LOAD.～ , \SL.QLOAD.～ 系を全て廃止。
+//      →「セーブロード確認画面設計.txt」「クイックセーブロード画面設計.txt」に移行しました
+//
+//・ERIS ver0.56  005→006 変更点
+//    ・背景画像設定 \SL.SBACK.FILE の廃止
+//　　・New!マーク画像指定 \SL.NEW.FILE の廃止
+//    ・テキスト設定 に \SL.TX.SPACE.Y を追加
+//　　・\SL.PLATE.TX, \SL.PLATE.DATE 追加。セーブデータ表示内容のカスタマイズに対応
+//　　・ボタン番号の自由化
+//
+//・ERIS ver0.53  004→005 変更点
+//    ・テキスト設定 に \SL.TX.SPACE.Y を追加
+//
+//============================================================================
+\VER.SAVELOADDEF(007) //定義Version
+//============================================================================
+
+//---------------------------------------------------------------------
+//
+// 全般
+//
+//---------------------------------------------------------------------
+
+#=es.SceneSaveLoad.Define
+
+
+	//---------------------------------------------------------------------
+	// Newマーク設定
+	//---------------------------------------------------------------------
+		\SL.NEW.XY(-12, 62)              // 相対表示座標
+
+	//---------------------------------------------------------------------
+	// サムネイル画像設定
+	//---------------------------------------------------------------------
+		//\SL.THUMB(1)                   // (未)サムネイルをセーブする(=1)/しない(=0)
+		\SL.THUMB.SIZE(100,75)           // サムネイルサイズ
+		\SL.THUMB.XY(8,5)                // 相対表示座標
+
+	//---------------------------------------------------------------------
+	// テキスト設定
+	//---------------------------------------------------------------------
+		\SL.TL.SIZE(230,80)              // テキストレイヤサイズ
+		\SL.TL.XY(115,6)                 // テキストレイヤ相対表示座標
+		\SL.TX.FONT.DEF("ＭＳ ゴシック") // デフォルトフォント
+		\SL.TX.SIZE(12)                  // テキストサイズ
+		\SL.TX.COLOR(0xffffff)           // テキスト色
+		\SL.TX.SPACE.Y(3)                // 文字の行間隔
+		\SL.TX.SHADE(1)                  // 影を付ける(=1)／付けない(=0)
+		\SL.TX.SHADE.COLOR(0x000000)     // 影の色(RGB指定)
+		\SL.TX.SHADE.XY(1,1)             // 影を付ける場合の影の位置座標（相対座標指定）
+		                                 // （例：2,1 なら右に２ピクセル、下に１ピクセルの意）
+
+	//---------------------------------------------------------------------
+	// テキスト内容設定
+	//  \SL.PLATE.TX( 行 , 種類 )
+	//
+	//  種類
+	//          0:なし
+	//    1～8191:$L.S(1～8191)の内容
+	// 9001～9010:文章1～10行目
+	//       9011:現実の日付
+	//       9012:ゲーム内の日付
+	//---------------------------------------------------------------------
+		\SL.PLATE.TX(1, 9011) //1行目 → 現実の日付
+		\SL.PLATE.TX(2, 9001) //2行目 → 文章1行目
+		\SL.PLATE.TX(3, 9002) //3行目 → 文章2行目
+		\SL.PLATE.TX(4, 9003) //4行目 → 文章3行目
+		\SL.PLATE.TX(5, 9004) //5行目 → 文章4行目
+
+	//---------------------------------------------------------------------
+	// 現実の日付、およびゲーム内の日付の表現方法
+	//	\SL.DATE.TYPE( 年月日 , 時分秒 )
+	//
+	// 以下のパターンから選択できます。
+	//
+	// ※Y=年,M=月,D=日,W=曜日   ※H=時,M=分,S=秒
+	// 年月日                    時分秒
+	//  00:なし                  00:なし
+	//  01:YYYY/MM/DD            01:HH:MM:SS
+	//  02:YY/MM/DD              02:HH:MM
+	//  03:YYYY/MM               03:MM:SS
+	//  04:YY/MM                 04:HH
+	//  05:MM/DD                 05:MM
+	//  06:YYYY                  06:SS
+	//  07:YY                    11:HH時MM分SS秒
+	//  08:MM                    12:HH時MM分
+	//  09:DD                    13:MM分SS秒
+	//  10:YYYY/MM/DD(WW)        14:HH時
+	//  11:YY/MM/DD(WW)          15:MM分
+	//  12:MM/DD(WW)             16:SS秒
+	//  13:DD(WW)
+	//  21:YYYY年MM月DD日
+	//  22:YY年MM月DD日
+	//  23:YYYY年MM月
+	//  24:YY年MM月
+	//  25:MM月DD日
+	//  26:YYYY年
+	//  27:YY年
+	//  28:MM月
+	//  29:DD日
+	//  30:YYYY年MM月DD日(WW)
+	//  31:YY年MM月DD日(WW)
+	//  32:MM月DD日(WW)
+	//  33:DD日(WW)
+	//---------------------------------------------------------------------
+		\SL.PLATE.DATE(01, 01) //年月日, 時分秒
+
+
+	//---------------------------------------------------------------------
+	// サウンド設定
+	//---------------------------------------------------------------------
+		//\SL.SAVE.SE()                    // (未)セーブ時のＳＥ
+		//\SL.LOAD.SE()                    // (未)ロード時のＳＥ
+		//\SL.QSAVE.SE()                   // (未)クイックセーブ時のＳＥ
+		//\SL.QLOAD.SE()                   // (未)クイックロード時のＳＥ
+
+	//---------------------------------------------------------------------
+	// 各種設定
+	//---------------------------------------------------------------------
+		\SL.PAGE.NUM(10)                   // ページ数(最大100まで)
+		\SL.PLATE.NUM(10)                  // プレート数(最大30まで)
+
+	//---------------------------------------------------------------------
+	// どの画像にどの機能を割り振るかの設定
+	// 　ここで定義したボタン番号の画像が、その機能となります。
+	//   番号が大きいほうが前面に表示されます。
+	//---------------------------------------------------------------------
+		@es.CNUM.SL.PAGE   =  11 //ページ番号　※定義した番号＋ページ数 まで使われます(例:11なら11+ページ数(仮に8として)-1=18まで)
+		@es.CNUM.SL.PLATE  = 111 //セーブプレート　※定義した番号＋プレート数 まで使われます(111なら111+プレート数(仮に12として)-1=122まで)
+		@es.CNUM.SL.NEW    = 201 //New!マーク
+		@es.CNUM.SL.COPY   = 251 //コピー
+		@es.CNUM.SL.DELETE = 252 //削除
+		@es.CNUM.SL.BACK   = 255 //戻る
+
+
+Return[]
+
+
+//---------------------------------------------------------------------
+//
+// 画像(セーブ)
+//
+//---------------------------------------------------------------------
+#=es.SceneSave.BtnSet
+
+
+	//---------------------------------------------------------------------
+	//
+	// ボタン
+	//
+	// \BTN.CG( ボタンOFF時の画像, マウスが乗った時の画像 )
+	// \BTN.XY( 表示Ｘ座標, 表示Ｙ座標 )
+	// \BTN.MAP.A( α値のしきい値(この値以上の画像部分がボタンとして反応します) )
+	// \BTN.KEY( ショートカットキー{一回の押下で一回のみ反応} ) 
+	// \BTN.KEY.S( ショートカットキー{連続反応} ) 
+	// \BTN.SE( オンマウス時ＳＥ, クリック時ＳＥ ) ※ファイル名orＳＥ定義文字列
+	//
+	// \BTNDEF ← 最後にBTNDEFでボタンを登録します。
+	//
+	//---------------------------------------------------------------------
+
+	//■Page1
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_01_off", "cg/saveload/btn_01_over", "cg/saveload/btn_01_on")
+	\BTN.XY(022, 060)
+	\BTN.KEY("F1")
+	\BTNDEF(11) //ボタン登録
+
+	//■Page2
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_02_off", "cg/saveload/btn_02_over", "cg/saveload/btn_02_on")
+	\BTN.XY(072, 060)
+	\BTN.KEY("F2")
+	\BTNDEF(12) //ボタン登録
+
+	//■Page3
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_03_off", "cg/saveload/btn_03_over", "cg/saveload/btn_03_on")
+	\BTN.XY(122, 060)
+	\BTN.KEY("F3")
+	\BTNDEF(13) //ボタン登録
+
+	//■Page4
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_04_off", "cg/saveload/btn_04_over", "cg/saveload/btn_04_on")
+	\BTN.XY(172, 060)
+	\BTN.KEY("F4")
+	\BTNDEF(14) //ボタン登録
+
+	//■Page5
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_05_off", "cg/saveload/btn_05_over", "cg/saveload/btn_05_on")
+	\BTN.XY(222, 060)
+	\BTN.KEY("F5")
+	\BTNDEF(15) //ボタン登録
+
+	//■Page6
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_06_off", "cg/saveload/btn_06_over", "cg/saveload/btn_06_on")
+	\BTN.XY(272, 060)
+	\BTN.KEY("F6")
+	\BTNDEF(16) //ボタン登録
+
+	//■Page7
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_07_off", "cg/saveload/btn_07_over", "cg/saveload/btn_07_on")
+	\BTN.XY(322, 060)
+	\BTN.KEY("F7")
+	\BTNDEF(17) //ボタン登録
+
+	//■Page8
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_08_off", "cg/saveload/btn_08_over", "cg/saveload/btn_08_on")
+	\BTN.XY(372, 060)
+	\BTN.KEY("F8")
+	\BTNDEF(18) //ボタン登録
+
+	//■Page9
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_09_off", "cg/saveload/btn_09_over", "cg/saveload/btn_09_on")
+	\BTN.XY(422, 060)
+	\BTN.KEY("F9")
+	\BTNDEF(19) //ボタン登録
+
+	//■Page10
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_10_off", "cg/saveload/btn_10_over", "cg/saveload/btn_10_on")
+	\BTN.XY(472, 060)
+	\BTN.KEY("F10")
+	\BTNDEF(20) //ボタン登録
+
+
+
+	//■Plate1
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(045+05, 102-8)
+	\BTN.KEY("1","NUM1")
+	\BTNDEF(111) //ボタン登録
+
+	//■Plate2
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(045+05, 192-6)
+	\BTN.KEY("2","NUM2")
+	\BTNDEF(112) //ボタン登録
+
+	//■Plate3
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(045+05, 282-4)
+	\BTN.KEY("3","NUM3")
+	\BTNDEF(113) //ボタン登録
+
+	//■Plate4
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(045+05, 372-2)
+	\BTN.KEY("4","NUM4")
+	\BTNDEF(114) //ボタン登録
+
+	//■Plate5
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(045+05, 462)
+	\BTN.KEY("5","NUM5")
+	\BTNDEF(115) //ボタン登録
+
+	//■Plate6
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(410-05, 102-8)
+	\BTN.KEY("6","NUM6")
+	\BTNDEF(116) //ボタン登録
+
+	//■Plate7
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(410-05, 192-6)
+	\BTN.KEY("7","NUM7")
+	\BTNDEF(117) //ボタン登録
+
+	//■Plate8
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(410-05, 282-4)
+	\BTN.KEY("8","NUM8")
+	\BTNDEF(118) //ボタン登録
+
+	//■Plate9
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(410-05, 372-2)
+	\BTN.KEY("9","NUM9")
+	\BTNDEF(119) //ボタン登録
+
+	//■Plate10
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(410-05, 462)
+	\BTN.KEY("0","NUM0")
+	\BTNDEF(120) //ボタン登録
+
+
+
+	//背景
+	\BTN.CG("cg/saveload/back_save")
+	\BTN.XY(000, 000)
+	\BTNDEF(001) //ボタン登録
+
+	//New!マーク(座標は上のほうで設定している『相対表示座標』をもとに自動で決定されます)
+	\BTN.CG("cg/saveload/tip_new")
+	\BTNDEF(201) //ボタン登録
+
+	//■コピー
+	\BTN.CG("cg/saveload/btn_copy_off", "cg/saveload/btn_copy_over", "cg/saveload/btn_copy_on")
+	\BTN.XY(480, 554)
+	\BTN.KEY("CTRL+C")
+	\BTNDEF(251) //ボタン登録
+
+	//■削除
+	\BTN.CG("cg/saveload/btn_delete_off", "cg/saveload/btn_delete_over", "cg/saveload/btn_delete_on")
+	\BTN.XY(580, 554)
+	\BTN.KEY("DELETE")
+	\BTNDEF(252) //ボタン登録
+
+	//■Back
+	\BTN.CG("cg/saveload/btn_back_off", "cg/saveload/btn_back_over")
+	\BTN.XY(680, 554)
+	\BTN.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BTNDEF(255) //ボタン登録
+
+
+Return[]
+
+
+
+//---------------------------------------------------------------------
+//
+// 画像(ロード)
+//
+//---------------------------------------------------------------------
+#=es.SceneLoad.BtnSet
+
+
+	//---------------------------------------------------------------------
+	//
+	// ボタン
+	//
+	// \BTN.CG( ボタンOFF時の画像, マウスが乗った時の画像 )
+	// \BTN.XY( 表示Ｘ座標, 表示Ｙ座標 )
+	// \BTN.MAP.A( α値のしきい値(この値以上の画像部分がボタンとして反応します) )
+	// \BTN.KEY( ショートカットキー{一回の押下で一回のみ反応} ) 
+	// \BTN.KEY.S( ショートカットキー{連続反応} ) 
+	// \BTN.SE( オンマウス時ＳＥ, クリック時ＳＥ ) ※ファイル名orＳＥ定義文字列
+	//
+	// \BTNDEF ← 最後にBTNDEFでボタンを登録します。
+	//
+	//---------------------------------------------------------------------
+
+	//■Page1
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_01_off", "cg/saveload/btn_01_over", "cg/saveload/btn_01_on")
+	\BTN.XY(022, 068)
+	\BTN.KEY("F1")
+	\BTNDEF(11) //ボタン登録
+
+	//■Page2
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_02_off", "cg/saveload/btn_02_over", "cg/saveload/btn_02_on")
+	\BTN.XY(072, 068)
+	\BTN.KEY("F2")
+	\BTNDEF(12) //ボタン登録
+
+	//■Page3
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_03_off", "cg/saveload/btn_03_over", "cg/saveload/btn_03_on")
+	\BTN.XY(122, 068)
+	\BTN.KEY("F3")
+	\BTNDEF(13) //ボタン登録
+
+	//■Page4
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_04_off", "cg/saveload/btn_04_over", "cg/saveload/btn_04_on")
+	\BTN.XY(172, 068)
+	\BTN.KEY("F4")
+	\BTNDEF(14) //ボタン登録
+
+	//■Page5
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_05_off", "cg/saveload/btn_05_over", "cg/saveload/btn_05_on")
+	\BTN.XY(222, 068)
+	\BTN.KEY("F5")
+	\BTNDEF(15) //ボタン登録
+
+	//■Page6
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_06_off", "cg/saveload/btn_06_over", "cg/saveload/btn_06_on")
+	\BTN.XY(272, 068)
+	\BTN.KEY("F6")
+	\BTNDEF(16) //ボタン登録
+
+	//■Page7
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_07_off", "cg/saveload/btn_07_over", "cg/saveload/btn_07_on")
+	\BTN.XY(322, 068)
+	\BTN.KEY("F7")
+	\BTNDEF(17) //ボタン登録
+
+	//■Page8
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_08_off", "cg/saveload/btn_08_over", "cg/saveload/btn_08_on")
+	\BTN.XY(372, 068)
+	\BTN.KEY("F8")
+	\BTNDEF(18) //ボタン登録
+
+	//■Page9
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_09_off", "cg/saveload/btn_09_over", "cg/saveload/btn_09_on")
+	\BTN.XY(422, 068)
+	\BTN.KEY("F9")
+	\BTNDEF(19) //ボタン登録
+
+	//■Page10
+	\BTN.GROUP(1)
+	\BTN.CG("cg/saveload/btn_10_off", "cg/saveload/btn_10_over", "cg/saveload/btn_10_on")
+	\BTN.XY(472, 068)
+	\BTN.KEY("F10")
+	\BTNDEF(20) //ボタン登録
+
+
+
+	//■Plate1
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(045, 102)
+	\BTN.KEY("1","NUM1")
+	\BTNDEF(111) //ボタン登録
+
+	//■Plate2
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(045, 192)
+	\BTN.KEY("2","NUM2")
+	\BTNDEF(112) //ボタン登録
+
+	//■Plate3
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(045, 282)
+	\BTN.KEY("3","NUM3")
+	\BTNDEF(113) //ボタン登録
+
+	//■Plate4
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(045, 372)
+	\BTN.KEY("4","NUM4")
+	\BTNDEF(114) //ボタン登録
+
+	//■Plate5
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(045, 462)
+	\BTN.KEY("5","NUM5")
+	\BTNDEF(115) //ボタン登録
+
+	//■Plate6
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(410, 102)
+	\BTN.KEY("6","NUM6")
+	\BTNDEF(116) //ボタン登録
+
+	//■Plate7
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(410, 192)
+	\BTN.KEY("7","NUM7")
+	\BTNDEF(117) //ボタン登録
+
+	//■Plate8
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(410, 282)
+	\BTN.KEY("8","NUM8")
+	\BTNDEF(118) //ボタン登録
+
+	//■Plate9
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(410, 372)
+	\BTN.KEY("9","NUM9")
+	\BTNDEF(119) //ボタン登録
+
+	//■Plate10
+	\BTN.CG("cg/saveload/tip_plate_off", "cg/saveload/tip_plate_over", "cg/saveload/tip_plate_on")
+	\BTN.XY(410, 462)
+	\BTN.KEY("0","NUM0")
+	\BTNDEF(120) //ボタン登録
+
+
+
+	//背景
+	\BTN.CG("cg/saveload/back_load")
+	\BTN.XY(000, 000)
+	\BTNDEF(001) //ボタン登録
+
+	//New!マーク(座標は上のほうで設定している『相対表示座標』をもとに自動で決定されます)
+	\BTN.CG("cg/saveload/tip_new")
+	\BTNDEF(201) //ボタン登録
+
+	//■コピー
+	\BTN.CG("cg/saveload/btn_copy_off", "cg/saveload/btn_copy_over", "cg/saveload/btn_copy_on")
+	\BTN.XY(480, 554)
+	\BTN.KEY("CTRL+C")
+	\BTNDEF(251) //ボタン登録
+
+	//■削除
+	\BTN.CG("cg/saveload/btn_delete_off", "cg/saveload/btn_delete_over", "cg/saveload/btn_delete_on")
+	\BTN.XY(580, 554)
+	\BTN.KEY("DELETE")
+	\BTNDEF(252) //ボタン登録
+
+	//■Back
+	\BTN.CG("cg/saveload/btn_back_off", "cg/saveload/btn_back_over")
+	\BTN.XY(680, 554)
+	\BTN.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BTNDEF(255) //ボタン登録
+
+
+Return[]
+

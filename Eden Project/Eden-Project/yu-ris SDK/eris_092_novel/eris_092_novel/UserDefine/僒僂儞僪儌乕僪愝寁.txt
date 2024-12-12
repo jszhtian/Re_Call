@@ -1,0 +1,176 @@
+//============================================================================
+//
+// ERIS サウンドモード設計
+//
+//
+//・ERIS ver0.56  002→003 変更点
+//    ・背景画像設定 \SOUNDMODE.BACK.FILE の廃止
+//    ・ボタン番号の自由化
+//
+//============================================================================
+\VER.SOUNDMODEDEF(003) //定義Version
+//============================================================================
+
+//---------------------------------------------------------------------
+//
+// 全般
+//
+//---------------------------------------------------------------------
+
+#=es.SceneSoundMode.Define
+
+
+	//---------------------------------------------------------------------
+	// リピート設定(デフォルト)
+	//   ※もしリピートボタン画像を利用する場合は０を、
+	//     利用しない場合１にしておくことをオススメします。
+	//---------------------------------------------------------------------
+		\SOUNDMODE.LOOPMODE.DEF(0) // 0=全曲リピート／1=１曲リピート
+
+
+	//---------------------------------------------------------------------
+	// どの画像にどの機能を割り振るかの設定
+	// 　ここで定義したボタン番号の画像が、その機能となります。
+	//   番号が大きいほうが前面に表示されます。
+	//---------------------------------------------------------------------
+		@es.CNUM.SOUNDMODE.BG      = 001 //背景
+		@es.CNUM.SOUNDMODE.PLATE   = 101 //ＢＧＭプレート(～+99)
+		@es.CNUM.SOUNDMODE.PLAY    = 241 //再生ボタン
+		@es.CNUM.SOUNDMODE.STOP    = 242 //停止ボタン
+		@es.CNUM.SOUNDMODE.NEXT    = 243 //次の曲へボタン
+		@es.CNUM.SOUNDMODE.PREV    = 244 //前の曲へボタン
+		@es.CNUM.SOUNDMODE.LOOP    = 245 //リピート再生ボタン
+		@es.CNUM.SOUNDMODE.SHUFFLE = 246 //ランダム再生ボタン
+		@es.CNUM.SOUNDMODE.BACK    = 255 //戻るボタン
+
+
+	//---------------------------------------------------------------------
+	// サウンドモード・ボタン定義 (01～100まで)※β3仕様
+	//---------------------------------------------------------------------
+
+	//ボタン01定義
+		\SOUNDMODE.BTN.FILE("bgm01")   // ＢＧＭファイル名orＢＧＭ定義文字列
+		\SOUNDMODE.BTNDEF(01)
+
+	//ボタン02定義
+		\SOUNDMODE.BTN.FILE("bgm02")   // ＢＧＭファイル名orＢＧＭ定義文字列
+		\SOUNDMODE.BTNDEF(02)
+
+		//↓...現状100個分まで追加できます(β3仕様)
+
+/*
+	//ボタン03定義
+		\SOUNDMODE.BTN.FILE("")   // ＢＧＭファイル名orＢＧＭ定義文字列
+		\SOUNDMODE.BTNDEF(03)
+*/
+
+
+
+
+
+Return[]
+
+
+//---------------------------------------------------------------------
+//
+// 画像
+//
+//---------------------------------------------------------------------
+#=es.SceneSoundMode.BtnSet
+
+
+
+	//---------------------------------------------------------------------
+	//
+	// ボタン
+	//
+	// \BTN.CG( ボタンOFF時の画像, マウスが乗った時の画像 )
+	// \BTN.XY( 表示Ｘ座標, 表示Ｙ座標 )
+	// \BTN.MAP.A( α値のしきい値(この値以上の画像部分がボタンとして反応します) )
+	// \BTN.KEY( ショートカットキー{一回の押下で一回のみ反応} ) 
+	// \BTN.KEY.S( ショートカットキー{連続反応} ) 
+	// \BTN.SE( オンマウス時ＳＥ, クリック時ＳＥ ) ※ファイル名orＳＥ定義文字列
+	//
+	// \BTNDEF ← 最後にBTNDEFでボタンを登録します。
+	//
+	//---------------------------------------------------------------------
+
+		//■1曲目
+		\BTN.GROUP(@es.CNUM.SOUNDMODE.PLATE)
+		\BTN.CG("cg/soundmode/btn_01_off", "cg/soundmode/btn_01_over", "cg/soundmode/btn_01_over")
+		\BTN.XY(80, 120+70*00)
+		\BTNDEF(101) //ボタン登録
+
+		//■2曲目
+		\BTN.GROUP(@es.CNUM.SOUNDMODE.PLATE)
+		\BTN.CG("cg/soundmode/btn_02_off", "cg/soundmode/btn_02_over", "cg/soundmode/btn_02_over")
+		\BTN.XY(80, 120+70*01)
+		\BTNDEF(102) //ボタン登録
+
+		//↓...同様に現状100個分まで追加できます(β3仕様)
+
+/*
+		//■3曲目
+		\BTN.GROUP(@es.CNUM.SOUNDMODE.PLATE)
+		\BTN.CG("cg/soundmode/btn_03_off", "cg/soundmode/btn_03_over", "cg/soundmode/btn_03_over")
+		\BTN.XY(80, 120+70*02)
+		\BTNDEF(103) //ボタン登録
+*/
+
+
+
+
+
+		//■背景
+		\BTN.CG("cg/soundmode/back")
+		\BTN.XY(000, 000)
+		\BTNDEF(001) //ボタン登録
+
+		//■再生ボタン
+		\BTN.GROUP(@es.CNUM.SOUNDMODE.PLAY)
+		\BTN.CG("cg/soundmode/btn_play_off", "cg/soundmode/btn_play_over", "cg/soundmode/btn_play_over")
+		\BTN.XY(150, 520)
+		\BTN.KEY("ENTER")
+		\BTNDEF(@es.CNUM.SOUNDMODE.PLAY) //ボタン登録
+
+		//■停止ボタン
+		\BTN.GROUP(@es.CNUM.SOUNDMODE.PLAY)
+		\BTN.CG("cg/soundmode/btn_stop_off", "cg/soundmode/btn_stop_over", "cg/soundmode/btn_stop_over")
+		\BTN.XY(250, 520)
+		\BTN.KEY("SPACE")
+		\BTNDEF(@es.CNUM.SOUNDMODE.STOP) //ボタン登録
+
+		//■次の曲へボタン
+		\BTN.CG("cg/soundmode/btn_next_off", "cg/soundmode/btn_next_over")
+		\BTN.XY(350, 520)
+		\BTN.KEY("RIGHT", "DOWN")
+		\BTNDEF(@es.CNUM.SOUNDMODE.NEXT) //ボタン登録
+
+		//■前の曲へボタン
+		\BTN.CG("cg/soundmode/btn_prev_off", "cg/soundmode/btn_prev_over")
+		\BTN.XY(050, 520)
+		\BTN.KEY("LEFT", "UP")
+		\BTNDEF(@es.CNUM.SOUNDMODE.PREV) //ボタン登録
+
+		//■リピート再生ボタン
+		\BTN.CG("cg/soundmode/btn_loop_off", "cg/soundmode/btn_loop_over", "cg/soundmode/btn_loop_over")
+		\BTN.XY(450, 520)
+		\BTN.KEY("L", "R")
+		\BTNDEF(@es.CNUM.SOUNDMODE.LOOP) //ボタン登録
+
+		//■ランダム再生ボタン
+		\BTN.CG("cg/soundmode/btn_shuffle_off", "cg/soundmode/btn_shuffle_over", "cg/soundmode/btn_shuffle_over")
+		\BTN.XY(550, 520)
+		\BTN.KEY("S")
+		\BTNDEF(@es.CNUM.SOUNDMODE.SHUFFLE) //ボタン登録
+
+		//■戻るボタン
+		\BTN.CG("cg/soundmode/btn_back_off", "cg/soundmode/btn_back_over")
+		\BTN.XY(680, 520)
+		\BTN.KEY("ESC", "BS", "MOUSE_R")
+		\BTNDEF(@es.CNUM.SOUNDMODE.BACK) //ボタン登録
+
+
+
+Return[]
+

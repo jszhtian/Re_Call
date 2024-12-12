@@ -1,0 +1,110 @@
+//============================================================================
+//
+//■ERIS タイトルへ戻る確認
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+}
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.TITLECONF.LOOP
+{
+	IF[@es.STATE==0]
+	{
+		IF[@es.GSD(114,02)==1] //タイトル確認の有無
+			@es.STATE=1
+		ELSE[]
+			\BT.END(ES.TITLECONF)
+			@es.STATE=011
+		IFEND[]
+	}
+	IFEND[]
+
+	IF[@es.STATE==1] //画像
+	{
+		\_gosub(ES.TITLECONF.VoicePlay.1)	// ボイス再生
+		\SS.FADE.TASK(200)
+		@es.STATE=100
+	}
+	IFEND[]
+
+	IF[@es.STATE==011] //OK
+	{
+		\_gosub(ES.TITLECONF.VoicePlay.2)	// ボイス再生
+
+		\es.CGTSS
+		\es.CGSDELALL
+
+		@es.STATE=013
+	}
+	IFEND[]
+
+	IF[@es.STATE==012] //キャンセル
+	{
+		\es.S.RETURN
+	}
+	IFEND[]
+	IF[@es.STATE==013] //タイトルへ戻る
+	{
+		IF[@es.RPMODE]
+			@es.RPMODE=0
+			\UI.RELOAD
+			@es.RPMODE=1
+		IFEND[]
+
+///xNKGR
+@es.TXSTART=0
+\_gosub(ES.GAMEMAIN.BTLOOP.REFRESH)
+\_gosub(ES.GAMEMAIN.BTLOOP)
+
+		GOSUB[#=es.CGTSS.2]
+		\es.S.RETURN.LBL("ES.GAMEMAIN", 900, 0)
+	}
+	IFEND[]
+
+
+	return[]
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[はい]ボタン -----------------------------------------------------
+//
+#=ES.TITLECONF.BTN.YES.ON { @es.STATE=011; return[] }
+
+//■[いいえ]ボタン ---------------------------------------------------
+//
+#=ES.TITLECONF.BTN.NO.ON { @es.STATE=012; return[] }
+
+
+
+//====================================================================
+// タイトルへ戻る確認(DIALOG版)
+//====================================================================
+#=ES.TITLECONF.DIALOG
+{
+	WAIT[FRAME=1] //最新の画面を表示させておくため.
+
+	INT[@ret=1]
+
+	IF[@es.GSD(114,02)==1] //確認あり
+	{
+		\_gosub(ES.TITLECONF.VoicePlay.1)	// ボイス再生
+
+		STR[$cap]
+		WINDOWINFO[NO=0 CAPTION=1 LET=$cap]
+		$cap="確認"
+		DIALOG[STR=$T(13,04) CAPTION=$cap YESNO=1 LET=@ret]
+	}
+	IFEND[]
+
+	return[rint=@ret]
+}
+

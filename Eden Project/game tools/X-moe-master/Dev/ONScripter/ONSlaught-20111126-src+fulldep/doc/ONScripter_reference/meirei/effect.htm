@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>effect</h2>
+<h3>effect &lt;number&gt;,&lt;number&gt;(,&lt;number&gt;(,&lt;character string&gt;))</h3>
+<p>
+Assigns an Effect Number to a pack-in effect.<br>
+Once you have an Effect Number assigned, you can use it in image display commands<br>
+From left to right, the variables are: effect number, pack-in effect index, effect runtime (in milliseconds), pattern image filename.<br>
+However, if you are using a pack-in effect, you may omit the last two variables.<br>
+<br>
+As an effect slotted in Effect Number 0  will display immediately with the next image display command, please start your effects at 1.<br>
+Or, if you are going to use 0, please remember to call an image display command as soon as you can.<br>
+<br>
+By default, pack-in effect index 1 is not an effect at all, but sets the effect runtime to 0 -- an instantaneous display.<br>
+<br>
+&lt;pack-in effect index&gt;<br>
+<ol>
+	<li>Instantaneous display.  No runtime variable needed.</li>
+	<li>Left-sided shutter</li>
+	<li>Right-sided shutter</li>
+	<li>Upwards shutter</li>
+	<li>Downwards shutter</li>
+	<li>Left-sided curtain</li>
+	<li>Right-sided curtain</li>
+	<li>Upwards curtain</li>
+	<li>Downwards curtain</li>
+	<li>Pixelwise crossfade</li>
+	<li>Left-sided scroll</li>
+	<li>Right-sided scroll</li>
+	<li>Upwards scroll</li>
+	<li>Downwards scroll</li>
+	<li>Fade via mask pattern.  You must set a filename with this, pointing to a mask bmp (of either 256 colors or full color).  In this mask bmp, the white areas fade slowly, and the black areas fade quickly.</li>
+	<li>Mosaic out.  After this effect is called, the state of the screen will be as uncertain as if you used Effect Number 0, so please call a display command, like print, immediately afterwards.</li>
+	<li>Mosaic in</li>
+	<li>Crossfade via mask.  This works similarly to 15, except it is far more processor intensive, so do use this effect with care.</li>
+</ol>
+
+　　　EX）<br>
+　　　　effect 1,1<br>
+　　　　effect 2,4,1000<br>
+　　　　effect 3,15,2000,"m3.bmp"<br>
+</p>
+
+</body>
+</html>

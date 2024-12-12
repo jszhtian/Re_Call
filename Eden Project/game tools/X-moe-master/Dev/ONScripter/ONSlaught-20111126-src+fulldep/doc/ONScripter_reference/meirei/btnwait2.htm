@@ -1,0 +1,28 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>btnwait2</h2>
+<h3>btnwait2 &lt;numerical variable&gt;</h3>
+<p>
+This serves as a listener for a button.  The result value of the button is returned in the numerical variable.<BR><BR>
+Return Values:<BR>
+0: no button was clicked<BR>
+-1: A right-click occured<BR>
+>=1: Number of clicked button<BR>
+<BR>
+Unlike btnwait, this command does not clear any button definitions.  Therefore, it will keep reading the button graphic files.  Now, since the buttons remain in memory even after there is no use for them, you should call a btndef "" after you're finished using them in order to free up the memory.
+</p>
+
+</body>
+</html>

@@ -1,0 +1,1057 @@
+$sc_e03
+
+_DayTime=2,
+
+_Mode=1,
+52("_GRPName","bg03a")
+42("DrawBG","00Draw.dat")
+#:NameSuffix
+&9572"「はあ……」"#:NameSuffix
+&9573"「うっ……」"&9574"最近出が悪い。"&9575"……ストレスか？"100("",3,2,0,0)
+100("SE089",0,2,0,0)
+&9576"渋々ケツを拭いてトイレを出た。"100("",3,2,0,0)
+_Mode=1,
+52("_GRPName","bg02c")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM04")
+42("BGM","00Sound.dat")
+52("_CharNameB","fc_da411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛
+&9577"「:NameSuffix～」"42("DEL","02CharChip.dat")#:NameSuffix
+&9578"「へい。呼んだか？」"52("_CharNameB","fc_di411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0094d
+&9579"「電気、つけて」"42("DEL","02CharChip.dat")&9580"手元の携帯から目をそらさず、びし！と天井を指差して命令する。"#:NameSuffix
+&9581"「自分でつけろよ！……ったく」"&9582"ブツブツ言いつつ従う俺。"52("_CharNameB","fc_ad421")_CosSel=4,
+_Glass=2,
+_Cheek=1,
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0248a
+&9583"「くっくっくっ……きゃははは！……ばりばり」"42("DEL","02CharChip.dat")&9584"せんべいをほおばりながら寝っころがって漫画を読む女子一名。"#:NameSuffix
+&9585"「行儀が悪い……ん？それ面白そうだな、ちょっと読ませて」"52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0249a
+&9586"「んー？んー……ん！」"42("DEL","02CharChip.dat")&9587"渡されたのは『少女漫画』である。"#:NameSuffix
+&9588"「さんくす、借りるわ」"52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0250a
+&9589"「んーモグモグ」"42("DEL","02CharChip.dat")#:NameSuffix
+&9590"「あとな、パンツ見えてるぞ」"52("_CharNameB","fc_aa421")_CosSel=4,
+_Glass=2,
+_Cheek=1,
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0251a
+&9591"「もぐもぐ……知ってる」"42("DEL","02CharChip.dat")#:NameSuffix
+&9592"「いや、隠せよ」"52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0252a
+&9593"「減るもんじゃないし」"42("DEL","02CharChip.dat")#:NameSuffix
+&9594"「恥じらいは低下してるけどな」"52("_CharNameB","fc_ab421")_CosSel=4,
+_Glass=2,
+_Cheek=1,
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0253a
+&9595"「うっさい！」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE023",0,2,0,0)
+&9596"バコッ。"100("",3,2,0,0)
+#:NameSuffix
+&9597"「てっ！」"&9598"まりるキックをくらってしまった。"&9599"やれやれと窓の外に目をやると雨だ。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","bb")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0461b
+&9600"「あー！！冷蔵庫のプリンがなくなってるうー！」"42("DEL","02CharChip.dat")#:NameSuffix
+&9601"「あ？ああ、あれか、俺食っちゃったわ」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","bf")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0462b
+&9602"「ええええええーっあとで食べようと思って楽しみにしてたのにー！」"42("DEL","02CharChip.dat")#:NameSuffix
+&9603"「あー、悪い。俺が悪かった」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","bk")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0463b
+&9604"「むううー許さないぞおお」"42("DEL","02CharChip.dat")#:NameSuffix
+&9605"「わかった、わかったから。代わりになんか買ってやるから」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","bm")
+42("DrawChar","00Draw.dat")
+_WaitTime=500,
+42("Wait","00Wait.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","bi")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0464b
+&9606"「！よーし。じゃあ、千きび屋のスペシャルパフェで手をうとう♪」"42("DEL","02CharChip.dat")#:NameSuffix
+&9607"「！？え？あ、おう」"#:NameSuffix
+&9608"（っきしょー。何でプリン1個で2000円近くも）"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","bd")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0465b
+&9609"「お兄ちゃんありがとう♪」"42("DEL","02CharChip.dat")#:NameSuffix
+&9610"「ははは……お兄ちゃんは涙目です」"52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0466b
+&9611"「ふふふ」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&9612"ついでに時計に目をやる。"#:NameSuffix
+&9613"（……母さん遅いな。そろそろ夕飯の時間なのだが）"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0203c
+&9614"「母さん、遅いわね。雨降ってきたけど、大丈夫かしら」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&9615"俺の心を代弁するべく夢子が言った。"52("_CharNameB","fc_da411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0095d
+&9616"「傘ならもってってなかったわよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&9617"「む、そうか……ついでに、ちょっとそこまで迎えにいってみるよ」"52("_CharNameB","fc_aa421")_CosSel=4,
+_Glass=2,
+_Cheek=1,
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0254a
+&9618"「……アイス食べたーい」"42("DEL","02CharChip.dat")52("_CharNameB","fc_da411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0096d
+&9619"「モンブラン食べたーい」"42("DEL","02CharChip.dat")&9620"どさくさまぎれにりあねーちゃんまで。"#:NameSuffix
+&9621"「太るぞ」"_Target=@CharL,
+_CharX=-200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ab")
+42("DrawChar","00Draw.dat")
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0255a
+&9622"「うるさいっ買ってこい！」"42("DEL","02CharChip.dat")#:NameSuffix
+&9623"「……行ってきます」"_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ba")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0467b
+&9624"「気を付けてね、お兄ちゃん」"42("DEL","02CharChip.dat")#:NameSuffix
+&9625"「おう」"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+100("",3,2,0,0)
+100("SE075",0,2,0,0)
+#:NameSuffix
+&9626"「……っと、噂をすれば、母さんかな？」"100("",3,2,0,0)
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ea")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0054e
+&9627"「ただいま」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+100("",3,2,0,0)
+100("SE066",0,2,0,0)
+_Target=@CharL,
+_CharX=-200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","be")
+42("DrawChar","00Draw.dat")
+52("_BGMName","BGM06")
+42("BGM","00Sound.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0468b
+&9628"「わわっ、すごいお土産っ」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","aa")
+42("DrawChar","00Draw.dat")
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0256a
+&9629"「またハムの詰め合わせとかあるかな？」"42("DEL","02CharChip.dat")#:NameSuffix
+&9630"「ほんと食いしん坊だなお前」"_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ab")
+42("DrawChar","00Draw.dat")
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0257a
+&9631"「……ぅっさい！」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+100("",3,2,0,0)
+100("SE023",0,2,0,0)
+#:NameSuffix
+&9632"「てっ！！」"100("",3,2,0,0)
+_Target=@CharL,
+_CharX=-200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","db")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0097d
+&9633"「あぁ～、喧嘩なら荷物降ろしてからやってよ。瓶が割れちゃうっしょ」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0204c
+&9634"「ハムの詰め合わせまであるわ……あら、可愛い」"42("DEL","02CharChip.dat")#:NameSuffix
+&9635"「可愛いて……それなんかの仏像だろ。こえー……邪神だよ」"_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","cd")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0205c
+&9636"「パンチパーマで顔と手が沢山あって、可愛いじゃない」"42("DEL","02CharChip.dat")#:NameSuffix
+&9637"「……それは果たして……いや、みなまで言うまい」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&9638"夢子の美意識は俺にはよくわからない。"_Target=@CharL,
+_CharX=-200,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ea")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0055e
+&9639"「それは……適当に片付けておいて」"42("DEL","02CharChip.dat")&9640"母さんは贈り物などには目を向けず、興味なさそうにタバコをくゆらす。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","de")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0098d
+&9641"「おっ！！　この白無垢の艶はっ！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&9642"（りあねーちゃんの目の輝きからして……大好物だろ）"&9643"りあねーちゃんは早々と封を切り、手近のグラスに白いセラミックボトルを傾けていた。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dd")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0099d
+&9644"「やっぱり高そうなお酒ッ！　母さんもらっていい？ゴクゴクッ……」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0056e
+&9645"「もう飲んでるじゃない」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dd")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0100d
+&9646"「……ぷっはぁぁ……あぁ、ホント、母さんに感謝しちゃう。労働しないで手に入れる至福の一滴♪」"42("DEL","02CharChip.dat")#:NameSuffix
+&9647"「あ～あ、そんな一気飲みしちゃって……。りあねーちゃんに高級酒は、なんとかに真珠……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","da")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0101d
+&9648"「なんか言ったか？こんなに沢山あるんだし、飲まなきゃもったいないだろ？」"42("DEL","02CharChip.dat")&9649"ちゃぷんっとグラスに注がれた酒を差し出される。"#:NameSuffix
+&9650"「いや、俺はいい……」"_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ba")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0469b
+&9651"「いただきまーす♪　んっ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&9652"「絵里沙あぁっ！？」"_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","bm")
+42("DrawChar","00Draw.dat")
+_Target=@CharL,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0470b
+&9653"「ほんとだ、おいしーっ！！」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","cd")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0206c
+&9654"「え……本当……？私も……おいし」"42("DEL","02CharChip.dat")#:NameSuffix
+&9655"「確かに疑問に思うけど……ってそこじゃない！」"#:NameSuffix
+&9656"「若いうちからこんなものに手を出していたら、りあねーちゃんみたいになっちゃうぞ！」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","db")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0102d
+&9657"「どういう意味よそれ」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","bd")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0471b
+&9658"「大丈夫だよっ、ジュースとかわんないもんっ」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&9659"「もう、手遅れなのか……！　母さんも何とか言ってよ！」"_Target=@CharL,
+_CharX=-200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","aa")
+42("DrawChar","00Draw.dat")
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0258a
+&9660"「チーズと夕飯の残りが少しあるけど……まっ、アニキになんか作らせれば足りそうかな」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ea")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0057e
+&9661"「……おつまみなんて適当でいいわ」"42("DEL","02CharChip.dat")#:NameSuffix
+&9662"「……俺の話を聞けよ」"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","bg01c")
+42("DrawBG","00Draw.dat")
+&9663"そして宴は始まった。"&9664"夢子はりあねーちゃんと絵里沙に流されてしまって、まりるも母さんもかなりノリ気。"&9665"止める者がいない現状に嫌な予感しかしない。"_Mode=1,
+52("_GRPName","bg02c")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM05")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","cd")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0207c
+&9666"「本当に美味しいわね、いくらでもいけそう……」"42("DEL","02CharChip.dat")&9667"変わらない笑顔でおしとやかにグラスの中身を流し込んでいく夢子。"&9668"先が読めないだけにすごくハラハラする。"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&9669"「ゆ、夢子、それ何杯目だ？　もう止めといたほうがいいんじゃ……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","ac")
+42("DrawChar","00Draw.dat")
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0259a
+&9670"「うぅっくぅ……やめるぅ？　やめれるもんならわたしもヤメたいわよぉぉ！！　うわぁあん！！　ゴクッゴクッゴクッ」"42("DEL","02CharChip.dat")#:NameSuffix
+&9671"「どうした！？」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","ab")
+42("DrawChar","00Draw.dat")
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0260a
+&9672"「ん……はぁ……アニキはどうして飲まないのよぉぉ……なんなの？　わたし？　わたしのせいなんですかそうですかっ！　ぐすっ……なによ」"42("DEL","02CharChip.dat")#:NameSuffix
+&9673"「お前……泣き上戸だったんかい」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","eg")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0058e
+&9674"「あの子、いつかお酒で人生が狂いそうね……」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=@NoDraw,
+_Target=@CharL,
+_CharX=-200,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","eg")
+42("DrawChar","00Draw.dat")
+_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","dg")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0103d
+&9675"「いやー、怖い怖い。そんなお酒は退治しなくちゃねぇ、ハイ、母さん♪」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0059e
+&9676"「ありがと」"42("DEL","02CharChip.dat")#:NameSuffix
+&9677"「傍観してるぅ……」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","bb")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0472b
+&9678"「お兄ちゃんっ！　わたしと盃交わしてぇ、えっと、きょーだいの契りを～……」"42("DEL","02CharChip.dat")#:NameSuffix
+&9679"「ブッ！！」"&9680"盛大に酒を吹き出してしまった。"#:NameSuffix
+&9681"「おま……意味わかってんのか？」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","bi")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0473b
+&9682"「よくわかんない！（キリ）」"42("DEL","02CharChip.dat")&9683"だんだんと素面でいる事がアホらしくなってきた。"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&9684"俺も呑むか。"#:NameSuffix
+&9685"「ゴキュ。……美味いなこれ」"&9686"思わずガブ飲みしたくなる気分もわかったけど、こういう酒ほど注意が必要だろう。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","bm")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0474b
+&9687"「お兄ちゃんが酔っ払いさんになるとこ、見たいなぁ～……にゅふふぅ」"42("DEL","02CharChip.dat")&9688"股座にもぐりこんでくるように、いちいちからだを俺にすりつけながら、ゴロゴロと絡みついてくる絵里沙。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","bl")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&9689"「あ、そっちの絡み？」"&9690"絵里沙の近くには空っぽのボトルが２本ほど転がっていた。"#:NameSuffix
+&9691"「いつのまに……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","bd")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0475b
+&9692"「お兄ちゃんのおっぱい、ぎゅー♪」"42("DEL","02CharChip.dat")#:NameSuffix
+&9693"「アダダダッ！！　乳首もげるがな！！」"52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0476b
+&9694"「にゃははははぁ～～」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=@NoDraw,
+_Target=@CharL,
+_CharX=-200,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","ae")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0208c
+&9695"「絵里沙、そこを絞っても何も出ないわよ。あむっ……もぐもぐ」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","ac")
+42("DrawChar","00Draw.dat")
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0261a
+&9696"「あ、ぁぁ……わたしのつまみがああ……うっ、うぅぅ、わたしのお皿がまっさらに……」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","ck")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0209c
+&9697"「お皿がまっさら……それギャグのつもりなの？……もぐもぐ」"52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0262a
+&9698"「自分のお皿すら守れないわたしをあざ笑ってぇぇ……ふえぇぇんっ！」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&9699"「あああ、泣くなまりる！そんなに食いたいなら俺のやるから！」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","al")
+42("DrawChar","00Draw.dat")
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0263a
+&9700"「ひぐっ……グスッ……ありがと、アニキ」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&9701"気づけば俺のおつまみもなくなっていた。"&9702"夢子、殆ど１人で食ったのか……そのウエストのどこに溜めてんの？"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","di")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0104d
+&9703"「ありゃ、ツマミ空っぽじゃーん、おっか～わり！　おっか～わり！」"42("DEL","02CharChip.dat")#:NameSuffix
+&9704"「おいおい、まだ食うつもりか？もう空っぽだっての」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=2,
+_UpFlg=1,
+52("_GRPName","dk")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0105d
+&9705"「つまんねっ、ぺっ……なんか思わず股間がぬれる面白い事やれよー」"42("DEL","02CharChip.dat")#:NameSuffix
+&9706"「……すごいめんどくさいこの姉」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","eg")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0060e
+&9707"「こくっ…ん……ちょっと飲み過ぎたかしら」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Mode=1,
+52("_GRPName","bg01c")
+42("DrawBG","00Draw.dat")
+&9708"…………。"&9709"…………………。"_Mode=1,
+52("_GRPName","bg02c")
+42("DrawBG","00Draw.dat")
+#:NameSuffix
+&9710"「まりるー、おーい……」"52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0264a
+&9711"「ぐすっ、ん……スー……スー」"42("DEL","02CharChip.dat")#:NameSuffix
+&9712"「…………」"52("_CCName","c")42("Start","02CharChip.dat")#夢　子
+&9713"「…………」"52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0106d
+&9714"「ぐぅぅぅ……ぐぅぅぅ……」"42("DEL","02CharChip.dat")&9715"死屍累々とはこの事だろうか、そこいらで絡み合うように眠りこける姉妹達。"#:NameSuffix
+&9716"「……がばがば飲んで……なんか溜まってるのか皆」"52("_BGMName","BGM04")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ea")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0061e
+&9717"「たまにはいいでしょ」"52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0477b
+&9718"「…………んぅ」"42("DEL","02CharChip.dat")&9719"絵里沙に毛布を掛けて、母さんは静かに座る。"#:NameSuffix
+&9720"「……意外だったな、母さんならバカ騒ぎは止めると思ったんだけど。」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ec")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0062e
+&9721"「長く生きてると、思い切り泣いたり、心から笑ったり、発散が必要な日がくるのよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&9722"「はは、発散するほど生きてねーけどな俺ら」"&9723"言わんとする事は、まぁ、なんとなくわかった気がする。"&9724"この宴は母さんから皆に提供された、娯楽だったのかもしれない。"#:NameSuffix
+&9725"「……ハァ、俺もちょっと飲みすぎたかな」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜
+&9726"「…………」"42("DEL","02CharChip.dat")&9727"よく見てみれば、母さんもほんのりと身体が紅潮している。"#:NameSuffix
+&9728"（……よく見んな）"&9729"大切な所がスケスケの母さんの私服（？）は正直昔から目に毒だった。"&9730"改めて見ても毒な事に変わりはない。予備知識が備わっている分、余計に厄介だ。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ea")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0063e
+&9731"「どうして目をそらすのかしら？」"42("DEL","02CharChip.dat")#:NameSuffix
+&9732"「いや、部屋がだいぶ散らかってるなーって……」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0064e
+&9733"「私よりも、部屋の散らかりの方が気になるの？」"42("DEL","02CharChip.dat")#:NameSuffix
+&9734"「……母さん、酔ってる？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ec")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0065e
+&9735"「酔ってるわね……なぜか:NameSuffixから目が離せないわ」"42("DEL","02CharChip.dat")#:NameSuffix
+&9736"（あれれ、なんかこの雰囲気……？）"&9737"散らかった部屋でムードもないのに……身体に纏わり付くような空気の甘ったるさまで感じる。"100("",3,2,0,0)
+100("SE045",0,2,0,0)
+#:NameSuffix
+&9738"（空気に飲まれんなマイサンッ！！）"100("",3,2,0,0)
+_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜
+&9739"「…………」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE221",0,2,0,0)
+#:NameSuffix
+&9740"「ちょっと！！　なんで脱ごうとしてんのさ！？」"100("",4,2,0,0)
+52("_BGMName","BGM08")
+42("BGM","00Sound.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0066e
+&9741"「言ったでしょう、発散は必要なのよ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&9742"「発散て……何についてだよ……？」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0067e
+&9743"「たぶん、:NameSuffixと同じモノをね……」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+
+$reco
+
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM08")
+42("BGM","00Sound.dat")
+&9744"ぱさっと薄布と変わらない母さんの服が床に落ち、下着姿を露にする母さん。"&9745"母さんの服よりも更に過激な下着の形状、それを惜しげもなく見せつけながら、俺を眺める瞳に身体が射抜かれてしまう。"&9746"ズボンの上からちんちんを擦ってきた。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0068e
+&9747"「ふふっ……:NameSuffixの硬くなってるわよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&9748"「ちょ、母さん……」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0069e
+&9749"「あっ、ん……ふふ、身体は正直ってとこかしらね……あまり乱暴にしちゃだめよ……」"42("DEL","02CharChip.dat")&9750"理性が死んだ。"&9751"俺は待ちきれないとばかりにズボンを脱ぎ、いきり勃つ肉棒を淫裂に押し当てていた。"_Mode=1,
+52("_GRPName","e04r0")
+42("DrawCG","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0070e
+&9752"「んんんっ！！　くぅ、はぁ……あ、あああぁぁっ……！」"42("DEL","02CharChip.dat")52("_BGMName","BGM09")
+42("BGM","00Sound.dat")
+&9753"腰に力を込めて、濡れるそぼる秘肉の中へ亀頭を埋め込む。"&9754"酒気のせいなのだろうか……蕩けているような肉壁は肉棒を膣奥へとすんなりと受け入れていく。"&9755"深度が深くなるほど、母さんは吐息を吐き出し、自重を支える手足を小さく震わせていた。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0071e
+&9756"「はぁ、はぁ……あ、んっ…なんだか身体が熱くて感じすぎるわ……もっと、ゆっくり……ん……く！」"42("DEL","02CharChip.dat")&9757"ちらちらと真下の寝顔を気にしながら、母さんは声を抑える。"&9758"まるで踏ん張るように足腰に力が込められると、膣肉もそれにつられ、肉棒への圧迫を上げる。"&9759"ノックダウンするほどではないにしろ、やけに熱い腹の中と股間。俺たちも相当酔っているようだ。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0072e
+&9760"「あぁ……ふぅ、ふぅ、ホントに全部入れた……のね…みんなの目の前で……私の奥まで、あっ……はぁん……」"42("DEL","02CharChip.dat")#:NameSuffix
+&9761"「何してんだろ俺……はぁ、はああぁぁ……」"&9762"母さんの肢体を目の前にしただけでも細かい鼓動を打っていた心臓は、肉棒が熱とねっとりと絡みつく秘肉に包まれた途端に張り裂けんばかりに高鳴る。"&9763"目の前の背中や尻をつたう汗の量も増え、密着する尻肉からは母さんの体温と熱が伝わっていた。"&9764"心地よい快感の小波に揺られながら、お互いの息遣いで興奮を確かめ合うようにゆっくりと動きはじめる。"_Mode=1,
+_View[1]=1,
+_Glass=1,
+_MovX=6,
+_MovY=6,
+_MovieLoopFlg=1,
+_MOVSEC=0,
+52("_GRPName","e04r1")52("_MovieFileName","e04a0")42("Start","00HMovPlay.dat")
+_View=1,
+_View[2]=0,
+42("Open","00MesWinSet.dat")
+
+_Mode=0,
+_Glass=1,
+_MovX=584,
+_MovY=6,
+_MovieLoopFlg=1,
+_MOVSEC=1,
+52("_GRPName","e20r0")42("Start","00CGFlag.dat")
+52("_MovieFileName2","e04a1")42("Start","00HMovPlay.dat")
+52("_ViewName1","e04r1")
+52("_ViewName2","e20r0")
+52("_MovieFileName","e04a0")
+52("_MovieFileName2","e04a1")
+
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0073e
+&9765"「はあぁぁ……あふっ、んんんっ、くぅっ、あ、あぁぁん……オマンコ、引っ張られてる……あっ、んんっ……」"42("DEL","02CharChip.dat")&9766"俺が腰を引くと、名残惜しそうに尻がついて来る。"&9767"普通じゃないのはわかっているはずなのに。そんな腰を抑えて、俺はカリ首が膣口から見え隠れするくらいまで引きずりだして。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0074e
+&9768"「はあぁん、んぁ、ぅ、はぁ、はぁ……あまり体重をかけたらダメ……立っているだけで精一杯なの……」"42("DEL","02CharChip.dat")&9769"少しばかり残る理性で腕にかかる力を加減しながら、膣奥へと再び亀頭を戻していく。"&9770"引っ張っても、押し込んでも、愛液は結合部から溢れ出し、敏感な粘膜同士が擦れる摩擦すら快感に変えていった。"#:NameSuffix
+&9771"「母さん、平気そうだと思ってたけど相当酔ってたんだ……皆の寝顔見ながらするなんてさ」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0075e
+&9772"「んぅ……そうね、こんなの母親のすることじゃないわね……ふっ、あっ！？　んっ！　ちょっと強すぎるわよっ……はぁぁっ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&9773"「今のうちに味わっとかないと……」"&9774"酒にも雰囲気にも飲まれている俺は、ゆっくりと力強く母さんの膣奥を亀頭でこづく。"&9775"尻肉は俺の下腹にまでそのハリを強調し、身体を押し出される母さんは、両手に力を込めて姿勢を支える。"&9776"母さんの顔からは数滴の汗が雫となって絵里沙の布団に落ちていった。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0076e
+&9777"「ああぁぁっ……深いぃ…んっぅっ、くっ、はぁっ、はぁっ……！」"42("DEL","02CharChip.dat")&9778"俺の行動を注意するような言葉は、腹底を押し上げると同時に色艶の目立つ猥声へと変化する。"&9779"濡れた肌同士がくっついては離れる、ゆったりとした生々しい音が部屋に響き渡り。独特の淫臭が当たりに充満していく。"&9780"突っ張る足のすぐ横では、りあねーちゃんや夢子達がもぞもぞと動き、今にもおきだしてきそうな雰囲気すらあった。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0077e
+&9781"「いっ、あああぁっ、んぅぅっ……ふっ、くぅっ……オマンコ火傷しちゃうぅぅ、ぁっ、んんん」"42("DEL","02CharChip.dat")#:NameSuffix
+&9782"「母さん、静かにしないと皆起きちゃうよ」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0078e
+&9783"「なら、もっと人間らしくしたらどう……はぁ、こ、交尾に狂ったケモノみたいに力強くお腹押し上げてぇぇ……あぁんっ」"42("DEL","02CharChip.dat")&9784"言葉も行動も裏腹なのは確かだ。"&9785"愛液に満たされ、柔らかな肉厚の蜜壺に、どんどんと血が巡りたけり狂う肉棒を出し入れする事に夢中になっていく。"&9786"ここは家で目の前で身体を揺らして悦びの声を上げているのが母親だという事も忘れそうなほどに。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0079e
+&9787"「んぁああぁ、はぁ、絵里沙あぁあ……あ、くぅ、あぁぅ……んぅぅぅ」"42("DEL","02CharChip.dat")&9788"ゆらゆらと揺れる視線の中で母さんが絵里沙の名前を申し訳なさそうに呻く。"&9789"そして見比べるように俺を横目で覗き、次いで２人の結合部を見る。"&9790"その表情は後悔や懺悔というにはあまりにも淫猥に歪んでいた。"#:NameSuffix
+&9791"「幸せそうな顔して寝てるよな、絵里沙。はぁっ、はぁっ」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0080e
+&9792"「ふっ、うっ……ん……やめっ、なさい…そんな事は言わなくて……ぁん、んぅっ！！」"42("DEL","02CharChip.dat")&9793"母さんが見せた一瞬の綻びを俺は見逃せなかった。"#:NameSuffix
+&9794"「母さん今、すごく絞まった……」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0081e
+&9795"「そんなわけないでしょうっ、あぁぅぅ…んんっ！　くっ、ふぅぅ……あふっ、ぅう」"42("DEL","02CharChip.dat")&9796"もし、パチッと絵里沙が目を覚ましたらどうなるだろう。絵里沙だけじゃない周りの皆もだ。"&9797"酒で頭の奥がボンヤリとしている俺がそれを考えると、なぜだか異様に昂ってしまう。"&9798"どうやら、母さんも同じようだ。太ももをつたう愛液は量を増し、とうとう、つたうまでもなく結合部から垂れ落ち始める。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0082e
+&9799"「あぁ……これは、違うわ……ちがぅ、んんぅっ！　くふぅ、はぁ、ぁ、あぁぁぁっ、ぉぉ……」"42("DEL","02CharChip.dat")&9800"酒の力もあるとは言え、目の前で母さんが見せる新たな一面に更なる昂りを覚える。"&9801"俺は高まる鼓動に身を任せ、蠢動する膣壁に刻み付けるように深く、強く、亀頭をこすりつけていく。"&9802"自覚はあるのだろうか、母さん自身も喘ぎを漏らして腰を揺らしている事に。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0083e
+&9803"「はぁっ、はぁっ、ぅっ、ん！　はぁんっ！　ふぁっ、ぁ、あぁ、身体中に響いてるわぁ、ぁっ、あぁ！」"52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0478b
+&9804"「んにゅぅ……？　んん……す～……す～……」"42("DEL","02CharChip.dat")#:NameSuffix
+&9805"「母さんの中、どんどん融けてくみたいだっ……！」"&9806"絵里沙の眉がぴくりと動き、毛布の下で身じろぐが、母さんも俺も止まる事などできず。"&9807"情動に任せ、お互いの性器を使って快楽を貪る事を選んでしまう。"&9808"水音が大きくなる程に愛液やカウパーで満たされた肉穴は肉棒の抽送を遮る事もなくなり、過剰に摩擦の快感を与えてくれる。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0084e
+&9809"「あぁああ、激しくされたら、立って…ぁぁっ、られないぃぃ、うぁっ、んふぅぅっ……！！」"42("DEL","02CharChip.dat")&9810"どんどんと早く、強くなる俺の腰の動きに、震えながらも自分の身体を何とか支え続ける母さん。"&9811"楽にさせるためというよりも、自分がもっと淫肉を味わう為に母さんの腰を強く抑える。"&9812"まるでこちらに重心を預けるようによろめいてくる、尻を押さえながら膣奥を突き上げた。"_Mode=1,
+_View[1]=1,
+_Glass=1,
+_MovX=6,
+_MovY=6,
+_MovieLoopFlg=1,
+_MOVSEC=0,
+52("_GRPName","e04r1")52("_MovieFileName","e04b0")42("Start","00HMovPlay.dat")
+_View=1,
+_View[2]=0,
+42("Open","00MesWinSet.dat")
+
+_Mode=0,
+_Glass=1,
+_MovX=584,
+_MovY=6,
+_MovieLoopFlg=1,
+_MOVSEC=1,
+52("_GRPName","e20r0")42("Start","00CGFlag.dat")
+52("_MovieFileName2","e04b1")42("Start","00HMovPlay.dat")
+52("_ViewName1","e04r1")
+52("_ViewName2","e20r0")
+52("_MovieFileName","e04b0")
+52("_MovieFileName2","e04b1")
+
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0085e
+&9813"「くふっ、はぅんっ！　はぁっ、はぁっ！　あひっ！　んあぁぁ……！　はぁあっ！　ふあぁっ！」"42("DEL","02CharChip.dat")&9814"母さんの尻のゆれと合わせるように、喘ぎもリズミカルに部屋に響く。"&9815"目の前の絵里沙や周りのまりる、夢子、りあねーちゃんを視線で気にしてはいるものの、声を抑えられてはいなかった。"&9816"俺はもっと音が響くように、大きくすばやく腰を振り、股間で母さんの尻を叩く。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0086e
+&9817"「あっ、あっ……ふっ！ぅ、これ以上激しくしたら、絵里沙の顔に……こぼれちゃうぅ……んんんっ！！」"42("DEL","02CharChip.dat")&9818"母さんの股間からは大量の愛液がそこら中に飛沫し、毛布に、畳に、しみを作っていた。"&9819"絵里沙の胸元やパジャマにもかなり飛んでいる。"#:NameSuffix
+&9820"「後で涎とかいってごまかすしかないかなっ」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0087e
+&9821"「はあぁんっ！　んんっ！　ふぐぅっ……あっ、あぁあ……」"42("DEL","02CharChip.dat")&9822"一際大きく母さんの身体を揺らすと、糸を引くほどの粘度の愛液が数滴、絵里沙の頬や唇に飛沫した。"52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0479b
+&9823"「ぅんん……むに……ん……すぅ……」"42("DEL","02CharChip.dat")&9824"顔に降りかかった違和感を取り除こうと動く絵里沙の指や唇は、逆にねっとりと塗り伸ばしてしまう。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0088e
+&9825"「ぁぁ……絵里沙、ごめんなさい……ぁっ、んんっ、くぅ、うぁっ！　あはぁぁ……」"42("DEL","02CharChip.dat")&9826"母さんが人に謝るところなんて、初めて見たかも。"&9827"昔からずっと見ていたはずなのに、この１時間足らずで見る母さんのどの表情も新鮮だ。"&9828"眉間にシワを寄せて快感に耐えたり、身体を力ませる為に歯を食いしばったり、腹底を突く度に唇から甘く吐息を漏らしたり。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0089e
+&9829"「ハァッ……ハァッ……あっ！　ハァアッ、あぁぅ……頭まで響いて、んふっ、ぅ……すごく、気持ちいいのぉ」"42("DEL","02CharChip.dat")&9830"一突き毎にお互いの関係性が断ち切られ、安直な思考によって再び繋がっていく。"&9831"周りを意識して辺りの様子を感じ取ろうとする防衛本能は、快感まで敏感に感じとってしまう。"&9832"膣内でペニスは脈動し、膣肉は蠢動し、腰を打ち付ける度に汗や愛液が当たりに飛び散る。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0090e
+&9833"「:NameSuffixの立派なおちんちんにお腹、潰されるっ……あッ、はぁあっ！　あんッ、あぁんっ……ぁっ！　はひっ、んっ！っく！」"42("DEL","02CharChip.dat")#:NameSuffix
+&9834"「チンポに夢中になっちゃって……ハァ、ハァ、ついこの間まで勃起しただけでも怒ってたのに」"&9835"お互い、抵抗も強制もつまらないプライドもなく、理性や不安を飲み込むほどの充実で心が溢れていた。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0091e
+&9836"「すごっ、あ、あぁっ……！　あふっ！　オマンコの中、くぅ……おちんちんで、あぅんっ、ぐちゃぐちゃにかき回されてるわぁ……ひあぁっ！」」"42("DEL","02CharChip.dat")&9837"本気で押さえつける必要もなく、俺に腰を預けながら時々背中をそらせて嬌声をあげる。"&9838"周りを気にしていた母さんの視線は宙を泳ぎ、荒い呼吸を繰り返し手を握り込む。"52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0480b
+&9839"「おにぃ……ちゃん……むにゃむにゃ」"42("DEL","02CharChip.dat")#:NameSuffix
+&9840"「ハァハァッ……」"&9841"喉が渇くほど呼吸を繰り返し、何もかも包み隠しもせずにさらけ出す、すぐ側には日常が広がっている。"&9842"だが、誰かが起きても止められる気がしない。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0092e
+&9843"「はひっ、ぐっ！　あぅ、あぁああっ、んくぅっ…全身が満たされていくようだわ、あ、はあぁあんっ」"42("DEL","02CharChip.dat")&9844"重力に引かれ、重そうに母さんの身体から垂れるおっぱいは、背中から見ていてもわかるほど揺れている。"&9845"充分すぎる程つまった脂肪をぶつけ合いながら、存在感を主張していた。"&9846"母さんがどんどんと乱れていく姿も誰でも見れるわけではないであろう表情も、目に焼き付ける。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0093e
+&9847"「こんなのはじめてぇぇ、あぁっ、はぁあぁ！」"52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0265a
+&9848"「うぅ……ん……」"42("DEL","02CharChip.dat")&9849"何度も何度も肉棒をピストンさせていると、限界まで腫れ上がりジンジンとした痺れを感じるようになっていた。"&9850"もうどのくらいこうしているんだろう？　周りの様子を見ると一瞬の事にも思える。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0094e
+&9851"「はぁはぁ、あふっ、んぁ、あんっ！　うぅぅ、くぅっ、ひあっ……あぅ！　あっ、あんっ、あぁんっ！」"42("DEL","02CharChip.dat")&9852"ただの喘ぎ声じゃない、悦びを訴えてくるような雰囲気を感じる。"&9853"興奮の中で感じる、一縷の嫌悪……いや、不安。"&9854"このまま快楽を受け入れ続けたら、もう元には戻れない気がする。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0095e
+&9855"「あぁ、イキそうなのね……おちんちんがまた膨らんでるわぁぁ、あんっ！」"42("DEL","02CharChip.dat")&9856"否、すでに手遅れだ。"&9857"俺も母さんも、酒気に扇動されたくらいじゃこうはならない。抑えつけられてきた欲望が噴出している様だ。"&9858"……もう戻れないのなら、溺れてしまえばいい。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0096e
+&9859"「私に吐き出しなさいっ……:NameSuffixの悦びも興奮も、全て……はぁ、うああっ！　んんんんっ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&9860"「……母さんっ」"&9861"一気に膣内は凝縮し、肉幹に肉襞が絡みつき、締め上げ、深く突き入れた亀頭はこれ以上侵入できない感触に圧迫される。"&9862"上り詰める濁流を感じながらも、大きく振るえだす母さんに体重をかけて、最後の最後まで荒いストロークを繰り返した。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0097e
+&9863"「あっ、はぁああっ！！　んぐぅっ！　んぅっ、はぁっ、あん、ああぁぁあ─……！！」"42("DEL","02CharChip.dat")
+_View=0,
+42("Start","02EndView.dat")
+
+120,0(@SelChoice[1],2,=,){
+52("_SelStr0","中に出す")
+52("_SelStr1","外に出す")
+52("_SelStr2","")
+42("Select","00Select.dat")
+120,1(_SelChoice,1,=,){
+41("Sel2",0)
+}1;
+}0;121,2{
+120,3(@SelChoice[1],0,=,){
+41("Sel1",0)
+}3;121,4{
+41("Sel2",0)
+}4;
+}2;
+
+$Sel1
+
+_AL=0,
+120,5(:OptionNum1,1,=,){
+_Mode=1,
+_View[1]=0,
+_Glass=1,
+_View[1]=0,
+_MovieLoopFlg=0,
+_MOVSEC=0,
+52("_GRPName","e04r2")52("_MovieFileName","e04c0")42("Start","00HMovPlay.dat")_Mode=1,
+}5;121,6{
+_Mode=6,
+_View[1]=0,
+_Glass=1,
+52("_GRPName","e04r2")42("DrawCG","00Draw.dat")
+_Mode=0,
+}6;
+
+_View[1]=0,
+_Glass=1,
+_MovieLoopFlg=1,
+_MOVSEC=0,
+52("_GRPName","e04r2")52("_MovieFileName","e04e0")42("Start","00HMovPlay.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0098e
+&9864"「あぁぁあんっ！　はぁあ……あぁ！　はぁ、ああっ、精液が……凄い勢いで流れ込んでくる、あっ……んっ、くっ！」"42("DEL","02CharChip.dat")&9865"濁流が押し寄せる度に、母さんの尻に体重をかけて腰を押し付けて一番奥に精液を吐き出す。"&9866"きつく締まる膣口を力強く脈動を繰り返す肉幹で拡げながら、何度も出し入れして扱く。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0099e
+&9867"「はぁ、ああぁ、そんなに動いたら……精液まで絵里沙にかかるわ……ぁ、んっ……ふぅぅ」"42("DEL","02CharChip.dat")&9868"大きな痙攣を繰り返していた母さんは、深く息を吐きながら、何とか自立している状態だった。"#:NameSuffix
+&9869"「辺りに沢山シミつくってるのに、今更じゃないか」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0100e
+&9870"「はぁ……はぁ……溢れるほど精液出してもオマンコの中で硬いまんまで、開き直らないでほしいわ……ぁん」"42("DEL","02CharChip.dat")
+41("SelEnd",0)
+
+
+$Sel2
+
+&9871"瞬く間に様相を変えていく膣内から肉棒を引き抜いた瞬間、目の前がぼやけ、チラチラと火花が見えた。"_AL=0,
+120,7(:OptionNum1,1,=,){
+_Mode=1,
+_View[1]=0,
+_Glass=1,
+_MovieLoopFlg=0,
+_MOVSEC=0,
+52("_GRPName","e04r3")52("_MovieFileName","e04d0")42("Start","00HMovPlay.dat")_Mode=1,
+}7;121,8{
+_Mode=6,
+_View[1]=0,
+_Glass=1,
+52("_GRPName","e04r3")42("DrawCG","00Draw.dat")
+_Mode=0,
+}8;
+
+_View[1]=0,
+_Glass=1,
+_MovieLoopFlg=1,
+_MOVSEC=0,
+52("_GRPName","e04r3")52("_MovieFileName","e04f0")42("Start","00HMovPlay.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0101e
+&9872"「くぅっ！　んんんっ……勢いよくあちこちに精液飛ばさないで、私にかけなさい……はぁ……はぁ……あん」"42("DEL","02CharChip.dat")&9873"跳ねる肉棒を押さえもせずに、白濁が母さんの身体や、床に飛んで行くのを俺は肩で呼吸をしながら見守る。"&9874"肉棒は何度も大きな脈動を繰り返すと、後は尿道に残った精液をこぼすだけの小刻みな震えに代わった。"&9875"震える母さんの身体に張り付く精液は、滴り落ちて絵里沙にもかかってしまっていた。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0102e
+&9876"「ふぅ……ふぅ……部屋中に精液の匂い充満させて……こんなの誰か起きたらすぐにバレるわ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&9877"「いままで誰も起きないのも奇跡だったけどね……」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0103e
+&9878"「はぁ……ん、後始末は任せたわよ……」"42("DEL","02CharChip.dat")
+
+$SelEnd
+
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&9879"…………。"&9880"…………………。"
+52("_GRPName","e03")
+42("RecoFlag","00RecoFlag.dat")
+52("_GRPName",_BGName)
+140(0)
+
+_Mode=1,
+52("_GRPName","bg02c")
+42("DrawBG","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子
+&9881"「……ん」"42("DEL","02CharChip.dat")#:NameSuffix
+&9882"「！！？」"&9883"足元で寝返りをうった夢子の肌の感触が足に触れる。"&9884"落ち着きを取り戻し始めていた心は途端に揺さぶられ、俺は体勢を崩してしまった。"_Target=@CharC,
+_CharX=0,
+_CosSel=3,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ee")
+42("DrawChar","00Draw.dat")
+_X=20,
+_Y=20,
+_WaitTime=0,
+80(1,"01Quake.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0104e
+&9885"「きゃっ！　ちょっと、今動いたら……あんっ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&9886"「……っとっと！！　ごめっ……わぁああ、こっちはまりるだぁぁ」"_ThreNum=1,
+42("QuakeEnd","01Quake.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=3,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ea")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0105e
+&9887"「はぁぁ……少しは落ち着きなさい」"42("DEL","02CharChip.dat")&9888"アルコールが身体を巡り今更フラフラしている俺を差し置いて、母さんはとても落ち着いているように思えた。"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&9889"…………。"&9890"…………………。"_Mode=1,
+52("_GRPName","bg02c")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM04")
+42("BGM","00Sound.dat")
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0266a
+&9891"「ん……んん～……ぁ、れ、わたし眠ってた……？」"42("DEL","02CharChip.dat")#:NameSuffix
+&9892"「あぁ、ぐっすりな」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","aa")
+42("DrawChar","00Draw.dat")
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0267a
+&9893"「ハァ……畳に直で眠るなんて……って、アニキ、なんで学園のジャージ着てんの？」"42("DEL","02CharChip.dat")#:NameSuffix
+&9894"「ちょっと、酒こぼしちゃってな」"52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0268a
+&9895"「ふーん、ドジだね」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&9896"「言い訳のしようもないわ」"&9897"母さんとアタフタしているうちに、いろんな汁や酒でぐちゃぐちゃになったのだが。"&9898"俺のドジと一言で済まされるならそれに越したことはない。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ea")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0106e
+&9899"「……皆も、寝る準備しなさい」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&9900"母さんは未だ眠る夢子、りあねーちゃん、と順番に肩を強めに揺すっていた。"#:NameSuffix
+&9901"（起きて寝る準備ってのもなかなか致し方ない響きだ）"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0210c
+&9902"「……ぅぅん」"42("DEL","02CharChip.dat")#:NameSuffix
+&9903"「おつかれ夢子……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","cc")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0211c
+&9904"「なんだかフラフラする。お腹が空いているみたい……」"42("DEL","02CharChip.dat")#:NameSuffix
+&9905"（ほっ、よかった。気づいていないようだ）"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&9906"起こさないように細心の注意を払いながら掃除して、換気した甲斐があったな。"_Target=@CharL,
+_CharX=-200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ba")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0481b
+&9907"「うぅ～……？？　なんだかべちょってする……」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ee")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜
+&9908"「……！」"42("DEL","02CharChip.dat")#:NameSuffix
+&9909"「おおっと！お兄ちゃんが拭いてやるよ！」"_Target=@CharL,
+_CharX=-200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","bc")
+42("DrawChar","00Draw.dat")
+52("_CCName","b")42("Start","02CharChip.dat")#絵里沙=w0482b
+&9910"「うあぅ、むにぃっ……なんで顔ばっかりぃ……まふっ」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ea")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜
+&9911"「…………」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&9912"（母さん、セーフセーフッ！）"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dd")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0107d
+&9913"「……んじゃ、酔いが冷めた所で二次会といきますかあ」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0107e
+&9914"「やらないわよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&9915"「やらないから」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dc")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0108d
+&9916"「えーっ……つまんないつまんない～っ」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","bg01c")
+42("DrawBG","00Draw.dat")
+&9917"騒ぎ足りない人物をほおって置いて、俺達は定位置に戻って就寝の準備をする。"&9918"酒はもうこりごりではあるが、母さんの乱れ具合はまた……。"#:NameSuffix
+&9919"「まだ酔ってんのか俺」"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+&9920"…………。"&9921"………………。"
+42("start","01Rand.dat")
+
+41("Start","02TU_Map.dat")

@@ -1,0 +1,1669 @@
+//====================================================================
+//
+//■セーブロード処理
+//
+//====================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@SL.PLATE.TX(10)]
+	S_INT[@SL.PLATE.SX=230] //※default
+	S_INT[@mx]
+	S_INT[@my]
+
+	S_STR[$SL.TX.FONT]
+	S_INT[@SL.TX.SX]
+	S_INT[@SL.TX.SY]
+	S_INT[@SL.TX.COLOR]
+	S_INT[@SL.TX.COLOR2]
+	S_INT[@SL.TX.SHADE.X]
+	S_INT[@SL.TX.SHADE.Y]
+	S_INT[@SL.TX.SHADE.COLOR]
+	S_INT[@SL.TX.OUTLINE.COLOR]
+
+}
+
+
+#=es.SaveLoad.TxRef
+{
+	//ボタンサイズ取得
+		STR[$BID="ES.SAVE."]
+		GOSUB[#=es.BT.SXY.GET pstr=$BID+"TIP.TX" pint2=1] //SAVEのプレート1番目を基準にする
+		IF[@_RINT(1)>0] @SL.PLATE.SX=@_RINT(1) IFEND[]
+
+	return[]
+}
+
+#=es.Save.DEFINE.INIT
+{
+	//----------------------------------------------------------------
+	// 文字情報取得
+	//----------------------------------------------------------------
+		GOSUB[#=es.TDDEF.SEARCH pstr=$T(11,21)]
+		@SL.TX.SX = @_RINT(1) / 65536			//文字Ｘサイズ
+		@SL.TX.SY = @_RINT(1) % 65536			//文字Ｙサイズ
+		@SL.TX.COLOR  = @_RINT(2)				//文字色１
+		@SL.TX.COLOR2 = @_RINT(3)				//文字色２
+		@SL.TX.SHADE.X = @_RINT(5) / 65536		//文字影座標Ｘ
+		@SL.TX.SHADE.Y = @_RINT(5) % 65536		//文字影座標Ｙ
+		@SL.TX.SHADE.COLOR = @_RINT(6)			//文字影色
+		@SL.TX.OUTLINE.COLOR = @_RINT(7)		//文字袋文字色
+		$SL.TX.FONT = $_RSTR(8)					//文字フォント
+
+	@es.sdpagenum =@T(11,01); IF[@es.sdpagenum >(100)] @es.sdpagenum =(100) IFEND[]
+	@es.sdplatenum=@T(11,02); IF[@es.sdplatenum>( 30)] @es.sdplatenum=( 30) IFEND[]
+
+	return[]
+}
+
+//====================================================================
+//
+//■セーブ処理
+//
+// @_PINT(1) : スロット番号
+// @_PINT(2) : 0=save,1=qsave,2=prevselsave
+//
+//====================================================================
+#=es.Save
+{
+	STR[$BID="ES.SAVE."]
+
+	INT[@SAVECONF.MODE=1]
+	INT[@SAVECONF.WRITE=0] //上書き時のみセーブ
+	STR[$SAVECONF.TX=$T(13,12)]
+	INT[@SAVECONF.END=1]
+	STR[$SAVECONF.END.TX=""]
+	INT[@SL.COPY.CONF.MODE=1]
+	INT[@SL.DEL.CONF.MODE=1]
+	STR[$SL.COPY.CONF.TX=$T(13,18)]
+	STR[$SL.DEL.CONF.TX=$T(13,24)]
+
+GOSUB[#=es.SaveLoad.TxRef]
+
+	//------------------------------------------------------
+	// スロット番号を受け取る
+	//------------------------------------------------------
+		INT[@mSAVENO = @_PINT(1)]
+
+		GOSUB[#=es.SL.FILENAME.GET pint=@mSAVENO]
+		STR[$SFNAME = $_RSTR(1)]
+
+	//------------------------------------------------------
+	// セーブ確認
+	//------------------------------------------------------
+		STR[$cap]
+		INT[@Ret=1]
+		INT[@mConfFlag]
+		INT[@mConfEndFlag]
+		STR[$mConf.TX]
+		STR[$mConfEnd.TX]
+		INT[@Flag]
+
+		IF[@_PINT(2)==0] //save
+		{
+			@mConfFlag = @es.GSD(114,06)
+			@mConfEndFlag = @SAVECONF.END
+			$mConf.TX = $SAVECONF.TX
+			$mConfEnd.TX = $SAVECONF.END.TX
+		}
+		IFEND[]
+
+///tri
+/*
+@mConfFlag=0
+		IF[@mConfFlag] // セーブ確認
+		{
+			IF[@SAVECONF.WRITE] // 上書き時のみか
+			{
+				//------------------------------------------------------
+				// セーブデータが有効か
+				//------------------------------------------------------
+					\es.SL.CHECK(@mSAVENO)
+					IF[@_RINT(1)]
+					{
+						@Flag=1
+
+						//------------------------------------------------------
+						// ボイス再生
+						//------------------------------------------------------
+							IF[@_PINT(2)==0] //save
+								\_gosub(ES.SAVE.VoicePlay.5)
+							IFEND[]
+					}
+					IFEND[]
+			}
+			ELSE[]
+			{
+				@Flag=1
+			}
+			IFEND[]
+		}
+		IFEND[]
+*/
+
+		IF[@Flag]
+		{
+			IF[@SAVECONF.MODE==1]
+			{
+				GOSUB[#=ES.SAVECONF.MAIN]
+				@Ret = @_RINT(1)
+			}
+			ELSE[]
+			{
+				WINDOWINFO[NO=0 CAPTION=1 LET=$cap]
+				$cap="確認"
+				DIALOG[STR=$mConf.TX CAPTION=$cap YESNO=1 LET=@Ret]
+			}
+			IFEND[]
+
+			IF[@Ret==2]
+			{
+				GO[#=es.Save.end]
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+
+	//------------------------------------------------------
+	// ボイス再生
+	//------------------------------------------------------
+		IF[@_PINT(2)==0] //save
+			\_gosub(ES.SAVE.VoicePlay.2)
+		IFEND[]
+
+	//------------------------------------------------------
+	// テキスト準備
+	//------------------------------------------------------
+		STR[$mDATE(3)]
+		INT[@mYear]
+		INT[@mMonth]
+		INT[@mDay]
+		INT[@mWeek]
+		INT[@mHour]
+		INT[@mMin]
+		INT[@mSec]
+
+		LOOP[SET=2]
+		{
+			//----------------------------------------
+			// 現実の日付を格納する.
+			//----------------------------------------
+			IF[@_LC==1]
+			{
+				@mYear  = @_TIME(0,0)
+				@mMonth = @_TIME(0,1)
+				@mDay   = @_TIME(0,2)
+				@mWeek  = @_TIME(0,3)
+				@mHour  = @_TIME(0,4)
+				@mMin   = @_TIME(0,5)
+				@mSec   = @_TIME(0,6)
+			}
+			IFEND[]
+			//----------------------------------------
+			// ゲーム内の日付を格納する.
+			//----------------------------------------
+			IF[@_LC==2]
+			{
+				@mYear  = @es.LSD(031,01)
+				@mMonth = @es.LSD(031,02)
+				@mDay   = @es.LSD(031,03)
+				@mWeek  = @es.LSD(031,04)
+				@mHour  = @es.LSD(031,05)
+				@mMin   = @es.LSD(031,06)
+				@mSec   = @es.LSD(031,07)
+			}
+			IFEND[]
+
+			STR[$D(3)]
+
+			$D(1)=$T(11,41)
+		//	$D(2)=$T(11,42)
+			$D(2)=""
+
+			INT[@len]
+			INT[@mLC=@_LC]
+			\_strlen($D(@mLC))(@len)
+			INT[@x]
+			INT[@er]
+			STR[$t]
+			STR[$d]
+			LOOP[]
+			{
+				//文字数進める
+				@x+=1;IF[@x>@len] LOOPBREAK[] IFEND[]
+
+				//1文字ずつ抽出
+				\_strmid($D(@mLC),@x,1)($t)
+				IF[$t=="!"]
+				{
+					@x+=1
+					IF[@x>@len] @er=1;LOOPBREAK[] IFEND[]
+
+					\_strmid($D(@mLC),@x,1)($t)
+					  IF[$t=="Y"] \_inttostr(@mYear    , 4);$d+=$_RSTR(1)
+					ELSE[$t=="y"] \_inttostr(@mYear%100, 2);$d+=$_RSTR(1)
+					ELSE[$t=="M"] \_inttostr(@mMonth   , 2);$d+=$_RSTR(1)
+					ELSE[$t=="D"] \_inttostr(@mDay     , 2);$d+=$_RSTR(1)
+					ELSE[$t=="H"] \_inttostr(@mHour    , 2);$d+=$_RSTR(1)
+					ELSE[$t=="h"] \_inttostr(@mHour%12 , 2);$d+=$_RSTR(1)
+					ELSE[$t=="F"] \_inttostr(@mMin     , 2);$d+=$_RSTR(1)
+					ELSE[$t=="S"] \_inttostr(@mSec     , 2);$d+=$_RSTR(1)
+					ELSE[$t=="W"] $d+=$T(11,45+(@mWeek   ))
+					ELSE[$t=="G"] $d+=$T(11,52+(@mHour/12))
+					IFEND[]
+				}
+				ELSE[]
+				{
+					$d+=$t
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+
+			$mDATE(@_LC)=$d
+
+		}
+		LOOPEND[]
+
+
+		//---------------------------------------- 
+		// テキスト情報を格納する.
+		//---------------------------------------- 
+			STR[$mTEXT(11)]
+			STR[$mTEXTNAME(11)]
+			STR[$mTEXTTASK(11)]
+
+
+			IF[@es.SELMODE==0]
+			{
+				INT[@mLOG.TX.SPACE.X=0]
+
+				GOSUB[#=es.LOG.BUF.GET]
+				$mTEXT(0) = $_RSTR(1)
+				$mTEXTNAME(0) = $_RSTR(2)
+				$mTEXTTASK(0) = $_RSTR(3)
+
+				///xここで正確な表示文字を算出する.
+
+				\_strlen($mTEXTTASK(0))(@len)
+				INT[@y=2]
+				STR[$char]
+				INT[@charSX]
+				INT[@pos=1]
+
+				LOOP[SET=10] $mTEXT(@_LC)="" LOOPEND[]
+
+				$mTEXT(1) = $mTEXTNAME(0)
+
+				LOOP[SET=@len]
+				{
+					IF[@x + @SL.TX.SX + @mLOG.TX.SPACE.X >= @SL.PLATE.SX - 4]
+					{
+						@x=0
+						@y+=1
+						IF[@y>(10)] LOOPBREAK[] IFEND[]
+					}
+					IFEND[]
+
+					\_strmid($mTEXTTASK(0), @_LC, 1)($char)
+					IF[$char=="R"]
+					{
+						@x=0
+						@y+=1
+						IF[@y>(10)] LOOPBREAK[] IFEND[]
+						LOOPCONTINUE[]
+					}
+					ELSE[$char=="1" || $char=="2"]
+					{
+						\_strmid($mTEXT(0), @pos, 1)($char)
+
+						$mTEXT(@y) += $char
+
+						//半角か全角か
+						\_strtype($char)
+						@charSX = @SL.TX.SX / (3-@_RINT(1))
+						@x += @charSX + @mLOG.TX.SPACE.X
+
+						@pos+=1
+					}
+					IFEND[]
+				}
+				LOOPEND[]
+
+			}
+			ELSE[@es.SELMODE==1]
+			{
+				GOSUB[#=ES.SEL.STR.GET] //選択肢文字列を取得
+
+				$mTEXT(1) = "<選択肢>"
+				$mTEXT(2) = ""+$_RSTR(1)
+				$mTEXT(3) = ""+$_RSTR(2)
+				$mTEXT(4) = ""+$_RSTR(3)
+				$mTEXT(5) = ""+$_RSTR(4)
+				$mTEXT(6) = ""+$_RSTR(5)
+				$mTEXT(7) = ""+$_RSTR(6)
+				$mTEXT(8) = ""+$_RSTR(7)
+				$mTEXT(9) = ""+$_RSTR(8)
+			}
+			ELSE[@es.SELMODE==2]
+			{
+				IF[1]
+					$mTEXT(1) = "<選択画面>"
+					$mTEXT(2) = ""
+					$mTEXT(3) = ""
+					$mTEXT(4) = ""
+					$mTEXT(5) = ""
+				ELSE[2]
+				ELSE[3]
+				IFEND[]
+			}
+			IFEND[]
+
+
+		//---------------------------------------- 
+		// 何を格納するか決める.
+		//---------------------------------------- 
+			STR[$mSAVESTR(16)]
+
+			@SL.PLATE.TX(1)=@T(11,31)
+			@SL.PLATE.TX(2)=@T(11,32)
+			@SL.PLATE.TX(3)=@T(11,33)
+			@SL.PLATE.TX(4)=@T(11,34)
+			@SL.PLATE.TX(5)=@T(11,35)
+			@SL.PLATE.TX(6)=@T(11,36)
+			@SL.PLATE.TX(7)=@T(11,37)
+			@SL.PLATE.TX(8)=@T(11,38)
+			@SL.PLATE.TX(9)=@T(11,39)
+
+			INT[@tx]
+
+			LOOP[SET=9]
+			{
+				@tx=@SL.PLATE.TX(@_LC)
+
+				  IF[@tx==   0] $mSAVESTR(@_LC)=""
+				ELSE[@tx<=8191] $mSAVESTR(@_LC)=$L(@tx)
+				ELSE[@tx==9001] $mSAVESTR(@_LC)=$mTEXT(1)
+				ELSE[@tx==9002] $mSAVESTR(@_LC)=$mTEXT(2)
+				ELSE[@tx==9003] $mSAVESTR(@_LC)=$mTEXT(3)
+				ELSE[@tx==9004] $mSAVESTR(@_LC)=$mTEXT(4)
+				ELSE[@tx==9005] $mSAVESTR(@_LC)=$mTEXT(5)
+				ELSE[@tx==9006] $mSAVESTR(@_LC)=$mTEXT(6)
+				ELSE[@tx==9007] $mSAVESTR(@_LC)=$mTEXT(7)
+				ELSE[@tx==9008] $mSAVESTR(@_LC)=$mTEXT(8)
+				ELSE[@tx==9009] $mSAVESTR(@_LC)=$mTEXT(9)
+				ELSE[@tx==9010] $mSAVESTR(@_LC)=$mTEXT(10)
+				ELSE[@tx==9011] $mSAVESTR(@_LC)=$mDATE(1)
+				ELSE[@tx==9012] $mSAVESTR(@_LC)=$mDATE(2)
+				IFEND[]
+			}
+			LOOPEND[]
+
+	//------------------------------------------------------
+	// 現在の画面のスクリーンショットを得る
+	//------------------------------------------------------
+		CG[ID=SLTEMP2 Z=1 A=0 SX=1 SY=1 FILE=""]
+		CGACT[COPY2=1 ID=SLTEMP ID2=SLTEMP2]
+
+
+	//------------------------------------------------------
+	// セーブ処理
+	//------------------------------------------------------
+		INT[@Version=\VERNO.SAVEDATA]
+
+//INT[@T1=@_OS_TIME(1)];LOOP[SET=100]
+
+		FILEACT[FILE=$es.SAVEPATH+$SFNAME DELETE=1]	// 上書き保存でなく新規保存にする
+
+		SAVEEND[]	//一応初期化
+
+		SAVE[DNO=0001 SET=@Version]				// セーブデータバージョン
+
+		SAVE[DNO=0002 SET=@es.GSD(141,01)]		// システム起動回数(セーブonly.ロードせず)
+
+		SAVE[DNO=0003 ID=SLTEMP2]				// サムネイル画像
+		SAVE[DNO=0004 SET=$mSAVESTR()]			// テキスト
+
+		SAVE[DNO=0005 SET=@L()]					// データ
+		SAVE[DNO=0006 SET=$L()]					// データ
+		SAVE[DNO=0007 SET=@es.LSD()]			// データ
+		SAVE[DNO=0008 SET=$es.LSD()]			// データ
+		SAVE[DNO=0009 SET=$es.WindowCaption1]	// キャプション1
+		SAVE[DNO=0010 SET=$es.WindowCaption2]	// キャプション2
+
+		SAVE[DNO=0011 SET=$es.ScriptPosData]	// 位置
+
+		GOSUB[#=es.SOUND.SAVE PINT=0020]		// サウンド
+
+		GOSUB[#=es.LOG.SAVE pint=0050]			// バックログデータ
+
+		GOSUB[#=es.TX.SAVE pint=0070]			// テキスト
+
+		GOSUB[#=es.TX.ICON.XYAUTO.GET]
+		SAVE[DNO=0090 SET=@_RINT(1)]			// ICON
+
+		SAVE[DNO=0100 SET=$es.VOICE.FILE()]		// ボイス
+
+		GOSUB[#=ES.SEL.SAVE PINT=0120]			// 選択肢
+	//	GOSUB[#=ES.SEL2.SAVE PINT=0140]			// 選択肢２
+
+		GOSUB[#=es.SNOWMODE.SAVE pint=0160]		// 降雪処理
+
+		SAVE[DNO=0181 SET=@es.RAINMODE]			//
+		SAVE[DNO=0182 SET=@es.SAKURAMODE]		//
+		SAVE[DNO=0183 SET=@es.SNOWMODE]			//
+
+		GOSUB[#=es.L.SAVE pint=200]				// 演出レイヤ情報
+
+
+		SAVE[FILE=$SFNAME]	// 一括保存
+
+//LOOPEND[];@T1=@_OS_TIME(1)-@T1;\_dmes($@T1+"ms.")
+
+
+	//------------------------------------------------------
+	// 一時レイヤ消す.
+	//------------------------------------------------------
+		CGEND[ID=SLTEMP2]
+
+
+	//------------------------------------------------------
+	// 最新のセーブデータ番号を保持.
+	//------------------------------------------------------
+		//クイックセーブや選択肢セーブで無ければ
+		IF[@mSAVENO>0 && @mSAVENO <= @es.sdpagenum * @es.sdplatenum]
+			@es.GSD(150,02) = @mSAVENO //グローバル変数データとして記録.
+		IFEND[]
+
+
+	//------------------------------------------------------
+	// セーブサウンド
+	//------------------------------------------------------
+		\_gosub(ES.SAVE.SoundPlay.9) //再生
+
+	//------------------------------------------------------
+	// メッセージ
+	//------------------------------------------------------
+/*
+		IF[@mConfEndFlag==1]
+		{
+			IF[@_PINT(2)==0] GOSUB[#=SL_REFRESH_PLATE pstr=$BID] IFEND[] ///x後でRef
+			WAIT[FRAME=1]
+
+		//	WINDOWINFO[NO=0 CAPTION=1 LET=$cap]
+			$cap="確認"
+			\_mes($mConfEnd.TX, $cap)
+		}
+		IFEND[]
+*/
+
+
+	#=es.Save.end
+/*
+	IF[@_PINT(2)==0] //save
+	{
+		IF[@SAVECONF.MODE==1]
+		{
+			//---------------------------------------------
+			// セーブ画面用ボタンセット
+			//---------------------------------------------
+				\BTDEF.LOAD(ES.SAVE)
+		}
+		IFEND[]
+
+			//---------------------------------------------
+			// プレート描画
+			//---------------------------------------------
+				IF[@Ret==1]
+				{
+					GOSUB[#=SL_REFRESH_PLATE pstr=$BID]
+				}
+				ELSE[]
+				{
+					INT[@mx=@T(11,11)]
+					INT[@my=@T(11,12)]
+					\BT.ES0($BID+"TIP.NEW")
+					\BT.X.SET($BID+"TIP.NEW",, @mx)
+					\BT.Y.SET($BID+"TIP.NEW",, @my)
+					\BT.ES1($BID+"TIP.NEW") //Newを指定した場所に表示する
+				}
+				IFEND[]
+
+				//ページボタンON.
+				\BT.ONOFF($BID+"BTN.PAGE", @es.GSD(150,01)+1, 1)
+
+		IF[@SAVECONF.MODE==1]
+		{
+			//---------------------------------------------
+			// フェード＆消去
+			//---------------------------------------------
+				\es.CGTFADEOUT(150)
+		}
+		IFEND[]
+
+	}
+	IFEND[]
+*/
+
+	return[]
+}
+
+
+//====================================================================
+//
+//■ロード処理
+//
+//@_PINT(1):ロード番号
+//@_PINT(2):QLOADフラグ(ボイス再生用)
+//
+//====================================================================
+#=es.Load
+{
+
+	//----------------------------------------------------------------
+	// 変数初期化
+	//----------------------------------------------------------------
+		STR[$Tmp.LPosData]
+
+	//----------------------------------------------------------------
+	// ロード前処理
+	//----------------------------------------------------------------
+
+			//----------------------------------------------------------------
+			// サウンドフェードアウト
+			//----------------------------------------------------------------
+				\SOUND_STOPALL(1000)
+
+			//----------------------------------------------------------------
+			// いろいろ終わらす
+			//----------------------------------------------------------------
+				// 選択肢／後処理
+				//\SCENE.END(SELECT)
+				GOSUB[#=ES.SEL.ENDEXEC pint=10]
+				GOSUB[#=ES.CSEL.ENDEXEC pint=100]
+
+			//----------------------------------------------------------------
+			// 終了処理
+			//----------------------------------------------------------------
+			//	\_task.end($es.ScenarioTaskID)
+
+				GOSUB[#=ES.LOG.FIN]
+
+				GOSUB[#=ES.SAVE.END]
+			//	GOSUB[#=ES.LOAD.END]
+
+				GOSUB[#=ES.SCENARIO.END pint=0]
+
+//\_gosub(ES.LOAD.VoicePlay.2)	//ボイス再生
+
+			//----------------------------------------------------------------
+			// フェード＆消去
+			//----------------------------------------------------------------
+				\es.CGTSS
+
+			//	CG[ID="SP/" E=0]
+				CG[ID="SPLDST"  E=0]
+				CG[ID="SPLDST2" E=0]
+
+				\BT.END($es.S.BT(@es.S.NEST))
+
+				\es.CGSDELALL
+				\es.CGTFADEOUT(0)
+
+					INT[@nn = 999]
+					STR[$id = "CGS"+$(@nn)]
+					LOOP[SET=32]
+					{
+						CG[ID=$id A-=8]
+			//			CG[ID=$id A=256-@_LC]
+						WAIT[FRAME=1]
+					}
+					LOOPEND[]
+
+				\es.CGTFADEOUT(0)
+
+			//----------------------------------------------------------------
+			// 0.5秒ウェイト
+			//----------------------------------------------------------------
+				WAIT[TIME=500]
+
+				//-------------------------------------------- システムボイス再生終了待ち
+				GOSUB[#=es.SVO.ENDWAIT pint=1] //スキップ禁止
+
+
+	//----------------------------------------------------------------
+	// フェードイン用幕
+	//----------------------------------------------------------------
+		CG[ID=SYSBLACK SX=@es.GSX2 SY=@es.GSY2 X=0 Y=0 Z=@es.63BITMAX FILE=""]
+
+	//----------------------------------------------------------------
+	// ロードスロット番号を受け取る
+	//----------------------------------------------------------------
+		GOSUB[#=es.SL.FILENAME.GET pint=@_PINT(1)]
+		STR[$LFNAME = $_RSTR(1)]
+
+//\_dmes("NO="+$(@_PINT(1)))
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		@es.LoadFlag=1
+
+ 	//----------------------------------------------------------------
+	// 内部テキスト情報初期化
+	//----------------------------------------------------------------
+		//\TEXTBUF_CLEAR
+
+	//----------------------------------------------------------------
+	// ロード
+	//----------------------------------------------------------------
+
+//INT[@T1=@_OS_TIME(1)];LOOP[SET=100]
+
+		$es.RIN.LFNAME=$LFNAME
+
+	//	LOAD[FILE=$LFNAME DNO=0002 LET=@ret]					// システム起動回数(セーブonly.ロードせず)
+
+		LOAD[FILE=$LFNAME DNO=0005 LET=@L()]					// データ
+		LOAD[FILE=$LFNAME DNO=0006 LET=$L()]					// データ
+		LOAD[FILE=$LFNAME DNO=0007 LET=@es.LSD()]				// データ
+		LOAD[FILE=$LFNAME DNO=0008 LET=$es.LSD()]				// データ
+		LOAD[FILE=$LFNAME DNO=0009 LET=$es.WindowCaption1]		// キャプション1
+		LOAD[FILE=$LFNAME DNO=0010 LET=$es.WindowCaption2]		// キャプション2
+		LOAD[FILE=$LFNAME DNO=0011 LET=$Tmp.LPosData]			// 位置
+
+		GOSUB[#=es.LOG.LOAD pstr=$LFNAME pint2=0050]			// バックログデータ
+
+		LOAD[FILE=$LFNAME DNO=0100 LET=$es.VOICE.FILE()]		// ボイス
+
+		GOSUB[#=ES.SEL.LOAD pstr=$LFNAME pint2=0120]			// 選択肢
+	//	GOSUB[#=ES.SEL2.LOAD pstr=$LFNAME pint2=0140]			// 選択肢２
+
+		GOSUB[#=es.SNOWMODE.LOAD pstr=$LFNAME pint2=0160]		// 降雪処理
+
+		LOAD[FILE=$LFNAME DNO=0181 LET=@es.RAINMODE]			// 
+		LOAD[FILE=$LFNAME DNO=0182 LET=@es.SAKURAMODE]			// 
+		LOAD[FILE=$LFNAME DNO=0183 LET=@es.SNOWMODE]			// 
+
+		GOSUB[#=es.L.LOAD pstr=$LFNAME pint2=200]				// 演出レイヤ情報
+
+//LOOPEND[];@T1=@_OS_TIME(1)-@T1;\_dmes($@T1+"ms.")
+
+
+	//----------------------------------------------------------------
+	// サウンドロード
+	//----------------------------------------------------------------
+		GOSUB[#=es.SOUND.LOAD pstr=$LFNAME pint2=0020]
+
+
+
+	@es.LoadFlag=2
+
+
+		WAIT[TIME=200]
+
+	//ボイス再生
+	IF[@_PINT(2)==1] //QLOAD
+		\_gosub(ES.QLOADCONF.VoicePlay.1)
+	ELSE[] //LOAD
+		\_gosub(ES.LOADCONF.VoicePlay.2)
+	IFEND[]
+
+		WAIT[TIME=300]
+
+		//----------------------------------------------------------------
+		// スクリプト位置を復元
+		//----------------------------------------------------------------
+			//\_task.info.exist( $es.ScenarioTaskID )
+			//IF[@_RINT(1)==0]
+			//	\_task(SCENARIO, "ES.GAMEMAIN", 100000)
+			//	WAIT[FRAME=2]
+			//IFEND[]
+
+			TASK[ID=$es.ScenarioTaskID SCRIPTPOS=$Tmp.LPosData]
+			$es.ScriptPosData = $Tmp.LPosData	// 位置
+
+			\ts()
+			\tc()
+			GOSUB[#=es.TX.LOAD pstr=$LFNAME pint2=0070]
+
+			INT[@Tmp.ICONXYAUTO]	// ICON
+			LOAD[FILE=$LFNAME DNO=0090 LET=@Tmp.ICONXYAUTO]	// ICON
+			GOSUB[#=es.TX.ICON.XYAUTO.SET pint=@Tmp.ICONXYAUTO]
+
+
+
+		//----------------------------------------------------------------
+		// キャプション反映
+		//----------------------------------------------------------------
+			GOSUB[#=es.CAPTION.REFRESH]
+
+		//----------------------------------------------------------------
+		// 
+		//----------------------------------------------------------------
+			@es.SCENARIOSTOP = 0
+
+			IF[@es.RAINMODE]
+			{
+				@es.RAINMODE=0
+				\RAIN
+			}
+			IFEND[]
+
+			IF[@es.SAKURAMODE]
+			{
+//				@es.SAKURAMODE=0
+//				\SAKURA
+				GOSUB[#=es.SAKURAMODE.MAIN]
+			}
+			IFEND[]
+
+			IF[@es.SNOWMODE]
+			{
+//				@es.SNOWMODE=0
+//				\SNOW
+				GOSUB[#=es.SNOWMODE.MAIN]
+			}
+			IFEND[]
+
+///xS
+			GOSUB[#=ES.SEL.INIT]
+
+			@es.TX.SKIP = 0
+			@es.TX.AUTO = 0
+
+			@es.LoadFlag=0
+
+			@es.LOADTHRU = 1
+
+	//システムメッセージ
+/*
+	@es.SM=1
+	IF[@_PINT(2)==1] //QLOAD
+		@es.SMNO=4
+	ELSE[] //LOAD
+		@es.SMNO=2
+	IFEND[]
+*/
+
+			//UI更新
+			\UI.RELOAD
+			\BT.ES0.ALL(ES.GAMEMAIN)
+			\BT.ES1("ES.GAMEMAIN.TIP.CLICK")
+			\BT.ES1("ES.GAMEMAIN.TIP.CTRLSKIP")
+
+
+	//テキスト初期化処理
+	GOSUB[#=es.TEXTTASK.FOR.LOAD]
+
+	return[]
+}
+
+
+//====================================================================
+//
+//■プレート描画処理
+//
+//====================================================================
+#=SL_REFRESH_PLATE
+{
+	STR[$BID =$_PSTR(1)]
+	INT[@NO  =@_PINT(2)]
+	INT[@MODE=@_PINT(3)] //MODE==0:通常セーブデータ, MODE==1:クイック＆オートデータ
+
+	\BT.ES0($BID+"TIP.NEW")
+//	\BT.ES0($BID+"TIP.NEW2")
+
+GOSUB[#=es.SaveLoad.TxRef]
+
+	//------------------------------------------------------
+	// プレート描画
+	//------------------------------------------------------
+	INT[@SDPLATENUM = @es.sdplatenum]
+
+	LOOP[SET=@SDPLATENUM]
+//	LOOP[SET=@SDPLATENUM+1]
+	{
+		//開始セーブデータ番号、プレート番号、モード
+//		GOSUB[#=SL_REFRESH_PLATE.ONE pstr=$BID pint2=@NO pint3=@_LC pint4=@MODE]
+		GOSUB[#=SL_REFRESH_PLATE.ONE pstr=$BID pint2=0 pint3=@_LC pint4=@MODE]
+
+		//ファイルが存在したか否か
+		@es.sdexist(@_LC)=@_RINT(1)
+	}
+	LOOPEND[]
+
+
+	//------------------------------------------------------
+	// 選択中のプレートを ON 状態にする
+	//------------------------------------------------------
+	LOOP[SET=@es.sdplatenum] \BT.ONOFF($BID+"BTN.PLATE", @_LC, 0) LOOPEND[]
+//	LOOP[SET=@es.sdplatenum+1] \BT.ONOFF($BID+"BTN.PLATE", @_LC, 0) LOOPEND[]
+	IF[@es.SL.SELPLATE>0]
+	{
+		IF[@es.GSD(150,01)==(@es.SL.SELPLATE-1)/@es.sdplatenum]  //表示しているページと、選択中プレートの存在するページが一致するならば.
+		{
+			\BT.ON($BID+"BTN.PLATE", ((@es.SL.SELPLATE-1) % @es.sdplatenum)+1)
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+
+	return[]
+}
+
+
+
+//------------------------------------------------------
+//■一個分表示ルーチン
+//------------------------------------------------------
+#=SL_REFRESH_PLATE.ONE
+{
+	STR[$BID =$_PSTR(1)]
+	INT[@NO  =@_PINT(2)]
+	INT[@mLC =@_PINT(3)]
+	INT[@MODE=@_PINT(4)]
+
+	INT[@SDPLATENUM]
+	@SDPLATENUM = @es.sdplatenum
+
+	INT[@ref_ret]
+	STR[$ref_text(16)]
+	INT[@sno]
+	INT[@i]
+	INT[@exist]
+
+	IF[@MODE==0]
+	{
+		IF[@mLC==@SDPLATENUM+1] //クイックセーブデータなら
+			@sno=@es.sdqsaveno
+		ELSE[] //通常セーブデータなら
+			@sno=@es.GSD(150,01)*@SDPLATENUM + @mLC + @NO
+		IFEND[]
+
+		//@i は 1～100の値.
+		@i = (@mLC+@NO)
+
+	//	@sno=@i
+	}
+	IFEND[]
+	IF[@MODE==1]
+	{
+		IF[(@mLC+@NO) <= 5] //クイックセーブデータ
+		{
+			//@i は 1～5の値.
+			@i = (@mLC+@NO)
+
+			//リストの上から @_LC 番目のファイル名を取得する
+			GOSUB[#=ES.QSAVEFILENAME.GET PINT=@i]
+			@sno=@_RINT(1)
+		}
+		ELSE[] //オートセーブデータ
+		{
+			//@i は 1～50の値.
+			@i = (@mLC+@NO - 5)
+
+			//リストの上から @_LC 番目のファイル名を取得する
+			GOSUB[#=ES.ASAVEFILENAME.GET PINT=@i]
+			@sno=@_RINT(1)
+		}
+		IFEND[]
+	}
+	IFEND[]
+	IF[@MODE==2]
+	{
+		//@i は 1～100の値.
+		@i = (@mLC+@NO)
+
+		//リストの上から @_LC 番目のファイル名を取得する
+	//	GOSUB[#=ES.SAVEFILENAME.GET PINT=@i]
+		@sno=@i
+	}
+	IFEND[]
+
+
+
+	//------------------------------------------------------
+	// プレート一旦非表示
+	//------------------------------------------------------
+		\BT.ES0($BID+"BTN.THUMB", @mLC)
+		\BT.ES0($BID+"TIP.TX", @mLC)
+		\BT.ES0($BID+"TIP.ICON.N", @mLC)
+		\BT.ES0($BID+"TIP.ICON.Q", @mLC)
+
+	//------------------------------------------------------
+	// アイコン読込
+	//------------------------------------------------------
+/*
+		IF[@MODE==0]
+		{
+			\BT.ES1($BID+"TIP.ICON.N", @mLC) //通常セーブデータ
+		}
+		IFEND[]
+		IF[@MODE==1]
+		{
+			//IF[(@mLC+@NO) <= 5]
+				\BT.ES1($BID+"TIP.ICON.Q", @mLC) //クイックセーブデータ
+			//IFEND[]
+		}
+		IFEND[]
+*/
+
+	//------------------------------------------------------
+	// セーブデータが有効か
+	//------------------------------------------------------
+		\es.SL.CHECK(@sno)
+		IF[@_RINT(1)==0] GO[#=SL_REFRESH_PLATE.ONE.LEnd] IFEND[]
+
+		//ファイルが存在した
+		@exist=1
+
+	//------------------------------------------------------
+	// サムネイル画像読込
+	//------------------------------------------------------
+		\BT.ES1($BID+"BTN.THUMB", @mLC)
+		\BT.ES1($BID+"TIP.TX", @mLC)
+
+		GOSUB[#=es.BT.SXY.GET pstr=$BID+"BTN.THUMB" pint2=@mLC]
+		INT[@sx=@_RINT(1)]
+		INT[@sy=@_RINT(2)]
+
+		CG[ID="_TMP_OF" Z=1 E=0 SX=@sx SY=@sy FILE=""]
+		CGACT[ID="_TMP_OF" RECTPAINT3=1 SET=0]
+		\es.SL.LOADCG("_TMP_OF", @sno, 0003)
+
+		//縮小
+	//	CGACT[ID="_TMP_OF" SIZE4=1 SX=200 SY=150]
+	//	CGACT[ID="_TMP_OF" SIZE4=1 SX=100 SY=075]
+	//	CGACT[ID="_TMP_OF" SIZE2=1 SX=080 SY=060]
+
+//		CG[ID="_TMP_OV" Z=1 E=0 FILE=""]
+//		CGACT[ID="_TMP_OF" ID2="_TMP_OV" COPY2=1]
+		CGACT[ID="_TMP_OF" AKARUSA=1 SET=(256)*128/256]
+//		CGACT[ID="_TMP_OV" AKARUSA=1 SET=(256)*128/256]
+		\BT.ID.OFF.GET($BID+"BTN.THUMB", @mLC)
+		CGACT[ID="_TMP_OF" ID2=$_RSTR(1) MERGE2=1 X=0 Y=0]
+//		\BT.ID.OVER.GET($BID+"BTN.THUMB", @mLC)
+//		CGACT[ID="_TMP_OV" ID2=$_RSTR(1) MERGE2=1 X=0 Y=0]
+		CGEND[ID="_TMP_OF"]
+//		CGEND[ID="_TMP_OV"]
+
+	//------------------------------------------------------
+	// テキスト読込
+	//------------------------------------------------------
+		\es.SL.LOADDATA($ref_text(), @sno, 0004) // テキスト
+
+
+		\BT.CGCLEAR($BID+"TIP.TX", @mLC)
+		LOOP[SET=(16)-1]
+		{
+			@mx=4
+			@my=(4)+(@SL.TX.SY+@T(11,22))*(@_LC-1)
+	//		IF[@_LC==1] { @mx=50; @my=09 } IFEND[]
+
+			IF[$SL.TX.FONT!=""] \FONT.FONT( $SL.TX.FONT )
+			ELSE[]
+				GOSUB[#=es.FONT.NAME.GET pint=@es.GSD(113,01)];\FONT.FONT( $_RSTR(1) )
+			IFEND[]
+
+			\FONT.COLOR( @SL.TX.COLOR, @SL.TX.COLOR2 )
+			\FONT.SIZE( @SL.TX.SX, @SL.TX.SY )
+			\FONT.XY( @mx , @my )
+			\FONT.BOLD( 1 )
+			\FONT.SHADE( @SL.TX.SHADE.X, @SL.TX.SHADE.Y, @SL.TX.SHADE.COLOR )
+			\FONT.OUTLINE( @SL.TX.OUTLINE.COLOR )
+			\BT.FONT.DRAW($BID+"TIP.TX", @mLC, $ref_text(@_LC))
+		}
+		LOOPEND[]
+
+	//------------------------------------------------------
+	// New!描画
+	//------------------------------------------------------
+		IF[@MODE==0] //通常セーブデータ
+		{
+		//	IF[(@mLC+@NO)==@es.GSD(150,02)] //最後にセーブしたセーブデータ番号
+			IF[(@sno)==@es.GSD(150,02)] //最後にセーブしたセーブデータ番号
+			{
+				@ref_ret = ((@es.GSD(150,02)-1) % @SDPLATENUM) + 1
+
+				GOSUB[#=es.BT.XY.GET pstr=$BID+"BTN.PLATE" pint2=@ref_ret]
+				@mx=@_RINT(1)+@T(11,11)
+				@my=@_RINT(2)+@T(11,12)
+
+		//		@mx = 179
+		//		@my = 061 + 71*((@mLC)-1) + 14
+				\BT.X.SET($BID+"TIP.NEW",, @mx)
+				\BT.Y.SET($BID+"TIP.NEW",, @my)
+				\BT.ES1($BID+"TIP.NEW") //Newを指定した場所に表示する
+			}
+			IFEND[]
+		}
+		IFEND[]
+		IF[@MODE==1] //クイックデータ
+		{
+			IF[(@mLC+@NO)==1] //最後にセーブしたセーブデータ番号
+			{
+				@mx = 179
+				@my = 061 + 71*((@mLC)-1) + 14
+				\BT.X.SET($BID+"TIP.NEW",, @mx)
+				\BT.Y.SET($BID+"TIP.NEW",, @my)
+				\BT.ES1($BID+"TIP.NEW") //Newを指定した場所に表示する
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+	//WAIT[FRAME=1]
+
+	#=SL_REFRESH_PLATE.ONE.LEnd
+
+	return[rint=@exist]
+}
+
+
+
+//=========================================================================
+//■プレートロック更新
+//=========================================================================
+#=ES.SL.LOCK.REF
+{
+	STR[$BID=$_PSTR(1)]
+	INT[@grpno=@es.GSD(150,01)]
+
+	INT[@slmode] //1…SAVE/2…LOAD
+	IF[$es.S.NOW=="ES.SAVE"] @slmode=1 IFEND[]
+	IF[$es.S.NOW=="ES.LOAD"] @slmode=2 IFEND[]
+
+	INT[@chk]
+	INT[@no]
+	INT[@btn_copy]
+	INT[@btn_move]
+	INT[@btn_del]
+	INT[@n]
+
+	\BT.ONOFF.GET($BID+"BTN.COPY")(@btn_copy)
+	\BT.ONOFF.GET($BID+"BTN.MOVE")(@btn_move)
+	\BT.ONOFF.GET($BID+"BTN.DELETE")(@btn_del)
+
+	LOOP[SET=@es.sdplatenum]
+	{
+		@n  = 0
+		@no = @_LC
+
+		//まずはプレートロックボタン自体の有効無効を決定する
+		IF[@es.sdexist(@no)==1]
+			\BT.N0($BID+"BTN.PLATECHECK", @no)	//セーブロック有効
+		ELSE[]
+			\BT.N1($BID+"BTN.PLATECHECK", @no)	//セーブロック無効
+		IFEND[]
+
+		@chk = (( @es.GSD(091,@grpno) & @es.POW2( @no%63 )) != 0)
+
+
+		\BT.ONOFF($BID+"BTN.PLATECHECK", @no, @chk)
+	//	\BT.ONOFF.GET($BID+"BTN.PLATECHECK", @no)(@chk)
+
+		IF[@btn_copy] //コピーモード中
+		{
+			IF[@es.SL.SELPLATE==0] //コピー元選択中
+			{
+				IF[@es.sdexist(@no)==0] @n=1 IFEND[]				//データが存在しないなら無効に
+			}
+			ELSE[] //コピー先選択中
+			{
+//				IF[@es.SL.SELPLATE==@es.GSD(150,01)*@es.sdplatenum+@no] @w=0 IFEND[]		//移動元と移動先が同じだったら無効に
+				IF[@es.sdexist(@no)==1 && @chk!=0] @n=1 IFEND[]		//データが存在して、かつロックがかかっていたら無効に
+			}
+			IFEND[]
+		}
+		ELSE[@btn_move] //移動モード中
+		{
+			IF[@es.SL.SELPLATE==0] //移動元選択中
+			{
+				IF[@es.sdexist(@no)==0] @n=1 IFEND[]				//データが存在しないなら無効に
+			}
+			ELSE[] //移動先選択中
+			{
+//				IF[@es.SL.SELPLATE==@es.GSD(150,01)*@es.sdplatenum+@no] @w=0 IFEND[]		//移動元と移動先が同じだったら無効に
+				IF[@es.sdexist(@no)==1 && @chk!=0] @n=1 IFEND[]		//データが存在して、かつロックがかかっていたら無効に
+			}
+			IFEND[]
+		}
+		ELSE[@btn_del] //削除モード中
+		{
+			IF[@es.sdexist(@no)==0 || @chk!=0] @n=1 IFEND[]			//データが存在しないか、ロックがかかっていたら無効に
+		}
+		ELSE[]
+		{
+			IF[@slmode==1] //SAVE
+			{
+				IF[@chk!=0] @n=1 IFEND[]							//データロックがかかっていないものを有効に、それ以外は無効に
+			}
+			ELSE[@slmode==2] //LOAD
+			{
+				IF[@es.sdexist(@no)==0] @n=1 IFEND[]				//データが存在しないなら無効に
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+		IF[@n==0] \BT.N0($BID+"BTN.PLATE", @no) IFEND[]
+		IF[@n==1] \BT.N1($BID+"BTN.PLATE", @no) IFEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+
+//=========================================================================
+//■描画更新
+//=========================================================================
+#=ES.SL.SCROLL.SHOW
+{
+	STR[$BID=$_PSTR(1)]
+
+	//ページボタン表示
+	\BT.ON($BID+"BTN.PAGE", @es.GSD(150,01)+1)
+
+	//セーブプレート描画
+	GOSUB[#=SL_REFRESH_PLATE pstr=$BID pint2=@es.GSD(150,01)*@es.sdplatenum]
+
+	//数字表示
+	\NM.VAL.SET(11, @es.GSD(150,01)+1)	//現在の頁
+	\NM.VAL.SET(12, @es.sdpagenum)	//総頁数
+
+	//プレートロック更新
+	GOSUB[#=ES.SL.LOCK.REF pstr=$BID]
+
+	return[]
+}
+
+
+
+//====================================================================
+//
+//■セーブデータコピー
+//
+//====================================================================
+#=es.SL.COPY
+{
+	INT[@SrcNo=@_PINT(1)] //
+	INT[@DstNo=@_PINT(2)] //
+
+/*
+	STR[$BID="ES.SAVE."]
+	STR[$cap]
+	INT[@Ret=1]
+	STR[$num1]
+	STR[$num2]
+
+	INT[@SL.COPY.CONF.MODE=1]
+	STR[$SL.COPY.CONF.TX=$T(13,18)]
+
+	//------------------------------------------------------
+	// セーブプレートが違うか
+	//------------------------------------------------------
+		IF[@_PINT(1)==@_PINT(2)] GO[#=es.SL.COPY.LEnd] IFEND[]
+
+	//------------------------------------------------------
+	// コピー確認
+	//------------------------------------------------------
+		IF[@es.GSD(114,09)]
+		{
+			//------------------------------------------------------
+			// ボイス再生
+			//------------------------------------------------------
+				\_gosub(ES.SAVELOAD.VoicePlay.3)
+
+			IF[@SL.COPY.CONF.MODE==0]
+			{
+				WINDOWINFO[NO=0 CAPTION=1 LET=$cap]
+				$cap="確認"
+				DIALOG[STR=$SL.COPY.CONF.TX CAPTION=$cap YESNO=1 LET=@Ret]
+				IF[@Ret==2] GO[#=es.SL.COPY.LEnd] IFEND[]
+			}
+			ELSE[]
+			{
+				GOSUB[#=ES.SDCOPYCONF.Main]
+				@Ret = @_RINT(1)
+			}
+			IFEND[]
+		}
+		IFEND[]
+*/
+
+	//------------------------------------------------------
+	//
+	//------------------------------------------------------
+		INT[@NewNo]
+//\_dmes("最新は "+$(@es.GSD(150,02))+" 番.")
+		IF[@SrcNo==@es.GSD(150,02)] //移動元のデータが最新だったら
+		{
+//\_dmes("コピー先 "+$(@DstNo)+" 番.")
+			@NewNo = @DstNo //移動先に移動
+		}
+		IFEND[]
+
+	//------------------------------------------------------
+	//
+	//------------------------------------------------------
+	//	\_dmes("コピー処理. "+$(@es.SL.SELPLATE)+"→"+$(@no)+"へ.")
+		\SAVECOPY( @SrcNo, @DstNo )
+
+	//------------------------------------------------------
+	// GSD 更新
+	//------------------------------------------------------
+		IF[@NewNo>0] @es.GSD(150,02) = @NewNo IFEND[]
+
+/*
+	//------------------------------------------------------
+	// 後処理
+	//------------------------------------------------------
+		IF[@SL.COPY.CONF.MODE==1]
+		{
+			//---------------------------------------------
+			// セーブ画面用ボタンセット
+			//---------------------------------------------
+				IF[@_PINT(3)==1] \BTDEF.LOAD(ES.SAVE) IFEND[]
+				IF[@_PINT(3)==2] \BTDEF.LOAD(ES.LOAD) IFEND[]
+
+				IF[@Ret==1]
+				{
+					//---------------------------------------------
+					// セーブプレート描画
+					//---------------------------------------------
+						GOSUB[#=SL_REFRESH_PLATE pstr=$BID]
+				}
+				ELSE[]
+				{
+					//---------------------------------------------
+					// プレート描画
+					//---------------------------------------------
+						{
+							GOSUB[#=es.SL.NEW.XY.GET]
+							INT[@mx=@T(11,11)]
+							INT[@my=@T(11,12)]
+							\BT.ES0($BID+"TIP.NEW")
+
+							\BT.X.SET($BID+"TIP.NEW",, @mx)
+							\BT.Y.SET($BID+"TIP.NEW",, @my)
+							\BT.ES1($BID+"TIP.NEW") //Newを指定した場所に表示する
+						}
+				}
+				IFEND[]
+
+				//ページボタンON.
+				\BT.ONOFF($BID+"BTN.PAGE", @es.GSD(150,01)+1, 1)
+
+			//---------------------------------------------
+			// フェード＆消去
+			//---------------------------------------------
+				\es.CGTFADEOUT(150)
+		}
+		IFEND[]
+*/
+	#=es.SL.COPY.LEnd
+
+	return[]
+}
+
+
+
+//====================================================================
+//
+//■セーブデータ移動
+//
+//====================================================================
+#=es.SL.MOVE
+{
+	INT[@SrcNo=@_PINT(1)] //Src
+	INT[@DstNo=@_PINT(2)] //Dst
+
+	IF[@SrcNo!=@DstNo]	// SrcとDstが同じならスルー
+	{
+		//ボイス再生
+	//	\_gosub(ES.SAVELOAD.VoicePlay.2, @SrcNo, @DstNo)
+
+	//	\_dmes("移動処理:"+$(@SrcNo)+" → "+$(@DstNo))
+
+		//------------------------------------------------------
+		// New!がある際の処理
+		//------------------------------------------------------
+			INT[@NewNo]
+			  IF[@SrcNo==@es.GSD(150,02)] @NewNo = @DstNo	//移動元のデータが最新だったら移動先に移動
+			ELSE[@DstNo==@es.GSD(150,02)] @NewNo = @SrcNo	//移動先のデータが最新だったら移動元に移動
+			IFEND[]
+
+		//------------------------------------------------------
+		// セーブデータが有効か
+		//------------------------------------------------------
+			\es.SL.CHECK(@DstNo)
+			IF[@_RINT(1)==0] //移動先にデータが無かった.
+		//	IF[@es.sdexist(-)==0] //移動先にデータが無かった.
+			{
+				\SAVECOPY( @SrcNo, @DstNo )
+				\SAVEDEL( @SrcNo )
+			}
+			ELSE[] //移動先にデータが有った.
+			{
+				//①上書きするパターン
+			//		\SAVECOPY( @SrcNo, @DstNo )
+			//		\SAVEDEL( @SrcNo )
+
+				//②交換するパターン
+					\SAVECOPY( @DstNo, 99999 )
+					\SAVECOPY( @SrcNo, @DstNo )
+					\SAVECOPY( 99999, @SrcNo )
+					\SAVEDEL( 99999 )
+			}
+			IFEND[]
+
+		//------------------------------------------------------
+		// GSD 更新
+		//------------------------------------------------------
+			IF[@NewNo>0] @es.GSD(150,02) = @NewNo IFEND[]
+
+		// ボイス再生
+	//	\_gosub(es.SaveLoad.VoicePlay.6)
+
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+
+//====================================================================
+//
+//■セーブデータ削除
+//
+//====================================================================
+#=es.SL.DEL
+{
+/*
+	INT[@SL.DEL.CONF.MODE=1]
+	STR[$SL.DEL.CONF.TX=$T(13,24)]
+
+	//------------------------------------------------------
+	// セーブデータが有効か
+	//------------------------------------------------------
+		\es.SL.CHECK(???)
+		IF[@_RINT(1)==0] GO[#=es.SL.DEL.LEnd] IFEND[]
+
+	//------------------------------------------------------
+	// 削除確認
+	//------------------------------------------------------
+		STR[$cap]
+		INT[@Ret=1]
+
+		IF[@es.GSD(114,12)]
+		{
+			//------------------------------------------------------
+			// ボイス再生
+			//------------------------------------------------------
+				\_gosub(ES.SAVELOAD.VoicePlay.4)
+
+			IF[@SL.DEL.CONF.MODE==0]
+			{
+				WINDOWINFO[NO=0 CAPTION=1 LET=$cap]
+				$cap="確認"
+				DIALOG[STR=$SL.DEL.CONF.TX CAPTION=$cap YESNO=1 LET=@Ret]
+				IF[@Ret==2] GO[#=es.SL.DEL.LEnd] IFEND[]
+			}
+			ELSE[]
+			{
+				GOSUB[#=ES.SDDELCONF.Main]
+				@Ret = @_RINT(1)
+			}
+			IFEND[]
+		}
+		IFEND[]
+*/
+
+	INT[@DstNo=@_PINT(1)] //
+
+	//------------------------------------------------------
+	// 削除
+	//------------------------------------------------------
+		\SAVEDEL( @DstNo )
+
+	//------------------------------------------------------
+	// GSD 更新
+	//------------------------------------------------------
+		IF[@es.GSD(150,02)==@DstNo] @es.GSD(150,02) = 0 IFEND[]
+
+
+/*
+	//------------------------------------------------------
+	// 後処理
+	//------------------------------------------------------
+		IF[@SL.DEL.CONF.MODE==1]
+		{
+			//---------------------------------------------
+			// セーブ画面用ボタンセット
+			//---------------------------------------------
+				IF[@_PINT(2)==1] \BTDEF.LOAD(ES.SAVE) IFEND[]
+				IF[@_PINT(2)==2] \BTDEF.LOAD(ES.LOAD) IFEND[]
+
+				IF[@Ret==1]
+				{
+					//---------------------------------------------
+					// セーブプレート描画
+					//---------------------------------------------
+						GOSUB[#=SL_REFRESH_PLATE pstr=$BID]
+				}
+				ELSE[]
+				{
+					//---------------------------------------------
+					// プレート描画
+					//---------------------------------------------
+						{
+							GOSUB[#=es.SL.NEW.XY.GET]
+							INT[@mx=@T(11,11)]
+							INT[@my=@T(11,12)]
+							\BT.ES0($BID+"TIP.NEW")
+
+							\BT.X.SET($BID+"TIP.NEW",, @mx)
+							\BT.Y.SET($BID+"TIP.NEW",, @my)
+							\BT.ES1($BID+"TIP.NEW") //Newを指定した場所に表示する
+						}
+				}
+				IFEND[]
+
+				//ページボタンON.
+				\BT.ONOFF($BID+"BTN.PAGE", @es.GSD(150,01)+1, 1)
+
+			//---------------------------------------------
+			// フェード＆消去
+			//---------------------------------------------
+				\es.CGTFADEOUT(150)
+		}
+		IFEND[]
+*/
+
+	#=es.SL.DEL.LEnd
+
+	return[]
+}
+
+
+//====================================================================
+//■セーブデータ削除処理
+//@_PINT(1):セーブファイル番号
+//====================================================================
+#=es.SAVEDEL
+{
+//	\_gosub(ES.SAVELOAD.VoicePlay.1) //ボイス再生
+
+	GOSUB[#=es.SL.FILENAME.GET pint=@_PINT(1)] //ファイル名取得
+
+	FILEACT[FILE=$es.SAVEPATH+$_RSTR(1) DELETE=1] //ファイル削除
+
+	return[]
+}
+
+
+//====================================================================
+//■セーブデータコピー処理
+//@_PINT(1):セーブファイル番号(コピー元)
+//@_PINT(2):セーブファイル番号(コピー先)
+//====================================================================
+#=es.SAVECOPY
+{
+//	\_gosub(ES.SAVELOAD.VoicePlay.2, @_PINT(1), @_PINT(2)) //ボイス再生
+
+	GOSUB[#=es.SL.FILENAME.GET pint=@_PINT(1)] STR[$src=$es.SAVEPATH+$_RSTR(1)] //ファイル名取得
+	GOSUB[#=es.SL.FILENAME.GET pint=@_PINT(2)] STR[$dst=$es.SAVEPATH+$_RSTR(1)] //ファイル名取得
+
+	FILEACT[COPY=1 FILE=$src FILE2=$dst] //コピー
+
+	return[]
+}
+
+
+//====================================================================
+//■セーブデータ有効チェック(番号指定)
+//@_PINT(1):セーブファイル番号
+//@_RINT(1):有効なら 1, 無効なら 0
+//====================================================================
+#=es.SL.CHECK
+{
+	GOSUB[#=es.SL.FILENAME.GET pint=@_PINT(1)] //ファイル名取得
+
+	GOSUB[#=es.SaveDataCheck pstr=$_RSTR(1)] //有効チェック
+
+	return[rint=@_RINT(1)]
+}
+
+
+//====================================================================
+//■セーブデータ有効チェック(ファイル名指定)
+//$_PSTR(1):セーブファイル名(フォルダ名除く)
+//@_RINT(1):有効なら 1, 無効なら 0
+//====================================================================
+#=es.SaveDataCheck
+{
+	INT[@ret]
+	INT[@chk]
+
+	\_file.info.exist($es.SAVEPATH+$_PSTR(1))	//セーブファイルが存在するか否か
+	IF[@_RINT(1)]
+		LOAD[FILE=$_PSTR(1) DNO=0001 LET=@chk]	//セーブデータバージョンが同じか否か
+		@ret=(@chk==\VERNO.SAVEDATA)
+	IFEND[]
+
+	return[rint=@ret]
+}
+
+
+//////
+
+
+///tri
+//
+#=es.SAVE.OFF
+{
+/*
+	@L(8111)=1
+
+	IF[@es.LOADTHRU==0]
+		\BT.END();\BTDEF.LOAD(ES.GAMEMAIN)
+		GOSUB[#=es.TX.E.GET]
+		IF[@_RINT(1)==0] \BT.END() IFEND[]
+	IFEND[]
+*/
+	return[]
+}
+
+#=es.SAVE.ON
+{
+/*
+	@L(8111)=0
+
+	IF[@es.LOADTHRU==0]
+		\BT.END();\BTDEF.LOAD(ES.GAMEMAIN)
+		GOSUB[#=es.TX.E.GET]
+		IF[@_RINT(1)==0] \BT.END() IFEND[]
+	IFEND[]
+*/
+	return[]
+}
+
+
+
+//////
+
+
+//--------------------------------------------------------------------
+//■AUTOSAVE
+//--------------------------------------------------------------------
+#=ES.AUTOSAVE.SS
+{
+	WAIT[FRAME=2]
+
+	//サムネ用にスクリーンショットを撮っておく
+	GOSUB[#=ES.SCENARIO.SS]
+
+	@es.AUTOSAVEFLAG=1 //後の \FIN 時にセーブするフラグ.
+
+	return[]
+}
+
+#=ES.AUTOSAVE
+{
+	INT[@MODE=@_PINT(1)] //MODE==0:日付変更時, MODE==1:選択肢時
+	INT[@no]
+
+	IF[@MODE==0 && @es.GSD(121,04)==1] //オートセーブタイミング・日付変更時
+	{
+
+//		@es.SM=1;@es.SMNO=6	//システムメッセージ
+
+		//------------------------------------------------------
+		// 保存するセーブデータ番号を取得する
+		// 最古のセーブデータは削除する
+		//------------------------------------------------------
+		GOSUB[#=es.ASAVE.INSERT]
+		@no=@es.sdautosaveno+@_RINT(1)-1
+		\SAVE(@no, 2) //0=save,1=qsave,2=prevselsave
+
+	}
+	IFEND[]
+	IF[@MODE==1 && @es.GSD(121,05)==1] //オートセーブタイミング・選択肢時
+	{
+
+//		@es.SM=1;@es.SMNO=6	//システムメッセージ
+
+		//------------------------------------------------------
+		// 保存するセーブデータ番号を取得する
+		// 最古のセーブデータは削除する
+		//------------------------------------------------------
+		GOSUB[#=es.ASAVE.INSERT]
+		@no=@es.sdautosaveno+@_RINT(1)-1
+		\SAVE(@no, 2) //0=save,1=qsave,2=prevselsave
+	}
+	IFEND[]
+
+	@es.AUTOSAVEFLAG=0
+
+	return[]
+}
+
+
+//====================================================================
+//■セーブデータファイル名取得
+//@_PINT(1):ファイル番号
+//$_RSTR(1):ファイル名
+//====================================================================
+#=es.SL.FILENAME.GET
+{
+	\_inttostr(@_PINT(1), \.SD.KETA)	//ロードするファイル名取得
+
+	return[rstr="save"+$_RSTR(1)+".sd"]
+}
+

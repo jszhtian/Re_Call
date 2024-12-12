@@ -1,0 +1,181 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">その他命令</A>＞MACRO［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="label.html">LABEL［］</A>
+　<A HREF="labelinfo.html">LABELINFO［］</A>
+　<A HREF="macro.html">MACRO［］</A>
+　<A HREF="dialog.html">DIALOG［］</A>
+　<A HREF="tray.html">TRAY［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=800 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■マクロ定義命令 MACRO[ ]</FONT>
+<FONT CLASS=t30><BR>
+
+マクロを定義します。
+この命令は、「macro.yst」ファイル内でのみ使用できます。
+
+YU-RIS のマクロは基本的に「置換処理をするマクロ」ですが、
+パラメータを利用することにより「疑似関数マクロ」として使うことも出来ます。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>NAME～NAME8 = 文字列</FONT></TD><TD><FONT CLASS=t40>定義するマクロ名を記述　※名前を複数定義する際はNAME2以降を使用</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>STR = 文字列</FONT></TD><TD><FONT CLASS=t40>マクロが実行された時に置換される文字列を記述</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DEF～DEF10 = 文字列</FONT></TD><TD><FONT CLASS=t40>パラメータが省略された場合にデフォルトで格納される文字列</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DEFB～DEFB10 = 文字列</FONT></TD><TD><FONT CLASS=t40>パラメータＢが省略された場合にデフォルトで格納される文字列</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PRE～PRE10 = 文字列</FONT></TD><TD><FONT CLASS=t40>パラメータが省略された場合にデフォルトで格納される文字列</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PREB～PREB10 = 文字列</FONT></TD><TD><FONT CLASS=t40>パラメータＢが省略された場合にデフォルトで格納される文字列</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SUF～SUF10 = 文字列</FONT></TD><TD><FONT CLASS=t40>パラメータが省略された場合にデフォルトで格納される文字列</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SUFB～SUFB10 = 文字列</FONT></TD><TD><FONT CLASS=t40>パラメータＢが省略された場合にデフォルトで格納される文字列</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] 「\ABC」という名前のマクロを定義します。
+　　このマクロがスクリプト上で記述されると、その場所は「テスト」という文字列に置換されます。
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[ <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>ABC</FONT>  <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"テスト"</FONT> ]</FONT></B>
+
+　　例えば上のように定義して、スクリプト上の任意の場所に、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>あいう\ABCえお。</FONT></FONT></B>
+
+　　という記述をすると、実際にはスクリプトに
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>あいうテストえお。</FONT></FONT></B>
+
+　　と記述したのと同じことになります。
+　　文字通り、マクロを指定した文字列に『置き換える』わけです。
+　　これが YU-RIS での基本的なマクロの機能になります。
+
+
+
+[2] 「\ABC」という名前のマクロを定義します。
+　　このマクロがスクリプト上でパラメータ付きで記述されると、$_M , $_M2 の部分が
+　　そのパラメータ文字列に変換されてから、置換されます。
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[ <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>ABC</FONT>  <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"GOSUB[#=SUB1 PINT=$_M PINT2=$_M2]"</FONT> ]</FONT></B>
+
+　　例えば上のように定義しておいて、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC(50,100)</FONT></FONT></B>
+
+　　上のようにマクロを記述すると、それぞれ $_M → 50 に、$_M2 → 100 に変換され、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>GOSUB[#=SUB1 PINT=50 PINT2=100]</FONT></FONT></B>
+
+　　と、置換されることになり、結果的に \ABC マクロは、
+　　『ラベルSUB1 へGOSUBジャンプし、パラメータとして 50 と 100 の値を渡す』働きを持つ命令となります。
+
+　　※パラメータ受け渡しの仕組みに関しては [制御系命令] → [GOSUB～RETURN] の項目をご覧ください。
+
+
+　　同様に、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[ <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>ABC</FONT>  <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"GOSUB[#=SUB1 PSTR=$_M PFLT2=$_M2]"</FONT> ]</FONT></B>
+
+　　と定義して、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC("あいう",1.23)</FONT></FONT></B>
+
+　　と記述すれば、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>GOSUB[#=SUB1 PSTR="あいう" PFLT2=1.23]</FONT></FONT></B>
+
+　　と、置換されます。
+
+
+　　マクロのパラメータは、記述を省略することができます。
+
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[ <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>ABC</FONT>  <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"GOSUB[#=SUB1 PINT=$_M PINT2=$_M2 PINT3=$_M3]"</FONT> ]</FONT></B>
+
+　　例えば、上のようにマクロ定義し、そのうえで
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC(10, 20, 30)</FONT></FONT></B>
+
+　　通常はこのように使用しているとき、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC(10, 20)</FONT></FONT></B>
+
+　　と、パラメータを省略して書くことも出来ます。（この場合は第３パラメータを省略）
+
+　　ただ上の例の場合、実際に置換されると下のようになります。
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>GOSUB[#=SUB1 PINT=10 PINT2=20 PINT3=]</FONT></FONT></B>
+
+　　PINT3 の部分を見てください。
+　　第３パラメータが省略されたので、$_M3 には何も格納されず、
+　　上のように置換されてしまい、結果として正しくない文法になりコンパイルエラーとなってしまいます。
+
+　　その対策（マクロのパラメータを省略しても問題なくするための方法）として、
+　　DEF～DEF8 キーワードを使用します。このキーワードにより、
+　　『パラメータが省略された際、$_M～$_M8 にデフォルトで格納される文字列を設定する』ことができます。
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[ <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>ABC</FONT>  <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"GOSUB[#=SUB1 PINT=$_M PINT2=$_M2 PINT3=$_M3]"</FONT>  <FONT CLASS=t62>DEF3</FONT>=<FONT CLASS=t63>"0"</FONT> ]</FONT></B>
+
+　　このようにマクロ定義することで、
+　　第３パラメータが省略された場合に、$_M3 には 0 という文字列が格納されるようになります。
+　　ですので、さきほどと同様に
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC(10, 20)</FONT></FONT></B>
+
+　　このように書いた場合、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>GOSUB[#=SUB1 PINT=10 PINT2=20 PINT3=0]</FONT></FONT></B>
+
+　　第３パラメータが省略されたため、DEF3 によって設定されたデフォルト文字列「0」が$_M3に格納されることになり、
+　　上のように文法として正しくなるので、コンパイルが通るようになります。
+
+
+　　補足として、パラメータ省略の記述仕様ですが、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC(,20)</FONT></FONT></B>
+　　や、
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC(,20,)</FONT></FONT></B>
+
+　　などと記述することもでき、この場合、第１，第３パラメータを省略した事になります。
+　　また、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC(,,,)</FONT></FONT></B>
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC(,,)</FONT></FONT></B>
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC(,)</FONT></FONT></B>
+　　　　<B><FONT CLASS=t60><FONT CLASS=t60>\ABC</FONT></FONT></B>
+
+　　と記述することもでき、この場合、全てのパラメータを省略した事になります。
+
+
+
+[3] 「\ABC」「\DEF」「\GHI」という名前のマクロを定義します。（※マクロの中身は全て同じ）
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[ <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>ABC</FONT> <FONT CLASS=t62>NAME2</FONT>=<FONT CLASS=t63>DEF</FONT> <FONT CLASS=t62>NAME3</FONT>=<FONT CLASS=t63>GHI</FONT> <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"テスト"</FONT> ]</FONT></B>
+
+　　上のように定義した場合、
+
+　　　　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[ <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>ABC</FONT> <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"テスト"</FONT> ]</FONT></B>
+　　　　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[ <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>DEF</FONT> <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"テスト"</FONT> ]</FONT></B>
+　　　　<B><FONT CLASS=t60><FONT CLASS=t64>MACRO</FONT>[ <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>GHI</FONT> <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"テスト"</FONT> ]</FONT></B>
+
+　　と定義したのと同じことになります。
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

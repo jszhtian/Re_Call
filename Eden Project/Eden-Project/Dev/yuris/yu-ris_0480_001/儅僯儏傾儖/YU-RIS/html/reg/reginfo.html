@@ -1,0 +1,51 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">レジストリ命令</A>＞REGINFO［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="reginfo.html">REGINFO［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=700 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■レジストリ情報取得命令 REGINFO[ ]</FONT>
+<FONT CLASS=t20>
+
+レジストリより下の階層にある任意のキーからデータを取得します。
+キー名はフルパスで指定します。
+※ver0.235 より、HKEY_CURRENT_USER だけでなく、他のキーの情報も取得できるようになりました。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>KEY = キー名</FONT></TD><TD><FONT CLASS=t40>キー名を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>NAME = 名前</FONT></TD><TD><FONT CLASS=t40>名前を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LET = 変数名</FONT></TD><TD><FONT CLASS=t40>各種情報値を格納する変数を指定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]「HKEY_CURRENT_USER/Software/Firstia/ABC-Game」というキーの中の「ver」の名前に対応するDWORD値を取得する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>REGINFO</FONT>[<FONT CLASS=t62>KEY</FONT>=<FONT CLASS=t63>"HKEY_CURRENT_USER/Software/Firstia/ABC-Game"</FONT> <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>"ver"</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@A</FONT>]</FONT></B>
+
+[2]「HKEY_CURRENT_USER/Software/Firstia/ABC-Game」というキーの中の「dir」の名前に対応する文字列を取得する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>REGINFO</FONT>[<FONT CLASS=t62>KEY</FONT>=<FONT CLASS=t63>"HKEY_CURRENT_USER/Software/Firstia/ABC-Game"</FONT> <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>"dir"</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$A</FONT>]</FONT></B>
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

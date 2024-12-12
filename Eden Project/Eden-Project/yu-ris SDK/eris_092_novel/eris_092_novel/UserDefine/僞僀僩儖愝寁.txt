@@ -1,0 +1,206 @@
+//============================================================================
+//
+// ERIS タイトル画面設計
+//
+//
+//・ERIS ver0.56  002→003 変更点
+//    ・\TITLE.BACK.FILE 廃止
+//    ・ボタン番号の自由化
+//　　・\TITLE.STARTLABEL 追加。スタート1～10のジャンプ先を指定可能になりました。
+//
+//・ERIS ver0.53  001→002 変更点
+//    ・ボタン画像定義部分で、未クリア時とクリア時で別々に定義できるようになりました。
+//
+//============================================================================
+\VER.TITLEDEF(003) //定義Version
+//============================================================================
+
+//-------------------------------------------------------------------------
+//
+// 全般
+//
+//-------------------------------------------------------------------------
+#=es.SceneTitle.Define
+{
+
+	//---------------------------------------------------------------------
+	// 再生ＢＧＭ
+	//  \TITLE.BGM("") で無音になります
+	//---------------------------------------------------------------------
+		\TITLE.BGM("bgm01")  // ファイル名orＢＧＭ定義文字列
+
+
+	//---------------------------------------------------------------------
+	// スタートボタンのジャンプ先
+	//　\TITLE.STARTLABEL( スタートボタン番号, ジャンプ先ラベル )
+	//  スタートボタン番号は1～20まで定義できます。
+	//  ボタン定義で
+	//  \BTNDEF(@es.CNUM.TITLE.START1～20) で定義しているボタンが
+	//　対応します。
+	//---------------------------------------------------------------------
+		\TITLE.STARTLABEL( 1, "SCENARIO_TITLESTART")
+		\TITLE.STARTLABEL( 2, "SCENARIO_TITLESTART2")
+
+
+	//---------------------------------------------------------------------
+	// どの画像にどの機能を割り振るかの設定
+	// 　ここで定義したボタン番号に対応する画像が、その機能となります。
+	//   番号が大きいほうが前面に表示されます。
+	//---------------------------------------------------------------------
+		@es.CNUM.TITLE.START1     = 011 //スタート1
+		@es.CNUM.TITLE.START2     = 012 //スタート2
+		@es.CNUM.TITLE.START3     = 013 //スタート3
+		@es.CNUM.TITLE.START4     = 014 //スタート4
+		@es.CNUM.TITLE.START5     = 015 //スタート5
+		@es.CNUM.TITLE.START6     = 016 //スタート6
+		@es.CNUM.TITLE.START7     = 017 //スタート7
+		@es.CNUM.TITLE.START8     = 018 //スタート8
+		@es.CNUM.TITLE.START9     = 019 //スタート9
+		@es.CNUM.TITLE.START10    = 020 //スタート10
+		@es.CNUM.TITLE.START11    = 021 //スタート11
+		@es.CNUM.TITLE.START12    = 022 //スタート12
+		@es.CNUM.TITLE.START13    = 023 //スタート13
+		@es.CNUM.TITLE.START14    = 024 //スタート14
+		@es.CNUM.TITLE.START15    = 025 //スタート15
+		@es.CNUM.TITLE.START16    = 026 //スタート16
+		@es.CNUM.TITLE.START17    = 027 //スタート17
+		@es.CNUM.TITLE.START18    = 028 //スタート18
+		@es.CNUM.TITLE.START19    = 029 //スタート19
+		@es.CNUM.TITLE.START20    = 030 //スタート20
+		@es.CNUM.TITLE.LOAD       = 101 //ロード
+		@es.CNUM.TITLE.OPTION     = 102 //オプション
+		@es.CNUM.TITLE.CGMODE     = 103 //ＣＧ閲覧モード
+		@es.CNUM.TITLE.REPLAYMODE = 104 //回想モード
+		@es.CNUM.TITLE.SOUND      = 105 //サウンドモード
+		@es.CNUM.TITLE.EXIT       = 255 //終了
+
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//
+// 画像
+//
+//-------------------------------------------------------------------------
+#=es.SceneTitle.BtnSet
+{
+
+	//---------------------------------------------------------------------
+	//
+	// ボタン
+	//
+	// \BTN.CG( ボタンOFF時の画像, マウスが乗った時の画像 )
+	// \BTN.XY( 表示Ｘ座標, 表示Ｙ座標 )
+	// \BTN.MAP.A( α値のしきい値(この値以上の画像部分がボタンとして反応します) )
+	// \BTN.KEY( ショートカットキー{一回の押下で一回のみ反応} ) 
+	// \BTN.KEY.S( ショートカットキー{連続反応} ) 
+	// \BTN.SE( オンマウス時ＳＥ, クリック時ＳＥ ) ※ファイル名orＳＥ定義文字列
+	//
+	// \BTNDEF ← 最後にBTNDEFでボタンを登録します。
+	//
+	//---------------------------------------------------------------------
+
+	//■背景
+	\BTN.CG("cg/title/back")
+	\BTN.XY(0, 0)
+	\BTNDEF(001) //ボタン登録
+
+
+	//↓クリアフラグを @G.I 変数の1234番とした場合、
+	//↓ゲーム中に @G.I(1234)=1 と記述すればクリアフラグが立ったことになり、
+	//↓「クリア後のボタン定義」のほうが反映されるようになります。
+
+
+	IF[@G.I(1234)==0] //「未クリア時のボタン定義」
+	{
+
+		//■スタート
+		\BTN.CG("cg/title/btn_start_off", "cg/title/btn_start_over")
+		\BTN.XY(540, 270+30*0)
+		\BTNDEF(@es.CNUM.TITLE.START1) //ボタン登録
+
+		//■ロード
+		\BTN.CG("cg/title/btn_load_off", "cg/title/btn_load_over")
+		\BTN.XY(540, 270+30*1)
+		\BTN.KEY("L")
+		\BTNDEF(@es.CNUM.TITLE.LOAD) //ボタン登録
+
+		//■オプション
+		\BTN.CG("cg/title/btn_option_off", "cg/title/btn_option_over")
+		\BTN.XY(540, 270+30*2)
+		\BTN.KEY("O")
+		\BTNDEF(@es.CNUM.TITLE.OPTION) //ボタン登録
+
+		//■終了
+		\BTN.CG("cg/title/btn_exit_off", "cg/title/btn_exit_over")
+		\BTN.XY(540, 270+30*3)
+		\BTN.KEY("ESC")
+		\BTNDEF(@es.CNUM.TITLE.EXIT) //ボタン登録
+
+	}
+	ELSE[] //「クリア後のボタン定義」
+	{
+
+		//■スタート
+		\BTN.CG("cg/title/btn_start_off", "cg/title/btn_start_over")
+		\BTN.XY(540, 270+30*0)
+		\BTNDEF(@es.CNUM.TITLE.START1) //ボタン登録
+
+		//※STARTは20個まで定義できます
+		//※\BTNDEF の中の @es.CNUM.TITLE.START1～20 の数字も合わせて変えてください
+		//
+
+		//■エピローグ
+		\BTN.CG("cg/title/btn_epilogue_off", "cg/title/btn_epilogue_over")
+		\BTN.XY(540, 270+30*1)
+		\BTNDEF(@es.CNUM.TITLE.START2) //ボタン登録
+
+
+		//■ロード
+		\BTN.CG("cg/title/btn_load_off", "cg/title/btn_load_over")
+		\BTN.XY(540, 270+30*2)
+		\BTN.KEY("L")
+		\BTNDEF(@es.CNUM.TITLE.LOAD) //ボタン登録
+
+		//■オプション
+		\BTN.CG("cg/title/btn_option_off", "cg/title/btn_option_over")
+		\BTN.XY(540, 270+30*3)
+		\BTN.KEY("O")
+		\BTNDEF(@es.CNUM.TITLE.OPTION) //ボタン登録
+
+		//■ＣＧ閲覧
+		\BTN.CG("cg/title/btn_cgmode_off", "cg/title/btn_cgmode_over")
+		\BTN.XY(540, 270+30*4)
+		\BTN.KEY("C")
+		\BTNDEF(@es.CNUM.TITLE.CGMODE) //ボタン登録
+
+		//■回想閲覧
+		\BTN.CG("cg/title/btn_replaymode_off", "cg/title/btn_replaymode_over")
+		\BTN.XY(540, 270+30*5)
+		\BTN.KEY("R")
+		\BTNDEF(@es.CNUM.TITLE.REPLAYMODE) //ボタン登録
+
+		//■音楽鑑賞
+		\BTN.CG("cg/title/btn_musicmode_off", "cg/title/btn_musicmode_over")
+		\BTN.XY(540, 270+30*6)
+		\BTN.KEY("S")
+		\BTNDEF(@es.CNUM.TITLE.SOUND) //ボタン登録
+
+		//■終了
+		\BTN.CG("cg/title/btn_exit_off", "cg/title/btn_exit_over")
+		\BTN.XY(540, 270+30*7)
+		\BTN.KEY("ESC")
+		\BTNDEF(@es.CNUM.TITLE.EXIT) //ボタン登録
+
+
+	}
+	IFEND[]
+
+
+
+	return[]
+}
+
+

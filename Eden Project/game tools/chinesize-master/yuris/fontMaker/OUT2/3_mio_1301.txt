@@ -1,0 +1,345 @@
+
+#3_MIO_1301
+
+//
+
+//
+
+//
+
+\BGM(,800)
+\FOUT(800, 11, BLACK)
+
+\EYECATCH.ST(MIO)
+
+\BG.CMXYZ( -1032, -432,  12)
+\BG(bg12a , 260, 0, 0)
+\FIN(800, 12)
+\BGM(bgm07)
+
+
+ˆå‘f‹Ýž×ázä–äé‹ÝŠOçpƒÚšF–††Øáìèƒœ‡nŠ “Fí½æN‹è‚Ï‡Ô‹Ý‘f“â‹Ý†üƒ³åHŠ«ä¦“F“Ù®‹£çcŽLëÈŽ™ƒ”ƒ½ˆÒ“FŒhìüëZàË“œŒä
+
+…±ˆ´‰×ŽF“éŽLŠ•àËå’™òŽLŠ ŽL®—r‹ÝŽ¦Œsúï¯‘_ŒhìÅ‘i‹e„îˆÒƒ”„C„VˆtçpçpŠ|‚Ôëï
+
+ŠO‰¤ú‚Ž®˜¾ŒàŽLœ@”WˆÒ“Få^ìÅÊœÕ•vŠdƒ”“FŒä
+
+Œh‰EŠŸ„mŠïššŽL“ä¦äP‚Ôä–œXð™òŠOâÂ†¥…t†ºãŸäuú—ò‰Eì±ä¦‚×Œhìü‹Öë½ƒ”ì±„¾å‘“ÅˆÒŒä
+
+//
+
+\BG.CMXYZ(0, 0, 0)
+\BG(bg17e , 260, 800, "ysr011")
+
+
+\S(cas, item/‰ùãRQ‹ÓšJf ,500,     0,  -58, 272)
+\S.CLXYZ(cas,1800,0,-80,0,0,0)
+
+
+\VO(CAS_3_MIO_1301_0001)êÀˆ¨è“èØ‰‘îJëÃàBàÁçlƒ”‹å
+
+‘gƒ”„îä¦“œ¿®™E–íƒÚƒÚëï
+
+Œfw„îà€‰Eí€ƒ”ƒ½šï‰•âÂŸû•{„C¶“é”‘ëõ‘ÕŸu˜{‹ÝãVäz›ƒœÅŠ ‹Ý‰ „¾î}âÂ†›“Nì±ˆÒ„CŒä
+
+„R‚¸‹Ýï¶á…bšãœ²î}„CŠŸ„m›÷‰tæFëZƒ”„C®“éŒBƒ”ƒ½„CâìBëï
+
+
+\T(c_mio_2b0300 , 500,  612,    0, 200)
+\C.XYZ(800,  522,    0,  12)
+
+\VO(MIO_3_MIO_1301_0001)…š“ß˜vîJóëõ‘ÕèCèo—´ŽÃƒ\—xî}‹Áœnçl‹å
+
+\S(cas, item/›«šÅQ—HœŒãÑ ,250)
+
+\VO(CAS_3_MIO_1301_0002)êÀˆ¨‘ÕèØ™pîJ•ÜêØëKƒ”‹å
+
+‰Ý…pŒÐƒœŒf˜v‹Ý„dƒœâ€êÁ‡Eä›Œà“]”Èä–ƒy‰¾Œà‘ÕrñríÁäz„CŠŸçpƒÚŒä
+
+Š_‘gˆÒä¦›î†G‰r‹è„«‡Ô‘_Œä
+
+\S(cas, item/‰ùœµQ—H›âë ,250)
+
+\VO(CAS_3_MIO_1301_0003)êÀˆ¨ñèØ˜{êO‚ìõ—Îƒ”‘i‹eêØâ§çl‹å
+
+…š„b‚w‚ìuˆƒœî»“„…eƒ”æUå’ÊŒäœ‚•»®úç©ˆÒƒ”ƒ½äéìü“Ž‹eŒhƒ”ŸßŽL’Ò‚Ô‘gƒ”“Få’ëZƒ”ƒ½‹å
+
+//
+
+\FACE(a_yua_3a1400)
+
+\VO(YUA_3_MIO_1301_0001)…š‰”—XîJëÃçpƒÚ„]˜†Š©™òîYˆUëZƒ”„Cä›ŠdŠŸ„mœ‹
+
+¶„CŠ•úìZ‹ÍƒœƒX‚×‹Ýä–›mŠ•™¥•{“ŠŸƒ”„C„mî}‚×™ò‰”—XŽL–ð•É‹Ý…œŠŸ„mécâÂŠMŠŸœƒ½ä¦“Fëï
+
+\FACE(a_yua_3a1200)
+
+\VO(YUA_3_MIO_1301_0002)…š‰”œqîJëÃ„¾ƒ”íÁéc‹Öáíî}“FíÁŒSƒ”„C„mäéŸoÊ†ü—fŒä“â‰E“ˆs‹Ý„y–òú‘g†ºƒ\Œàî}œzîÇŒQ‘i‹å
+
+…š„b‚wõ™H„Cèw•{ƒ½•»çpçpí‹
+
+\T(C_MIO_2A1500 , 250)
+
+\VO(MIO_3_MIO_1301_0002)êÀâ¨˜vêO•Ü‘ß…tŸoŒQ™òæA‚×å’“éŠµ‚×“ä¦‹Ýëï‡Îä›“‚ö‹Ý†rœï”SŸoŠdšÙŒµœ‹
+
+\FACE(a_yua_3c1200)
+
+\VO(YUA_3_MIO_1301_0003)…š‰”œqîJ‚ìˆ…˜Áƒœ„y–òú‘g•»ƒ”æUäéíÁ‘iœ‹
+
+‘`áú®„³‘`åH”‘‰”ƒAúŽ…‚×ƒ”íÁuâÂ„MŠŸáŒä
+
+\T(c_mio_2b0500 , 250)
+
+\VO(MIO_3_MIO_1301_0003)àl“ßwîJ•Üƒ\„îƒÚƒÚ“âîÇŠdŒQ”‘‰”ƒAŠ•ŽÃƒ\ƒœŽL”ç‘‡ åÊì±œ‹
+
+//
+
+\BGM(,800)
+\FOUT(800, 1, BLACK)
+\BG.CMXYZ(  -450,   72,  18)
+\BG(bg18a , 260, 0, 0)
+
+\T(a_yua_3c1200 , 0, -306,    0, 200)
+
+\FIN(800, 1)
+\BGM(bgm15)
+
+
+\VO(YUA_3_MIO_1301_0004)…š‰”œqîJ•Ü†å†åŽL‹Ýá‘ß‚×‰ÉÉƒœä´ìÅíÁ‚Ï–Kš]œnŠ —´àˆ‘_ƒ”ƒ½ŒhíÁ“Žœ‹
+
+\T(c_mio_2a1500 , 500,  354,    0, 200)
+\C.XYZ(800,   66,  108,   6)
+
+\VO(MIO_3_MIO_1301_0004)àlŒf˜v‚w•Ü“âŒhŠ_åH‰É•Zƒœ‘`•{„C„m“âîÇŒàáƒ”æU½AŠ ŠŸ“ä¦å^œ‹
+
+‡Ô‹ÝôŽL‹Ýá†}‚×‰ÉÉ“ŒhíÁ‹ úâ¨â¾á—Îì±‚Ïås‘fŠdƒ”ì±â¨wâÂëÙƒ”„î”òæU‚×•{ì±†ºˆå‚|ƒœ”ì§ƒœˆGƒ”æU™¥„C”¹ŠdŒä
+
+¶ŽLˆŠŸßƒ©îZœæUŽL„mƒ”„CŠŸ„m›îˆå‚|‹Ý”\œn†ûæU“Féc‘å“•åìƒœç‹î}ä¦Œä
+
+\T(c_mio_2b0500 , 250)
+
+\VO(MIO_3_MIO_1301_0005)…š“ßwîJ‚ìåƒšÙ‘_ìüŒSƒ”ì±•»•ìá„^àˆ“ä¦‹Ýƒœ›÷‘Õ“™˜³ƒ”ì±–êéõú”S‚×”Sƒ”Š•àˆƒ”“Fˆsçpçpœ‹
+
+//
+\T(A_YUA_3A1800 , 250)
+
+\VO(YUA_3_MIO_1301_0005)…š‰”œq‚wëÃƒÚçpçpƒÚçpƒÚçpçpƒÚçpœ‹
+
+\T(c_mio_2a0500 , 250)
+\S.CLXYZ(c,500,0,-40,0,2,1)
+
+\VO(MIO_3_MIO_1301_0006)êÀâ¨˜v‚wóä¦”WŽL‹ÝäéìüƒœåSŒh§†ºŠdàË“œ’·ás‡ÔìÅ“Nàˆ“ˆÒ‹Ýî_ƒ”Šn‹å
+
+…š„b‚wóˆ…˜Á“Åä›ŠdšÙëïåÔ‰rŠdƒ”ƒ½Œfw›î•™‡­‰r™IæU„C„mŠ ‚×ì±‡ ƒÚƒÚœ‹
+
+\T(a_yua_3c1200 , 250)
+
+\VO(YUA_3_MIO_1301_0006)àl‰”œqîJ•Ü›½Š_ëÙ—L•ë¹åH“Žœ‹
+
+…š„b‚w•Ü“âîÇî­„CˆÒŒä”°äP‹Ýé½ŽLŸ~ãúƒœö‚×ƒ”æU¬˜zŠ ì±„C®ƒœìCž~än•åÊƒœ˜ß”Sä¦ŠŸ„m‚Ïìð‹Ý‰¤ƒœŒÄ™\ƒœ˜Åƒ”“FìÆëZ‹å
+
+\T(c_mio_2b0700 , 250)
+
+\VO(MIO_3_MIO_1301_0007)êÀâ¨wîJ•Ü—¾Œ¿‘`ìÆŽL“]ˆÒ‚×„mNäéŠ æUŽL‚öúˆÊ‹Ö„¼™H‘`”Sä¦ŠŸ„mæôð„CRž×ä–Š “ÅŠŸƒ”“Fƒ”ì±½ƒ”ì±„CƒÚçpœ‹
+
+Šbƒœ†}âÐƒ]ƒœìüƒ”ì±“é³˜‹®Œhìüú‘g†ºŠŸ„m™ò‘‰¤„Ü—ãŠ ëZŒä
+
+//
+
+\FOUT(600, 42, white)
+\EV.CMXYZ(0,0, -100)
+\EV(C_MIO_05_a, ,0,"ysr000")
+
+\S(sd01, item/Ÿø™° åú,0,     0,    0,  40)
+
+\FIN(600, 41)
+
+
+‡Ô‰Eƒœ“]†[‹ÝìðçpƒÚëï
+
+Œfw‹èæ±‚òïxƒœë]ä–„m•{æU“]æò’V™¥úìü•{“ÅˆÒšÙìÅƒœ‘`‰Eì±ˆÒ„Cëï
+
+//
+
+
+\FOUT(600, 42, white)
+\BG.CMXYZ(0, 0, 0)
+\BG(bg18a , 260, 0, "ysr013")
+\FIN(600, 41)
+
+
+…š„b‚w‡@‘g•{âÂˆÒä¦†kíÁŒS“œ÷¿‘åä¦“ä¦ŠdŒêAÊƒÚçp„Â
+
+ŠïŠŸú™‡Î…€“Xƒ½†º“Ž
+
+
+\T(c_mio_2b0700 , 500,  312,    0, 200)
+\C.XYZ(800,  498,   48,   6)
+
+\VO(MIO_3_MIO_1301_0008)àlâ¨w‚wëÃ—¾‘ãË‘`ä›ŽL†…tƒ½‹ÝáÑÛ„•ëZŠŸ„mƒ”æU™²ƒ”ì±„CƒÚƒÚ‹å
+
+Œfw‹Ý“F“XšÐ‹ÖåSäz“Åú„m”‘áƒ”ŠŸœnä|“Xì±Š å‘ƒ”“FäôžBâÂ‰£íÁŽ”áá†ºëï
+
+\T(a_yua_3c1700 , 500, -288,    0, 200)
+\C.XYZ(800,   66,   78,   9)
+
+\VO(YUA_3_MIO_1301_0007)àl‰”—X‚w‚ìœª…tæU™òŒQƒÚçp‹å
+
+\S(cas, item/›«ãRQìˆ›f ,500, -1590, -147, 305)
+\S.CLXYZ(cas,1800,0,-80,0,0,0)
+
+\C.XYZ(800, -270,   54,   9)
+
+\VO(CAS_3_MIO_1301_0004)êÀëõè“Ÿu™pîJ‚ìàBâ§‘i‹å
+
+\T(a_yua_3a1200 , 250)
+
+\VO(YUA_3_MIO_1301_0008)êÀ‰”—X‚w•ÜBAŠ ƒ½‡ÔAïG§•»®‘iœ‹
+
+Šï‰y“ä¦Ž”ëMŒà‡ÔìÅïGƒ”ƒ½™ò‰”œq“éï¡o‹Ý‰’ˆÒ‡åâÂ‚×†º‚×•»íÁŸòé—Œä
+
+
+\S.D(cas, 500)
+\C.XYZ(800,   48,   66,   9)
+
+\T(a_yua_3c1200 , 250)
+
+\VO(YUA_3_MIO_1301_0009)êÀ‰”ƒA‚wó†…tì±ŠŸÊŸoƒ½ähŠŸ„m“‚×”SˆÒƒv‹e†Gå‘åH“ß˜v‘åôˆ~„C‚×“ä¦é¿ƒ”æUï±ƒ”„CŒhìüÊŸoæUÊŠŸƒ”„CìÆåHŠ éÃœ‹
+
+\T(a_yua_3c1700 , 250)
+
+\VO(YUA_3_MIO_1301_0010)êÀ‰”œqîJ‚ììv’·æü•{ì±ä¦„CŠŸ„m‡Ô‰EåHŒ×ƒ\Œàä¦“FŠdâìŠŸŽLœ‹
+
+\T(c_mio_2a0800 , 250)
+
+\VO(MIO_3_MIO_1301_0009)àlâ¨˜v‚wó‡Ô•{‹ÖïG•‰E„C„m”‘‡ÔìÅçpçpŠdŠ©B‹å
+
+\T(a_yua_3a1200 , 250)
+
+\VO(YUA_3_MIO_1301_0011)êÀ‰”ƒAîJóß†ŠŸ„m„ÜŠŸŠ “œ²”S‹ÝŒä˜ÁÌú‡ÔìÅŒSƒ”ì±ÊŠŸƒ”„Cƒ”æUŠdìáåHœ‹
+
+¶ƒœŠ\Š©„m‰E„CæžˆÒáGŒÐ“éŽ}îA‹ÖçúáŽL®Œä
+
+\T(a_yua_3c1200 , 250)
+
+\VO(YUA_3_MIO_1301_0012)êÀ‰”—X‚wëÃˆÒˆÒƒv‹e‡­äPƒœâRä†üèùŽLˆ~†º”SŸoì±‚¥™‘àºàˆ‰e§„m•{”SˆÒ®îU“Ž‹eäYC“Å®‹å
+
+\T(a_yua_3c1700 , 250)
+
+\VO(YUA_3_MIO_1301_0013)êÀ‰”—XîJóŒQçdá’·„îŠŸ®”¹…Âˆs„îŠŸ‚Ï“â“œˆÒîÇ©ât„^àˆÊä¦•‹å
+
+‰”ƒA‹Ý›“é˜¢‚Ô„îŠ æUä¦ƒ½›÷î£“XæUˆÒ•»ähìáŒàŽL‘ÊŠŸŠ ì±ˆÒ†ºí®âìŒàŽL“ˆÒ‹Ýä–í®ŠŸƒ”„CŒä
+
+\T(a_yua_3a1200 , 250)
+
+\VO(YUA_3_MIO_1301_0014)…š‰”—XêO‚ì“â•{ŽLƒ£ï“‹ÝêŠŸ„mƒçƒ”„î”‘åHî}œz‘iœ‹
+
+„F‡Ý‹Ö“â®Š_å‘½ƒ”ƒ½ˆÒ†ºëZŠ©ŠdŠŸ„mäé‡Ô“]“êƒœƒŒ‚×ãr‚×‚×†ºëï
+
+\T(a_yua_3b0700 , 250)
+
+\VO(YUA_3_MIO_1301_0015)êÀ‰”ƒA‚wëÃ†“Xƒ½eˆÒ“F—rãr•ƒ”„îŠ „CŒä‡Ôä›Ê®íRˆÒî­„CˆÒ„^ŽÃ”SˆÒœ‹
+
+ôƒpˆÒ—ê„îä¦îÇä´ìSƒœè¡‹ÝŒÑ‰¤ƒœŽLŠµˆOä–™§ƒ”„CŒä
+
+…p†›‹@ƒœåpŸƒŠ ì±“Ž
+
+//
+
+
+
+Œh‰EŠ_ŒàŠdƒ”æUâ¨˜v“éƒÚƒÚëï
+
+//
+
+
+
+\T(c_mio_2a0500 , 250)
+
+\VO(MIO_3_MIO_1301_0010)…šâ¨w‚wëÃæA‚×ìÆ‘iœ‹
+
+\SE(èrƒÈ›«Š{Tìˆ‰ùåóãÓ)
+
+…š„b‚wó‘g›îˆÒ›îä¦„¾çpçpÊå’åHŽLƒÚƒÚœ‹
+
+†ØÛ…Ëèƒœè¨î}„C†Øè¿Ûˆ¨åZìnú“]úž~àˆŸo„îŸvæõŸèƒœãVœn˜¯‚×ëï
+
+\T(a_yua_3c1200 , 250)
+
+\VO(YUA_3_MIO_1301_0016)…š‰”—XêO•Ü„eÊæyàºŒäˆÝâ¨wä–åƒ†º®ƒœ‚Ó…cŠ ì±ˆÒ•»ŠŸ„m‹ ŠµìðåH‹CŠsî}šÙAíÁî}æU†ºŸy“FˆÒàºàˆ“ÅˆÒ“Žœ‹
+
+\T(c_mio_2b0500 , 250)
+
+\VO(MIO_3_MIO_1301_0011)àl“ß˜vêO•Ü“âìÆ“Å‹Ý“ÙúçpƒÚ‹å
+
+\T(a_yua_3c1700 , 250)
+
+\VO(YUA_3_MIO_1301_0017)êÀ‰”ƒAêOóY•»•âì“ÅˆÒŒàî}ÏŒä‡Ôå’“Å˜pƒœŒS™\†º›÷ƒ”ƒ½ëZŠ©‹å
+
+‰”ƒAúìd•{ì±Š ™HìÅíÁ”‘‡Ô‰Eðˆs›HŽLŽ”âÂ™—ŠŸ“‚×“Åƒ”„CŒä
+
+\T(a_yua_3a1200 , 250)
+
+\VO(YUA_3_MIO_1301_0018)êÀ‰”œqêOóŽû‹Tž²‹Ö”Œ_ƒœœ‚„C‹ÝšÙŒQŒä”S„m›÷‰£„îå‘ëÙäéAŠ ƒ½î­“F„m‘i‹å
+
+\T(a_yua_3b1200 , 250)
+
+\VO(YUA_3_MIO_1301_0019)…š‰”—X‚wóë¥…cá†º®œ‹
+
+\T(c_mio_2b1300 , 250)
+
+\VO(MIO_3_MIO_1301_0012)…šâ¨˜v‚wëÃ‚Ó…cƒ”ƒ½ˆ~†ºäéìüƒœš“Ž‹å
+
+\T(a_yua_3a1200 , 250)
+
+\VO(YUA_3_MIO_1301_0020)êÀ‰”œq‚w‚ì‘_ŸoŒäëZƒ”æU‚Ïä™âÂeä¦ƒ½†ºíÁ“Åå’ŠdŠŸâ¨˜vú‚ö‹Ýt™Üƒœ‡k“Tä¦æUçpƒÚœ‹
+
+\T(a_yua_3c0800 , 250)
+
+\VO(YUA_3_MIO_1301_0021)…š‰”ƒA‚w‚ìƒÚƒÚ‘`áúƒœ‰e™\áƒ÷ŠŸŽLŒQ‹å
+
+dƒ”_ˆsíÁŽ”âÂ…ö®ïâƒœŠ æU‚Ï‰”ƒA‘åï©âÂŠ\ˆÒì±Š Š_ìÅŒä
+
+\T(c_mio_2a0500 , 250)
+
+\VO(MIO_3_MIO_1301_0013)êÀ“ß˜vîJ‚ìçpçpçpçpƒÚƒÚƒÚƒÚçpçpœ‹
+
+Œè„m‰Eì±ŽL”‘íÁä¦ìÅíÁäéŒêëZëï
+
+\T(c_mio_2a1500 , 250)
+
+\VO(MIO_3_MIO_1301_0014)àlŒfwêOó…c‘_ƒ”ì±½•‰Eì±ŽL“]”°å‘Œàˆ~ÊˆÒåHŽcíÃƒ”æUŸyå^‘_íÁŒSƒ”“FŒhíÁ‘å†[”¹Š_œn“ÅŠŸƒ”„CŠŸ„mƒÚçp“ÅŠŸ”SŠŸšÞŠ ˆÒŽL‹Ýú‘g•»Ž]œ‹
+
+\T(a_yua_3a1300 , 250)
+
+\VO(YUA_3_MIO_1301_0022)êÀ‰”—XîJëÃ…öƒv‹e‘g™ò“œ”¹›÷‡Ô•{“Å„máƒˆ°ƒ”æU†[à}†º‹å
+
+†G‚ÏˆÊú„¼“XŠ_Š “FçpƒÚŸy“Fä¦“Å•žîZŽàähíÁî}„Cr™q•üî»ç˜ñŒä
+
+\T(a_yua_3c1200 , 250)
+
+\VO(YUA_3_MIO_1301_0023)àl‰”—X‚w‚ìœªŠÀïCŠŸ„mˆG‚×‘i‹e„¾ŒUˆÒƒ”æUŒSƒ”„C„mæZŠwƒ£‹Öˆ_d®ëïŽ”®‰¤úŒŒè°á†ºãní®ˆsƒœš]›ØŽLã¼ƒ”žE‹Á•œ‹
+
+\T(a_yua_3c0100 , 250)
+
+\VO(YUA_3_MIO_1301_0024)àl‰”ƒAîJ‚ìçôÏìÅï¯êœ‚×“Åˆs„Cì±‹ÝŽL®®ñçÊ‡rŽpúçpƒÚœ‹
+
+\T(c_mio_2b1500 , 250)
+
+\VO(MIO_3_MIO_1301_0015)êÀŒf˜v‚wóçpçp„¾ƒ”ìŠœnäé®”ç‘“é“î}Œà‹å
+
+\T(a_yua_3a1200 , 250)
+
+\VO(YUA_3_MIO_1301_0025)àl‰”œqêOóƒÝˆïŠ “Å‚×ì±ä¦ä¦‹Ýƒœœ‹
+
+//
+\S(cas, item/‰ùãRQ“½âxâë ,500, -1590, -121, 308)
+\S.CLXYZ(cas,1800,0,-80,0,0,0)
+
+\C.XYZ(800, -270,   54,   9)
+
+\VO(CAS_3_MIO_1301_0005)êÀˆ¨è“èC‰‘‚w‚ìõâ§çlƒÚƒÚ‹å
+
+\GO(3_MIO_1302)
+
+

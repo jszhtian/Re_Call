@@ -1,0 +1,194 @@
+20111126
+Minor bug fixes.
+
+
+20110316
+Last minute bug fixes.
+
+
+20110315
+Newly implemented commands:
+  bar, barclear, btndown, chvol, csel, cselbtn, cselgoto, dwaveplay,
+  dwaveplayloop, dwavestop, getcselnum, getcselstr, getmousepos, getsevol,
+  gettag, logsp, lookbacksp, movemousecursor, pretextgosub, selectbtnwait,
+  setwindow2, sevol, spbtn, spclclk, splitstring, strip_format, strsp, strsph,
+  texec, textcolor, texthide, textshow
+
+Important changes:
+  * Added joystick support.
+  * Discontinued preprocessor support.
+  * Discontinued support for savegames from previous versions.
+
+Minor changes:
+  * Added -use-long-audio-buffers command line option to fix audio problems in
+    slow systems.
+  * Replaced SDL_mixer with OpenAL-based sound system.
+  * Discontinued WAV support. Replaced with FLAC.
+  * Moved font configuration to command line.
+  * Replaced old config format with XML-based configuration.
+
+Bug fixes:
+  * Plugged memory leaks in various routines.
+  * Fixed minor bugs in video playback code.
+  * Added missing \t escape sequence to expression parser.
+  * Fixed stack overflow in video player.
+  * Incorrect behavior in volume setting fixed.
+  * Fixed old bug when passing output variables to commands.
+  * Fixed bug in button code.
+  * Fixed old bug in setwindow command.
+  * Fixed possible bug in NONS_FontCache::get_glyph().
+  * Fixed null dereference in NONS_ScriptInterpreter::load().
+  * Fixed graphical bug in savegame loading mechanism.
+  * Fixed bug in BZ2 de/compression routine.
+  * Fixed bug in debugging console that caused crash at exit.
+  * Fixed improper calls to internal function that were causing undue exit when
+    leaving the debugging console.
+
+
+20100714
+Newly implemented commands:
+  transmode
+
+Important changes:
+  * Added SVG support.
+  * Implemented generic streams to encapsulate access to file system and
+    archives. In other words, the engine can now read non-compressed files from
+    archives without extracting them or loading them to memory.
+  * Added support for big (<16 EiB, or 17.1 billion GiB) files to ZIP
+    implementation.
+  * Added partial font style support.
+    TODO: Document changes.
+  * Added internal support for font outlines.
+    TODO: Implement user-level interface and save mechanism.
+
+Minor changes:
+  * Implemented enforcement of command execution to the *define and *start
+    blocks.
+  * Discontinued UCS-2 support.
+  * Implemented reduced memory consumption builds for low memory environments.
+    Note: Macros are disabled in this state.
+  * Implemented color correction in video player.
+
+Bug fixes:
+  * Fixed bug in division operator (!).
+  * Fixed bug in fullscreen switch.
+  * Updated expression parsing mechanism.
+  * Minor bug in label checking fixed.
+  * Minor bug in string interpretation fixed.
+  * Minor bug in animation fixed.
+  * Bug in date command fixed.
+  * Fixed bug in NONS_VariableStore::NONS_VariableStore() whereby an invalid
+    global.sav could crash the engine.
+  * Minor rand() bug fixed.
+  * Bug in array implementation fixed.
+  * Fixed major bug in FFmpeg video player that caused deadlock on slow
+    systems.
+  * Fixed minor bug in FFmpeg video player that caused crash when playing
+    videos with no audio stream.
+  * Fixed threading bugs related to sem_wait() calls.
+  * Fixed open(2) call compliance problem.
+  * Fixed memory management bug.
+  * Fixed file handling bugs.
+  * Fixed minor bug in TreeNode::get_branch().
+  * Fixed very old minor bug in readWord().
+  * Fixed sound problem when playing video under UNIX.
+  * Fixed race conditions under X11.
+
+
+20091212
+    * Implemented: avi, mpegplay.
+    * The engine is confirmed to compile with MinGW versions 4.x and above.
+    * In-game console replacing old debugging console added.
+    * Font path moved to the configuration file under "default font".
+    * Added plug-in system.
+    * Added ZIP support.
+    * Added full video support.
+    * Minor bug fixes.
+    * Fixed compliance error in effects 11, 12, 13, and 14.
+    * Fixed compliance error in nega.
+    * Fixed major bug in file reading function.
+    * Fixed bug in UTF-8 decoding function.
+    * Fixed crashing bug in input events.
+    * Fixed bug in the macro parser.
+    * Fixed bug in bg.
+    * Fixed memory leak in menu GUI element.
+    * Fixed memory leak in save game loading routine.
+    * Fixed bug when playing very short audio samples while skipping.
+    * Fixed minor bug in lookback GUI element.
+
+20090904
+    * Implemented: versionstr, cell, bgcopy, bgcpy, draw, drawbg, drawbg2,
+        drawclear, drawfill, drawsp, drawsp2, drawsp3, drawtext, allsphide,
+        allspresume, mov3, mov4, ..., mov10, selnum, humanorder, loadgosub,
+        defsub, user commands, getparam, getcursor, useescspc, getpage,
+        getenter, gettab, getfunction, getinsert, getzxc, usewheel,
+        shadedistance, tablegoto, indent, getscreenshot, deletescreenshot,
+        gettext, maxkaisoupage, checkpage, getlog.
+    * Added screenshot function.
+    * Improved error reporting system.
+    * Added macro capabilities for code generation.
+        TODO: Improve the syntax error reporting system.
+    * Fixed savescreenshot and savescreenshot2.
+    * Memory leak the size of the script fixed.
+    * Bug in jumpb and jumpf fixed.
+    * Fixed incorrect behavior of bg for images of size other than the screen.
+    * Fixed possible incorrect behavior in select, selectgosub, and selectnum.
+    * Fixed bug in text color tags (#RRGGBB).
+
+20090715
+    * Major internal redesign.
+    * Implemented: split, isdown, isfull, getcursorpos, textgosub, ispage,
+        puttext, labellog, underline.
+    * Unimplemented: kidokumode, kidokuskip, skipoff, isskip.
+    * Implemented mouse wheel.
+    * Variable indices can now be negative.
+    * Added automatic encoding detection.
+    * Added "auto" to the possible encodings list. This is now the default.
+    * doc/Changes.txt reformatted.
+    * Save file version upgraded.
+    * Added INSTALL.txt with installation instructions.
+    * Changed implementation of expression evaluator to a Bison-generated
+        parser-evaluator. Because of MinGW's poor implementation, the code can
+        no longer be compiled with it.
+    * Discontinued support for O/NScripter savegames (save*.dat).
+    * The array identification method has changed from C-style identifiers to
+        integers. As a result, all savegames for scripts that use arrays will be
+        incorrectly loaded.
+    * Labels are now C-style identifiers (sort of).
+    * Added string concatenation support in expressions.
+    * Added asynchronous animation support for all layers.
+    * Added full sprite string support (see doc/NScrAPI/NScrAPI.xml#lsp) for the
+        syntax "[:(trans-mode)[/(animation)];](filename)".
+    * Removed -transparency-method-layer and -transparency-method-anim as
+        command line arguments.
+    * Fixed serious bug in the string reduction mechanism.
+    * Fixed bug related to text speed.
+    * Fixed bug in the bilinear interpolation function.
+    * Fixed bug related to !sd and !s# escape sequences.
+    * Fixed a bug that caused loading a sound on channel X to crash if a
+        wavestop had been issued on channel X while no sound was loaded at that
+        channel.
+    * Fixed crash involving screen interpolation and fullscreen switching.
+    * And so on...
+
+20090307
+    * Several bug fixes.
+    * Implemented the following commands: blt, fileexist, menu_full, mp3stop,
+        savefileexist, savescreenshot, savescreenshot2, savetime.
+    * New commands: savetime2.
+    * New command line arguments: -!reset-out-files -!redirect
+    * Improved redirection files behavior.
+    * Unimplemented commands: killmenu
+    * global.sav and nonsflog.dat moved to the save directory.
+
+20090126
+    * Major bugs in the Linux version fixed. Now ONSlaught works correctly in
+        both Windows and Linux.
+    * New commands: centerh, centerv
+    * New convenience command line argument: -save-directory
+
+20081231
+    Minor problems in the initial release corrected.
+
+20081230
+    Initial release.

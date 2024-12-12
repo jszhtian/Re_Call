@@ -1,0 +1,51 @@
+﻿// header.h: 标准系统包含文件的包含文件，
+// 或特定于项目的包含文件
+//
+
+#pragma once
+
+#define WIN32_LEAN_AND_MEAN             // 从 Windows 头文件中排除极少使用的内容
+#include <Windows.h>
+#include <iostream>;
+#include <stdint.h>
+#include <string>
+#include <memory.h>
+#include <stdio.h>
+#include <stdarg.h>
+#pragma comment(lib, "libpng16.lib")
+
+
+class NakedMemory
+{
+public:
+    NakedMemory() :buff_(nullptr), size_(0) {}
+    NakedMemory(uint32_t size);
+    NakedMemory(const void* buff, uint32_t size);
+    NakedMemory(const NakedMemory& other);
+    NakedMemory(NakedMemory&& other) noexcept;
+    ~NakedMemory();
+
+    void* Get() const
+    {
+        return buff_;
+    }
+    uint32_t GetSize() const
+    {
+        return size_;
+    }
+
+    void SetSize(uint32_t size);
+
+    NakedMemory& operator=(const NakedMemory& other);
+    NakedMemory& operator=(NakedMemory&& other) noexcept;
+
+private:
+    uint8_t* buff_;
+    uint32_t size_;
+};
+
+void ErrorW(const wchar_t* format, ...);
+void ErrorA(const char* format, ...);
+
+bool ReadPngToBmp(BYTE* src, int size, int* width, int* height, int* bit_count, NakedMemory& dib);
+void WriteBmp(const char* filename, NakedMemory& dib_info, long width, long height, short bpp);

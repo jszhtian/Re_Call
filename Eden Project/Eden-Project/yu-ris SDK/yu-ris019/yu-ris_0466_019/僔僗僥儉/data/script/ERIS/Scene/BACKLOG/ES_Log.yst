@@ -1,0 +1,1485 @@
+//============================================================================
+//
+//■ERIS ログ
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.LOG."]
+
+	S_INT[@LOG.TL.X=36]
+	S_INT[@LOG.TL.SX=680]
+	S_INT[@LOG.TL.SY=72]
+	S_INT[@LOG.TL.SPACE.Y=80]
+
+	S_INT[@LOG.TX.SPACE.X]
+	S_INT[@LOG.TX.SPACE.Y]
+	S_INT[@LOG.TX.SX]
+	S_INT[@LOG.TX.SY]
+	S_INT[@LOG.VOICE.SY]
+	S_INT[@LOG.VOICE2.SY]
+	S_INT[@LOG.VOICE3.SY]
+	S_INT[@LOG.VOICE4.SY]
+
+	S_INT[@LOG.Y(16)]
+	S_INT[@LOG.LNO(16)]
+
+	S_INT[@LOG.PAGE.NUM]		// １画面に表示するログの個数
+	S_INT[@LOG.PAGE.MAX]		// ログ最大頁数
+	S_INT[@LOG.NUM]				// 現在のログ蓄積数
+	S_INT[@LOG.CURNO]			// 現在開いている頁
+	S_INT[@LOG.NUM.PLUS.FLAG]	//
+
+	S_STR[$LOG.BUF0]
+	S_STR[$LOG.BUF(\.LOG.SIZE+1)]
+	S_STR[$LOG.VO(\.LOG.SIZE+1,12)]
+	S_STR[$LOG.VO2(16,12)]
+
+	S_STR[$LOG.TX(\.TX.MAX+1)]
+	S_INT[@LOG.TXPOS]
+
+	S_INT[@LOG.SCROLL.NUM]		// スクロールアニメーション数
+
+	S_INT[@LOG.PAGENUM]
+	S_INT[@Z.NUM=60000000000000+3]
+
+	S_STR[$TX.FONT]
+	S_INT[@TX.SX]
+	S_INT[@TX.SY]
+	S_INT[@TX.COLOR]
+	S_INT[@TX.COLOR2]
+	S_INT[@TX.BOLD]
+	S_INT[@TX.SHADE.X]
+	S_INT[@TX.SHADE.Y]
+	S_INT[@TX.SHADE.COLOR]
+	S_INT[@TX.OUTLINE.COLOR]
+
+	S_STR[$fonttemp]
+
+	S_INT[@VOICEPLAYFLAG]
+
+	S_INT[@Z.LOG]
+
+	S_INT[@NAMEFLAG]
+
+}
+
+
+#=ES.LOG.DEFINE.INIT
+{
+	//----------------------------------------------------------------
+	// 文字情報取得
+	//----------------------------------------------------------------
+		GOSUB[#=es.TDDEF.SEARCH pstr=$T(21,21)]
+		@TX.SX = @_RINT(1) / 65536			//文字Ｘサイズ
+		@TX.SY = @_RINT(1) % 65536			//文字Ｙサイズ
+		@TX.COLOR  = @_RINT(2)				//文字色１
+		@TX.COLOR2 = @_RINT(3)				//文字色２
+		@TX.BOLD = @_RINT(4)
+		@TX.SHADE.X = @_RINT(5) / 65536		//文字影座標Ｘ
+		@TX.SHADE.Y = @_RINT(5) % 65536		//文字影座標Ｙ
+		@TX.SHADE.COLOR = @_RINT(6)			//文字影色
+		@TX.OUTLINE.COLOR = @_RINT(7)		//文字袋文字色
+		$TX.FONT = $_RSTR(8)				//文字フォント
+
+	@LOG.PAGENUM		= 1 //ページ数字表示する
+	@LOG.TL.X			= @T(21,13)
+
+	@LOG.TL.SX			= @T(21,15)
+	@LOG.TL.SY			= @T(21,16)
+
+	@LOG.TL.SPACE.Y		= @T(21,14)
+	@LOG.TX.SX			= @TX.SX
+	@LOG.TX.SY			= @TX.SY
+	@LOG.TX.SPACE.X		= @T(21,22)
+	@LOG.TX.SPACE.Y		= @T(21,23)
+	@LOG.PAGE.NUM		= @T(21,01)
+	@LOG.PAGE.MAX		= @T(21,02)
+	IF[@LOG.PAGE.MAX<1 || @LOG.PAGE.MAX>(\.LOG.SIZE)] \_mes("[バックログ設計]最大ログ頁数の値が不正です。");END[] IFEND[]
+	@LOG.SCROLL.NUM = @T(21,03)
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■INIT
+//--------------------------------------------------------------------
+#=ES.LOG.INIT
+{
+	//\BTDEF.LOAD("ES.LOG")
+
+	\BT.ES20($BID+"BTN.PLATE")
+	\BT.ES20($BID+"BTN.VOICE")
+
+/*
+///xTOC
+$LOG.BUF0 = ""
+LOOP[SET=@LOG.TXPOS]
+{
+	$LOG.BUF0 += $LOG.TX(@_LC-1)
+}
+LOOPEND[]
+*/
+$LOG.BUF(1) = $LOG.BUF0
+
+	//----------------------------------------------------------------
+	// ボイス再生
+	//----------------------------------------------------------------
+		\_gosub($BID+"VoicePlay.1")
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+//		\BT.W0.ALL(ES.SEL)
+
+	//----------------------------------------------------------------
+	// フォント変更
+	//----------------------------------------------------------------
+		IF[$TX.FONT!=""]
+			\_txfont($TX.FONT)
+			$fonttemp = $_RSTR(1)
+		IFEND[]
+
+	//----------------------------------------------------------------
+	// 現在開いている頁の初期化
+	//----------------------------------------------------------------
+		@LOG.CURNO=-(@LOG.PAGE.NUM/2)
+
+	//----------------------------------------------------------------
+	// 数値画像読込
+	//----------------------------------------------------------------
+		IF[@LOG.PAGENUM]
+		{
+			\NUM.XYZ(11, @T(21,42), @T(21,43), @Z.NUM)
+			\NUM.SX(11, @T(21,44))
+			\NUM.FILE(11, $T(21,41))
+			\NUM.DIG(11, @T(21,45), @T(21,46))
+			\NUM.MAX(11, @LOG.NUM)
+			\NUM.MIN(11, 1)
+			\NUM.VAL(11, 0)
+			\NUM.SET(11)
+
+			\NUM.XYZ(12, @T(21,48), @T(21,49), @Z.NUM)
+			\NUM.SX(12, @T(21,50))
+			\NUM.FILE(12, $T(21,47))
+			\NUM.DIG(12, @T(21,51), @T(21,52))
+			\NUM.VAL(12, 0)
+			\NUM.SET(12)
+
+			GOSUB[#=es.NUM.Enabled pint=11 pint2=@LOG.CURNO+@LOG.PAGE.NUM]
+			GOSUB[#=es.NUM.Enabled pint=12 pint2=@LOG.NUM]
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	// ログレイヤ生成.
+	//----------------------------------------------------------------
+		@Z.LOG = @es.Z.BT+900000*@es.ZEX  // バックログテキスト
+
+		//レイヤセット
+	//	CG[ID="LOG/" Z=@Z.LOG E=1 SX=@LOG.TL.X+@LOG.TL.SX SY=(@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM X=@T(21,11) Y=@T(21,12) MODE=0]
+
+
+	STR[$ID]
+	INT[@btno]
+
+		LOOP[SET=@LOG.PAGE.NUM+2]
+		{
+			@LOG.LNO(@_LC) = @_LC
+			@LOG.Y(@_LC)   = (@_LC-2) * (@LOG.TL.SPACE.Y)
+
+			CG[ID="LOGTX"+$(@_LC) SX=@LOG.TL.SX SY=@LOG.TL.SY X=@LOG.TL.X Y=@T(21,12)+@LOG.Y(@_LC) Z=@Z.LOG+@_LC E=1 FILE=""]
+			CGACT[ID="LOGTX"+$(@_LC) RECTPAINT3=1 SET=@es.COL.CLEAR]
+
+	$ID=$BID+"BTN.VOICE"
+	\BT.NONONO.GET(@btno, $ID, 0)
+
+	$ID="BT.OFF"+$(@btno*100+1)
+
+			CG[ID="LOG.VO" +$(@_LC) Z=@Z.LOG E=1 X=@T(21,11)-1000 Y=@T(21,12)+@T(21,32)+@LOG.Y(@_LC) FILE=""]
+		//	CGACT[ID="LOG.VO.BUF"  ID2="LOG.VO" +$(@_LC) COPY2=1]
+			CGACT[ID=$ID ID2="LOG.VO"+$(@_LC) COPY2=1]
+			CGINFO[ID=$ID SY=1 LET=@LOG.VOICE.SY]
+
+	$ID="BT.OVER"+$(@btno*100+1)
+
+			CG[ID="LOG.VO2"+$(@_LC) Z=@Z.LOG E=0 X=@T(21,11)-1000 Y=@T(21,12)+@T(21,32)+@LOG.Y(@_LC) FILE=""]
+		//	CGACT[ID="LOG.VO2.BUF" ID2="LOG.VO2"+$(@_LC) COPY2=1]
+			CGACT[ID=$ID ID2="LOG.VO2"+$(@_LC) COPY2=1]
+			CGINFO[ID=$ID SY=1 LET=@LOG.VOICE2.SY]
+
+	$ID="BT.ON"+$(@btno*100+1)
+
+			CG[ID="LOG.VO3"+$(@_LC) Z=@Z.LOG E=0 X=@T(21,11)-1000 Y=@T(21,12)+@T(21,32)+@LOG.Y(@_LC) FILE=""]
+		//	CGACT[ID="LOG.VO3.BUF" ID2="LOG.VO3"+$(@_LC) COPY2=1]
+			CGACT[ID=$ID ID2="LOG.VO3"+$(@_LC) COPY2=1]
+			CGINFO[ID=$ID SY=1 LET=@LOG.VOICE3.SY]
+
+	$ID="BT.ONOVER"+$(@btno*100+1)
+
+			CG[ID="LOG.VO4"+$(@_LC) Z=@Z.LOG E=0 X=@T(21,11)-1000 Y=@T(21,12)+@T(21,32)+@LOG.Y(@_LC) FILE=""]
+		//	CGACT[ID="LOG.VO4.BUF" ID2="LOG.VO4"+$(@_LC) COPY2=1]
+			CGACT[ID=$ID ID2="LOG.VO4"+$(@_LC) COPY2=1]
+			CGINFO[ID=$ID SY=1 LET=@LOG.VOICE4.SY]
+
+
+	$ID=$BID+"BTN.PLATE"
+	\BT.NONONO.GET(@btno, $ID, 0)
+
+	$ID="BT.OFF"+$(@btno*100+1)
+
+			CG[ID="LOG.MES.OF" +$(@_LC) Z=@Z.LOG E=1 X=@T(21,11)-1000 Y=@T(21,12)+@T(21,32)+@LOG.Y(@_LC) FILE=""]
+			CGACT[ID=$ID ID2="LOG.MES.OF"+$(@_LC) COPY2=1]
+
+	$ID="BT.OVER"+$(@btno*100+1)
+
+			CG[ID="LOG.MES.OV" +$(@_LC) Z=@Z.LOG E=0 X=@T(21,11)-1000 Y=@T(21,12)+@T(21,32)+@LOG.Y(@_LC) FILE=""]
+			CGACT[ID=$ID ID2="LOG.MES.OV"+$(@_LC) COPY2=1]
+
+			GOSUB[#=es.LOG.DRAW pint=@_LC pint2=@LOG.CURNO+((@LOG.PAGE.NUM+2)-@_LC) pint3=1] //pint3→一番上のログボイス画像が表示されてしまうバグがあるので表示されないように
+		}
+		LOOPEND[]
+
+		GOSUB[#=es.LOG.REF]
+
+		\BT.A.SET($BID+"TIP.BG",, @es.GSD(115,10)) //ログ背景不透明度
+
+		///xS
+		GOSUB[#=ES.LOG.77.TYOUSEI]
+
+	//----------------------------------------------------------------
+	// フェードアウト
+	//----------------------------------------------------------------
+		\SS.FADE(250)
+
+		@es.STATE=100
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.LOG.LOOP
+{
+	IF[@es.STATE==100]
+	{
+		GOSUB[#=ES.LOG.VOICECHECK]
+	}
+	IFEND[]
+	IF[@es.STATE==101]
+	{
+		GOSUB[#=ES.LOG.QUIT]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■VOICECHECK
+//--------------------------------------------------------------------
+#=ES.LOG.VOICECHECK
+{
+	INT[@col]
+	INT[@LC]
+	INT[@UID]
+
+	LOOP[SET=@LOG.PAGE.NUM+2]
+	{
+		//@LC=@LOG.LNO(@_LC)
+		@LC=@_LC
+
+		@UID = @LOG.CURNO-(@LOG.Y(@LC)/@LOG.TL.SPACE.Y)+100
+
+	//	IF[@VOICEPLAYFLAG==@LC]
+		IF[@VOICEPLAYFLAG==@UID]
+		{
+
+				CGINFO[ID="LOG.VO"+$(@LC) ONMOUSE2=1 LET=@col]
+				IF[@col>0]
+				{
+					CG[ID="LOG.VO" +$(@LC) E=0]
+					CG[ID="LOG.VO2"+$(@LC) E=0]
+					CG[ID="LOG.VO3"+$(@LC) E=0]
+					CG[ID="LOG.VO4"+$(@LC) E=1]
+					CG[ID="LOG.MES.OF"+$(@LC) E=0]
+					CG[ID="LOG.MES.OV"+$(@LC) E=1]
+
+					//クリックでボイス再生.
+					//
+					IF[@_MOUSE_L==1 || @_MOUSE_L==2]
+					{
+						IF[@_MOUSE_Y>=@T(21,12) && @_MOUSE_Y<@T(21,12)+(@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM]
+						{
+							@_MOUSE_L=3
+
+							GOSUB[#=ES.LOG.VOICEPLAY pint=@LC]
+						}
+						IFEND[]
+					}
+					IFEND[]
+				}
+				ELSE[]
+				{
+					CGINFO[ID="LOG.MES.OV"+$(@LC) ONMOUSE2=1 LET=@col]
+					IF[@col>0]
+					{
+						CG[ID="LOG.VO" +$(@LC) E=0]
+						CG[ID="LOG.VO2"+$(@LC) E=0]
+						CG[ID="LOG.VO3"+$(@LC) E=0]
+						CG[ID="LOG.VO4"+$(@LC) E=1]
+						CG[ID="LOG.MES.OF"+$(@LC) E=0]
+						CG[ID="LOG.MES.OV"+$(@LC) E=1]
+
+						//クリックでボイス再生.
+						//
+						IF[@_MOUSE_L==1 || @_MOUSE_L==2]
+						{
+							IF[@_MOUSE_Y>=@T(21,12) && @_MOUSE_Y<@T(21,12)+(@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM]
+							{
+								@_MOUSE_L=3
+
+								GOSUB[#=ES.LOG.VOICEPLAY pint=@LC]
+
+								@es.LOG.VOICE.STOP.FLAG=1 //ログを抜けたときにボイスを停止するフラグを立てる.
+							}
+							IFEND[]
+						}
+						IFEND[]
+					}
+					ELSE[]
+					{
+						CG[ID="LOG.VO" +$(@LC) E=0]
+						CG[ID="LOG.VO2"+$(@LC) E=0]
+						CG[ID="LOG.VO3"+$(@LC) E=1]
+						CG[ID="LOG.VO4"+$(@LC) E=0]
+						CG[ID="LOG.MES.OF"+$(@LC) E=0]
+						CG[ID="LOG.MES.OV"+$(@LC) E=1]
+					}
+					IFEND[]
+				}
+				IFEND[]
+
+		}
+		ELSE[]
+		{
+
+			CGINFO[ID="LOG.VO"+$(@LC) ONMOUSE2=1 LET=@col]
+			IF[@col>0]
+			{
+				CG[ID="LOG.VO" +$(@LC) E=0]
+				CG[ID="LOG.VO2"+$(@LC) E=1]
+				CG[ID="LOG.VO3"+$(@LC) E=0]
+				CG[ID="LOG.VO4"+$(@LC) E=0]
+				CG[ID="LOG.MES.OF"+$(@LC) E=0]
+				CG[ID="LOG.MES.OV"+$(@LC) E=1]
+
+				//クリックでボイス再生.
+				//
+				IF[@_MOUSE_L==1 || @_MOUSE_L==2]
+				{
+					IF[@_MOUSE_Y>=@T(21,12) && @_MOUSE_Y<@T(21,12)+(@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM]
+					{
+						@_MOUSE_L=3
+
+						GOSUB[#=ES.LOG.VOICEPLAY pint=@LC]
+
+						@es.LOG.VOICE.STOP.FLAG=1 //ログを抜けたときにボイスを停止するフラグを立てる.
+					}
+					IFEND[]
+				}
+				IFEND[]
+			}
+			ELSE[]
+			{
+
+				CGINFO[ID="LOG.MES.OV"+$(@LC) ONMOUSE2=1 LET=@col]
+				IF[@col>0]
+				{
+					CG[ID="LOG.VO" +$(@LC) E=0]
+					CG[ID="LOG.VO2"+$(@LC) E=1]
+					CG[ID="LOG.VO3"+$(@LC) E=0]
+					CG[ID="LOG.VO4"+$(@LC) E=0]
+					CG[ID="LOG.MES.OF"+$(@LC) E=0]
+					CG[ID="LOG.MES.OV"+$(@LC) E=1]
+
+					//クリックでボイス再生.
+					//
+					IF[@_MOUSE_L==1 || @_MOUSE_L==2]
+					{
+						IF[@_MOUSE_Y>=@T(21,12) && @_MOUSE_Y<@T(21,12)+(@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM]
+						{
+							@_MOUSE_L=3
+
+							GOSUB[#=ES.LOG.VOICEPLAY pint=@LC]
+
+							@es.LOG.VOICE.STOP.FLAG=1 //ログを抜けたときにボイスを停止するフラグを立てる.
+						}
+						IFEND[]
+					}
+					IFEND[]
+				}
+				ELSE[]
+				{
+					CG[ID="LOG.VO" +$(@LC) E=1]
+					CG[ID="LOG.VO2"+$(@LC) E=0]
+					CG[ID="LOG.VO3"+$(@LC) E=0]
+					CG[ID="LOG.VO4"+$(@LC) E=0]
+					CG[ID="LOG.MES.OF"+$(@LC) E=1]
+					CG[ID="LOG.MES.OV"+$(@LC) E=0]
+				}
+				IFEND[]
+
+			}
+			IFEND[]
+
+		}
+		IFEND[]
+
+	}
+	LOOPEND[]
+
+	//============================================================ ボイス再生終了チェック
+	IF[@VOICEPLAYFLAG]
+	{
+		\VO.PCHK
+		IF[@_RINT(1)==0] @VOICEPLAYFLAG=0 IFEND[]
+	}
+	IFEND[]
+
+
+	return[]
+}
+
+#=ES.LOG.VOICEPLAY
+{
+	INT[@no=@_PINT(1)]
+	INT[@UID]
+
+	@UID = @LOG.CURNO-(@LOG.Y(@no)/@LOG.TL.SPACE.Y)+100
+
+//	IF[@VOICEPLAYFLAG!=@no] @VOICEPLAYFLAG=0 IFEND[]
+	IF[@VOICEPLAYFLAG!=@UID] @VOICEPLAYFLAG=0 IFEND[]
+
+	IF[@VOICEPLAYFLAG==0]
+	{
+
+///xS暫定解決法.
+
+//\_dmes("NO="+$(@LOG.CURNO-(@LOG.Y(@no)/@LOG.TL.SPACE.Y)))
+
+//\_dmes("NO="+$(@LOG.CURNO+@no))
+/*
+//		\BT.ONOFF($es.BID, @no, 1)
+		CG[ID="LOG.VO" +$(@no) E=0]
+		CG[ID="LOG.VO2"+$(@no) E=0]
+		CG[ID="LOG.VO3"+$(@no) E=1]
+		CG[ID="LOG.VO4"+$(@no) E=0]
+*/
+		@VOICEPLAYFLAG = @UID
+//\_dmes("@VOICEPLAYFLAG="+$(@VOICEPLAYFLAG))
+
+		///xあとで \VO.NL に書き換える
+		IF[@es.GSD(111,03)==1] //ボイスループ再生
+			\VO1.N($LOG.VO2(@no, 1),,,0)
+			\VO2.N($LOG.VO2(@no, 2),,,0)
+			\VO3.N($LOG.VO2(@no, 3),,,0)
+			\VO4.N($LOG.VO2(@no, 4),,,0)
+			\VO5.N($LOG.VO2(@no, 5),,,0)
+			\VO6.N($LOG.VO2(@no, 6),,,0)
+			\VO7.N($LOG.VO2(@no, 7),,,0)
+			\VO8.N($LOG.VO2(@no, 8),,,0)
+			\VO9.N($LOG.VO2(@no, 9),,,0)
+			\VO10.N($LOG.VO2(@no, 10),,,0)
+		ELSE[]
+			\VO1.N($LOG.VO2(@no, 1),,,,,1)
+			\VO2.N($LOG.VO2(@no, 2),,,,,1)
+			\VO3.N($LOG.VO2(@no, 3),,,,,1)
+			\VO4.N($LOG.VO2(@no, 4),,,,,1)
+			\VO5.N($LOG.VO2(@no, 5),,,,,1)
+			\VO6.N($LOG.VO2(@no, 6),,,,,1)
+			\VO7.N($LOG.VO2(@no, 7),,,,,1)
+			\VO8.N($LOG.VO2(@no, 8),,,,,1)
+			\VO9.N($LOG.VO2(@no, 9),,,,,1)
+			\VO10.N($LOG.VO2(@no, 10),,,,,1)
+		IFEND[]
+	}
+	ELSE[]
+	{
+//		\BT.ONOFF($es.BID, @no, 0)
+		CG[ID="LOG.VO" +$(@no) E=1]
+		CG[ID="LOG.VO2"+$(@no) E=0]
+		CG[ID="LOG.VO3"+$(@no) E=0]
+		CG[ID="LOG.VO4"+$(@no) E=0]
+
+		GOSUB[#=es.VOICE.DEL] // ボイス停止
+		//\SVO(,400) // システムボイス停止
+		@VOICEPLAYFLAG = 0
+	}
+	IFEND[]
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■QUIT
+//--------------------------------------------------------------------
+#=ES.LOG.QUIT
+{
+	\_gosub($BID+"VoiceStop.1")	//ボイス停止
+
+	IF[$TX.FONT!=""] \_txfont($fonttemp) IFEND[] //フォント元に戻す
+
+	\es.S.RETURN	//戻る
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//■ログシーン終了処理
+//-------------------------------------------------------------------------
+#=ES.LOG.END
+{
+	//----------------------------------------------------------------
+	// レイヤセット削除
+	//----------------------------------------------------------------
+		LOOP[SET=@LOG.PAGE.NUM+2]
+		{
+			CGEND[ID="LOG.VO" +$(@_LC)]
+			CGEND[ID="LOG.VO2"+$(@_LC)]
+			CGEND[ID="LOG.VO3"+$(@_LC)]
+			CGEND[ID="LOG.VO4"+$(@_LC)]
+
+			CGEND[ID="LOGTX"+$(@_LC)]
+
+			CGEND[ID="LOG.MES.OF" +$(@_LC)]
+			CGEND[ID="LOG.MES.OV" +$(@_LC)]
+		}
+		LOOPEND[]
+//		CGEND[ID=LOG/]
+
+
+		GOSUB[#=es.NUM.DEL pint=11]
+		GOSUB[#=es.NUM.DEL pint=12]
+
+	return[]
+}
+
+//シナリオ終了時
+#=ES.LOG.FIN
+{
+//	CGEND[ID=LOG/]
+
+	IF[@es.ERISOFFMODE==0]
+		GOSUB[#=es.LOG.CLEAR] //バックログデータ消去
+	IFEND[]
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//■↓移動
+//-------------------------------------------------------------------------
+#=ES.LOG.Down
+{
+	IF[@LOG.CURNO < @LOG.NUM-1]
+	{
+		INT[@LOG.CURNO.SRC = @LOG.CURNO]
+
+		@LOG.CURNO += 1
+
+		INT[@Temp = @LOG.LNO(@LOG.PAGE.NUM+2)]
+		LOOP[SET=(@LOG.PAGE.NUM+2)-1] @LOG.LNO((@LOG.PAGE.NUM+2)+1-@_LC) = @LOG.LNO((@LOG.PAGE.NUM+2)-@_LC) LOOPEND[]
+		@LOG.LNO(1) = @Temp
+
+		@LOG.Y( @LOG.LNO(1) ) = (-2) * @LOG.TL.SPACE.Y
+
+		CGACT[ID="LOGTX"+$(@LOG.LNO(1)) RECTPAINT3=1 SET=@es.COL.CLEAR]
+
+		GOSUB[#=es.LOG.DRAW pint=@LOG.LNO(1) pint2=@LOG.CURNO.SRC+(@LOG.PAGE.NUM+2)]
+
+		GOSUB[#=ES.LOG.Move pint=1 pint2=@_PINT(1)]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//■↑移動
+//-------------------------------------------------------------------------
+#=ES.LOG.Up
+{
+	IF[@LOG.CURNO > -(@LOG.PAGE.NUM)+1]
+	{
+		INT[@LOG.CURNO.SRC = @LOG.CURNO]
+
+		@LOG.CURNO -= 1
+
+		INT[@Temp = @LOG.LNO(1)]
+		LOOP[SET=(@LOG.PAGE.NUM+2)-1] @LOG.LNO(@_LC) = @LOG.LNO(@_LC+1) LOOPEND[]
+		@LOG.LNO(@LOG.PAGE.NUM+2) = @Temp
+
+		@LOG.Y( @LOG.LNO(@LOG.PAGE.NUM+2) ) = ((@LOG.PAGE.NUM+2)-1) * @LOG.TL.SPACE.Y
+
+		CGACT[ID="LOGTX"+$(@LOG.LNO(@LOG.PAGE.NUM+2)) RECTPAINT3=1 SET=@es.COL.CLEAR]
+
+		GOSUB[#=es.LOG.DRAW pint=@LOG.LNO(@LOG.PAGE.NUM+2) pint2=@LOG.CURNO.SRC-1]
+
+		GOSUB[#=ES.LOG.Move pint=-1 pint2=@_PINT(1)]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//■移動
+//-------------------------------------------------------------------------
+#=ES.LOG.Move
+{
+	INT[@mLC]
+
+	STR[$ID]
+	INT[@btno]
+	$ID=$BID+"BTN.VOICE"
+	\BT.NONONO.GET(@btno, $ID, 0)
+
+	LOOP[SET=@LOG.SCROLL.NUM]
+	{
+		@mLC=@_LC
+
+		LOOP[SET=@LOG.PAGE.NUM+2]
+		{
+			CG[ID="LOG.MES.OF" +$(@LOG.LNO(@_LC)) Y=@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1)]
+			CG[ID="LOG.MES.OV" +$(@LOG.LNO(@_LC)) Y=@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1)]
+
+			CG[ID="LOGTX" +$(@LOG.LNO(@_LC)) X=@LOG.TL.X Y=@T(21,12)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) E=1]
+			CG[ID="LOG.VO" +$(@LOG.LNO(@_LC))             Y=@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) E=1]
+			CG[ID="LOG.VO2"+$(@LOG.LNO(@_LC))             Y=@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) E=0]
+			CG[ID="LOG.VO3"+$(@LOG.LNO(@_LC))             Y=@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) E=0]
+			CG[ID="LOG.VO4"+$(@LOG.LNO(@_LC))             Y=@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) E=0]
+
+			$ID="BT.OFF"+$(@btno*100+1)
+			CGACT[ID=$ID ID2="LOG.VO" +$(@LOG.LNO(@_LC)) COPY2=1]
+			$ID="BT.OVER"+$(@btno*100+1)
+			CGACT[ID=$ID ID2="LOG.VO2"+$(@LOG.LNO(@_LC)) COPY2=1]
+			$ID="BT.ON"+$(@btno*100+1)
+			CGACT[ID=$ID ID2="LOG.VO3"+$(@LOG.LNO(@_LC)) COPY2=1]
+			$ID="BT.ONOVER"+$(@btno*100+1)
+			CGACT[ID=$ID ID2="LOG.VO4"+$(@LOG.LNO(@_LC)) COPY2=1]
+
+
+			IF[ 0 > @T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) ]
+			{
+				CGACT[ID="LOG.VO" +$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0 Y=0 Y2=@T(21,12)-(@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1))]
+				CGACT[ID="LOG.VO2"+$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0 Y=0 Y2=@T(21,12)-(@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1))]
+				CGACT[ID="LOG.VO3"+$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0 Y=0 Y2=@T(21,12)-(@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1))]
+				CGACT[ID="LOG.VO4"+$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0 Y=0 Y2=@T(21,12)-(@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1))]
+			}
+			IFEND[]
+			IF[ (@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM - @LOG.VOICE.SY < @T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) ]
+			{
+				CGACT[ID="LOG.VO"+$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0 Y=@LOG.VOICE.SY - (@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) - (@T(21,12) + (@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM - @LOG.VOICE.SY)) Y2=9999]
+			}
+			IFEND[]
+			IF[ (@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM - @LOG.VOICE2.SY < @T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) ]
+			{
+				CGACT[ID="LOG.VO2"+$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0 Y=@LOG.VOICE2.SY - (@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) - (@T(21,12) + (@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM - @LOG.VOICE2.SY)) Y2=9999]
+			}
+			IFEND[]
+			IF[ (@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM - @LOG.VOICE3.SY < @T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) ]
+			{
+				CGACT[ID="LOG.VO3"+$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0 Y=@LOG.VOICE3.SY - (@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) - (@T(21,12) + (@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM - @LOG.VOICE3.SY)) Y2=9999]
+			}
+			IFEND[]
+			IF[ (@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM - @LOG.VOICE4.SY < @T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) ]
+			{
+				CGACT[ID="LOG.VO4"+$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0 Y=@LOG.VOICE4.SY - (@T(21,12)+@T(21,32)+@LOG.Y( @LOG.LNO(@_LC) ) + (@LOG.TL.SPACE.Y * @mLC / @LOG.SCROLL.NUM) * @_PINT(1) - (@T(21,12) + (@LOG.TL.SPACE.Y)*@LOG.PAGE.NUM - @LOG.VOICE4.SY)) Y2=9999]
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+
+		IF[@mLC<@LOG.SCROLL.NUM && @_PINT(2)==1] WAIT[FRAME=1] IFEND[]
+	}
+	LOOPEND[]
+
+	LOOP[SET=@LOG.PAGE.NUM+2]
+	{
+	//	@LOG.Y( @LOG.LNO(@_LC) ) += (@LOG.TL.SPACE.Y / @LOG.SCROLL.NUM) * @_PINT(1)
+		@LOG.Y( @LOG.LNO(@_LC) ) += @LOG.TL.SPACE.Y * @_PINT(1)
+	}
+	LOOPEND[]
+
+	///xS
+	GOSUB[#=ES.LOG.77.TYOUSEI]
+
+
+	return[]
+}
+
+///xS
+#=ES.LOG.77.TYOUSEI
+{
+	CG[ID="LOG.MES.OF" +$(@LOG.LNO(              1)) Y=-10000]
+	CG[ID="LOG.MES.OV" +$(@LOG.LNO(              1)) Y=-10000]
+	CG[ID="LOG.MES.OF" +$(@LOG.LNO(@LOG.PAGE.NUM+2)) Y=-10000]
+	CG[ID="LOG.MES.OV" +$(@LOG.LNO(@LOG.PAGE.NUM+2)) Y=-10000]
+	CG[ID="LOGTX"  +$(@LOG.LNO(              1)) Y=-10000]
+	CG[ID="LOGTX"  +$(@LOG.LNO(@LOG.PAGE.NUM+2)) Y=-10000]
+	CG[ID="LOG.VO" +$(@LOG.LNO(              1)) Y=-10000]
+	CG[ID="LOG.VO" +$(@LOG.LNO(@LOG.PAGE.NUM+2)) Y=-10000]
+	CG[ID="LOG.VO2"+$(@LOG.LNO(              1)) Y=-10000]
+	CG[ID="LOG.VO2"+$(@LOG.LNO(@LOG.PAGE.NUM+2)) Y=-10000]
+	CG[ID="LOG.VO3"+$(@LOG.LNO(              1)) Y=-10000]
+	CG[ID="LOG.VO3"+$(@LOG.LNO(@LOG.PAGE.NUM+2)) Y=-10000]
+	CG[ID="LOG.VO4"+$(@LOG.LNO(              1)) Y=-10000]
+	CG[ID="LOG.VO4"+$(@LOG.LNO(@LOG.PAGE.NUM+2)) Y=-10000]
+
+	return[]
+}
+
+//-------------------------------------------------------------------------
+//■ログ登録
+//-------------------------------------------------------------------------
+#=es.LOG.SET
+{
+	\LOG.NUM.PLUS
+
+	\LOG.W2( $es.VOICE.FILE(1), $es.VOICE.FILE(2), $es.VOICE.FILE(3), $es.VOICE.FILE(4), $es.VOICE.FILE(5), $es.VOICE.FILE(6), $es.VOICE.FILE(7), $es.VOICE.FILE(8), $es.VOICE.FILE(9), $es.VOICE.FILE(10) )
+
+	//------------------------------------------------------------
+	// この時点でボイスタスクがあれば処理
+	//------------------------------------------------------------
+	//	GOSUB[#=es.Voice]
+
+	$LOG.BUF(1) = $_PSTR(1)+$_CHR(0xEF)+$_CHR(0xEF)+$_PSTR(2)
+//	$LOG.BUF(1) = $_CHR(0xEF)+$_CHR(0xEF)+$_PSTR(2)
+	@LOG.TXPOS = 0
+
+	\LOG.NUM.PLUS.FLAG
+	\LOG.NUM.PLUS(5)
+
+	//------------------------------------------------------------
+	// ボイス情報初期化
+	//------------------------------------------------------------
+		GOSUB[#=es.Voice.DataInit]
+
+	return[]
+}
+
+//-------------------------------------------------------------------------
+//■
+//-------------------------------------------------------------------------
+#=es.LOG.REF
+{
+	INT[@y]
+	INT[@sy]
+	INT[@val1=-(@LOG.PAGE.NUM)+1] //ex:-4
+	INT[@val2=@LOG.NUM-1]  //ex:54
+	INT[@val3=@val2-@val1] //ex:0～50
+
+	\BT.SLIDE.SY.GET(@sy, $BID+"BTN.SLIDER") //ボタンスライドサイズ取得
+	@y = @sy - (@sy * (@LOG.CURNO+@LOG.PAGE.NUM-1) / @val3)
+	\BT.SLIDE.Y.SET($BID+"BTN.SLIDER",, @y) //ボタンスライド座標セット
+
+	return[]
+}
+
+//-------------------------------------------------------------------------
+//■ログテキスト表示
+//-------------------------------------------------------------------------
+#=es.LOG.DRAW
+{
+	INT[@len]
+	STR[$char]
+	INT[@charSX]
+	INT[@hx]
+	INT[@hy]
+	INT[@lno=@_PINT(1)]
+	INT[@flg=@_PINT(3)]
+
+	CG[ID="LOG.VO" +$(@lno) X=-1000]
+	CG[ID="LOG.VO2"+$(@lno) X=-1000]
+	CG[ID="LOG.VO3"+$(@lno) X=-1000]
+	CG[ID="LOG.VO4"+$(@lno) X=-1000]
+	CG[ID="LOG.MES.OF" +$(@lno) X=-1000]
+	CG[ID="LOG.MES.OV" +$(@lno) X=-1000]
+
+	IF[@_PINT(2)>=0 && @_PINT(2)<=@LOG.PAGE.MAX]
+	{
+		IF[$LOG.BUF(@_PINT(2))!=""]
+			CG[ID="LOG.MES.OF" +$(@lno) X=@T(21,11)+@T(21,31)+46]
+			CG[ID="LOG.MES.OV" +$(@lno) X=-10000]
+		IFEND[]
+
+		IF[$LOG.VO(@_PINT(2),1)!=""]
+			CG[ID="LOG.VO" +$(@lno) X=@T(21,11)+@T(21,31)]
+			CG[ID="LOG.VO2"+$(@lno) X=@T(21,11)+@T(21,31)]
+			CG[ID="LOG.VO3"+$(@lno) X=@T(21,11)+@T(21,31)]
+			CG[ID="LOG.VO4"+$(@lno) X=@T(21,11)+@T(21,31)]
+
+			CG[ID="LOG.MES.OV" +$(@lno) X=@T(21,11)+@T(21,31)+46]
+
+///xMGI
+			IF[@lno==1 && @flg==1]
+				CGACT[ID="LOG.VO" +$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0]
+				CGACT[ID="LOG.VO2"+$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0]
+				CGACT[ID="LOG.VO3"+$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0]
+				CGACT[ID="LOG.VO4"+$(@LOG.LNO(@_LC)) RECTPAINT2=1 SET=0]
+			IFEND[]
+		IFEND[]
+
+
+			//-----------------------------------------------------------------
+			// 表示
+			//-----------------------------------------------------------------
+				@hx = 0
+				@hy = 0
+
+				\_strlen( $LOG.BUF(@_PINT(2)) )
+				@len=@_RINT(1)
+
+				LOOP[SET=@len]
+				{
+					IF[@hx + @LOG.TX.SX + @LOG.TX.SPACE.X >= @LOG.TL.SX - 10]
+					{
+						//行頭禁則チェック ///x
+						//
+
+						//行末禁則チェック ///x
+						//
+
+						//ぶら下げ文字チェック
+						//
+						\_strmid($LOG.BUF(@_PINT(2)), @_LC, 1)
+					//	IF[$_RSTR(1)=="、" || $_RSTR(1)=="。" || $_RSTR(1)=="，" || $_RSTR(1)=="．"]
+						IF[$_RSTR(1)=="、" || $_RSTR(1)=="。" || $_RSTR(1)=="，" || $_RSTR(1)=="．" || $_RSTR(1)=="」" || $_RSTR(1)=="』" || $_RSTR(1)=="）"] ///x後ろ３つ暫定.いずれ行頭禁則へ.
+						{
+							IF[@hx + @LOG.TX.SX + @LOG.TX.SPACE.X >= @LOG.TL.SX - 10]
+								@hx = 0
+								@hy += @LOG.TX.SY + @LOG.TX.SPACE.Y
+								IF[@hy + @LOG.TX.SY + @LOG.TX.SPACE.Y >= @LOG.TL.SY - 10] LOOPBREAK[] IFEND[]
+
+								IF[@NAMEFLAG==1] @hx += @LOG.TX.SX + @LOG.TX.SPACE.X IFEND[]
+
+							IFEND[]
+							//LOOPCONTINUE[]
+							//\_dmes(禁則)
+						}
+						ELSE[]
+						{
+							@hx = 0
+							@hy += @LOG.TX.SY + @LOG.TX.SPACE.Y
+							IF[@hy + @LOG.TX.SY + @LOG.TX.SPACE.Y >= @LOG.TL.SY - 10] LOOPBREAK[] IFEND[]
+
+							IF[@NAMEFLAG==1] @hx += @LOG.TX.SX + @LOG.TX.SPACE.X IFEND[]
+						}
+						IFEND[]
+
+					}
+					IFEND[]
+
+					//１文字ずつ調べていく
+					\_strmid( $LOG.BUF(@_PINT(2)), @_LC, 1 )
+					$char = $_RSTR(1)
+					  IF[$char==$_CHR(0xEF)+$_CHR(0xF0)] //R
+					{
+//\_dmes(R)
+						@hx = 0
+						@hy += @LOG.TX.SY + @LOG.TX.SPACE.Y
+						IF[@hy + @LOG.TX.SY + @LOG.TX.SPACE.Y >= @LOG.TL.SY - 10] LOOPBREAK[] IFEND[]
+
+						IF[@NAMEFLAG==1] @hx += @LOG.TX.SX + @LOG.TX.SPACE.X IFEND[]
+
+						LOOPCONTINUE[]
+					}
+					ELSE[$char==$_CHR(0xEF)+$_CHR(0xF2)] //P
+					{
+//\_dmes(P)
+						LOOPCONTINUE[]
+					}
+					ELSE[$char==$_CHR(0xEF)+$_CHR(0xF3)] //C
+					{
+//\_dmes(C)
+						LOOPCONTINUE[]
+					}
+					ELSE[$char==$_CHR(0xEF)+$_CHR(0xF4)] //CR
+					{
+//\_dmes(CR)
+						@hx = 0
+						@hy += @LOG.TX.SY + @LOG.TX.SPACE.Y
+						IF[@hy + @LOG.TX.SY + @LOG.TX.SPACE.Y >= @LOG.TL.SY - 10] LOOPBREAK[] IFEND[]
+
+						IF[@NAMEFLAG==1] @hx += @LOG.TX.SX + @LOG.TX.SPACE.X IFEND[]
+
+						LOOPCONTINUE[]
+					}
+					ELSE[$char==$_CHR(0xEF)+$_CHR(0xF5)] //CP
+					{
+//\_dmes(CP)
+						LOOPCONTINUE[]
+					}
+///xTOC
+					ELSE[$char==$_CHR(0xEF)+$_CHR(0xEF)] //名前行の改行
+					{
+						@hx = 0
+						@hy += @LOG.TX.SY + @LOG.TX.SPACE.Y
+						IF[@hy + @LOG.TX.SY + @LOG.TX.SPACE.Y >= @LOG.TL.SY - 10] LOOPBREAK[] IFEND[]
+
+					//	IF[@NAMEFLAG==1] @hx += @LOG.TX.SIZE + @LOG.TX.SPACE.X IFEND[]
+						@NAMEFLAG=1
+
+						LOOPCONTINUE[]
+					}
+					ELSE[] //通常文字
+					{
+//IF[@es.GSD(115,15)==1] //グラデ有り
+						\FONT.COLOR( @TX.COLOR )
+						IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.COLOR, @TX.COLOR2 ) IFEND[]
+
+						\FONT.SIZE( @LOG.TX.SX, @LOG.TX.SY )
+						\FONT.XY(@hx+3, @hy+2+5)
+						\FONT.BOLD( @TX.BOLD )
+						\FONT.SHADE( @TX.SHADE.X, @TX.SHADE.Y, @TX.SHADE.COLOR )
+						\FONT.OUTLINE( @TX.OUTLINE.COLOR )
+				//		IF[@es.GSD(115,14)==1] \FONT.BOLD( 1 )											IFEND[]
+				//		IF[@es.GSD(115,09)==1] \FONT.SHADE( @TX.SHADE.X, @TX.SHADE.Y, @TX.SHADE.COLOR )	IFEND[]
+				//		IF[@es.GSD(115,08)==1] \FONT.OUTLINE( @TX.OUTLINE.COLOR )						IFEND[]
+
+						\FONT.DRAW("LOGTX"+$(@lno), $char)
+					}
+					IFEND[]
+
+					//半角か全角か
+					\_strtype($char)
+					@charSX = @LOG.TX.SX / (3-@_RINT(1))
+					@hx += @charSX + @LOG.TX.SPACE.X
+
+				}
+				LOOPEND[]
+
+
+		$LOG.VO2(@lno, 1) = $LOG.VO(@_PINT(2), 1)
+		$LOG.VO2(@lno, 2) = $LOG.VO(@_PINT(2), 2)
+		$LOG.VO2(@lno, 3) = $LOG.VO(@_PINT(2), 3)
+		$LOG.VO2(@lno, 4) = $LOG.VO(@_PINT(2), 4)
+		$LOG.VO2(@lno, 5) = $LOG.VO(@_PINT(2), 5)
+		$LOG.VO2(@lno, 6) = $LOG.VO(@_PINT(2), 6)
+		$LOG.VO2(@lno, 7) = $LOG.VO(@_PINT(2), 7)
+		$LOG.VO2(@lno, 8) = $LOG.VO(@_PINT(2), 8)
+		$LOG.VO2(@lno, 9) = $LOG.VO(@_PINT(2), 9)
+		$LOG.VO2(@lno,10) = $LOG.VO(@_PINT(2),10)
+	}
+	IFEND[]
+
+	@NAMEFLAG=0
+
+	return[]
+}
+
+
+//============================================================================
+//■ログにテキストを追加
+//============================================================================
+#=es.LOG.ONE
+{
+//\_dmes("[es.LOG.ONE]"+$_CHR(13)+$_CHR(13)+$LOG.BUF0+$_CHR(13)+$_CHR(13)+$_PSTR(1))
+
+	//テキスト
+	$LOG.TX(@LOG.TXPOS) = $_PSTR(1)
+	@LOG.TXPOS+=1
+
+//	\LOG.W1( $TXN.NAME.TEXT+$_CHR(0xEF)+$_CHR(0xXX)+$TX.LOG )
+	$LOG.BUF0 = ""
+	LOOP[SET=@LOG.TXPOS] $LOG.BUF0 += $LOG.TX(@_LC-1) LOOPEND[]
+
+	\LOG.W2( $es.VOICE.FILE(1), $es.VOICE.FILE(2), $es.VOICE.FILE(3), $es.VOICE.FILE(4), $es.VOICE.FILE(5), $es.VOICE.FILE(6), $es.VOICE.FILE(7), $es.VOICE.FILE(8), $es.VOICE.FILE(9), $es.VOICE.FILE(10) )
+
+	return[]
+}
+
+#=es.LOG.W1
+{
+//\_dmes("[es.LOG.W1]"+$_CHR(13)+$_CHR(13)+$_PSTR(1))
+
+	//テキスト
+	$LOG.BUF0     = $_PSTR(1)
+	return[]
+}
+
+#=es.LOG.W2
+{
+//\_dmes("[es.LOG.W2]"+$_CHR(13)+$_CHR(13))
+
+	//ボイスファイル名
+	$LOG.VO(1, 1) = $_PSTR(1)
+	$LOG.VO(1, 2) = $_PSTR(2)
+	$LOG.VO(1, 3) = $_PSTR(3)
+	$LOG.VO(1, 4) = $_PSTR(4)
+	$LOG.VO(1, 5) = $_PSTR(5)
+	$LOG.VO(1, 6) = $_PSTR(6)
+	$LOG.VO(1, 7) = $_PSTR(7)
+	$LOG.VO(1, 8) = $_PSTR(8)
+	$LOG.VO(1, 9) = $_PSTR(9)
+	$LOG.VO(1,10) = $_PSTR(10)
+	return[]
+}
+
+
+#=es.LOG.WRITE
+{
+
+//\_dmes("[es.LOG.WRITE]"+$_CHR(13)+$_CHR(13)+$_PSTR(1))
+
+	//テキスト
+	IF[$_PSTR(1)!=""] //4つまでしか対応していない
+	{
+		$LOG.BUF0     = $_PSTR(1)
+		//ボイスファイル名
+		$LOG.VO(1,1)  = $_PSTR(2)
+		$LOG.VO(1,2)  = $_PSTR(3)
+		$LOG.VO(1,3)  = $_PSTR(4)
+		$LOG.VO(1,4)  = $_PSTR(5)
+	}
+	IFEND[]
+
+	$LOG.BUF(1) = ""
+
+///xここで正確な表示文字を算出する.
+
+
+	$LOG.BUF(1) = $LOG.BUF0
+/*
+	\_strlen($LOG.BUF0)
+	INT[@len=@_RINT(1)]
+	INT[@y=1]
+	INT[@x]
+	STR[$char]
+	INT[@charSX]
+
+	LOOP[SET=@len]
+	{
+		IF[@x + @LOG.TX.SX + @LOG.TX.SPACE.X >= @LOG.TL.SX - 10]
+		{
+			@x=0
+			@y+=1
+			IF[@y==4] LOOPBREAK[] IFEND[]
+		}
+		IFEND[]
+
+		\_strmid($LOG.BUF0, @_LC, 1)
+		$char = $_RSTR(1)
+		IF[$char==$_CHR(0xEF)+$_CHR(0xF0)]
+		{
+			//\_dmes("r")
+			@x=0
+			@y+=1
+			IF[@y==4] LOOPBREAK[] IFEND[]
+		}
+		ELSE[]
+		{
+			$LOG.BUF(1,@y-1) += $char
+
+			//半角か全角か
+			\_strtype($char)
+			@charSX = @LOG.TX.SX / (3-@_RINT(1))
+			@x += @charSX + @LOG.TX.SPACE.X
+		}
+		IFEND[]
+
+	}
+	LOOPEND[]
+*/
+	return[]
+}
+
+
+#=es.LOG.NUM.PLUS.FLAG
+{
+	@LOG.NUM.PLUS.FLAG=1
+	return[]
+}
+
+#=es.LOG.NUM.PLUS
+{
+
+	IF[@LOG.NUM.PLUS.FLAG && $LOG.BUF0!=""]
+	{
+			@LOG.NUM.PLUS.FLAG=0
+
+
+			IF[@LOG.TXPOS>0]
+			{
+				$LOG.BUF0 = ""
+				LOOP[SET=@LOG.TXPOS]
+				{
+					$LOG.BUF0 += $LOG.TX(@_LC-1)
+				}
+				LOOPEND[]
+				$LOG.BUF(1) = $LOG.BUF0
+
+				@LOG.TXPOS=0
+			}
+			IFEND[]
+
+
+//\_dmes("$LOG.BUF0=["+$LOG.BUF0+"]")
+
+			//制御コードしかないようならスルー(※暫定処理)
+			//
+			\_strlen($LOG.BUF0)
+			INT[@len=@_RINT(1)]
+			INT[@f]
+			LOOP[SET=@len]
+			{
+				\_strmid($LOG.BUF0, @_LC, 1)
+				IF[$_RSTR(1)==$_CHR(0xEF)+$_CHR(0xF0)] LOOPCONTINUE[] IFEND[]
+				IF[$_RSTR(1)==$_CHR(0xEF)+$_CHR(0xF2)] LOOPCONTINUE[] IFEND[]
+				IF[$_RSTR(1)==$_CHR(0xEF)+$_CHR(0xF3)] LOOPCONTINUE[] IFEND[]
+				IF[$_RSTR(1)==$_CHR(0xEF)+$_CHR(0xF4)] LOOPCONTINUE[] IFEND[]
+				IF[$_RSTR(1)==$_CHR(0xEF)+$_CHR(0xF5)] LOOPCONTINUE[] IFEND[]
+				IF[$_RSTR(1)==$_CHR(0xEF)+$_CHR(0xEF)] LOOPCONTINUE[] IFEND[]
+				@f=1;LOOPBREAK[]
+			}
+			LOOPEND[]
+			IF[@f==0] IFBREAK[LV=2] IFEND[]
+
+//\_dmes("LOG.NUM.PLUS  "+$(@_PINT(1))+$_CHR(13)+"$LOG.BUF0=["+$LOG.BUF0+"]")
+
+
+		//	IF[@LOG.NUM>0] //最初の１回は無視する
+			{
+				LOOP[SET=@LOG.PAGE.MAX-1]
+				{
+					$LOG.BUF(@LOG.PAGE.MAX-@_LC+1) = $LOG.BUF(@LOG.PAGE.MAX-@_LC)
+					$LOG.VO(@LOG.PAGE.MAX-@_LC+1,1) = $LOG.VO(@LOG.PAGE.MAX-@_LC,1)
+					$LOG.VO(@LOG.PAGE.MAX-@_LC+1,2) = $LOG.VO(@LOG.PAGE.MAX-@_LC,2)
+					$LOG.VO(@LOG.PAGE.MAX-@_LC+1,3) = $LOG.VO(@LOG.PAGE.MAX-@_LC,3)
+					$LOG.VO(@LOG.PAGE.MAX-@_LC+1,4) = $LOG.VO(@LOG.PAGE.MAX-@_LC,4)
+					$LOG.VO(@LOG.PAGE.MAX-@_LC+1,5) = $LOG.VO(@LOG.PAGE.MAX-@_LC,5)
+					$LOG.VO(@LOG.PAGE.MAX-@_LC+1,6) = $LOG.VO(@LOG.PAGE.MAX-@_LC,6)
+					$LOG.VO(@LOG.PAGE.MAX-@_LC+1,7) = $LOG.VO(@LOG.PAGE.MAX-@_LC,7)
+					$LOG.VO(@LOG.PAGE.MAX-@_LC+1,8) = $LOG.VO(@LOG.PAGE.MAX-@_LC,8)
+					$LOG.VO(@LOG.PAGE.MAX-@_LC+1,9) = $LOG.VO(@LOG.PAGE.MAX-@_LC,9)
+					$LOG.VO(@LOG.PAGE.MAX-@_LC+1,10) = $LOG.VO(@LOG.PAGE.MAX-@_LC,10)
+				}
+				LOOPEND[]
+			}
+		//	IFEND[]
+
+			//ログ数＋１
+			@LOG.NUM += 1
+			IF[@LOG.NUM > @LOG.PAGE.MAX] @LOG.NUM=@LOG.PAGE.MAX IFEND[]
+
+			IF[@VOICEPLAYFLAG] @VOICEPLAYFLAG+=1 IFEND[]
+
+		//\_inttostr(@LOG.NUM)
+		//\DBG.STR(2, $_RSTR(1))
+			$LOG.BUF0 = ""
+			$LOG.BUF(1) = ""
+			$LOG.VO(1,1) = ""
+			$LOG.VO(1,2) = ""
+			$LOG.VO(1,3) = ""
+			$LOG.VO(1,4) = ""
+			$LOG.VO(1,5) = ""
+			$LOG.VO(1,6) = ""
+			$LOG.VO(1,7) = ""
+			$LOG.VO(1,8) = ""
+			$LOG.VO(1,9) = ""
+			$LOG.VO(1,10) = ""
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//============================================================================
+//■ ログクリア
+//============================================================================
+#=es.LOG.CLEAR
+{
+	LOOP[SET=(\.LOG.SIZE)+1]
+	{
+		$LOG.BUF(@_LC-1)=""
+		$LOG.VO(@_LC-1,1)=""
+		$LOG.VO(@_LC-1,2)=""
+		$LOG.VO(@_LC-1,3)=""
+		$LOG.VO(@_LC-1,4)=""
+		$LOG.VO(@_LC-1,5)=""
+		$LOG.VO(@_LC-1,6)=""
+		$LOG.VO(@_LC-1,7)=""
+		$LOG.VO(@_LC-1,8)=""
+		$LOG.VO(@_LC-1,9)=""
+		$LOG.VO(@_LC-1,10)=""
+	}
+	LOOPEND[]
+
+	$LOG.BUF0 = ""
+
+	@LOG.TXPOS = 0
+
+//	@LOG.NUM=0
+	@LOG.NUM=1
+
+	@LOG.NUM.PLUS.FLAG=0
+
+	return[]
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[OLD]ボタン ------------------------------------------------------
+//
+#=ES.LOG.BTN.OLD.ON
+{
+	LOOP[SET=@LOG.PAGE.MAX+@LOG.PAGE.NUM] GOSUB[#=ES.LOG.Down PINT=2] LOOPEND[]
+	IF[@LOG.PAGENUM]
+	{
+		GOSUB[#=es.NUM.Enabled pint=11 pint2=@LOG.CURNO+@LOG.PAGE.NUM]
+	}
+	IFEND[]
+
+	GOSUB[#=es.LOG.REF]
+
+	return[]
+}
+
+//■[BB]ボタン -------------------------------------------------------
+//
+#=ES.LOG.BTN.BB.ON
+{
+	\BT.W0(ES.LOG.BTN.BB)
+
+	GOSUB[#=ES.LOG.Down PINT=2]
+	GOSUB[#=ES.LOG.Down PINT=2]
+///xS:２つ分増やした
+	GOSUB[#=ES.LOG.Down PINT=2]
+	GOSUB[#=ES.LOG.Down PINT=2]
+	IF[@LOG.PAGENUM]
+	{
+		GOSUB[#=es.NUM.Enabled pint=11 pint2=@LOG.CURNO+@LOG.PAGE.NUM]
+	}
+	IFEND[]
+
+	GOSUB[#=es.LOG.REF]
+
+//WAIT[FRAME=2]
+
+	\BT.W1(ES.LOG.BTN.BB)
+
+	return[]
+}
+
+//■[B]ボタン --------------------------------------------------------
+//
+#=ES.LOG.BTN.B.ON
+{
+	\BT.W0(ES.LOG.BTN.B)
+
+//\_dmes(push)
+	GOSUB[#=ES.LOG.Down PINT=1]
+	IF[@LOG.PAGENUM]
+	{
+		GOSUB[#=es.NUM.Enabled pint=11 pint2=@LOG.CURNO+@LOG.PAGE.NUM]
+	}
+	IFEND[]
+
+	GOSUB[#=es.LOG.REF]
+
+WAIT[FRAME=2]
+
+	\BT.W1(ES.LOG.BTN.B)
+
+	return[]
+}
+
+//■[F]ボタン --------------------------------------------------------
+//
+#=ES.LOG.BTN.F.ON
+{
+	\BT.W0(ES.LOG.BTN.F)
+
+	GOSUB[#=ES.LOG.Up PINT=1]
+	IF[@LOG.PAGENUM]
+	{
+		GOSUB[#=es.NUM.Enabled pint=11 pint2=@LOG.CURNO+@LOG.PAGE.NUM]
+	}
+	IFEND[]
+
+	GOSUB[#=es.LOG.REF]
+
+WAIT[FRAME=2]
+
+	\BT.W1(ES.LOG.BTN.F)
+
+	return[]
+}
+
+//■[FF]ボタン -------------------------------------------------------
+//
+#=ES.LOG.BTN.FF.ON
+{
+	\BT.W0(ES.LOG.BTN.FF)
+
+	GOSUB[#=ES.LOG.Up PINT=2]
+	GOSUB[#=ES.LOG.Up PINT=2]
+///xS:２つ分増やした
+	GOSUB[#=ES.LOG.Up PINT=2]
+	GOSUB[#=ES.LOG.Up PINT=2]
+	IF[@LOG.PAGENUM]
+	{
+		GOSUB[#=es.NUM.Enabled pint=11 pint2=@LOG.CURNO+@LOG.PAGE.NUM]
+	}
+	IFEND[]
+
+	GOSUB[#=es.LOG.REF]
+
+//WAIT[FRAME=2]
+
+	\BT.W1(ES.LOG.BTN.FF)
+
+	return[]
+}
+
+//■[NEW]ボタン ------------------------------------------------------
+//
+#=ES.LOG.BTN.NEW.ON
+{
+	LOOP[SET=@LOG.PAGE.MAX+@LOG.PAGE.NUM] GOSUB[#=ES.LOG.Up PINT=2] LOOPEND[]
+	IF[@LOG.PAGENUM]
+	{
+		GOSUB[#=es.NUM.Enabled pint=11 pint2=@LOG.CURNO+@LOG.PAGE.NUM]
+	}
+	IFEND[]
+
+	GOSUB[#=es.LOG.REF]
+
+	return[]
+}
+
+//■[スクロールバー]ボタン -------------------------------------------
+//
+#=ES.LOG.BTN.GAUGE.ON		//ゲージ
+{
+	\SLIDER.SYNC($BID+"BTN.SLIDER")
+	return[]
+}
+
+#=ES.LOG.BTN.SLIDER.DRAG	//スライダー
+{
+	INT[@val1 = -(@LOG.PAGE.NUM)+1]	//ex:-4
+	INT[@val2 = @LOG.NUM-1]			//ex:54
+	INT[@val3 = @val2-@val1]		//ex:0～50
+
+	INT[@per]
+//	\BT.SLIDE.PER.GET(@per, $BID+"BTN.SLIDER")	//ツマミの割合を取得(0～256)
+//	@per=256-@per //上下を逆に
+	@per=256-@_PINT(2) //上下を逆に
+	@val3=@val1+(@val3*@per/256)
+
+//	\DBG.STR(2, "@LOG.CURNO="+$@LOG.CURNO)
+//	\DBG.STR(3, "@val1     ="+$@val1)
+//	\DBG.STR(4, "@val2     ="+$@val2)
+//	\DBG.STR(5, "@val3     ="+$@val3)
+
+	IF[@val3>@LOG.CURNO]
+	{
+		LOOP[]
+		{
+			GOSUB[#=ES.LOG.Down PINT=2]
+			IF[@LOG.PAGENUM]
+			{
+				GOSUB[#=es.NUM.Enabled pint=11 pint2=@LOG.CURNO+@LOG.PAGE.NUM]
+			}
+			IFEND[]
+			IF[@val3==@LOG.CURNO] LOOPBREAK[] IFEND[]
+		}
+		LOOPEND[]
+	}
+	ELSE[@val3<@LOG.CURNO]
+	{
+		LOOP[]
+		{
+			GOSUB[#=ES.LOG.Up PINT=2]
+			IF[@LOG.PAGENUM]
+			{
+				GOSUB[#=es.NUM.Enabled pint=11 pint2=@LOG.CURNO+@LOG.PAGE.NUM]
+			}
+			IFEND[]
+			IF[@val3==@LOG.CURNO] LOOPBREAK[] IFEND[]
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//■[BACK]ボタン -----------------------------------------------------
+//
+#=ES.LOG.BTN.BACK.ON { @es.STATE=101; return[] }
+
+
+//////
+
+
+//--------------------------------------------------------------------
+//■(SAVE 暫定)
+//--------------------------------------------------------------------
+#=es.LOG.SAVE
+{
+	INT[@No=@_PINT(1)]
+	SAVE[DNO=@No   SET=$LOG.BUF()]	// 
+	SAVE[DNO=@No+1 SET=$LOG.VO()]	// 
+	SAVE[DNO=@No+2 SET=@LOG.NUM]	// 
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■(LOAD 暫定)
+//--------------------------------------------------------------------
+#=es.LOG.LOAD
+{
+	STR[$fn=$_PSTR(1)]
+	INT[@No=@_PINT(2)]
+	LOAD[FILE=$fn DNO=@No   LET=$LOG.BUF()]	// 
+	LOAD[FILE=$fn DNO=@No+1 LET=$LOG.VO()]	// 
+	LOAD[FILE=$fn DNO=@No+2 LET=@LOG.NUM]	// 
+
+	return[]
+}
+
+
+//////
+
+
+//△BUF0 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.LOG.BUF0.GET
+{
+	return[rstr=$LOG.BUF0]
+}
+
+
+//▼ログ何個分表示するか @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.LOG.PAGE.NUM.SET
+{
+	@LOG.PAGE.NUM = @_PINT(1)
+	IF[@LOG.PAGE.NUM<1 || @LOG.PAGE.NUM>12] \_mes("[バックログ設計]１ページに表示するログ頁数の値が不正です。");END[] IFEND[]
+	return[]
+}
+
+

@@ -1,0 +1,341 @@
+dnl >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+dnl
+dnl First definition
+dnl There may be few image formats named 'pdt',
+dnl then it is original name of this software.(^^;
+AC_INIT(image_pdt.h)
+
+dnl Software version
+PACKAGE=xkanon
+VERSION=beta21
+
+dnl I do not use automake ; It is too difficult for me ...
+dnl AM_INIT_AUTOMAKE($PACKAGE, $VERSION)
+
+dnl Specify a configuretion file
+AM_CONFIG_HEADER([config.h])
+
+dnl Checks for programs.
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_LN_S
+AC_PROG_RANLIB
+dnl AC_PROG_INSTALL
+AC_PROG_MAKE_SET
+
+dnl Checks for header files.
+AC_PATH_X
+AC_PATH_XTRA
+AC_HEADER_DIRENT
+AC_HEADER_STDC
+AC_CHECK_HEADERS(fcntl.h sys/ioctl.h sys/time.h unistd.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_TYPE_PID_T
+AC_TYPE_SIZE_T
+AC_HEADER_TIME
+AC_STRUCT_TM
+X_LIBS="$X_LIBS -lX11 -lXext -L/usr/X11R6/lib"
+
+CFLAGS="$CFLAGS $X_CFLAGS"
+LIBS="$LIBS $X_LIBS"
+
+
+dnl Checks for library functions.
+AC_PROG_GCC_TRADITIONAL
+AC_FUNC_MEMCMP
+AC_FUNC_MMAP
+AC_TYPE_SIGNAL
+AC_CHECK_FUNCS(gettimeofday mkdir snprintf lrand48 random mkstemp)
+ac_save_LIBS="$LIBS"
+LIBS="$LIBS -pthread"
+AC_CHECK_FUNCS(_thread_sys_sigaltstack)
+LIBS="$ac_save_LIBS"
+AC_C_BIGENDIAN
+
+dnl for gettext
+ALL_LINGUAS="ja"
+AM_GNU_GETTEXT
+AC_CHECK_FUNC(gettext,,AC_CHECK_LIB(intl, gettext))
+
+dnl >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+dnl
+dnl Check libraries
+AC_CHECK_LIB(Xxf86vm, XF86VidModeQueryVersion,,,-lX11 -lXext)
+AC_CHECK_LIB(z, zlibVersion)
+my_save_libs="$LIBS"
+echo $my_save_libs
+dnl LIBS=""
+AC_CHECK_LIB(png, png_write_end)
+VISARC_LIBS=$LIBS
+AC_SUBST(VISARC_LIBS)
+LIBS=$my_save_libs
+AC_PATH_PROG(AVIPLAY,xanim)
+AC_PATH_PROG(MPLAYER,mplayer)
+AC_DEFINE_UNQUOTED(AVIPLAY,"${AVIPLAY}",[avi file player])
+AC_DEFINE_UNQUOTED(MPLAYER,"${MPLAYER}",[mpeg file player])
+
+dnl >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+dnl mp3 player / MIDI player の設定
+
+AC_ARG_WITH(mp3-player, [ --with-mp3-player=CMD    mp3 player is CMD], mp3_player=$withval)
+AC_ARG_WITH(mp3-player-arg, [ --with-mp3-player-arg=ARG    mp3 player is called with command line argument ARG], mp3_player_arg=$withval)
+
+mp3cmd=""
+mp3arg=""
+if test X$mp3_player != X ; then
+	AC_PATH_PROG(mp3cmd, $mp3_player)
+	if test X$mp3cmd != X ; then
+		mp3arg=$mp3_player_arg
+	fi
+fi
+dnl 設定が無い場合、mpg123 -w - を使う
+if test X$mp3cmd = X ; then
+	AC_PATH_PROG(mp3cmd, "mpg123")
+	if test X$mp3cmd != X ; then
+		mp3arg="-w -"
+	fi
+fi
+AC_DEFINE_UNQUOTED(MP3CMD,"${mp3cmd}",[mp3 file player command])
+AC_DEFINE_UNQUOTED(MP3ARG,"${mp3arg}",[mp3 file player command line argument])
+
+dnl >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+dnl Checking pthread bug... (FreeBSD 4.2 or previous release)
+
+AC_MSG_CHECKING([FreeBSD pthread bug])
+dnl auto detection
+FreeBSD_PTHREAD_ERROR=no
+AC_TRY_CPP([
+  #ifdef __FreeBSD__
+  #include <osreldate.h>
+  #if __FreeBSD_version <= 430000
+  #error FreeBSD pthread bug!!
+  #endif
+  #endif],,FreeBSD_PTHREAD_ERROR=yes)
+
+dnl manual detection
+AC_ARG_ENABLE(FreeBSD-pthread-bug,
+  [  --enable-FreeBSD-pthread-bug            manually enables FreeBSD pthread bug support ],
+  [ FreeBSD_PTHREAD_ERROR=$enableval ],)
+AC_MSG_RESULT($FreeBSD_PTHREAD_ERROR)
+if test X$FreeBSD_PTHREAD_ERROR = Xyes ; then
+	FreeBSD_PTHREAD_ERROR=1
+else
+	FreeBSD_PTHREAD_ERROR=0
+fi
+	
+AC_DEFINE_UNQUOTED(FreeBSD_PTHREAD_ERROR,$FreeBSD_PTHREAD_ERROR, [FreeBSD pthread bug])
+
+dnl we now require gtk+ - 2.6
+AM_PATH_GTK_2_0([2.6.0])
+
+
+dnl >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+dnl
+dnl Checking sound ... this code is from xsystem35 configure.in
+dnl
+
+dnl Checks for libraries.
+have_alsa=no
+AC_ARG_ENABLE(alsa,
+  [  --enable-alsa             Try to use ALSA])
+if test "$enable_alsa" == "yes" ; then
+  AM_PATH_ALSA(0.9.0)
+  if test "$have_alsa" = "error" ; then
+    have_alsa=no
+    ALSA_LIBS=
+    ALSA_CFLAGS=
+  elif test "$ALSA_LIBS" ; then
+    have_alsa=yes
+  else
+    have_alsa=no
+    ALSA_LIBS=
+    ALSA_CFLAGS=
+  fi
+fi
+
+have_esd=no
+AC_ARG_ENABLE(esd,
+  [  --enable-esd            Try to use EsounD ])
+if test "$enable_esd" = "yes" ; then
+  KEEPCFLAGS=$CFLAGS
+  KEEPLIBS=$LIBS
+  KEEPLDFLAGS=$LDFLAGS
+  AM_PATH_ESD(0.2.0,have_esd=yes,have_esd=no)
+  CFLAGS=$KEEPCFLAGS
+  LIBS=$KEEPLIBS
+  LDFLAGS=$KEEPLDFLAGS
+fi
+AC_SUBST(ESD_CFLAGS)
+AC_SUBST(ESD_LIBS)
+
+dnl Machine Set
+default_cd=none
+case `uname -s` in
+  Alpha)
+    ;;
+  FreeBSD)
+    OSDEPLIB=-lxpg4
+    default_cd=bsd
+    CDROM_S=cdrom.FreeBSD
+    AUDIO_IO=audioIO_oss;;
+  Linux)
+    default_cd=linux
+    AUDIO_IO=audioIO_oss;;
+  OpenBSD)
+    OSDEPINC=-I/usr/local/lib/oss/include
+    OSDEPLIB=-lossaudio
+    default_cd=bsd
+    AUDIO_IO=audioIO_oss;;
+  NetBSD)
+    OSDEPLIB=-lossaudio
+    default_cd=bsd
+    AUDIO_IO=audioIO_oss;;
+  SGI)
+    chk_rgb=yes
+    OSDEPLIB=-lcdaudio -lds -lmediad;;
+  SunOS)
+    chk_rgb=yes
+    default_cd=linux;;
+esac
+AC_SUBST(OSDEPDEF)
+AC_SUBST(OSDEPLIB)
+
+dnl
+dnl cdrom device
+dnl
+AC_ARG_ENABLE(cdrom,
+  [  --enable-cdrom[=mode_list]  Enable CD-adio (Specify comma separated mode list):
+                              default:  Automatically select cdrom device.
+                              linux:    linux API (Linux/Solaris)
+                              bsd:      BSD API (FreeBSD/NetBSD/OpenBSD)
+                              irix:     IRIX API
+                              mp3:      play mp3 file using external/piped player],
+  [ enable_cdrom=$enableval],
+  [ enable_cdrom=yes])
+
+dnl yes -> default
+test "x$enable_cdrom" = xyes && enable_cdrom=default
+
+if test "x$enable_cdrom" != xno; then
+  for i in `echo $enable_cdrom | sed 's/,/ /g'`; do
+    eval "enable_cd_$i=yes"
+  done
+fi
+
+if test "x$enable_cdrom" = xdefault; then
+  if test "x$default_cd" = x -o "x$default_cd" = xnone; then
+    case "$target" in
+      *-*-linux*|*-*-solaris*)
+        enable_cd_linux=yes
+        ;;
+      *-*-freebsd*|*-*-netbsd*|*-*-openbsd*)
+        enable_cd_bsd=yes
+        ;;
+      *-irix*)
+        enable_cd_irix=yes
+        ;;
+      *-dec-*)
+        enable_cd_mp3=yes
+        ;;
+      *)
+        AC_MSG_WARN(No --enable-cdrom=default cdrom for $target)
+        ;;
+    esac
+  else
+    eval enable_cd_${default_cd}=yes
+  fi
+fi
+
+dnl Check CDROM
+SRC_CDROM=
+if test "x$enable_cd_linux" = xyes; then
+  SRC_CDROM="cdrom.Linux.c"
+  CFLAGS="$CFLAGS -DCDROM_LINUX"
+elif test "x$enable_cd_bsd" = xyes; then
+   SRC_CDROM="$SRC_CROM cdrom.FreeBSD.c"
+   CFLAGS="$CFLAGS -DCDROM_BSD"
+elif test "x$enable_cd_irix" = xyes; then
+  SRC_CDROM="$SRC_CDROM cdrom.Irix.c"
+  CFLAGS="$CFLAGS -DCDROM_IRIX"
+else
+  SRC_CDROM="$SRC_CDROM cdrom.empty.c"
+fi
+if test "x$enable_cd_mp3" = xyes; then
+  SRC_CDROM="$SRC_CDROM cdrom.mp3.c"
+  CFLAGS="$CFLAGS -DCDROM_MP3"
+fi
+AC_SUBST(SRC_CDROM)
+
+AC_ARG_WITH(cdromdev,    [  --with-cdromdev=#       CDROM Device Name. (default is /dev/cdrom)],	cdromdev="$withval",cdromdev="/dev/cdrom")
+AC_DEFINE_UNQUOTED(CDROM_DEVICE,"$cdromdev",[cdrom device])
+
+
+dnl Check Audio
+if test "x$have_alsa" = xyes ; then
+    AC_DEFINE([ENABLE_ALSA], [], [enable ALSA library])
+    AC_ARG_WITH(alsa-card,    [  --with-alsa-card=#      ALSA Card No.],
+	alsacard="$withval",alsacard="0")
+    AC_ARG_WITH(alsa-pcmdev,  [  --with-alsa-pcmdev=#    ALSA PCM device No.],
+	alsapcmdev="$withval",alsapcmdev="0")
+    AC_ARG_WITH(alsa-mixerdev,[  --with-alsa-mixerdev=#  ALSA Mixer device No.],
+	alsamixerdev="$withval",alsamixerdev="0")
+    ALSACARD=$alsacard
+    AC_DEFINE_UNQUOTED(ALSACARD,"$alsacard",[alsa card no])
+    MIXERDEV=$alsamixerdev
+    AUDIODEV=$alsapcmdev
+    AC_CHECK_LIB(asound,snd_mixer_element_read,ALSAMIX_H=audioMix_alsa.h)
+    AC_SUBST(ALSAMIX_H)
+else
+    AC_ARG_WITH(audiodev,[  --with-audio-dev=DEVFILE DSP DEVICE],
+	audiodev="$withval",audiodev="/dev/dsp")
+    AC_ARG_WITH(mixerdev,[  --with-mixer-dev=DEVFILE MIXER DEVICE],
+	mixerdev="$withval",mixerdev="/dev/mixer")
+    AUDIODEV=$audiodev
+    MIXERDEV=$mixerdev
+fi
+AC_DEFINE_UNQUOTED(AUDIODEV,"$AUDIODEV",[aduio device])
+AC_DEFINE_UNQUOTED(MIXERDEV,"$MIXERDEV",[mixer device])
+
+if test "x$have_esd" = xyes ; then
+    AUDIO_IO=audioIO_esd
+else
+    if test "x$have_alsa" = xyes ; then
+        AUDIO_IO=audioIO_alsa
+    fi
+fi
+if test ! "$AUDIO_IO" ; then
+    if test X`uname -s` = XSunOS ; then
+        AUDIO_IO=audioIO_solaris
+    else
+        AUDIO_IO=audioIO_dmy
+    fi
+fi
+AC_SUBST(AUDIO_IO)
+
+dnl >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+dnl
+dnl Check option ... archive and save file directory
+AC_MSG_CHECKING([xkanon archive root directory])
+
+data_root_dir="\$(PREFIX)/share"
+save_root_dir="~/.xkanon"
+AC_ARG_ENABLE(data-root,
+	[ --enable-data-root=DIR change default root directory of the installed binary data directory to DIR],
+	data_root_dir=$enableval)
+AC_ARG_ENABLE(save-root,
+	[ --enable-save-root=DIR change default directory of the save data to DIR],
+	save_root_dir=$enableval)
+AC_SUBST(data_root_dir)
+AC_SUBST(save_root_dir)
+
+dnl set PDT buffer / cache deal
+MaxPDTImage=20
+BackLogLen=1048576
+AC_ARG_WITH(least-memory, [  --with-least-memory       Use least memory. ], MaxPDTImage=3; BackLogLen=65536)
+AC_DEFINE_UNQUOTED(MaxPDTImage,$MaxPDTImage,[pdt cache deal])
+AC_DEFINE_UNQUOTED(BACKLOG_LEN,$BackLogLen, [backlog length])
+
+
+AC_OUTPUT(Makefile contrib/Makefile)

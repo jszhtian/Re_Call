@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "namalib_sys", "namalib_sys\namalib_sys.vcproj", "{EDE20FA5-F765-4FEC-AC49-7B72F03B74A2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "namalib_grp", "namalib_grp\namalib_grp.vcproj", "{2F9410F6-0536-47F3-9311-E5AC4870B9DC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "namalib_grp_core", "namalib_grp_core\namalib_grp_core.vcproj", "{F4575B60-CF66-4A56-9D68-FC30B512FADA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDE20FA5-F765-4FEC-AC49-7B72F03B74A2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EDE20FA5-F765-4FEC-AC49-7B72F03B74A2}.Debug|Win32.Build.0 = Debug|Win32
+		{EDE20FA5-F765-4FEC-AC49-7B72F03B74A2}.Release|Win32.ActiveCfg = Release|Win32
+		{EDE20FA5-F765-4FEC-AC49-7B72F03B74A2}.Release|Win32.Build.0 = Release|Win32
+		{2F9410F6-0536-47F3-9311-E5AC4870B9DC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2F9410F6-0536-47F3-9311-E5AC4870B9DC}.Debug|Win32.Build.0 = Debug|Win32
+		{2F9410F6-0536-47F3-9311-E5AC4870B9DC}.Release|Win32.ActiveCfg = Release|Win32
+		{2F9410F6-0536-47F3-9311-E5AC4870B9DC}.Release|Win32.Build.0 = Release|Win32
+		{F4575B60-CF66-4A56-9D68-FC30B512FADA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F4575B60-CF66-4A56-9D68-FC30B512FADA}.Debug|Win32.Build.0 = Debug|Win32
+		{F4575B60-CF66-4A56-9D68-FC30B512FADA}.Release|Win32.ActiveCfg = Release|Win32
+		{F4575B60-CF66-4A56-9D68-FC30B512FADA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

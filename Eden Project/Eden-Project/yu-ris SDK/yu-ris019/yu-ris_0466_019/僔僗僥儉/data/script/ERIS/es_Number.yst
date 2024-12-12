@@ -1,0 +1,242 @@
+//============================================================================
+//
+//■ERIS 数値表示
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$NUM.CGID(\.NUMBUF.MAX+1)]	//画像CGID
+	S_STR[$NUM.FILE(\.NUMBUF.MAX+1)]	//画像ファイル(未指定の場合はテキスト描画になる)
+	S_INT[@NUM.X(\.NUMBUF.MAX+1)]		//表示座標X
+	S_INT[@NUM.Y(\.NUMBUF.MAX+1)]		//表示座標Y
+	S_INT[@NUM.Z(\.NUMBUF.MAX+1)]		//表示座標Z
+	S_INT[@NUM.SX(\.NUMBUF.MAX+1)]		//文字間隔
+	S_INT[@NUM.DIG(\.NUMBUF.MAX+1)]		//桁数
+	S_INT[@NUM.ZERO(\.NUMBUF.MAX+1)]	//上位桁に０を表示するか否か
+	S_INT[@NUM.NOT(\.NUMBUF.MAX+1)=10]	//進数
+	S_INT[@NUM.RANGE(\.NUMBUF.MAX+1)]	//範囲制限有無フラグ(0=なし/1=下限あり/2=上限あり/3=上限下限あり)
+	S_INT[@NUM.MAX(\.NUMBUF.MAX+1)]		//上限値
+	S_INT[@NUM.MIN(\.NUMBUF.MAX+1)]		//下限値
+	S_INT[@NUM.VAL(\.NUMBUF.MAX+1)]		//数値
+
+}
+
+
+
+#=es.NUM.SET
+{
+
+	INT[@NO=@_PINT(1)]
+
+	//バッファレイヤ生成
+	IF[$NUM.CGID(@NO)==""]
+	{
+		$NUM.CGID(@NO)="es.NUM.BUF"
+
+		INT[@mLC]
+		STR[$sLC]
+		LOOP[SET=@NUM.NOT(@NO)]
+		{
+			@mLC=@_LC-1
+			\_inttostr(@mLC, 1);$sLC=$_RSTR(1)
+
+			CG[ID=$NUM.CGID(@NO)+$(@NO*10000+@mLC) Z=1 E=0 A=256 FILE=$NUM.FILE(@NO)+$sLC]
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	//表示レイヤ生成
+	LOOP[SET=@NUM.DIG(@NO)]
+	{
+		CG[ID="es.NUM"+$(@NO*10000+@_LC) X=@NUM.X(@NO)+@NUM.SX(@NO)*(@_LC-1) Y=@NUM.Y(@NO) Z=@NUM.Z(@NO) E=0 FILE=""]
+	}
+	LOOPEND[]
+//	CG[ID="es.NUM"+$(@NO) X=@NUM.X(@NO) Y=@NUM.Y(@NO) Z=@NUM.Z(@NO) E=0 A=256 SX=@NUM.SX(@NO)*10 SY=20 FILE=""]
+//	CGACT[ID="es.NUM"+$(@NO) RECTPAINT3=1 SET=0xff0000ff]
+
+	return[]
+}
+
+
+#=es.NUM.Enabled
+{
+	INT[@NO =@_PINT(1)]
+	INT[@VAL=@_PINT(2)]
+	INT[@pow]
+	INT[@flag]
+
+	//範囲制限
+	IF[(@NUM.RANGE(@NO)&1)>0 && @VAL<@NUM.MIN(@NO)] @VAL=@NUM.MIN(@NO) IFEND[]
+	IF[(@NUM.RANGE(@NO)&2)>0 && @VAL>@NUM.MAX(@NO)] @VAL=@NUM.MAX(@NO) IFEND[]
+
+	@flag|=(@NUM.ZERO(@NO)==1) //全桁表示
+
+	LOOP[SET=@NUM.DIG(@NO)]
+	{
+		@pow=@es.POW10(@NUM.DIG(@NO)-@_LC)
+
+		@flag|=((@VAL/@pow)>0)
+		@flag|=(@_LC==@NUM.DIG(@NO))
+
+		IF[@flag]
+		{
+	//		CGACT[COPY2=1 ID=$NUM.CGID(@NO)+$(@NO*10000+(@VAL/@pow)%10) ID2="es.NUM"+$(@NO)]
+	//		CGACT[MERGE=1 ID=$NUM.CGID(@NO)+$(@NO*10000+(@VAL/@pow)%10) ID2="es.NUM"+$(@NO) X=3 Y=3]
+	//		CG[ID="es.NUM"+$(@NO) E=1]
+
+			CGACT[COPY2=1 ID=$NUM.CGID(@NO)+$(@NO*10000+(@VAL/@pow)%10) ID2="es.NUM"+$(@NO*10000+@_LC)]
+			CG[ID="es.NUM"+$(@NO*10000+@_LC) E=1]
+		}
+		ELSE[]
+		{
+			CG[ID="es.NUM"+$(@NO*10000+@_LC) E=0]
+		}
+		IFEND[]
+
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+#=es.NUM.Disabled
+{
+	INT[@NO =@_PINT(1)]
+
+	LOOP[SET=@NUM.DIG(@NO)]
+	{
+		CG[ID="es.NUM"+$(@NO*10000+@_LC) E=0]
+	}
+	LOOPEND[]
+//	CG[ID="es.NUM"+$(@NO) E=0]
+
+	return[]
+}
+
+#=es.NUM.DEL
+{
+	INT[@NO =@_PINT(1)]
+
+	//これはこのままでいい.     es.NUM.BUF↓
+	LOOP[SET=@NUM.NOT(@NO)] CGEND[ID="es.NUM.BUF"+$(@NO*10000+@_LC-1)] LOOPEND[]
+
+	LOOP[SET=@NUM.DIG(@NO)] CGEND[ID="es.NUM"    +$(@NO*10000+@_LC  )] LOOPEND[]
+//	CGEND[ID="es.NUM"+$(@NO)]
+
+	$NUM.CGID(@NO)=""
+	$NUM.FILE(@NO)=""
+	@NUM.X(@NO)=0
+	@NUM.Y(@NO)=0
+	@NUM.Z(@NO)=0
+	@NUM.SX(@NO)=0
+	@NUM.DIG(@NO)=0
+	@NUM.ZERO(@NO)=0
+	@NUM.NOT(@NO)=10 //10
+	@NUM.RANGE(@NO)=0
+	@NUM.MAX(@NO)=0
+	@NUM.MIN(@NO)=0
+	@NUM.VAL(@NO)=0
+
+	return[]
+}
+
+
+//////
+
+
+//▼CGID @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.CGID.SET
+{
+	$NUM.CGID(@_PINT(1)) = $_PSTR(2)
+	return[]
+}
+
+//▼画像ファイル @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.FILE.SET
+{
+	$NUM.FILE(@_PINT(1)) = $_PSTR(2)
+	return[]
+}
+
+//▼座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.XY.SET
+{
+	@NUM.X(@_PINT(1)) = @_PINT(2)
+	@NUM.Y(@_PINT(1)) = @_PINT(3)
+	return[]
+}
+
+//▼優先順位 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.Z.SET
+{
+	@NUM.Z(@_PINT(1)) = @_PINT(2)
+	return[]
+}
+
+//▼座標＆優先順位 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.XYZ.SET
+{
+	@NUM.X(@_PINT(1)) = @_PINT(2)
+	@NUM.Y(@_PINT(1)) = @_PINT(3)
+	@NUM.Z(@_PINT(1)) = @_PINT(4)
+	return[]
+}
+
+//▼文字間隔 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.SX.SET
+{
+	@NUM.SX(@_PINT(1)) = @_PINT(2)
+	return[]
+}
+
+//▼桁数 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.DIG.SET
+{
+	@NUM.DIG(@_PINT(1)) = @_PINT(2)
+	@NUM.ZERO(@_PINT(1)) = @_PINT(3)
+	return[]
+}
+
+//▼進数(NOTation) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.NOT.SET
+{
+	@NUM.NOT(@_PINT(1)) = @_PINT(2)
+	return[]
+}
+
+//▼上限 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.MAX.SET
+{
+	@NUM.MAX(@_PINT(1)) = @_PINT(2)
+	@NUM.RANGE(@_PINT(1)) |= 2
+	return[]
+}
+
+//▼下限 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.MIN.SET
+{
+	@NUM.MIN(@_PINT(1)) = @_PINT(2)
+	@NUM.RANGE(@_PINT(1)) |= 1
+	return[]
+}
+
+//▼数値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NUM.VAL.SET
+{
+	@NUM.VAL(@_PINT(1)) = @_PINT(2)
+	return[]
+}
+

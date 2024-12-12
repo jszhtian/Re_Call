@@ -1,0 +1,126 @@
+#!/bin/sh
+
+# senario_test
+#	senario_test <path> <other options for senario_dump>
+#	path はインストールしたディレクトリ
+
+# visarc と seneario_dump がカレントディレクトリまたは /tmp に必要
+
+search_path="./ /tmp/ /usr/bin/ /usr/X11R6/bin/ /usr/local/bin/"
+
+# まず、バイナリを探す
+VISARC=""
+for p in $search_path ; do
+	if [ -x ${p}visarc ] ; then
+		VISARC=${p}visarc
+		break
+	fi
+done
+
+DUMP=""
+for p in $search_path ; do
+	if [ -x ${p}senario_dump ] ; then
+		DUMP=${p}senario_dump
+		break
+	fi
+done
+
+if [ "X$VISARC" = X -o "X$DUMP" = X ] ; then
+	echo "Cannot find binary , visarc or senario_dump. Please make!"
+	exit 1
+fi
+
+# パスを確認
+if [ "X$#" = X0 ] ; then
+	echo "usage : senario_test <path> <other options...>"
+	exit 1
+fi
+
+if [ ! -d $1 ] ; then
+	echo "Cannot find directory : $1"
+	exit 1
+fi
+datadir=$1 ; shift
+
+# seen.txt を探す
+seen_list="dat/seen.txt DAT/seen.txt txt/seen.txt TXT/seen.txt dat/SEEN.TXT DAT/SEEN.TXT txt/SEEN.TXT TXT/SEEN.TXT"
+for s in $seen_list; do
+	if [ -r $datadir/$s ] ; then
+		SEEN=$datadir/$s
+		break
+	fi
+done
+
+if [ "X$SEEN" = X ] ; then
+	echo "Cannot find 'seen.txt' in subdirectories of '$datadir'. Install binary correctly!"
+	exit 1
+fi
+
+# senario_dump のリスト内容と visarc のリスト内容が一致するのを確認
+
+echo "do senario_dump for listing : $DUMP --path $datadir $*"
+$DUMP --path $datadir $* | awk '{print $1;}' | sed 's/^0$//' >/tmp/senario_test_list1
+
+echo "do visarc for listing : $VISARC l $SEEN"
+$VISARC l $SEEN | grep SEEN | sed 's/SEEN.TXT/SEEN000.TXT/' |sed 's/^.*SEEN0*//' | sed 's/.TXT.*//' > /tmp/senario_test_list2
+
+echo "diff two list?"
+diff /tmp/senario_test_list1 /tmp/senario_test_list2
+
+if [ "X$?" != X0 ] ; then
+	echo "two lists differ ; some errors may occur."
+	echo "check file '/tmp/senario_test_list1 , /tmp/senario_test_list2'."
+	exit 1
+fi
+
+
+# senario_dump で全てのシナリオを展開する
+echo "do senario_dump for all files"
+cat /tmp/senario_test_list1 | xargs $DUMP --path $datadir $* > /tmp/senario_test_all
+
+# (作業用のファイルを消す)
+rm -f /tmp/senario_test_list1
+rm -f /tmp/senario_test_list2
+
+echo "Checking errors"
+grep Error /tmp/senario_test_all | diff /dev/null -
+if [ "X$?" != X0 ] ; then
+	echo "some errors exist in senario decode."
+	echo "check file '/tmp/senario_test_all'."
+	exit 0
+fi
+
+# sel のチェック
+echo "checking sel no..."
+if [ -e $datadir/gameexe.ini ] ; then
+	cp $datadir/gameexe.ini /tmp/g.ini
+elif [ -e $datadir/Gameexe.ini ] ; then
+	cp $datadir/Gameexe.ini /tmp/g.ini
+elif [ -e $datadir/gameexe.INI ] ; then
+	cp $datadir/gameexe.INI /tmp/g.ini
+elif [ -e $datadir/GAMEEXE.INI ] ; then
+	cp $datadir/GAMEEXE.INI /tmp/g.ini
+else
+	cp /dev/null /tmp/g.ini
+fi
+perl -e '
+	open(OUT,">/tmp/sel_list") || die;
+	open(IN,"/tmp/g.ini") || die;
+	while(<IN>){
+		if (/SEL\.(.*)=(.*)$/) {
+			$sel_no = $1; $sel_list = $2;
+			@sel = split(/,/, $sel_list);
+			$sel_no =~ s/^0+//; $sel[7] =~ s/^0+//;
+			print OUT "s/SelBuf number $sel_no *\$/SelBuf $sel[7]/\n";
+		}
+	}
+'
+
+grep Sel /tmp/senario_test_all | sed 's/^.*Sel/Sel/' | sed 's/ :.*//' | \
+	sed -f /tmp/sel_list | sort|uniq
+
+rm -f /tmp/g.ini /tmp/sel_list
+echo "all senario checks done."
+
+# 作業用のファイルを消す
+rm -f /tmp/senario_test_all

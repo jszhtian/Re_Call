@@ -1,0 +1,170 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="./top.html">概要</A>＞システム変数</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="./basic.html">[基本文法]</A>
+　<A HREF="./variable.html">[変数]</A>
+　<A HREF="./svariable.html">[システム変数]</A>
+　<A HREF="./macro.html">[マクロ]</A>
+　<A HREF="./layer.html">[ＣＧレイヤ]</A>
+　<A HREF="./task.html">[タスク]</A>
+　<A HREF="./input.html">[入力]</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■システム変数</FONT>
+<FONT CLASS=t20>
+
+<FONT CLASS=t60><U>●システム変数とは</U></FONT>
+
+システム変数とはユーリスに最初から用意されている変数のことで、
+日付や時間をはじめ、起動したＯＳのバージョン、また、任意のキーの押下状態などが格納されています。
+
+最初の一文字が「 ＿ 」アンダーバーから始まる変数がシステム変数です。
+
+システム変数の種類は以下の通りです。
+
+
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TH><FONT CLASS=t30>代入</FONT></TH><TH><FONT CLASS=t30>システム変数名</FONT></TH><TH><FONT CLASS=t30>説明</FONT></TH></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_LC</FONT></TD><TD><FONT CLASS=t40>LOOP 命令内でのループカウンタ(1～x)<BR>※LOOPネスト毎に値を保持します</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_PINT(n)</FONT></TD><TD><FONT CLASS=t40>GOSUBジャンプ元から受け取った整数値　※nはパラメータ番号(1～16)<BR>※GOSUBネスト毎に値を保持します</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_PFLT(n)</FONT></TD><TD><FONT CLASS=t40>GOSUBジャンプ元から受け取った実数値　※nはパラメータ番号(1～16)<BR>※GOSUBネスト毎に値を保持します</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_PSTR(n)</FONT></TD><TD><FONT CLASS=t40>GOSUBジャンプ元から受け取った文字列　※nはパラメータ番号(1～16)<BR>※GOSUBネスト毎に値を保持します</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_PFLG(n)</FONT></TD><TD><FONT CLASS=t40>GOSUBジャンプ元に PINT/PFLT/PSTR が存在したか　※nはパラメータ番号(1～16)<BR>※GOSUBネスト毎に値を保持します</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_RINT(n)</FONT></TD><TD><FONT CLASS=t40>RETURNジャンプ元から受け取った整数値　※nはパラメータ番号(1～16)<BR>※GOSUBネスト毎に値を保持します</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_RFLT(n)</FONT></TD><TD><FONT CLASS=t40>RETURNジャンプ元から受け取った実数値　※nはパラメータ番号(1～16)<BR>※GOSUBネスト毎に値を保持します</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_RSTR(n)</FONT></TD><TD><FONT CLASS=t40>RETURNジャンプ元から受け取った文字列　※nはパラメータ番号(1～16)<BR>※GOSUBネスト毎に値を保持します</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_RFLG(n)</FONT></TD><TD><FONT CLASS=t40>RETURNジャンプ元に RINT/RFLT/RSTR が存在したか　※nはパラメータ番号(1～16)<BR>※GOSUBネスト毎に値を保持します</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_M ～ $_M16</FONT></TD><TD><FONT CLASS=t40>マクロパラメータが格納される変数(マクロ宣言時にのみ使用)</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_MB ～ $_MB16</FONT></TD><TD><FONT CLASS=t40>マクロパラメータＢが格納される変数(マクロ宣言時にのみ使用)</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_TEXT</FONT></TD><TD><FONT CLASS=t40>現在表示されているテキストの内容</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_TEXT_FLAG</FONT></TD><TD><FONT CLASS=t40>現在表示されているテキストの半角全角情報や、改行改頁クリック待ち情報</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_MENUCODE</FONT></TD><TD><FONT CLASS=t40>最後に選択されたメニュー項目の CODE 値</FONT></TD></TR>
+
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_TIME</FONT></TD><TD><FONT CLASS=t40>■現在の日付・時間<BR>@_TIME(0,0) = 西暦<BR>@_TIME(0,1) = 月<BR>@_TIME(0,2) = 日<BR>@_TIME(0,3) = 曜日<BR>@_TIME(0,4) = 時<BR>@_TIME(0,5) = 分<BR>@_TIME(0,6) = 秒<BR>@_TIME(0,7) = ミリ秒<BR><BR>■YU-RISを起動した時点での日付・時間<BR>@_TIME(1,0) = 西暦<BR>@_TIME(1,1) = 月<BR>@_TIME(1,2) = 日<BR>@_TIME(1,3) = 曜日<BR>@_TIME(1,4) = 時<BR>@_TIME(1,5) = 分<BR>@_TIME(1,6) = 秒<BR>@_TIME(1,7) = ミリ秒</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_OS_TIME</FONT></TD><TD><FONT CLASS=t40>■経過時間(ミリ秒)<BR>@_OS_TIME(0) = ＯＳを起動してからの経過時間<BR>@_OS_TIME(1) = YU-RISを起動してからの経過時間</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_OS_VERSION</FONT></TD><TD><FONT CLASS=t40>ＯＳの種類<BR>20 = Windows 98<BR>21 = Windows 98SE<BR>30 = Windows ME<BR>40 = Windows 2000<BR>50 = Windows XP<BR>60 = Windows 2003<BR>70 = Windows Vista<BR>80 = Windows 7<BR>90 = Windows 8<BR>91 = Windows 8.1<BR>255 = その他のＯＳ</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_OS_DXVERSION</FONT></TD><TD><FONT CLASS=t40>DirectXのバージョン(メジャーバージョン番号のみ)</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_OS_SOUND</FONT></TD><TD><FONT CLASS=t40>サウンド機能が利用可能(=1)、利用不可(=0)</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_OS_MEMTOTAL</FONT></TD><TD><FONT CLASS=t40>搭載メモリ容量(単位：バイト)</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_OS_MEMAVAIL</FONT></TD><TD><FONT CLASS=t40>空きメモリ容量(単位：バイト)</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_SYSTEM_VERSION</FONT></TD><TD><FONT CLASS=t40>YU-RISのバージョン(x1000した値)</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_SYSTEM_PATH</FONT></TD><TD><FONT CLASS=t40>YU-RIS起動パス</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_SAVE_PATH</FONT></TD><TD><FONT CLASS=t40>YU-RISセーブデータパス</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_APPDATA_PATH</FONT></TD><TD><FONT CLASS=t40>ユーザのホームディレクトリパス</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_PERSONAL_PATH</FONT></TD><TD><FONT CLASS=t40>マイドキュメントのパス</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_ARGC</FONT></TD><TD><FONT CLASS=t40>YU-RIS起動時のコマンドラインパラメータの数</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>$_ARGV(0～8)</FONT></TD><TD><FONT CLASS=t40>YU-RIS起動時のコマンドラインパラメータ</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_DEBUGMODE</FONT></TD><TD><FONT CLASS=t40>デバッグモードか否か(1=デバッグモード/0=リリースモード)</FONT></TD></TR>
+
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_SCREEN_COLOR</FONT></TD><TD><FONT CLASS=t40>現在の色数</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_SCREEN_SIZE_X</FONT></TD><TD><FONT CLASS=t40>現在の画面解像度(Ｘ座標)</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_SCREEN_SIZE_Y</FONT></TD><TD><FONT CLASS=t40>現在の画面解像度(Ｙ座標)</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_WINDOW_EXEC_MAX</FONT></TD><TD><FONT CLASS=t40>最大化ボタン押下状態(0/1)</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_WINDOW_EXEC_CLOSE</FONT></TD><TD><FONT CLASS=t40>閉じるボタン押下状態(0/1)</FONT></TD></TR>
+
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_MEDIA_READONLY</FONT></TD><TD><FONT CLASS=t40>読み込み専用メディア、または書き込み権限のない<BR>環境から起動した場合に１が格納される(0/1)</FONT></TD></TR>
+
+<TR><TH><FONT CLASS=t30>　</FONT></TD><TD><FONT CLASS=t40>@_PAI</FONT></TD><TD><FONT CLASS=t40>πの値(3.1415926535～)</FONT></TD></TR>
+
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_INP(n)</FONT></TD><TD><FONT CLASS=t40>キー／マウス押下状態(配列版)　※３</FONT></TD></TR>
+
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_ANY</FONT></TD><TD><FONT CLASS=t40>任意のキーの押下状態</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_A ～ @_KEY_Z</FONT></TD><TD><FONT CLASS=t40>A～Zキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_0 ～ @_KEY_9</FONT></TD><TD><FONT CLASS=t40>0～9キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_NUM0 ～ @_KEY_NUM9</FONT></TD><TD><FONT CLASS=t40>0～9テンキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_F1 ～ @_KEY_F24</FONT></TD><TD><FONT CLASS=t40>F1～F24ファンクションキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_BS</FONT></TD><TD><FONT CLASS=t40>BSキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_TAB</FONT></TD><TD><FONT CLASS=t40>TABキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_SPACE</FONT></TD><TD><FONT CLASS=t40>SPACEキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_ENTER</FONT></TD><TD><FONT CLASS=t40>ENTERキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_SHIFT</FONT></TD><TD><FONT CLASS=t40>SHIFTキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_CTRL</FONT></TD><TD><FONT CLASS=t40>CTRLキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_ALT</FONT></TD><TD><FONT CLASS=t40>ALTキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_LEFT</FONT></TD><TD><FONT CLASS=t40>LEFTキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_RIGHT</FONT></TD><TD><FONT CLASS=t40>RIGHTキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_UP</FONT></TD><TD><FONT CLASS=t40>UPキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_DOWN</FONT></TD><TD><FONT CLASS=t40>DOWNキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_INSERT</FONT></TD><TD><FONT CLASS=t40>INSERTキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_DELETE</FONT></TD><TD><FONT CLASS=t40>DELETEキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_HELP</FONT></TD><TD><FONT CLASS=t40>HELPキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_SCROLL</FONT></TD><TD><FONT CLASS=t40>SCROLLキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_NUMLOCK</FONT></TD><TD><FONT CLASS=t40>NUMLOCKキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_ESC</FONT></TD><TD><FONT CLASS=t40>ESCキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_PAGEUP</FONT></TD><TD><FONT CLASS=t40>PAGEUPキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_PAGEDOWN</FONT></TD><TD><FONT CLASS=t40>PAGEDOWNキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_HOME</FONT></TD><TD><FONT CLASS=t40>HOMEキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_END</FONT></TD><TD><FONT CLASS=t40>ENDキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_NUMADD</FONT></TD><TD><FONT CLASS=t40>＋テンキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_NUMSUB</FONT></TD><TD><FONT CLASS=t40>－テンキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_NUMMUL</FONT></TD><TD><FONT CLASS=t40>＊テンキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_NUMDIV</FONT></TD><TD><FONT CLASS=t40>／テンキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_NUMDEC</FONT></TD><TD><FONT CLASS=t40>．テンキー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_HYPHEN</FONT></TD><TD><FONT CLASS=t40>－(ハイフン)キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_CIRCUMFLEX</FONT></TD><TD><FONT CLASS=t40>＾キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_YEN</FONT></TD><TD><FONT CLASS=t40>￥キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_AT</FONT></TD><TD><FONT CLASS=t40>＠キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_LEFTBRACKET</FONT></TD><TD><FONT CLASS=t40>［キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_RIGHTBRACKET</FONT></TD><TD><FONT CLASS=t40>］キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_SEMICOLON</FONT></TD><TD><FONT CLASS=t40>；キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_COLON</FONT></TD><TD><FONT CLASS=t40>：キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_COMMA</FONT></TD><TD><FONT CLASS=t40>，キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_PERIOD</FONT></TD><TD><FONT CLASS=t40>．キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_SLASH</FONT></TD><TD><FONT CLASS=t40>／キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEY_BACKSLASH</FONT></TD><TD><FONT CLASS=t40>＼キー押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_KEYNUM_～</FONT></TD><TD><FONT CLASS=t40>キーの押された回数<BR>　※ ～ に入る文字は上の @_KEY_～ 系の文字と<BR>　　　同じものが入ります。</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_MOUSE_L</FONT></TD><TD><FONT CLASS=t40>マウス左ボタン押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_MOUSE_R</FONT></TD><TD><FONT CLASS=t40>マウス右ボタン押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_MOUSE_M</FONT></TD><TD><FONT CLASS=t40>マウス中央ボタン押下状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_MOUSE_U</FONT></TD><TD><FONT CLASS=t40>マウスホイール↑回し状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_MOUSE_D</FONT></TD><TD><FONT CLASS=t40>マウスホイール↓回し状態　※１</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_MOUSENUM_～</FONT></TD><TD><FONT CLASS=t40>マウスボタンの押された回数<BR>　※ ～ に入る文字は上の @_MOUSE_～ 系の文字と<BR>　　　同じものが入ります。</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_MOUSE_X</FONT></TD><TD><FONT CLASS=t40>マウスＸ座標</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_MOUSE_Y</FONT></TD><TD><FONT CLASS=t40>マウスＹ座標</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_PAD_LEFT(n)</FONT></TD><TD><FONT CLASS=t40>パッド[左]の押下状態　※１　※２</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_PAD_RIGHT(n)</FONT></TD><TD><FONT CLASS=t40>パッド[右]の押下状態　※１　※２</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_PAD_UP(n)</FONT></TD><TD><FONT CLASS=t40>パッド[上]の押下状態　※１　※２</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_PAD_DOWN(n)</FONT></TD><TD><FONT CLASS=t40>パッド[下]の押下状態　※１　※２</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_PAD_BUTTON(n, m)</FONT></TD><TD><FONT CLASS=t40>パッドボタンの押下状態　※１　※２　※４</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_PAD_BUTTON1(n)<BR>　～ @_PAD_BUTTON32(n)</FONT></TD><TD><FONT CLASS=t40>注：廃止予定の変数です。↑の @_PAD_BUTTON を使用してください。<BR>パッドボタンの押下状態　※１　※２</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_PADNUM_～</FONT></TD><TD><FONT CLASS=t40>パッドの押下回数<BR>　※ ～ に入る文字は上の @_PAD_～ 系の文字と<BR>　　　同じものが入ります。</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_PAD_NUMBER</FONT></TD><TD><FONT CLASS=t40>接続されているパッドの数</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_CODE_～</FONT></TD><TD><FONT CLASS=t40>各キーのボタンコード<BR>　※ ～ に入る文字は上の @_KEY_～ 系の文字と同じものが入ります。<BR>例：@_CODE_Z, @_CODE_SLASH</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_CODE_MOUSE_～</FONT></TD><TD><FONT CLASS=t40>各マウスのボタンコード<BR>　※ ～ に入る文字は上の @_MOUSE_～ 系の文字と同じものが入ります。<BR>例：@_CODE_MOUSE_L, @_CODE_MOUSE_D</FONT></TD></TR>
+<TR><TH><FONT CLASS=t30>○</FONT></TD><TD><FONT CLASS=t40>@_CODE_PAD_～(n)</FONT></TD><TD><FONT CLASS=t40>各パッドのボタンコード<BR>　※ ～ に入る文字は上の @_PAD_～ 系の文字と同じものが入ります。<BR>例：@_CODE_PAD_LEFT(1), @_CODE_PAD_DOWN(2)<BR><BR>@_CODE_PAD_BUTTON～ の場合は、<BR>@_CODE_PAD_BUTTON(n, m) のように二次元配列で指定します。<BR>n はパッド番号(0～15), m は ボタン番号(0～31)になります。<BR>例：@_CODE_PAD_BUTTON(0, 0), @_CODE_PAD_BUTTON(1, 24)</FONT></TD></TR>
+</TABLE>
+<FONT CLASS=t20>
+代入　○：値を代入する事が出来るシステム変数です。
+　　　△：値を代入する事が出来ますが、間違った使い方をすると正しく動作しなくなる危険性があります。
+　　　無記入：値を代入する事は出来ません（エラーメッセージが出ます）
+
+※１　押されていれば『押され続けているフレーム数』が(例:1,2,3,4,5…)、
+　　　　離されていれば『離され続けているフレーム数(マイナス値)』が(例:-1,-2,-3,-4,-5…)格納されます。
+
+※２　ｎはパッド番号(0～15)
+
+※３　ｎにはそれぞれ対応するボタンコードを指定します。使い方としては、
+　　　　@_INP( @_CODE_Z )
+　　　と書けば、Ｚキーの押下状態が取得できます。また、
+　　　　@VAL = @_CODE_Z
+　　　　@_INP( @VAL )
+　　　と書くこともできます。
+　　　これを利用すれば、@VALキーの値を変えるだけで、どのキーを取得するかが簡単に変更できるようになります。
+　　　キーコンフィグ機能を搭載する場面などで役立つと思います。
+
+※４　ｍはパッドボタン番号(0～31)
+
+</FONT>
+
+</FONT>
+
+
+</BODY></HTML>
+

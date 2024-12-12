@@ -1,0 +1,46 @@
+modename load
+
+enterFadeInType 2
+enterFadeInTime 5
+enterFadeInSkipOkFlag 1
+enterFadeInColorR 0
+enterFadeInColorG 0
+enterFadeInColorB 0
+createExitScreenFlag 1
+fillExitScreenFlag 1
+
+
+fileNameBG sys_load_bg
+
+useCommonBackSetup 1
+useCommonUpDownSetup 1
+
+
+
+
+
+fileNamePageFont ta_suuji24x24
+pagePrintFlag 1
+pageKeta 2
+pagePrintX 137
+pagePrintY 538
+pageFontSizeX 24
+pageFontSizeY 24
+pageFontNextX 24
+pageMaxPrintFlag 0
+slashPrintFlag 0
+pageUpZeroPrintFlag 0
+
+blockNumberX 4
+blockNumberY 3
+printX 52
+printY 120
+nextX 180
+nextY 150
+
+page 10
+
+loadSound 5
+cannotLoadSound 4
+
+ClickTime 2

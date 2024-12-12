@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>960</width>
+    <height>540</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res/res.qrc">
+    <normaloff>:/icon/00001.ico</normaloff>:/icon/00001.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#MainWindow { 
+border-image: url(:/image/bg.bmp); 
+} 
+#MainWindow * { 
+border-image:url(); 
+}</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QPushButton" name="pushButton_Install">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>490</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:2px groove gray;border-radius:10px;padding:2px 4px;
+</string>
+    </property>
+    <property name="text">
+     <string>Install</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Exit">
+    <property name="geometry">
+     <rect>
+      <x>860</x>
+      <y>490</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:2px groove gray;border-radius:10px;padding:2px 4px;
+</string>
+    </property>
+    <property name="text">
+     <string>Exit</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>450</y>
+      <width>400</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_select">
+    <property name="geometry">
+     <rect>
+      <x>860</x>
+      <y>450</y>
+      <width>50</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:2px groove gray;border-radius:10px;padding:2px 4px;
+</string>
+    </property>
+    <property name="text">
+     <string>Select</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Info">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>490</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:2px groove gray;border-radius:10px;padding:2px 4px;
+</string>
+    </property>
+    <property name="text">
+     <string>About</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="main_display">
+    <property name="geometry">
+     <rect>
+      <x>155</x>
+      <y>80</y>
+      <width>650</width>
+      <height>360</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:transparent</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>450</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Select Setup Directory</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="res/res.qrc"/>
+ </resources>
+ <connections/>
+ <slots>
+  <slot>updateDirectory()</slot>
+ </slots>
+</ui>

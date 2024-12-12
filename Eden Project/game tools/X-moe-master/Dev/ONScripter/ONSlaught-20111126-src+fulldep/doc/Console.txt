@@ -1,0 +1,23 @@
+In order to use the console, two conditions must be met:
+1. ONSlaught has to be started with the -debug command line option.
+2. The font file "cout.ttf" needs to be in the working directory. Alternatively,
+   the path to the font file can be provided in the configuration file using the
+   variable "console font".
+
+Console controls:
+UP and DOWN: Navigate the command history.
+CTRL+UP and CTRL+DOWN: Navigate the console history.
+TAB: Autocomplete.
+
+Console commands:
+_get: Evaluate an expression and print its result to the console (e.g.
+_get 1+2*3 or _get %variable). The expression can evaluate to a string or an
+integer.
+quit: Immediately terminates the engine.
+Everything else: Is directly interpreted. If the command line can't be
+interpreted immediately for safety reasons, it's queued for interpretation at
+the end of the current command. Commands that aren't queued: add, atoi, cmp,
+cos, date, date2, dec, dim, div, effect, fileexist, getbgmvol, getbtntimer,
+getcursorpos, getini, getlog, getmp3vol, gettext, gettimer, getversion, inc,
+intlimit, isfull, ispage, itoa, itoa2, len, mid, mod, mov, mov3, mov4, mov5,
+mov6, mov7, mov8, mov9, mov10, movl, mul, rnd, rnd2, sin, split, tan, time.

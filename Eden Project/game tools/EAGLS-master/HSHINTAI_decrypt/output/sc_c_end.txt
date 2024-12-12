@@ -1,0 +1,190 @@
+$sc_c_end
+
+_BGMTime=132002,
+52("_BGMName","BGM01")42("Start","00Endroll.dat")
+
+_Day=0,
+_DayTime=0,
+
+_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM03")
+42("BGM","00Sound.dat")
+&5705"俺達は家に帰っていない。"&5706"ある夜、真剣に話し合って俺は夢子と家を出る事を決めた。 "&5707"最後のけじめとして二季には別れを告げた。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0459c
+&5708"「はやく～乗り遅れちゃうわよ」"42("DEL","02CharChip.dat")&5709"それから先は、二人で電車やバス……いろんな乗り物を乗り継いで。"&5710"今まで住んでいた街を出て行った。"&5711"昔住んでいた懐かしい街へ向かうことにした。"&5712"無理にでも家に帰っていれば、崩れてしまった部分は元通りにはならないけど、皆でまた暮らせたんじゃないか。"&5713"昔の生活を思い出し、淋しさに似た感情が一瞬沸き起こったが。"&5714"俺はもう決めたんだ。"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Mode=9,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&5715"…………。"&5716"………………。"_Mode=9,
+52("_GRPName","bg05d")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM04")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ce")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0460c
+&5717"「一緒に来てくれるの？」"42("DEL","02CharChip.dat")#:NameSuffix
+&5718"「馬鹿……夢子を一人にするわけないだろ」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","cc")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0461c
+&5719"「:NameSuffix……心配かけてごめんね」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","cd")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0462c
+&5720"「私には:NameSuffixが居るから、今とても幸せよ」"42("DEL","02CharChip.dat")_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Mode=9,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&5721"…………。"&5722"………………。"_Mode=1,
+52("_GRPName","c11r0")
+42("DrawCG","00Draw.dat")
+52("_BGMName","BGM08")
+42("BGM","00Sound.dat")
+&5723"人里離れたただただ広大で誰もいない、シロツメクサの咲き乱れる土地に夢子と越して、二年ばかりの時が過ぎていた。"&5724"誰とも連絡を取り合わずに過ごし。"&5725"まるで、本当に二人だけの世界になったみたいだ。"52("_CharNameB","fc_cd111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0463c
+&5726"「:NameSuffix、ここ、本当にいい場所ね。私、好きだわ」"42("DEL","02CharChip.dat")&5727"二人で幸せになろうと、夢子が望んだように。"&5728"今の夢子は、嬉しそうに、俺の隣で笑っている。"&5729"２人でいることで、本来の夢子の時間が増えた。"52("_CharNameB","fc_ca111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0464c
+&5730"「静かで……街に住んでいたときに比べたら、時間の流れもとっても穏やか。空気も綺麗」"42("DEL","02CharChip.dat")#:NameSuffix
+&5731"「そうだな。……いい所だ」"#:NameSuffix
+&5732"「夢子は……後悔しないか？」"52("_CharNameB","fc_cd111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0465c
+&5733"「あなたとずっと一緒にいられるんだもの。するわけないじゃない」"42("DEL","02CharChip.dat")&5734"情景が変われば、笑顔の印象も変わるものなんだと、ふと思う。"52("_CharNameB","fc_ca111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0466c
+&5735"「あなたは？」"42("DEL","02CharChip.dat")#:NameSuffix
+&5736"「俺もだ。……後悔しない」"52("_CharNameB","fc_cd112")_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0467c
+&5737"「こうして二人で過ごせるなんて……まるで夢みたい」"42("DEL","02CharChip.dat")#:NameSuffix
+&5738"「……」"&5739"この現実が、夢であればいいのに。"&5740"そう思った事も、過去に何度かあった。"&5741"他の家族がどうしているのかとか、二季と白幸は、バカやってた友達は……。"&5742"そうして考える事をやめたのは、いつだったか。"52("_CharNameB","fc_ca112")_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0468c
+&5743"「:NameSuffix、何も心配いらないわ。あなたには、私がついてるから」"42("DEL","02CharChip.dat")#:NameSuffix
+&5744"「心配なんて……。ただ、そうだな……、ありがとう」"&5745"言い当てられたようでドキッとするが、それも夢子にとってはいつもの事だ。"&5746"自分のすることに、迷いがない。疑問を持たない。"&5747"それが、たまに怖かったりもするんだけど。"#:NameSuffix
+&5748"「風が出てきたな」"&5749"風に髪を遊ばせる夢子は、そっと寄りかかってきた。"&5750"瞳を閉じて、自然の音に耳を傾けているようだ。"52("_CharNameB","fc_ca112")_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0469c
+&5751"「そうだ。:NameSuffix、これあげる」"42("DEL","02CharChip.dat")#:NameSuffix
+&5752"「ん？」"&5753"ごそごそと、夢子はポケットを探ると紙切れを取り出した。"&5754"それを眺め、嬉しそうに俺に手渡す。"#:NameSuffix
+&5755"「？　これ……」"52("_CharNameB","fc_cd112")_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0470c
+&5756"「そう、四葉のクローバー。見つけたから、押し花にしてみたの。今日、やっと完成したのよ」"42("DEL","02CharChip.dat")&5757"色も形も、綺麗に残ったまま、しおりのように加工された四葉。"#:NameSuffix
+&5758"「クローバーか、懐かしいな……」"52("_CharNameB","fc_ca112")_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0471c
+&5759"「あっ、思い出した？」"42("DEL","02CharChip.dat")#:NameSuffix
+&5760"「四葉って、持ってたら幸福になれる、ってよく聞くだろ？　だから……」"52("_CharNameB","fc_cd112")_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0472c
+&5761"「ううん、これはあなたがもっていて。言ったでしょ？　あなたの幸せが、私の幸せって」"42("DEL","02CharChip.dat")&5762"もっと:NameSuffixに幸せになってほしいの。"&5763"俺が幸せになれば、夢子も幸せになれるから……。"#:NameSuffix
+&5764"「じゃあ、もらっておくよ」"&5765"夢子からの贈り物を大切にしまい、俺は作業に戻る。"52("_CharNameB","fc_ca111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0473c
+&5766"「:NameSuffix？　なにしてるの？」"42("DEL","02CharChip.dat")#:NameSuffix
+&5767"「んー？　秘密」"&5768"夢子が見つけた四葉は、きっとここに咲く、シロツメクサの花畑から見つけたんだろう。"#:NameSuffix
+&5769"「ここをこうしてと……」"&5770"いつ以来か忘れてしまったけど。"&5771"たしか、昔の夢子はこれを編み上げたら、凄く喜んでくれた気がする。"100("",3,2,0,0)
+100("SE221",0,2,0,0)
+&5772"…………。"&5773"………………。"100("",4,2,0,0)
+52("_CharNameB","fc_ce112")_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0474c
+&5774"「あっ……それ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&5775"「やっぱ久しぶりに作ると汚いなー」"&5776"なんかもっとこう。"&5777"綺麗に編めてたような記憶があるんだけど……。"#:NameSuffix
+&5778"「これ、しおりのお礼」"52("_CharNameB","fc_cd112")_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_CCName","c")42("Start","02CharChip2.dat")#夢　子=w0475c
+&5779"「……いいの？　とっても嬉しい！　ありがとう……」"42("DEL","02CharChip.dat")_Mode=1,
+52("_GRPName","c10r0")
+42("DrawCG","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0476c
+&5780"「懐かしいね」"42("DEL","02CharChip.dat")#:NameSuffix
+&5781"「あぁ」"&5782"花冠を頭に乗せた夢子は、幼い頃のように無邪気にはしゃいでいた。"&5783"成長していくうちに、だんだん大人びていった夢子だったけど。"#:NameSuffix
+&5784"「こんなに喜んでもらえるとは思わなかったよ」"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0477c
+&5785"「だって、幸せすぎて……！　ありがとう:NameSuffix」"42("DEL","02CharChip.dat")_Mode=1,
+52("_GRPName","white")
+42("DrawBG","00Draw.dat")
+&5786"飛びついてきた夢子を何とか抱きとめ、どちらからともなく唇を重ねた。"&5787"触れるだけで離れ、また、夢子は笑った。"&5788"姉弟でありながら、まるで恋人同士のように振舞うなんておかしいとはわかってる。"&5789"それでも、夢子の優しい笑顔が見れるなら。"&5790"こうして何事もなくすごせるなら。"&5791"これも一つの幸せだと思う。"_Mode=1,
+52("_GRPName","c10r0")
+42("DrawCG","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0478c
+&5792"「大好きよ、:NameSuffix」"42("DEL","02CharChip.dat")#:NameSuffix
+&5793"「俺も……大好きだよ、夢子」"&5794"もうこの温もりは裏切らない。"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_AL=0,
+_Mode=1,
+52("_GRPName","white")
+42("DrawBG","00Draw.dat")
+_AL=0,
+_Mode=1,
+52("_GRPName","fin03")
+42("DrawBG","00Draw.dat")
+_WaitTime=4000,
+42("Wait","00Wait.dat")
+_AL=0,
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+
+120,0(@END[34],0,=,){
+_AL=0,
+_Mode=1,
+52("_GRPName","ic03")
+42("DrawBG","00Draw.dat")
+_WaitTime=4000,
+42("Wait","00Wait.dat")
+}0;
+@END=1,
+@END[3]=1,
+@END[34]=1,
+
+120,1(@END[35],6,!,){
+@END[35]=@END[1],@END[2],+,@END[3],+,@END[4],+,@END[5],+,@END[6],+,
+120,2(@END[35],6,=,){
+_AL=0,
+_Mode=1,
+52("_GRPName","ic02")
+42("DrawBG","00Draw.dat")
+_WaitTime=4000,
+42("Wait","00Wait.dat")
+}2;
+}1;
+
+149()
+41("RESET","00Init.dat")

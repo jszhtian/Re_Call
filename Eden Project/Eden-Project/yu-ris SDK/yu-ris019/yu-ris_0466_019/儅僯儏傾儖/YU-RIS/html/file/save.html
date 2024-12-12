@@ -1,0 +1,115 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">ファイル系命令</A>＞SAVE［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="save.html">SAVE［］</A>
+　<A HREF="saveend.html">SAVEEND［］</A>
+　<A HREF="load.html">LOAD［］</A>
+　<A HREF="fileact.html">FILEACT［］</A>
+　<A HREF="fileinfo.html">FILEINFO［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=700 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■変数保存命令 SAVE[ ]</FONT>
+<FONT CLASS=t20>
+
+ファイルに指定した変数を保存します。
+
+「save」フォルダ内に指定したファイルを生成し、その中に任意のデータ(値)を保存します。
+データファイル名には拡張子として「.sd」が付きます。
+データファイルのパス指定はできません。「save」フォルダ固定となります。(β版仕様)
+
+ファイルにデータ(値)を保存する際、まずそのデータに「データ番号」を割り振ります。
+例えば仮に、SAVE[FILE="AAA" DNO=5 SET=@B]　とした場合、
+「ファイルＡＡＡ．ＳＤの中に、５番目のデータとして、変数＠Ｂの値を格納する」
+という意味でとらえていただければ分かりやすいでしょうか。
+後に LOAD 命令でその保存したデータ(値)を読み出す際は、そのデータ番号を指定すれば、
+簡単に取り出すことが出来ます。
+
+配列変数の一括保存も可能です。その場合、配列変数の全要素を一括保存する形となります。
+SAVE[FILE="AAA" DNO=12 SET=@TEST1()] のように、<B>『＠配列変数名（）』</B>という記述をします。
+LOAD 命令にて配列変数を読み込む際も同様に、
+LOAD[FILE="AAA" DNO=12 LET=@TEST2()] と記述すれば、保存した配列変数を読み出せます。
+
+保存した配列変数を読み出す時は、保存した時と全く同じ配列サイズの配列変数を用意します。
+例えば、上の例で @TEST1 変数が、INT[@TEST1(34,5,6)] と宣言された配列変数だったとすると、
+それを読み込む @TEST2 変数も、(34,5,6) のサイズの配列変数でなければなりません。
+サイズが違う場合は、エラーとなります。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>FILE = ファイル名</FONT></TD><TD><FONT CLASS=t40>データファイル名</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DNO = 値(1～1024)</FONT></TD><TD><FONT CLASS=t40>データ番号の指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SET = 変数名</FONT></TD><TD><FONT CLASS=t40>保存する変数</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>ID = 文字列</FONT></TD><TD><FONT CLASS=t40>保存するレイヤーＩＤを指定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]saveフォルダ内の「GLOBAL_FLAG.sd」に、データ番号１として整数変数＠ＡＢＣの値を保存する。
+
+　　<B><FONT CLASS=t60>INT[@ABC=5000]</FONT></B>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SAVE</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"GLOBAL_FLAG.sd"</FONT> <FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@ABC</FONT>]</FONT></B>
+
+
+[2]saveフォルダ内の「SAVE_001.sd」に、データ番号５として実数変数＠ＦＦの値を保存する。
+
+　　<B><FONT CLASS=t60>FLT[@FF]</FONT></B>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SAVE</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"SAVE_001"</FONT> <FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>5</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@FF</FONT>]</FONT></B><FONT CLASS=t20>　　（※拡張子.sdを省略することも出来ます）</FONT>
+
+
+[3]saveフォルダ内の「SAVE_001.sd」に、データ番号１２３として整数の配列変数＠ＨＡの全要素を全て保存する。
+
+　　<B><FONT CLASS=t60>INT[@HA(500,20)]</FONT></B>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SAVE</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"SAVE_001"</FONT> <FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>123</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@HA()</FONT>]</FONT></B>
+
+
+[4]saveフォルダ内の「SAVE_001.sd」に、データ番号３０として文字列変数＄Ｓの内容を保存する。
+
+　　<B><FONT CLASS=t60>STR[$S]</FONT></B>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SAVE</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"SAVE_001"</FONT> <FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>30</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>$S</FONT>]</FONT></B>
+
+
+[5]saveフォルダ内の「SAVE_001.sd」に、データ番号１００として、ＣＧレイヤー「ＢＧ」を保存する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SAVE</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"SAVE_001"</FONT> <FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>100</FONT> <FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BG</FONT>]</FONT></B><FONT CLASS=t20></FONT>
+
+
+[6]saveフォルダ内の「SAVE_001.sd」に、各種データを一括保存する。
+　※基本的に FILE キーワードが記述されるまでは、セーブされるべきデータがメモリに保存され続けます(データの予約保存)。
+    その後 FILE キーワードが記述された時点で、一気に出力されます(予約保存データの書き出し)。
+    この方式は、ファイルへの書込が一回で済むため、通常より高速に保存できるというメリットがあります。
+    大量の変数やサイズの大きい画像レイヤなどを保存する場合に特に顕著になります。
+    ですので、複数データをファイルに保存する場合の記述方法として、この方式を推奨します。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SAVE</FONT>[<FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>10</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@A</FONT>]</FONT></B><FONT CLASS=t20>  //←データはメモリに予約保存され、ファイルへはまだ保存されない</FONT>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SAVE</FONT>[<FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>50</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@B()</FONT>]</FONT></B><FONT CLASS=t20>  //←データはメモリに予約保存され、ファイルへはまだ保存されない</FONT>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SAVE</FONT>[<FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>30</FONT> <FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BG_LAYER</FONT>]</FONT></B><FONT CLASS=t20>  //←データはメモリに予約保存され、ファイルへはまだ保存されない</FONT>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SAVE</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"SAVE_001"</FONT>]</FONT></B><FONT CLASS=t20>  //←メモリに予約保存されていたデータが、ここではじめてファイルへ保存される</FONT>
+
+
+    SAVE[FILE="～"] でファイルへと書き出さない限り、予約保存されたデータはずっとメモリ上に残り続けます。
+    特に動作上の問題はありませんが、ただメモリ使用量がデータサイズ分だけ増えたままになってしまいますので、
+    意図してメモリ上に残しておく場合をのぞいて、確実に最後に SAVE[FILE="～"] を記述するようにしてください。
+    また、予約保存データを取り消したい(初期化したい)場合には SAVEEND[ ] を利用できます。
+
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

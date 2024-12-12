@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Libudis86", "Libudis86\Libudis86.vcxproj", "{0D3060C0-C515-4C44-B52D-5671D84E6E21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D3060C0-C515-4C44-B52D-5671D84E6E21}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0D3060C0-C515-4C44-B52D-5671D84E6E21}.Debug|Win32.Build.0 = Debug|Win32
+		{0D3060C0-C515-4C44-B52D-5671D84E6E21}.Release|Win32.ActiveCfg = Release|Win32
+		{0D3060C0-C515-4C44-B52D-5671D84E6E21}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

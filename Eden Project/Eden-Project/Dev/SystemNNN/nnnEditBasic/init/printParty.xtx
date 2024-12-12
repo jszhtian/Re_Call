@@ -1,0 +1,121 @@
+modename printParty
+
+enterFadeInType 2
+enterFadeInTime 100
+
+backScriptFlag 1
+backScriptName backscript
+
+
+effectTime 50
+
+
+filenameBG bg_status
+
+
+printNumber 3
+statusNumber 4
+partyNumber 4
+etcNumber 1
+
+filenamePlate ta_partyStatusPlate
+
+partyAreaSizeX 400
+partyAreaSizeY 150
+
+partyAreaNextX 0
+partyAreaNextY 160
+
+party1PrintX 0
+party1PrintY 0
+
+status0PrintX 10
+status0PrintY 10
+
+
+status1Type 1
+status1PrintX 100
+status1PrintY 60
+status1Keta 4
+status1SuujiSizeX 32
+status1SuujiSizeY 32
+status1SuujiNextX 32
+status1SuujiFilename ta_partyStatusSuuji32x32
+
+
+status2Type 1
+status2PrintX 300
+status2PrintY 60
+status2Keta 4
+status2LeftFlag 1
+
+status3Type 1
+status3PrintX 200
+status3PrintY 120
+status3Keta 8
+status3UpZero 1
+
+
+status4Type 2
+status4PrintX 200
+status4PrintY 10
+status4FontSize 24
+status4FontColorR 255
+status4FontColorG 192
+status4FontColorB 64
+
+
+
+
+etc1PrintX 200
+etc1PrintY 550
+etc1Keta 6
+etc1SuujiSizeX 32
+etc1SuujiSizeY 32
+etc1SuujiNextX 32
+etc1SuujiFilename ta_partyStatusSuuji32x32
+etc1Var ŠƒMƒ‹
+
+
+
+print1Var ƒp[ƒeƒBƒƒ“ƒo[‚»‚Ì‚P
+print2Var ƒp[ƒeƒBƒƒ“ƒo[‚»‚Ì‚Q
+print3Var ƒp[ƒeƒBƒƒ“ƒo[‚»‚Ì‚R
+
+
+
+
+party1Filename ta_honoka_face
+party1_1Var ‚Ù‚Ì‚©‚g‚o
+party1_2Var ‚Ù‚Ì‚©‚g‚o‚l‚`‚w
+party1_3Var ‚Ù‚Ì‚©‚l‚o
+party1_4textNumber 0
+
+party2Filename ta_kasumi_face
+party2_1Var ‚©‚·‚İ‚g‚o
+party2_2Var ‚©‚·‚İ‚g‚o‚l‚`‚w
+party2_3Var ‚©‚·‚İ‚l‚o
+party2_4textNumber 1
+
+party3Filename ta_satomi_face
+party3_1Var ‚³‚Æ‚İ‚g‚o
+party3_2Var ‚³‚Æ‚İ‚g‚o‚l‚`‚w
+party3_3Var ‚³‚Æ‚İ‚l‚o
+party3_4textNumber 2
+
+party4Filename ta_nekoko_face
+party4_1Var ‚Ë‚±‚±‚g‚o
+party4_2Var ‚Ë‚±‚±‚g‚o‚l‚`‚w
+party4_3Var ‚Ë‚±‚±‚l‚o
+party4_4textNumber 3
+
+
+
+backFilename ta_voice_back
+backPrintX 700
+backPrintY 500
+backSizeX 64
+backSizeY 64
+backAnimeType1 7
+backAnimePattern1 2
+backAnimeSpeed1 30

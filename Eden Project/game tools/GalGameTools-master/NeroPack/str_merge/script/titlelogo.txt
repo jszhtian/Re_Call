@@ -1,0 +1,39 @@
+;――――――――――――――――――――――――――――――――――――――
+;
+;	タイトルロゴ表示
+;
+;――――――――――――――――――――――――――――――――――――――
+
+; 警告表示
+.img attention
+.fade 1
+.wait 20
+.img white
+.fade 1
+
+; BGM開始
+.bgm title
+
+; ブランドロゴ表示
+.img more_pre.png
+.wipe more_pre 1000
+.img more
+.wipe WIPE005 1000 fade
+.wait 2
+.img white
+.fade 1
+
+; 文字演出
+? 全クリア = 茜クリア & 亜依クリア & カナクリア & 汐里クリア
+.img titleA0
+.img titleB0 if 全クリア
+.fade 1
+.img titleA1
+.img titleB1 if 全クリア
+.wipe title 1000
+.img titleA2
+.img titleB2 if 全クリア
+.fade 1
+.wait 1
+
+.load title

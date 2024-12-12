@@ -1,0 +1,371 @@
+//=========================================================================
+//
+//■降雪処理
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@Snow.SP.X(201)]
+	S_INT[@Snow.SP.Y(201)]
+	S_INT[@Snow.A(201)]
+	S_INT[@Snow.Rad(201)]
+	S_INT[@Snow.ED.Y(201)]
+	S_FLT[@Snow.X(201)]
+	S_FLT[@Snow.Y(201)]
+	S_FLT[@fVal]
+	S_INT[@Count]
+	S_INT[@mode]
+	S_INT[@mA]
+	S_INT[@mEndCount]
+	S_INT[@mEndStartTime]
+	S_INT[@mEndFadeTime]
+
+	S_STR[$fn.snow(3)]
+	S_INT[@Z.SNOW(3)]
+	S_INT[@SNOW.NUM(3)]
+
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SNOWMODE.INIT
+{
+	//雨画像ファイル名
+	$fn.snow(1) = "cg/snow_s"
+	$fn.snow(2) = "cg/snow_m"
+	return[]
+}
+
+#=es.SNOWMODE
+{
+	IF[@es.SNOWMODE==0]
+	{
+		@es.LSD(032,01) = @_PINT(2)  //雪数1
+		@es.LSD(032,02) = @_PINT(1)  //雪数2
+		@es.LSD(032,03) = @_PINT(4)  //雪Z1
+		@es.LSD(032,04) = @_PINT(3)  //雪Z2
+		@es.LSD(032,05) = @_PINT(6)  //雪Y速度1
+		@es.LSD(032,06) = @_PINT(5)  //雪Y速度2
+		@es.LSD(032,07) = @_PINT(8)  //雪Xスケール1
+		@es.LSD(032,08) = @_PINT(7)  //雪Xスケール2
+		@es.LSD(032,09) = @_PINT(10) //雪X周期速度1
+		@es.LSD(032,10) = @_PINT(9)  //雪X周期速度2
+
+		IF[@es.LSD(032,01)+@es.LSD(032,02)>200]
+			\_mes("雪の数が多すぎます。表示できる数は大小合わせて最大200個です。");END[]
+		IFEND[]
+
+		@SNOW.NUM(1)=@es.LSD(032,01)
+		@SNOW.NUM(2)=@es.LSD(032,02)
+
+		@Z.SNOW(1) = @es.Z.SP+09000*@es.ZEX-(@es.LSD(032,03))*@es.ZEX
+		@Z.SNOW(2) = @es.Z.SP+09000*@es.ZEX-(@es.LSD(032,04))*@es.ZEX
+
+		GOSUB[#=es.SNOWMODE.INIT]
+		GOSUB[#=es.SNOWMODE.CGLOAD]
+
+		LOOP[SET=@SNOW.NUM(1)]
+		{
+			@Snow.X(@_LC) = @_LC*10
+			IF[@es.LSD(032,05)>0]
+				@Snow.Y(@_LC) = @es.GSY
+			ELSE[]
+				@Snow.Y(@_LC) = -50
+			IFEND[]
+			@Snow.A(@_LC) = 256
+
+			\_rnd(0,@es.LSD(032,05)/2)
+			@Snow.SP.Y(@_LC) = @_RINT(1) + @es.LSD(032,05)
+
+			\_rnd(0,40)
+			@Snow.ED.Y(@_LC) = @_RINT(1) + @es.GSY
+		}
+		LOOPEND[]
+
+		LOOP[SET=@SNOW.NUM(2)]
+		{
+			@Snow.X(@SNOW.NUM(1)+@_LC) = @_LC*10
+			IF[@es.LSD(032,06)>0]
+				@Snow.Y(@SNOW.NUM(1)+@_LC) = @es.GSY
+			ELSE[]
+				@Snow.Y(@SNOW.NUM(1)+@_LC) = -50
+			IFEND[]
+			@Snow.A(@SNOW.NUM(1)+@_LC) = 256
+
+			\_rnd(0,@es.LSD(032,06)/2)
+			@Snow.SP.Y(@SNOW.NUM(1)+@_LC) = @_RINT(1) + @es.LSD(032,06)
+
+			\_rnd(0,40)
+			@Snow.ED.Y(@SNOW.NUM(1)+@_LC) = @_RINT(1) + @es.GSY
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	@mEndCount=0
+	@mEndStartTime=0
+	@mEndFadeTime=1
+	@es.SNOWMODE = 1
+	@mA=256
+
+	return[]
+}
+
+
+//===============================================================
+//■メイン
+//===============================================================
+#=es.SNOWMODE.MAIN
+{
+
+	@mode+=1
+	IF[@mode%2==0]
+	{
+		//@mA=256
+		//\_range(@mA,, 256)
+
+		//IF[@mode%4==0]
+		{
+			GOSUB[#=es.SNOWMODE.MAIN.Calc pint=0 pint2=@SNOW.NUM(1) pint3=2 pint4=0 pint5=@es.LSD(032,09) pint6=@es.LSD(032,07)] //小
+		}
+		//ELSE[]
+		{
+			GOSUB[#=es.SNOWMODE.MAIN.Calc pint=1 pint2=@SNOW.NUM(2) pint3=10 pint4=0 pint5=@es.LSD(032,10) pint6=@es.LSD(032,08)] //大
+		}
+		//IFEND[]
+	}
+	IFEND[]
+
+	@Count+=1
+
+	IF[@es.SNOWMODE==2]
+	{
+		@mA = 256 - ((@_OS_TIME(1)-@mEndStartTime) * 256 / @mEndFadeTime)
+
+		//@mEndCount+=1
+		//IF[@mEndCount>=100]
+		IF[@mA<=0]
+		{
+			GOSUB[#=es.SNOWMODE.DEL]
+		}
+		IFEND[]
+
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//===============================================================
+//■
+//===============================================================
+#=es.SNOWMODE.MAIN.Calc
+{
+
+	INT[@id]
+	INT[@NUM=@_PINT(2)] //数
+	INT[@MAX=@_PINT(3)]
+
+		INT[@dummy=@_PINT(4)]
+
+	FLT[@CYCLE=@_PINT(5)/10.0]
+	FLT[@SCALE=@_PINT(6)/10.0]
+
+	INT[@mmA]
+
+	LOOP[SET=@NUM]
+	{
+		//----------------------------------------------------------------
+		// 計算
+		//----------------------------------------------------------------
+			@id = @_LC + @_PINT(1)*@SNOW.NUM(1)
+
+			\_rnd(0,@MAX)
+			@Snow.SP.X(@id) = @_RINT(1) - @MAX/2
+
+			MATH[COS=1 LET=@fVal SET=(@Snow.Rad(@id)+@Count*@CYCLE) * @_PAI / 180]
+			@Snow.X(@id) += @fVal * @SCALE
+	//		@Snow.X(@id) += @Snow.SP.X(@id) / 10.0
+			@Snow.Y(@id) += @Snow.SP.Y(@id) / 10.0
+
+
+			//↓
+			IF[(@_PINT(1)==0 && @es.LSD(032,05)>0) || (@_PINT(1)==1 && @es.LSD(032,06)>0)]
+			//IF[@mEndCount==0]
+			{
+				@mmA = @mA
+				IF[@Snow.Y(@id) > @Snow.ED.Y(@id)-250]
+				{
+					@Snow.A(@id) -= 8
+					IF[@Snow.A(@id)<0] @Snow.A(@id)=0 IFEND[]
+				}
+				IFEND[]
+
+				IF[@Snow.Y(@id) > @Snow.ED.Y(@id)]
+				{
+					\_rnd(0,@es.GSX)
+					@Snow.X(@id) = @_RINT(1) - 8
+
+					\_rnd(0,@es.GSY)
+					@Snow.Y(@id) -= @es.GSY + 100 + @_RINT(1)
+
+					@Snow.A(@id) = 256
+
+					\_rnd(0,360)
+					@Snow.Rad(@id) = @_RINT(1)
+				}
+				IFEND[]
+			}
+			//IFEND[]
+			IFEND[]
+
+			//↑
+			IF[(@_PINT(1)==0 && @es.LSD(032,05)<0) || (@_PINT(1)==1 && @es.LSD(032,06)<0)]
+			//IF[@mEndCount==0]
+			{
+				@mmA = @mA
+				IF[@Snow.Y(@id) < 250]
+				{
+					@Snow.A(@id) -= 8
+					IF[@Snow.A(@id)<0] @Snow.A(@id)=0 IFEND[]
+				}
+				IFEND[]
+
+				IF[@Snow.Y(@id) < -50]
+				{
+					\_rnd(0,@es.GSX)
+					@Snow.X(@id) = @_RINT(1) - 8
+
+					\_rnd(0,@es.GSY)
+					@Snow.Y(@id) += @es.GSY + 100 + @_RINT(1)
+
+					@Snow.A(@id) = 256
+
+					\_rnd(0,360)
+					@Snow.Rad(@id) = @_RINT(1)
+				}
+				IFEND[]
+			}
+			//IFEND[]
+			IFEND[]
+
+
+		//----------------------------------------------------------------
+		// 表示
+		//----------------------------------------------------------------
+	//	if[1] //上から下
+	//	{
+			IF[@_PINT(1)==0] CG[ID="es.SNOW1."+$(@_LC) X=@Snow.X(@id) Y=@Snow.Y(@id) A=@mA] IFEND[]
+			IF[@_PINT(1)==1] CG[ID="es.SNOW2."+$(@_LC) X=@Snow.X(@id) Y=@Snow.Y(@id) A=@mA] IFEND[]
+	//	}
+	//	ELSE[] //下から上
+	//	{
+	//		IF[@_PINT(1)==0] CG[ID="es.SNOW1."+$(@_LC) X=@Snow.X(@id) Y=@es.GSY-16-@Snow.Y(@id) A=@Snow.A(@id)*@mA/256] IFEND[]
+	//		IF[@_PINT(1)==1] CG[ID="es.SNOW2."+$(@_LC) X=@Snow.X(@id) Y=@es.GSY-16-@Snow.Y(@id) A=@Snow.A(@id)*@mA/256] IFEND[]
+	//	}
+	//	IFEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SNOWMODE.CGLOAD
+{
+	LOOP[SET=@SNOW.NUM(1)] CG[ID="es.SNOW1."+$(@_LC) Z=@Z.SNOW(1) A=0 FILE=$fn.snow(1) MODE=5] LOOPEND[] //小
+	LOOP[SET=@SNOW.NUM(2)] CG[ID="es.SNOW2."+$(@_LC) Z=@Z.SNOW(2) A=0 FILE=$fn.snow(2) MODE=5] LOOPEND[] //大
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SNOWMODE.SAVE
+{
+	INT[@No=@_PINT(1)]
+	SAVE[DNO=@No    SET=@Snow.SP.X()]	// 
+	SAVE[DNO=@No+1  SET=@Snow.SP.Y()]	// 
+	SAVE[DNO=@No+2  SET=@Snow.A()]		// 
+	SAVE[DNO=@No+3  SET=@Snow.Rad()]	// 
+	SAVE[DNO=@No+4  SET=@Snow.ED.Y()]	// 
+	SAVE[DNO=@No+5  SET=@Snow.X()]		// 
+	SAVE[DNO=@No+6  SET=@Snow.Y()]		// 
+	SAVE[DNO=@No+7  SET=@fVal]			// 
+	SAVE[DNO=@No+8  SET=@Count]			// 
+	SAVE[DNO=@No+9  SET=@mode]			// 
+
+	SAVE[DNO=@No+10 SET=@mA]			// 
+	SAVE[DNO=@No+11 SET=@mEndCount]		// 
+
+	SAVE[DNO=@No+12 SET=@Z.SNOW()]		// 
+	SAVE[DNO=@No+13 SET=@SNOW.NUM()]	// 
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SNOWMODE.LOAD
+{
+///x
+	GOSUB[#=es.SNOWMODE.INIT]
+
+	STR[$fn=$_PSTR(1)]
+	INT[@No=@_PINT(2)]
+	LOAD[FILE=$fn DNO=@No    LET=@Snow.SP.X()]	// 
+	LOAD[FILE=$fn DNO=@No+1  LET=@Snow.SP.Y()]	// 
+	LOAD[FILE=$fn DNO=@No+2  LET=@Snow.A()]		// 
+	LOAD[FILE=$fn DNO=@No+3  LET=@Snow.Rad()]	// 
+	LOAD[FILE=$fn DNO=@No+4  LET=@Snow.ED.Y()]	// 
+	LOAD[FILE=$fn DNO=@No+5  LET=@Snow.X()]		// 
+	LOAD[FILE=$fn DNO=@No+6  LET=@Snow.Y()]		// 
+	LOAD[FILE=$fn DNO=@No+7  LET=@fVal]			// 
+	LOAD[FILE=$fn DNO=@No+8  LET=@Count]		// 
+	LOAD[FILE=$fn DNO=@No+9  LET=@mode]			// 
+
+	LOAD[FILE=$fn DNO=@No+10 LET=@mA]			// 
+	LOAD[FILE=$fn DNO=@No+11 LET=@mEndCount]	// 
+
+	LOAD[FILE=$fn DNO=@No+12 LET=@Z.SNOW()]		// 
+	LOAD[FILE=$fn DNO=@No+13 LET=@SNOW.NUM()]	// 
+
+	GOSUB[#=es.SNOWMODE.CGLOAD]
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SNOWMODE.END
+{
+	@es.SNOWMODE = 2
+	@mEndStartTime = @_OS_TIME(1)
+	@mEndFadeTime = @_PINT(1)
+	IF[@mEndFadeTime==0] @mEndFadeTime=1 IFEND[]
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SNOWMODE.DEL
+{
+	//レイヤ消去
+	LOOP[SET=@SNOW.NUM(1)] CGEND[ID="es.SNOW1."+$(@_LC)] LOOPEND[]
+	LOOP[SET=@SNOW.NUM(2)] CGEND[ID="es.SNOW2."+$(@_LC)] LOOPEND[]
+
+	@es.SNOWMODE = 0
+
+	return[]
+}
+

@@ -1,0 +1,1431 @@
+//============================================================================
+//
+// ERIS オプション設計
+//
+//
+//・ERIS ver0.69  008→009 変更点
+//    ・画像のタブの項目に \BTN.GROUP(～) を２つ追加。(200行目,206行目付近。不具合改善の為)
+//
+//・ERIS ver0.62  007→008 変更点
+//    ・各種設定に \OPT.FONTLIST.SIZE.X を追加。
+//    ・各種設定に \OPT.FONTLIST.SPACE.Y を追加。
+//    ・各種設定に \OPT.FONTLIST.NUM を追加。
+//
+//・ERIS ver0.57  006→007 変更点
+//    ・ボタン定義の「タイトルへ戻る」で、IF文による場合分けを追加。
+//　　　タイトル画面時の時はタイトルへ戻るボタンを表示させないようにした。※IF文をなくせばいままで通り表示出来ます
+//
+//・ERIS ver0.56  005→006 変更点
+//    ・背景画像設定 \OPT.BACK.FILE の廃止
+//　　・ボタン番号の自由化
+//
+//・ERIS ver0.--  004→005 変更点
+//    ・\BTNDEF の番号が全体的に変更になりました
+//
+//============================================================================
+\VER.OPTIONDEF(009) //定義Version
+//============================================================================
+
+//---------------------------------------------------------------------
+//
+// 全般
+//
+//---------------------------------------------------------------------
+
+#=es.SceneOption.Define
+
+	//-----------------------------------------------------------------
+	// 各種設定
+	//-----------------------------------------------------------------
+		\OPT.FONT.XY(132, 491-105)     //フォント表示座標
+		\OPT.FONT.SIZE(14)             //文字サイズ
+		\OPT.FONTLIST.XY(132, 268-105) //フォントリスト表示座標
+		\OPT.FONTLIST.SIZE.X(233)      //フォントリスト幅
+		                               //※フォント文字の表示領域であり、マウスを上に乗せたときに反応させる領域でもあります
+		\OPT.FONTLIST.SPACE.Y(13)      //フォントリスト行間隔
+		\OPT.FONTLIST.NUM(8)           //フォントリストに一度に表示するフォント数
+
+
+	//---------------------------------------------------------------------
+	// どの画像にどの機能を割り振るかの設定
+	// 　ここで定義したボタン番号の画像が、その機能となります。
+	//   番号が大きいほうが前面に表示されます。
+	//---------------------------------------------------------------------
+		@es.CNUM.OPT.SKIP.CTRL.ON        = 021 //CTRLキーでの未読スキップ
+		@es.CNUM.OPT.SKIP.CTRL.OFF       = 022 //CTRLキーでの未読スキップ
+		@es.CNUM.OPT.SKIP.BTN.ON         = 023 //スキップボタンでの未読スキップ
+		@es.CNUM.OPT.SKIP.BTN.OFF        = 024 //スキップボタンでの未読スキップ
+		@es.CNUM.OPT.KTX.FAST.ON         = 025 //既読文章の最速表示
+		@es.CNUM.OPT.KTX.FAST.OFF        = 026 //既読文章の最速表示
+		@es.CNUM.OPT.KTX.COL.ON          = 027 //既読文章の色を変える
+		@es.CNUM.OPT.KTX.COL.OFF         = 028 //既読文章の色を変える
+		@es.CNUM.OPT.KSEL.COL.ON         = 029 //選択済の選択肢の色を変える
+		@es.CNUM.OPT.KSEL.COL.OFF        = 030 //選択済の選択肢の色を変える
+		@es.CNUM.OPT.SEL.AUTO.ON         = 031 //選択肢を通過後もオートモード持続
+		@es.CNUM.OPT.SEL.AUTO.OFF        = 032 //選択肢を通過後もオートモード持続
+		@es.CNUM.OPT.SEL.SKIP.ON         = 033 //選択肢を通過後もスキップモード持続
+		@es.CNUM.OPT.SEL.SKIP.OFF        = 034 //選択肢を通過後もスキップモード持続
+		@es.CNUM.OPT.SCREEN.ON           = 035 //画面モード
+		@es.CNUM.OPT.SCREEN.OFF          = 036 //画面モード
+		@es.CNUM.OPT.NOACTIVE.ON         = 037 //非アクティブ時の動作設定
+		@es.CNUM.OPT.NOACTIVE.OFF        = 038 //非アクティブ時の動作設定
+		@es.CNUM.OPT.SCRSAVER.ON         = 039 //スクリーンセーバーの起動を防止する
+		@es.CNUM.OPT.SCRSAVER.OFF        = 040 //スクリーンセーバーの起動を防止する
+		@es.CNUM.OPT.CONF.SAVE.ON        = 041 //セーブ確認
+		@es.CNUM.OPT.CONF.SAVE.OFF       = 042 //セーブ確認
+		@es.CNUM.OPT.CONF.LOAD.ON        = 043 //ロード確認
+		@es.CNUM.OPT.CONF.LOAD.OFF       = 044 //ロード確認
+		@es.CNUM.OPT.CONF.QSAVE.ON       = 045 //クイックセーブ確認
+		@es.CNUM.OPT.CONF.QSAVE.OFF      = 046 //クイックセーブ確認
+		@es.CNUM.OPT.CONF.QLOAD.ON       = 047 //クイックロード確認
+		@es.CNUM.OPT.CONF.QLOAD.OFF      = 048 //クイックロード確認
+		@es.CNUM.OPT.CONF.PREVSEL.ON     = 049 //直前の選択肢に戻る確認
+		@es.CNUM.OPT.CONF.PREVSEL.OFF    = 050 //直前の選択肢に戻る確認
+		@es.CNUM.OPT.CONF.SAVECOPY.ON    = 051 //セーブデータコピー確認
+		@es.CNUM.OPT.CONF.SAVECOPY.OFF   = 052 //セーブデータコピー確認
+		@es.CNUM.OPT.CONF.SAVEDEL.ON     = 053 //セーブデータ削除確認
+		@es.CNUM.OPT.CONF.SAVEDEL.OFF    = 054 //セーブデータ削除確認
+		@es.CNUM.OPT.CONF.CFGINIT.ON     = 055 //設定初期化確認
+		@es.CNUM.OPT.CONF.CFGINIT.OFF    = 056 //設定初期化確認
+		@es.CNUM.OPT.CONF.TITLE.ON       = 057 //タイトル確認
+		@es.CNUM.OPT.CONF.TITLE.OFF      = 058 //タイトル確認
+		@es.CNUM.OPT.CONF.END.ON         = 059 //終了確認
+		@es.CNUM.OPT.CONF.END.OFF        = 060 //終了確認
+
+		@es.CNUM.OPT.TX.SP.GAUGE         = 061 //文章速度・ゲージ
+		@es.CNUM.OPT.TX.SP.SLIDER        = 062 //文章速度・スライダー
+		@es.CNUM.OPT.AUTO.SP.GAUGE       = 063 //オートモード速度・ゲージ
+		@es.CNUM.OPT.AUTO.SP.SLIDER      = 064 //オートモード速度・スライダー
+		@es.CNUM.OPT.WINDOW.A.GAUGE      = 065 //ウィンドウ透過度・ゲージ
+		@es.CNUM.OPT.WINDOW.A.SLIDER     = 066 //ウィンドウ透過度・スライダー
+
+		@es.CNUM.OPT.VO.STOP.ON          = 071 //音声再生の停止タイミング
+		@es.CNUM.OPT.VO.STOP.OFF         = 072 //音声再生の停止タイミング
+		@es.CNUM.OPT.VO.AUTO.ON          = 073 //オート時に再生終了まで待つ
+		@es.CNUM.OPT.VO.AUTO.OFF         = 074 //オート時に再生終了まで待つ
+
+		@es.CNUM.OPT.VOL.MASTER.GAUGE    = 075 //全体音量・ゲージ
+		@es.CNUM.OPT.VOL.MASTER.SLIDER   = 076 //全体音量・スライダー
+		@es.CNUM.OPT.VOL.MASTER.MUTE.ON  = 077 //全体音量・ミュート
+		@es.CNUM.OPT.VOL.MASTER.MUTE.OFF = 078 //全体音量・ミュート
+		@es.CNUM.OPT.VOL.BGM.GAUGE       = 079 //ＢＧＭ音量・ゲージ
+		@es.CNUM.OPT.VOL.BGM.SLIDER      = 080 //ＢＧＭ音量・スライダー
+		@es.CNUM.OPT.VOL.BGM.MUTE.ON     = 081 //ＢＧＭ音量・ミュート
+		@es.CNUM.OPT.VOL.BGM.MUTE.OFF    = 082 //ＢＧＭ音量・ミュート
+		@es.CNUM.OPT.VOL.SE.GAUGE        = 083 //効果音音量・ゲージ
+		@es.CNUM.OPT.VOL.SE.SLIDER       = 084 //効果音音量・スライダー
+		@es.CNUM.OPT.VOL.SE.MUTE.ON      = 085 //効果音音量・ミュート
+		@es.CNUM.OPT.VOL.SE.MUTE.OFF     = 086 //効果音音量・ミュート
+		@es.CNUM.OPT.VOL.SSE.GAUGE       = 087 //システム音音量・ゲージ
+		@es.CNUM.OPT.VOL.SSE.SLIDER      = 088 //システム音音量・スライダー
+		@es.CNUM.OPT.VOL.SSE.MUTE.ON     = 089 //システム音音量・ミュート
+		@es.CNUM.OPT.VOL.SSE.MUTE.OFF    = 090 //システム音音量・ミュート
+		@es.CNUM.OPT.VOL.VO.GAUGE        = 091 //音声全体音量・ゲージ
+		@es.CNUM.OPT.VOL.VO.SLIDER       = 092 //音声全体音量・スライダー
+		@es.CNUM.OPT.VOL.VO.MUTE.ON      = 093 //音声全体音量・ミュート
+		@es.CNUM.OPT.VOL.VO.MUTE.OFF     = 094 //音声全体音量・ミュート
+		@es.CNUM.OPT.VO.HILIGHT.GAUGE    = 095 //音声ハイライト率・ゲージ
+		@es.CNUM.OPT.VO.HILIGHT.SLIDER   = 096 //音声ハイライト率・スライダー
+
+		@es.CNUM.OPT.VOL.CHARA.GAUGE     = 101 //(～+19)
+		@es.CNUM.OPT.VOL.CHARA.SLIDER    = 121 //(～+19)
+		@es.CNUM.OPT.VOL.CHARA.MUTE.ON   = 141 //(～+19)
+		@es.CNUM.OPT.VOL.CHARA.MUTE.OFF  = 161 //(～+19)
+		@es.CNUM.OPT.VOL.CHARA.SYSVOICE  = 181 //(～+19)
+		@es.CNUM.OPT.VOL.CHARA.TEST      = 201 //(～+19)
+
+		@es.CNUM.OPT.BG                  = 011 //背景(～+9)
+		@es.CNUM.OPT.TAB                 = 231 //タブ(～+9)
+
+		@es.CNUM.OPT.FONT.CLOSE          = 241 //フォント・ボックス閉じ
+		@es.CNUM.OPT.FONT.OPEN           = 242 //フォント・ボックス開き
+		@es.CNUM.OPT.FONT.GAUGE          = 243 //フォント・スクロールバー・ゲージ
+		@es.CNUM.OPT.FONT.SLIDER         = 244 //フォント・スクロールバー・スライダー
+		@es.CNUM.OPT.FONT.UP             = 245 //フォント・スクロールバー・△
+		@es.CNUM.OPT.FONT.DOWN           = 246 //フォント・スクロールバー・▽
+		@es.CNUM.OPT.FONT.BAR            = 247 //フォント・選択バー
+
+		@es.CNUM.OPT.CFGINIT             = 251 //設定初期化
+		@es.CNUM.OPT.TITLE               = 252 //タイトルへ戻る
+		@es.CNUM.OPT.END                 = 253 //終了する
+		@es.CNUM.OPT.BACK                = 255 //戻る
+
+
+Return[]
+
+
+
+//---------------------------------------------------------------------
+//
+// 画像
+//
+//---------------------------------------------------------------------
+#=es.SceneOption.BtnSet
+
+	INT[@no]
+
+	//---------------------------------------------------------------------
+	//
+	// ボタン
+	//
+	// \BTN.CG( ボタンOFF時の画像, マウスが乗った時の画像 )
+	// \BTN.XY( 表示Ｘ座標, 表示Ｙ座標 )
+	// \BTN.MAP.A( α値のしきい値(この値以上の画像部分がボタンとして反応します) )
+	// \BTN.KEY( ショートカットキー{一回の押下で一回のみ反応} ) 
+	// \BTN.KEY.S( ショートカットキー{連続反応} ) 
+	// \BTN.SE( オンマウス時ＳＥ, クリック時ＳＥ ) ※ファイル名orＳＥ定義文字列
+	// \BTN.SLIDE( スライダーの動く範囲X, Y, ドラッグ中心位置X, Y ) ※XY両方とも0以外の値を入れることは出来ません
+	//
+	// \BTNDEF ← 最後にBTNDEFでボタンを登録します。
+	//
+	//---------------------------------------------------------------------
+
+	//---------------------------------------------------------------------
+	// 背景
+	//---------------------------------------------------------------------
+		//■背景・システム
+		\BTN.CG("cg/option/back_1")
+		\BTN.XY(000, 000)
+		\BTNDEF(011) //ボタン登録
+
+		//■背景・サウンド
+		\BTN.CG("cg/option/back_2")
+		\BTN.XY(000, 000)
+		\BTNDEF(012) //ボタン登録
+
+
+	//---------------------------------------------------------------------
+	// タブ(これをクリックすることで背景が変わります)
+	//---------------------------------------------------------------------
+		//■タブ・システム
+		\BTN.GROUP(@es.CNUM.OPT.TAB)
+		\BTN.CG("cg/option/tab_back")
+		\BTN.XY(512, 024)
+		\BTNDEF(231) //ボタン登録
+
+		//■タブ・サウンド
+		\BTN.GROUP(@es.CNUM.OPT.TAB)
+		\BTN.CG("cg/option/tab_back")
+		\BTN.XY(650, 024)
+		\BTNDEF(232) //ボタン登録
+
+
+	//■////////////// タブ１
+
+	//---------------------------------------------------------------------
+	//■CTRLキーでの未読スキップ
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(290, 205)
+			\BTNDEF(@es.CNUM.OPT.SKIP.CTRL.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.SKIP.CTRL.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(290, 205)
+			\BTNDEF(@es.CNUM.OPT.SKIP.CTRL.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.SKIP.CTRL.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(340, 205)
+			\BTNDEF(@es.CNUM.OPT.SKIP.CTRL.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■スキップボタンでの未読スキップ
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(290, 240)
+			\BTNDEF(@es.CNUM.OPT.SKIP.BTN.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.SKIP.BTN.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(290, 240)
+			\BTNDEF(@es.CNUM.OPT.SKIP.BTN.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.SKIP.BTN.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(340, 240)
+			\BTNDEF(@es.CNUM.OPT.SKIP.BTN.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■既読文章の最速表示
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(290, 275)
+			\BTNDEF(@es.CNUM.OPT.KTX.FAST.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.KTX.FAST.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(290, 275)
+			\BTNDEF(@es.CNUM.OPT.KTX.FAST.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.KTX.FAST.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(340, 275)
+			\BTNDEF(@es.CNUM.OPT.KTX.FAST.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■既読文章の色を変える
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(290, 310)
+			\BTNDEF(@es.CNUM.OPT.KTX.COL.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.KTX.COL.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(290, 310)
+			\BTNDEF(@es.CNUM.OPT.KTX.COL.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.KTX.COL.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(340, 310)
+			\BTNDEF(@es.CNUM.OPT.KTX.COL.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■選択済の選択肢の色を変える
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(290, 345)
+			\BTNDEF(@es.CNUM.OPT.KSEL.COL.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.KSEL.COL.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(290, 345)
+			\BTNDEF(@es.CNUM.OPT.KSEL.COL.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.KSEL.COL.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(340, 345)
+			\BTNDEF(@es.CNUM.OPT.KSEL.COL.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■選択肢を通過後もオートモード持続
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(290, 415)
+			\BTNDEF(@es.CNUM.OPT.SEL.AUTO.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.SEL.AUTO.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(290, 415)
+			\BTNDEF(@es.CNUM.OPT.SEL.AUTO.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.SEL.AUTO.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(340, 415)
+			\BTNDEF(@es.CNUM.OPT.SEL.AUTO.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■選択肢を通過後もスキップモード持続
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(290, 450)
+			\BTNDEF(@es.CNUM.OPT.SEL.SKIP.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.SEL.SKIP.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(290, 450)
+			\BTNDEF(@es.CNUM.OPT.SEL.SKIP.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.SEL.SKIP.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(340, 450)
+			\BTNDEF(@es.CNUM.OPT.SEL.SKIP.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■画面モード
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(290, 485)
+			\BTNDEF(@es.CNUM.OPT.SCREEN.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆フルスクリーン
+			\BTN.GROUP(@es.CNUM.OPT.SCREEN.ON)
+			\BTN.CG("cg/option/btn_fullscreen_off", "cg/option/btn_fullscreen_over", "cg/option/btn_fullscreen_on")
+			\BTN.XY(190, 485)
+			\BTNDEF(@es.CNUM.OPT.SCREEN.ON) //ボタン登録
+			//◆ウィンドウ
+			\BTN.GROUP(@es.CNUM.OPT.SCREEN.ON)
+			\BTN.CG("cg/option/btn_window_off", "cg/option/btn_window_over", "cg/option/btn_window_on")
+			\BTN.XY(290, 485)
+			\BTNDEF(@es.CNUM.OPT.SCREEN.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■フォント
+	//---------------------------------------------------------------------
+		//◆フォント・リストボックス閉じ
+		\BTN.CG("cg/option/fontbox1_off", "cg/option/fontbox1_over", "cg/option/fontbox1_on")
+		\BTN.XY(128, 485-105)
+		\BTNDEF(@es.CNUM.OPT.FONT.CLOSE) //番号固定
+
+		//◆フォント・リストボックス開き
+		\BTN.CG("cg/option/fontbox2")
+		\BTN.XY(128, 265-105)
+		\BTNDEF(@es.CNUM.OPT.FONT.OPEN) //ボタン登録
+
+		//◆フォント・目盛り
+		\BTN.CG("cg/option/fontbox2_slider", "cg/option/fontbox2_slider")
+		\BTN.XY(365, 289-105)
+		\BTNDEF(@es.CNUM.OPT.FONT.GAUGE) //ボタン登録
+
+		//◆フォント・ツマミ
+		\BTN.CG("cg/option/fontbox2_fader_off", "cg/option/fontbox2_fader_over")
+		\BTN.XY(365, 289-105)
+		\BTN.SLIDE(0,152,0,10)
+		\BTNDEF(@es.CNUM.OPT.FONT.SLIDER) //ボタン登録
+
+		//◆フォント・↑
+		\BTN.CG("cg/option/fontbox2_up_off", "cg/option/fontbox2_up_over")
+		\BTN.XY(365, 268-105)
+		\BTN.KEY.S("MOUSE_U", "UP")
+		\BTNDEF(@es.CNUM.OPT.FONT.UP) //ボタン登録
+
+		//◆フォント・↓
+		\BTN.CG("cg/option/fontbox2_down_off", "cg/option/fontbox2_down_over")
+		\BTN.XY(365, 462-105)
+		\BTN.KEY.S("MOUSE_D", "DOWN")
+		\BTNDEF(@es.CNUM.OPT.FONT.DOWN) //ボタン登録
+
+		//◆フォント・選択バー
+		\BTN.CG("cg/option/fontbox2_sel")
+		\BTN.XY(0, 0)
+		\BTN.MODE(2)
+		\BTNDEF(@es.CNUM.OPT.FONT.BAR) //ボタン登録
+
+
+	//---------------------------------------------------------------------
+	//■文章速度
+	//---------------------------------------------------------------------
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188, 100)
+		\BTNDEF(@es.CNUM.OPT.TX.SP.GAUGE) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188, 100) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.TX.SP.SLIDER) //ボタン登録
+
+
+	//---------------------------------------------------------------------
+	//■オート速度
+	//---------------------------------------------------------------------
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188, 135)
+		\BTNDEF(@es.CNUM.OPT.AUTO.SP.GAUGE) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188, 135) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.AUTO.SP.SLIDER) //ボタン登録
+
+
+	//---------------------------------------------------------------------
+	//■ウィンドウ透過度
+	//---------------------------------------------------------------------
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188, 170)
+		\BTNDEF(@es.CNUM.OPT.WINDOW.A.GAUGE) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188, 170) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.WINDOW.A.SLIDER) //ボタン登録
+
+
+	//---------------------------------------------------------------------
+	//■非アクティブ時の動作設定
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 100)
+			\BTNDEF(@es.CNUM.OPT.NOACTIVE.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.NOACTIVE.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 100)
+			\BTNDEF(@es.CNUM.OPT.NOACTIVE.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.NOACTIVE.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 100)
+			\BTNDEF(@es.CNUM.OPT.NOACTIVE.OFF) //ボタン登録
+		}
+		IFEND[]
+
+
+	//---------------------------------------------------------------------
+	//■スクリーンセーバーの起動を防止する
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 135)
+			\BTNDEF(@es.CNUM.OPT.SCRSAVER.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.SCRSAVER.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 135)
+			\BTNDEF(@es.CNUM.OPT.SCRSAVER.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.SCRSAVER.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 135)
+			\BTNDEF(@es.CNUM.OPT.SCRSAVER.OFF) //ボタン登録
+		}
+		IFEND[]
+
+
+	//---------------------------------------------------------------------
+	//■セーブ確認
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 170)
+			\BTNDEF(@es.CNUM.OPT.CONF.SAVE.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.CONF.SAVE.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 170)
+			\BTNDEF(@es.CNUM.OPT.CONF.SAVE.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.CONF.SAVE.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 170)
+			\BTNDEF(@es.CNUM.OPT.CONF.SAVE.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■ロード確認
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 205)
+			\BTNDEF(@es.CNUM.OPT.CONF.LOAD.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.CONF.LOAD.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 205)
+			\BTNDEF(@es.CNUM.OPT.CONF.LOAD.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.CONF.LOAD.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 205)
+			\BTNDEF(@es.CNUM.OPT.CONF.LOAD.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■クイックセーブ確認
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 240)
+			\BTNDEF(@es.CNUM.OPT.CONF.QSAVE.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.CONF.QSAVE.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 240)
+			\BTNDEF(@es.CNUM.OPT.CONF.QSAVE.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.CONF.QSAVE.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 240)
+			\BTNDEF(@es.CNUM.OPT.CONF.QSAVE.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■クイックロード確認
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 275)
+			\BTNDEF(@es.CNUM.OPT.CONF.QLOAD.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.CONF.QLOAD.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 275)
+			\BTNDEF(@es.CNUM.OPT.CONF.QLOAD.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.CONF.QLOAD.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 275)
+			\BTNDEF(@es.CNUM.OPT.CONF.QLOAD.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■直前の選択肢に戻る確認
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 310)
+			\BTNDEF(@es.CNUM.OPT.CONF.PREVSEL.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.CONF.PREVSEL.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 310)
+			\BTNDEF(@es.CNUM.OPT.CONF.PREVSEL.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.CONF.PREVSEL.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 310)
+			\BTNDEF(@es.CNUM.OPT.CONF.PREVSEL.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■セーブデータコピー確認
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 345)
+			\BTNDEF(@es.CNUM.OPT.CONF.SAVECOPY.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.CONF.SAVECOPY.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 345)
+			\BTNDEF(@es.CNUM.OPT.CONF.SAVECOPY.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.CONF.SAVECOPY.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 345)
+			\BTNDEF(@es.CNUM.OPT.CONF.SAVECOPY.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■セーブデータ削除確認
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 380)
+			\BTNDEF(@es.CNUM.OPT.CONF.SAVEDEL.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.CONF.SAVEDEL.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 380)
+			\BTNDEF(@es.CNUM.OPT.CONF.SAVEDEL.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.CONF.SAVEDEL.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 380)
+			\BTNDEF(@es.CNUM.OPT.CONF.SAVEDEL.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■設定初期化確認
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 415)
+			\BTNDEF(@es.CNUM.OPT.CONF.CFGINIT.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.CONF.CFGINIT.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 415)
+			\BTNDEF(@es.CNUM.OPT.CONF.CFGINIT.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.CONF.CFGINIT.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 415)
+			\BTNDEF(@es.CNUM.OPT.CONF.CFGINIT.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■タイトル確認
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 450)
+			\BTNDEF(@es.CNUM.OPT.CONF.TITLE.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.CONF.TITLE.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 450)
+			\BTNDEF(@es.CNUM.OPT.CONF.TITLE.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.CONF.TITLE.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 450)
+			\BTNDEF(@es.CNUM.OPT.CONF.TITLE.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■終了確認
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(650, 485)
+			\BTNDEF(@es.CNUM.OPT.CONF.END.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.CONF.END.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(670, 485)
+			\BTNDEF(@es.CNUM.OPT.CONF.END.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.CONF.END.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(720, 485)
+			\BTNDEF(@es.CNUM.OPT.CONF.END.OFF) //ボタン登録
+		}
+		IFEND[]
+
+
+
+	//■////////////// タブ２
+
+	//---------------------------------------------------------------------
+	//■全体音量
+	//---------------------------------------------------------------------
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188, 100)
+		\BTNDEF(@es.CNUM.OPT.VOL.MASTER.GAUGE) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188, 100) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.MASTER.SLIDER) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152, 100)
+			\BTNDEF(@es.CNUM.OPT.VOL.MASTER.MUTE.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.MASTER.MUTE.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152, 100)
+			\BTNDEF(@es.CNUM.OPT.VOL.MASTER.MUTE.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.MASTER.MUTE.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202, 100)
+			\BTNDEF(@es.CNUM.OPT.VOL.MASTER.MUTE.OFF) //ボタン登録
+		}
+		IFEND[]
+
+
+	//---------------------------------------------------------------------
+	//■ＢＧＭ音量
+	//---------------------------------------------------------------------
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188, 135)
+		\BTNDEF(@es.CNUM.OPT.VOL.BGM.GAUGE) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188, 135) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.BGM.SLIDER) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152, 135)
+			\BTNDEF(@es.CNUM.OPT.VOL.BGM.MUTE.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.BGM.MUTE.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152, 135)
+			\BTNDEF(@es.CNUM.OPT.VOL.BGM.MUTE.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.BGM.MUTE.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202, 135)
+			\BTNDEF(@es.CNUM.OPT.VOL.BGM.MUTE.OFF) //ボタン登録
+		}
+		IFEND[]
+
+
+	//---------------------------------------------------------------------
+	//■効果音音量
+	//---------------------------------------------------------------------
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188, 170)
+		\BTNDEF(@es.CNUM.OPT.VOL.SE.GAUGE) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188, 170) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.SE.SLIDER) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152, 170)
+			\BTNDEF(@es.CNUM.OPT.VOL.SE.MUTE.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.SE.MUTE.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152, 170)
+			\BTNDEF(@es.CNUM.OPT.VOL.SE.MUTE.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.SE.MUTE.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202, 170)
+			\BTNDEF(@es.CNUM.OPT.VOL.SE.MUTE.OFF) //ボタン登録
+		}
+		IFEND[]
+
+
+	//---------------------------------------------------------------------
+	//■システム音音量
+	//---------------------------------------------------------------------
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188, 205)
+		\BTNDEF(@es.CNUM.OPT.VOL.SSE.GAUGE) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188, 205) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.SSE.SLIDER) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152, 205)
+			\BTNDEF(@es.CNUM.OPT.VOL.SSE.MUTE.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.SSE.MUTE.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152, 205)
+			\BTNDEF(@es.CNUM.OPT.VOL.SSE.MUTE.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.SSE.MUTE.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202, 205)
+			\BTNDEF(@es.CNUM.OPT.VOL.SSE.MUTE.OFF) //ボタン登録
+		}
+		IFEND[]
+
+
+	//---------------------------------------------------------------------
+	//■音声ハイライト率
+	//---------------------------------------------------------------------
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188, 275)
+		\BTNDEF(@es.CNUM.OPT.VO.HILIGHT.GAUGE) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188, 275) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VO.HILIGHT.SLIDER) //ボタン登録
+
+
+	//---------------------------------------------------------------------
+	//■音声再生の停止タイミング
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(190, 345)
+			\BTNDEF(@es.CNUM.OPT.VO.STOP.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆次のボイス
+			\BTN.GROUP(@es.CNUM.OPT.VO.STOP.ON)
+			\BTN.CG("cg/option/btn_nextvoice_off", "cg/option/btn_nextvoice_over", "cg/option/btn_nextvoice_on")
+			\BTN.XY(190, 345)
+			\BTNDEF(@es.CNUM.OPT.VO.STOP.ON) //ボタン登録
+			//◆次の文章
+			\BTN.GROUP(@es.CNUM.OPT.VO.STOP.ON)
+			\BTN.CG("cg/option/btn_nexttext_off", "cg/option/btn_nexttext_over", "cg/option/btn_nexttext_on")
+			\BTN.XY(290, 345)
+			\BTNDEF(@es.CNUM.OPT.VO.STOP.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■オート時に再生終了まで待つ
+	//---------------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(290, 380)
+			\BTNDEF(@es.CNUM.OPT.VO.AUTO.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VO.AUTO.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(290, 380)
+			\BTNDEF(@es.CNUM.OPT.VO.AUTO.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VO.AUTO.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(340, 380)
+			\BTNDEF(@es.CNUM.OPT.VO.AUTO.OFF) //ボタン登録
+		}
+		IFEND[]
+
+
+
+	//---------------------------------------------------------------------
+	//■音声全体音量
+	//---------------------------------------------------------------------
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188+375, 100)
+		\BTNDEF(@es.CNUM.OPT.VOL.VO.GAUGE) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188+375, 100) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.VO.SLIDER) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152+375, 100)
+			\BTNDEF(@es.CNUM.OPT.VOL.VO.MUTE.ON) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.VO.MUTE.ON)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152+375, 100)
+			\BTNDEF(@es.CNUM.OPT.VOL.VO.MUTE.ON) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.VO.MUTE.ON)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202+375, 100)
+			\BTNDEF(@es.CNUM.OPT.VOL.VO.MUTE.OFF) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■キャラ１音量
+	//---------------------------------------------------------------------
+		@no=1
+
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188+375, 135)
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.GAUGE+@no-1) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188+375, 135) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.SLIDER+@no-1) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152+375, 135)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152+375, 135)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202+375, 135)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.OFF+@no-1) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■キャラ２音量
+	//---------------------------------------------------------------------
+		@no=2
+
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188+375, 170)
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.GAUGE+@no-1) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188+375, 170) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.SLIDER+@no-1) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152+375, 170)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152+375, 170)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202+375, 170)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.OFF+@no-1) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■キャラ３音量
+	//---------------------------------------------------------------------
+		@no=3
+
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188+375, 205)
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.GAUGE+@no-1) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188+375, 205) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.SLIDER+@no-1) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152+375, 205)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152+375, 205)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202+375, 205)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.OFF+@no-1) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■キャラ４音量
+	//---------------------------------------------------------------------
+		@no=4
+
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188+375, 240)
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.GAUGE+@no-1) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188+375, 240) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.SLIDER+@no-1) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152+375, 240)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152+375, 240)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202+375, 240)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.OFF+@no-1) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■キャラ５音量
+	//---------------------------------------------------------------------
+		@no=5
+
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188+375, 275)
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.GAUGE+@no-1) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188+375, 275) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.SLIDER+@no-1) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152+375, 275)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152+375, 275)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202+375, 275)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.OFF+@no-1) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■キャラ６音量
+	//---------------------------------------------------------------------
+		@no=6
+
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188+375, 310)
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.GAUGE+@no-1) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188+375, 310) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.SLIDER+@no-1) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152+375, 310)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152+375, 310)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202+375, 310)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.OFF+@no-1) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■キャラ７音量
+	//---------------------------------------------------------------------
+		@no=7
+
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188+375, 345)
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.GAUGE+@no-1) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188+375, 345) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.SLIDER+@no-1) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152+375, 345)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152+375, 345)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202+375, 345)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.OFF+@no-1) //ボタン登録
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■キャラ８音量
+	//---------------------------------------------------------------------
+		@no=8
+
+		//◆目盛り
+		\BTN.CG("cg/option/gauge")
+		\BTN.XY(188+375, 380)
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.GAUGE+@no-1) //ボタン登録
+
+		//◆ツマミ
+		\BTN.CG("cg/option/slider_off", "cg/option/slider_over")
+		\BTN.XY(188+375, 380) //スライダー左端の座標をセットする
+		\BTN.SLIDE(200-8,0,3,0) //スライダーの動く範囲XY,ドラッグ中心位置XY
+		\BTNDEF(@es.CNUM.OPT.VOL.CHARA.SLIDER+@no-1) //ボタン登録
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BTN.CG("cg/option/check_off", "", "cg/option/check_on")
+			\BTN.XY(152+375, 380)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_on_off", "cg/option/btn_on_over", "cg/option/btn_on_on")
+			\BTN.XY(152+375, 380)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1) //ボタン登録
+			//◆OFF
+			\BTN.GROUP(@es.CNUM.OPT.VOL.CHARA.MUTE.ON+@no-1)
+			\BTN.CG("cg/option/btn_off_off", "cg/option/btn_off_over", "cg/option/btn_off_on")
+			\BTN.XY(202+375, 380)
+			\BTNDEF(@es.CNUM.OPT.VOL.CHARA.MUTE.OFF+@no-1) //ボタン登録
+		}
+		IFEND[]
+
+
+
+	//---------------------------------------------------------------------
+	//■設定初期化
+	//---------------------------------------------------------------------
+		//◆設定初期化
+		\BTN.CG("cg/option/btn_init_off", "cg/option/btn_init_over")
+		\BTN.XY(380, 554)
+		\BTNDEF(@es.CNUM.OPT.CFGINIT) //ボタン登録
+
+
+	//---------------------------------------------------------------------
+	//■タイトルへ戻る
+	//---------------------------------------------------------------------
+		IF[@es.TITLEMODE==0] //タイトル画面モードじゃなければ表示
+		{
+			IF[@es.RPMODE==0] //回想シーンでなければ
+			{
+				//◆タイトルへ戻る
+				\BTN.CG("cg/option/btn_title_off", "cg/option/btn_title_over")
+				\BTN.XY(480, 554)
+				\BTNDEF(@es.CNUM.OPT.TITLE) //ボタン登録
+			}
+			ELSE[] //回想シーンならば
+			{
+				//◆回想閲覧へ戻る
+				\BTN.CG("cg/option/btn_replayend_off", "cg/option/btn_replayend_over")
+				\BTN.XY(480, 554)
+				\BTNDEF(@es.CNUM.OPT.TITLE) //ボタン登録
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+	//---------------------------------------------------------------------
+	//■終了する
+	//---------------------------------------------------------------------
+		//◆EXIT
+		\BTN.CG("cg/option/btn_exit_off", "cg/option/btn_exit_over")
+		\BTN.XY(580, 554)
+		\BTNDEF(@es.CNUM.OPT.END) //ボタン登録
+
+	//---------------------------------------------------------------------
+	//■戻る
+	//---------------------------------------------------------------------
+		//◆BACK
+		\BTN.CG("cg/option/btn_back_off", "cg/option/btn_back_over")
+		\BTN.XY(680, 554)
+		\BTN.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+		\BTNDEF(@es.CNUM.OPT.BACK) //ボタン登録
+
+
+
+Return[]
+

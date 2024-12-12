@@ -1,0 +1,59 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">変数系命令</A>＞STR［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="int.html">INT［］</A>
+　<A HREF="flt.html">FLT［］</A>
+　<A HREF="str.html">STR［］</A>
+　<A HREF="g_int.html">G_INT［］</A>
+　<A HREF="g_flt.html">G_FLT［］</A>
+　<A HREF="g_str.html">G_STR［］</A>
+　<A HREF="s_int.html">S_INT［］</A>
+　<A HREF="s_flt.html">S_FLT［］</A>
+　<A HREF="s_str.html">S_STR［］</A>
+　<A HREF="let.html">LET［］</A>
+　<A HREF="varact.html">VARACT［］</A>
+　<A HREF="varinfo.html">VARINFO［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=600 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■文字列変数宣言命令 STR[ ]</FONT>
+<FONT CLASS=t20>
+
+文字列変数を使えるようにし、初期文字列を設定します。
+このコマンドによって宣言された変数は<B>ローカル変数</B>となり、
+これを宣言した地点から、ファイル終端もしくは次に RETURN 命令が来るまでの範囲で
+この変数を使用できるようになります。
+
+<FONT CLASS=t70>STR[$<FONT CLASS=t70>変数名</FONT>]</FONT>
+もしくは
+<FONT CLASS=t70>STR[$<FONT CLASS=t70>変数名</FONT>=<FONT CLASS=t70>初期値</FONT>]</FONT>
+
+
+配列変数を宣言する場合は、以下のように記述します。
+
+<FONT CLASS=t70>STR[$<FONT CLASS=t70>変数名</FONT>(<FONT CLASS=t70>配列要素数</FONT>)]</FONT>
+もしくは
+<FONT CLASS=t70>STR[$<FONT CLASS=t70>変数名</FONT>(<FONT CLASS=t70>配列要素数</FONT>)=<FONT CLASS=t70>初期文字列</FONT>]</FONT>
+
+
+初期文字列を省略して記述した場合は、何も格納されない空の文字列変数となります。
+配列変数の場合は、その配列の要素全てに初期文字列が代入されます。
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

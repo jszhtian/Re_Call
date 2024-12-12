@@ -1,0 +1,66 @@
+modename miniGame
+
+
+@nextMode Omake
+noCGFileName logo1_1280x720
+
+
+exitfileName ta_backbutton
+ExitPrintX 1120
+ExitPrintY 624
+ExitSizeX 128
+ExitSizeY 64
+
+ExitAnimeType1 7
+ExitAnimePattern1 2
+ExitAnimeSpeed1 20
+
+ExitAnimeType2 7
+ExitAnimePattern2 2
+ExitAnimeSpeed2 3
+
+ExitAnimeType3 7
+ExitAnimePattern3 2
+ExitAnimeSpeed3 50
+
+ExitClickSound 2
+ExitClickTime 1
+
+
+
+addMiniGame 2
+miniGame1 9
+miniGame2 10
+@miniGame3 1
+
+
+
+miniGameCheckNumber 2
+
+miniGameCheckMode1 title
+miniGameCheckX1 0
+miniGameCheckY1 0
+miniGameCheckSizeX1 50
+miniGameCheckSizeY1 50
+miniGameDescNumber1 0
+@miniGameDescFileName1_1 bg_config01
+@miniGameDescFileName1_2 bg_kamititle
+
+
+
+miniGameCheckMode2 title
+miniGameCheckX2 50
+miniGameCheckY2 0
+miniGameCheckSizeX2 100
+miniGameCheckSizeY2 100
+
+
+sabunOkFlag 0
+
+miniGameClickSound 1
+miniGameBadSound 3
+
+mahjongPicFileName ta_mahjong
+mahjongPicSizeX 48
+mahjongPicSizeY 67
+

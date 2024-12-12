@@ -1,0 +1,67 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">ムービー系命令</A>＞MOVIE［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="movie.html">MOVIE［］</A>
+　<A HREF="movieinfo.html">MOVIEINFO［］</A>
+　<A HREF="movieend.html">MOVIEEND［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=680 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■ムービー制御命令 MOVIE[ ]</FONT>
+<FONT CLASS=t20>
+
+ムービー再生の制御をします。
+
+MOVIE 命令は、メディアプレイヤーで再生できる全てのムービーファイル（MPG,AVI等）に
+対応します。ただレイヤーとして操作することは出来ず、全てのレイヤーより前面に表示されます。
+ゲームのオープニングやエンディングなどでのムービー再生に適しています。
+ムービー(AVI形式)をレイヤとして扱いたい場合は、CG 命令を利用してください。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>FILE = ファイル名</FONT></TD><TD><FONT CLASS=t40>ムービーファイルを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>X = 値</FONT></TD><TD><FONT CLASS=t40>ムービーのＸ座標位置を指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Y = 値</FONT></TD><TD><FONT CLASS=t40>ムービーのＹ座標位置を指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SX = 値</FONT></TD><TD><FONT CLASS=t40>ムービーのサイズＸを指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SY = 値</FONT></TD><TD><FONT CLASS=t40>ムービーのサイズＹを指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>VOLUME = 値(0～256)</FONT></TD><TD><FONT CLASS=t40>ムービーの音量を指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PLAY = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>１を指定すると再生、０を指定すると停止します</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]「ABC.MPG」ムービーファイルをロードし、ムービーをウィンドウいっぱいに広げて再生する。
+　※SX, SY キーワードを指定しなかった場合は、ウィンドウと同じサイズになります。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MOVIE</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"ABC.MPG"</FONT> <FONT CLASS=t62>PLAY</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[2]「ABC.MPG」ムービーファイルをロードし、ムービーを幅320、縦240の大きさにして再生する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MOVIE</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"ABC.MPG"</FONT> <FONT CLASS=t62>SX</FONT>=<FONT CLASS=t63>320</FONT> <FONT CLASS=t62>SY</FONT>=<FONT CLASS=t63>240</FONT> <FONT CLASS=t62>PLAY</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[3]ムービーの再生を停止する。
+　※停止しても、MOVIEEND 命令でムービー再生を終了しない限り他のレイヤは一切表示されません。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MOVIE</FONT>[<FONT CLASS=t62>PLAY</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

@@ -1,0 +1,526 @@
+//=========================================================================
+//
+//■ERIS セーブ
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.SAVE."]
+
+	S_INT[@Z.NUM  =60000000000000+3]
+
+	S_INT[@SAVEEXEC.NO1]
+	S_INT[@MOVEEXEC.NO1]
+	S_INT[@MOVEEXEC.NO2]
+	S_INT[@COPYEXEC.NO1]
+	S_INT[@COPYEXEC.NO2]
+	S_INT[@DELEXEC.NO1]
+
+}
+
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.SAVE.LOOP
+{
+
+	IF[@es.STATE==1] //BACK
+	{
+			GOSUB[#=ES.SAVE.INIT2]
+
+			\SS.FADE(150)
+			@es.STATE=100
+	}
+	IFEND[]
+
+
+	IF[@es.STATE==901] //タイトル確認/終了確認/シーン鑑賞確認からBACK
+	{
+			GOSUB[#=ES.SAVE.INIT2]
+
+			\SS.FADE(250)
+			@es.STATE=100
+	}
+	IFEND[]
+
+
+	IF[@es.STATE==1000] //セーブ実行
+	{
+			\SAVE(@SAVEEXEC.NO1, 0 ) //0=save,1=qsave,,2=prevselsave
+
+			@es.STATE =1
+		//	@es.STATE2=11
+	}
+	IFEND[]
+	IF[@es.STATE==1001] //セーブ確認
+	{
+			\_gosub(ES.SAVECONF.VoicePlay.1)	//ボイス再生
+			\es.S.GOSUB.OVER("ES.SAVECONF", 0, 1, 1003, 0)
+	}
+	IFEND[]
+	IF[@es.STATE==1002] //上書きセーブ確認
+	{
+			\_gosub(ES.SAVE.VoicePlay.5)		//ボイス再生
+			\es.S.GOSUB.OVER("ES.SAVECONF", 0, 2, 1003, 0)
+	}
+	IFEND[]
+	IF[@es.STATE==1003] //確認画面から戻った
+	{
+			IF[@es.S.RINT(1)==1] @es.STATE=1000 IFEND[] //はい
+			IF[@es.S.RINT(1)==0] @es.STATE=   1 IFEND[] //いいえ
+	}
+	IFEND[]
+
+
+
+	IF[@es.STATE==1100] //コピー実行
+	{
+			GOSUB[#=es.SL.COPY pint=@COPYEXEC.NO1 pint2=@COPYEXEC.NO2] //引数1 から 引数2へコピー
+
+			@es.STATE =1
+		//	@es.STATE2=11
+	}
+	IFEND[]
+	IF[@es.STATE==1101] //コピー確認
+	{
+			\_gosub(ES.SDCOPYCONF.VoicePlay.1)	//ボイス再生
+			\es.S.GOSUB.OVER("ES.SDCOPYCONF", 0, 1, 1103, 0)
+	}
+	IFEND[]
+	IF[@es.STATE==1102] //上書きコピー確認
+	{
+			\_gosub(ES.SDCOPYCONF.VoicePlay.2)	//ボイス再生
+			\es.S.GOSUB.OVER("ES.SDCOPYCONF", 0, 2, 1103, 0)
+	}
+	IFEND[]
+	IF[@es.STATE==1103] //確認画面から戻った
+	{
+			IF[@es.S.RINT(1)==1] @es.STATE=1100 IFEND[] //はい
+			IF[@es.S.RINT(1)==0] @es.STATE=   1 IFEND[] //いいえ
+	}
+	IFEND[]
+
+
+
+	IF[@es.STATE==1200] //移動実行
+	{
+			GOSUB[#=es.SL.MOVE pint=@MOVEEXEC.NO1 pint2=@MOVEEXEC.NO2] //引数1 から 引数2へ移動
+
+			@es.STATE =1
+		//	@es.STATE2=12
+	}
+	IFEND[]
+	IF[@es.STATE==1201] //移動確認
+	{
+			\_gosub(ES.SDMOVECONF.VoicePlay.1)	//ボイス再生
+			\es.S.GOSUB.OVER("ES.SDMOVECONF", 0, 0, 1203, 0)
+	}
+	IFEND[]
+	IF[@es.STATE==1203] //確認画面から戻った
+	{
+			IF[@es.S.RINT(1)==1] @es.STATE=1200 IFEND[] //はい
+			IF[@es.S.RINT(1)==0] @es.STATE=   1 IFEND[] //いいえ
+	}
+	IFEND[]
+
+
+
+
+	IF[@es.STATE==1300] //削除実行
+	{
+			GOSUB[#=es.SL.DEL pint=@DELEXEC.NO1] //引数1 を消去
+
+			@es.STATE =1
+		//	@es.STATE2=13
+	}
+	IFEND[]
+	IF[@es.STATE==1301] //削除確認
+	{
+			\_gosub(ES.SDDELCONF.VoicePlay.1)	//ボイス再生
+			\es.S.GOSUB.OVER("ES.SDDELCONF", 0, 0, 1303, 0)
+	}
+	IFEND[]
+	IF[@es.STATE==1303] //確認画面から戻った
+	{
+			IF[@es.S.RINT(1)==1] @es.STATE=1300 IFEND[] //はい
+			IF[@es.S.RINT(1)==0] @es.STATE=   1 IFEND[] //いいえ
+	}
+	IFEND[]
+
+
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■INIT
+//--------------------------------------------------------------------
+#=ES.SAVE.INIT
+{
+	\_gosub($BID+"VoicePlay.1")		//ボイス再生
+
+	GOSUB[#=ES.SAVE.INIT2]
+	\SS.FADE(250)
+	@es.STATE=100
+
+	return[]
+}
+
+#=ES.SAVE.INIT2
+{
+	//各種準備
+		//
+		@SAVEEXEC.NO1 = 0
+		@MOVEEXEC.NO1 = 0
+		@MOVEEXEC.NO2 = 0
+		@COPYEXEC.NO1 = 0
+		@COPYEXEC.NO2 = 0
+		@DELEXEC.NO1  = 0
+		@es.SL.SELPLATE = 0
+
+		//数字
+			//現在のページ
+			\NUM.XYZ(11, @T(11,62), @T(11,63), @Z.NUM)
+			\NUM.SX(11, @T(11,64))
+			\NUM.FILE(11, $T(11,61))
+			\NUM.DIG(11, @T(11,65), @T(11,66))
+			\NUM.MAX(11, 99)
+			\NUM.MIN(11, 0)
+			\NUM.VAL(11, 0)
+			\NUM.SET(11)
+
+			//総ページ
+			\NUM.XYZ(12, @T(11,68), @T(11,69), @Z.NUM)
+			\NUM.SX(12, @T(11,70))
+			\NUM.FILE(12, $T(11,67))
+			\NUM.DIG(12, @T(11,71), @T(11,72))
+			\NUM.MAX(12, 99)
+			\NUM.MIN(12, 0)
+			\NUM.VAL(12, 0)
+			\NUM.SET(12)
+
+		GOSUB[#=ES.SL.SCROLL.SHOW pstr=$BID]	//プレート描画
+
+	return[]
+}
+
+
+
+//--------------------------------------------------------------------
+//■終了処理
+//--------------------------------------------------------------------
+#=ES.SAVE.END
+{
+	//----------------------------------------------------------------
+	// 変数初期化
+	//----------------------------------------------------------------
+		LOOP[SET=@es.sdplatenum] @es.sdexist(@_LC)=0 LOOPEND[]
+
+	//----------------------------------------------------------------
+	// 消去
+	//----------------------------------------------------------------
+		LOOP[SET=2] GOSUB[#=es.NUM.DEL pint=11+@_LC-1] LOOPEND[]
+
+	//	CGEND[ID=SLTEMP]
+
+	return[]
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[ページ]ボタン ---------------------------------------------------
+//
+#=ES.SAVE.BTN.PAGE.ON
+{
+	@es.GSD(150,01) = @_PINT(1)-1				// ページ番号取得
+	GOSUB[#=ES.SL.SCROLL.SHOW pstr=$BID]		// セーブプレート描画
+	return[]
+}
+
+//■[→]ボタン -------------------------------------------------------
+//
+#=ES.SAVE.BTN.PAGENEXT.ON
+{
+	IF[@es.GSD(150,01)<@es.sdpagenum-1]
+		@es.GSD(150,01)+=1
+		GOSUB[#=ES.SL.SCROLL.SHOW pstr=$BID]	// セーブプレート描画
+	IFEND[]
+	return[]
+}
+
+//■[←]ボタン -------------------------------------------------------
+//
+#=ES.SAVE.BTN.PAGEPREV.ON
+{
+	IF[@es.GSD(150,01)>0]
+		@es.GSD(150,01) -= 1
+		GOSUB[#=ES.SL.SCROLL.SHOW pstr=$BID]	// セーブプレート描画
+	IFEND[]
+	return[]
+}
+
+//■[→→]ボタン -----------------------------------------------------
+//
+#=ES.SAVE.BTN.PAGELAST.ON
+{
+	@es.GSD(150,01) = @es.sdpagenum-1
+	GOSUB[#=ES.SL.SCROLL.SHOW pstr=$BID]		// セーブプレート描画
+	return[]
+}
+
+//■[←←]ボタン -----------------------------------------------------
+//
+#=ES.SAVE.BTN.PAGEFIRST.ON
+{
+	@es.GSD(150,01) = 0
+	GOSUB[#=ES.SL.SCROLL.SHOW pstr=$BID]		// セーブプレート描画
+	return[]
+}
+
+//■[プレート]ボタン -------------------------------------------------
+//
+#=ES.SAVE.BTN.PLATE.ON
+{
+	INT[@no=@_PINT(1)]
+	INT[@saveno = @es.GSD(150,01)*@es.sdplatenum + @no]	//スロット番号
+
+	INT[@btn_copy];\BT.ONOFF.GET(@btn_copy, $BID+"BTN.COPY")
+	INT[@btn_move];\BT.ONOFF.GET(@btn_move, $BID+"BTN.MOVE")
+	INT[@btn_del];\BT.ONOFF.GET(@btn_del, $BID+"BTN.DELETE")
+
+	IF[@btn_copy] //コピーモード
+	{
+			IF[@es.SL.SELPLATE==0]
+			{
+				@es.SL.SELPLATE = @saveno
+
+				GOSUB[#=ES.SL.LOCK.REF pstr=$BID]
+			}
+			ELSE[]
+			{
+				@COPYEXEC.NO1 = @es.SL.SELPLATE
+				@COPYEXEC.NO2 = @saveno
+
+				\BT.OFF($BID+"BTN.COPY")
+				@es.SL.SELPLATE = 0
+
+				@es.STATE=1100	//コピー実行
+				IF[@es.GSD(114,09)] @es.STATE=1101 IFEND[]	//コピー確認
+
+				IF[@es.sdexist(@no)] //セーブデータがある場合
+					IF[@es.GSD(114,10)] @es.STATE=1102 IFEND[]	//上書きコピー確認
+				IFEND[]
+			}
+			IFEND[]
+	}
+	ELSE[@btn_move] //移動モード
+	{
+			IF[@es.SL.SELPLATE==0]
+			{
+				@es.SL.SELPLATE = @saveno
+
+				GOSUB[#=ES.SL.LOCK.REF pstr=$BID]
+			}
+			ELSE[]
+			{
+				@MOVEEXEC.NO1 = @es.SL.SELPLATE
+				@MOVEEXEC.NO2 = @saveno
+
+				\BT.OFF($BID+"BTN.MOVE")
+				@es.SL.SELPLATE = 0
+
+				@es.STATE=1200	//移動実行
+				IF[@es.GSD(114,11)] @es.STATE=1201 IFEND[]	//移動確認
+			}
+			IFEND[]
+	}
+	ELSE[@btn_del] //削除モード
+	{
+			@DELEXEC.NO1 = @saveno
+
+			@es.STATE=1300	//削除実行
+			IF[@es.GSD(114,12)] @es.STATE=1301 IFEND[]	//削除確認
+	}
+	ELSE[] //セーブ
+	{
+			@SAVEEXEC.NO1 = @saveno
+
+			@es.STATE=1000	//セーブ実行
+			IF[@es.GSD(114,06)] @es.STATE=1001 IFEND[]	//セーブ確認
+
+			IF[@es.sdexist(@no)] //セーブデータがある場合
+				IF[@es.GSD(114,07)] @es.STATE=1002 IFEND[]	//上書きセーブ確認
+			IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//■[Ｑプレート]ボタン -----------------------------------------------
+//
+/*
+#=ES.SAVE.BTN.QPLATE.ON
+{
+	GOSUB[#=ES.SAVE_Main pint=@_PINT(1)]
+	return[]
+}
+*/
+
+//■[セーブロック]ボタン ---------------------------------------------
+//
+#=ES.SAVE.BTN.PLATECHECK.ON
+{
+	INT[@no=@_PINT(1)]
+	INT[@grpno = @es.GSD(150,01)]
+
+	@es.GSD(091,@grpno) ^= @es.POW2( @no%63 ) //特定bitを反転する
+
+	GOSUB[#=ES.SL.LOCK.REF pstr=$BID]	//プレートロック更新
+	return[]
+}
+
+//■[コピー]ボタン ---------------------------------------------------
+//
+#=ES.SAVE.BTN.COPY.ON
+{
+	INT[@btn_copy]
+
+	\BT.ONOFF.GET(@btn_copy, $BID+"BTN.COPY")
+	IF[@btn_copy]
+	{
+		\_gosub($BID+"VoicePlay.3")	// ボイス再生
+
+		\BT.OFF($BID+"BTN.DELETE")
+		\BT.OFF($BID+"BTN.MOVE")
+	}
+	ELSE[]
+	{
+		@es.SL.SELPLATE = 0
+	}
+	IFEND[]
+
+	GOSUB[#=ES.SL.LOCK.REF pstr=$BID]	//プレートロック更新
+
+	return[]
+}
+
+//■[移動]ボタン -----------------------------------------------------
+//
+#=ES.SAVE.BTN.MOVE.ON
+{
+	INT[@btn_move]
+
+	\BT.ONOFF.GET(@btn_move, $BID+"BTN.MOVE")
+	IF[@btn_move]
+	{
+		\_gosub($BID+"VoicePlay.3")	// ボイス再生
+
+		\BT.OFF($BID+"BTN.COPY")
+		\BT.OFF($BID+"BTN.DELETE")
+	}
+	ELSE[]
+	{
+		@es.SL.SELPLATE = 0
+	}
+	IFEND[]
+
+	GOSUB[#=ES.SL.LOCK.REF pstr=$BID]	//プレートロック更新
+
+	return[]
+}
+
+//■[削除]ボタン -----------------------------------------------------
+//
+#=ES.SAVE.BTN.DELETE.ON
+{
+	INT[@btn_del]
+
+	\BT.ONOFF.GET(@btn_del, $BID+"BTN.DELETE")
+	IF[@btn_del]
+	{
+		\_gosub($BID+"VoicePlay.4")	// ボイス再生
+
+		\BT.OFF($BID+"BTN.COPY")
+		\BT.OFF($BID+"BTN.MOVE")
+	}
+	IFEND[]
+	@es.SL.SELPLATE = 0
+
+	GOSUB[#=ES.SL.LOCK.REF pstr=$BID]	//プレートロック更新
+
+	return[]
+}
+
+//■[ロード]ボタン ---------------------------------------------------
+//
+#=ES.SAVE.BTN.LOAD.ON
+{
+	\es.S.GO("ES.LOAD", 0, 0) //ロードへ
+	return[]
+}
+
+//■[タイトル]ボタン -------------------------------------------------
+//
+#=ES.SAVE.BTN.TITLE.ON
+{
+	IF[@_PINT(1)==0] //タイトル確認
+		\es.S.GOSUB.OVER("ES.TITLECONF", 0, 0, 901, 0)
+	IFEND[]
+	IF[@_PINT(1)==1] //タイトル確認(DIALOG)
+		GOSUB[#=ES.TITLECONF.DIALOG]
+		IF[@_RINT(1)==1]
+			GOSUB[#=es.CGTSS.2]
+			\es.S.RETURN.LBL("ES.GAMEMAIN", 900, 0)
+		IFEND[]
+	IFEND[]
+	return[]
+}
+
+//■[終了]ボタン -----------------------------------------------------
+//
+#=ES.SAVE.BTN.END.ON
+{
+	IF[@_PINT(1)==0] //終了確認
+		\es.S.GOSUB.OVER("ES.ENDCONF", 0, 0, 901, 0)
+	IFEND[]
+	IF[@_PINT(1)==1] //終了確認(DIALOG)
+		GOSUB[#=ES.ENDCONF.DIALOG]
+	IFEND[]
+	return[]
+}
+
+//■[戻る]ボタン -----------------------------------------------------
+//
+#=ES.SAVE.BTN.BACK.ON
+{
+	INT[@btn_copy]
+	INT[@btn_move]
+	INT[@btn_del]
+
+//	\BT.ONOFF.GET(@btn_copy, $BID+"BTN.COPY")
+//	\BT.ONOFF.GET(@btn_move, $BID+"BTN.MOVE")
+//	\BT.ONOFF.GET(@btn_del, $BID+"BTN.DELETE")
+
+	IF[@btn_copy] //もしコピーモード中ならば解除
+		\BT.OFF($BID+"BTN.COPY")
+	ELSE[@btn_move] //もし移動モード中ならば解除
+		\BT.OFF($BID+"BTN.MOVE")
+	ELSE[@btn_del] //もし削除モード中ならば解除
+		\BT.OFF($BID+"BTN.DELETE")
+	ELSE[]
+		\es.S.RETURN
+	IFEND[]
+
+	@es.SL.SELPLATE = 0
+
+	GOSUB[#=ES.SL.LOCK.REF pstr=$BID]	//プレートロック更新
+
+	return[]
+}
+

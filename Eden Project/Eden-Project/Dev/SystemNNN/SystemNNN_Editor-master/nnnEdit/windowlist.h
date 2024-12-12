@@ -1,0 +1,32 @@
+//
+// windowlist.h
+//
+
+#if !defined __NNNEDIT_WINDOWLIST__
+#define __NNNEDIT_WINDOWLIST__
+
+#define MAINSCREEN_WINDOW 0
+#define FILM_WINDOW 1
+#define LAYER_WINDOW 2
+#define ZAHYO_WINDOW 3
+#define GAMEMESSAGE_WINDOW 4
+#define EFFECT_WINDOW 5
+
+
+#define STORY_WINDOW 10
+#define VAR_WINDOW 11
+#define PROGRAM_WINDOW 12
+
+
+#define FILMCASE_WINDOW 15
+#define STORYBOOK_WINDOW 16
+
+#define CONTE_WINDOW 17
+#define CONTEMESSAGE_WINDOW 18
+
+#define CONTROL_WINDOW 20
+
+
+#endif
+/*_*/
+

@@ -1,0 +1,1 @@
+for %%a in (*.) do BGITextureConvert.exe e %%a

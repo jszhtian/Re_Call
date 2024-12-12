@@ -1,0 +1,16 @@
+Example 1:
+select
+"` Start ",*ppa,
+"` Postscript ",*kou
+
+Explanation: I don't know what the original programmer had in mind, but I
+completely disagree with command-specific syntax. The syntax of a language
+should be as regular as possible. These are the only accepted syntaxes for all
+commands:
+(#=any number of parameters)
+command #
+command #,
+#
+command # : command #
+command #/
+,#

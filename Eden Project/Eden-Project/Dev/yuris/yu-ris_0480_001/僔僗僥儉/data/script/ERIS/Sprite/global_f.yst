@@ -1,0 +1,440 @@
+
+	//現在のレイヤ情報
+	F_STR[$L.SPID(\.SP.MAX+1)]
+	F_STR[$L.FCG(\.SP.MAX+1)]
+	F_STR[$L.FTR(\.SP.MAX+1)]
+	F_FLT[@L.YMTIME(\.SP.MAX+1)]
+	F_INT[@L.YMFPS(\.SP.MAX+1)]
+	F_INT[@L.TRA(\.SP.MAX+1)]
+	F_INT[@L.TRR(\.SP.MAX+1)]
+	F_INT[@L.CHRNO(\.SP.MAX+1)] //スプライトが立ち絵だった場合のキャラ番号(Z座標を+0.00nするため)
+	F_INT[@L.LZCNT(\.SP.MAX+1)] //スプライトが立ち絵だった場合のZ座標カウント※目的は↑と同じでどちらかを使用する形
+	F_INT[@L.FTYPE(\.SP.MAX+1)]
+	F_INT[@L.TIP(\.SP.MAX+1)]
+	F_INT[@L.ST(\.SP.MAX+1)]
+	F_INT[@L.BL(\.SP.MAX+1)]
+
+	F_INT[@L.HOR(\.SP.MAX+1)]
+	F_INT[@L.VER(\.SP.MAX+1)]
+	F_INT[@L.REV(\.SP.MAX+1)]
+	F_INT[@L.MONO(\.SP.MAX+1)]
+	F_INT[@L.BLUR(\.SP.MAX+1)]
+	F_INT[@L.MOSA(\.SP.MAX+1)]
+	F_INT[@L.DIFF(\.SP.MAX+1)]
+	F_INT[@L.ROT(\.SP.MAX+1)]
+	F_INT[@L.RAS(\.SP.MAX+1)]
+	F_INT[@L.WPL(\.SP.MAX+1)]
+	F_INT[@L.AKA(\.SP.MAX+1)]
+
+	F_INT[@L.PARENT(\.SP.MAX+1)]
+	F_INT[@L.CHILD(\.SP.MAX+1)]
+	F_INT[@L.SX(\.SP.MAX+1)]
+	F_INT[@L.SY(\.SP.MAX+1)]
+	F_INT[@L.LV(\.SP.MAX+1)]
+	F_INT[@L.CX(\.SP.MAX+1)]
+	F_INT[@L.CY(\.SP.MAX+1)]
+	F_INT[@L.A(\.SP.MAX+1)]
+	F_INT[@L.F1(\.SP.MAX+1)]
+	F_INT[@L.F2(\.SP.MAX+1)]
+	F_FLT[@L.AX(\.SP.MAX+1)] //アニメ用座標
+	F_FLT[@L.AY(\.SP.MAX+1)] //アニメ用座標
+	F_FLT[@L.AZ(\.SP.MAX+1)] //アニメ用座標
+	F_FLT[@L.ABX(\.SP.MAX+1)] //アニメ用拡大率
+	F_FLT[@L.ABY(\.SP.MAX+1)] //アニメ用拡大率
+	F_FLT[@L.MX(\.SP.MAX+1)]
+	F_FLT[@L.MY(\.SP.MAX+1)]
+	F_FLT[@L.MZ(\.SP.MAX+1)]
+	F_FLT[@L.QX(\.SP.MAX+1)]
+	F_FLT[@L.QY(\.SP.MAX+1)]
+	F_FLT[@L.QZ(\.SP.MAX+1)]
+	F_FLT[@L.RX(\.SP.MAX+1)]
+	F_FLT[@L.RY(\.SP.MAX+1)]
+	F_FLT[@L.RZ(\.SP.MAX+1)]
+	F_FLT[@L.CLBX(\.SP.MAX+1)]
+	F_FLT[@L.CLBY(\.SP.MAX+1)]
+	F_INT[@L.CLA(\.SP.MAX+1)]
+	F_INT[@L.CLH(\.SP.MAX+1)]
+	F_INT[@L.CLTP(\.SP.MAX+1)]
+	F_FLT[@L.CLV(\.SP.MAX+1)]
+	F_FLT[@L.CLW(\.SP.MAX+1)]
+	F_FLT[@L.CLX(\.SP.MAX+1)]
+	F_FLT[@L.CLY(\.SP.MAX+1)]
+	F_FLT[@L.CLZ(\.SP.MAX+1)]
+	F_FLT[@L.CLRX(\.SP.MAX+1)]
+	F_FLT[@L.CLRY(\.SP.MAX+1)]
+	F_FLT[@L.CLRZ(\.SP.MAX+1)]
+	F_FLT[@L.BX(\.SP.MAX+1)]
+	F_FLT[@L.BY(\.SP.MAX+1)]
+	F_INT[@L.H(\.SP.MAX+1)]
+	F_INT[@L.TP(\.SP.MAX+1)]
+	F_FLT[@L.V(\.SP.MAX+1)]
+	F_FLT[@L.W(\.SP.MAX+1)]
+	F_FLT[@L.X(\.SP.MAX+1)]
+	F_FLT[@L.Y(\.SP.MAX+1)]
+	F_FLT[@L.Z(\.SP.MAX+1)]
+	F_INT[@L.SD(\.SP.MAX+1)]
+	F_INT[@L.MD(\.SP.MAX+1)]
+
+	F_STR[$L.EMVO(\.SP.MAX+1)] //E-mote口パク変数
+	F_INT[@L.EMVO(\.SP.MAX+1)] //E-mote口パクキャラ番号
+	F_INT[@L.EMVOL(\.SP.MAX+1)] //E-mote口パクキャラ音量 (意図的にINT)
+	F_STR[$L.EMV(\.SP.MAX+1)]  //E-mote変数
+	F_STR[$L.EMP(\.SP.MAX+1)]  //E-moteTLPLAY
+	F_STR[$L.EMS(\.SP.MAX+1)]  //E-moteTLSTOP
+	F_STR[$L.EMPA(\.SP.MAX+1)] //E-moteDTLPLAY
+	F_STR[$L.EMSA(\.SP.MAX+1)] //E-moteDTLSTOP
+	F_STR[$L.EMDATA(\.SP.MAX+1)] //E-moteSaveLoad用
+
+
+	F_INT[@L.TXV(\.SP.MAX+1)] //変数番号
+	F_STR[$L.TXF(\.SP.MAX+1)] //フォント定義文字列
+	F_STR[$L.TXS(\.SP.MAX+1)] //文字列内容
+//anime
+	F_INT[@L.ANFLAG(\.SP.MAX+1)]
+	F_INT[@L.ANC(\.SP.MAX+1)]
+	F_INT[@L.ANC2(\.SP.MAX+1)]
+	F_INT[@L.ANC3(\.SP.MAX+1)]
+	F_INT[@L.ANC4(\.SP.MAX+1)]
+	F_INT[@L.ANX(\.SP.MAX+1)]
+	F_INT[@L.ANY(\.SP.MAX+1)]
+	F_INT[@L.ANNUM(\.SP.MAX+1)]
+	F_INT[@L.ANTIME(\.SP.MAX+1)]
+	F_INT[@L.ANSTOP(\.SP.MAX+1)]
+	F_INT[@L.ANLOOP(\.SP.MAX+1)]
+
+	F_INT[@STA.PrevVal(\.SP.MAX+1)] //立ち絵アニメ
+
+///xNEK
+	F_INT[@es.MIMI.STOP(21)]
+	F_INT[@es.MIMI.COM.INIT(\.SP.MAX+1)]  //パタパタ開始フラグ
+	F_INT[@es.MIMI.COM.COUNT(\.SP.MAX+1)] //パタパタする回数
+	F_INT[@es.MIMI.COM.WAIT(\.SP.MAX+1)]  //パタパタする間隔
+
+	F_INT[@LMAX = \.SP.MAX]
+
+	//キュー情報
+	F_INT[@QUE.MAX=\.QUE.MAX]
+	F_INT[@QUE.R=1] //キュー読み込み位置
+	F_INT[@QUE.W=1] //キュー書き込み位置
+
+	F_INT[@S.FLAG(\.QUE.MAX+1)]
+	F_INT[@S.FLAG.END(\.QUE.MAX+1)]
+
+	F_INT[@S.TNOW(\.QUE.MAX+1)]
+	F_INT[@S.TOLD(\.QUE.MAX+1)]
+	F_STR[$S.NAME(\.QUE.MAX+1)] //演出名
+	F_STR[$S.SPID(\.QUE.MAX+1)]
+	F_STR[$S.FCG(\.QUE.MAX+1)]
+	F_STR[$S.FTR(\.QUE.MAX+1)]
+	F_STR[$S.TXF(\.QUE.MAX+1)]
+	F_STR[$S.TXS(\.QUE.MAX+1)]
+	F_INT[@S.YMP(\.QUE.MAX+1)]
+	F_INT[@S.QNO(\.QUE.MAX+1)]
+	F_INT[@S.QNO2(\.QUE.MAX+1)]
+	F_INT[@S.LNO(\.QUE.MAX+1)]
+	F_INT[@S.COM(\.QUE.MAX+1)]
+	F_INT[@S.FTYPE(\.QUE.MAX+1)]
+
+	F_STR[$S.EMVO(\.QUE.MAX+1)] //E-mote口パク
+	F_STR[$S.EMV(\.QUE.MAX+1)]  //E-mote変数
+	F_STR[$S.EMP(\.QUE.MAX+1)]  //E-moteTLPLAY
+	F_STR[$S.EMS(\.QUE.MAX+1)]  //E-moteTLSTOP
+	F_STR[$S.EMPA(\.QUE.MAX+1)] //E-moteDTLPLAY
+	F_STR[$S.EMSA(\.QUE.MAX+1)] //E-moteDTLSTOP
+
+	F_INT[@S.I1(\.QUE.MAX+1)]
+	F_INT[@S.I2(\.QUE.MAX+1)]
+	F_INT[@S.I3(\.QUE.MAX+1)]
+	F_INT[@S.I4(\.QUE.MAX+1)]
+	F_FLT[@S.F1(\.QUE.MAX+1)]
+	F_FLT[@S.F2(\.QUE.MAX+1)]
+	F_FLT[@S.F3(\.QUE.MAX+1)]
+	F_FLT[@S.F4(\.QUE.MAX+1)]
+	F_FLT[@S.L1(\.QUE.MAX+1,12)]	//スプライン用(X座標)
+	F_FLT[@S.L2(\.QUE.MAX+1,12)]	//スプライン用(Y座標)
+	F_FLT[@S.L3(\.QUE.MAX+1,12)]	//スプライン用(Z座標)
+	F_INT[@S.L4(\.QUE.MAX+1)]		//スプライン用(点の数)
+	F_INT[@S.N(\.QUE.MAX+1)]
+	F_INT[@S.T(\.QUE.MAX+1)]
+	F_INT[@S.AC(\.QUE.MAX+1)]
+	F_STR[$S.PARENT(\.QUE.MAX+1)]	//
+	F_INT[@S.SDMD.NA(\.QUE.MAX+1)]	//彩度明度無効フラグ
+	F_INT[@S.TIP(\.QUE.MAX+1)]		//チップレイヤフラグ
+	F_INT[@S.SK(\.QUE.MAX+1)]
+
+	//引数保存用
+	F_INT[@P.I1(77)]
+	F_INT[@P.I2(77)]
+	F_INT[@P.I3(77)]
+	F_INT[@P.I4(77)]
+	F_FLT[@P.F1(77)]
+	F_FLT[@P.F2(77)]
+	F_FLT[@P.L1(12)]				//スプライン用(X座標)
+	F_FLT[@P.L2(12)]				//スプライン用(Y座標)
+	F_FLT[@P.L3(12)]				//スプライン用(Z座標)
+	F_INT[@P.L4]					//スプライン用(点の数)
+	F_STR[$P.S1(77)]
+	F_STR[$P.S2(77)]
+	F_INT[@P.N(77)]
+	F_INT[@P.T(77)]
+	F_INT[@P.AC(77)]
+	F_STR[$P.PARENT(77)]
+	F_INT[@P.SDMD.NA(77)]	//彩度明度無効フラグ
+
+	F_INT[@e_CG		=01]	//
+	F_INT[@e_TR		=02]	//
+	F_INT[@e_MV		=03]	//
+	F_INT[@e_ECG	=04]	//
+	F_INT[@e_TXG	=05]
+	F_INT[@e_TXL	=06]
+	F_INT[@e_TXS	=07]
+	F_INT[@e_BL		=08]
+
+	F_INT[@e_HOR	=09]
+	F_INT[@e_VER	=10]
+	F_INT[@e_REV	=11]
+	F_INT[@e_MONO	=12]
+	F_INT[@e_BLUR	=13]
+	F_INT[@e_MOSA	=14]
+	F_INT[@e_DIFF	=15]
+	F_INT[@e_ROT	=16]
+	F_INT[@e_RAS	=17]
+	F_INT[@e_WPL	=18]
+	F_INT[@e_AKA	=19]
+
+	F_INT[@e_SK		=20]
+	F_INT[@e_SD		=21]
+	F_INT[@e_MD		=22]
+	F_INT[@e_A		=23]
+	F_INT[@e_F1		=24]
+	F_INT[@e_F2		=25]
+	F_INT[@e_MX		=26]
+	F_INT[@e_MY		=27]
+	F_INT[@e_MZ		=28]
+	F_INT[@e_QX		=29]
+	F_INT[@e_QY		=30]
+	F_INT[@e_QZ		=31]
+	F_INT[@e_RX		=32]
+	F_INT[@e_RY		=33]
+	F_INT[@e_RZ		=34]
+	F_INT[@e_BX		=35]
+	F_INT[@e_BY		=36]
+	F_INT[@e_H		=37]
+	F_INT[@e_TP		=38]
+	F_INT[@e_V		=39]
+	F_INT[@e_W		=40]
+	F_INT[@e_X		=41]
+	F_INT[@e_Y		=42]
+	F_INT[@e_Z		=43]
+	F_INT[@e_PXY	=44]
+	F_INT[@e_PXYZ	=45]
+	F_INT[@e_CLBX	=46]
+	F_INT[@e_CLBY	=47]
+	F_INT[@e_CLA	=48]
+	F_INT[@e_CLH	=49]
+	F_INT[@e_CLTP	=50]
+	F_INT[@e_CLV	=51]
+	F_INT[@e_CLW	=52]
+	F_INT[@e_CLX	=53]
+	F_INT[@e_CLY	=54]
+	F_INT[@e_CLZ	=55]
+	F_INT[@e_CLRX	=56]
+	F_INT[@e_CLRY	=57]
+	F_INT[@e_CLRZ	=58]
+	F_INT[@e_FIN	=59]
+	F_INT[@e_MP		=60]
+	F_INT[@e_NOP	=61]
+	F_INT[@e_END	=62]
+	F_INT[@e_ANLP	=63]
+	//E-mote
+	F_INT[@e_EM_VO	=64]
+	F_INT[@e_EM_VAR	=65]
+	F_INT[@e_EM_TLP	=66]
+	F_INT[@e_EM_TLS	=67]
+	F_INT[@e_EM_TLPA=68]
+	F_INT[@e_EM_TLSA=69]
+
+
+	F_INT[@EM_VO_CNT]
+	F_INT[@EM_VAR_CNT]
+	F_INT[@EM_TLP_CNT]
+	F_INT[@EM_TLS_CNT]
+	F_INT[@EM_TLPA_CNT]
+	F_INT[@EM_TLSA_CNT]
+
+	F_STR[$stcstr(1000)]
+	F_STR[$comstr(77)]
+	F_INT[@H.COM(77)]
+	F_INT[@H.QNOW(77)]
+
+	F_INT[@DRAW.FLAG(\.SP.MAX+1)]
+
+	F_STR[$PATH(8)] //BG/EV/CG/TR/ST/PAC/CGSYS
+	F_STR[$LID		="SPL"]
+	F_STR[$LIDBUF	="SPLBUF"]
+	F_STR[$LIDBUF2	="SPLBUFa"]
+	F_STR[$LIDBUF3	="SPLBUFb"]
+	F_STR[$LIDTR	="SPLTR"]
+	F_STR[$LIDTRBUF	="SPLTRBUF"]
+
+	F_INT[@mTADD]
+
+	F_INT[@SP.SKIPMODE=1]
+//	F_INT[@SP.MENU.SKIPMODE]
+
+	F_INT[@RLQL      =   2] //回転：1=通常,2=高速(粗い)
+	F_INT[@LNO_FD    =   1]
+	F_INT[@LNO_BG    =   2]
+	F_INT[@LNO_CM    =   3]
+	F_INT[@LNO_BGF   =   4]
+	F_INT[@LNO_CMF   =   5]
+
+	F_INT[@StopFlag]
+//	F_INT[@Wcount]
+
+	F_INT[@L.WAIT=1]
+
+	F_INT[@OS_TIME]
+	F_INT[@SNO] //キュー番号
+	F_INT[@LNO] //レイヤ番号
+	F_INT[@r]
+
+	F_INT[@DIR_CAMERA]
+
+	F_INT[@DBG.TY]
+	F_INT[@DBG.FSX=11]
+//	F_INT[@DBG.FSX=12]
+	F_INT[@DBG.FSY=13]
+//	F_FLT[@DBG.LV(\.SP.MAX+1)]
+//	F_FLT[@DBG.LW(\.SP.MAX+1)]
+	F_FLT[@DBG.LX(\.SP.MAX+1)]
+	F_FLT[@DBG.LY(\.SP.MAX+1)]
+	F_FLT[@DBG.LZ(\.SP.MAX+1)]
+	F_FLT[@DBG.UNDO.LX(\.SP.MAX+1)]
+	F_FLT[@DBG.UNDO.LY(\.SP.MAX+1)]
+	F_FLT[@DBG.UNDO.LZ(\.SP.MAX+1)]
+	F_FLT[@USR.LX(\.SP.MAX+1)]
+	F_FLT[@USR.LY(\.SP.MAX+1)]
+	F_FLT[@USR.LZ(\.SP.MAX+1)]
+
+	F_INT[@es.FORBIT.U]
+	F_INT[@es.FORBIT.D]
+	F_INT[@es.FORBIT.L]
+	F_INT[@es.FORBIT.R]
+
+	F_INT[@DBG.LISTCUR=0]
+	F_INT[@DBG.LISTNUM=0]
+	F_INT[@DBG.LISTLNO(256)]
+
+	F_INT[@DBG.CGBYTE]
+	F_INT[@DBG.REDFONT]
+	F_INT[@DBG.CGBYTEOVER]
+	F_INT[@DBG.CGBYTEOVER.ERR]
+	F_INT[@DBG.TOTALCGBYTE]
+	F_INT[@DBG.TOTALCGBYTE.MAX=(100)] //CGデータサイズチェック 100MB
+
+	F_INT[@es.BL(20)]
+
+	F_INT[@LNO_CMFLAG]
+	F_FLT[@LNO_BBX]
+	F_FLT[@LNO_BBY]
+	F_FLT[@LNO_BGZ]
+	F_FLT[@LNO_CMV]
+	F_FLT[@LNO_CMW]
+	F_FLT[@LNO_CMX]
+	F_FLT[@LNO_CMY]
+	F_FLT[@LNO_CMZ]
+
+	F_INT[@WSX.BIG]
+	F_INT[@WSY.BIG]
+
+	F_INT[@BGF.FLAG]
+
+	F_INT[@IV]
+	F_INT[@IW]
+	F_INT[@IX]
+	F_INT[@IY]
+	F_INT[@IZ]
+	F_INT[@CZ]
+	F_STR[$SIV]
+	F_STR[$SIW]
+	F_STR[$SIX]
+	F_STR[$SIY]
+	F_STR[$SIZ]
+	F_STR[$DBS]
+
+	F_INT[@CHRLZ(128)]
+
+	F_INT[@g.QNOW]
+	F_INT[@COMQNOW(77)]
+	F_INT[@COMQNOR(77)]
+
+	F_INT[@SMV.KEY.YM(3)]			//上(Y-)
+	F_INT[@SMV.KEY.YP(3)]			//下(Y+)
+	F_INT[@SMV.KEY.XM(3)]			//左(X-)
+	F_INT[@SMV.KEY.XP(3)]			//右(X+)
+	F_INT[@SMV.KEY.ZM(3)]			//前(Z-)
+	F_INT[@SMV.KEY.ZP(3)]			//後(Z+)
+	F_INT[@SMV.KEY.SPLOW(3)]		//低速
+	F_INT[@SMV.KEY.SPHIGH(3)]		//倍速
+	F_INT[@SMV.KEY.INIT(3)]			//初期位置
+	F_INT[@SMV.KEY.GUIDE(3)]		//ガイド表示
+	F_INT[@SMV.KEY.XYZCOPY(3)]		//座標コピー
+	F_INT[@SMV.KEY.LISTCHANGE(3)]	//リスト表示切替
+	F_INT[@SMV.KEY.LISTPREV(3)]		//リスト選択[↑]
+	F_INT[@SMV.KEY.LISTNEXT(3)]		//リスト選択[↓]
+	F_INT[@SMV.KEY.UNDO(3)]			//アンドウ
+
+	F_INT[@es.C0]
+
+	F_INT[@ST.Z.MODE=0] //0…立ち絵Zカウント方式, 1…キャラ毎に立ち絵Z値固定方式
+
+	F_INT[@es.ERRMSG]
+	F_INT[@es.ERRMSG2]
+
+	F_INT[@finflag]
+	F_STR[$finspid]
+	F_STR[$finname]
+
+	F_INT[@dbg.pushflag]
+	F_INT[@dbg.pushflag.xyz]
+	F_INT[@dbg.xm]
+	F_INT[@dbg.xp]
+	F_INT[@dbg.ym]
+	F_INT[@dbg.yp]
+	F_INT[@dbg.zm]
+	F_INT[@dbg.zp]
+
+	F_INT[@dbg.val=1]
+
+	F_INT[@dbg.dragmode]
+	F_INT[@dbg.dragx]
+	F_INT[@dbg.dragy]
+	F_INT[@dbg.dragdx]
+	F_INT[@dbg.dragdz]
+
+
+	F_INT[@SPLN.PXMAX	= 11]
+	F_INT[@SPLN.DIVNUM	= 20]
+
+	F_INT[@SPLN.PXNUM(\.QUE.MAX+1)]
+	F_FLT[@SPLN.LX(\.QUE.MAX+1,12)]
+	F_FLT[@SPLN.LY(\.QUE.MAX+1,12)]
+	F_FLT[@SPLN.LZ(\.QUE.MAX+1,12)]
+
+	F_FLT[@spln.a(\.QUE.MAX+1,3,21)]
+	F_FLT[@spln.b(\.QUE.MAX+1,3,21)]
+	F_FLT[@spln.c(\.QUE.MAX+1,3,21)]
+	F_FLT[@spln.d(\.QUE.MAX+1,3,21)]
+	F_FLT[@spln.t(\.QUE.MAX+1,12,21)]	//２点間の移動時間
+
+	F_INT[@SPLINE.FLAG] //スプラインフラグ
+
+	F_STR[$CGSYS2.PATH]
+
+	F_FLT[@DEFZ = 200] //100%サイズ表示時のZ値.
+
+	F_INT[@M3D.I(10)] //内部計算用
+	F_FLT[@M3D.F(40)] //内部計算用
+
+

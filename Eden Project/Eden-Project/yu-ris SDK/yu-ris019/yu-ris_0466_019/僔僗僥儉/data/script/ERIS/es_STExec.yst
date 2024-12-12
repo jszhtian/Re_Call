@@ -1,0 +1,442 @@
+
+S_INT[@CASHLOADFLG]
+
+//============================================================================
+// 画像キャッシュロード
+//============================================================================
+#=es.SP.LOADCGCASH
+{
+	INT[@cashsize]
+/*
+	IF[@CASHLOADFLG==0]
+	{
+		@CASHLOADFLG=1
+
+		//エンジン設定の 画像キャッシュ設定値を取得.
+		//
+		///xCOM:20021 let=@cashsize
+		IF[@cashsize==0]
+		{
+				//優理
+			//	FILEACT[FILE="cg/stand/yuu/yuu_1a01" CGCASH=1]
+
+				//枝理
+			//	FILEACT[FILE="cg/stand/eri/eri_1a01" CGCASH=1]
+
+		}
+		IFEND[]
+	}
+	IFEND[]
+*/
+
+	return[]
+}
+
+
+
+
+//============================================================================
+// 画像合成判定
+//============================================================================
+#=es.SP.PRO.CHECKCG
+{
+	\_strlower($_PSTR(1))
+	STR[$B=$_RSTR(1)]	//ベース画像
+	STR[$S]				//差分画像
+	INT[@MGX]			//差分合成座標X
+	INT[@MGY]			//差分合成座標Y
+	INT[@COMP]			//合成方式
+
+	\_findstrleft($B, ">")
+	IF[@_RINT(1)] //β３
+	{
+		\_strsplit.str($B, ">")
+		$B=$_RSTR(1)
+		$S=$_RSTR(2)
+		@MGX=0
+		@MGY=0
+		@COMP=0
+	}
+	ELSE[] //β４
+	{
+		GOSUB[#=es.SPC.DEF.SEARCH pstr=$B]
+		IF[$_RSTR(1)!=""]
+			$S=$B
+			$B=$_RSTR(1)
+			@MGX=@_RINT(2)
+			@MGY=@_RINT(3)
+			@COMP=@_RINT(4)
+		IFEND[]
+	}
+	IFEND[]
+
+//	IF[$B!="" && $S!=""] \_dmes("[es.SP.PRO.CHECKCG]"+$_CHR(13)+$_CHR(10)+"ベース = "+$B+$_CHR(13)+$_CHR(10)+"差分   = "+$S+$_CHR(13)+$_CHR(10)+"座標   = ("+$(@MGX)+","+$(@MGY)+")") IFEND[]
+
+	return[rstr=$B rstr2=$S rint3=@MGX rint4=@MGY rint5=@COMP]
+}
+
+
+//============================================================================
+// 画像ロード
+//============================================================================
+#=es.SP.PRO.LOADCG
+{
+	STR[$lid=$_PSTR(1)]
+	STR[$fnA=$_PSTR(2)] //ベース画像
+	STR[$fnB=$_PSTR(3)] //差分画像
+	INT[@MGX=@_PINT(4)] //差分合成座標X
+	INT[@MGY=@_PINT(5)] //差分合成座標Y
+	INT[@EXC=@_PINT(6)] //SRC取り除き合成モード
+	INT[@ftype=@_PINT(7)] //FTYPE
+
+//	GOSUB[#=es.SP.LOADCGCASH]
+
+	//----------------------------------------------------------------
+	// ファイル存在チェック
+	//----------------------------------------------------------------
+		IF[@_DEBUGMODE]
+		{
+			\_cg.exist($fnA)
+			IF[@_RINT(1)==0]
+			{
+				  IF[@ftype==1] //BG
+				{
+					IF[@T(37,51)] \_mes("★["+$fnA+"]が存在しませんでした。") IFEND[]
+				}
+				ELSE[@ftype==2] //EV
+				{
+					IF[@T(37,52)] \_mes("★["+$fnA+"]が存在しませんでした。") IFEND[]
+				}
+				ELSE[@ftype==5] //ST
+				{
+					IF[$fnA!=""]
+						IF[@T(37,53)] \_mes("★["+$fnA+"]が存在しませんでした。") IFEND[]
+					IFEND[]
+				}
+				ELSE[] //CG
+				{
+					IF[@T(37,54)] \_mes("★["+$fnA+"]が存在しませんでした。") IFEND[]
+				}
+				IFEND[]
+
+				\MAKELOG2("★["+$fnA+"]が存在しませんでした。")
+
+				$fnA = ""
+			}
+			IFEND[]
+
+			IF[$fnB!=""]
+			{
+				\_cg.exist($fnB)
+				IF[@_RINT(1)==0]
+				{
+					  IF[@ftype==1] //BG
+					{
+						IF[@T(37,51)] \_mes("★["+$fnB+"]が存在しませんでした。") IFEND[]
+					}
+					ELSE[@ftype==2] //EV
+					{
+						IF[@T(37,52)] \_mes("★["+$fnB+"]が存在しませんでした。") IFEND[]
+					}
+					ELSE[@ftype==5] //ST
+					{
+						IF[$fnA!=""]
+							IF[@T(37,53)] \_mes("★["+$fnB+"]が存在しませんでした。") IFEND[]
+						IFEND[]
+					}
+					ELSE[] //CG
+					{
+						IF[@T(37,54)] \_mes("★["+$fnB+"]が存在しませんでした。") IFEND[]
+					}
+					IFEND[]
+
+					\MAKELOG2("★["+$fnB+"]が存在しませんでした。")
+
+					$fnB = ""
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+
+//	IF[@es.CASHMODE] FILEACT[CGCASH=@es.CASHMODE FILE=$loadfilename];@es.CASHMODE=0;IFEND[]
+
+
+	//----------------------------------------------------------------
+	// 読み込み
+	//----------------------------------------------------------------
+		//ベース読み込み
+		CG[ID=$lid Z=1 FILE=$fnA]
+
+//\_dmes("AN:$fnA="+$fnA)
+
+		//差分読み込み
+	//	IF[$fnB!=""]
+		IF[$fnB!="" && $fnB!=$fnA]
+		{
+//\_dmes("AN:$fnA="+$fnA+$_CHR(13)+"$fnB="+$fnB+$_CHR(13)+$_CHR(13)+"lid="+$lid)
+
+			CG[ID="sp.tmp" Z=1 FILE=$fnB]
+
+			//合成するSRC部分を取り除く.
+			IF[@EXC==1]
+				INT[@sx]CGINFO[ID="sp.tmp" SX=1 LET=@sx]
+				INT[@sy]CGINFO[ID="sp.tmp" SY=1 LET=@sy]
+				CGACT[ID=$lid RECTPAINT3=1 SET=0 X=@MGX Y=@MGY X2=@MGX+@sx-1 Y2=@MGY+@sy-1]
+			IFEND[]
+
+			INT[@l]CGINFO[ID=$lid EXIST=1 LET=@l]IF[@l]
+				CGACT[ID="sp.tmp" ID2=$lid X=@MGX Y=@MGY MERGE=1]
+			IFEND[]
+				CGEND[ID="sp.tmp"]
+		}
+		IFEND[]
+
+
+	return[]
+}
+
+
+//立ち絵アニメ用
+#=es.SP.PRO.LOADCG.2
+{
+	STR[$LID =$_PSTR(1)]
+	STR[$LID2=$_PSTR(2)]
+	STR[$fnA =$_PSTR(3)] //ベース画像
+	STR[$FNB =$_PSTR(4)] //差分画像
+	INT[@MGX =@_PINT(5)] //差分合成座標X
+	INT[@MGY =@_PINT(6)] //差分合成座標Y
+	INT[@EXC =@_PINT(7)] //SRC取り除き合成モード
+	INT[@No  =@_PINT(8)] //レイヤNo
+	INT[@NUM =@_PINT(9)] //枚数
+	INT[@ftype=5] //FTYPE
+	INT[@SD  =@_PINT(10) & 65535]
+	INT[@MD  =@_PINT(10) / 65536]
+
+	STR[$lid]
+	STR[$fnB]
+
+//	GOSUB[#=es.SP.LOADCGCASH]
+
+	//----------------------------------------------------------------
+	// ファイル存在チェック
+	//----------------------------------------------------------------
+		IF[@_DEBUGMODE]
+		{
+			\_cg.exist($fnA)
+			IF[@_RINT(1)==0]
+			{
+				  IF[@ftype==1] //BG
+				{
+					IF[@T(37,51)] \_mes("★["+$fnA+"]が存在しませんでした。") IFEND[]
+				}
+				ELSE[@ftype==2] //EV
+				{
+					IF[@T(37,52)] \_mes("★["+$fnA+"]が存在しませんでした。") IFEND[]
+				}
+				ELSE[@ftype==5] //ST
+				{
+					IF[$fnA!=""]
+						IF[@T(37,53)] \_mes("★["+$fnA+"]が存在しませんでした。") IFEND[]
+					IFEND[]
+				}
+				ELSE[] //CG
+				{
+					IF[@T(37,54)] \_mes("★["+$fnA+"]が存在しませんでした。") IFEND[]
+				}
+				IFEND[]
+
+				\MAKELOG2("★["+$fnA+"]が存在しませんでした。")
+
+				$fnA = ""
+			}
+			IFEND[]
+
+			IF[$fnB!=""]
+			{
+				\_cg.exist($fnB)
+				IF[@_RINT(1)==0]
+				{
+					  IF[@ftype==1] //BG
+					{
+						IF[@T(37,51)] \_mes("★["+$fnB+"]が存在しませんでした。") IFEND[]
+					}
+					ELSE[@ftype==2] //EV
+					{
+						IF[@T(37,52)] \_mes("★["+$fnB+"]が存在しませんでした。") IFEND[]
+					}
+					ELSE[@ftype==5] //ST
+					{
+						IF[$fnA!=""]
+							IF[@T(37,53)] \_mes("★["+$fnB+"]が存在しませんでした。") IFEND[]
+						IFEND[]
+					}
+					ELSE[] //CG
+					{
+						IF[@T(37,54)] \_mes("★["+$fnB+"]が存在しませんでした。") IFEND[]
+					}
+					IFEND[]
+
+					\MAKELOG2("★["+$fnB+"]が存在しませんでした。")
+
+					$fnB = ""
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+
+//	IF[@es.CASHMODE] FILEACT[CGCASH=@es.CASHMODE FILE=$loadfilename];@es.CASHMODE=0;IFEND[]
+
+
+	//----------------------------------------------------------------
+	// 読み込み
+	//----------------------------------------------------------------
+
+	//ベース読み込み
+	CG[ID="sp.tmpA" Z=1 E=0 FILE=""]
+	CGACT[ID=$LID2+$(1+@No*100) ID2="sp.tmpA" COPY2=1]
+
+	LOOP[SET=@NUM]
+	{
+		$lid=$LID+$(1+@_LC+@No*100)
+
+		\_inttostr(@_LC, 2)
+		$fnB = $FNB+$_RSTR(1)
+
+		CG[ID=$lid Z=1 FILE=""]
+		CGACT[ID="sp.tmpA" ID2=$lid COPY2=1]
+
+//\_dmes("AN2:$fnA="+$fnA)
+
+		//差分読み込み
+		IF[$fnB!=""]
+	//	IF[$fnB!="" && $fnA!=$fnB]
+		{
+//\_dmes("AN2:$fnA="+$fnA+$_CHR(13)+"$fnB="+$fnB+$_CHR(13)+$_CHR(13)+"$LID+$(1+@No*100)="+$LID+$(1+@No*100))
+
+			CG[ID="sp.tmpB" Z=1 FILE=$fnB]
+			IF[@SD!=     128] CGACT[ID="sp.tmpB" SAIDO=1 SET=@SD] IFEND[]
+			IF[@MD!=0x808080] CGACT[ID="sp.tmpB" MEIDO=1 SET=@MD] IFEND[]
+
+			//合成するSRC部分を取り除く.
+			IF[@EXC==1]
+				INT[@sx]CGINFO[ID="sp.tmpB" SX=1 LET=@sx]
+				INT[@sy]CGINFO[ID="sp.tmpB" SY=1 LET=@sy]
+				CGACT[ID=$lid RECTPAINT3=1 SET=0 X=@MGX Y=@MGY X2=@MGX+@sx-1 Y2=@MGY+@sy-1]
+			IFEND[]
+
+			INT[@l]CGINFO[ID=$lid EXIST=1 LET=@l]IF[@l]
+				CGACT[ID="sp.tmpB" ID2=$lid X=@MGX Y=@MGY MERGE=1]
+			IFEND[]
+				CGEND[ID="sp.tmpB"]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	CGEND[ID="sp.tmpA"]
+
+
+	return[]
+}
+
+
+//============================================================================
+// 立ち絵簡易処理マクロ
+//============================================================================
+#=es.STEXEC
+{
+	STR[$id  =$_PSTR(1)]
+	STR[$file=$_PSTR(2)]
+	INT[@time=@_PINT(3)]
+	INT[@posx=@_PINT(4)]
+	INT[@posy=@_PINT(5)]
+	INT[@posz=@_PINT(6)]
+
+	STR[$name]
+
+	IF[@T(28,91)==1] //不具合なしver
+	{
+		$name="stdir."+$id
+	}
+	IFEND[]
+
+	IF[$file!="" && @time==-1] @time=@T(28,01) IFEND[]
+
+	INT[@xytime=@time]
+	INT[@ex]
+	IF[$file!=""]
+	{
+		\SP.EX.GET($id,@ex)
+		IF[@ex==0] @xytime=0 IFEND[]
+	}
+	IFEND[]
+
+	IF[@posx!=-999999999] \SP.ZX(@posx, @xytime) IFEND[]
+	IF[@posy!=-999999999] \SP.ZY(@posy, @xytime) IFEND[]
+	IF[@posz!=-999999999] \SP.ZZ(@posz, @xytime) IFEND[]
+
+	IF[$file!=""] //新規表示/切替
+	{
+		IF[@T(28,91)==1] //不具合なしver
+		{
+			\SP.FINISH($id, $name)
+		}
+		ELSE[] //不具合ありver
+		{
+			\SP.FINISH($id, "st.end")
+		}
+		IFEND[]
+
+		\SP.ST($file, @time)
+
+		IF[@T(28,91)==1] //不具合なしver
+		{
+			\SP.GO($id)
+		}
+		ELSE[] //不具合ありver
+		{
+			\SP.GO($id, $name)
+		}
+		IFEND[]
+	}
+	ELSE[@time<0 || @posx!=-999999999 || @posy!=-999999999 || @posz!=-999999999] //移動など
+	{
+		IF[@T(28,91)==1] //不具合なしver
+		{
+			\SP.GO($id)
+		}
+		ELSE[]
+		{
+			\SP.GO($id, $name)
+		}
+		IFEND[]
+	}
+	ELSE[] //消去
+	{
+		IF[@T(28,91)==1] //不具合なしver
+		{
+			\SP.ST($file, @time)
+			\SP.GO($id, $name)
+			\SP.END
+			\SP.GO($id, $name)
+		}
+		ELSE[] //不具合ありver
+		{
+			\SP.ST($file, @time)
+			\SP.GO($id, "st.end")
+			\SP.END
+			\SP.GO($id, "st.end")
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+

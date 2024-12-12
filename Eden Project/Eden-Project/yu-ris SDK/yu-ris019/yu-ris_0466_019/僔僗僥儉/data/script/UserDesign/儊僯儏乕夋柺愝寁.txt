@@ -1,0 +1,176 @@
+//============================================================================
+// メニュー画面設計
+//============================================================================
+#=ES.MENU.BTDEF
+
+	\BTDEF.GROUP(ES.MENU)
+
+
+	IF[@es.RPMODE==0] //通常モード時のボタン定義
+	{
+
+			\BT.NAME("■背景")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/back")
+			\BT.XY(000, 000)
+			\BT.Z(1000)
+			\BT.SET(TIP.BG)
+
+			\BT.NAME("■ダイアログ")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/tip_dialog")
+			\BT.XY(260, 090)
+			\BT.Z(1001)
+			\BT.SET(TIP.DIALOG)
+
+
+			\BT.NAME("■バックログ")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_log")
+			\BT.XY(290, 150+30*00)
+			\BT.Z(1020)
+			\BT.SET(BTN.LOG)
+
+			\BT.NAME("■セーブ")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_save")
+			\BT.XY(290, 150+30*01)
+			\BT.Z(1020)
+			\BT.SET(BTN.SAVE)
+
+			\BT.NAME("■ロード")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_load")
+			\BT.XY(290, 150+30*02)
+			\BT.Z(1020)
+			\BT.SET(BTN.LOAD)
+
+			\BT.NAME("■クイックセーブ")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_qsave")
+			\BT.XY(290, 150+30*03)
+			\BT.Z(1020)
+			\BT.SET(BTN.QSAVE)
+
+			\BT.NAME("■クイックロード")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_qload")
+		//	\BT.CGSYS("menu/btn_qload_na")
+//\BT.N(1)
+			\BT.XY(290, 150+30*04)
+			\BT.Z(1020)
+			\BT.SET(BTN.QLOAD)
+
+			\BT.NAME("■直前の選択肢へ戻る")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_prevsel")
+		//	\BT.CGSYS("menu/btn_prevsel_na")
+//\BT.N(1)
+			\BT.XY(290, 150+30*05)
+			\BT.Z(1020)
+			\BT.SET(BTN.PREVSEL)
+
+			\BT.NAME("■コンフィグ")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_config")
+			\BT.XY(290, 150+30*06)
+			\BT.Z(1020)
+			\BT.SET(BTN.CONFIG)
+
+			\BT.NAME("■ウィンドウ消去")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_erase")
+			\BT.XY(290, 150+30*07)
+			\BT.Z(1020)
+			\BT.SET(BTN.ERASE)
+
+			\BT.NAME("■タイトルへ戻る")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_title")
+			\BT.XY(290, 150+30*08)
+			\BT.Z(1020)
+			\BT.SET(BTN.TITLE, 0) //1=Windowsダイアログ
+
+			\BT.NAME("■終了する")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_end")
+			\BT.XY(290, 150+30*09)
+			\BT.Z(1020)
+			\BT.SET(BTN.END, 0) //1=Windowsダイアログ
+
+			\BT.NAME("■キャンセル")
+			\BT.GROUP(1)
+			\BT.CGSYS("menu/btn_cancel")
+			\BT.XY(290, 150+30*10)
+			\BT.Z(1020)
+			\BT.KEY("MOUSE_R", "BS", "ESC", "SPACE")
+			\BT.SET(BTN.BACK)
+
+	}
+	ELSE[] //シーン鑑賞モード時のボタン定義
+	{
+
+			\BT.NAME("■背景")
+			\BT.CGSYS("menu/back")
+			\BT.XY(000, 000)
+			\BT.Z(1000)
+			\BT.SET(TIP.BG)
+
+			\BT.NAME("■ダイアログ")
+			\BT.CGSYS("menu/tip_dialog")
+			\BT.XY(260, 090)
+			\BT.Z(1001)
+			\BT.SET(TIP.DIALOG)
+
+
+			\BT.NAME("■バックログ")
+			\BT.CGSYS("menu/btn_log")
+			\BT.XY(290, 150+30*00)
+			\BT.Z(1020)
+			\BT.SET(BTN.LOG)
+
+			\BT.NAME("■コンフィグ")
+			\BT.CGSYS("menu/btn_config")
+			\BT.XY(290, 150+30*01)
+			\BT.Z(1020)
+			\BT.SET(BTN.CONFIG)
+
+			\BT.NAME("■ウィンドウ消去")
+			\BT.CGSYS("menu/btn_erase")
+			\BT.XY(290, 150+30*02)
+			\BT.Z(1020)
+			\BT.SET(BTN.ERASE)
+
+			\BT.NAME("■シーン鑑賞へ戻る")
+			\BT.CGSYS("menu/btn_rpmode")
+			\BT.XY(290, 150+30*03)
+			\BT.Z(1020)
+			\BT.SET(BTN.RPMODE)
+
+			\BT.NAME("■タイトルへ戻る")
+			\BT.CGSYS("menu/btn_title")
+			\BT.XY(290, 150+30*04)
+			\BT.Z(1020)
+			\BT.SET(BTN.TITLE, 0) //1=Windowsダイアログ
+
+			\BT.NAME("■終了する")
+			\BT.CGSYS("menu/btn_end")
+			\BT.XY(290, 150+30*05)
+			\BT.Z(1020)
+			\BT.SET(BTN.END, 0) //1=Windowsダイアログ
+
+			\BT.NAME("■キャンセル")
+			\BT.CGSYS("menu/btn_cancel")
+			\BT.XY(290, 150+30*06)
+			\BT.Z(1020)
+			\BT.KEY("MOUSE_R", "BS", "ESC", "SPACE")
+			\BT.SET(BTN.BACK)
+
+	}
+	IFEND[]
+
+
+
+RETURN[]
+
+

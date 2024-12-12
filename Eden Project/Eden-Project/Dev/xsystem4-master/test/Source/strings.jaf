@@ -1,0 +1,103 @@
+// -*-mode: C; coding: sjis; -*-
+
+void test_strings(void)
+{
+	int i;
+	float f;
+	string s;
+	test_bool("\"a\" == \"a\"", "a" == "a", true);
+	test_bool("\"a\" != \"b\"", "a" == "b", false);
+	test_bool("\"a\" < \"b\"",  "a" < "b",  true);
+	test_bool("\"a\" < \"a\"",  "a" < "a",  false);
+	test_bool("\"b\" < \"a\"",  "b" < "a",  false);
+	test_bool("\"a\" > \"b\"",  "a" > "b",  false);
+	test_bool("\"a\" > \"a\"",  "a" > "a",  false);
+	test_bool("\"b\" > \"a\"",  "b" > "a",  true);
+	test_bool("\"a\" <= \"b\"", "a" <= "b", true);
+	test_bool("\"a\" <= \"a\"", "a" <= "a", true);
+	test_bool("\"b\" <= \"a\"", "b" <= "a", false);
+	test_bool("\"a\" >= \"b\"", "a" >= "b", false);
+	test_bool("\"a\" >= \"a\"", "a" >= "a", true);
+	test_bool("\"b\" >= \"a\"", "b" >= "a", true);
+	test_bool("var = \"str\"", (s = "str", s == "str"), true);
+	test_string("foo += \"bar\"", (s = "foo", s += "bar"), "foobar");
+	// S_ADD
+	test_string("\"a\" + \"b\"", "a" + "b", "ab");
+	// S_LENGTH
+	test_equal("\"\".Length()", (s = "", s.Length()), 0);
+	test_equal("\"abc\".Length()", (s = "abc", s.Length()), 3);
+	test_equal("\"Ç†bc\".Length()", (s = "Ç†bc", s.Length()), 3);
+	// S_LENGTHBYTE
+	test_equal("\"\".LengthByte()", (s = "", s.LengthByte()), 0);
+	test_equal("\"abc\".LengthByte()", (s = "abc", s.LengthByte()), 3);
+	test_equal("\"Ç†bc\".LengthByte()", (s = "Ç†bc", s.LengthByte()), 4);
+	// S_EMPTY
+	test_bool("\"\".Empty()", (s = "", s.Empty()), true);
+	test_bool("\"a\".Empty()", (s = "a", s.Empty()), false);
+	// S_FIND
+	test_equal("\"abÇ†Ç¢Ç§\".Find(\"bÇ†\")", (s = "abÇ†Ç¢Ç§", s.Find("bÇ†")), 1);
+	test_equal("\"abÇ†Ç¢Ç§\".Find(\"bÇ†\")", (s = "abÇ†Ç¢Ç§", s.Find("Ç¢")), 3);
+	test_equal("\"abÇ†Ç¢Ç§\".Find(\"Ç§Ç¶Ç®\")", (s = "abÇ†Ç¢Ç§", s.Find("Ç§Ç¶Ç®")), -1);
+	// S_GETPART
+	test_string("\"abÇ†Ç¢Ç§\".GetPart(0, 0)", (s = "abÇ†Ç¢Ç§", s.GetPart(0, 0)), "");
+	test_string("\"abÇ†Ç¢Ç§\".GetPart(16, 2)", (s = "abÇ†Ç¢Ç§", s.GetPart(16, 2)), "");
+	test_string("\"abÇ†Ç¢Ç§\".GetPart(1, 3)", (s = "abÇ†Ç¢Ç§", s.GetPart(1, 3)), "bÇ†Ç¢");
+	test_string("\"abÇ†Ç¢Ç§\".GetPart(-1, 3)", (s = "abÇ†Ç¢Ç§", s.GetPart(-1, 3)), "abÇ†");
+	test_string("\"abÇ†Ç¢Ç§\".GetPart(2, 16)", (s = "abÇ†Ç¢Ç§", s.GetPart(2, 16)), "Ç†Ç¢Ç§");
+	// S_PUSHBACK2
+	test_string("\"\".PushBack('a')", (s = "", s.PushBack('a'), s), "a");
+	test_string("\"Ç†\".PushBack('a')", (s = "Ç†", s.PushBack('a'), s), "Ç†a");
+	// S_POPBACK2
+	test_string("\"Ç†a\".PopBack()", (s = "Ç†a", s.PopBack(), s), "Ç†");
+	test_string("\"Ç†\".PopBack()", (s = "Ç†", s.PopBack(), s), "");
+	// S_ERASE2
+	test_string("\"\".Erase(-1)",   (s = "",   s.Erase(-1), s), "");
+	test_string("\"\".Erase(0)",    (s = "",   s.Erase(0),  s), "");
+	test_string("\"\".Erase(1)",    (s = "",   s.Erase(1),  s), "");
+	test_string("\"a\".Erase(-1)",  (s = "a",  s.Erase(-1), s), "");
+	test_string("\"a\".Erase(0)",   (s = "a",  s.Erase(0),  s), "");
+	test_string("\"a\".Erase(1)",   (s = "a",  s.Erase(1),  s), "a");
+	test_string("\"Ç†\".Erase(-1)", (s = "Ç†", s.Erase(-1), s), "");
+	test_string("\"Ç†\".Erase(0)",  (s = "Ç†", s.Erase(0),  s), "");
+	test_string("\"Ç†\".Erase(1)",  (s = "Ç†", s.Erase(1),  s), "Ç†");
+	test_string("\"Ç†bc\".Erase(1)",  (s = "Ç†bc", s.Erase(1),  s), "Ç†c");
+	// S_MOD
+	// int
+	test_string("%d % 42", "%d" % 42, "42");
+	test_string("abc%d % 42", "abc%d" % 42, "abc42");
+	test_string("%dabc % 42", "%dabc" % 42, "42abc");
+	test_string("abc%ddef % 42", "abc%ddef" % 42, "abc42def");
+	test_string("abc%4ddef % 42", "abc%4ddef" % 42, "abc  42def");
+	test_string("abc%04ddef % 42", "abc%04ddef" % 42, "abc0042def");
+	test_string("abc%Ddef % 42", "abc%Ddef" % 42, "abcÇSÇQdef");
+	test_string("abc%4Ddef % 42", "abc%4Ddef" % 42, "abcÅ@Å@ÇSÇQdef");
+	test_string("abc%04Ddef % 42", "abc%04Ddef" % 42, "abcÇOÇOÇSÇQdef");
+	test_string("\"%d %d\" % 42 % 43", "%d %d" % 42 % 43, "42 43");
+	// float
+	test_string("abc%fdef % 12.3", "abc%fdef" % 12.3, "abc12.300000def");
+	test_string("abc%.2fdef % 12.3", "abc%.2fdef" % 12.3, "abc12.30def");
+	test_string("abc%8.2fdef % 12.3", "abc%8.2fdef" % 12.3, "abc   12.30def");
+	test_string("abc%Fdef % 12.3", "abc%Fdef" % 12.3, "abcÇPÇQÅDÇRÇOÇOÇOÇOÇOFdef");
+	test_string("abc%.2Fdef % 12.3", "abc%.2Fdef" % 12.3, "abcÇPÇQÅDÇRÇOFdef");
+	test_string("abc%8.2Fdef % 12.3", "abc%8.2Fdef" % 12.3, "abcÅ@Å@Å@ÇPÇQÅDÇRÇOFdef");
+	// string
+	test_string("abc%sdef % \"Ç†Ç¢Ç§\"", "abc%sdef" % "Ç†Ç¢Ç§", "abcÇ†Ç¢Ç§def");
+	// char
+	test_string("abc%cdef % 'Ç†'", "abc%cdef" % 'Ç†', "abcÇ†def");
+	// bool
+	test_string("abc%bdef % 1", "abc%bdef" % 1, "abctruedef");
+	test_string("abc%bdef % 0", "abc%bdef" % 0, "abcfalsedef");
+
+	// I_STRING
+	test_bool("(42).String()", (i = 42, i.String() == "42"), true);
+	// FTOS
+	test_bool("(4.2).String()", (f = 4.2, f.String() == "4.200000"), true);
+	test_bool("(4.222).String(2)", (f = 4.222, f.String(2) == "4.22"), true);
+	// C_REF
+	test_equal("abÇ†Ç¢Ç§[3]", (s = "abÇ†Ç¢Ç§", s[3]), 'Ç¢');
+	// C_ASSIGN
+	test_string("abÇ†Ç¢Ç§[1] = 'c'", (s = "abÇ†Ç¢Ç§", s[1] = 'c', s), "acÇ†Ç¢Ç§");
+	test_string("abÇ†Ç¢Ç§[3] = 'Ç†'", (s = "abÇ†Ç¢Ç§", s[3] = 'Ç†', s), "abÇ†Ç†Ç§");
+	test_string("abÇ†Ç¢Ç§[1] = 'Ç†'", (s = "abÇ†Ç¢Ç§", s[1] = 'Ç†', s), "aÇ†Ç†Ç¢Ç§");
+	test_string("abÇ†Ç¢Ç§[3] = 'c'", (s = "abÇ†Ç¢Ç§", s[3] = 'c', s), "abÇ†cÇ§");
+}

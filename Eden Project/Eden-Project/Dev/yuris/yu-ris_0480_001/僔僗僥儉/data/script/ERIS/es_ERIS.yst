@@ -1,0 +1,1090 @@
+//============================================================================
+//
+//■ERIS
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@dbg.val=2]
+}
+
+#=es.ERIS
+{
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/" SX=200 SY=600 Z=100]
+	WINDOW[NO=3 CGID=":/W3/" CAPTION="SS" SX=200 SY=600 X=410 Y=300 CLOSEMODE=3]
+IFEND[]
+
+
+	STR[$S.LBL.INIT]
+	STR[$S.LBL.LOOP]
+	STR[$S.LBL.END]
+
+	//-----------------------------------------------------------
+	// エラー出力レベル設定
+	//-----------------------------------------------------------
+		ERROR[COM_CG=0]
+
+	//-----------------------------------------------------------
+	// 
+	//-----------------------------------------------------------
+		\es.S.GO("ES.FIRST", 0, 0)
+
+	//-----------------------------------------------------------
+	// ERISループ
+	//-----------------------------------------------------------
+		LOOP[]
+		{
+			@es.STATE  = @es.S.P1
+			@es.STATE2 = @es.S.P2
+//			@es.STATE3 = @es.S.P3
+//			@es.STATE4 = @es.S.P4
+
+			$S.LBL.INIT = $es.S.LBL+".INIT"
+			$S.LBL.LOOP = $es.S.LBL+".LOOP"
+			$S.LBL.END  = $es.S.LBL+".END"
+			$es.S.LBL   = ""
+
+			IF[@es.S.RETFLAG==0]
+				\_gosub($S.LBL.INIT)
+			IFEND[]
+			@es.S.RETFLAG = 0
+
+			\_label.info.exist($S.LBL.LOOP)
+			IF[@_RINT(1)] //LOOPラベルがある場合
+			{
+				LOOP[]
+				{
+					GOSUB[#=es.BT.GOSUB.EXEC]	//ボタン処理
+
+					GOSUB[#=$S.LBL.LOOP]
+
+					IF[$es.S.LBL!=""] LOOPBREAK[] IFEND[]
+
+					WAIT[FRAME=1]
+				}
+				LOOPEND[]
+
+				\_gosub($S.LBL.END)
+
+			}
+			ELSE[] //LOOPラベルがない場合
+			{
+				//\_mes("ラベル[ "+$S.LBL.LOOP+" ]が存在しませんでした。")
+				//END[]
+
+				LOOP[]
+				{
+					GOSUB[#=es.BT.GOSUB.EXEC]	//ボタン処理
+
+					IF[$es.S.LBL!=""] LOOPBREAK[] IFEND[]
+
+					WAIT[FRAME=1]
+				}
+				LOOPEND[]
+
+				\_gosub($S.LBL.END)
+
+			}
+			IFEND[]
+
+		}
+		LOOPEND[]
+
+}
+
+//=========================================================================
+//
+//■ERIS 終了
+//
+//=========================================================================
+#=es.ERIS.END
+{
+	\GSD.SAVE //セーブ
+
+	END[RESTART=@_PINT(1)] //終了
+}
+
+
+
+//=========================================================================
+//■es.S.～
+//=========================================================================
+#=es.S.GO
+{
+	$es.S.OLD = $es.S.NOW
+	$es.S.LBL = $_PSTR(1)
+	$es.S.NOW = $_PSTR(1)
+	@es.S.P1  = @_PINT(2)
+	@es.S.P2  = @_PINT(3)
+//	@es.S.P3  = @_PINT(4)
+//	@es.S.P4  = @_PINT(5)
+
+//	WAIT[FRAME=1]
+	\SS.GO($_PSTR(1), 1) //スクリーンショット
+
+///xシーン変わるときは入力一旦無効に.
+	@_MOUSE_L=5
+	@_KEY_ENTER=5
+
+	return[]
+}
+
+//=========================================================================
+//
+//=========================================================================
+#=es.S.GOSUB
+{
+	$es.S.NAME(@es.S.NAMENEST) = $es.S.NOW
+	GOSUB[#=es.BT.ACTIVEGROUP.GET] @es.S.ACTIVEGROUP(@es.S.NAMENEST) = @_RINT(1)
+	$es.S.LBL = $_PSTR(1)
+	$es.S.OLD = $es.S.NOW
+	$es.S.NOW = $es.S.LBL
+	@es.S.P1  = @_PINT(2)
+	@es.S.P2  = @_PINT(3)
+//	@es.S.P3  = @_PINT(4)
+//	@es.S.P4  = @_PINT(5)
+	@es.S.R1(@es.S.NAMENEST)  = @_PINT(4)
+	@es.S.R2(@es.S.NAMENEST)  = @_PINT(5)
+	@es.S.NAMENEST+=1
+
+//	WAIT[FRAME=1]
+	\SS.GOSUB($_PSTR(1), 1) //スクリーンショット
+
+///xシーン変わるときは入力一旦無効に.
+	@_MOUSE_L=5
+	@_KEY_ENTER=5
+
+	return[]
+}
+
+//=========================================================================
+//
+//=========================================================================
+#=es.S.GOSUB.OVER
+{
+	$es.S.NAME(@es.S.NAMENEST) = $es.S.NOW
+	GOSUB[#=es.BT.ACTIVEGROUP.GET] @es.S.ACTIVEGROUP(@es.S.NAMENEST) = @_RINT(1)
+	$es.S.LBL = $_PSTR(1)
+	$es.S.OLD = $es.S.NOW
+	$es.S.NOW = $es.S.LBL
+	@es.S.P1  = @_PINT(2)
+	@es.S.P2  = @_PINT(3)
+//	@es.S.P3  = @_PINT(4)
+//	@es.S.P4  = @_PINT(5)
+	@es.S.R1(@es.S.NAMENEST)  = @_PINT(4)
+	@es.S.R2(@es.S.NAMENEST)  = @_PINT(5)
+	@es.S.NAMENEST+=1
+
+//	WAIT[FRAME=1]
+	\SS.GOSUB($_PSTR(1), 0) //スクリーンショット
+
+///xシーン変わるときは入力一旦無効に.
+	@_MOUSE_L=5
+	@_KEY_ENTER=5
+
+	return[]
+}
+
+//=========================================================================
+//
+//=========================================================================
+//	@es.S.STATE  →  \es.S.GOSUB の 引数2 の値が入る
+//	@es.S.STATE2  →  \es.S.GOSUB の 引数3 の値が入る
+//	@es.PINT(1)  →  別途設定した値が入る？
+//	@es.PINT(2)  →  別途設定した値が入る？
+//	@es.RINT(1)  →  \es.S.RETURN の 引数1 の値が入る
+//	@es.RINT(2)  →  \es.S.RETURN の 引数2 の値が入る
+
+#=es.S.RETURN
+{
+	$es.S.NAME(@es.S.NAMENEST) = ""
+	@es.S.R1(@es.S.NAMENEST)   = 0
+	@es.S.R2(@es.S.NAMENEST)   = 0
+	@es.S.ACTIVEGROUP(@es.S.NAMENEST) = 0
+	@es.S.NAMENEST-=1
+	IF[@es.S.NAMENEST<0] \_mes("S.RETURN エラー. GO/GOSUB に対して RETURN の数が上回りました。");END[] IFEND[]
+	$es.S.LBL = $es.S.NAME(@es.S.NAMENEST)
+	$es.S.OLD = $es.S.NOW
+	$es.S.NOW = $es.S.LBL
+//	@es.S.P1  = @_PINT(1)
+//	@es.S.P2  = @_PINT(2)
+	@es.S.RINT(1) = @_PINT(1)
+	@es.S.RINT(2) = @_PINT(2)
+	@es.S.P1  = @es.S.R1(@es.S.NAMENEST)
+	@es.S.P2  = @es.S.R2(@es.S.NAMENEST)
+//	@es.S.P3  = @_PINT(3)
+//	@es.S.P4  = @_PINT(4)
+
+//	WAIT[FRAME=1]
+	\SS.RETURN	//スクリーンショット
+
+	@es.S.RETFLAG = 1
+
+///xシーン変わるときは入力一旦無効に.
+	@_MOUSE_L=5
+	@_KEY_ENTER=5
+
+	return[]
+}
+
+#=es.S.RETURN.NUM
+{
+	LOOP[SET=@_PINT(1)]
+	{
+		$es.S.NAME(@es.S.NAMENEST) = ""
+		@es.S.R1(@es.S.NAMENEST)   = 0
+		@es.S.R2(@es.S.NAMENEST)   = 0
+		@es.S.ACTIVEGROUP(@es.S.NAMENEST) = 0
+		@es.S.NAMENEST-=1
+		IF[@es.S.NAMENEST<0] \_mes("S.RETURN エラー. GO/GOSUB に対して RETURN の数が上回りました。");END[] IFEND[]
+		$es.S.LBL = $es.S.NAME(@es.S.NAMENEST)
+		$es.S.OLD = $es.S.NOW
+		$es.S.NOW = $es.S.LBL
+
+			@es.S.P1  = @_PINT(2)
+			@es.S.P2  = @_PINT(3)
+			@es.S.RINT(1) = @_PINT(2)
+			@es.S.RINT(2) = @_PINT(3)
+		//	@es.S.P1  = @es.S.R1(@es.S.NAMENEST)
+		//	@es.S.P2  = @es.S.R2(@es.S.NAMENEST)
+//			@es.S.P3  = @_PINT(4)
+//			@es.S.P4  = @_PINT(5)
+
+		\SS.RETURN	//スクリーンショット
+	}
+	LOOPEND[]
+
+	@es.S.RETFLAG = 1
+
+///xシーン変わるときは入力一旦無効に.
+	@_MOUSE_L=5
+	@_KEY_ENTER=5
+
+	return[]
+}
+
+#=es.S.RETURN.LBL
+{
+	IF[$es.S.NOW==$_PSTR(1)]
+	{
+		@es.STATE = @_PINT(2) //@es.S.P1でないのに注意.
+		@es.STATE2 = @_PINT(3) //@es.S.P2でないのに注意.
+		@es.S.RINT(1) = @_PINT(2)
+		@es.S.RINT(2) = @_PINT(3)
+
+		GO[#=es.S.RETURN.LBL.LEnd]
+	}
+	IFEND[]
+
+	LOOP[SET=-1]
+	{
+		IF[@es.S.NAMENEST==0] LOOPBREAK[] IFEND[]
+		IF[$es.S.NAME(@es.S.NAMENEST)==$_PSTR(1)] LOOPBREAK[] IFEND[]
+
+		$es.S.NAME(@es.S.NAMENEST) = ""
+		@es.S.R1(@es.S.NAMENEST)   = 0
+		@es.S.R2(@es.S.NAMENEST)   = 0
+		@es.S.ACTIVEGROUP(@es.S.NAMENEST) = 0
+		@es.S.NAMENEST-=1
+		IF[@es.S.NAMENEST<0] \_mes("S.RETURN エラー. GO/GOSUB に対して RETURN の数が上回りました。");END[] IFEND[]
+		$es.S.LBL = $es.S.NAME(@es.S.NAMENEST)
+		$es.S.OLD = $es.S.NOW
+		$es.S.NOW = $es.S.LBL
+		@es.S.P1  = @_PINT(2)
+		@es.S.P2  = @_PINT(3)
+		@es.S.RINT(1) = @_PINT(2)
+		@es.S.RINT(2) = @_PINT(3)
+//		@es.S.P1  = @es.S.R1(@es.S.NAMENEST)
+//		@es.S.P2  = @es.S.R2(@es.S.NAMENEST)
+//		@es.S.P3  = @_PINT(4)
+//		@es.S.P4  = @_PINT(5)
+
+		\SS.RETURN	//スクリーンショット
+	}
+	LOOPEND[]
+
+	@es.S.RETFLAG = 1
+
+///xシーン変わるときは入力一旦無効に.
+	@_MOUSE_L=5
+	@_KEY_ENTER=5
+
+	#=es.S.RETURN.LBL.LEnd
+
+	return[]
+}
+
+
+
+//=========================================================================
+//■es.SS.～
+//=========================================================================
+#=es.SS.GO
+{
+	//--------------------------------------------
+	// スクリーンショット
+	//--------------------------------------------
+		\es.CGTSS
+		GOSUB[#=es.BT.BTLOOP]
+		GOSUB[#=es.BT.DRAW]
+
+	//--------------------------------------------
+	// ボタン消去
+	//--------------------------------------------
+		\BT.END($es.S.BT(@es.S.NEST))
+
+//\_dmes("BTN.END="+$es.S.BT(@es.S.NEST))
+
+	////↓多分要らない
+	//	\es.CGSDEL
+	//	\es.CGSSS
+
+		$es.S.BT(@es.S.NEST)=$_PSTR(1)
+
+
+		\_log("■ネスト数＝"+$(@es.S.NEST))
+			\_log("[0]"+$es.S.BT(0))
+		LOOP[SET=@es.S.NEST]
+		{
+			\_log("["+$(@_LC)+"]"+$es.S.BT(@_LC))
+		}
+		LOOPEND[]
+
+	//--------------------------------------------
+	// 画像セット
+	//--------------------------------------------
+\_log("￡es.SS.GO : \\BTDEF.LOAD ("+$_PSTR(1)+")")
+		\BTDEF.LOAD($_PSTR(1))
+
+//\_dmes("SS.GO:"+$es.S.BT(@es.S.NEST))
+
+	//--------------------------------------------
+	// ACTIVEGROUP セット
+	//--------------------------------------------
+		\BT.ACTIVEGROUP( 1 )
+
+
+	return[]
+}
+
+//=========================================================================
+//
+//=========================================================================
+#=es.SS.GOSUB
+{
+	IF[@_PINT(2)==0] //.OVER
+	{
+			//--------------------------------------------
+			// スクリーンショット
+			//--------------------------------------------
+				\es.CGTSS
+				\es.CGSSS
+				GOSUB[#=es.BT.BTLOOP]
+				GOSUB[#=es.BT.DRAW]
+
+			//--------------------------------------------
+			// ボタン消去
+			//--------------------------------------------
+				\BT.ES20.ALL($es.S.BT(@es.S.NEST))
+//				\BT.END($es.S.BT(@es.S.NEST))
+
+		//\_dmes("BTN.END="+$es.S.BT(@es.S.NEST))
+
+	}
+	ELSE[]
+	{
+			//--------------------------------------------
+			// スクリーンショット１
+			//--------------------------------------------
+				\es.CGTSS
+				\es.CGTA(0)
+				GOSUB[#=es.BT.BTLOOP]
+				GOSUB[#=es.BT.DRAW]
+
+			//--------------------------------------------
+			// ボタン消去
+			//--------------------------------------------
+//\_dmes($es.S.BT(@es.S.NEST))
+				\BT.ES20.ALL($es.S.BT(@es.S.NEST))
+//				\BT.END($es.S.BT(@es.S.NEST))
+
+			//--------------------------------------------
+			// スクリーンショット２
+			//--------------------------------------------
+				IF[@es.S.NEST==0]
+					\es.CGSSS
+				ELSE[]
+					\es.CGSCOPY
+				IFEND[]
+
+				\es.CGTA(256)
+
+	}
+	IFEND[]
+
+	//--------------------------------------------
+	// 
+	//--------------------------------------------
+		@es.S.NEST+=1
+		$es.S.BT(@es.S.NEST)=$_PSTR(1)
+/*
+	\_log("■ネスト数＝"+$@es.S.NEST)
+		\_log("[0]"+$es.S.BT(0))
+	LOOP[SET=@es.S.NEST]
+	{
+		\_log("["+$@_LC+"]"+$es.S.BT(@_LC))
+	}
+	LOOPEND[]
+*/
+	//--------------------------------------------
+	// 画像セット
+	//--------------------------------------------
+\_log("￡es.SS.GOSUB : \\BTDEF.LOAD ("+$_PSTR(1)+")")
+		\BTDEF.LOAD($_PSTR(1))
+
+//\_dmes("SS.GOSUB:"+$_PSTR(1))
+//\_dmes("SS.GOSUB:"+$es.S.BT(@es.S.NEST))
+
+	//--------------------------------------------
+	// ACTIVEGROUP セット
+	//--------------------------------------------
+		\BT.ACTIVEGROUP( 1 )
+
+	return[]
+}
+
+//=========================================================================
+//
+//=========================================================================
+#=es.SS.RETURN
+{
+	//--------------------------------------------
+	// ボタン描画
+	//--------------------------------------------
+	//	GOSUB[#=es.BT.DRAW]
+		WAIT[FRAME=1] ///xなぜかこっちでないとボタンon状態でSS取れない。あとでじっくり直す.
+
+	//--------------------------------------------
+	// スクリーンショット
+	//--------------------------------------------
+		GOSUB[#=es.BT.BTLOOP]
+		GOSUB[#=es.BT.DRAW]
+		\es.CGTSS
+		\es.CGSDEL
+
+	//--------------------------------------------
+	// ボタン消去
+	//--------------------------------------------
+		\BT.END($es.S.BT(@es.S.NEST))
+
+	//--------------------------------------------
+	// 
+	//--------------------------------------------
+		$es.S.BT(@es.S.NEST)=""
+		@es.S.NEST-=1
+
+//\_dmes("SS.RETURN:"+$es.S.BT(@es.S.NEST))
+
+	//--------------------------------------------
+	// ボタン読み込み
+	//--------------------------------------------
+//		\BTDEF.LOAD($es.S.BT(@es.S.NEST))
+		\BT.ES21.ALL($es.S.BT(@es.S.NEST))
+
+	//--------------------------------------------
+	// ACTIVEGROUP を元に戻す
+	//--------------------------------------------
+		\BT.ACTIVEGROUP( @es.S.ACTIVEGROUP(@es.S.NEST) )
+//\_dmes("BTN="+$(@es.S.ACTIVEGROUP(@es.S.NEST)))
+
+	return[]
+}
+
+
+//=========================================================================
+//
+//=========================================================================
+#=es.SS.FADE
+{
+	\es.CGTFADEOUT(@_PINT(1))
+	return[]
+}
+
+//別タスクバージョン
+#=es.SS.FADE.TASK
+{
+	TASK[ID=es.SS.FADE.TASK #=es.SS.FADE.TASK.MAIN Z=@es.63BITMAX TINT=@_PINT(1)]
+	return[]
+}
+
+#=es.SS.FADE.TASK.MAIN
+{
+	@es.SS.FADE.TASK=1
+
+		\es.CGTFADEOUT(@_TINT(1))
+
+	@es.SS.FADE.TASK=0
+
+	return[]
+}
+
+
+//=========================================================================
+//
+//=========================================================================
+#=es.SS.DELALL
+{
+	INT[@mNO  = @es.CGSNO]
+
+	LOOP[]
+	{
+		IF[@mNO<=0] LOOPBREAK[] IFEND[]
+
+		\es.CGSDEL
+
+		@es.CGSNO-=1
+		@mNO-=1
+		@es.S.NEST-=1
+	}
+	LOOPEND[]
+
+//	\_dmes("[CGSDELALL] @es.CGSNO = "+$@es.CGSNO)
+
+	return[]
+}
+
+
+//////
+
+
+//=========================================================================
+//■CGSBLACK マクロ
+//=========================================================================
+#=es.CGSBLACK
+{
+	@es.CGSNO+=1
+
+	INT[@no = @es.CGSNO]
+	STR[$id = "CGS"+$(@no)]
+	INT[@zz = @es.Z.SS+@no]
+
+	CG[ID=$id Z=@zz E=1 A=256 SX=@es.GSX SY=@es.GSY FILE=""]
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/"+$id E=1 A=256 Z=@zz X=0 Y=0 FILE=""]
+	CGACT[ID=$id ID2=":/W3/"+$id SIZE=1 SX=80 SY=60]
+IFEND[]
+
+	return[]
+}
+
+
+//=========================================================================
+//■CGTBLACK マクロ
+//=========================================================================
+#=es.CGTBLACK
+{
+	INT[@no = 100]
+	STR[$id = "CGS"+$(@no)]
+//	INT[@zz = @es.Z.SS+@no]
+	INT[@zz = @es.63BITMAX]
+
+	CG[ID=$id Z=@zz E=1 A=000 SX=@es.GSX SY=@es.GSY FILE=""]
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/"+$id E=1 A=000 Z=@zz X=0 Y=0 FILE=""]
+	CGACT[ID=$id ID2=":/W3/"+$id SIZE=1 SX=80 SY=60]
+IFEND[]
+
+	return[]
+}
+
+//=========================================================================
+//■CGSLOAD マクロ
+//=========================================================================
+#=es.CGSLOAD
+{
+	STR[$ID=":/W0/"]
+	STR[$mFN = $_PSTR(1)]
+
+	@es.CGSNO+=1
+
+	INT[@no = @es.CGSNO]
+	STR[$id = "CGS"+$(@no)]
+	INT[@zz = @es.Z.SS+@no]
+
+	CG[ID=$id Z=@zz E=1 A=256 FILE=$mFN]
+
+	INT[@sx]INT[@sy]
+	IF[@_PINT(2)>0]
+	{
+		CGINFO[ID=$id SX=1 LET=@sx]
+		CGINFO[ID=$id SY=1 LET=@sy]
+		CGACT[ID=$id SIZE4=1 SX=@sx/2 SY=@sy/2]
+	}
+	IFEND[]
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/"+$id E=1 A=256 Z=@zz X=0 Y=0 FILE=""]
+	CGACT[ID=$id ID2=":/W3/"+$id SIZE=1 SX=80 SY=60]
+IFEND[]
+
+	return[]
+}
+
+
+//=========================================================================
+//■スクリーンショット前後処理
+//=========================================================================
+#=es.SSHOT.PRE
+{
+//	LOOP[SET=7] CG[ID="SMES"+$(@_LC) E=0] LOOPEND[]
+	return[]
+}
+
+#=es.SSHOT.POST
+{
+//	LOOP[SET=7] CG[ID="SMES"+$(@_LC) E=1] LOOPEND[]
+	return[]
+}
+
+//=========================================================================
+//■CGSSS マクロ
+//=========================================================================
+#=es.CGSSS
+{
+	STR[$ID=":/W0/"]
+	IF[$_PSTR(1)!=""] $ID=$_PSTR(1) IFEND[]
+
+	@es.CGSNO+=1
+
+	INT[@no = @es.CGSNO]
+	STR[$id = "CGS"+$(@no)]
+	INT[@zz = @es.Z.SS+@no]
+
+	GOSUB[#=es.SSHOT.PRE]
+
+	//スクリーンショット
+	CG[ID=$id Z=@zz E=1 A=0 FILE=""]
+	CGACT[COPY2=1 ID=$ID ID2=$id]
+
+	GOSUB[#=es.SSHOT.POST]
+
+	CG[ID=$id A=256]
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/"+$id E=1 A=256 Z=@zz X=0 Y=@T(37,25)-@no*60 FILE=""]
+	CGACT[ID=$id ID2=":/W3/"+$id SIZE=1 SX=80 SY=60]
+IFEND[]
+
+	return[]
+}
+
+
+//=========================================================================
+//■CGSCOPY マクロ
+//=========================================================================
+#=es.CGSCOPY
+{
+	STR[$ID=":/W0/"]
+	IF[$_PSTR(1)!=""] $ID=$_PSTR(1) IFEND[]
+
+	INT[@no0 = @es.CGSNO]
+	STR[$id0 = "CGS"+$(@no0)]
+	INT[@zz0 = @es.Z.SS+@no0]
+
+	@es.CGSNO+=1
+
+	INT[@no = @es.CGSNO]
+	STR[$id = "CGS"+$(@no)]
+	INT[@zz = @es.Z.SS+@no]
+
+	CG[ID=$id Z=@zz E=1 A=0 FILE=""]
+	CGACT[COPY2=1 ID=$id0 ID2=$id]
+
+	CG[ID=$id A=256]
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/"+$id E=1 A=256 Z=@zz X=0 Y=@T(37,25)-@no*60 FILE=""]
+	CGACT[ID=$id ID2=":/W3/"+$id SIZE=1 SX=80 SY=60]
+IFEND[]
+
+	return[]
+}
+
+
+//=========================================================================
+//■CGTSS マクロ
+//=========================================================================
+#=es.CGTSS
+{
+	STR[$ID=":/W0/"]
+	IF[$_PSTR(1)!=""] $ID=$_PSTR(1) IFEND[]
+
+	INT[@no = 100]
+	STR[$id = "CGS"+$(@no)]
+	INT[@zz = @es.63BITMAX] //最前面へ
+
+	GOSUB[#=es.SSHOT.PRE]
+
+	//スクリーンショット
+	CG[ID=$id Z=@zz E=1 A=0 FILE=""]
+	CGACT[COPY2=1 ID=$ID ID2=$id]
+
+	GOSUB[#=es.SSHOT.POST]
+
+	CGACT[ID=$id RECTPAINT2=1 SET=0xff] //不透明度部分をなくす
+	CG[ID=$id A=256]
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/"+$id E=1 A=256 Z=@zz X=0 Y=0 FILE=""]
+	CGACT[ID=$id ID2=":/W3/"+$id SIZE=1 SX=80 SY=60]
+IFEND[]
+
+	return[]
+}
+
+#=es.CGTSS.2
+{
+	STR[$ID=":/W0/"]
+	IF[$_PSTR(1)!=""] $ID=$_PSTR(1) IFEND[]
+
+	INT[@no = 999]
+	STR[$id = "CGS"+$(@no)]
+	INT[@zz = @es.64BITMAX] //最前面へ
+
+	GOSUB[#=es.SSHOT.PRE]
+
+	//スクリーンショット
+	CG[ID=$id Z=@zz E=1 A=0 FILE=""]
+	CGACT[COPY2=1 ID=$ID ID2=$id]
+
+	GOSUB[#=es.SSHOT.POST]
+
+	CGACT[ID=$id RECTPAINT2=1 SET=0xff] //不透明度部分をなくす
+	CG[ID=$id A=256]
+
+	return[]
+}
+
+
+//=========================================================================
+//■CGSA マクロ
+//=========================================================================
+#=es.CGSA
+{
+	STR[$id = "CGS"+$(@es.CGSNO)]
+
+	CG[ID=$id A=@_PINT(1)]
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/"+$id A=@_PINT(1)]
+IFEND[]
+
+	return[]
+}
+
+
+//=========================================================================
+//■CGTA マクロ
+//=========================================================================
+#=es.CGTA
+{
+	INT[@no = 100]
+	STR[$id = "CGS"+$(@no)]
+
+	CG[ID=$id A=@_PINT(1)]
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/"+$id A=@_PINT(1)]
+IFEND[]
+
+	return[]
+}
+
+
+//=========================================================================
+//■CGTFADEIN マクロ
+//=========================================================================
+#=es.CGTFADEIN
+{
+	INT[@no = 100]
+	STR[$id = "CGS"+$(@no)]
+
+	INT[@mTIME = @_PINT(1)];IF[@mTIME<0] @mTIME=1000 IFEND[]
+	INT[@mSKIP = @_PINT(2)]
+
+	\es.CGFADEEXEC($id, @mTIME, 0, 0, @mSKIP, 0, 1)
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/"+$id A=256]
+IFEND[]
+
+	return[]
+}
+
+//=========================================================================
+//■CGTFADEOUT マクロ
+//=========================================================================
+#=es.CGTFADEOUT
+{
+	INT[@no = 100]
+	STR[$id = "CGS"+$(@no)]
+
+	INT[@mTIME = @_PINT(1)];IF[@mTIME<0] @mTIME=1000 IFEND[]
+	INT[@mSKIP = @_PINT(2)]
+
+	\es.CGFADEEXEC($id, @mTIME, 1, 0, @mSKIP, 0, 1)
+	CGEND[ID=$id]
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CGEND[ID=":/W3/"+$id]
+IFEND[]
+
+	return[]
+}
+
+//=========================================================================
+//■CGTDEL マクロ
+//=========================================================================
+#=es.CGTDEL
+{
+	INT[@no = 100]
+	STR[$id = "CGS"+$(@no)]
+
+	CGEND[ID=$id]
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CGEND[ID=":/W3/"+$id]
+IFEND[]
+
+	return[]
+}
+
+//=========================================================================
+//■CGSFADEIN マクロ
+//=========================================================================
+#=es.CGSFADEIN
+{
+	INT[@no = @es.CGSNO]
+	STR[$id = "CGS"+$(@no)]
+
+	INT[@mTIME = @_PINT(1)];IF[@mTIME<0] @mTIME=1000 IFEND[]
+	INT[@mSKIP = @_PINT(2)]
+
+	\es.CGFADEEXEC($id, @mTIME, 0, 0, @mSKIP, 0, 1)
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CG[ID=":/W3/"+$id A=256]
+IFEND[]
+
+	return[]
+}
+
+//=========================================================================
+//■CGSFADEOUT マクロ
+//=========================================================================
+#=es.CGSFADEOUT
+{
+	INT[@no = @es.CGSNO]
+	STR[$id = "CGS"+$(@no)]
+
+	INT[@mTIME = @_PINT(1)];IF[@mTIME<0] @mTIME=1000 IFEND[]
+	INT[@mSKIP = @_PINT(2)]
+
+	\es.CGFADEEXEC($id, @mTIME, 1, 0, @mSKIP, 0, 1)
+	CGEND[ID=$id]
+
+	@es.CGSNO-=1
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CGEND[ID=":/W3/"+$id]
+IFEND[]
+
+	return[]
+}
+
+//=========================================================================
+//■CGSDEL マクロ
+//=========================================================================
+#=es.CGSDEL
+{
+	STR[$id = "CGS"+$(@es.CGSNO)]
+
+	IF[@es.CGSNO]
+	{
+		CGEND[ID=$id]
+		@es.CGSNO-=1
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CGEND[ID=":/W3/"+$id]
+IFEND[]
+
+	}
+	IFEND[]
+
+//	\_dmes("[CGSDEL] @es.CGSNO = "+$@es.CGSNO)
+
+	return[]
+}
+
+//=========================================================================
+//■CGSDELALL マクロ
+//=========================================================================
+#=es.CGSDELALL
+{
+	INT[@no = @es.CGSNO]
+	STR[$id]
+
+	LOOP[]
+	{
+		$id = "CGS"+$(@no)
+
+		IF[@no<=0] LOOPBREAK[] IFEND[]
+
+		CGEND[ID=$id]
+		@es.CGSNO-=1
+		@no-=1
+
+IF[@_DEBUGMODE>=@dbg.val]
+	CGEND[ID=":/W3/"+$id]
+IFEND[]
+
+	}
+	LOOPEND[]
+
+//	\_dmes("[CGSDELALL] @es.CGSNO = "+$@es.CGSNO)
+
+	return[]
+}
+
+
+
+//=========================================================================
+//■汎用レイヤフェード マクロ
+//=========================================================================
+#=es.CGFADEEXEC
+{
+	STR[$IDName  =$_PSTR(1)]
+	INT[@Time    =@_PINT(2)]
+	INT[@Dir     =@_PINT(3)] //0=(0→256),1=(256→0)
+	INT[@Mode    =@_PINT(4)] //0=alpha,1=Trandision
+	INT[@SkipChk1=@_PINT(5)] //1=yes,0=no
+	INT[@SkipChk2=@_PINT(6)] //1=yes,0=no
+	INT[@WaitFlag=@_PINT(7)] //1=1FrameWait
+
+	INT[@Time0   =@_OS_TIME(1)]
+
+	IF[@Time<=0] @Time=1 IFEND[]
+
+	@es.FADEMODE=1
+
+	//----------------------------------------------------------------
+	//メインループ
+	//----------------------------------------------------------------
+		INT[@Skip]
+		FLT[@mNOW]
+		INT[@mT]
+		INT[@mTADD]
+		FLT[@mA]
+
+		LOOP[]
+		{
+
+			//----------------------------------------------------------------
+			// フェード進捗
+			//----------------------------------------------------------------
+				/*
+				@mTADD = @_OS_TIME(1) - @Time0
+				IF[@es.TX.CSKIP>0 && @SkipChk1>0] @mTADD *= @es.GSD(120,05) IFEND[]
+				@mT += @mTADD
+				@Time0 = @_OS_TIME(1)
+				@mNOW = 256 * @mT / @Time
+				*/
+
+				@mTADD = @_OS_TIME(1) - @Time0
+				@mNOW = 256 * @mTADD / @Time
+
+			//----------------------------------------------------------------
+			// フェード中に入力があればスキップ
+			//----------------------------------------------------------------
+				IF[@SkipChk1]
+				{
+///xMG
+					IF[@es.MG.AUTO==0]
+						@Skip+=(@_KEY_CTRL  >0) // CTRLキー
+						@Skip+=(@_KEY_ENTER==1) // ENTERキー
+						@Skip+=(@_MOUSE_L  ==1) // 左クリック
+					IFEND[]
+					IF[@Skip]
+					{
+						@mNOW=256
+						IF[@SkipChk2] @es.TX.SKIP=0 IFEND[]
+					}
+					IFEND[]
+				}
+				IFEND[]
+
+			//----------------------------------------------------------------
+			// メニュースキップボタンでスキップ
+			//----------------------------------------------------------------
+				//IF[@GSD(009,2)==1] @mNOW=256] IFEND[]
+
+			//----------------------------------------------------------------
+			// スキップ中なら瞬間切替
+			//----------------------------------------------------------------
+				IF[@SkipChk2 && @es.TX.SKIP] @mNOW=256 IFEND[]
+
+			//----------------------------------------------------------------
+			// オーバーフロー防止
+			//----------------------------------------------------------------
+				\_range(@mNOW,, 256)
+
+			//----------------------------------------------------------------
+			// 不透明度計算
+			//----------------------------------------------------------------
+				IF[@Dir==0] @mA =     @mNOW
+				ELSE[]      @mA = 256-@mNOW
+				IFEND[]
+
+			//----------------------------------------------------------------
+			// 不透明度反映
+			//----------------------------------------------------------------
+				IF[@Mode==0] CG[ID=$IDName A=@mA]
+				ELSE[]       CG[ID=$IDName T=@mA]
+				IFEND[]
+
+			//----------------------------------------------------------------
+			// アルファ値が０になったら終了
+			//----------------------------------------------------------------
+				IF[@mNOW==256] LOOPBREAK[] IFEND[]
+
+			//----------------------------------------------------------------
+			// １フレームウェイト
+			//----------------------------------------------------------------
+				WAIT[FRAME=1]
+		}
+		LOOPEND[]
+
+	//----------------------------------------------------------------
+	//１フレームウェイト
+	//----------------------------------------------------------------
+		IF[@WaitFlag==0]
+		{
+			IF[@_KEY_CTRL<0 && @es.TX.SKIP==0] WAIT[FRAME=1] IFEND[] //フェードイン等で最後のフレームがカクつかないように.
+		}
+		ELSE[]
+		{
+			WAIT[FRAME=1]
+		}
+		IFEND[]
+
+	@es.FADEMODE=0
+
+	return[]
+}
+
+

@@ -1,0 +1,505 @@
+$sc_c05
+_Mode=1,
+52("_GRPName","bg02a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM03")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","cd")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0001c
+&7186"「はい、お弁当」"42("DEL","02CharChip.dat")&7187"ここのところずっと、俺の弁当は夢子が毎日作っている。"#:NameSuffix
+&7188"「ん？ああ」"&7189"なんか弁当のボリュームが……だんだんすごいことになってきてるような。"52("_BGMName","BGM07")
+42("BGM","00Sound.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0002c
+&7190"「今日は:NameSuffixの大好きな生姜焼きよ。あとはお楽しみ」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cl")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0003c
+&7191"「食べて……今日も:NameSuffixの好きなものばかり詰めたのよ」"#夢　子=w0004c
+&7192"「美味しい？ふふふっ……とっておきの隠し味を使っているのよ」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0005c
+&7193"「抱いてよ……本当に私を愛しているかどうか確かめたかった」"42("DEL","02CharChip.dat")_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ci")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0006c
+&7194"「信じてくれないの？　こんなに好きなのに。　お弁当だってほら……」"42("DEL","02CharChip.dat")_AL=0,
+_Mode=6,
+52("_GRPName","c10r1")
+42("DrawCG","00Draw.dat")
+_WaitTime=400,
+42("Wait","00Wait.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+#:NameSuffix
+&7195"「うわあああああああっ！！」"_Mode=0,
+52("_GRPName","bg02a")
+42("DrawBG","00Draw.dat")
+100("",3,2,0,0)
+100("SE016",0,2,0,0)
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子
+&7196"「？」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cc")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0007c
+&7197"「どうしたの？　すごいうなされてたけど」"42("DEL","02CharChip.dat")100("",3,4,0,0)
+100("SE041",1,4,0,0)
+#:NameSuffix
+&7198"「はあ……ああ……夢か」"52("_BGMName","BGM07")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0008c
+&7199"「ちょっとすごい汗よ……大丈夫？」"42("DEL","02CharChip.dat")#:NameSuffix
+&7200"「はあっはあっ……大丈夫だ」"&7201"動揺を隠すように目を伏せたが、声が震えた。"&7202"動悸が激しい。なんなんだあの夢は。"100("",4,4,0,0)
+&7203"夢子が一瞬別人に見えた―。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cc")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0009c
+&7204"「悪い夢でも見たの？かわいそうに……」"42("DEL","02CharChip.dat")&7205"頭を撫でようとしてくる。"&7206"手を差し伸べてくる。"#:NameSuffix
+&7207"「触るな！」"100("",3,2,0,0)
+100("SE021",0,2,0,0)
+&7208"思わず手を払いのけてしまった。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ce")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0010c
+&7209"「きゃっ……！　:NameSuffix……？」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&7210"「……っ！　ごめん」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子
+&7211"「……？」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&7212"とりあえず登校の支度……しなくちゃな……。"&7213"…………。"_Mode=1,
+52("_GRPName","bg02a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM03")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cd")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0011c
+&7214"「はい、これ。お弁当」"42("DEL","02CharChip.dat")&7215"夢の事もあって、俺は素直に受け取れなかった。"#:NameSuffix
+&7216"「いや……今日はいいよ。食欲ないし」"&7217"二季が最近弁当作ってくれてるから、夢子の弁当まであると入らない。"&7218"気持ち的にもいっぱいいっぱいだった。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cc")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0012c
+&7219"「そう？　でも顔色悪いわよ。ちゃんと食べないと……」"42("DEL","02CharChip.dat")&7220"かまわず弁当差し出してくる。"#:NameSuffix
+&7221"「いいって！」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ce")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子
+&7222"「:NameSuffix……」"42("DEL","02CharChip.dat")&7223"このままじゃ、早く何とかしないと俺も夢子もダメになってしまう。"&7224"俺の中途半端な優しさが、逆に夢子を傷つけていたことに気付いたからだ。"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cb")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0013c
+&7225"「彼女のお弁当があるからいらないなら、はっきり言えばいいじゃない」"42("DEL","02CharChip.dat")#:NameSuffix
+&7226"「……すまん」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cc")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0014c
+&7227"「私、:NameSuffixのしてほしいことなら何でもするわ。:NameSuffixが望むなら何でも、何だって出来るんだから」"42("DEL","02CharChip.dat")#:NameSuffix
+&7228"「……え」"52("_BGMName","BGM07")
+42("BGM","00Sound.dat")
+&7229"机に置いてある俺の携帯を取り出し、待ち受け画像の二季とのデートの写メを見ながら言った。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0015c
+&7230"「そっか……:NameSuffixは、今は髪が短い女の子が好みなのね？」"42("DEL","02CharChip.dat")&7231"そういうと、夢子はハサミを持ち出した。"#:NameSuffix
+&7232"「ゆ……夢子？　お前何を」"&7233"自分の髪の毛にハサミをあてがう。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","cc")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0016c
+&7234"「:NameSuffixが、長い髪の女の人って好きだって言ってたから、私頑張ってここまで伸ばしたんだよ」"#夢　子=w0017c
+&7235"「すごく頑張ったんだから……」"42("DEL","02CharChip.dat")#:NameSuffix
+&7236"（はったりじゃない……）"#:NameSuffix
+&7237"「夢子！やめろ！」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","cb")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0605c
+&7238"「ずっとずっと、私のほうがずっと前から大好きなのに……離れたいなんて言わないわよね？　ずっとそばにいてくれるでしょ？　ねえ、そう言ってよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&7239"「夢子……俺は……」"#:NameSuffix
+&7240"「夢子……お前との関係は……」"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0018c
+&7241"「聞きたくないわ。黙って」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0019c
+&7242"「ねえ……好き？」"42("DEL","02CharChip.dat")#:NameSuffix
+&7243"「……好きだ」"&7244"その言葉で、この上もない笑顔をほころばせる。いつもの夢子に戻れる魔法の言葉。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","cd")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0020c
+&7245"「そう？　じゃあデートして」"42("DEL","02CharChip.dat")&7246"学園は……とも言っていられる状況じゃなくなってしまっていた。"#:NameSuffix
+&7247"「どこに行きたいんだ？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ck")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0021c
+&7248"「そうね……それじゃあ私、海がいい」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+&7249"…………。"&7250"…………………。"_Mode=1,
+52("_GRPName","white")
+42("DrawBG","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0022c
+&7251"「ねえ、:NameSuffix！:NameSuffix……私をお嫁さんにして。:NameSuffixは……嫌？」"42("DEL","02CharChip.dat")#:NameSuffix
+&7252"「い、嫌じゃ……ないよ。俺、夢子のこと、好……」"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0023c
+&7253"「本当？本当に好き？私の事好き？」"42("DEL","02CharChip.dat")#:NameSuffix
+&7254"「う、うん……」"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0024c
+&7255"「そしたら約束ね！指切りげんまん。絶対にお嫁さんにしてね」"42("DEL","02CharChip.dat")#:NameSuffix
+&7256"「うん！」"_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&7257"…………。"&7258"…………………。"_Mode=1,
+52("_GRPName","bg06a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM03")
+42("BGM","00Sound.dat")
+&7259"俺の心とは裏腹に、どこまでも青い空と青い海。"&7260"自由で穏やかな空気、砂浜を眩しい太陽が照りつけていた。"&7261"ビーチの視線を独り占め状態の夢子。"&7262"本当に、家族でなけりゃよかったと何度思ったことか。"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0025c
+&7263"「静かね……もう夏も終わりかな」"42("DEL","02CharChip.dat")#:NameSuffix
+&7264"「そうだな。……なあ夢子、どうしてそんなに俺にこだわるんだ？」"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cd")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0026c
+&7265"「だって私のこと好きだって言ってるじゃない」"42("DEL","02CharChip.dat")#:NameSuffix
+&7266"「……それは置いといて、実際お前モテるだろ、他にいい男なんていくらでも」"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cb")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0027c
+&7267"「……興味ないわ。会話だってまともにしたことないし」"42("DEL","02CharChip.dat")#:NameSuffix
+&7268"「嘘だろ……」"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cd")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0028c
+&7269"「だって……私にはあなたがいるもの」"42("DEL","02CharChip.dat")#:NameSuffix
+&7270"「そうは言うけどなあ……」"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0029c
+&7271"「……もとはといえば、私をこんなにしたのは:NameSuffixのせいでもあるのよ？」"42("DEL","02CharChip.dat")#:NameSuffix
+&7272"「俺のせい？　待てよ夢子、確かに俺は夢子と……その、寝たけど……」"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cb")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0030c
+&7273"「じゃあどうして？　どうして私じゃダメなの？　私のどこがいけないの？」"42("DEL","02CharChip.dat")&7274"まっすぐ見つめて懇願する口調で言った。"&7275"夢子は正直いって非の打ちどころのない女性だと思う。"&7276"だけど―"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cc")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0031c
+&7277"「子どものころに約束したじゃない。どうしていけないのよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&7278"「どうしてって……俺たちは……姉弟だぞ」"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","cb")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0032c
+&7279"「わからないわ！　だから何だっていうの？　どうしてこんな時にそんなこと言うの？　それなら……どうして私を抱いたの？　どうしてあの時……」"42("DEL","02CharChip.dat")#:NameSuffix
+&7280"「……っ」"&7281"何も言えなくなってしまった。"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","cc")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0033c
+&7282"「:NameSuffixは……覚えてないの？　あの頃私に言ったこと……」"42("DEL","02CharChip.dat")#:NameSuffix
+&7283"「あの頃……？」"&7284"涙目で抗議する、水着の夢子の肢体が眩しすぎて―。"&7285"甘く誘惑する。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0034c
+&7286"「私は:NameSuffixさえ居れば何もいらないのに。もう……一人にしないで」"42("DEL","02CharChip.dat")#:NameSuffix
+&7287"「夢子……」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+&7288"…………。"&7289"…………………。"
+$reco
+
+_Mode=1,
+52("_GRPName","c08r0")
+42("DrawCG","00Draw.dat")
+52("_BGMName","BGM08")
+42("BGM","00Sound.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0035c
+&7290"「はぁっ……あっ、はぁっ……あぅっ」"42("DEL","02CharChip.dat")#:NameSuffix
+&7291"「そんなつもりはないんだけど……く……はぁ」"_Mode=1,
+52("_GRPName","c08r1")
+42("DrawCG","00Draw.dat")
+&7292"横たわり俺を誘う夢子を見て、俺は愛撫もなしに挿入する。"&7293"指よりも太い肉棒で、熱と愛液で満たされた秘肉の狭い道を押し広げながらゆっくりと腰を進めていく。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0036c
+&7294"「苦しいけど気持ちよくて……ひあっ、くっ…………んぅっ！……あぁんっ」"42("DEL","02CharChip.dat")&7295"夢子は俺に体を任せつつ、自らも悩ましく動いていた。"&7296"その様子に、なんだか腹の底の黒いものをくすぐられる気分だ。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0037c
+&7297"「んはっ……ぁ、もっと……もっと:NameSuffixと繋がっていたいの……」"42("DEL","02CharChip.dat")&7298"俺と繋がっていたい、心の奥底にまで響く言葉はそうはない。"&7299"夢子は隠そうともせずに、肉棒が奥に進むに連れて、幸せそうに顔を緩めていく。"&7300"俺まで嬉しさのせいか、膣内で肉棒が大きく反応してしまう。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0038c
+&7301"「あんっ、お腹の中でチンチンが大きくなってるぅ……ああっ、……ひぁあんっ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&7302"「あぁ、すごくあったかいし、夢子も嬉しそうだし、充実してくみたいだ……」"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0039c
+&7303"「はぁ……はぁ……:NameSuffixは……エッチな私も好き……？」"42("DEL","02CharChip.dat")#:NameSuffix
+&7304"「……ああ」"&7305"言いながら夢子の体中を撫で回す。"&7306"女らしい丸みを帯びた太もも……形の良い尻。"&7307"ゆったりとした曲線を描く腰から指を滑らせ、そのまましまった下っ腹、へそをなぞり上げる。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0040c
+&7308"「くすぐったい……はぁんッ　そろそろ、動いて……なんだかオマンコがムズムズして……切ないの……」"42("DEL","02CharChip.dat")&7309"すっかり根元まで挿入していて、夢子の股間に恥骨がぶつかった。"#:NameSuffix
+&7310"「わかった……」"&7311"小さく震えるように動いていた夢子の腰を固定し、ピストンを開始する。"&7312"密着状態から腰を離すと夢子の愛液で俺の股間まで濡れていた。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0041c
+&7313"「んんぁっ……あ、うっ、ッくぅ……深い所から、全身にズンズン響いて、る、あっ、あっ、あんっ！」"42("DEL","02CharChip.dat")&7314"女らしい肉付きといっても俺よりずっと華奢な体は、腰を打ち付けるたびに大きく揺れ動き。"&7315"夢子は体を強張らせ、上半身を捻り。流れるほどの汗を肌に浮かばせる。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0042c
+&7316"「あ、ぁあっ……私で気持ちよくなって、いい……けどっ……もっとゆっくり……ひッ、んっ！」"42("DEL","02CharChip.dat")&7317"狭い肉壁を擦る度に、濡れているとは言っても摩擦熱でどんどん熱くなる。"&7318"この熱は夢子も感じているんだろう……時々肩を丸め、ゾクゾクと上半身を痙攣させる。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0043c
+&7319"「ひぁぁっ……ぁっ、くぅっ……あぁんッ、痺れてるみたいに、あぁっ、何も、わかんな、くっ、うぅッ」"42("DEL","02CharChip.dat")#:NameSuffix
+&7320"「くっ……！」"&7321"俺は一度、夢子を突き放した事もあった。それでも夢子は俺の事を誰よりも心配してくれている。"&7322"そんな夢子が望むならなんだってしてやりたい。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0044c
+&7323"「はあ、あぁっ、はぁんッ、あぁぁぁっ……気持ちいい……:NameSuffixのおちんちん、気持ちいいッ！　あぁあッ！」"42("DEL","02CharChip.dat")&7324"これまで夢か現実か、曖昧な情事をくりかえしていて、ハッキリさせようともしなかった。"&7325"だからはっきり決めた今こそ……夢子に心の底から感じて欲しい。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0045c
+&7326"「やぁっ……おちんちんが膨らんで……あっんっ、裂けちゃうっ……ふぁぁっ！　あっ、んん─ッ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&7327"「俺じゃなくて夢子の締まりが強くなったんだろ……もっとして欲しいってさ……」"&7328"大きく叫ぶように喘いでいるからか、無意識か……膣肉は肉棒をより圧迫し、絞り上げる。"&7329"夢子は押し出されるように吐息を吐き、首を左右に振り乱す。"&7330"こちらを惑わせるようにおっぱいは大きく揺れ、ピンと勃つ乳首が円を描く度に、俺は夢子の体を揺らす事しか考えられなくなりそうだった。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0046c
+&7331"「はぁあ、あぁあ！　ふぁっ、どんどん気持ちよくなって……あぁん！　これ、ひぁっ、これじゃ、すぐイッちゃう……は、ァンッ！」"42("DEL","02CharChip.dat")&7332"動きを緩めはしない。このまま夢子と溺れてしまおう。"&7333"抑制の効かない衝動に身を任せて、２人で何度だって果てたい。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0047c
+&7334"「はぅっあ、腰……が、勝手に動く、の……あんっ、ッハァ！……私、すごく興奮してる、恥ずかしい……くぅうッ」"42("DEL","02CharChip.dat")&7335"溢れるほど愛液は、激しいピストン運動に水音を加え、動きの早さや強さを誇張していた。"&7336"瞳はトロンと宙を仰ぎながら、どこか苦悶の色も伺える。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0048c
+&7337"「お腹が押し上げられて苦し……はぁっ！　あっ、くっ……んん……ッ！！」"42("DEL","02CharChip.dat")&7338"夢子の腹に手を置き、優しく揉む。"#:NameSuffix
+&7339"「なんかで読んだな、エッチの興奮で子宮口がチンコに迫ってくるって」"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0049c
+&7340"「そうなんだ……んぁっ、赤ちゃんつくるところにキスしてるのね……ハァンッ……ハッ……ハァ」"42("DEL","02CharChip.dat")&7341"俺はそんな保健体育に熱中してしまったような情報を意識させられて更に興奮してしまった……。"&7342"亀頭の先に感じるコツコツと当り、押し上げる感触、これのすぐ先には新たな生命を授かる為の器官が子種を求めているわけで。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0050c
+&7343"「ひぅ！？……あっ、ンンッ！急に、奥ばかり……は、アっ……やめ、本当に……苦しいっ、のに、あぁあっ、はぁっ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&7344"「赤ちゃんつくるとこなんていうから……ここに出して欲しいか……？」"&7345"夢子はぼんやりとまとまらない思考の中で口走っただけだろう。"&7346"俺も後先を考えれていなかった。"&7347"肉棒を膣奥に突き入れ、亀頭でこれ以上進まないソコを擦る様に、刺激し、意識させる。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0051c
+&7348"「まっ……て、ぁんっ……あぁ……それは嬉しい……けどっ……今は心の準備が、んあぁっ」"42("DEL","02CharChip.dat")&7349"射精される事を恐れ始めながらも、快感に溺れ、喘ぐ目の前の娘の様子に、ゾクリと背筋が震える。"&7350"待てと言われて待てるほど、落ち着ける状況ではなくなっていた。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0052c
+&7351"「あぁん！ッく、ぅう……ダメ……ぁああっ、やぁ、おちんちんとめて……少し考え、させてぇっ」"42("DEL","02CharChip.dat")&7352"言葉とは裏腹に、俺が動くのとは別に奥から離すまいと肉棒を強く締め付ける膣肉。"&7353"裏筋を刺激されているような、ザラザラとした肉襞の感触を強く感じる。"#:NameSuffix
+&7354"「腰止まらないんだ……もう、そろそろッ……」"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0053c
+&7355"「うくぁぁあっ！　ひあぁっ、ダメ、んぁァッ！　これじゃ、本当に何も考えられない、あ、ああっ、はあぁぁんっ！」"42("DEL","02CharChip.dat")&7356"ラストスパートとばかりに腹の底と、夢子の尻を強く突き上げる。"&7357"夢子は俺の腕を強く握り。まるでそれで理性を保っているかのように、掴んで離しはしない。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0054c
+&7358"「いいわ……イッて……あたしのオマンコで……っ！　一緒に……あ、あ、あぁっ！　も、もうっ！　……っく！　イッ……あっ……はぁっ！」"42("DEL","02CharChip.dat")120,0(@SelChoice[1],2,=,){
+52("_SelStr0","中に出す")
+52("_SelStr1","外に出す")
+52("_SelStr2","")
+42("Select","00Select.dat")
+120,1(_SelChoice,1,=,){
+41("Sel2",0)
+}1;
+}0;121,2{
+120,3(@SelChoice[1],0,=,){
+41("Sel1",0)
+}3;121,4{
+41("Sel2",0)
+}4;
+}2;
+
+$Sel1
+
+_Mode=6,
+52("_GRPName","c08r2")
+42("DrawCG","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0055c
+&7359"「あぁああッ……うあ、ぁぁ……ドクンドクンって……射精してる…はぁっ……心の準備……あっ……あぁっ」"42("DEL","02CharChip.dat")&7360"夢子は、若干の抵抗をしながらも……絶頂で混沌とした自分の頭と体をうまく使えないのか。"&7361"力強さは微塵もなく……ただ、ガッチリと抑えられ、俺と密着している下半身を小さく震えさせる。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0056c
+&7362"「はぁ、あぁっ……あっ、うぅっ……私、中出しされながらイってる……はぁっ、はぁっ……あんっ」"42("DEL","02CharChip.dat")&7363"いくらでも沸いてくるかのように、熱い波は留まる事を知らず、腰を大きく震わせ、肉棒に上り詰める熱を夢子の中で解放していく。"&7364"ドロドロとだらしなく接合部分から溢れてお互いの股間だけじゃなく、砂まで汚す精液は、その濃さと量を見せ付けていた。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0057c
+&7365"「お腹の中に、アツいのが溢れてる……本当に……できちゃう……んん……」"42("DEL","02CharChip.dat")&7366"射精の感覚は落ち着いたが、ギュウギュウと絞るような膣内の動きは今だに続いていた。"&7367"そして、中の気泡が溢れる精液と肉の動きで外に押し出されているのだろう。"
+41("SelEnd",0)
+
+$Sel2
+
+_Mode=6,
+52("_GRPName","c08r3")
+42("DrawCG","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0058c
+&7368"「ハァッ！　んんっ！……あんっ……肌に精液が……ひゃんっ、絡み付いてくる……あぁっ」"42("DEL","02CharChip.dat")&7369"まるで怯えているような仕草を見せる夢子を見ていられず、肉棒を急いで抜いていた。"&7370"目の前でカクンと一気に脱力する体めがけ、肉棒を扱きながら、射精感を解放していく。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0059c
+&7371"「ッン……びちゃびちゃって……すごい……ハァッ……んっ、まだ、かけられてる……ひゃぅっ」"42("DEL","02CharChip.dat")&7372"目を閉じて震える夢子でも感じ取れるくらいの量の白濁はおっぱいや腹を汚していく。"&7373"勢いづいて夢子を飛び越えていく。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0060c
+&7374"「精液の匂い……:NameSuffixの匂い……これを嗅いでいると……ハァ……ンッ、おかしくなりそう……」"42("DEL","02CharChip.dat")&7375"自分で量をコントロールできるわけじゃないが……いつもこんなに出していると……。"&7376"干からびるんじゃと、不安になってしまう。"52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0061c
+&7377"「:NameSuffixに気持ちよくなってほしかったのに……ん……はぁ……ッ」"42("DEL","02CharChip.dat")#:NameSuffix
+&7378"「えっ……」"$SelEnd
+
+_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+52("_CharNameB","fc_cc212")_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0062c
+&7379"「はぁ……はぁ……」"42("DEL","02CharChip.dat")&7380"のそのそと起き上がった夢子は、情事によってずれた水着を直し、もう一度俺に寄りかかってきた。"52("_CharNameB","fc_cd212")_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0063c
+&7381"「:NameSuffix、あったかい……」"42("DEL","02CharChip.dat")#:NameSuffix
+&7382"「夢子……」"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&7383"…………。"&7384"…………………。"
+52("_GRPName","c05")
+42("RecoFlag","00RecoFlag.dat")
+52("_GRPName",_BGName)
+140(0)
+
+_DayTime=2,
+
+_Mode=1,
+52("_GRPName","bg06c")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM04")
+42("BGM","00Sound.dat")
+&7385"ああ……夢子は本当に、ただ愛されたかっただけなんだ。"&7386"どうしようもなく不安定な感情に揺れ動いている。ただの女の子。"&7387"俺が受け入れてやれば、夢子はそれだけで安心できるのだ。"&7388"優しい、いつもの夢子でいられるんだ。"&7389"俺は、夢子にとっての幸せそのものなのだと。"&7390"今更ながら気が付いた。いや、わかってはいた。"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0064c
+&7391"「どうしたの？　:NameSuffix、目、痛いの？」"42("DEL","02CharChip.dat")#:NameSuffix
+&7392"「や、痛いって言うか……ちょっとな……」"&7393"それまでのどっちつかずで優柔不断だった自分。"&7394"それでは自分も相手も幸せにできない。"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ce")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子
+&7395"「……！」"42("DEL","02CharChip.dat")&7396"黙って抱きしめて頭を撫でながら話した。"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","cd")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&7397"「夢子……ごめんな」"&7398"俺はありのままの夢子を受け入れる覚悟をした。"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+&7399"…………。"&7400"…………………。"
+42("start","01Rand.dat")
+
+41("sc_c06","sc_c06.dat")

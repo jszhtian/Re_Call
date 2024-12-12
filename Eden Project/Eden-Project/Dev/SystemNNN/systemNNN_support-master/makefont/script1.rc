@@ -1,0 +1,121 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_MAKEFONT DIALOG DISCARDABLE  0, 0, 299, 297
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ユーザーフォント作成"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,49,259,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,214,259,50,14
+    COMBOBOX        IDC_COMBO_FONTNAME,44,51,141,126,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "2bit",IDC_RADIO_2BIT,"Button",BS_AUTORADIOBUTTON,224,
+                    167,44,10
+    CONTROL         "4bit",IDC_RADIO_4BIT,"Button",BS_AUTORADIOBUTTON,224,
+                    188,43,10
+    CONTROL         "8bit",IDC_RADIO_8BIT,"Button",BS_AUTORADIOBUTTON,224,
+                    209,45,10
+    EDITTEXT        IDC_EDIT_FILENAME,32,224,118,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_SEIDO,210,101,40,14,ES_AUTOHSCROLL
+    GROUPBOX        "データビット数",IDC_STATIC,205,138,72,102
+    LTEXT           "作成精度(2-8)",IDC_STATIC,213,74,62,12
+    LTEXT           "フォントサイズ",IDC_STATIC,26,19,54,8
+    LTEXT           "ファイル名",IDC_STATIC,32,203,85,8
+    EDITTEXT        IDC_EDIT_FONTSIZE,91,17,52,14,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOG_MAKEFONT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 292
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 290
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON    DISCARDABLE     "icon1.ico"
+#endif    // 日本語 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

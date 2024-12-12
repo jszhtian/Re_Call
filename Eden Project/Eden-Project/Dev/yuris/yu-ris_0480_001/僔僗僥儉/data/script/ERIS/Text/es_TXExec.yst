@@ -1,0 +1,353 @@
+//============================================================================
+//
+//■オート処理
+//
+//============================================================================
+#=ES.AUTO.LOOP
+{
+	//キー情報クリア
+	@_KEYLAST   = 0
+	@_MOUSELAST = 0
+
+	IF[@es.TX.SKIP]
+	{
+		GOSUB[#=ES.SKIP.LOOP]
+	}
+	ELSE[]
+	{
+		@es.TX.AUTO = 1-@es.TX.AUTO	//フラグON/OFF
+
+		//ボイス再生
+		IF[@es.TX.AUTO]
+			\_gosub(ES.AUTO.VoicePlay.1)
+		ELSE[]
+			\_gosub(ES.AUTO.VoicePlay.2)
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+#=es.MG.AUTO
+{
+	IF[@_PINT(1)>10] \_mes("オート指定番号は1～10の値にしてください。");\END IFEND[]
+
+	@es.MG.AUTO = 1
+	@es.MG.AUTONO = @_PINT(1)
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+#=es.MG.AUTO.END
+{
+	IF[@es.MG.AUTONO==01] @es.GSD(093,01)=1 IFEND[]
+	IF[@es.MG.AUTONO==02] @es.GSD(093,02)=1 IFEND[]
+	IF[@es.MG.AUTONO==03] @es.GSD(093,03)=1 IFEND[]
+	IF[@es.MG.AUTONO==04] @es.GSD(093,04)=1 IFEND[]
+	IF[@es.MG.AUTONO==05] @es.GSD(093,05)=1 IFEND[]
+	IF[@es.MG.AUTONO==06] @es.GSD(093,06)=1 IFEND[]
+	IF[@es.MG.AUTONO==07] @es.GSD(093,07)=1 IFEND[]
+	IF[@es.MG.AUTONO==08] @es.GSD(093,08)=1 IFEND[]
+	IF[@es.MG.AUTONO==09] @es.GSD(093,09)=1 IFEND[]
+	IF[@es.MG.AUTONO==10] @es.GSD(093,10)=1 IFEND[]
+
+	@es.MG.AUTO=0
+	@es.MG.AUTONO=0
+	@es.MG.AUTOSKIP=0
+
+	//スクリプト位置を記憶する
+	\SCRIPTPOS_SAVE
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+#=es.SP.AUTO
+{
+	@es.SP.AUTO		= 1
+	@es.SP.AUTONO	= @_PINT(1)
+	@es.SP.AUTOSKIP	= 0
+
+//\_dmes("@es.SP.AUTONO:"+$(@es.SP.AUTONO))
+
+	@_MOUSE_L=3
+
+	return[]
+}
+
+#=es.SP.SKIP
+{
+	@es.SP.AUTO		= 1
+//	@es.SP.AUTONO	= @_PINT(1)
+	@es.SP.AUTOSKIP	= 1
+
+	return[]
+}
+
+
+#=es.SP.AUTOEND
+{
+	\SP.WA
+	\WA(1)
+
+	@es.NGSKIP = 0
+//	@es.ED.STARTTIME = 0
+
+	@es.SP.AUTO		= 0
+	@es.SP.AUTONO	= 0
+	@es.SP.AUTOSKIP	= 0
+//	\SCRIPTPOS_SAVE
+
+	return[]
+}
+
+
+
+
+//============================================================================
+//
+//■スキップ処理
+//
+//============================================================================
+#=ES.SKIP.LOOP
+{
+	//キー情報クリア
+	@_KEYLAST   = 0
+	@_MOUSELAST = 0
+
+	IF[@es.TX.AUTO]
+	{
+		GOSUB[#=ES.AUTO.LOOP]
+	}
+	ELSE[]
+	{
+		@es.TX.SKIP = 1-@es.TX.SKIP //フラグON/OFF
+
+		//ボイス再生
+		IF[@es.TX.SKIP]
+			\_gosub(ES.SKIP.VoicePlay.1)
+		ELSE[]
+			\_gosub(ES.SKIP.VoicePlay.2)
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+
+//============================================================================
+//
+//■メッセージウィンドウ関連処理
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.GAMEMAIN."]
+
+	S_INT[@TX.ICON.X]
+	S_INT[@TX.ICON.Y]
+	S_INT[@TX.ICON.XYAUTO]
+
+}
+
+
+//----------------------------------------------------------------
+//■テキストカウント
+//----------------------------------------------------------------
+#=es.TEXTCOUNT
+{
+	\BT.AN($BID+"TIP.COUNTICON",, 0)
+
+	IF[@es.LOADTHRU==0]
+	{
+		  IF[@es.LSD(091,04)>0 && @es.LSD(091,04)<=@es.GSD(115,02) && (@es.LSD(091,02)==0 || (@es.LSD(091,02)==1 && @es.GSD(115,05)==1))] //1
+//		  IF[@es.LSD(091,04)>0 && (@es.LSD(091,02)==0 || (@es.LSD(091,02)>0 && @es.GSD(115,05)==1))] //1
+		{
+			\BT.AN($BID+"TIP.COUNTICON",, @es.LSD(091,04))
+		}
+		ELSE[@es.LSD(091,03)>0 && @es.LSD(091,03)<=@es.GSD(115,02) && (@es.LSD(091,01)==0 || (@es.LSD(091,01)==1 && @es.GSD(115,05)==2))] //2
+//		ELSE[@es.LSD(091,03)>0 && (@es.LSD(091,01)==0 || (@es.LSD(091,01)>0 && @es.GSD(115,05)==2))] //2
+		{
+			\BT.AN($BID+"TIP.COUNTICON",, @es.LSD(091,03))
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.TEXTCOUNT1.SET
+{
+	IF[@_PINT(1)>=0]
+		@es.LSD(091,04)=@_PINT(1) //カウント1フラグ
+		@es.LSD(091,02)=1 //カウント1非表示
+	IFEND[]
+	return[]
+}
+
+#=es.TEXTCOUNT2.SET
+{
+	IF[@_PINT(1)>=0]
+		@es.LSD(091,03)=@_PINT(1) //カウント2フラグ
+		@es.LSD(091,01)=1 //カウント2非表示
+	IFEND[]
+	return[]
+}
+
+#=es.TEXTCOUNT1.SHOW.SET
+{
+	@es.LSD(091,02)=0; return[] //カウント1表示フラグ
+}
+
+#=es.TEXTCOUNT2.SHOW.SET
+{
+	@es.LSD(091,01)=0; return[] //カウント2表示フラグ
+}
+
+
+//----------------------------------------------------------------
+//■メッセージテキストレイヤ消去
+//----------------------------------------------------------------
+#=es.Mes.Clear
+{
+	\BT.CGCLEAR("ES.GAMEMAIN.TIP.MESW.TX")
+	return[]
+}
+
+
+//============================================================================
+//
+//■テキストアイコン
+//
+//============================================================================
+#=es.TX.ICON.EXEC
+{
+	STR[$id]
+
+	IF[@es.TX.ICON.TYPE==0] $id=$BID+"TIP.TX.REPAGEICON" IFEND[] //改頁用アイコン
+	IF[@es.TX.ICON.TYPE==1] $id=$BID+"TIP.TX.RETURNICON" IFEND[] //改行用アイコン
+
+//	\BT.ES0($id)
+	\BT.ES20($BID+"TIP.TX.REPAGEICON")
+	\BT.ES20($BID+"TIP.TX.RETURNICON")
+
+	IF[@es.TX.AUTO==0 && \es.SuperAutoPlayMode==0]
+	{
+		IF[@TX.ICON.XYAUTO]
+			\BT.X.SET($id,,@TX.ICON.X)
+			\BT.Y.SET($id,,@TX.ICON.Y)
+		IFEND[]
+
+		\BT.ES21($id)
+//		\BT.ES1($id)
+	}
+	IFEND[]
+
+	return[]
+}
+
+//AUTOアイコン
+#=es.TX.AUTOICON.MAIN
+{
+	IF[@es.TX.AUTO==1]
+		\BT.ON($BID+"BTN.AUTO")
+	ELSE[]
+		\BT.OFF($BID+"BTN.AUTO")
+	IFEND[]
+
+	\BT.A0($BID+"TIP.AUTOICON")
+
+	IF[@es.TX.AUTO==1 || \es.SuperAutoPlayMode==1]
+	{
+		\BT.A1($BID+"TIP.AUTOICON")
+	}
+	IFEND[]
+
+	return[]
+}
+
+//SKIPアイコン
+#=es.TX.SKIPICON.MAIN
+{
+	IF[@es.TX.SKIP==1]
+		\BT.ON($BID+"BTN.SKIP")
+	ELSE[]
+		\BT.OFF($BID+"BTN.SKIP")
+	IFEND[]
+
+	\BT.A0($BID+"TIP.SKIPICON")
+
+	IF[@es.TX.SKIP]
+	{
+		\BT.A1($BID+"TIP.SKIPICON")
+		\BT.A0($BID+"TIP.AUTOICON") //AUTOは消す
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■無効化
+//----------------------------------------------------------------
+#=es.TX.ICON.DISABLED.RPMODE
+{
+	\BT.ES0($BID+"TIP.TX.REPAGEICON")
+	\BT.ES0($BID+"TIP.TX.RETURNICON")
+	\BT.ES0($BID+"TIP.AUTOICON")
+	\BT.ES0($BID+"TIP.SKIPICON")
+
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■名前,名前画像クリア
+//----------------------------------------------------------------
+#=es.NAMEW.CLEAR
+{
+	\BT.CGCLEAR("ES.GAMEMAIN.TIP.NAMEW.TX")
+	return[]
+}
+
+
+//////
+
+
+//△アイコン表示モード @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.ICON.XYAUTO.GET
+{
+	return[rint=@TX.ICON.XYAUTO]
+}
+
+
+//▼アイコン表示座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.ICON.XY2.SET
+{
+	IF[@TX.ICON.XYAUTO]
+		@TX.ICON.X = @_PINT(1)
+		@TX.ICON.Y = @_PINT(2)
+	IFEND[]
+	return[]
+}
+
+//▼アイコン表示モード @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.ICON.XYAUTO.SET
+{
+	@TX.ICON.XYAUTO = @_PINT(1)
+	return[]
+}
+
+

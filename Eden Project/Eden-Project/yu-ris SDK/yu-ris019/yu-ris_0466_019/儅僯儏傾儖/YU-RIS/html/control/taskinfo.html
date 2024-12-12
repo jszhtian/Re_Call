@@ -1,0 +1,89 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">制御系命令</A>＞TASKINFO［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="go.html">GO［］</A>
+　<A HREF="gosub.html">GOSUB［］</A>
+　<A HREF="return.html">RETURN［］</A>
+　<A HREF="loop.html">LOOP［］</A>
+　<A HREF="loopbreak.html">LOOPBREAK［］</A>
+　<A HREF="loopcontinue.html">LOOPCONTINUE［］</A>
+　<A HREF="loopend.html">LOOPEND［］</A>
+　<A HREF="wait.html">WAIT［］</A>
+</TD></TR>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="if.html">IF［］</A>
+　<A HREF="else.html">ELSE［］</A>
+　<A HREF="ifend.html">IFEND［］</A>
+　<A HREF="ifbreak.html">IFBREAK［］</A>
+　<A HREF="ifcontinue.html">IFCONTINUE［］</A>
+　<A HREF="task.html">TASK［］</A>
+　<A HREF="taskinfo.html">TASKINFO［］</A>
+　<A HREF="taskend.html">TASKEND［］</A>
+　<A HREF="end.html">END［］</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■タスク情報取得命令 TASKINFO[ ]</FONT>
+<FONT CLASS=t20>
+
+タスクレイヤに関する各種情報を取得します。
+タスクＩＤを指定しなかった場合、この命令を実行した自身のタスクが対象になります。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>ID = 文字列</FONT></TD><TD><FONT CLASS=t40>レイヤＩＤを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LET = 変数名</FONT></TD><TD><FONT CLASS=t40>情報値を格納する変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>EXIST = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤの存在を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>E = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤの有効無効を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Z = 値</FONT></TD><TD><FONT CLASS=t40>タスクの実行優先度を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FILE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>現在実行されているファイル名を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LINE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>現在実行されている行数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>IFNEST = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ＩＦネスト数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>GOSUBNEST = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ＧＯＳＵＢネスト数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LOOPNEST = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ＬＯＯＰネスト数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SCRIPTPOS = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>現在実行されているスクリプト位置情報を調べる場合は１を指定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] タスクレイヤ「SUB」が存在するか否か調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TASKINFO</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>"SUB"</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>EXIST</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[2] タスクレイヤ「SUB」の有効無効状態を調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TASKINFO</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>"SUB"</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>E</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[3] タスクレイヤ「SUB」の現在読み込まれているファイル名を調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TASKINFO</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>"SUB"</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[4] タスクレイヤ「SUB」の現在実行されているスクリプトが何行目かを調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TASKINFO</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>"SUB"</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>LINE</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[5] タスクレイヤ「SYSTEM」の現在実行されているスクリプト位置情報を文字列変数 $A に格納する。
+　※この変数を SAVE 命令でファイルに保存すれば、事実上スクリプト位置のファイルへの保存になります。
+　※スクリプト位置情報の設定（事実上スクリプト位置のロード）は、TASK 命令にて行います。
+　※スクリプト位置情報が格納された文字列変数は、画面に表示することはできません。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TASKINFO</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>"SYSTEM"</FONT> <FONT CLASS=t62>SCRIPTPOS</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$A</FONT>]</FONT></B>
+
+
+
+</FONT>
+
+
+</BODY></HTML>

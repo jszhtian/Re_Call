@@ -1,0 +1,42 @@
+{
+	"Header": {
+		"Magic": [
+			89,
+			83,
+			84,
+			66
+		],
+		"Version": 555,
+		"InstCnt": 2,
+		"CodeSize": 8,
+		"ArgSize": 12,
+		"ResourceSize": 12,
+		"OffSize": 8,
+		"Resv": 0
+	},
+	"Insts": [
+		{
+			"Op": 42,
+			"Unk": 0,
+			"Args": [
+				{
+					"Value": 0,
+					"Type": 3,
+					"Res": {
+						"Type": 77,
+						"Res": "ImVzLkVSSVMi"
+					}
+				}
+			]
+		},
+		{
+			"Op": 13,
+			"Unk": 0,
+			"Args": []
+		}
+	],
+	"Offs": [
+		14,
+		17
+	]
+}

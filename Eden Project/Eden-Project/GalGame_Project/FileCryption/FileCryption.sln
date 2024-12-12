@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileCryption", "FileCryption\FileCryption.vcxproj", "{177A6C5D-F8C3-46F4-8A5B-E9A6F73AAE59}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{177A6C5D-F8C3-46F4-8A5B-E9A6F73AAE59}.Debug|x64.ActiveCfg = Debug|x64
+		{177A6C5D-F8C3-46F4-8A5B-E9A6F73AAE59}.Debug|x64.Build.0 = Debug|x64
+		{177A6C5D-F8C3-46F4-8A5B-E9A6F73AAE59}.Debug|x86.ActiveCfg = Debug|Win32
+		{177A6C5D-F8C3-46F4-8A5B-E9A6F73AAE59}.Debug|x86.Build.0 = Debug|Win32
+		{177A6C5D-F8C3-46F4-8A5B-E9A6F73AAE59}.Release|x64.ActiveCfg = Release|x64
+		{177A6C5D-F8C3-46F4-8A5B-E9A6F73AAE59}.Release|x64.Build.0 = Release|x64
+		{177A6C5D-F8C3-46F4-8A5B-E9A6F73AAE59}.Release|x86.ActiveCfg = Release|Win32
+		{177A6C5D-F8C3-46F4-8A5B-E9A6F73AAE59}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F94CF543-4FE7-4829-A338-2265CBEC4251}
+	EndGlobalSection
+EndGlobal

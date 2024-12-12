@@ -1,0 +1,546 @@
+$sc_10c
+_Day=10,
+_DayTime=2,
+
+_Mode=1,
+52("_GRPName","bg01c")
+42("DrawBG","00Draw.dat")
+&1848"白幸も俺もソレを浮気じゃないと確信している上でエッチした場合。"&1849"果たしてそれは裏切りになるのか否か。"&1850"彼女ができた翌日にまさかそんな事で悩む事になろうとは。"#:NameSuffix
+&1851"（普通の恋愛ができない体質とか思っちゃうんだけどいかがなものだろう）"52("_BGMName","BGM04")
+42("BGM","00Sound.dat")
+_Mode=1,
+52("_GRPName","bg02c")
+42("DrawBG","00Draw.dat")
+&1852"なんだか質も量も予想を遥かに上回る悩みだな。"&1853"なんかメールでも出すべきなんだろうか。様子を伺う的な意味で。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dj")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0431d
+&1854"「退屈ねー」"42("DEL","02CharChip.dat")#:NameSuffix
+&1855"「……なんだよ藪から棒に」"&1856"皆は銭湯に行っていて、どこからか帰ってきたりあねーちゃんは寝転がりながらダラーッとしていた。"&1857"とても静かな、とっても貴重な思考の時間だった。"&1858"りあねーちゃんが喋り出すまでは。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","di")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0432d
+&1859"「料理もいいけどさー。他にする事ないのー？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1860"「あとは……宿題とか？」"&1861"焦げないように。傷つけないように。崩さないように。"&1862"慎重に慎重にひっくり返す。"&1863"……完璧。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dc")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0433d
+&1864"「あーそうじゃなくてー……。もー、何を楽しみに生きてるのー」"42("DEL","02CharChip.dat")#:NameSuffix
+&1865"「んー……」"&1866"ウンウン唸りながら考えるも、そう言われたらぱっと出てこないものでして。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dl")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0434d
+&1867"「……彼女とはどうなのよ。うまくいってるの？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1868"「えーと……」"&1869"彼女って言うのは紛れもなく二季の事を指すんだろうな。"#:NameSuffix
+&1870"（超言いたくねぇ……）"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","da")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛
+&1871"「…………」"42("DEL","02CharChip.dat")#:NameSuffix
+&1872"「なかなか上手く焼けたな、うんまそー」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dm")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0435d
+&1873"「フォークをおけ」"42("DEL","02CharChip.dat")#:NameSuffix
+&1874"「はい」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","di")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0436d
+&1875"「何、まさか進展なしなわけ？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1876"「メアドと携帯番号くらいならゲットしまして」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dn")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0437d
+&1877"「それは進展とは言わない」"42("DEL","02CharChip.dat")#:NameSuffix
+&1878"「ぇ、マジすか……」"52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0438d
+&1879"「最後にメールがきたのはいつ？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1880"「昨日の夜にメールきたくらいかな……眠かったから返事は返さなかったけど……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dc")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛
+&1881"「…………」"42("DEL","02CharChip.dat")#:NameSuffix
+&1882"「なんで哀れみの目！？　学園で毎日のように会うんだし別に必要ねーだろ？」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dj")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0439d
+&1883"「わかってないなぁ……メールの内容は？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1884"「そこまで教えなくてもいいじゃん、コレはプライベートつーか……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dm")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0440d
+&1885"「携帯かせ」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE025",0,2,0,0)
+#:NameSuffix
+&1886"「キャアッ！」"100("",3,2,0,0)
+&1887"あぁああ、待ってくれ、画像フォルダだけは！！"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","di")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0441d
+&1888"「別に彼女とのメール以外は見ないわよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&1889"「さ、左様ですか」"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+100("",3,2,0,0)
+100("SE095",0,2,0,0)
+_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","da")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0442d
+&1890"「えー、何々……今日は思い切り大変な事になったけれどごめんね略、街に行ったら何みようかなぁ略、それじゃ、また学園でね……」"42("DEL","02CharChip.dat")#:NameSuffix
+&1891"「あぁ、そういえば街一緒に行こうなんていうのもなんだかんだで、流れてたなぁ……」"100("",3,2,0,0)
+52("_BGMName","BGM05")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","db")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0443d
+&1892"「こんのスットコドッコイ！！」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE028",0,2,0,0)
+_X=20,
+_Y=20,
+_WaitTime=2000,
+80(1,"01Quake.dat")
+#:NameSuffix
+&1893"「アウッ！」"100("",3,2,0,0)
+_ThreNum=1,
+42("QuakeEnd","01Quake.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0444d
+&1894"「コレに返事返してないとかアンタ何様！　ちょっと正座！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&1895"「い、イテェ……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dn")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0445d
+&1896"「どう見たって脈しか無いでしょうが。自分の報告をしつつ相手の情報も集めつつ、気をつかわれてるメールでしょうが」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","di")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0446d
+&1897"「こんなメール送られておいて、自分は我がもの顔で学園で返事？　それで進展したいって？　ちゃんちゃら可笑しいわ女子なめんな？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1898"「いや、舐めてないよ？　進展したいとも言った覚えねーけど！」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dc")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0447d
+&1899"「もっと仲良くなりたくないの？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1900"「うぐ、それはぁ……そうなったらいいなぁ程度っていうかぁ……」"&1901"確かに二季や白幸ともっと仲良くなりたいとは思う。"&1902"でも今でも充分仲はいいわけだし。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dj")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0448d
+&1903"「そうやってクネクネクネクネしながら、女の方から何か言ってくるの待ってるの？　言うわけないでしょ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&1904"「！」"&1905"た、確かに１回エッチしたとは言え、どっちも俺が誘ったわけじゃなかった。"&1906"もしかして、このままだとそれ以上は無いってことなのか……？"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dn")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0449d
+&1907"「で、どうなの、エッチしたいのかしたくないのか」"42("DEL","02CharChip.dat")#:NameSuffix
+&1908"「したいけどっ……アレ？」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","db")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0450d
+&1909"「なら今すぐメールしろ！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&1910"「えぇぇ……いきなりメールしたって困るだろ……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dj")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0451d
+&1911"「困るかどうかはアンタが決めることじゃない！　あーもう。紙とペンもってこい」"42("DEL","02CharChip.dat")#:NameSuffix
+&1912"「ハイィ！」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","di")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0452d
+&1913"「それじゃあ、今から言う事、一言一句逃さずメモれ」"42("DEL","02CharChip.dat")#:NameSuffix
+&1914"「う、うん……？」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","df")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0453d
+&1915"「お久しぶり、連絡が遅くなってホントすまん。ダメ人間どうしよう。だけど、もし街に一緒に行く約束が残っていたら、都合のいい時間教えてよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&1916"（街に行く云々ってのも約束って程の事じゃないんだけど……うわぁ、話がでかくなってきたぞぉ）"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","di")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0454d
+&1917"「あー、押しが足らないな……今のはメモんなくていいから。　それで、もしよかったら、一回電話していい？積もる話もあるし」"42("DEL","02CharChip.dat")#:NameSuffix
+&1918"「もう少し、ゆっくり……アワッアワワッ」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dh")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0455d
+&1919"「ホント連絡遅れて申し訳なかとです。手遅れ感もあると思うけど、街に行く件とか映画に行く件とか。あ、映画に行く件は言ってないか」"#理　愛=w0456d
+&1920"「で。段取りできたらなぁと……」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dm")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&1921"「ハァハァ……それで全部か」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","df")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0457d
+&1922"「週末は激しくフリーダムに遊ぶ予定があるから。もしかしたら興味ないかもしんないけど、サッカーしたり、一緒に見に行く相手を探してたり」"42("DEL","02CharChip.dat")#:NameSuffix
+&1923"「ッ！？」"52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0458d
+&1924"「もしくは、最近得意になったオリジナルスパゲッティをご馳走してみたかったり」"42("DEL","02CharChip.dat")#:NameSuffix
+&1925"「あ？終わり？　このメモは一体……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","di")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0459d
+&1926"「全部メモった？　……ヨシ。それじゃあ、その内容で彼女に送りなさい」"42("DEL","02CharChip.dat")#:NameSuffix
+&1927"「やだよっ！？こんな二回も謝って、映画とかスパゲッティとかわけわかんない事まで付け足されてるメールなんか送りたくないって！！」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","db")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0460d
+&1928"「だからボウヤなんだよ！」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE024",0,2,0,0)
+_X=20,
+_Y=20,
+_WaitTime=2000,
+80(1,"01Quake.dat")
+#:NameSuffix
+&1929"「オゥッ！」"100("",3,2,0,0)
+_ThreNum=1,
+42("QuakeEnd","01Quake.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dn")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0461d
+&1930"「いい？　別に街に行くことは問題じゃないのよ。アンタと彼女が何をするのか、どうリアクションを返すのかが重要なの」"42("DEL","02CharChip.dat")#:NameSuffix
+&1931"「それと、このメールとどう関係が……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dg")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0462d
+&1932"「約束の話を中心にして、ちょっと行き過ぎな話をして、それに食いついてくるかが見たいわけ」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","df")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0463d
+&1933"「一緒に街に行くくらいなんだから、映画くらいはジャブよ。その後のサッカーとか、料理の話がキモね」"42("DEL","02CharChip.dat")#:NameSuffix
+&1934"「興味がなかったら流されるだけだけど……もし食いついてきたらサッカー行かないといけないし料理も作らないとだめじゃね？」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dj")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0464d
+&1935"「そのくらいカッコつけなさいよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&1936"「そんなぁ……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","di")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0465d
+&1937"「スパゲッティでも、もしかしたらボロネーゼが好きとかアラビアータが好きとか、返事されるかもしれないでしょ」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","df")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0466d
+&1938"「そうしたら、彼女の事を一つ知れるじゃない。　その代わり材料から何からしっかり調べて手作するのよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&1939"「俺に何を求めてるんだ……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dl")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0467d
+&1940"「男は王子様を演出する事ができるかどうかが大切なの。女の子に期待以上の思い出を作ってあげなさいよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&1941"「喜ばせろってことか……！！」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","df")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0468d
+&1942"「そうそう♪　さぁ、送りなさい！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&1943"「俺は王子様になるんだぁぁあっ！！」"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+100("",3,2,0,0)
+100("SE095",0,2,0,0)
+&1944"上手いこと言いくるめられた気がしないでもない。"100("",3,2,0,0)
+&1945"しかも思わず送信。"&1946"二季や白幸の事をもっと知りたいというのは事実だ……けど……なんだか、沸々とやっちまった感が漂うのはなぜだ。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dd")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0469d
+&1947"「もうスパゲッティの練習はしといたほうがいいわよ。アタシが出来みてあげるから♪」"42("DEL","02CharChip.dat")#:NameSuffix
+&1948"「……まさか、りあねーちゃんが食べたかっただけなんじゃ」"100("",3,2,0,0)
+100("SE093",0,2,0,0)
+_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+52("_BGMName","BGM05")
+42("BGM","00Sound.dat")
+#:NameSuffix
+&1949"「ッ！？」"&1950"二季からだ……！！"100("",3,2,0,0)
+100("SE095",0,2,0,0)
+&1951"返信どころか、電話きちゃったよ……早っ！！"100("",3,2,0,0)
+#:NameSuffix
+&1952"「もしもしっ！」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","da")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛
+&1953"「…………」"42("DEL","02CharChip.dat")#:NameSuffix
+&1954"「……んっ……どうもしないけど……あ、ああ、やっぱり変だった？」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","de")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0470d
+&1955"「あー……流石に自分で書いたメールじゃないことくらい気づくかー」"42("DEL","02CharChip.dat")#:NameSuffix
+&1956"「～～ッ！」"100("",3,2,0,0)
+100("SE066",0,2,0,0)
+_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dk")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0471d
+&1957"（こりゃ、すぐフラれるだろーなー）"42("DEL","02CharChip.dat")100("",4,2,0,0)
+_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_AL=0,
+_Mode=8,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+_Mode=8,
+52("_GRPName","bg02c")
+42("DrawBG","00Draw.dat")
+100("",3,2,0,0)
+100("SE066",0,2,0,0)
+#:NameSuffix
+&1958"「…………」"100("",3,2,0,0)
+100("",3,2,0,0)
+100("SE095",0,2,0,0)
+_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","df")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0472d
+&1959"「おかえりー、随分話しこんでたじゃない。どうだった？」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+#:NameSuffix
+&1960"「………今度、デートすることになっちった……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","de")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0473d
+&1961"「え、マジ？」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dd")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&1962"「…………」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dh")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0474d
+&1963"「ハッ！　ホラッ、ヴィクトリアお姉様の言う通りだったでしょーが！」"42("DEL","02CharChip.dat")#:NameSuffix
+&1964"「確かにすげーよ！　すげーけどどうすんだよいきなりデートだなんてぇぇ！」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","bg01c")
+42("DrawBG","00Draw.dat")
+&1965"なんの準備もないままに日取りを組んでしまった、人生初の彼女とデート。"&1966"それはきっと、家族と行く街よりも比べ物にならないハラハラドキドキが詰ったアトラクションに違いない。"&1967"いや、大概だけど。"&1968"期待と不安を胸に秘めて、俺は百戦錬磨っぽいりあねーちゃんにあれこれ聞いてしまっていた。"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+
+42("start","01Rand.dat")
+
+41("sc_11a","sc_11a.dat")

@@ -1,0 +1,803 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0897079B-7C3D-4D44-B90A-56BB0A3B746D}</ProjectGuid>
+    <RootNamespace>tvpwin32</RootNamespace>
+    <Keyword>ManagedCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>OldSyntax</CLRSupport>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>OldSyntax</CLRSupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\wxWidgets-3.1.0\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\;.\my_vcl;..\;..;..\..\..\..\tools\win32\krdevui;..\..\..\msg\win32;..\..\..\msg;..\..\..\sound\win32;..\..\..\sound;..\..\..\base\win32;..\..\..\base;..\..\..\utils\win32;..\..\..\utils;..\..\..\visual\IA32;..\..\..\visual\win32;..\..\..\visual;..\..\..\tjs2;..\..\..;C:\data\develop\other\libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__WIN32__;WIN32;_DEBUG;TJS_SUPPORT_VCL;TJS_TEXT_OUT_CRLF;TJS_JP_LOCALIZED;TJS_NO_DEBUG_PROFILE_TIME;TVP_NO_CHECK_WIDE_CHAR_SIZE;TVP_SUPPORT_KPI;TVP_SUPPORT_OLD_WAVEUNPACKER;TVP_ENVIRON;BOOST_REGEX_V3;__USE_OLD_RW_STL;TJS_DEBUG_DUMP_STRING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <PrecompiledHeader />
+      <BrowseInformation />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>version.lib;vfw32.lib;ddraw.lib;dxguid.lib;libjpegd.lib;zlibd.lib;libpngd.lib;wxmsw28d_core.lib;wxbase28d.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexd.lib;wxexpatd.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;odbc32.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>WinMainCRTStartup</EntryPointSymbol>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>.\;.\my_vcl;..\;..;..\..\..\..\tools\win32\krdevui;..\..\..\msg\win32;..\..\..\msg;..\..\..\sound\win32;..\..\..\sound;..\..\..\base\win32;..\..\..\base;..\..\..\utils\win32;..\..\..\utils;..\..\..\visual\IA32;..\..\..\visual\win32;..\..\..\visual;..\..\..\tjs2;..\..\..;C:\data\develop\other\libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__WIN32__;WIN32;wxUSE_ABOUTDLG;wxUSE_ACCEL;TJS_SUPPORT_VCL;TJS_TEXT_OUT_CRLF;TJS_JP_LOCALIZED;TJS_NO_DEBUG_PROFILE_TIME;TVP_NO_CHECK_WIDE_CHAR_SIZE;wxUSE_GUI;TVP_SUPPORT_KPI;TVP_SUPPORT_OLD_WAVEUNPACKER;TVP_ENVIRON;BOOST_REGEX_V3;__USE_OLD_RW_STL;TJS_DEBUG_DUMP_STRING;wxUSE_MENUS;wxUSE_STATUSBAR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>version.lib;vfw32.lib;ddraw.lib;dxguid.lib;libjpeg.lib;zlib.lib;libpng.lib;wxmsw28_core.lib;wxbase28.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;wxregex.lib;wxexpat.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;odbc32.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)krkr_VC2005.exe</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>WinMainCRTStartup</EntryPointSymbol>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Data">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Xml">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\tools\win32\krdevui\ConfMainFrameUnit.cpp" />
+    <ClCompile Include="..\..\..\..\tools\win32\krdevui\ConfSettingsUnit.cpp" />
+    <ClCompile Include="..\..\..\base\CharacterSet.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\EventIntf.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\PluginIntf.cpp" />
+    <ClCompile Include="..\..\..\base\ScriptMgnIntf.cpp" />
+    <ClCompile Include="..\..\..\base\StorageIntf.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\SysInitIntf.cpp" />
+    <ClCompile Include="..\..\..\base\SystemIntf.cpp" />
+    <ClCompile Include="..\..\..\base\TextStream.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\UtilStreams.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\EventImpl.cpp" />
+    <ClCompile Include="..\..\..\base\win32\FileSelector.cpp" />
+    <ClCompile Include="..\..\..\base\win32\FuncStubs.cpp" />
+    <ClCompile Include="..\..\..\base\win32\PluginImpl.cpp" />
+    <ClCompile Include="..\..\..\base\win32\ScriptMgnImpl.cpp" />
+    <ClCompile Include="..\..\..\base\win32\StorageImpl.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\SusieArchive.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\SysInitImpl.cpp" />
+    <ClCompile Include="..\..\..\base\win32\SystemImpl.cpp" />
+    <ClCompile Include="..\..\..\base\XP3Archive.cpp" />
+    <ClCompile Include="..\..\..\msg\MsgIntf.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\msg\win32\MsgImpl.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\msg\win32\OptionsDesc.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\CDDAIntf.cpp" />
+    <ClCompile Include="..\..\..\sound\MIDIIntf.cpp" />
+    <ClCompile Include="..\..\..\sound\PhaseVocoderDSP.cpp" />
+    <ClCompile Include="..\..\..\sound\PhaseVocoderFilter.cpp" />
+    <ClCompile Include="..\..\..\sound\SoundBufferBaseIntf.cpp" />
+    <ClCompile Include="..\..\..\sound\WaveIntf.cpp" />
+    <ClCompile Include="..\..\..\sound\WaveLoopManager.cpp" />
+    <ClCompile Include="..\..\..\sound\WaveSegmentQueue.cpp" />
+    <ClCompile Include="..\..\..\sound\win32\CDDAImpl.cpp" />
+    <ClCompile Include="..\..\..\sound\win32\MIDIImpl.cpp" />
+    <ClCompile Include="..\..\..\sound\win32\SoundBufferBaseImpl.cpp" />
+    <ClCompile Include="..\..\..\sound\win32\tvpsnd.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\win32\WaveImpl.cpp" />
+    <ClCompile Include="..\..\..\tjs2\tjs.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjs.tab.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsArray.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsCompileControl.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsConfig.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsDate.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsdate.tab.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsDateParser.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsDebug.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsDictionary.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsDisassemble.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsError.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsException.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsGlobalStringMap.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsInterCodeExec.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsInterCodeGen.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsInterface.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsLex.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsMath.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsMessage.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsMT19937ar-cok.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsNamespace.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsNative.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsObject.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjspp.tab.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsRandomGenerator.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsRegExp.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsScriptBlock.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsScriptCache.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsString.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsUtils.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsVariant.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Cdecl</CallingConvention>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsVariantString.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Fast</FloatingPointModel>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <OmitFramePointers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OmitFramePointers>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</RuntimeTypeInfo>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\ClipboardIntf.cpp" />
+    <ClCompile Include="..\..\..\utils\DebugIntf.cpp" />
+    <ClCompile Include="..\..\..\utils\KAGParser.cpp" />
+    <ClCompile Include="..\..\..\utils\md5.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\PadIntf.cpp" />
+    <ClCompile Include="..\..\..\utils\Random.cpp" />
+    <ClCompile Include="..\..\..\utils\ThreadIntf.cpp" />
+    <ClCompile Include="..\..\..\utils\TimerIntf.cpp" />
+    <ClCompile Include="..\..\..\utils\win32\ClipboardImpl.cpp" />
+    <ClCompile Include="..\..\..\utils\win32\ConsoleFormUnit.cpp" />
+    <ClCompile Include="..\..\..\utils\win32\DebugImpl.cpp" />
+    <ClCompile Include="..\..\..\utils\win32\PadFormUnit.cpp" />
+    <ClCompile Include="..\..\..\utils\win32\PadImpl.cpp" />
+    <ClCompile Include="..\..\..\utils\win32\ThreadImpl.cpp" />
+    <ClCompile Include="..\..\..\utils\win32\TickCount.cpp" />
+    <ClCompile Include="..\..\..\utils\win32\TimerImpl.cpp" />
+    <ClCompile Include="..\..\..\utils\win32\TLogViewer.cpp" />
+    <ClCompile Include="..\..\..\visual\ComplexRect.cpp" />
+    <ClCompile Include="..\..\..\visual\GraphicsLoaderIntf.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\IA32\tvpgl_ia32_intf.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\LayerBitmapIntf.cpp" />
+    <ClCompile Include="..\..\..\visual\LayerIntf.cpp" />
+    <ClCompile Include="..\..\..\visual\LayerManager.cpp" />
+    <ClCompile Include="..\..\..\visual\LoadTLG.cpp" />
+    <ClCompile Include="..\..\..\visual\MenuItemIntf.cpp" />
+    <ClCompile Include="..\..\..\visual\Resampler.cpp" />
+    <ClCompile Include="..\..\..\visual\TransIntf.cpp" />
+    <ClCompile Include="..\..\..\visual\tvpgl.c">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\VideoOvlIntf.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\DInputMgn.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\DrawDevice.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\FontSelectFormUnit.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\LayerBitmapImpl.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\LayerImpl.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\MenuContainerFormUnit.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\MenuItemImpl.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\PassThroughDrawDevice.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\TransImpl.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\VideoOvlImpl.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\WindowFormUnit.cpp" />
+    <ClCompile Include="..\..\..\visual\win32\WindowImpl.cpp" />
+    <ClCompile Include="..\..\..\visual\WindowIntf.cpp" />
+    <ClCompile Include="..\DetectCPU.cpp" />
+    <ClCompile Include="..\EmergencyExit.cpp" />
+    <ClCompile Include="..\HaltWarnFormUnit.cpp" />
+    <ClCompile Include="..\MainFormUnit.cpp" />
+    <ClCompile Include="..\my_HintWindow.cpp" />
+    <ClCompile Include="..\tvpwin32.cpp" />
+    <ClCompile Include="..\VersionFormUnit.cpp" />
+    <ClCompile Include="..\WatchFormUnit.cpp" />
+    <ClCompile Include="..\WideNativeFuncs.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="my_vcl\AnsiString.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Application.cpp" />
+    <ClCompile Include="my_vcl\Canvas.cpp" />
+    <ClCompile Include="my_vcl\Classes.cpp" />
+    <ClCompile Include="my_vcl\Clipbrd.cpp" />
+    <ClCompile Include="my_vcl\ComCtrls.cpp" />
+    <ClCompile Include="my_vcl\Component.cpp" />
+    <ClCompile Include="my_vcl\Controls.cpp" />
+    <ClCompile Include="my_vcl\Dialogs.cpp" />
+    <ClCompile Include="my_vcl\ExtDlgs.cpp" />
+    <ClCompile Include="my_vcl\Forms.cpp" />
+    <ClCompile Include="my_vcl\Graphics.cpp" />
+    <ClCompile Include="my_vcl\IniFiles.cpp" />
+    <ClCompile Include="my_vcl\ListControl.cpp" />
+    <ClCompile Include="my_vcl\Menus.cpp" />
+    <ClCompile Include="my_vcl\Registry.cpp" />
+    <ClCompile Include="my_vcl\Screen.cpp" />
+    <ClCompile Include="my_vcl\StdCtrls.cpp" />
+    <ClCompile Include="my_vcl\Stream.cpp" />
+    <ClCompile Include="my_vcl\systobj.cpp" />
+    <ClCompile Include="my_vcl\SysUtils.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">OldSyntax</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Timer.cpp" />
+    <ClCompile Include="my_vcl\ToolWin.cpp" />
+    <ClCompile Include="my_vcl\vcl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\tools\win32\krdevui\ConfMainFrameUnit.h" />
+    <ClInclude Include="..\..\..\..\tools\win32\krdevui\ConfSettingsUnit.h" />
+    <ClInclude Include="..\..\..\base\CharacterSet.h" />
+    <ClInclude Include="..\..\..\base\common.h" />
+    <ClInclude Include="..\..\..\base\EventIntf.h" />
+    <ClInclude Include="..\..\..\base\PluginIntf.h" />
+    <ClInclude Include="..\..\..\base\ScriptMgnIntf.h" />
+    <ClInclude Include="..\..\..\base\StorageIntf.h" />
+    <ClInclude Include="..\..\..\base\SysInitIntf.h" />
+    <ClInclude Include="..\..\..\base\SystemIntf.h" />
+    <ClInclude Include="..\..\..\base\TextStream.h" />
+    <ClInclude Include="..\..\..\base\UtilStreams.h" />
+    <ClInclude Include="..\..\..\base\win32\EventImpl.h" />
+    <ClInclude Include="..\..\..\base\win32\FileSelector.h" />
+    <ClInclude Include="..\..\..\base\win32\FuncStubs.h" />
+    <ClInclude Include="..\..\..\base\win32\PluginImpl.h" />
+    <ClInclude Include="..\..\..\base\win32\ScriptMgnImpl.h" />
+    <ClInclude Include="..\..\..\base\win32\StorageImpl.h" />
+    <ClInclude Include="..\..\..\base\win32\SusieArchive.h" />
+    <ClInclude Include="..\..\..\base\win32\SysInitImpl.h" />
+    <ClInclude Include="..\..\..\base\win32\SystemImpl.h" />
+    <ClInclude Include="..\..\..\base\XP3Archive.h" />
+    <ClInclude Include="..\..\..\msg\MsgIntf.h" />
+    <ClInclude Include="..\..\..\msg\win32\MsgImpl.h" />
+    <ClInclude Include="..\..\..\msg\win32\OptionsDesc.h" />
+    <ClInclude Include="..\..\..\sound\CDDAIntf.h" />
+    <ClInclude Include="..\..\..\sound\MIDIIntf.h" />
+    <ClInclude Include="..\..\..\sound\PhaseVocoderDSP.h" />
+    <ClInclude Include="..\..\..\sound\PhaseVocoderFilter.h" />
+    <ClInclude Include="..\..\..\sound\RingBuffer.h" />
+    <ClInclude Include="..\..\..\sound\SoundBufferBaseIntf.h" />
+    <ClInclude Include="..\..\..\sound\WaveIntf.h" />
+    <ClInclude Include="..\..\..\sound\WaveLoopManager.h" />
+    <ClInclude Include="..\..\..\sound\WaveSegmentQueue.h" />
+    <ClInclude Include="..\..\..\sound\win32\CDDAImpl.h" />
+    <ClInclude Include="..\..\..\sound\win32\kmp_pi.h" />
+    <ClInclude Include="..\..\..\sound\win32\MIDIImpl.h" />
+    <ClInclude Include="..\..\..\sound\win32\oldwaveunpacker.h" />
+    <ClInclude Include="..\..\..\sound\win32\SoundBufferBaseImpl.h" />
+    <ClInclude Include="..\..\..\sound\win32\tvpsnd.h" />
+    <ClInclude Include="..\..\..\sound\win32\WaveImpl.h" />
+    <ClInclude Include="..\..\..\tjs2\tjs.h" />
+    <ClInclude Include="..\..\..\tjs2\tjs.tab.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsArray.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsCommHead.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsCompileControl.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsConfig.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsDate.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsdate.tab.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsDateParser.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsDebug.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsDictionary.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsError.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsErrorDefs.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsError_jp.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsException.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsGlobalStringMap.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsHashSearch.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsInterCodeExec.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsInterCodeGen.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsInterface.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsLex.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsMath.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsMessage.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsMT19937ar-cok.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsNamespace.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsNative.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsObject.h" />
+    <ClInclude Include="..\..\..\tjs2\tjspp.tab.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsRandomGenerator.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsRegExp.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsScriptBlock.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsScriptCache.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsString.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsTypes.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsUtils.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsVariant.h" />
+    <ClInclude Include="..\..\..\tjs2\tjsVariantString.h" />
+    <ClInclude Include="..\..\..\utils\ClipboardIntf.h" />
+    <ClInclude Include="..\..\..\utils\DebugIntf.h" />
+    <ClInclude Include="..\..\..\utils\KAGParser.h" />
+    <ClInclude Include="..\..\..\utils\md5.h" />
+    <ClInclude Include="..\..\..\utils\ObjectList.h" />
+    <ClInclude Include="..\..\..\utils\PadIntf.h" />
+    <ClInclude Include="..\..\..\utils\Random.h" />
+    <ClInclude Include="..\..\..\utils\ThreadIntf.h" />
+    <ClInclude Include="..\..\..\utils\TimerIntf.h" />
+    <ClInclude Include="..\..\..\utils\win32\ClipboardImpl.h" />
+    <ClInclude Include="..\..\..\utils\win32\ConsoleFormUnit.h" />
+    <ClInclude Include="..\..\..\utils\win32\ConsoleFormUnit_dfm.h" />
+    <ClInclude Include="..\..\..\utils\win32\DebugImpl.h" />
+    <ClInclude Include="..\..\..\utils\win32\PadFormUnit.h" />
+    <ClInclude Include="..\..\..\utils\win32\PadFormUnit_dfm.h" />
+    <ClInclude Include="..\..\..\utils\win32\PadImpl.h" />
+    <ClInclude Include="..\..\..\utils\win32\ThreadImpl.h" />
+    <ClInclude Include="..\..\..\utils\win32\TickCount.h" />
+    <ClInclude Include="..\..\..\utils\win32\TimerImpl.h" />
+    <ClInclude Include="..\..\..\utils\win32\TLogViewer.h" />
+    <ClInclude Include="..\..\..\visual\argb.h" />
+    <ClInclude Include="..\..\..\visual\ComplexRect.h" />
+    <ClInclude Include="..\..\..\visual\drawable.h" />
+    <ClInclude Include="..\..\..\visual\GraphicsLoaderIntf.h" />
+    <ClInclude Include="..\..\..\visual\IA32\tvpgl_ia32_intf.h" />
+    <ClInclude Include="..\..\..\visual\LayerBitmapIntf.h" />
+    <ClInclude Include="..\..\..\visual\LayerIntf.h" />
+    <ClInclude Include="..\..\..\visual\LayerManager.h" />
+    <ClInclude Include="..\..\..\visual\LoadTLG.h" />
+    <ClInclude Include="..\..\..\visual\MenuItemIntf.h" />
+    <ClInclude Include="..\..\..\visual\Resampler.h" />
+    <ClInclude Include="..\..\..\visual\transhandler.h" />
+    <ClInclude Include="..\..\..\visual\TransIntf.h" />
+    <ClInclude Include="..\..\..\visual\tvpfontstruc.h" />
+    <ClInclude Include="..\..\..\visual\tvpgl.h" />
+    <ClInclude Include="..\..\..\visual\tvpinputdefs.h" />
+    <ClInclude Include="..\..\..\visual\VideoOvlIntf.h" />
+    <ClInclude Include="..\..\..\visual\voMode.h" />
+    <ClInclude Include="..\..\..\visual\win32\DInputMgn.h" />
+    <ClInclude Include="..\..\..\visual\win32\DrawDevice.h" />
+    <ClInclude Include="..\..\..\visual\win32\FontSelectFormUnit.h" />
+    <ClInclude Include="..\..\..\visual\win32\GraphicsLoaderImpl.h" />
+    <ClInclude Include="..\..\..\visual\win32\krmovie.h" />
+    <ClInclude Include="..\..\..\visual\win32\LayerBitmapImpl.h" />
+    <ClInclude Include="..\..\..\visual\win32\LayerImpl.h" />
+    <ClInclude Include="..\..\..\visual\win32\MenuContainerFormUnit.h" />
+    <ClInclude Include="..\..\..\visual\win32\MenuItemImpl.h" />
+    <ClInclude Include="..\..\..\visual\win32\PassThroughDrawDevice.h" />
+    <ClInclude Include="..\..\..\visual\win32\TransImpl.h" />
+    <ClInclude Include="..\..\..\visual\win32\VideoOvlImpl.h" />
+    <ClInclude Include="..\..\..\visual\win32\WindowFormUnit.h" />
+    <ClInclude Include="..\..\..\visual\win32\WindowFormUnit_dfm.h" />
+    <ClInclude Include="..\..\..\visual\win32\WindowImpl.h" />
+    <ClInclude Include="..\..\..\visual\WindowIntf.h" />
+    <ClInclude Include="..\DetectCPU.h" />
+    <ClInclude Include="..\EmergencyExit.h" />
+    <ClInclude Include="..\HaltWarnFormUnit.h" />
+    <ClInclude Include="..\MainFormUnit.h" />
+    <ClInclude Include="..\MainFormUnit_dfm.h" />
+    <ClInclude Include="..\VersionFormUnit.h" />
+    <ClInclude Include="..\WatchFormUnit.h" />
+    <ClInclude Include="..\WideNativeFuncs.h" />
+    <ClInclude Include="my_vcl\AnsiString.h" />
+    <ClInclude Include="my_vcl\Application.h" />
+    <ClInclude Include="my_vcl\Buttons.hpp" />
+    <ClInclude Include="my_vcl\Canvas.h" />
+    <ClInclude Include="my_vcl\Classes.hpp" />
+    <ClInclude Include="my_vcl\Clipbrd.hpp" />
+    <ClInclude Include="my_vcl\ComCtrls.hpp" />
+    <ClInclude Include="my_vcl\Component.h" />
+    <ClInclude Include="my_vcl\Controls.hpp" />
+    <ClInclude Include="my_vcl\Dialogs.hpp" />
+    <ClInclude Include="my_vcl\dir.h" />
+    <ClInclude Include="my_vcl\ExtCtrls.hpp" />
+    <ClInclude Include="my_vcl\ExtDlgs.hpp" />
+    <ClInclude Include="my_vcl\FileCtrl.hpp" />
+    <ClInclude Include="my_vcl\Forms.hpp" />
+    <ClInclude Include="my_vcl\function.h" />
+    <ClInclude Include="my_vcl\Graphics.hpp" />
+    <ClInclude Include="my_vcl\ImgList.hpp" />
+    <ClInclude Include="my_vcl\IniFiles.hpp" />
+    <ClInclude Include="my_vcl\Menus.hpp" />
+    <ClInclude Include="my_vcl\Messages.hpp" />
+    <ClInclude Include="my_vcl\Registry.hpp" />
+    <ClInclude Include="my_vcl\Screen.h" />
+    <ClInclude Include="my_vcl\StdCtrls.hpp" />
+    <ClInclude Include="my_vcl\Stream.h" />
+    <ClInclude Include="my_vcl\syncobjs.hpp" />
+    <ClInclude Include="my_vcl\systobj.h" />
+    <ClInclude Include="my_vcl\SysUtils.hpp" />
+    <ClInclude Include="my_vcl\ToolWin.hpp" />
+    <ClInclude Include="my_vcl\vcl.h" />
+    <ClInclude Include="my_vcl\vcl_base.h" />
+    <ClInclude Include="my_vcl\vcl_enums.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\visual\IA32\tvpgl_ia32vc.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\visual\tvpps.inc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\..\..\sound\cpu\pv_def_vc.obj" />
+    <Object Include="..\..\..\sound\cpu\pv_sse_vc.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\krkr_ym.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="tvpwin32.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

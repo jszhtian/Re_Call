@@ -1,0 +1,137 @@
+
+#2_TSU_704
+
+//
+
+//
+
+\BGM(,800)
+\FOUT(800, 42, BLACK)
+
+//
+\RP.END(SCENE_TSU_H_03)
+
+\BG.CMXYZ(     0, -114,   0)
+\BG(bg04c , 260, 0, 0)
+
+\WA(300)
+
+\FIN(800, 41)
+\BGM(bgm09)
+
+‰Ø‰Œ‹Ö„š•{™òí˜‚ùâÂéÑ’VŠ æUˆÒ•»†ü‹è›Ø˜†ŠŸ“ÅŠŸƒ”„CŠ©BçpçpŒä
+
+…š„b‚w•Üå‘Šd›îëZä¦‹Á“Óƒ”æU•»‚|Œxä¦•»ä›Šd“‘iœ‹
+
+„h†wˆø†“‚Øƒ”ƒ½‰e™\•{ŒU›î‡Ô•{ŽLí­†–ŠŸëï
+
+‡è‚ù‹Ý…œŠŸ„mŽØ—ˆê«ë[íÁäéâÍ•{ƒ½ˆÒ†º•gŠŸˆsƒœ“é”‘”S”¹„î“é“î}ƒœåƒ”ŒhœníÁî}“FŽL‹ÝâÂæyàº†ºŒä
+
+\T(B_TSU_1A0801 , 500)
+\C.XYZ(800,   12,   60,  12)
+
+\VO(TSU_2_TSU_704_0001)…šWêOëÃçpçpçpƒÚAŸ[‹å
+
+„Ü„¾„Ü„¾ƒv‹eïqœÕŒàäzì±“ˆÒŠŸ”Sëï
+
+\T(B_TSU_1B0801 , 250)
+
+\T.NOP(b, 5000)
+
+\T(B_TSU_1B0901 , 250)
+
+\T.NOP(b, 3500)
+
+\T(B_TSU_1A0801 , 250)
+
+\VO(TSU_2_TSU_704_0002)êÀW‚w‚ì†Gí´ŠŸŽLëZâìásžÃŠµ†›ä–á†}ä¦šÙŒä‘ß…tŸoÊ‘`ˆÒ“]—¾³‘`Ÿo„ÜŒ¿‡ ä›ƒÚçpW“é„Nê„ƒœ“Åƒ”æUî}Š_ä¦™Hî}„C‹å
+
+…š„b‚wëÃ„¾“Xì±‚×‰EW“]‡Ô®Ÿ}‚Ë“é¶ƒœ”m‚×‹å
+
+†GŠ_Œà‹èéÕ•{œï“œäéíÁá„mç¼áÀŠ ì±„C®ƒœ‚Ï„hžâ‹Ýåí‰ŒŒà†[ìÆ“ÅŒhìüŒh”¹Êäé„îƒÚçpëï
+
+‘g†º‚ïŠÒ“]çH²‹Ý‹O„M“Ž
+
+\T(B_TSU_1A1001 , 250)
+
+\VO(TSU_2_TSU_704_0003)àl†EêO‚ìáÑ¬ŒÉƒªçpçpœ‹
+
+…š„b‚wó„ÜŠŸŠ ä¦™òè¡®“•‡‚ú‰JŠŸÊ„mîâ“Þ®—ï‹è†EŠŸ„mœ‡…s’ÀƒœŒ±ì“—ÑçÖ®é@Š®”Së„•‹ÖçpƒÚ‹å
+
+//
+
+\SE(êQ’—í÷˜«…“½†l‰ù)
+\FLASH(100, 2)
+\QUAKE(20, 20, 0, 300, 0, 1)
+
+…š„b‚w‚ìŽLAŠ ™HåÊŸoœ‹
+
+\T(B_TSU_1C0501 , 250)
+
+\T.NOP(b, 1000)
+
+\T(B_TSU_1C0701 , 250)
+
+\VO(TSU_2_TSU_704_0004)…šW‚wóì}„CœnìßåHî}ÏŠn‹e”°‘f“é—´œzƒ”ìüƒÚƒÚ—¾™ò„ÜéÓœn®›Øo„îŠŸŽL†[ƒ”“FœnåH‚Ï_ä¦”Wä¦”Õƒ”ŠŸƒ”ž~àˆƒ”“F’ï¯œ‹
+
+…š„b‚wëÃ†E‹ÝéüâÂà½®â‡á}ƒœŒè„m•{„CˆsŠ “F„mßŠµëZŽLå’Ê‹å
+
+\T(B_TSU_1A0501 , 250)
+
+\T.NOP(b, 1000)
+
+\T(B_TSU_1A0801 , 250)
+
+\VO(TSU_2_TSU_704_0005)àlW‚w•Ü‡Ô‰EŽL†[•»Šn‹e¾‹Ýƒ£ìüŠ æU‹èâ¥‚ºƒœƒàˆïŠ ƒ½•VŠ ä¦íÁäéàË‹å
+
+…š„b‚w•Ü‰JëËƒœœÓ™\•»äé„î‘å™ò‡ÔˆÒœ@‹Ýí]ƒœD‹Öåv•{•»äéíÁƒœ“†ºœ‹
+
+\T(B_TSU_1C1001 , 250)
+\S.CLXYZ(b,500,0,-40,0,1,1)
+
+\VO(TSU_2_TSU_704_0006)…š†EêOó‹qæð‡î‹H—·Šn‹å
+
+ŒqˆÒ¶ú“mä¦át’V‹ÖœÂ„^ì±ŽLæÇ˜lŠdä–“]“â‹ÝåÊˆÒåH†EƒœŸÎåQíÁŠŸëËœ¼ä–—|•»ä›àºŽÃˆtítëZŒä
+
+//
+\T(B_TSU_1B0701 , 250)
+\S.CLXYZ(b,300,10,0,0,2,1)
+
+\VO(TSU_2_TSU_704_0007)…š†EêO•ÜˆÒ™ò½ƒ”íÁ‚×âìï¯‚ÏäéîÇˆÒ“œ‹ÝP—·ƒ”ì±œÓƒ”ì±†ºí®’·àºàˆ”SˆÒŠŸ„mŒQ“Ž‹eçôŽÃå’„îE‡ˆL‚òÛEç˜ñ‹Öåµƒ\åH‚×•{‡ ™\á•{ŒUçpƒÚœ‹
+
+…š„b‚w‚ì†GäP›î—†™Hƒ”ƒ½‚×ƒvœ‹
+
+\T(b_tsu_1a1001 , 250)
+\S.CLXYZ(b,500,0,-40,0,1,1)
+
+\VO(TSU_2_TSU_704_0008)êÀWêO•Ü‹O–ö‹Ý’Òä–”Sä¦Šn‹å
+
+…š„b‚w•Ü‹O‡ƒ‹èŠ ƒ½†ºâìB”‘“â‹Ý‚ÏŒòœqŠŸƒ”“FŠŸ„mƒÚçp‹å
+
+\T(B_TSU_1C0701 , 250)
+
+\VO(TSU_2_TSU_704_0009)êÀ†EîJëÃƒÚƒÚ—à„\ƒœ’Lå‘ƒ”ƒ½†ºåHŠ ÏŒä‘g”‘•g‰r™òžáå‚éÓÊ®ƒœçpƒÚà\äz„m‰E”S‚×“ƒ”çôŽÃ‘_œ‹
+
+¶„îˆÊ‹ÖœïîZœ”Sä¦îUìÅƒœŠ ë[œ@‚ÏWú“âƒ”„îDâÂš¦…tì±‚×†ºëï
+
+\T(B_TSU_1C0501 , 250)
+
+\VO(TSU_2_TSU_704_0010)…šWêO•Ü“â“]‡Ô•{íÁŽL›÷B“œŠ æUŽL”S®çpçp“Ž‹å
+
+…š„b‚wóï¯îÇî}ì±ŽLŒà“é“ˆÒŠn‹eçpçp’ï¯œ‹
+
+ŠdŠŸ„m›÷ùŠŸ„mŽLëˆL‡ríÁâÂëÄœn—vî}æUçpçpŒä
+
+…š„b‚w‚ìèÐŽ™œn“é‰V‡Z‘i‹eœ“³ƒ”“F…©í\ƒœ–bâÂì}ƒ½•»çpçpî­“Fä¦“äéíÁŒàœ‹
+
+\T(B_TSU_1A0301 , 250)
+
+\VO(TSU_2_TSU_704_0011)…šWîJóä›™ò‰Vžö‹å
+
+¶‡¾‹è”bƒ”‚×ˆs›î…eˆsŽÁ“œšÙ‘_ƒœŠ æU™Uð—|áëï
+
+‡´Š ‘`„¾‰yŠ~ëÙŠŸŠ ‡ ”‘‰ÚäPƒœŠ\ŠŸ‘_æ¼ävíÁŠŸƒv‹eãyo›÷‹nŸo”SŽL‹ÝâÂŒoä¦ëZê`ŠŸ„mƒKŠŸ—´ˆÑìÅšÙìÅƒœŠ æUëï
+
+\GO(2_TSU_801)
+
+

@@ -1,0 +1,93 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">制御系命令</A>＞TASK［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="go.html">GO［］</A>
+　<A HREF="gosub.html">GOSUB［］</A>
+　<A HREF="return.html">RETURN［］</A>
+　<A HREF="loop.html">LOOP［］</A>
+　<A HREF="loopbreak.html">LOOPBREAK［］</A>
+　<A HREF="loopcontinue.html">LOOPCONTINUE［］</A>
+　<A HREF="loopend.html">LOOPEND［］</A>
+　<A HREF="wait.html">WAIT［］</A>
+</TD></TR>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="if.html">IF［］</A>
+　<A HREF="else.html">ELSE［］</A>
+　<A HREF="ifend.html">IFEND［］</A>
+　<A HREF="ifbreak.html">IFBREAK［］</A>
+　<A HREF="ifcontinue.html">IFCONTINUE［］</A>
+　<A HREF="task.html">TASK［］</A>
+　<A HREF="taskinfo.html">TASKINFO［］</A>
+　<A HREF="taskend.html">TASKEND［］</A>
+　<A HREF="end.html">END［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=700 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■タスク生成命令 TASK[ ]</FONT>
+<FONT CLASS=t20>
+
+タスクレイヤを生成したり、有効無効の設定やスクリプト位置などを制御します。
+
+タスク生成の場合は、指定したラベル位置から始まるタスク（新たな制御の流れ）を生成します。
+タスクを生成すると、その瞬間からタスクが動作し始めます。
+RETURN 命令に到達すると、タスクは自動的に消滅します。
+※(GOSUB でネストしている場合は別です。GOSUB のネストが無い状態で RETURN に到達すると消滅します)
+
+
+タスクＩＤを指定しなかった場合、この命令を実行した自身のタスクが対象になります。
+
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>ID = 文字列</FONT></TD><TD><FONT CLASS=t40>レイヤＩＤを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>E = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤの有効(１)／無効(０)を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Z = 値</FONT></TD><TD><FONT CLASS=t40>タスクの実行優先度を指定<BR>※タスクレイヤ生成時のみ有効<BR>※省略した場合は１を指定したことになる</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40># = ラベル名</FONT></TD><TD><FONT CLASS=t40>タスク生成先のラベルを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SCRIPTPOS = ＄変数名</FONT></TD><TD><FONT CLASS=t40>スクリプト位置情報を設定する</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] タスクレイヤ「SUB」に、ラベル #ABC から始まるタスクを生成する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TASK</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>"SUB"</FONT> <FONT CLASS=t62>#</FONT>=<FONT CLASS=t63>"ABC"</FONT>]</FONT></B>
+
+
+[2] タスクレイヤ「SUB」の実行を停止する（存在はし続ける）。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TASK</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>"SUB"</FONT> <FONT CLASS=t62>E</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[3] タスクレイヤ「SUB」の実行を再開する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TASK</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>"SUB"</FONT> <FONT CLASS=t62>E</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[4] タスクレイヤ「SYSTEM」の現在のスクリプト位置情報を、
+　　文字列変数 $A に格納された情報で上書きする（位置を設定する）。
+　　※事実上スクリプト位置のロードになります。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TASK</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>"SYSTEM"</FONT> <FONT CLASS=t62>SCRIPTPOS</FONT>=<FONT CLASS=t63>$A</FONT>]</FONT></B>
+
+
+
+
+</TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

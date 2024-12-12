@@ -1,0 +1,78 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">フォント系命令</A>＞FONT［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="font.html">FONT［］</A>
+　<A HREF="fontinfo.html">FONTINFO［］</A>
+</TD></TR></TABLE>
+
+<PRE>
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=680 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■フォント設定命令 FONT[ ]</FONT>
+<FONT CLASS=t20>
+
+テキストフォントの属性を設定します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>NAME = フォント名</FONT></TD><TD><FONT CLASS=t40>文字フォント設定(フォント名指定)</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>NO = 値</FONT></TD><TD><FONT CLASS=t40>文字フォント設定(フォントリスト番号指定)</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>COLOR = 値(0～0xffffff)</FONT></TD><TD><FONT CLASS=t40>文字色を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>COLOR2 = 値(0～0xffffff)</FONT></TD><TD><FONT CLASS=t40>文字色を指定(グラデーション用)</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SX = 値</FONT></TD><TD><FONT CLASS=t40>文字の大きさ(横幅)を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SY = 値</FONT></TD><TD><FONT CLASS=t40>文字の大きさ(縦幅)を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>BOLD = 値</FONT></TD><TD><FONT CLASS=t40>文字の太字の有無(1/0)を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>ANTIALIASING = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字のアンチエイリアス処理の有無</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DRAWMODE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字を描画する際の合成方法を指定<BR>0=透明部分も含めて新しい文字で上書き(若干高速)※デフォルト<BR>1=合成して上書き(若干低速)</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] テキストのフォントを、「ＭＳ 明朝」のフォントに設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FONT</FONT>[<FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>"ＭＳ 明朝"</FONT>]</FONT></B>
+
+
+[2] テキストのフォントを、インストールされているフォントリストの３番目のフォントに設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FONT</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>3</FONT>]</FONT></B>
+
+
+[3] テキストサイズを横幅22、縦幅24に設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FONT</FONT>[<FONT CLASS=t62>SX</FONT>=<FONT CLASS=t63>22</FONT> <FONT CLASS=t62>SY</FONT>=<FONT CLASS=t63>24</FONT>]</FONT></B>
+
+
+[4] テキストを太字に設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FONT</FONT>[<FONT CLASS=t62>BOLD</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[5] テキストの色を黄色(0xffff00)に設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FONT</FONT>[<FONT CLASS=t62>COLOR</FONT>=<FONT CLASS=t63>0xffff00</FONT>]</FONT></B>
+
+
+[6] テキストの色を黄色(0xffff00)から青(0x0000ff)へのグラデーション色に設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FONT</FONT>[<FONT CLASS=t62>COLOR</FONT>=<FONT CLASS=t63>0xffff00</FONT> <FONT CLASS=t62>COLOR2</FONT>=<FONT CLASS=t63>0x0000ff</FONT>]</FONT></B>
+
+
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

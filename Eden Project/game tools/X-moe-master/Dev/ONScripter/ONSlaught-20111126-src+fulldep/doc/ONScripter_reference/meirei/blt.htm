@@ -1,0 +1,29 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>blt</h2>
+<h3>blt &lt;onscreen x&gt;,&lt;onscreen y&gt;,&lt;onscreen height&gt;,&lt;onscreen width&gt;,&lt;button image x&gt;,&lt;button image y&gt;,&lt;button image width&gt;,&lt;button image height&gt;</h3>
+<p>
+Use this command if you want to blit images instantaneously on screen (as in AIR's opening engine-driven cutscene, for instance).<br>
+This utilizes the button image buffer, so please populate said buffer using btndef beforehand.<br>
+In cases where the width of the image button is larger than the width of the screen, the image scales accordingly.<br>
+(For instance, if one were to load 4 half-sized images and then use blt, then they would instantly be blitted one after another with no afterimage effects, like a high-speed animation.  This effect was used in AIR.)<br>
+This command writes directly to the screen, not to the backbuffer.  Therefore, after the end of the blitting, the contents of the screen may be uncertain, in which case you should use ofscpy (to save the old state) followed by bg (to load a new one).<br>
+<br>
+Even if one saves in the midst of this blitting, the images will not be screenshotted for the save caption.<br>
+Therefore, please limit your usage of this technique (for instance, a demo, or a status screen/save/load menu in an SLG).<br>
+</p>
+
+</body>
+</html>

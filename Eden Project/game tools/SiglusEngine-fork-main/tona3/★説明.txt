@@ -1,0 +1,178 @@
+
+●Tona3.lib
+
+・使い方
+
+	"tona3.h" をインクルードする
+
+・ヘッダ
+	・tona3_pch.h		ベースとなるプリコンパイルヘッダ
+	・tona3_array.h		配列
+	・tona3_string.h	文字列
+	・tona3_util.h		各種便利関数
+	・tona3_math.h		数値計算系
+	・tona3_file.h		ファイル
+	・tona3_stream.h	ストリーム
+
+	・tona3_app.h		アプリケーション
+	・tona3_ini.h		設定ファイル
+
+	・tona3_wbase.h		ウィンドウ基底
+	・tona3_window.h	ウィンドウ
+	・tona3_dialog.h	ダイアログ
+	・tona3_control.h	コントロール
+	・tona3_listview.h	リストビュー
+	・tona3_menu.h		メニュー
+
+	・tona3_input.h		入力
+	・tona3_rsc_mng.h	リソース管理
+
+	・tona3_csv.h		csv
+	・tona3_xml.h		xml
+
+●基本型
+
+	singned char	->	char
+	singned short	->	short
+	singned int		->	int
+	unsigned char	->	BYTE
+	unsigned short	->	WORD
+	unsigned int	->	DWORD
+
+●命名規則
+
+	int foo_bar;		// 変数
+	void foo_bar();		// 関数
+	int Gfoo_bar;		// グローバル
+	struct Sfoo_bar;	// 構造体
+	class Cfoo_bar;		// クラス
+
+●メモリ管理
+
+	malloc / free、new / delete は明示的には使わない。
+	基本的に ARRAY（std::vector）、BSP（boost::shared_ptr）を使う。
+
+	// Choge 型のインスタンスを動的に作る
+	・BSP<Choge> hoge(new Choge);
+	・BSP<Choge> hoge;	hoge = BSP<Choge>(new Choge);
+
+	// ポインタを取得（API や標準関数に渡すときなどに使用）
+	memcpy(dst, buffer.get(), buffer.size());
+
+●配列
+
+	ARRAY（std::vector）を使う。
+
+	ARRAY<int> int_array;		// int 型の配列を作る
+	ARRAY<int> int_array(100);	// 要素数 100 の int 型の配列を作る
+	ARRAY<BYTE> buffer(size);	// サイズ size のバッファを作る
+
+	// 要素を参照する
+	int data = int_array[10];
+	// 要素を追加する
+	int_array.push_back(10);
+	// サイズを変更する
+	int_array.resize(300);
+
+	// 合計を求める
+	int sum = 0;
+	for (ARRAY<int>::iterator itr = int_array.begin(); itr != int_array.end(); ++itr)
+		sum += *itr;
+
+	// 並び替える
+	std::sort(int_array.begin(), int_array.end());
+
+	// ポインタを取得（API や標準関数に渡すときなどに使用）
+	memcpy(dst, buffer.get(), buffer.size());
+
+●文字列
+
+	文字は全て Unicode で扱う。char ではなく、TCHAR を使う。
+	文字列は TSTR（std::basic_string(TCHAR)）を使う。
+	Unicode 文字列リテラルは _T() マクロで生成する。
+
+	// 文字列を扱う
+	TSTR str = _T("abc");
+	TSTR str2 = str + _T("def");
+
+	// 文字列の各種変換
+	int a = 5;	str = tostr(a);
+
+	// ポインタを取得（API や標準関数に渡すときなどに使用）
+	SetCurrentDirectory(str.c_str());
+
+●ファイル操作
+
+	Cfile クラスを使う。
+
+	// ★ファイルの読み方（その１）
+	// 独自で読み込む
+
+		// ファイル hoge.dat をバイナリ形式で読み取り専用で開く
+		Cfile file;
+		if (!file.open(_T("hoge.dat"), _T("rb")))	{
+			error_box(_T("hoge.dat が開けませんでした。"));
+			return false;
+		}
+
+		// ファイルを読み込む
+		int file_size = (int)file.get_size();
+		ARRAY<BYTE> buffer(file_size);
+		file.read(buffer.get(), file_size);
+
+		// ファイルを閉じる
+		file.close();
+
+	// ★ファイルの読み方（その２）
+	// 便利関数を使う
+
+		// バイナリデータを読み込む
+		ARRAY<BYTE> file_data;
+		Cfile::read_full_data(_T("hoge.txt"), file_data);
+
+		// テキストデータを読み込む
+		TSTR file_text;
+		Cfile::read_full_text(_T("hoge.txt"), file_text);
+
+		// テキストデータを行ごとに分割して読み込む
+		ARRAY<TSTR> file_text;
+		Cfile::read_full_text(_T("hoge.txt"), file_text);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

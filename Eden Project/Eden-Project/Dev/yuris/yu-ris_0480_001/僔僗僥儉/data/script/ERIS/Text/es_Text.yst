@@ -1,0 +1,3378 @@
+//============================================================================
+//
+//■テキスト処理
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@mTX.NOWTIME] //暫定
+
+	S_STR[$TX]
+	S_INT[@TX.LEN]
+	S_INT[@TX.POS]
+
+	S_STR[$TX.TASK]
+	S_INT[@TX.TASK.LEN]
+	S_INT[@TX.TASK.POS]
+
+//	S_INT[@TX.BUF(\.TX.MAX+1)]
+	S_INT[@TX.BUF.X(\.TX.MAX+1)]
+	S_INT[@TX.BUF.Y(\.TX.MAX+1)]
+	S_INT[@TX.BUF.SB(\.TX.MAX+1)]
+	S_INT[@TX.BUF.SX(\.TX.MAX+1)]
+	S_INT[@TX.BUF.SY(\.TX.MAX+1)]
+	S_INT[@TX.BUF.COLOR(\.TX.MAX+1)]
+	S_INT[@TX.BUF.COLOR2(\.TX.MAX+1)]
+	S_INT[@TX.BUF.TCFLAG(\.TX.MAX+1)]
+	S_INT[@TX.BUF.SPD(\.TX.MAX+1)]
+	S_INT[@TX.BUF.RUBY(\.TX.MAX+1)]
+
+	S_STR[$TX.BUF.RUBY.STR(64)]
+	S_INT[@TX.BUF.RUBY.SRCLEN(64)]
+
+	S_INT[@TX.ColorReadPos]
+	S_INT[@TX.ColorWritePos]
+	S_INT[@TX.SizeReadPos]
+	S_INT[@TX.SizeWritePos]
+	S_INT[@TX.WaitTimeReadPos]
+	S_INT[@TX.WaitTimeWritePos]
+
+	S_INT[@TX.WaitTime.Start]
+	S_INT[@TX.WaitTime.First] //１文字目は即表示フラグ
+	S_INT[@TX.WaitTime.Next]  //次の文字表示の時間
+
+	S_STR[$TX.DEFSTR]
+	S_STR[$TXN.DEFSTR]
+	S_STR[$TX.RUBY.DEFSTR]
+
+	S_INT[@TX.SPD]
+	S_INT[@TX.WAIT]
+	S_INT[@TX.SY.MAX]
+	S_INT[@TX.SX]
+	S_INT[@TX.SY]
+	S_INT[@TX.COLOR]
+	S_INT[@TX.COLOR2]
+	S_INT[@TX.TCFLAG]
+	S_INT[@TX.SHADE.COLOR]
+	S_INT[@TX.SHADE.X]
+	S_INT[@TX.SHADE.Y]
+	S_INT[@TX.OUTLINE.COLOR]
+
+	S_INT[@TX.StartPosX=2]
+	S_INT[@TX.StartPosY=2]
+	S_INT[@TX.PrevLine.X]
+	S_INT[@TX.PrevLine.Y]
+
+	S_STR[$TX.RubyStartStr]
+	S_STR[$TX.RubyCenterStr]
+	S_STR[$TX.RubyEndStr]
+	S_INT[@TX.RUBY.AnalyzePos]
+	S_INT[@TX.RUBY.AnalyzeLen]
+
+	S_INT[@TX.RUBY.COLOR]
+	S_INT[@TX.RUBY.COLOR2]
+	S_INT[@TX.RUBY.X]
+	S_INT[@TX.RUBY.Y]
+	S_INT[@TX.RUBY.SX]
+	S_INT[@TX.RUBY.SY]
+	S_INT[@TX.RUBY.SHADE.COLOR]
+	S_INT[@TX.RUBY.SHADE.X]
+	S_INT[@TX.RUBY.SHADE.Y]
+	S_INT[@TX.RUBY.OUTLINE.COLOR]
+
+	S_INT[@TXN.COLOR]
+	S_INT[@TXN.COLOR2]
+	S_INT[@TXN.X]
+	S_INT[@TXN.Y]
+	S_INT[@TXN.SX]
+	S_INT[@TXN.SY]
+	S_INT[@TXN.SHADE.COLOR]
+	S_INT[@TXN.SHADE.X]
+	S_INT[@TXN.SHADE.Y]
+	S_INT[@TXN.OUTLINE.COLOR]
+
+	S_INT[@TX.CHARCOLOR]		//キャラ毎の文字色
+	S_INT[@TX.CHARCOLOR2]		//キャラ毎の文字グラデ色
+	S_INT[@TX.CHARKCOLOR]		//キャラ毎の既読文字色
+	S_INT[@TX.CHARKCOLOR2]		//キャラ毎の既読文字グラデ色
+
+	S_INT[@TX.AUTOCLICK.F]		//自動クリック待ち設定
+	S_INT[@TX.AUTOPAGE.F]		//自動改頁設定
+	S_INT[@TX.AUTORETURN.F]		//自動改行設定
+	S_INT[@TX.AUTOCLICK.L]		//自動クリック待ち設定
+	S_INT[@TX.AUTOPAGE.L]		//自動改頁設定
+	S_INT[@TX.AUTORETURN.L]		//自動改行設定
+	S_INT[@TX.AUTOCLICK.N]		//一時的クリック待ち無効設定
+	S_INT[@TX.AUTOPAGE.N]		//一時的改頁無効設定
+	S_INT[@TX.AUTORETURN.N]		//一時的改行無効設定
+
+	S_INT[@TX.SCRIPTSAVEFLAG]
+
+	S_INT[@TX.LineEndTime] //テキストが文末に達したときの時間
+
+	S_STR[$TXN.NAME.TEXT]
+	S_STR[$TXN.NAME.CG]
+	S_INT[@TXN.EXIST]
+
+	S_INT[@TX.STATE]
+
+	S_INT[@SKIPTIME]
+
+}
+
+
+//============================================================================
+//
+//■テキストタスク
+//
+//============================================================================
+#=es.TextTask
+{
+	return[]
+}
+
+
+//============================================================================
+//
+//■テキストタスク 後処理
+//
+//============================================================================
+#=es.TextTask.END
+{
+
+	//----------------------------------------------------------------
+	// フォント初期化
+	//----------------------------------------------------------------
+		GOSUB[#=es.FONT.SET pint=0]
+
+	//----------------------------------------------------------------
+	// 内部の文字バッファをクリアする.
+	//----------------------------------------------------------------
+		TEXT[CLEAR=1]
+
+	//----------------------------------------------------------------
+	// 後処理
+	//----------------------------------------------------------------
+		GOSUB[#=es.TX.End]
+
+	//----------------------------------------------------------------
+	// 日付ウィンドウ各種レイヤ消去
+	//----------------------------------------------------------------
+		GOSUB[#=es.DATE.DEL]
+
+	//----------------------------------------------------------------
+	// テキスト情報クリア
+	//----------------------------------------------------------------
+		//\TEXTBUF_CLEAR
+		$_TEXT=""
+		$_TEXT_FLAG=""
+
+		@TX.TCFLAG=0
+
+		GOSUB[#=es.Mes.Clear]
+
+	//----------------------------------------------------------------
+	// 名前初期化
+	//----------------------------------------------------------------
+		GOSUB[#=es.TX.NAME.INIT]
+		GOSUB[#=es.NAMEW.CLEAR]
+
+	//----------------------------------------------------------------
+	// 設定初期化
+	//----------------------------------------------------------------
+		@es.TX.AUTO=0
+		@es.TX.SKIP=0
+		\SUPERAUTOMODE_OFF
+		$es.ScriptPosData=""
+
+@es.TXSTART=0
+
+	return[]
+}
+
+
+//============================================================================
+//
+//■テキスト処理タスク 準備
+//
+//============================================================================
+#=es.TextTask.Init
+{
+
+/*
+DEBUGLIST[ADD=$TX				STR="$TX"]
+DEBUGLIST[ADD=@TX.LEN			STR="@TX.LEN"]
+DEBUGLIST[ADD=@TX.POS			STR="@TX.POS"]
+DEBUGLIST[ADD=$TX.TASK			STR="$TX.TASK"]
+DEBUGLIST[ADD=@TX.TASK.LEN		STR="@TX.TASK.LEN"]
+DEBUGLIST[ADD=@TX.TASK.POS		STR="@TX.TASK.POS"]
+//DEBUGLIST[ADD=@TX.STATE		STR="@TX.STATE"]
+DEBUGLIST[ADD=@TX.PrevLine.X	STR="@TX.PrevLine.X"]
+DEBUGLIST[ADD=@TX.PrevLine.Y	STR="@TX.PrevLine.Y"]
+*/
+
+	GOSUB[#=es.TX.RUBY.STR.SET pstr=$T(36,25) pstr2=$T(36,26) pstr3=$T(36,27)]
+
+	//----------------------------------------------------------------
+	// テキストフォント初期化
+	//----------------------------------------------------------------
+		FONT[NAME=$es.GSD(113)]
+
+	//----------------------------------------------------------------
+	// 文字情報初期化
+	//----------------------------------------------------------------
+		$TX.DEFSTR = $T(36,18)
+		GOSUB[#=es.TDDEF.SEARCH pstr=$TX.DEFSTR]
+		@TX.SX = @_RINT(1) / 65536
+		@TX.SY = @_RINT(1) % 65536
+		@TX.COLOR  = @_RINT(2)
+		@TX.COLOR2 = @_RINT(3)
+		@TX.SHADE.X = @_RINT(5) / 65536
+		@TX.SHADE.Y = @_RINT(5) % 65536
+		@TX.SHADE.COLOR = @_RINT(6)
+		@TX.OUTLINE.COLOR = @_RINT(7)
+
+		$TXN.DEFSTR = $T(36,31)
+		GOSUB[#=es.TDDEF.SEARCH pstr=$TXN.DEFSTR]
+		@TXN.SX = @_RINT(1) / 65536
+		@TXN.SY = @_RINT(1) % 65536
+		@TXN.COLOR  = @_RINT(2)
+		@TXN.COLOR2 = @_RINT(3)
+		@TXN.SHADE.X = @_RINT(5) / 65536
+		@TXN.SHADE.Y = @_RINT(5) % 65536
+		@TXN.SHADE.COLOR = @_RINT(6)
+		@TXN.OUTLINE.COLOR = @_RINT(7)
+
+		$TX.RUBY.DEFSTR = $T(36,22)
+		GOSUB[#=es.TDDEF.SEARCH pstr=$TX.RUBY.DEFSTR]
+		@TX.RUBY.SX = @_RINT(1) / 65536
+		@TX.RUBY.SY = @_RINT(1) % 65536
+		@TX.RUBY.COLOR  = @_RINT(2)
+		@TX.RUBY.COLOR2 = @_RINT(3)
+		@TX.RUBY.SHADE.X = @_RINT(5) / 65536
+		@TX.RUBY.SHADE.Y = @_RINT(5) % 65536
+		@TX.RUBY.SHADE.COLOR = @_RINT(6)
+		@TX.RUBY.OUTLINE.COLOR = @_RINT(7)
+
+
+
+		\_txsize(@TX.SX, @TX.SY)
+
+	//----------------------------------------------------------------
+	// テキスト自動改行、自動改頁、自動クリック待ちをＯＮ.
+	//----------------------------------------------------------------
+	IF[@es.LOADTHRU==0] //onにすると進んでしまう
+	{
+		@TX.AUTORETURN.F = 1
+		@TX.AUTOPAGE.F   = 1
+		@TX.AUTOCLICK.F  = 1
+		@TX.AUTORETURN.L = 1
+		@TX.AUTOPAGE.L   = 1
+		@TX.AUTOCLICK.L  = 1
+		@TX.AUTORETURN.N = 0
+		@TX.AUTOPAGE.N   = 0
+		@TX.AUTOCLICK.N  = 0
+	}
+	IFEND[]
+
+		@TX.SCRIPTSAVEFLAG = 0
+
+		@TX.LEN = 0
+		@TX.TASK.LEN = 0
+		@es.TX.IKKATSU = 0
+
+		@TX.POS      = 1  // 読込位置初期化
+		@TX.TASK.POS = 1  // 読込位置初期化
+
+		@TX.ColorReadPos     = 1  // テキスト色情報読み込み完了位置
+		@TX.ColorWritePos    = 1  // テキスト色情報書き込み完了位置
+		@TX.SizeReadPos      = 1  // テキストサイズ情報読み込み完了位置
+		@TX.SizeWritePos     = 1  // テキストサイズ情報書き込み完了位置
+		@TX.WaitTimeReadPos  = 1  // テキスト速度情報読み込み完了位置
+		@TX.WaitTimeWritePos = 1  // テキスト速度情報書き込み完了位置
+
+		@es.TX.CWAIT = 0
+
+		@TX.PrevLine.X = 0
+		@TX.PrevLine.Y = 0
+
+		@TX.STATE = 0
+
+		GOSUB[#=es.TX.TIMEINIT]
+
+	//----------------------------------------------------------------
+	// テキスト情報クリア(INIT時にしないとロード時$_TEXT参照するのでおかしくなる)
+	//----------------------------------------------------------------
+		//\TEXTBUF_CLEAR
+		$_TEXT=""
+		$_TEXT_FLAG=""
+
+	//----------------------------------------------------------------
+	// 名前初期化
+	//----------------------------------------------------------------
+		GOSUB[#=es.TX.NAME.INIT]
+		GOSUB[#=es.NAMEW.CLEAR]
+
+	//----------------------------------------------------------------
+	// 内部テキスト情報初期化
+	//----------------------------------------------------------------
+	//	
+
+
+	return[]
+}
+
+
+#=es.TEXTTASK.FOR.LOAD
+{
+	GOSUB[#=es.TextTask.Init]
+	@TX.STATE=950
+
+	return[]
+}
+
+
+#=es.TXTASK.TX.E0
+{
+	@es.TXTASK.TX.E = 0
+	\_task.pause($es.ScenarioTaskID)
+	return[]
+}
+#=es.TXTASK.SN.E0
+{
+	@es.TXTASK.SN.E = 0
+	\_task.pause($es.ScenarioTaskID)
+	return[]
+}
+#=es.TXTASK.TX.E1
+{
+	@es.TXTASK.TX.E = 1
+	IF[@es.TXTASK.TX.E && @es.TXTASK.SN.E] \_task.resume($es.ScenarioTaskID) IFEND[]
+	return[]
+}
+#=es.TXTASK.SN.E1
+{
+	@es.TXTASK.SN.E = 1
+	IF[@es.TXTASK.TX.E && @es.TXTASK.SN.E] \_task.resume($es.ScenarioTaskID) IFEND[]
+	return[]
+}
+
+
+//============================================================================
+//
+//■テキスト処理タスク メインループ
+//
+//============================================================================
+#=es.TEXTTASK.LOOP
+{
+
+	LOOP[]
+	{
+		IF[@TX.STATE==0] GOSUB[#=es.TX.100]      IF[@_RINT(1)] @TX.STATE=1 IFEND[] IFEND[]
+		IF[@TX.STATE==1] GOSUB[#=es.TX.101]      @TX.STATE=2 IFEND[]		//未処理タスクがある
+		IF[@TX.STATE==2] GOSUB[#=es.TX.Ready]    @TX.STATE=3 IFEND[]		//ゞ
+		IF[@TX.STATE==3] GOSUB[#=es.TX.Main.103] @TX.STATE=4 IFEND[]		//テキスト処理タスク メイン
+		IF[@TX.STATE==4] GOSUB[#=es.TX.Main.104] IF[@_RINT(1)] @TX.STATE=950 ELSE[] @TX.STATE=5 IFEND[] IFEND[]	//タスクが全て終了するまで繰り返す
+		IF[@TX.STATE==5] GOSUB[#=es.TX.Main.105] IFEND[]	//ここで一文字ずつ表示
+	//	IF[@TX.STATE==5] GOSUB[#=es.TX.Main.105] IF[@TX.STATE==4] LOOPCONTINUE[] IFEND[] IFEND[] //ここで一文字ずつ表示
+
+		GOSUB[#=es.TX.CLICKWAIT.MAIN]	// クリック待ち処理
+
+		IF[@TX.STATE==201] IF[@es.TX.CWAIT==0] \LOG.W.TX.ONE("", "C");@TX.STATE=205 IFEND[] IFEND[]	//'C'改行クリック待ち
+		IF[@TX.STATE==204] IF[@es.TX.CWAIT==0] \LOG.W.TX.ONE("", "c");@TX.STATE=205 IFEND[] IFEND[]	//'c'改頁クリック待ち
+
+		IF[@TX.STATE==205] GOSUB[#=es.TX.CLICK.205] GOSUB[#=es.TX.TIMEINIT] @TX.STATE=5 IFEND[]
+
+		IF[@TX.STATE==950] GOSUB[#=es.TX.End] GOSUB[#=es.TX.Final] @TX.STATE=0 IFEND[]
+
+		LOOPBREAK[]
+	}
+	LOOPEND[]
+
+	//----------------------------------------------------------------
+	// ボイスアイコン処理
+	//----------------------------------------------------------------
+	//============================================================ ボイス再生終了チェック
+	IF[@es.VOICEPLAYFLAG]
+	{
+		\VO.PCHK
+		IF[@_RINT(1)==0]
+			@es.VOICEPLAYFLAG=0
+			\BT.OFF("ES.GAMEMAIN.BTN.VOICE")
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//■TX.100
+#=es.TX.100
+{
+	INT[@ret]
+
+	//------------------------------------------------------------
+	// テキストおよびテキストタスクを解析用変数に移す
+	//------------------------------------------------------------
+		$TX      = $_TEXT
+		$TX.TASK = $_TEXT_FLAG
+
+		\_strlen($TX.TASK)(@TX.TASK.LEN)
+
+	//------------------------------------------------------------
+	// 未処理タスクがあれば処理する
+	//------------------------------------------------------------
+		IF[@TX.TASK.POS <= @TX.TASK.LEN] @ret=1 IFEND[]
+
+	return[rint=@ret]
+}
+
+
+//■TX.101
+#=es.TX.101
+{
+	//------------------------------------------------------------
+	// 未処理タスクの中からクリック待ち・改行・改頁コードを探し、
+	// 'C''R''P'に置き換える.
+	// また、'E'の直前にある'C''R''P'は'E'の後に移動させる.
+	//------------------------------------------------------------
+//	\_dmes("[BEFORE]"+\_R+"$TX="+$TX+\_R+"$TX.TASK="+$TX.TASK)
+		GOSUB[#=es.TX.CRPREPLACE]
+//	\_dmes("[AFTER]"+\_R+"$TX="+$TX+\_R+"$TX.TASK="+$TX.TASK)
+
+	//------------------------------------------------------------
+	// シナリオタスクを一時停止
+	//------------------------------------------------------------
+		\es.TXTASK.TX.E0
+
+	//------------------------------------------------------------
+	// ロード時音声再生
+	// ＆ロード時状態解除
+	//------------------------------------------------------------
+		IF[@es.LOADTHRU]
+		{
+			@es.LOADTHRU = 0
+
+			\VO1($es.VOICE.FILE( 1))
+			\VO2($es.VOICE.FILE( 2))
+			\VO3($es.VOICE.FILE( 3))
+			\VO4($es.VOICE.FILE( 4))
+			\VO5($es.VOICE.FILE( 5))
+			\VO6($es.VOICE.FILE( 6))
+			\VO7($es.VOICE.FILE( 7))
+			\VO8($es.VOICE.FILE( 8))
+			\VO9($es.VOICE.FILE( 9))
+			\VO10($es.VOICE.FILE(10))
+		}
+		IFEND[]
+
+	//------------------------------------------------------------
+	// ボイス登録
+	//------------------------------------------------------------
+		\LOG.W.VO( $es.VOICE.FILE(1)+">"+$es.VOICE.FILE(2)+">"+$es.VOICE.FILE(3)+">"+$es.VOICE.FILE(4)+">"+$es.VOICE.FILE(5)+">"+$es.VOICE.FILE(6)+">"+$es.VOICE.FILE(7)+">"+$es.VOICE.FILE(8)+">"+$es.VOICE.FILE(9)+">"+$es.VOICE.FILE(10) )
+
+	return[]
+}
+
+
+//■TX.Ready
+#=es.TX.Ready
+{
+
+	@es.VOICEPLAYFLAG=0
+	\BT.OFF("ES.GAMEMAIN.BTN.VOICE")
+
+///rin
+	IF[$es.RIN.LFNAME!=""]
+	{
+		LOAD[FILE=$es.RIN.LFNAME DNO=0005 LET=@L()]	// データ
+		LOAD[FILE=$es.RIN.LFNAME DNO=0006 LET=$L()]	// データ
+
+		$es.RIN.LFNAME=""
+	}
+	IFEND[]
+
+	//------------------------------------------------------------
+	// 色、サイズ、速度情報をバッファに格納
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.BUFSET.COL]  // 色
+		GOSUB[#=es.TX.BUFSET.SIZE] // サイズ
+		GOSUB[#=es.TX.BUFSET.SPD]  // 速度
+
+	//------------------------------------------------------------
+	// 文字定義情報取得
+	//------------------------------------------------------------
+		GOSUB[#=es.TDDEF.SEARCH pstr=$TX.DEFSTR]
+		@TX.COLOR  = @_RINT(2)
+		@TX.COLOR2 = @_RINT(3)
+		@TX.SHADE.X = @_RINT(5) / 65536
+		@TX.SHADE.Y = @_RINT(5) % 65536
+		@TX.SHADE.COLOR = @_RINT(6)
+		@TX.OUTLINE.COLOR = @_RINT(7)
+
+		GOSUB[#=es.TDDEF.SEARCH pstr=$TXN.DEFSTR]
+		@TXN.COLOR  = @_RINT(2)
+		@TXN.COLOR2 = @_RINT(3)
+		@TXN.SHADE.X = @_RINT(5) / 65536
+		@TXN.SHADE.Y = @_RINT(5) % 65536
+		@TXN.SHADE.COLOR = @_RINT(6)
+		@TXN.OUTLINE.COLOR = @_RINT(7)
+
+		GOSUB[#=es.TDDEF.SEARCH pstr=$TX.RUBY.DEFSTR]
+		@TX.RUBY.COLOR  = @_RINT(2)
+		@TX.RUBY.COLOR2 = @_RINT(3)
+		@TX.RUBY.SHADE.X = @_RINT(5) / 65536
+		@TX.RUBY.SHADE.Y = @_RINT(5) % 65536
+		@TX.RUBY.SHADE.COLOR = @_RINT(6)
+		@TX.RUBY.OUTLINE.COLOR = @_RINT(7)
+
+
+		@es.KIDOKUCOLORFLAG = 0
+
+	//------------------------------------------------------------
+	// 既読文字ならば文字色変更
+	//------------------------------------------------------------
+		\_task.info($es.ScenarioTaskID, 1)
+		INT[@mFNo = @_RINT(2)]
+		INT[@mTLine = @_RINT(4)]
+		@GSD.NEXTVOICE = (@_RINT(5)!=0)
+
+		\KIDOKU.CHECK(@mFNo, @mTLine)
+		@es.KIDOKUFLAG = @_RINT(1)
+		IF[@es.KIDOKUFLAG]
+		{
+			IF[@es.GSD(110,09)] @es.KIDOKUCOLORFLAG=1 IFEND[]
+			IF[@es.GSD(112,02)] @es.TX.IKKATSU=1 IFEND[]
+		}
+		IFEND[]
+
+
+		STR[$BID="ES.GAMEMAIN."]
+		IF[$es.VOICE.FILE(1)+$es.VOICE.FILE(2)+$es.VOICE.FILE(3)+$es.VOICE.FILE(4)+$es.VOICE.FILE(5)+$es.VOICE.FILE(6)+$es.VOICE.FILE(7)+$es.VOICE.FILE(8)+$es.VOICE.FILE(9)+$es.VOICE.FILE(10)!=""]
+		{
+			\BT.N0($BID+"BTN.VOICE")
+	//		\BT.ONOFF($BID+"BTN.VOICE",,@es.VOICEPLAYFLAG)
+		}
+		ELSE[]
+		{
+			\BT.N1($BID+"BTN.VOICE")
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// テキストフォント初期化
+	//----------------------------------------------------------------
+		FONT[NAME=$es.GSD(113)]
+
+
+	return[]
+}
+
+
+//■TX.End
+#=es.TX.End
+{
+
+	//------------------------------------------------------------
+	// ボイス情報初期化
+	//------------------------------------------------------------
+		IF[@es.LOADTHRU==0]
+			GOSUB[#=es.Voice.DataInit]
+		IFEND[]
+
+	//------------------------------------------------------------
+	// ボイス停止
+	//------------------------------------------------------------
+		IF[@es.GSD(111,02)==0]
+		{
+			GOSUB[#=es.VOICE.DEL]
+		}
+		IFEND[]
+
+	//------------------------------------------------------------
+	// ロード時なら、ロード完了までここで待つ.その１
+	//------------------------------------------------------------
+		LOOP[]
+		{
+			IF[@es.LoadFlag==0] LOOPBREAK[] IFEND[]
+			WAIT[FRAME=1]
+			//\_dmes(loadwait)
+		}
+		LOOPEND[]
+
+//\_dmes(es.TX.End.End)
+
+	return[]
+}
+
+
+//■TX.Final
+#=es.TX.Final
+{
+	//------------------------------------------------------------
+	// 既読判定
+	//------------------------------------------------------------
+	IF[@es.LOADTHRU==0]
+		\_task.info($es.ScenarioTaskID, 1)
+		INT[@mFNo = @_RINT(2)]
+		INT[@mTLine = @_RINT(4)]
+		\KIDOKU.ON(@mFNo, @mTLine)
+	IFEND[]
+
+	//------------------------------------------------------------
+	// ノベルモードでなければスクリプト位置を記憶
+	//------------------------------------------------------------
+	//	IF[@TX.AUTOPAGE.N==0]
+		{
+			IF[@TX.AUTOCLICK.L==1 || @TX.SCRIPTSAVEFLAG]
+			{
+				@TX.SCRIPTSAVEFLAG=0
+				\SCRIPTPOS_SAVE
+			}
+			IFEND[]
+		}
+	//	IFEND[]
+
+		@TX.AUTOCLICK.N  = 0
+		@TX.AUTORETURN.N = 0
+		@TX.AUTOPAGE.N   = 0
+
+	//------------------------------------------------------------
+	// シナリオタスク再開
+	//------------------------------------------------------------
+		\es.TXTASK.TX.E1
+
+	return[]
+}
+
+//============================================================================
+//
+//■テキスト処理タスク メイン
+//
+//============================================================================
+#=es.TX.Main.103
+{
+	//------------------------------------------------------------
+	// 色、サイズ、速度情報をバッファに格納
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.BUFSET.COL]  // 色
+		GOSUB[#=es.TX.BUFSET.SIZE] // サイズ
+		GOSUB[#=es.TX.BUFSET.SPD]  // 速度
+
+	//------------------------------------------------------------
+	// テキストからルビ記述を抜き出し
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.RUBY.CHK]
+
+	//------------------------------------------------------------
+	// テキストからキャラ名抜き出し
+	//------------------------------------------------------------
+//		IF[@TX.AUTOCLICK.L] //ADVモードのみ
+	//	IF[$TXN.NAME.TEXT=="" && @TX.PrevLine.X==0 && @TX.PrevLine.Y==0]
+		IF[$TXN.NAME.TEXT==""]
+			GOSUB[#=es.TX.CHARNAME.CHK]
+		IFEND[]
+
+	//------------------------------------------------------------
+	// テキスト/テキストタスク文字数を調べる
+	//------------------------------------------------------------
+		\_strlen($TX)(@TX.LEN)
+		\_strlen($TX.TASK)(@TX.TASK.LEN)
+
+//\_dmes("@TX.LEN="+$(@TX.LEN)+", @TX.TASK.LEN="+$(@TX.TASK.LEN))
+
+	//------------------------------------------------------------
+	// 表示位置情報をバッファに格納（禁則処理付）
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.BUFSET.XY]
+
+	//------------------------------------------------------------
+	// 名前テキスト表示
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.NAME.SHOW]
+
+@es.SEL.SEQFLAG=0
+
+	//------------------------------------------------------------
+	// 
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.TIMEINIT]
+
+	return[]
+}
+
+//------------------------------------------------------------
+// タスクが全て終了するまで繰り返す.
+//------------------------------------------------------------
+#=es.TX.Main.104
+{
+	INT[@ret]
+
+	LOOP[SET=1]
+	{
+		//--------------------------------------------------------------------
+		// タスクが無くなったら抜ける(文中のクリック待ちの時等に必要)
+		//--------------------------------------------------------------------
+			IF[@TX.TASK.POS > @TX.TASK.LEN] @ret=1;LOOPBREAK[] IFEND[]
+
+		//--------------------------------------------------------------------
+		// テキストウェイト無視して一括表示
+		//--------------------------------------------------------------------
+			IF[@es.TX.SKIP]       @es.TX.IKKATSU=1 IFEND[]
+			IF[@es.TX.CSKIP]      @es.TX.IKKATSU=1 IFEND[]
+			IF[@es.TEXT.TIPCLICK] @es.TEXT.TIPCLICK=0;@es.TX.IKKATSU=1 IFEND[]
+
+		//--------------------------------------------------------------------
+		// 待ち時間の基準となる時刻を取得
+		//--------------------------------------------------------------------
+			@mTX.NOWTIME = @_OS_TIME(1)
+	}
+	LOOPEND[]
+
+	return[rint=@ret]
+}
+
+#=es.TX.Main.105
+{
+	STR[$str]
+	STR[$one]
+	INT[@nextflag]
+
+	LOOP[]
+	{
+
+		//--------------------------------------------------------------------
+		// メッセージウェイト分だけ待ったか、クリックによる一括表示モードか
+		//--------------------------------------------------------------------
+			@nextflag=0
+			IF[(@mTX.NOWTIME - @TX.WaitTime.Start >= @TX.WaitTime.Next) || @es.TX.IKKATSU==1 || @TX.WaitTime.First==1]
+				@nextflag=1 //次の文字表示フラグ
+			IFEND[]
+			IF[@nextflag==0] @TX.STATE=4;LOOPBREAK[] IFEND[] //表示フラグまだなら抜ける.
+
+		//--------------------------------------------------------------------
+		// タスクを調べ、それに応じた処理.
+		//--------------------------------------------------------------------
+			IF[@TX.TASK.POS > @TX.TASK.LEN] @TX.STATE=950;LOOPBREAK[] IFEND[]
+			\_strmid($TX.TASK, @TX.TASK.POS, 1)($str)
+
+			IF[$str=='2']
+			{
+				GOSUB[#=es.TX.OUTPUT.ONE pint=2] // 全角
+			}
+			ELSE[$str=='1']
+			{
+				GOSUB[#=es.TX.OUTPUT.ONE pint=1] // 半角
+			}
+			ELSE[$str=='c'] //クリック待ち(改頁用)
+			{
+				@es.TX.ICON.TYPE=0
+				GOSUB[#=es.TX.CLICK.PRE]
+				@TX.STATE=204;LOOPBREAK[]
+			}
+			ELSE[$str=='C'] //クリック待ち(改行用)
+			{
+				@es.TX.ICON.TYPE=1
+				GOSUB[#=es.TX.CLICK.PRE]
+				@TX.STATE=201;LOOPBREAK[]
+			}
+			ELSE[$str=="R"] // 改行
+			{
+		//		@TX.PrevLine.X = 0
+		//		@TX.PrevLine.Y += @TX.SY.MAX + @T(36,20)
+		//		IF[@T(36,21)] @TX.PrevLine.Y += @TX.RUBY.SY + @T(36,24) IFEND[]
+//\_dmes("@TX.PrevLine.Y = "+$(@TX.PrevLine.Y))
+				\LOG.W.TX.ONE("", "R")
+			}
+			ELSE[$str=="P"] //改頁
+			{
+				GOSUB[#=es.Mes.Clear]
+
+				//表示位置初期化
+				@TX.PrevLine.X=0;@TX.PrevLine.Y=0
+
+				//ログ改頁
+				\LOG.ADD
+
+///xADV
+GOSUB[#=es.Voice.DataInit]
+
+				//改頁直後処理
+				GOSUB[#=es.TextPageAfter]
+				GOSUB[#=es.TextPageAfter2]
+			}
+			ELSE[$str=="E"] // 行末
+			{
+//\_dmes("行末Ｅ")
+				GOSUB[#=es.TX.OUTPUT.LINEEND]
+			}
+			ELSE[$str=="Z"] // 行末2
+			{
+//\_dmes("行末Ｚ")
+				GOSUB[#=es.TX.OUTPUT.Z] @TX.STATE=950;LOOPBREAK[]
+			}
+			IFEND[]
+
+		//------------------------------------------------------------
+		// タスク読込位置の移動
+		//------------------------------------------------------------
+			@TX.TASK.POS+=1
+
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+
+//============================================================================
+//■クリック待ち・改行・改頁コードを探し、'C''R''P'に置き換える.
+//  また、'E'の直前にある'C''R''P'は'E'の後に移動させる.
+//============================================================================
+#=es.TX.CRPREPLACE
+{
+	INT[@pos=@TX.POS]
+	INT[@taskpos=@TX.TASK.POS]
+	STR[$str]
+	STR[$one]
+	LOOP[]
+	{
+		IF[@taskpos > @TX.TASK.LEN] LOOPBREAK[] IFEND[]
+
+		\_strmid($TX.TASK, @taskpos, 1)($str)
+		IF[$str=="2"]
+		{
+			//１文字分抽出
+			\_strmid($TX, @pos, 1)($one)
+
+			IF[$one==$_CHR(0xEF)+$_CHR(0xF3)] //C
+				\_strreplace($TX.TASK, "C", @taskpos)($TX.TASK)
+				\_strdel($TX, @pos, 1)($TX);@pos-=1;@TX.LEN-=1
+			IFEND[]
+			IF[$one==$_CHR(0xEF)+$_CHR(0xF0)] //R
+				\_strreplace($TX.TASK, "R", @taskpos)($TX.TASK)
+				\_strdel($TX, @pos, 1)($TX);@pos-=1;@TX.LEN-=1
+			IFEND[]
+			IF[$one==$_CHR(0xEF)+$_CHR(0xF2)] //P
+				\_strreplace($TX.TASK, "P", @taskpos)($TX.TASK)
+				\_strdel($TX, @pos, 1)($TX);@pos-=1;@TX.LEN-=1
+			IFEND[]
+		}
+		IFEND[]
+
+		@pos+=1
+		@taskpos+=1
+	}
+	LOOPEND[]
+
+	\_strmid($TX.TASK, @TX.TASK.LEN, 1)
+	IF[$_RSTR(1)=="E"]
+	{
+		\_strleft($TX.TASK, @TX.TASK.LEN-1)($TX.TASK)
+		@TX.TASK.LEN-=1
+
+		@taskpos=@TX.TASK.LEN
+
+		LOOP[]
+		{
+			IF[@taskpos <= 0] LOOPBREAK[] IFEND[]
+
+			\_strmid($TX.TASK, @taskpos, 1)
+			IF[$_RSTR(1)!="c" && $_RSTR(1)!="C" && $_RSTR(1)!="R" && $_RSTR(1)!="P"] LOOPBREAK[] IFEND[]
+
+		//	\_dmes("= "+$_RSTR(1))
+			@taskpos-=1
+		}
+		LOOPEND[]
+
+		\_strins($TX.TASK, "E", @taskpos)($TX.TASK)
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//============================================================================
+//■テキストからテキストタスクを生成する
+//  (単純に文字数分"1"か"2"を返すだけ)
+//$_PSTR(1) : テキスト文字列
+//---
+//$_RSTR(1) : テキストタスク文字列
+//============================================================================
+#=es.TX.SETTASK
+{
+	STR[$task]
+	INT[@len]
+	\_strlen($_PSTR(1))(@len)
+	LOOP[SET=@len]
+	{
+		\_strmid($_PSTR(1),@_LC,1)
+		\_strtype($_RSTR(1))
+		$task+=$(@_RINT(1))
+	}
+	LOOPEND[]
+
+	return[rstr=$task]
+}
+
+
+//============================================================================
+//
+//■一文字描画
+//
+//============================================================================
+#=es.TX.OUTPUT.ONE
+{
+
+	//------------------------------------------------------------
+	// 
+	//------------------------------------------------------------
+		@es.TXSTART=1
+
+	//------------------------------------------------------------
+	// 即表示フラグOFF
+	//------------------------------------------------------------
+		@TX.WaitTime.First = 0
+
+	//------------------------------------------------------------
+	// 待ち時間を設定
+	//------------------------------------------------------------
+		@TX.WaitTime.Next += @TX.BUF.SPD(@TX.POS) / (3-@_PINT(1))
+
+	//------------------------------------------------------------
+	// ボタン座標取得
+	//------------------------------------------------------------
+		GOSUB[#=es.BT.XY.GET pstr="ES.GAMEMAIN.TIP.MESW.TX" pint2=0]
+		INT[@TX.X=@_RINT(1)]
+		INT[@TX.Y=@_RINT(2)]
+
+	//------------------------------------------------------------
+	// １文字分抽出
+	//------------------------------------------------------------
+		\_strmid($TX, @TX.POS, 1)
+		STR[$txone = $_RSTR(1)]
+		\_strmid($TX.TASK, @TX.TASK.POS, 1)
+		STR[$txtaskone = $_RSTR(1)]
+
+	//------------------------------------------------------------
+	// ログ用に記録
+	//------------------------------------------------------------
+		\LOG.W.TX.ONE( $txone, $txtaskone )
+
+	//------------------------------------------------------------
+	// 文字を描画
+	//------------------------------------------------------------
+
+		IF[@TX.BUF.TCFLAG(@TX.POS)] //文字色変更時
+		{
+			\FONT.COLOR( @TX.BUF.COLOR(@TX.POS) )
+			IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.BUF.COLOR(@TX.POS), @TX.BUF.COLOR2(@TX.POS) ) IFEND[]
+		}
+		ELSE[@TX.CHARCOLOR!=-1] //キャラ文字色定義時
+		{
+			IF[@es.KIDOKUCOLORFLAG]	//既読色か
+				\FONT.COLOR( @TX.CHARKCOLOR )
+				IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.CHARKCOLOR, @TX.CHARKCOLOR2 ) IFEND[]
+			ELSE[]					//否か
+				\FONT.COLOR( @TX.CHARCOLOR )
+				IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.CHARCOLOR, @TX.CHARCOLOR2 ) IFEND[]
+			IFEND[]
+		}
+		ELSE[] //通常時
+		{
+			IF[@es.KIDOKUCOLORFLAG]	//既読色か
+				\FONT.COLOR( @T(36,16) )
+				IF[@es.GSD(115,15)==1] \FONT.COLOR( @T(36,16), @T(36,17) ) IFEND[]
+			ELSE[]					//否か
+				\FONT.COLOR( @TX.COLOR )
+				IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.COLOR, @TX.COLOR2 ) IFEND[]
+			IFEND[]
+		}
+		IFEND[]
+
+		\FONT.SIZE( @TX.BUF.SB(@TX.POS), @TX.BUF.SY(@TX.POS) )
+//		\FONT.SIZE( @TX.BUF.SX(@TX.POS), @TX.BUF.SY(@TX.POS) )
+		\FONT.XY( (4)+@TX.BUF.X(@TX.POS), (4)+@TX.BUF.Y(@TX.POS) )
+		IF[@es.GSD(115,14)==1] \FONT.BOLD( 1 )											IFEND[]
+		IF[@es.GSD(115,09)==1] \FONT.SHADE( @TX.SHADE.X, @TX.SHADE.Y, @TX.SHADE.COLOR )	IFEND[]
+		IF[@es.GSD(115,08)==1] \FONT.OUTLINE( @TX.OUTLINE.COLOR ) IFEND[]
+		\BT.FONT.DRAW("ES.GAMEMAIN.TIP.MESW.TX",, $txone)
+
+		INT[@icx=@TX.X+(4)+@TX.BUF.X(@TX.POS)+@TX.BUF.SX(@TX.POS)]
+		INT[@icy=@TX.Y+(4)+@TX.BUF.Y(@TX.POS)]
+		GOSUB[#=es.TX.ICON.XY2.SET pint=@icx pint2=@icy]
+
+
+	//------------------------------------------------------------
+	// ルビ描画処理
+	//------------------------------------------------------------
+		INT[@chkX]
+
+		IF[@T(36,21)]
+		{
+			//------------------------------------------------------------
+			// ルビバッファがあれば描画
+			//------------------------------------------------------------
+				IF[@TX.BUF.RUBY( @TX.POS ) > 0]
+				{
+					//------------------------------------------------------------
+					// ルビ表示位置を算出
+					//------------------------------------------------------------
+						\_strlen( $TX.BUF.RUBY.STR(@TX.BUF.RUBY(@TX.POS)) )
+						INT[@len1 = @_RINT(1)]
+						INT[@len2 = @TX.BUF.RUBY.SRCLEN(@TX.BUF.RUBY(@TX.POS))]
+						INT[@sx1  = (@TX.RUBY.SX * @len1) + (@T(36,23) * (@len1-1))]   //ルビ文字の幅
+						INT[@sx2  = (@TX.BUF.SX(@TX.POS) * @len2) + (@T(36,19) * (@len2-1))] //ルビ振られる文字の幅
+						INT[@posx = (@sx2 - @sx1) / 2]
+
+///tri
+/*ルビはみだしチェック
+					@chkX=(4)+@TX.BUF.X(@TX.POS)+@posx
+					IF[@chkX<(203) || @chkX+@sx1>(700)]
+						\_log($_TEXT)
+					IFEND[]
+*/
+
+					//------------------------------------------------------------
+					// 描画
+					//------------------------------------------------------------
+						LOOP[SET=@len1]
+						{
+							IF[@TX.BUF.TCFLAG(@TX.POS)] //文字色変更時
+							{
+								\FONT.COLOR( @TX.BUF.COLOR(@TX.POS) )
+								IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.BUF.COLOR(@TX.POS), @TX.BUF.COLOR2(@TX.POS) ) IFEND[]
+							}
+							ELSE[@TX.CHARCOLOR!=-1] //キャラ文字色定義時
+							{
+								IF[@es.KIDOKUCOLORFLAG]	//既読色か
+									\FONT.COLOR( @TX.CHARKCOLOR )
+									IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.CHARKCOLOR, @TX.CHARKCOLOR2 ) IFEND[]
+								ELSE[]					//否か
+									\FONT.COLOR( @TX.CHARKCOLOR )
+									IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.CHARKCOLOR, @TX.CHARKCOLOR2 ) IFEND[]
+								IFEND[]
+							}
+							ELSE[] //通常時
+							{
+								IF[@es.KIDOKUCOLORFLAG]	//既読色か
+									\FONT.COLOR( @T(36,16) )
+									IF[@es.GSD(115,15)==1] \FONT.COLOR( @T(36,16), @T(36,17) ) IFEND[]
+								ELSE[]					//否か
+									\FONT.COLOR( @TX.RUBY.COLOR )
+									IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.RUBY.COLOR, @TX.RUBY.COLOR2 ) IFEND[]
+								IFEND[]
+							}
+							IFEND[]
+
+							\FONT.SIZE( @TX.RUBY.SX, @TX.RUBY.SY )
+							\FONT.XY( (4)+@TX.BUF.X(@TX.POS)+@posx + ((@TX.RUBY.SX+@T(36,23))*(@_LC-1)) , (4)+@TX.BUF.Y(@TX.POS)-@TX.RUBY.SY-@T(36,24) )
+							\FONT.BOLD( 1 )
+							\FONT.SHADE( @TX.RUBY.SHADE.X, @TX.RUBY.SHADE.Y, @TX.RUBY.SHADE.COLOR )
+							\FONT.OUTLINE( @TX.RUBY.OUTLINE.COLOR )
+
+							\_strmid($TX.BUF.RUBY.STR(@TX.BUF.RUBY(@TX.POS)), @_LC, 1)
+							\BT.FONT.DRAW("ES.GAMEMAIN.TIP.MESW.TX",, $_RSTR(1))
+						}
+						LOOPEND[]
+				}
+				IFEND[]
+
+		}
+		IFEND[]
+
+
+//	IFEND[]
+
+	//------------------------------------------------------------
+	// テキスト読込位置の移動
+	//------------------------------------------------------------
+		@TX.POS += 1
+
+
+	return[]
+}
+
+
+//============================================================================
+//
+//■クリック待ち
+//
+//============================================================================
+#=es.TX.CLICK.PRE
+{
+
+	//----------------------------------------------------------------
+	// テキスト文末停止時間初期化
+	//----------------------------------------------------------------
+		@TX.LineEndTime = 0
+
+	//----------------------------------------------------------------
+	// テキスト文末停止時間セット
+	//----------------------------------------------------------------
+		IF[@TX.LineEndTime==0]
+		{
+			@TX.LineEndTime = @_OS_TIME(1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	// 未読スキップ防止処理
+	//----------------------------------------------------------------
+		\_task.info($es.ScenarioTaskID, 1)
+		INT[@mFNo=@_RINT(2)]
+		INT[@mTLine=@_RINT(4)]
+		\KIDOKU.CHECK(@mFNo, @mTLine)
+		@es.KIDOKUFLAG = @_RINT(1)
+
+		IF[@es.GSD(110,04)==1] // 未読スキップ設定なら
+		{
+			IF[@es.gSKIP==0] @es.gSKIP=1 IFEND[]
+		}
+		ELSE[] // 未読で止まる設定
+		{
+			IF[@es.KIDOKUFLAG==0]
+			{
+				IF[@es.gSKIP==1] @es.gSKIP=0 IFEND[]
+				@es.TX.SKIP=0
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// フラグ立てる
+	//----------------------------------------------------------------
+		@es.TX.CWAIT = 1
+
+//\_dmes("es.TX.CWAIT=1")
+
+/*
+	//----------------------------------------------------------------
+	// CTRLスキップ処理
+	//----------------------------------------------------------------
+		//IF[@es.gSKIP]
+		{
+			IF[@es.SCENARIOSTOP==0]
+			{
+				//----------------------------------------------------------------
+				// 強制オートモードかつスキップ不許可ならCTRL認識させない
+				//----------------------------------------------------------------
+				IF[\es.SuperAutoPlayMode==0 || \es.SuperAutoPlayTimeTextSk==1]
+				{
+					IF[@es.TX.CSKIP] @es.TX.CWAIT=0 IFEND[]	//手動スキップ
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		//IFEND[]
+*/
+
+	return[]
+}
+
+
+#=es.TX.CLICK.205
+{
+	@es.TX.ICON.TYPE=0
+	@TX.TASK.POS+=1	//タスク読込位置の移動
+	return[]
+}
+
+
+#=es.TX.TIMEINIT
+{
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		@TX.WaitTime.Start = @_OS_TIME(1)
+		@TX.WaitTime.First = 1
+		@TX.WaitTime.Next  = 0
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■クリック待ち処理
+//--------------------------------------------------------------------
+#=es.TX.CLICKWAIT.MAIN
+{
+	IF[@es.TX.CWAIT==0]
+	{
+		IF[@es.WA.MODE==0] //これ入れないと \WA 中の CLICK スキップが効かない
+			@es.TEXT.TIPCLICK = 0 //初期化される
+		IFEND[]
+	}
+	ELSE[]
+//	IF[1]
+	{
+
+		LOOP[SET=1]
+		{
+
+			//----------------------------------------------------------------
+			// デバッグ機能 Tキーで現在のテキストをコピー
+			//----------------------------------------------------------------
+			/*	IF[@_DEBUGMODE>=0 && @_KEY_T==1]
+				{
+					//$_CHR(f0)系をあらかじめ処理
+					//
+					STR[$t=$TX]
+					\_strlen($t)
+					LOOP[]
+					{
+						//
+						//
+						//
+						LOOPBREAK[]
+					}
+					LOOPEND[]
+
+					CLIPACT[TEXT=1 SET=$TX]
+				}
+				IFEND[]
+			*/
+
+
+			//スキップ速度の調整
+			//
+			INT[@mSKIPTIME = @es.GSD(120,04)]
+			  IF[@mSKIPTIME>=192] @mSKIPTIME = @es.GSD(120,04)*4
+			ELSE[@mSKIPTIME>=128] @mSKIPTIME = @es.GSD(120,04)*2
+			ELSE[@mSKIPTIME>=064] @mSKIPTIME = @es.GSD(120,04)*1.5
+			IFEND[]
+
+
+			//----------------------------------------------------------------
+			// スキップ停止処理
+			//----------------------------------------------------------------
+			IF[@es.TX.SKIP]
+			{
+				IF[@_KEYLAST  >0] @_KEYLAST  =0;@es.TX.SKIP=0 IFBREAK[LV=2] IFEND[]
+				IF[@_MOUSELAST>0] @_MOUSELAST=0;@es.TX.SKIP=0 IFBREAK[LV=2] IFEND[]
+
+				IF[@_OS_TIME(1) - @SKIPTIME >= @mSKIPTIME]
+				{
+					GOSUB[#=es.VOICE.DEL] //強制的にボイス切る
+
+					@SKIPTIME = @_OS_TIME(1)
+
+					@es.TX.CWAIT=0
+
+					LOOPBREAK[]
+				}
+				IFEND[]
+
+			}
+			IFEND[]
+
+
+			{
+				//----------------------------------------------------------------
+				// テキスト文末停止時間チェック
+				//----------------------------------------------------------------
+					GOSUB[#=TextLineEndTime_Check]
+
+					IF[@_RINT(1)] @es.TX.CWAIT=0;LOOPBREAK[] IFEND[]
+
+				//----------------------------------------------------------------
+				// 読み進める
+				//----------------------------------------------------------------
+					//----------------------------------------------------------------
+					// 強制オートモードかつクリック不許可なら認識させない
+					//----------------------------------------------------------------
+IF[@es.SELMODE==0] ///x暫定的
+{
+						IF[\es.SuperAutoPlayMode==0 || \es.SuperAutoPlayTimeTextCl==1]
+						{
+							IF[@es.TEXT.TIPCLICK]
+							{
+								@es.TEXT.TIPCLICK=0
+								@es.TX.CWAIT=0;@es.KEYOP.THRU.COUNT=5;LOOPBREAK[]
+							}
+							IFEND[]
+						}
+						IFEND[]
+
+
+				//----------------------------------------------------------------
+				// CTRLスキップ処理
+				//----------------------------------------------------------------
+					//IF[@es.gSKIP]
+					{
+						//----------------------------------------------------------------
+						// 強制オートモードかつスキップ不許可ならCTRL認識させない
+						//----------------------------------------------------------------
+						IF[\es.SuperAutoPlayMode==0 || \es.SuperAutoPlayTimeTextSk==1]
+						{
+							IF[@_OS_TIME(1) - @SKIPTIME >= @mSKIPTIME]
+							{
+
+								IF[(@es.KIDOKUFLAG==1 || (@es.KIDOKUFLAG==0 && @es.GSD(110,05)==1)) && @es.TX.CSKIP>0]
+								{
+									GOSUB[#=es.VOICE.DEL] //CTRL押したなら強制的にボイス切る
+
+									@SKIPTIME = @_OS_TIME(1)
+
+									@es.TX.CWAIT=0
+
+									LOOPBREAK[]
+								}
+								IFEND[]	//手動スキップ
+
+							}
+							IFEND[]
+						}
+						IFEND[]
+					}
+					//IFEND[]
+}
+IFEND[]
+
+			}
+//			IFEND[]
+
+
+		}
+		LOOPEND[]
+
+	}
+	IFEND[]
+
+
+	/*
+	@fl=0
+	IF[@es.MG.AUTO]
+	{
+		@es.TX.SKIP=0
+		@es.TX.AUTO=0
+
+		IF[@es.MG.AUTONO==01 && @es.GSD(093,01)==1] @fl=1 IFEND[]
+		IF[@es.MG.AUTONO==02 && @es.GSD(093,02)==1] @fl=1 IFEND[]
+		IF[@es.MG.AUTONO==03 && @es.GSD(093,03)==1] @fl=1 IFEND[]
+		IF[@es.MG.AUTONO==04 && @es.GSD(093,04)==1] @fl=1 IFEND[]
+		IF[@es.MG.AUTONO==05 && @es.GSD(093,05)==1] @fl=1 IFEND[]
+		IF[@es.MG.AUTONO==06 && @es.GSD(093,06)==1] @fl=1 IFEND[]
+		IF[@es.MG.AUTONO==07 && @es.GSD(093,07)==1] @fl=1 IFEND[]
+		IF[@es.MG.AUTONO==08 && @es.GSD(093,08)==1] @fl=1 IFEND[]
+		IF[@es.MG.AUTONO==09 && @es.GSD(093,09)==1] @fl=1 IFEND[]
+		IF[@es.MG.AUTONO==10 && @es.GSD(093,10)==1] @fl=1 IFEND[]
+
+		IF[@fl]
+		{
+			IF[@_MOUSE_L==1 || @_MOUSE_L==2 || @_MOUSE_R==1 || @_MOUSE_R==2 || @es.TX.CSKIP>0]
+			{
+				@_MOUSE_L=0
+				@_MOUSE_R=0
+				@es.MG.AUTOSKIP=1
+				//\_dmes("AUTOSKIP")
+			}
+			IFEND[]
+		}
+		IFEND[]
+	}
+	IFEND[]
+	*/
+
+	return[]
+}
+
+
+
+
+//-------------------------------------------------------------------------
+//■行末処理
+//-------------------------------------------------------------------------
+#=es.TX.OUTPUT.LINEEND
+{
+	//------------------------------------------------------------
+	// 行末の手動改行、手動改頁、手動自動クリック待ち有無を調べる
+	//------------------------------------------------------------
+//\_dmes("@TX.TASK.POS="+$(@TX.TASK.POS))
+		INT[@cf]INT[@rf]INT[@pf]
+		LOOP[]
+		{
+			\_strmid($TX.TASK, @TX.TASK.POS+1, 1)
+			IF[$_RSTR(1)=="C"]
+			{
+				\_strdel($TX.TASK, @TX.TASK.POS+1, 1)($TX.TASK);@TX.TASK.LEN-=1
+				@cf=1;LOOPCONTINUE[]
+			}
+			IFEND[] //C
+			IF[$_RSTR(1)=="R"]
+			{
+				\_strdel($TX.TASK, @TX.TASK.POS+1, 1)($TX.TASK);@TX.TASK.LEN-=1
+				@rf=1;LOOPCONTINUE[]
+			}
+			IFEND[] //R
+			IF[$_RSTR(1)=="P"]
+			{
+				\_strdel($TX.TASK, @TX.TASK.POS+1, 1)($TX.TASK);@TX.TASK.LEN-=1
+				@pf=1;LOOPCONTINUE[]
+			}
+			IFEND[] //P
+			LOOPBREAK[]
+		}
+		LOOPEND[]
+
+	//------------------------------------------------------------
+	// 自動クリック待ち、自動改行、自動改頁をフラグに反映
+	//------------------------------------------------------------
+//\_dmes("[LINEEND][BEFORE]"+\_R+"$TX="+$TX+\_R+"$TX.TASK="+$TX.TASK+"  @TX.TASK.LEN="+$(@TX.TASK.LEN)+\_R+"crp="+$(@cf)+$(@rf)+$(@pf))
+		IF[@TX.AUTOCLICK.N ==0 && @TX.AUTOCLICK.L ==1] @cf=1 IFEND[] //自動クリック待ち
+		IF[@TX.AUTORETURN.N==0 && @TX.AUTORETURN.L==1] @rf=1 IFEND[] //自動改行
+		IF[@TX.AUTOPAGE.N  ==0 && @TX.AUTOPAGE.L  ==1] @pf=1 IFEND[] //自動改頁
+
+	//------------------------------------------------------------
+	// 改頁有りなら、クリック待ちアイコンも改頁用にする
+	//------------------------------------------------------------
+		IF[@pf==1 && @cf==1] @cf=2 IFEND[]
+
+	//------------------------------------------------------------
+	// クリック待ち、改行、改頁を順番に挿入
+	//------------------------------------------------------------
+		INT[@pos=@TX.TASK.POS]
+		IF[@cf==1] \_strins($TX.TASK, "C", @pos)($TX.TASK);@pos+=1;@TX.TASK.LEN+=1;IFEND[]
+		IF[@cf==2] \_strins($TX.TASK, "c", @pos)($TX.TASK);@pos+=1;@TX.TASK.LEN+=1;IFEND[]
+		IF[@rf==1]
+		{
+			\_strins($TX.TASK, "R", @pos)($TX.TASK);@pos+=1;@TX.TASK.LEN+=1
+
+				@TX.PrevLine.X = 0
+				@TX.PrevLine.Y += @TX.SY.MAX + @T(36,20)
+				IF[@T(36,21)] @TX.PrevLine.Y += @TX.RUBY.SY + @T(36,24) IFEND[]
+//\_dmes("@TX.PrevLine.Y = "+$(@TX.PrevLine.Y))
+		}
+		IFEND[]
+		IF[@pf==1] \_strins($TX.TASK, "P", @pos)($TX.TASK);@pos+=1;@TX.TASK.LEN+=1;IFEND[]
+
+	//------------------------------------------------------------
+	// 行末２挿入
+	//------------------------------------------------------------
+		\_strins($TX.TASK, "Z", @pos)($TX.TASK);@TX.TASK.LEN+=1
+
+//\_dmes("[LINEEND][AFTER] "+\_R+"$TX="+$TX+\_R+"$TX.TASK="+$TX.TASK+"  @TX.TASK.LEN="+$(@TX.TASK.LEN)+\_R+"crp="+$(@cf)+$(@rf)+$(@pf))
+
+//	@TX.AUTOCLICK.N  = 0
+//	@TX.AUTORETURN.N = 0
+//	@TX.AUTOPAGE.N   = 0
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//■行末処理２
+//-------------------------------------------------------------------------
+#=es.TX.OUTPUT.Z
+{
+
+//	IF[@TX.AUTOCLICK.L]
+	IF[1]
+	{
+		//------------------------------------------------------------
+		// テキスト読込位置の初期化
+		//------------------------------------------------------------
+			@TX.POS = 1
+			@TX.TASK.POS = 1
+
+	}
+	IFEND[]
+
+	//------------------------------------------------------------
+	// 色情報格納位置の初期化
+	//------------------------------------------------------------
+		@TX.ColorReadPos = 1
+		@TX.ColorWritePos = 1
+
+	//------------------------------------------------------------
+	// サイズ情報格納位置の初期化
+	//------------------------------------------------------------
+		@TX.SizeReadPos = 1
+		@TX.SizeWritePos = 1
+
+	//------------------------------------------------------------
+	// 速度情報格納位置の初期化
+	//------------------------------------------------------------
+		@TX.WaitTimeReadPos = 1
+		@TX.WaitTimeWritePos = 1
+
+	//------------------------------------------------------------
+	// 
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.TIMEINIT]
+
+	//------------------------------------------------------------
+	// 全タスク終了したら、ウェイトかけずにもう一度全タスクを実行
+	//------------------------------------------------------------
+//		WAIT[FRAME=1]
+		TASK[RESTART=1]
+
+	return[]
+}
+
+
+
+#=es.TextPageAfter2
+{
+	//------------------------------------------------------------
+	// 文字情報初期化
+	//------------------------------------------------------------
+		IF[1] ///x 設定可能にする.
+		{
+			$TX.DEFSTR = $T(36,18)
+			GOSUB[#=es.TDDEF.SEARCH pstr=$TX.DEFSTR]
+			@TX.SX = @_RINT(1) / 65536
+			@TX.SY = @_RINT(1) % 65536
+			@TX.COLOR  = @_RINT(2)
+			@TX.COLOR2 = @_RINT(3)
+			@TX.SHADE.X = @_RINT(5) / 65536
+			@TX.SHADE.Y = @_RINT(5) % 65536
+			@TX.SHADE.COLOR = @_RINT(6)
+			@TX.OUTLINE.COLOR = @_RINT(7)
+
+			$TXN.DEFSTR = $T(36,31)
+			GOSUB[#=es.TDDEF.SEARCH pstr=$TXN.DEFSTR]
+			@TXN.SX = @_RINT(1) / 65536
+			@TXN.SY = @_RINT(1) % 65536
+			@TXN.COLOR  = @_RINT(2)
+			@TXN.COLOR2 = @_RINT(3)
+			@TXN.SHADE.X = @_RINT(5) / 65536
+			@TXN.SHADE.Y = @_RINT(5) % 65536
+			@TXN.SHADE.COLOR = @_RINT(6)
+			@TXN.OUTLINE.COLOR = @_RINT(7)
+
+			$TX.RUBY.DEFSTR = $T(36,22)
+			GOSUB[#=es.TDDEF.SEARCH pstr=$TX.RUBY.DEFSTR]
+			@TX.RUBY.SX = @_RINT(1) / 65536
+			@TX.RUBY.SY = @_RINT(1) % 65536
+			@TX.RUBY.COLOR  = @_RINT(2)
+			@TX.RUBY.COLOR2 = @_RINT(3)
+			@TX.RUBY.SHADE.X = @_RINT(5) / 65536
+			@TX.RUBY.SHADE.Y = @_RINT(5) % 65536
+			@TX.RUBY.SHADE.COLOR = @_RINT(6)
+			@TX.RUBY.OUTLINE.COLOR = @_RINT(7)
+
+			@TX.TCFLAG = 0
+		}
+		IFEND[]
+
+
+	//------------------------------------------------------------
+	// 
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.TIMEINIT]
+
+
+	//------------------------------------------------------------
+	// テキスト一括表示フラグの初期化
+	//------------------------------------------------------------
+		@es.TX.IKKATSU = 0
+
+
+	//------------------------------------------------------------
+	// 自動空白挿入機能オンに戻す
+	//------------------------------------------------------------
+		@es.LSD(035,01)=0
+
+///xLUN
+	//------------------------------------------------------------
+	// オートモード進行バー画像初期化
+	//------------------------------------------------------------
+		//
+
+
+	//------------------------------------------------------------
+	// テキストカウント用
+	//------------------------------------------------------------
+		IF[@es.LSD(091,04)>0]
+		{
+			@es.LSD(091,04)-=1
+			IF[@es.LSD(091,04)<=0]
+			{
+				//初期化
+				@es.LSD(091,06)=0
+			}
+			IFEND[]
+		}
+		IFEND[]
+		IF[@es.LSD(091,03)>0]
+		{
+			@es.LSD(091,03)-=1
+			IF[@es.LSD(091,03)<=0]
+			{
+				//初期化
+				@es.LSD(091,06)=0
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+
+	//------------------------------------------------------------
+	// 名前 or 名前画像表示されていたらクリア
+	// ※スキップ高速化のため名前があった時だけ処理する
+	//------------------------------------------------------------
+		IF[@TXN.EXIST]
+		{
+			@TXN.EXIST=0
+			GOSUB[#=es.NAMEW.CLEAR]
+		}
+		IFEND[]
+
+	//------------------------------------------------------------
+	// 名前初期化
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.NAME.INIT]
+
+
+	return[]
+}
+
+
+//============================================================================
+//
+//■テキスト文末停止時間チェック
+//
+//============================================================================
+#=TextLineEndTime_Check
+{
+
+	INT[@playflag]
+	INT[@c]INT[@b]
+	INT[@Ret]
+
+	INT[@tx_per]
+	INT[@vo_per]
+
+	//----------------------------------------------------------------
+	// 強制オートモードON
+	//----------------------------------------------------------------
+		IF[\es.SuperAutoPlayMode]
+		{
+			//テキスト
+			IF[@_OS_TIME(1) - @TX.LineEndTime > \es.SuperAutoPlayTimeTextSt]
+			{
+				@tx_per = 100
+			}
+			ELSE[]
+			{
+				@tx_per = (@_OS_TIME(1) - @TX.LineEndTime) * 100.0 / ((@es.GSD(120,02)+25)*20)
+			}
+			IFEND[]
+
+				@es.AUTO.PER = @tx_per
+				GOSUB[#=es.BT.TR.SET pstr="ES.GAMEMAIN.TIP.AUTOGAUGE" pint2=2 pint3=@es.AUTO.PER*256/100]
+
+			//ボイス
+		//	\_task.info($es.ScenarioTaskID, 1)
+		//	IF[@es.GSD(111,01)==2 && @_RINT(5)==0] @vo_per=100 IFEND[] //2…次音声がある時だけ音声再生終了まで待つ
+		//	IF[@es.GSD(111,01)==0] @vo_per=100 IFEND[] //0…音声再生終了まで待たない
+
+			LOOP[SET=(10)]
+			{
+				\VO.PCHK(@_LC);@c=@_RINT(2);@b=@_LC
+
+				//ミュート設定の場合は再生していないものと認識させる
+				@playflag += @_RINT(1) * @es.GSD(010,@c)*@es.GSD(012,@c)*@es.LSD(010,@c)*@es.LSD(012,@c) * @es.GSD(005,50+@b)*@es.GSD(008,50+@b)*@es.LSD(005,50+@b)*@es.LSD(008,50+@b)
+			}
+			LOOPEND[]
+			IF[@playflag==0] @vo_per=100 IFEND[]
+
+			IF[@tx_per==100 && @vo_per==100] @Ret=1 IFEND[]
+
+		}
+	//----------------------------------------------------------------
+	// 強制オートモードOFF
+	//----------------------------------------------------------------
+		ELSE[]
+		{
+			IF[@es.TX.AUTO]
+			{
+				//テキスト
+				IF[@_OS_TIME(1) - @TX.LineEndTime > (@es.GSD(120,02)+25)*20] //500～5620ms
+				{
+					@tx_per = 100
+				}
+				ELSE[]
+				{
+					@tx_per = (@_OS_TIME(1) - @TX.LineEndTime) * 100.0 / ((@es.GSD(120,02)+25)*20)
+				}
+				IFEND[]
+
+					@es.AUTO.PER = @tx_per
+					GOSUB[#=es.BT.TR.SET pstr="ES.GAMEMAIN.TIP.AUTOGAUGE" pint2=2 pint3=@es.AUTO.PER*256/100]
+
+				//ボイス
+				\_task.info($es.ScenarioTaskID, 1)
+				IF[@es.GSD(111,01)==2 && @_RINT(5)==0] @vo_per=100 IFEND[] //2…次音声がある時だけ音声再生終了まで待つ
+				IF[@es.GSD(111,01)==0] @vo_per=100 IFEND[] //0…音声再生終了まで待たない
+
+				LOOP[SET=(10)]
+				{
+					\VO.PCHK(@_LC);@c=@_RINT(2);@b=@_LC
+
+					//ミュート設定の場合は再生していないものと認識させる
+					@playflag += @_RINT(1) * @es.GSD(010,@c)*@es.GSD(012,@c)*@es.LSD(010,@c)*@es.LSD(012,@c) * @es.GSD(005,50+@b)*@es.GSD(008,50+@b)*@es.LSD(005,50+@b)*@es.LSD(008,50+@b)
+				}
+				LOOPEND[]
+				IF[@playflag==0] @vo_per=100 IFEND[]
+
+				IF[@tx_per==100 && @vo_per==100] @Ret=1 IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+	return[RINT=@Ret]
+}
+
+
+//============================================================================
+//
+//■テキストからルビ抜き出し
+//
+//============================================================================
+#=es.TX.RUBY.CHK
+{
+
+	STR[$mFN]
+	STR[$mKANAStr]
+	INT[@mNUM]
+	INT[@mRMode]
+	INT[@mStartPos]
+	INT[@mEndPos]
+
+	//------------------------------------------------------------
+	// 変数初期化
+	//------------------------------------------------------------
+		LOOP[SET=\.TX.MAX] @TX.BUF.RUBY(@_LC)=0 LOOPEND[] // ルビ情報バッファ
+		@mRMode = 0 //ルビモード
+		@mNUM = 1 //ルビ数
+		@TX.RUBY.AnalyzePos = 0 // 解析位置
+
+	//------------------------------------------------------------
+	// 文字数を調べる
+	//------------------------------------------------------------
+		\_strlen($TX)(@TX.RUBY.AnalyzeLen)
+
+	//------------------------------------------------------------
+	// 文字列を順にチェックする
+	//------------------------------------------------------------
+		STR[$one]
+
+		LOOP[]
+		{
+
+			//------------------------------------------------------------
+			// 全文字列チェック終わったら抜ける.
+			//------------------------------------------------------------
+				@TX.RUBY.AnalyzePos+=1
+				IF[@TX.RUBY.AnalyzePos > @TX.RUBY.AnalyzeLen] LOOPBREAK[] IFEND[]
+
+			//------------------------------------------------------------
+			// １文字分抽出
+			//------------------------------------------------------------
+				\_strmid($TX, @TX.RUBY.AnalyzePos, 1)($one)
+
+			//------------------------------------------------------------
+			// ルビ開始文字チェック
+			//------------------------------------------------------------
+				IF[$one==$TX.RubyStartStr]
+				{
+
+					//------------------------------------------------------------
+					// ルビ振り記述エラーチェック
+					//------------------------------------------------------------
+						IF[@mRMode!=0]
+						{
+							\_task.info($es.ScenarioTaskID, 1)($mFN)
+							\_inttostr(@_RINT(3))
+							\_mes( "[エラー] "+$mFN+" "+$_RSTR(1)+"行目 ルビ記述エラーです。" )
+							END[]
+						}
+						IFEND[]
+
+					//------------------------------------------------------------
+					// ルビモード１へ
+					//------------------------------------------------------------
+						@mRMode = 1
+
+					//------------------------------------------------------------
+					// テキストを削除
+					//------------------------------------------------------------
+						GOSUB[#=es.TX.RUBY.CUTTEXT]
+
+					//------------------------------------------------------------
+					// ルビ振り開始文字位置格納
+					//------------------------------------------------------------
+						@mStartPos = @TX.RUBY.AnalyzePos + 1
+
+					//------------------------------------------------------------
+					// ルビ格納文字列初期化
+					//------------------------------------------------------------
+						$mKANAStr = ""
+
+						LOOPCONTINUE[]
+
+				}
+				IFEND[]
+
+
+			//------------------------------------------------------------
+			// ルビ中間区切り文字チェック
+			// ルビ設定内でのみ検出させる.それ以外は普通に出力文字扱い.
+			//------------------------------------------------------------
+				IF[$one==$TX.RubyCenterStr && @mRMode==1]
+				{
+
+					//------------------------------------------------------------
+					// ルビモード２へ
+					//------------------------------------------------------------
+						@mRMode = 2
+
+					//------------------------------------------------------------
+					// テキストを削除
+					//------------------------------------------------------------
+						GOSUB[#=es.TX.RUBY.CUTTEXT]
+
+					//------------------------------------------------------------
+					// ルビ振り終了文字位置格納
+					//------------------------------------------------------------
+						@mEndPos = @TX.RUBY.AnalyzePos
+
+					//------------------------------------------------------------
+					// ルビ振り記述エラーチェック
+					//------------------------------------------------------------
+						IF[@mEndPos < @mStartPos]
+						{
+							\_task.info($es.ScenarioTaskID, 1)($mFN)
+							\_inttostr(@_RINT(3))
+							\_mes( "[エラー] "+$mFN+" "+$_RSTR(1)+"行目 ルビ記述エラーです。" )
+							END[]
+						}
+						IFEND[]
+
+
+						//VARACT[SET=@mStartPos TYPE=1 LET=$Msg] \_dmes("StartPos = "+$Msg)
+						//VARACT[SET=@mEndPos   TYPE=1 LET=$Msg] \_dmes("EndPos   = "+$Msg)
+
+
+						LOOPCONTINUE[]
+
+				}
+				IFEND[]
+
+
+			//------------------------------------------------------------
+			// ルビ終了文字チェック
+			//------------------------------------------------------------
+				IF[$one==$TX.RubyEndStr]
+				{
+
+					//------------------------------------------------------------
+					// ルビ振り記述エラーチェック
+					//------------------------------------------------------------
+						IF[@mRMode!=2]
+						{
+							\_task.info($es.ScenarioTaskID, 1)($mFN)
+							\_inttostr(@_RINT(3))
+							\_mes( "[エラー] "+$mFN+" "+$_RSTR(1)+"行目 ルビ記述エラーです。" )
+							END[]
+						}
+						IFEND[]
+
+					//------------------------------------------------------------
+					// ルビモード０へ
+					//------------------------------------------------------------
+						@mRMode = 0
+
+					//------------------------------------------------------------
+					// テキストを削除
+					//------------------------------------------------------------
+						GOSUB[#=es.TX.RUBY.CUTTEXT]
+
+						//\_dmes("ふりがな = "+$mKANAStr)
+
+					//------------------------------------------------------------
+					// ルビ振りデータをバッファへセット
+					//------------------------------------------------------------
+						IF[$mKANAStr != ""]
+						{
+							// ルビ番号をセット
+							@TX.BUF.RUBY( @mStartPos ) = @mNUM
+
+							// ルビ文字をセット
+							$TX.BUF.RUBY.STR( @mNUM ) = $mKANAStr
+
+							// ルビを振られる方の文字数をセット
+							@TX.BUF.RUBY.SRCLEN( @mNUM ) = @mEndPos - @mStartPos + 1
+
+							// ルビ番号を＋１
+							@mNUM += 1
+
+							IF[@mNUM >= 64]
+							{
+								\_task.info($es.ScenarioTaskID, 1)($mFN)
+								\_inttostr(@_RINT(3))
+								\_mes( "[エラー] "+$mFN+" "+$_RSTR(1)+"行目 ルビ指定が多すぎます。" )
+							}
+							IFEND[]
+						}
+						IFEND[]
+
+
+						LOOPCONTINUE[]
+
+				}
+				IFEND[]
+
+			//------------------------------------------------------------
+			// ふりがな文字チェック
+			//------------------------------------------------------------
+				IF[@mRMode==2]
+				{
+					$mKANAStr += $one // ふりがな文字連結
+
+					GOSUB[#=es.TX.RUBY.CUTTEXT] // １文字分カット
+
+					LOOPCONTINUE[]
+				}
+				IFEND[]
+
+		}
+		LOOPEND[]
+
+
+	//------------------------------------------------------------
+	// ルビ設定モードが終了していなかったらエラー.
+	//------------------------------------------------------------
+		IF[@mRMode>0]
+		{
+			\_task.info($es.ScenarioTaskID, 1)($mFN)
+			\_inttostr(@_RINT(3))
+			\_mes( "[エラー] "+$mFN+" "+$_RSTR(1)+"行目 ルビ記述エラーです。" )
+		}
+		IFEND[]
+
+
+	return[]
+}
+
+
+
+//------------------------------------------------------------
+//■テキストを削除
+//------------------------------------------------------------
+#=es.TX.RUBY.CUTTEXT
+{
+
+	//------------------------------------------------------------
+	// 各種バッファを前にずらす.
+	//------------------------------------------------------------
+		INT[@mI = @TX.RUBY.AnalyzePos]
+		VARACT[SET=@TX.BUF.X()		POP=@mI]
+		VARACT[SET=@TX.BUF.Y()		POP=@mI]
+		VARACT[SET=@TX.BUF.SB()		POP=@mI]
+		VARACT[SET=@TX.BUF.SX()		POP=@mI]
+		VARACT[SET=@TX.BUF.SY()		POP=@mI]
+		VARACT[SET=@TX.BUF.COLOR()	POP=@mI]
+		VARACT[SET=@TX.BUF.COLOR2()	POP=@mI]
+		VARACT[SET=@TX.BUF.TCFLAG()	POP=@mI]
+		VARACT[SET=@TX.BUF.SPD()	POP=@mI]
+		VARACT[SET=@TX.BUF.RUBY()	POP=@mI]
+
+	//------------------------------------------------------------
+	// テキストを削除
+	//------------------------------------------------------------
+		VARACT[CUT=1 SET=$TX POS=@TX.RUBY.AnalyzePos LENGTH=1]
+
+	//------------------------------------------------------------
+	// テキストタスクを削除
+	//------------------------------------------------------------
+		INT[@mC]
+		INT[@mPos]
+		LOOP[]
+		{
+			\_strmid($TX.TASK, @_LC, 1)
+			IF[$_RSTR(1)=="1" || $_RSTR(1)=="2"] @mC+=1 IFEND[]
+
+			IF[@mC==@TX.RUBY.AnalyzePos] @mPos=@_LC LOOPBREAK[] IFEND[]
+		}
+		LOOPEND[]
+
+		VARACT[CUT=1 SET=$TX.TASK POS=@mPos LENGTH=1]
+
+	@TX.RUBY.AnalyzePos-=1
+	@TX.RUBY.AnalyzeLen-=1
+
+//	@TX.ColorWritePos-=1
+//	@TX.SizeWritePos-=1
+
+	return[]
+}
+
+
+
+//============================================================================
+//
+//■テキストサイズ変更
+//
+//============================================================================
+#=es.TextSizeChange
+{
+	//------------------------------------------------------------
+	// この時点までのサイズ情報をバッファに格納する
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.BUFSET.SIZE]
+
+	//------------------------------------------------------------
+	// 新しいサイズを設定する
+	//------------------------------------------------------------
+//		$TX.DEFSTR = $_PSTR(1)
+//		GOSUB[#=es.TDDEF.SEARCH pstr=$TX.DEFSTR]
+//		@TX.SX = @_RINT(1) / 65536
+//		@TX.SY = @_RINT(1) % 65536
+		@TX.SX = @_PINT(1)
+		@TX.SY = @_PINT(2)
+		IF[@TX.SX==-1] @TX.SX=(22);@TX.SY=(22) IFEND[]
+		IF[@TX.SY==-1] @TX.SY=@TX.SX IFEND[]
+
+		IF[@TX.SX<=0 || @TX.SY<=0] \_mes("文字サイズ指定が不適切です。") END[] IFEND[]
+
+	return[]
+}
+
+
+//============================================================================
+//
+//■テキスト色変更
+//
+//============================================================================
+#=es.TextColorChange
+{
+	//------------------------------------------------------------
+	// この時点での色情報をバッファに格納する
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.BUFSET.COL]
+
+	//------------------------------------------------------------
+	// 色を設定
+	//------------------------------------------------------------
+		IF[@_PINT(1)!=-1]	//新しい色にセット.
+		{
+			@TX.COLOR  = @_PINT(1)
+			@TX.COLOR2 = @_PINT(2)
+			@TX.TCFLAG = 1
+
+			IF[@TX.COLOR < 0 || @TX.COLOR>0xFFFFFF] \_mes("文字色指定が不適切です。") END[] IFEND[]
+			IF[@TX.COLOR2<-1 || @TX.COLOR>0xFFFFFF] \_mes("文字色指定が不適切です。") END[] IFEND[]
+		}
+		ELSE[]				//色を元に戻す
+		{
+			GOSUB[#=es.TDDEF.SEARCH pstr=$TX.DEFSTR]
+			@TX.COLOR  = @_RINT(2)
+			@TX.COLOR2 = @_RINT(3)
+			@TX.TCFLAG = 0
+		}
+		IFEND[]
+
+	return[]
+}
+
+
+//============================================================================
+//
+//■テキスト情報変更
+//
+//============================================================================
+#=es.TextDefineChange
+{
+	//------------------------------------------------------------
+	// この時点での色情報をバッファに格納する
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.BUFSET.COL]
+		GOSUB[#=es.TX.BUFSET.SIZE]
+
+	//------------------------------------------------------------
+	// 新しい色を設定する
+	//------------------------------------------------------------
+	//	$TX.DEFSTR = $_PSTR(1)
+	//	GOSUB[#=es.TDDEF.SEARCH pstr=$TX.DEFSTR]
+		GOSUB[#=es.TDDEF.SEARCH pstr=$_PSTR(1)]
+		@TX.SX = @_RINT(1) / 65536
+		@TX.SY = @_RINT(1) % 65536
+		@TX.COLOR  = @_RINT(2)
+		@TX.COLOR2 = @_RINT(3)
+		@TX.SHADE.X = @_RINT(5) / 65536
+		@TX.SHADE.Y = @_RINT(5) % 65536
+		@TX.SHADE.COLOR = @_RINT(6)
+		@TX.OUTLINE.COLOR = @_RINT(7)
+
+		IF[@TX.SX==-1] @TX.SX=(22);@TX.SY=(22) IFEND[]
+		IF[@TX.SY==-1] @TX.SY=@TX.SX IFEND[]
+
+		IF[@TX.SX<=0 || @TX.SY<=0] \_mes("文字サイズ指定が不適切です。") END[] IFEND[]
+
+		IF[@TX.COLOR < 0 || @TX.COLOR>0xFFFFFF] \_mes("文字色指定が不適切です。") END[] IFEND[]
+		IF[@TX.COLOR2<-1 || @TX.COLOR>0xFFFFFF] \_mes("文字色指定が不適切です。") END[] IFEND[]
+
+	return[]
+}
+
+
+//============================================================================
+//
+//■テキスト速度変更
+//
+//============================================================================
+#=es.TextWaitTimeChange
+{
+	//------------------------------------------------------------
+	// この時点での速度情報をバッファに格納する
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.BUFSET.SPD]
+
+	//------------------------------------------------------------
+	// 速度情報を変更する
+	//------------------------------------------------------------
+		@TX.SPD = @_PINT(1)
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//■サイズ情報をバッファに格納する
+//-------------------------------------------------------------------------
+#=es.TX.BUFSET.SIZE
+{
+	INT[@num]
+	STR[$one]
+
+	\_strlen($_TEXT)
+	INT[@mLen=@_RINT(1)]
+	IF[@mLen>0]
+	{
+		@num = (@mLen - @TX.SizeReadPos + 1) //何文字分格納か
+
+//IF[@TX.SizeWritePos<0] \_mes("TX.SizeWritePos Error.");END[] IFEND[]
+		LOOP[SET=@num]
+		{
+			\_strmid($_TEXT, @TX.SizeReadPos, 1)($one)
+			IF[$one==$_CHR(0xEF)+$_CHR(0xF0) || $one==$_CHR(0xEF)+$_CHR(0xF2) || $one==$_CHR(0xEF)+$_CHR(0xF3)]
+			ELSE[]
+			{
+				//正確な表示位置情報の決定の為、半角文字なら半分のサイズとこの時点で格納してしまう
+				\_strmid($_TEXT_FLAG, @TX.SizeReadPos, 1)($one)
+				  IF[$one=="1"]
+					@TX.BUF.SX(@TX.SizeWritePos) = @TX.SX/2
+				ELSE[$one=="2"]
+					@TX.BUF.SX(@TX.SizeWritePos) = @TX.SX
+				IFEND[]
+				@TX.BUF.SB(@TX.SizeWritePos) = @TX.SX
+				@TX.BUF.SY(@TX.SizeWritePos) = @TX.SY
+				@TX.SizeWritePos += 1
+			}
+			IFEND[]
+
+			@TX.SizeReadPos += 1
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//■色情報をバッファに格納する
+//-------------------------------------------------------------------------
+#=es.TX.BUFSET.COL
+{
+	INT[@num]
+	STR[$one]
+
+	\_strlen($_TEXT)
+	INT[@mLen=@_RINT(1)]
+	IF[@mLen>0]
+	{
+		@num = (@mLen - @TX.ColorReadPos + 1) //何文字分格納か
+
+		LOOP[SET=@num]
+		{
+			\_strmid($_TEXT, @TX.ColorReadPos, 1)($one)
+
+			IF[$one==$_CHR(0xEF)+$_CHR(0xF0) || $one==$_CHR(0xEF)+$_CHR(0xF2) || $one==$_CHR(0xEF)+$_CHR(0xF3)]
+			ELSE[]
+			{
+				@TX.BUF.COLOR(@TX.ColorWritePos)  = @TX.COLOR
+				@TX.BUF.COLOR2(@TX.ColorWritePos) = @TX.COLOR2
+				@TX.BUF.TCFLAG(@TX.ColorWritePos) = @TX.TCFLAG
+				@TX.ColorWritePos += 1
+			}
+			IFEND[]
+
+			@TX.ColorReadPos+=1
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//■速度情報をバッファに格納する
+//-------------------------------------------------------------------------
+#=es.TX.BUFSET.SPD
+{
+	INT[@num]
+	STR[$one]
+
+	\_strlen($_TEXT)
+	INT[@mLen=@_RINT(1)]
+	IF[@mLen>0]
+	{
+		@num = (@mLen - @TX.WaitTimeReadPos + 1) //何文字分格納か
+
+		LOOP[SET=@num]
+		{
+			IF[$one==$_CHR(0xEF)+$_CHR(0xF0) || $one==$_CHR(0xEF)+$_CHR(0xF2) || $one==$_CHR(0xEF)+$_CHR(0xF3)]
+			ELSE[]
+			{
+				@TX.BUF.SPD(@TX.WaitTimeWritePos) = @TX.SPD * 100 / 256
+
+				IF[\es.SuperAutoPlayMode]
+					@TX.BUF.SPD(@TX.WaitTimeWritePos) = \es.SuperAutoPlayTimeTextSp
+				IFEND[]
+
+				@TX.WaitTimeWritePos += 1
+			}
+			IFEND[]
+
+			@TX.WaitTimeReadPos += 1
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//============================================================================
+//
+//■表示位置情報をバッファに格納（禁則処理付）
+//
+//============================================================================
+#=es.TX.BUFSET.XY
+{
+	INT[@mX]
+	INT[@mY]
+	INT[@mSY.MAX]
+	STR[$mTX.Task]
+
+	INT[@mPos=1]     //テキスト解析位置
+	INT[@mTASKPos=1] //テキストタスク解析位置
+	INT[@mLineStartPos=1]
+	INT[@mLineEndPos]
+
+	INT[@mReturnFlag] //改行フラグ
+	INT[@mRepageFlag] //改頁フラグ
+
+
+	@mY = @TX.PrevLine.Y // Y初期位置(前のテキストからの足し分.自動改行無効時など)
+
+	IF[@T(36,21)] @mY += @TX.RUBY.SY + @T(36,24) IFEND[]
+
+
+///x暫定処置.はみ出した文字は全て-99999が入るよう、あらかじめその値で初期化しておく
+	\_strlen($TX)
+	LOOP[SET=@_RINT(1)+1]
+	{
+		@TX.BUF.X(@_LC-1) = 99999
+		@TX.BUF.Y(@_LC-1) = 99999
+	}
+	LOOPEND[]
+
+
+	//ボタンサイズ取得
+	GOSUB[#=es.BT.SXY.GET pstr="ES.GAMEMAIN.TIP.MESW.TX" pint2=0]
+	INT[@mesw_sx=@_RINT(1)]
+	INT[@mesw_sy=@_RINT(2)]
+
+	LOOP[]
+	{
+		//----------------------------------------------------------------
+		// 自動空白挿入
+		//----------------------------------------------------------------
+			IF[@T(36,51)==1]
+			{
+				IF[@es.LSD(035,01)==0] //自動空白挿入機能オンならば
+				{
+					IF[@TX.PrevLine.Y>0 && @TX.PrevLine.X==0]
+					{
+					//	IF[@TXN.EXIST==1]
+						IF[$TXN.NAME.CG!="" || $TXN.NAME.TEXT!=""]
+						{
+//							@TX.PrevLine.X += @TX.BUF.SX(@mLineStartPos) + @T(36,19)
+							@TX.PrevLine.X += @TX.BUF.SX(1) + @T(36,19)
+						}
+						IFEND[]
+					}
+					IFEND[]
+				}
+				IFEND[]
+			}
+			IFEND[]
+
+		//----------------------------------------------------------------
+		// １行の頭とお尻の位置を算出する.
+		//----------------------------------------------------------------
+			@mLineStartPos = @mPos // 行頭位置取得
+
+			@mX = @TX.PrevLine.X // X初期位置(前のテキストからの足し分.自動改行無効時など)
+
+			LOOP[]
+			{
+
+				\_strmid($TX.TASK, @mTASKPos, 1)($mTX.Task)
+
+				  IF[$mTX.Task=="C"] //C
+				{
+					@mTASKPos+=1;LOOPCONTINUE[]
+				}
+				ELSE[$mTX.Task=="R"] //R
+				{
+					@mTASKPos+=1;@mReturnFlag=1;LOOPBREAK[]
+				}
+				ELSE[$mTX.Task=="P"] //P
+				{
+					@mTASKPos+=1;@mRepageFlag=1
+					IF[@TX.AUTOCLICK.L==0] @TX.SCRIPTSAVEFLAG=1 IFEND[]
+					LOOPBREAK[]
+				}
+				ELSE[$mTX.Task=="1" || $mTX.Task=="2"] //文字
+				{
+					IF[(@mX + @TX.StartPosX) + @TX.BUF.SX(@mPos)*2 + @T(36,19) >= @mesw_sx - 1] @mReturnFlag=1;LOOPBREAK[] IFEND[]
+					@mX += @TX.BUF.SX(@mPos) + @T(36,19)
+					@mPos+=1
+				//	IF[@mPos > @TX.LEN] LOOPBREAK[] IFEND[]
+
+				}
+				IFEND[]
+
+				@mTASKPos += 1
+				IF[@mTASKPos > @TX.TASK.LEN] LOOPBREAK[] IFEND[]
+
+			}
+			LOOPEND[]
+
+			@mLineEndPos = @mPos - 1 // 行末位置取得
+
+
+			//----------------------------------------------------------------
+			// １行に１文字以上あった.
+			//----------------------------------------------------------------
+				IF[@mLineEndPos >= @mLineStartPos]
+				{
+
+					//----------------------------------------------------------------
+					// 禁則処理 (その文字列配置で正しいか否かをチェック)
+					//----------------------------------------------------------------
+
+						//行頭禁則チェック ///x
+						//
+
+						//行末禁則チェック ///x
+						//
+
+						//ぶら下げ文字チェック
+						//
+						\_strmid($TX, @mLineEndPos+1, 1)
+					//	IF[$_RSTR(1)=="、" || $_RSTR(1)=="。" || $_RSTR(1)=="，" || $_RSTR(1)=="．"]
+						IF[$_RSTR(1)=="、" || $_RSTR(1)=="。" || $_RSTR(1)=="，" || $_RSTR(1)=="．" || $_RSTR(1)=="」" || $_RSTR(1)=="』" || $_RSTR(1)=="）"] ///x後ろ３つ暫定.いずれ行頭禁則へ.
+						{
+							@mPos += 1
+							@mTASKPos += 1
+							@mLineEndPos = @mPos - 1
+						}
+						IFEND[]
+
+
+					//----------------------------------------------------------------
+					// 頭からお尻までの範囲の中で一番高さのある文字を取得.
+					//----------------------------------------------------------------
+						@mSY.MAX = 0
+						LOOP[SET=@mLineEndPos-@mLineStartPos+1]
+						{
+							IF[@mSY.MAX < @TX.BUF.SY(@mLineStartPos+@_LC-1)]
+								@mSY.MAX = @TX.BUF.SY(@mLineStartPos+@_LC-1)
+							IFEND[]
+						}
+						LOOPEND[]
+						@TX.SY.MAX = @mSY.MAX
+
+					//----------------------------------------------------------------
+					// 表示位置情報をバッファに格納していく.
+					//----------------------------------------------------------------
+						@mX = @TX.PrevLine.X // X初期位置(前のテキストからの足し分.自動改行無効時など)
+						LOOP[SET=@mLineEndPos-@mLineStartPos+1]
+						{
+							@TX.BUF.X(@mLineStartPos+@_LC-1) = @TX.StartPosX + @mX
+							@TX.BUF.Y(@mLineStartPos+@_LC-1) = @TX.StartPosY + @mY + ( @mSY.MAX - @TX.BUF.SY(@mLineStartPos+@_LC-1) )
+
+							@mX += @TX.BUF.SX(@mLineStartPos+@_LC-1) + @T(36,19)
+							@TX.PrevLine.X = @mX
+						}
+						LOOPEND[]
+
+				}
+			//----------------------------------------------------------------
+			// １行に１文字もなかった.(改行だけ等)
+			//----------------------------------------------------------------
+				ELSE[]
+				{
+					@mSY.MAX = @TX.BUF.SY(@mPos)
+				}
+				IFEND[]
+
+
+		//----------------------------------------------------------------
+		// １行分の処理が終了.次の行へ.
+		//----------------------------------------------------------------
+			IF[@mReturnFlag]
+			{
+				@mReturnFlag = 0
+				@TX.PrevLine.X = 0
+
+				@mY += @mSY.MAX + @T(36,20)
+				@TX.PrevLine.Y = @mY
+				IF[@T(36,21)] @mY += @TX.RUBY.SY + @T(36,24) IFEND[]
+
+				//@mY = 0  // 初期位置
+				//IF[@T(36,21)] @mY += @TX.RUBY.SY + @T(36,24) IFEND[]
+			}
+			IFEND[]
+
+			IF[@mRepageFlag]
+			{
+				@mRepageFlag = 0
+				@TX.PrevLine.X = 0
+				@TX.PrevLine.Y = 0
+				@mY = 0  // 初期位置
+				IF[@T(36,21)] @mY += @TX.RUBY.SY + @T(36,24) IFEND[]
+			}
+			IFEND[]
+
+		//----------------------------------------------------------------
+		// 表示可能範囲超えたらループ抜ける.
+		//----------------------------------------------------------------
+			IF[@mY + @TX.StartPosY >= @mesw_sy] LOOPBREAK[] IFEND[]
+
+		//----------------------------------------------------------------
+		// 全文字列分終わったらループ抜ける.
+		//----------------------------------------------------------------
+		//	IF[@mPos > @TX.LEN] LOOPBREAK[] IFEND[]
+			IF[@mTASKPos > @TX.TASK.LEN] LOOPBREAK[] IFEND[]
+
+	}
+	LOOPEND[]
+
+
+	return[]
+}
+
+
+
+//============================================================================
+//
+//■テキストからキャラ名抜き出し
+//
+//============================================================================
+#=es.TX.CHARNAME.CHK
+{
+//\_dmes("CHARNAME.CHK")
+	INT[@CharNo]
+	INT[@lenA]
+
+	IF[@TX.PrevLine.X==0 && @TX.PrevLine.Y==0]
+//	IF[@TX.PrevLine.X==0 && @TX.PrevLine.Y==0 && $TXN.NAME.TEXT==""]
+	{
+		//------------------------------------------------------------
+		// テキストを検索
+		//   $TX に キャラ名「～」という表記があるかどうか
+		//------------------------------------------------------------
+			GOSUB[#=es.CHAR.NAME.SEARCH PSTR=$TX]
+			@CharNo         = @_RINT(1)
+			@lenA           = @_RINT(2)
+			$TXN.NAME.TEXT  = $_RSTR(3)
+			$TXN.NAME.CG    = $_RSTR(4)
+			@TX.CHARCOLOR   = @_RINT(5)
+			@TX.CHARCOLOR2  = @_RINT(6)
+			@TX.CHARKCOLOR  = @_RINT(7)
+			@TX.CHARKCOLOR2 = @_RINT(8)
+
+			IF[@TX.CHARKCOLOR==-1]
+				@TX.CHARKCOLOR  = @TX.CHARCOLOR
+				@TX.CHARKCOLOR2 = @TX.CHARCOLOR2
+			IFEND[]
+
+
+		IF[@CharNo>0] //あったなら
+		{
+			//------------------------------------------------------------
+			// テキストを削除
+			//   $TX から名前文字列を削除する
+			//------------------------------------------------------------
+				VARACT[CUT=1 SET=$TX POS=1 LENGTH=@lenA]
+
+			//------------------------------------------------------------
+			// テキストタスクを削除
+			//   文字タスク「1」or「2」の最初に現れる位置を探す
+			//------------------------------------------------------------
+				INT[@mC]
+				INT[@mPos]
+				LOOP[]
+				{
+					\_strmid($TX.TASK, @_LC, 1)
+
+					IF[$_RSTR(1)=="1" || $_RSTR(1)=="2"] @mC+=1 IFEND[]
+
+					IF[@mC==1] @mPos=@_LC LOOPBREAK[] IFEND[]
+				}
+				LOOPEND[]
+
+				VARACT[CUT=1 SET=$TX.TASK POS=@mPos LENGTH=@lenA]
+
+			//------------------------------------------------------------
+			// 各種バッファを前にずらす.
+			//------------------------------------------------------------
+				LOOP[SET=\.TX.MAX-@lenA]
+				{
+					@TX.BUF.X(@_LC)      = @TX.BUF.X(@_LC+@lenA)
+					@TX.BUF.Y(@_LC)      = @TX.BUF.Y(@_LC+@lenA)
+					@TX.BUF.SB(@_LC)     = @TX.BUF.SB(@_LC+@lenA)
+					@TX.BUF.SX(@_LC)     = @TX.BUF.SX(@_LC+@lenA)
+					@TX.BUF.SY(@_LC)     = @TX.BUF.SY(@_LC+@lenA)
+					@TX.BUF.COLOR(@_LC)  = @TX.BUF.COLOR(@_LC+@lenA)
+					@TX.BUF.COLOR2(@_LC) = @TX.BUF.COLOR2(@_LC+@lenA)
+					@TX.BUF.TCFLAG(@_LC) = @TX.BUF.TCFLAG(@_LC+@lenA)
+					@TX.BUF.SPD(@_LC)    = @TX.BUF.SPD(@_LC+@lenA)
+					@TX.BUF.RUBY(@_LC)   = @TX.BUF.RUBY(@_LC+@lenA)
+				}
+				LOOPEND[]
+
+			\LOG.W.NM($TXN.NAME.TEXT)
+		}
+		ELSE[]
+		{
+			\LOG.W.NM("")
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.TX.CHARNAME.CHK.2
+{
+	\LOG.W.NM($TXN.NAME.TEXT)
+	return[]
+}
+
+
+//============================================================================
+//
+//■名前ウィンドウ表示
+//
+//============================================================================
+#=es.TX.NAME.SHOW
+{
+	INT[@namew_sx]
+	INT[@namew_sy]
+
+	//-----------------------------------------------------------
+	// キャラ名画像表示
+	//-----------------------------------------------------------
+	IF[$TXN.NAME.CG!=""]
+	{
+		@TXN.EXIST=1
+
+		//-----------------------------------------------------------
+		// 名前描画
+		//-----------------------------------------------------------
+			//ボタンサイズ取得
+			GOSUB[#=es.BT.SXY.GET pstr="ES.GAMEMAIN.TIP.NAMEW.TX" pint2=0]
+			@namew_sx=@_RINT(1)
+			@namew_sy=@_RINT(2)
+
+			CG[ID="_NAMETMP" Z=1 E=1 FILE=$T(38,08)+$TXN.NAME.CG]
+			INT[@mSX]CGINFO[ID="_NAMETMP" SX=1 LET=@mSX]
+			INT[@mSY]CGINFO[ID="_NAMETMP" SY=1 LET=@mSY]
+
+			INT[@mTXNCGX = 2]
+			INT[@mTXNCGY = (@namew_sy - @mSY) / 2]
+
+			IF[@T(36,33)==1] // 中央揃え
+				@mTXNCGX += (@namew_sx - @mSX) / 2
+			IFEND[]
+
+			\BT.ID.OFF.GET("ES.GAMEMAIN.TIP.NAMEW.TX", 0)
+			CGACT[ID="_NAMETMP" ID2=$_RSTR(1) MERGE2=1 X=@mTXNCGX Y=@mTXNCGY]
+			CGEND[ID="_NAMETMP"]
+
+	}
+	//-----------------------------------------------------------
+	// キャラ名テキスト表示
+	//-----------------------------------------------------------
+	ELSE[$TXN.NAME.TEXT!=""]
+	{
+		@TXN.EXIST=1
+
+		//-----------------------------------------------------------
+		// 名前描画
+		//-----------------------------------------------------------
+			//ボタンサイズ取得
+			GOSUB[#=es.BT.SXY.GET pstr="ES.GAMEMAIN.TIP.NAMEW.TX" pint2=0]
+			@namew_sx=@_RINT(1)
+			@namew_sy=@_RINT(2)
+
+			INT[@mTXNX=2]
+			INT[@mTXNY=2]
+
+			IF[@T(36,33)==1] // 中央揃え
+				\_strlen($TXN.NAME.TEXT)
+				@mTXNX = ((@namew_sx / 2) - (@_RINT(1) * (@TXN.SX / 2)))
+			IFEND[]
+
+			@mTXNY = (@namew_sy - @TXN.SX) / 2
+
+			// テキスト色設定
+			IF[0] //文字色変更時 (※\TCでは変更できない)
+			ELSE[@TX.CHARCOLOR!=-1] //キャラ文字色定義時
+			{
+				IF[@es.KIDOKUCOLORFLAG] //既読色か
+					\FONT.COLOR( @TX.CHARKCOLOR )
+					IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.CHARKCOLOR, @TX.CHARKCOLOR2 ) IFEND[]
+				ELSE[]					//否か
+					\FONT.COLOR( @TX.CHARCOLOR )
+					IF[@es.GSD(115,15)==1] \FONT.COLOR( @TX.CHARCOLOR, @TX.CHARCOLOR2 ) IFEND[]
+				IFEND[]
+			}
+			ELSE[] //通常時
+			{
+				IF[@es.KIDOKUCOLORFLAG] //既読色か
+					\FONT.COLOR( @T(36,16) )
+					IF[@es.GSD(115,15)==1] \FONT.COLOR( @T(36,16), @T(36,17) ) IFEND[]
+				ELSE[]					//否か
+					\FONT.COLOR( @TXN.COLOR )
+					IF[@es.GSD(115,15)==1] \FONT.COLOR( @TXN.COLOR, @TXN.COLOR2 ) IFEND[]
+				IFEND[]
+			}
+			IFEND[]
+
+			\FONT.SIZE( @TXN.SX, @TXN.SY )
+			\FONT.XY( @mTXNX, @mTXNY )
+
+			IF[@es.GSD(115,14)==1] \FONT.BOLD( 1 ) IFEND[]
+			IF[@es.GSD(115,09)==1] \FONT.SHADE( @TXN.SHADE.X, @TXN.SHADE.Y, @TXN.SHADE.COLOR ) IFEND[]
+			IF[@es.GSD(115,08)==1] \FONT.OUTLINE( @TXN.OUTLINE.COLOR ) IFEND[]
+
+			\BT.FONT.DRAW("ES.GAMEMAIN.TIP.NAMEW.TX",, $TXN.NAME.TEXT)
+
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■名前セット
+//--------------------------------------------------------------------
+#=es.TX.NAME.SET
+{
+	$TXN.NAME.TEXT = $_PSTR(1)
+	@TXN.EXIST = 1
+
+	GOSUB[#=es.TX.CHARNAME.CHK.2]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■名前初期化
+//--------------------------------------------------------------------
+#=es.TX.NAME.INIT
+{
+	$TXN.NAME.TEXT = ""
+	$TXN.NAME.CG = ""
+	@TXN.EXIST = 0
+	@TX.CHARCOLOR = -1
+	@TX.CHARCOLOR2 = -1
+	@TX.CHARKCOLOR = -1
+	@TX.CHARKCOLOR2 = -1
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■メッセージウィンドウ表示
+//@_PINT(1):0…強制消去モード
+//          1…通常表示モード (※自動で表示したり消去したりするモード)
+//          2…強制表示モード
+//--------------------------------------------------------------------
+#=es.TX.WINDOW.SET
+{
+	IF[@_PINT(1)<0 || @_PINT(2)>2] \_mes("[エラー]ウィンドウ表示モードの値が不正です。") IFEND[]
+	@es.LSD(036,01) = @_PINT(1)
+	return[]
+}
+
+
+//S_INT[@PPP]
+//--------------------------------------------------------------------
+//■既読フラグＯＮ(63bitずつ処理)
+//--------------------------------------------------------------------
+#=es.TX.KIDOKU.ON
+{
+	IF[@_PINT(2) > 10000]
+	{
+		\_mes("テキスト行だけで 10000 行を超えました。別のシナリオスクリプトにジャンプさせてください。", "エラー") END[]
+	}
+	IFEND[]
+
+	IF[(@es.KMD( @_PINT(1) , @_PINT(2)/63 ) & @es.POW2( @_PINT(2)%63 ))==0]
+	{
+		@es.KMD.FLAG=1
+		@es.KMD( @_PINT(1) , @_PINT(2)/63 ) |= @es.POW2( @_PINT(2)%63 ) //特定bitに1を立てる
+	}
+	IFEND[]
+
+	//@PPP+=1
+	//\_dmesval(@PPP)
+	//\_dmesval( @es.KMD( @_PINT(1) , @_PINT(2)/63 ) )
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■既読フラグチェック
+//--------------------------------------------------------------------
+#=es.TX.KIDOKU.CHECK
+{
+	//\_dmesval( @_PINT(2) )
+
+	IF[@_PINT(2) > 10000]
+	{
+		\_mes("テキスト行だけで 10000 行を超えました。別のシナリオスクリプトにジャンプさせてください。", "エラー") END[]
+	}
+	IFEND[]
+
+	INT[@r = (( @es.KMD( @_PINT(1) , @_PINT(2)/63 ) & @es.POW2( @_PINT(2)%63 ) ) != 0)]
+
+	return[rint=@r]
+}
+
+
+S_INT[@KDKGAUGE.DIVNUM=200]
+S_INT[@KDK.LY=0]
+
+//--------------------------------------------------------------------
+//■既読率一覧表示
+//--------------------------------------------------------------------
+#=es.TX.KIDOKU.SHOW
+{
+	INT[@SCRNUM]
+	INT[@SCRTXNUM]
+	STR[$SCRFN]
+	INT[@TXNUMALLTMP]
+	INT[@TXNUMTMP]
+	INT[@TXNUMALL]
+	INT[@TXNUM]
+	INT[@LY=6]
+	INT[@SCRNO]
+	INT[@mCOL]
+	INT[@mFNO]
+
+	@_KEY_F7=3
+	@_KEY_H=3
+
+	@es.HELPMODE=1
+
+	STR[$str]
+	STR[$str2]
+	STR[$str3]
+
+	FONT[SX=12 SY=12 COLOR=0x999999 COLOR2=0x999999 BOLD=0 ANTIALIASING=0]
+
+	SYSTEMINFO[SCRIPTNUM=1 LET=@SCRNUM] //ファイル数取得
+
+	//テキストのあるスクリプトファイル数を取得
+	LOOP[SET=@SCRNUM]
+	{
+		@mFNO=@_LC
+		GOSUB[#=es.TX.KIDOKU.PER.ONE.GET pint=@mFNO]
+		@SCRTXNUM+=(@_RINT(2)>0)
+	}
+	LOOPEND[]
+
+	CG[ID=KDK.BG      A=224 Z=81312121000000000000 SX=@es.GSX SY=@es.GSY FILE=""]
+	CG[ID=KDK.LIST    A=255 Z=81312121010000000000 SX=@es.GSX SY=(@SCRTXNUM+6)*12 Y=@KDK.LY FILE=""]
+	CG[ID=KDK.CURSOR1 A=000 Z=81312121020000000000 FILE="cgsys2/tip_focus_cm1"]
+	CG[ID=KDK.CURSOR2 A=000 Z=81312121020000000000 FILE="cgsys2/tip_focus_cm1"]
+
+	CGACT[ID=KDK.LIST RECTPAINT3=1 SET=0]
+	CGACT[ID=KDK.CURSOR2 SIZE=1 SX=30 SY=30]
+	WAIT[FRAME=1]
+
+	CGACT[ID=KDK.LIST TEXT=1 X=2 Y=@LY SETSTR="■テキスト既読情報"]
+	@LY+=12
+
+	CGACT[ID=KDK.LIST RECTPAINT3=1 X=0 Y=@LY+5 X2=@es.GSX Y2=@LY+5 SET=0xFF999999]
+	@LY+=12
+
+
+
+	INT[@CLX=-9999]
+	INT[@CLY=-9999]
+	INT[@mfno]
+	INT[@mline]
+	\_task.info($es.ScenarioTaskID, 1)(,@mfno,,@mline)
+	@mfno+=1
+
+//\_dmes( "現在 : "+$mFN+"("+$(@mfno)+"), "+$(@mline) )
+
+	LOOP[SET=@SCRNUM]
+	{
+		@mFNO=@_LC
+		GOSUB[#=es.TX.KIDOKU.PER.ONE.GET pint=@mFNO]
+		$SCRFN       = $_RSTR(1)
+		@TXNUMALLTMP = @_RINT(2)
+		@TXNUMTMP    = @_RINT(3)
+		@TXNUMALL    = @TXNUMALL + @TXNUMALLTMP
+		@TXNUM       = @TXNUM    + @TXNUMTMP
+
+
+		IF[@TXNUMALLTMP>0]
+		{
+			//表示
+//			\_dmes($SCRFN+": "+\_R+"[ "+$(@TXNUMTMP)+" / "+$(@TXNUMALLTMP)+" ]")
+
+			//既読率によって色を変える.
+			  IF[@TXNUMTMP == @TXNUMALLTMP]	FONT[SX=12 SY=12 COLOR=0xFFFF00 COLOR2=0xFFFF00]
+			ELSE[@TXNUMTMP  > @TXNUMALLTMP]	FONT[SX=12 SY=12 COLOR=0xFF4444 COLOR2=0xFF4444]
+			ELSE[]							FONT[SX=12 SY=12 COLOR=0x999999 COLOR2=0x999999]
+			IFEND[]
+
+			\_inttostr(@TXNUMTMP, 6, 0)							$str  = $_RSTR(1)+"/"
+			\_inttostr(@TXNUMALLTMP, 6, 0)						$str += $_RSTR(1)
+			\_inttostr(@TXNUMTMP * 100 / @TXNUMALLTMP, 4, 0)	$str2 = $_RSTR(1)
+
+			\_inttostr(@SCRNO+1, 3, 0)							$str3 = $_RSTR(1)
+
+			CGACT[ID=KDK.LIST TEXT=1 X=002 Y=@LY SETSTR="["+$str3+"]"+$str+" ("+$str2+"%) "]
+		//	CGACT[ID=KDK.LIST TEXT=1 X=250+42 Y=@LY SETSTR=$SCRFN]
+			CGACT[ID=KDK.LIST TEXT=1 X=@KDKGAUGE.DIVNUM+140+42-18+10 Y=@LY SETSTR=$SCRFN]
+
+			LOOP[SET=@KDKGAUGE.DIVNUM]
+			{
+				GOSUB[#=es.TX.KIDOKU.PER.ONE.2.GET pint=@mFNO pint2=@_LC]
+				IF[@TXNUMTMP > @TXNUMALLTMP]
+					@mCOL=0xFFFF4444
+				ELSE[@_RINT(1)]
+					@mCOL=0xFFFFFF00
+				ELSE[]
+					@mCOL=0xFF33333A
+				IFEND[]
+				CGACT[ID=KDK.LIST RECTPAINT3=1 X=140+42-18+@_LC Y=@LY X2=140+42-18+@_LC Y2=@LY+9 SET=@mCOL]
+			//	CGACT[ID=KDK.LIST RECTPAINT3=1 X=140+42      Y=@LY X2=140+42+99   Y2=@LY+9 SET=0xFF0000FF]
+			}
+			LOOPEND[]
+
+			//現在地点表示
+			IF[@mFNO==@mfno]
+			{
+				//@KDKGAUGE.DIVNUM //200
+
+				GOSUB[#=es.TX.KIDOKU.PER.ONE.GET pint=@mFNO]
+
+			//	@mline = (@KDKGAUGE.DIVNUM / @_RINT(2)) * @mline
+				@mline = @KDKGAUGE.DIVNUM * (@mline-1) / @_RINT(2)
+
+				@CLX=140+42-18+@mline
+				@CLY=@LY
+				CG[ID=KDK.CURSOR1 A=256 X=@CLX-06 Y=@CLY+@KDK.LY-03]
+				CG[ID=KDK.CURSOR2 A=256 X=@CLX-13 Y=@CLY+@KDK.LY-10]
+			//	CGACT[ID=KDK.LIST RECTPAINT3=1 X=140+42-18+@mline Y=@LY-5 X2=140+42-18+@mline+3 Y2=@LY+9+5 SET=0xFF888888]
+
+				//\_dmes("発見."+$SCRFN)
+			}
+			IFEND[]
+
+			@LY+=12
+			@SCRNO+=1
+
+		//	IF[@SCRNO%10==0] WAIT[FRAME=1] IFEND[]
+		//	WAIT[FRAME=1]
+
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	INT[@mPer = @TXNUM * 100 / (@TXNUMALL)]
+//	INT[@mPer = @TXNUM * 100 / (@_TEXT_NUM)]
+	\_range(@mPer, 0, 100)
+
+//表示
+//	\_dmes("計："+$(@TXNUM)+" / "+$(@TXNUMALL)+"  ("+$(@mPer)+"％)")
+//	\_dmes("計："+$(@TXNUM)+" / "+$(@_TEXT_NUM)+"  ("+$(@mPer)+"％)")
+
+	CGACT[ID=KDK.LIST RECTPAINT3=1 X=0 Y=@LY+5 X2=@es.GSX Y2=@LY+5 SET=0xFF999999]
+//	CGACT[ID=KDK.LIST TEXT=1 X=2 Y=@LY SETSTR="------------------------------------------------------------------------------------------------------------------------"]
+	@LY+=12
+
+	//既読率によって色を変える.
+	  IF[@TXNUM == @TXNUMALL]	FONT[COLOR=0xFFFFFF COLOR2=0xFFFF00]
+	ELSE[@TXNUM  > @TXNUMALL]	FONT[COLOR=0xFF0000 COLOR2=0xFF0000]
+	ELSE[]						FONT[COLOR=0x888888 COLOR2=0x888888]
+	IFEND[]
+
+	\_inttostr(@TXNUM, 6, 0)					$str  = $_RSTR(1)+"/"
+	\_inttostr(@TXNUMALL, 6, 0)					$str += $_RSTR(1)
+	\_inttostr(@TXNUM * 100 / @TXNUMALL, 4, 0)	$str2 = $_RSTR(1)
+
+	CGACT[ID=KDK.LIST TEXT=1 X=2 Y=@LY SETSTR="     "+$str+" ("+$str2+"%)"]
+
+
+
+	//キー入力
+	INT[@mF]
+	INT[@Chk]
+	INT[@CNT]
+	LOOP[]
+	{
+		IF[@_KEY_F7==1 || @_KEY_BS==1] LOOPBREAK[] IFEND[]
+		IF[@_KEY_F7==2 || @_KEY_BS==2] LOOPBREAK[] IFEND[]
+		IF[@_MOUSE_L==1 || @_MOUSE_L==2] LOOPBREAK[] IFEND[]
+		IF[@_MOUSE_R==1 || @_MOUSE_R==2] LOOPBREAK[] IFEND[]
+
+		IF[@_KEY_UP  >0] @KDK.LY+=16*2;@mF=1 IFEND[]
+		IF[@_KEY_DOWN>0] @KDK.LY-=16*2;@mF=1 IFEND[]
+		IF[@_MOUSE_U >0] @KDK.LY+=32*2;@mF=1 IFEND[]
+		IF[@_MOUSE_D >0] @KDK.LY-=32*2;@mF=1 IFEND[]
+
+		IF[@mF]
+		{
+			\_range(@KDK.LY, -(((@SCRTXNUM+6)*12)-@es.GSY), 0)
+			CG[ID=KDK.LIST Y=@KDK.LY]
+			CG[ID=KDK.CURSOR1 X=@CLX-06 Y=@CLY+@KDK.LY-03]
+			CG[ID=KDK.CURSOR2 X=@CLX-13 Y=@CLY+@KDK.LY-10]
+		}
+		IFEND[]
+
+
+		//カーソル点滅処理
+		@CNT+=1
+/*
+		//大→小
+		  IF[@CNT%60>40] CG[ID=KDK.CURSOR1 E=1]CG[ID=KDK.CURSOR2 E=0]
+		ELSE[@CNT%60>20] CG[ID=KDK.CURSOR1 E=0]CG[ID=KDK.CURSOR2 E=1]
+		ELSE[]           CG[ID=KDK.CURSOR1 E=0]CG[ID=KDK.CURSOR2 E=0]
+		IFEND[]
+*/
+		IF[@_KEY_SHIFT<0]
+		{
+			//小
+			  IF[@CNT%60>30] CG[ID=KDK.CURSOR1 E=1]CG[ID=KDK.CURSOR2 E=0]
+			ELSE[]           CG[ID=KDK.CURSOR1 E=0]CG[ID=KDK.CURSOR2 E=0]
+			IFEND[]
+		}
+		ELSE[]
+		{
+			//大
+			  IF[@CNT%30>15] CG[ID=KDK.CURSOR1 E=0]CG[ID=KDK.CURSOR2 E=1]
+			ELSE[]           CG[ID=KDK.CURSOR1 E=0]CG[ID=KDK.CURSOR2 E=0]
+			IFEND[]
+		}
+		IFEND[]
+
+
+		//-------------------------------------------------------
+		// ウィンドウ終了監視
+		//-------------------------------------------------------
+			IF[@_WINDOW_EXEC_CLOSE]
+			{
+				@_WINDOW_EXEC_CLOSE=0
+				DIALOG[STR="アプリケーションを終了します。宜しいですか？" CAPTION="終了確認" YESNO=1 LET=@Chk]
+
+			//	GOSUB[#=es.SceneEndConfirm pint=1] //通常の終了ダイアログ
+
+				IF[@Chk==1]
+				{
+					\es.END
+				}
+				IFEND[]
+			}
+			IFEND[]
+
+		WAIT[FRAME=1]
+	}
+	LOOPEND[]
+
+	CGEND[ID=KDK.BG]
+	CGEND[ID=KDK.LIST]
+	CGEND[ID=KDK.CURSOR1]
+	CGEND[ID=KDK.CURSOR2]
+
+	FONT[BOLD=1 ANTIALIASING=1]
+
+//	@_MOUSE_L=-2
+	@_MOUSE_L=2
+	@_MOUSE_R=3
+	@_KEY_ENTER=3
+	@_KEY_SPACE=3
+	@_KEY_F7=3
+	@_KEY_H=3
+	@_KEY_BS=3
+
+//	@es.CLICKFORBIT=1
+	@es.HELPMODE=0
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■既読率取得
+//--------------------------------------------------------------------
+#=es.TX.KIDOKU.PER.GET
+{
+	INT[@SCRNUM]
+	INT[@TXNUMALL]
+	INT[@TXNUM]
+
+	SYSTEMINFO[SCRIPTNUM=1 LET=@SCRNUM] //ファイル数取得
+	LOOP[SET=@SCRNUM]
+	{
+		GOSUB[#=es.TX.KIDOKU.PER.ONE.GET pint=@_LC]
+		@TXNUMALL = @TXNUMALL + @_RINT(2)
+		@TXNUM    = @TXNUM    + @_RINT(3)
+	}
+	LOOPEND[]
+
+//\_dmes("ファイル数 = "+$(@SCRNUM)+"  既読率 = "+$(@KDK_TOTALNUM)+" / "+$(@_TEXT_NUM))
+//\_dmes("ファイル数 = "+$(@SCRNUM)+"  既読率 = "+$(@TXNUM)+" / "+$(@TXNUMALL))
+
+//	INT[@mPer = @TXNUM * 100 / (@_TEXT_NUM)]
+	INT[@mPer = @TXNUM * 100 / (@TXNUMALL)]
+
+	\_range(@mPer, 0, 100)
+
+	return[rint=@mPer]
+}
+
+
+//--------------------------------------------------------------------
+//■ファイル既読情報取得 (１ファイル分)
+//@_PINT(1):ファイル番号 (1～)
+//
+//$_RSTR(1):ファイル名
+//@_RINT(2):テキスト数
+//@_RINT(3):既読数
+//--------------------------------------------------------------------
+#=es.TX.KIDOKU.PER.ONE.GET
+{
+	INT[@mFNo=@_PINT(1)]
+
+	STR[$mNAME]
+	INT[@mTEXTNUM]
+	INT[@mKDKNUM]
+	INT[@mLine=1]
+
+	SYSTEMINFO[SCRIPTFILE=1 LET=$mNAME NO=@mFNo]
+	SYSTEMINFO[TEXTNUM=1 LET=@mTEXTNUM NO=@mFNo]
+	@mFNo-=1
+
+	\_findstrleft($mNAME, '\\')
+	\_strmid($mNAME, @_RINT(1)+1, 9999)($mNAME)
+	\_findstrleft($mNAME, '\\')
+	\_strmid($mNAME, @_RINT(1)+1, 9999)($mNAME)
+
+	IF[@mTEXTNUM>0]
+	{
+		LOOP[]
+		{
+			IF[@mLine>10000] LOOPBREAK[] IFEND[]
+
+			IF[@es.KMD(@mFNo, @mLine/63)]
+			{
+				LOOP[SET=63]
+				{
+					\KIDOKU.CHECK(@mFNo, @mLine)
+					@mKDKNUM += @_RINT(1)
+					@mLine+=1
+				}
+				LOOPEND[]
+			}
+			ELSE[]
+			{
+				@mLine+=63
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	return[rstr=$mNAME rint2=@mTEXTNUM rint3=@mKDKNUM]
+}
+
+
+#=es.TX.KIDOKU.PER.ONE.2.GET
+{
+	INT[@mFNo=@_PINT(1)]
+	INT[@mPos=@_PINT(2)] //1～@KDKGAUGE.DIVNUM ( @KDKGAUGE.DIVNUM 分割しての位置)
+
+	INT[@mTEXTNUM]
+	INT[@mLine]
+	INT[@mLine1]
+	INT[@mLine2]
+	INT[@ret]
+
+	SYSTEMINFO[TEXTNUM=1 LET=@mTEXTNUM NO=@mFNo]
+	@mFNo-=1
+
+	IF[@mTEXTNUM>0]
+	{
+		//7*190/200=6.65=6
+		//7*191/200=6.685=6-1=5
+		@mLine1 = (@mTEXTNUM * (@mPos-1) / @KDKGAUGE.DIVNUM)
+		@mLine2 = (@mTEXTNUM * (@mPos  ) / @KDKGAUGE.DIVNUM) - 1
+		IF[@mLine2<@mLine1] @mLine2=@mLine1 IFEND[]
+
+		//範囲１から範囲２までチェックする
+		@mLine = @mLine1
+		LOOP[]
+		{
+			IF[@mLine > @mLine2] LOOPBREAK[] IFEND[]
+			IF[@mLine > 10000] LOOPBREAK[] IFEND[]
+
+			\KIDOKU.CHECK(@mFNo, @mLine+1)
+			@ret += @_RINT(1)
+
+			@mLine+=1
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	return[rint=(@ret>0 && @ret==@mLine2-@mLine1+1)]
+}
+
+
+
+//============================================================================
+//■強制オートプレイモード ON/OFF
+//============================================================================
+#=es.SetSuperAutoPlayMode
+{
+	@es.TX.SKIP = 0  // スキップ状態を強制的に切る.
+
+	\es.SuperAutoPlayMode = 1
+	\es.SuperAutoPlayTimeTextSp = @_PINT(1) // オートモード時のテキスト速度
+	\es.SuperAutoPlayTimeTextSt = @_PINT(2) // オートモード時の文末停止時間
+	\es.SuperAutoPlayTimeTextCl = @_PINT(3) // オートモード時のクリック許可
+	\es.SuperAutoPlayTimeTextSk = @_PINT(4) // オートモード時のスキップ許可
+
+	return[]
+}
+
+#=es.SetSuperAutoPlayModeOFF
+{
+	\es.SuperAutoPlayMode = 0
+	\es.SuperAutoPlayTimeTextSp = 0 // オートモード時のテキスト速度
+	\es.SuperAutoPlayTimeTextSt = 0 // オートモード時の文末停止時間
+	\es.SuperAutoPlayTimeTextCl = 0 // オートモード時のクリック許可
+	\es.SuperAutoPlayTimeTextSk = 0 // オートモード時のスキップ許可
+
+	return[]
+}
+
+
+//====================================================================
+//■テキスト情報セーブロード
+// ( @No ～ @No+7 )
+//====================================================================
+#=es.TX.SAVE
+{
+	INT[@No=@_PINT(1)]
+
+//	SAVE[DNO=@No+00 SET=$TX.DEFSTR]			// テキスト情報
+//	SAVE[DNO=@No+00 SET=@TX.COLOR]			// テキスト色
+//	SAVE[DNO=@No+00 SET=@TX.COLOR2]			// テキスト色
+	SAVE[DNO=@No+00 SET=@TX.AUTOCLICK.F]	// ACF
+	SAVE[DNO=@No+01 SET=@TX.AUTORETURN.F]	// ARF
+	SAVE[DNO=@No+02 SET=@TX.AUTOPAGE.F]		// APF
+	SAVE[DNO=@No+03 SET=@TX.AUTOCLICK.L]	// ACL
+	SAVE[DNO=@No+04 SET=@TX.AUTORETURN.L]	// ARL
+	SAVE[DNO=@No+05 SET=@TX.AUTOPAGE.L]		// APL
+	SAVE[DNO=@No+06 SET=@TX.AUTOCLICK.N]	// ACN
+	SAVE[DNO=@No+07 SET=@TX.AUTORETURN.N]	// ARN
+	SAVE[DNO=@No+08 SET=@TX.AUTOPAGE.N]		// APN
+
+	return[]
+}
+
+#=es.TX.LOAD
+{
+	STR[$fn=$_PSTR(1)]
+	INT[@No=@_PINT(2)]
+
+//	LOAD[FILE=$fn DNO=@No+00 LET=$TX.DEFSTR]		// テキスト情報
+//	LOAD[FILE=$fn DNO=@No+00 LET=@TX.COLOR]			// テキスト色
+//	LOAD[FILE=$fn DNO=@No+00 LET=@TX.COLOR2]		// テキスト色
+	LOAD[FILE=$fn DNO=@No+00 LET=@TX.AUTOCLICK.F]	// ACF
+	LOAD[FILE=$fn DNO=@No+01 LET=@TX.AUTORETURN.F]	// ARF
+	LOAD[FILE=$fn DNO=@No+02 LET=@TX.AUTOPAGE.F]	// APF
+	LOAD[FILE=$fn DNO=@No+03 LET=@TX.AUTOCLICK.L]	// ACL
+	LOAD[FILE=$fn DNO=@No+04 LET=@TX.AUTORETURN.L]	// ARL
+	LOAD[FILE=$fn DNO=@No+05 LET=@TX.AUTOPAGE.L]	// APL
+	LOAD[FILE=$fn DNO=@No+06 LET=@TX.AUTOCLICK.N]	// ACN
+	LOAD[FILE=$fn DNO=@No+07 LET=@TX.AUTORETURN.N]	// ARN
+	LOAD[FILE=$fn DNO=@No+08 LET=@TX.AUTOPAGE.N]	// APN
+
+	return[]
+}
+
+
+//////
+
+
+//△キャラ名 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+//#=es.TXN.NAME.GET { return[rstr=$TXN.NAME.TEXT] }
+
+//△ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.LEN.GET { return[rint=@TX.POS] }
+
+#=es.TXN.EX.GET { return[rint=@TXN.EXIST] }
+
+
+//////
+
+
+//▼ルビ設定文字 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.RUBY.STR.SET
+{
+	$TX.RubyStartStr  = $_PSTR(1)
+	$TX.RubyCenterStr = $_PSTR(2)
+	$TX.RubyEndStr    = $_PSTR(3)
+
+
+	// ルビ設定文字が１文字でない場合
+	//
+		\_strlen($TX.RubyStartStr)
+		IF[@_RINT(1) != 1]
+		{
+			\_mes("ルビ設定開始文字が不正です。") END[]
+		}
+		IFEND[]
+
+		\_strlen($TX.RubyCenterStr)
+		IF[@_RINT(1) != 1]
+		{
+			\_mes("ルビ中間区切り文字が不正です。") END[]
+		}
+		IFEND[]
+
+		\_strlen($TX.RubyEndStr)
+		IF[@_RINT(1) != 1]
+		{
+			\_mes("ルビ設定終了文字が不正です。") END[]
+		}
+		IFEND[]
+
+
+	// ルビ設定文字に同じ文字がないかチェック.
+	//
+		IF[$TX.RubyStartStr==$TX.RubyCenterStr]
+		{
+			\_mes("ルビ設定文字が重複しています。") END[]
+		}
+		IFEND[]
+
+		IF[$TX.RubyStartStr==$TX.RubyEndStr]
+		{
+			\_mes("ルビ設定文字が重複しています。") END[]
+		}
+		IFEND[]
+
+		IF[$TX.RubyCenterStr==$TX.RubyEndStr]
+		{
+			\_mes("ルビ設定文字が重複しています。") END[]
+		}
+		IFEND[]
+
+	return[]
+}
+
+
+//▼文字表示速度 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.SPD.SET { @TX.SPD = @_PINT(1); return[] }
+
+//▼自動改行設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.ARF.SET { @TX.AUTORETURN.F = @_PINT(1); return[] }
+
+//▼自動改頁設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.APF.SET { @TX.AUTOPAGE.F = @_PINT(1); return[] }
+
+//▼自動クリック待ち設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.ACF.SET { @TX.AUTOCLICK.F = @_PINT(1); return[] }
+
+//▼自動改行設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.ARL.SET { @TX.AUTORETURN.L = @_PINT(1); return[] }
+
+//▼自動改頁設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.APL.SET { @TX.AUTOPAGE.L = @_PINT(1); return[] }
+
+//▼自動クリック待ち設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.ACL.SET { @TX.AUTOCLICK.L = @_PINT(1); return[] }
+
+//▼一時的改行無効設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.ARN.SET { @TX.AUTORETURN.N = @_PINT(1); return[] }
+
+//▼一時的改頁無効設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.APN.SET { @TX.AUTOPAGE.N = @_PINT(1); return[] }
+
+//▼一時的クリック待ち無効設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TX.ACN.SET { @TX.AUTOCLICK.N = @_PINT(1); return[] }
+
+

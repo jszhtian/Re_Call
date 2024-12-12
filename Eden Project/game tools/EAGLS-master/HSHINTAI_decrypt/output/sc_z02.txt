@@ -1,0 +1,993 @@
+$sc_z02
+_Day=15,
+_DayTime=0,
+
+_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM03")
+42("BGM","00Sound.dat")
+&16702"何かが変わるからだろうか。"&16703"見慣れた風景も、感じる空気も、全部が、いつもと違うように感じた。"&16704"それは、俺が落ち着いていないからなんだろうな。"&16705"……俺は、話すつもりだった。"&16706"関係が変わっても、このままじゃいけないんだ。"&16707"…………。"&16708"…………………。"_Mode=1,
+52("_GRPName","bg06a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM02")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0103f
+&16709"「ほーら、２人とも早く早くーっ」"42("DEL","02CharChip.dat")&16710"熱い砂浜。"&16711"小波と高い日差しの中、二季を追いかける。"&16712"出るところは大きく出ていながら引き締まった体。"&16713"小さく跳ねながら腕を振り、水着から溢れんばかりのおっぱいまで揺らして俺を急かすその姿。"_Target=@CharC,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0008g
+&16714"「……眩しい……熱い……」"42("DEL","02CharChip.dat")&16715"数歩後ろからゆっくりと歩いてきた白幸。"&16716"さらさらと風に遊ばせている長い黒髪と、純白の水着のコントラストに心が奪われる。"&16717"髪に覆われては、曲線にそって束の間から顔をだす双丘……なんてチラリズム。"&16718"しかし、当の本人は元気な二季とは対照的に、遊ぶ前から体力を持っていかれてるな。"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+&16719"…………。"&16720"…………………。"_Mode=1,
+52("_GRPName","bg06a")
+42("DrawBG","00Draw.dat")
+_Mode=@NoDraw,
+_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0104f
+&16721"「いっくよー！　それ！」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE258",0,2,0,0)
+&16722"落とした人がバツゲームを食らうビーチバレーが始まった。"&16723"二季は運動得意だもんな。昔から活発だったし。"#:NameSuffix
+&16724"「ほら、白幸！」"100("",3,2,0,0)
+100("SE258",0,2,0,0)
+_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ge")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0009g
+&16725"「ま、ちょっと……！」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE258",0,2,0,0)
+#:NameSuffix
+&16726"「ほらほらがんばれー！」"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gb")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0010g
+&16727"「そうやって私ばっかりっ……」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE258",0,2,0,0)
+_Mode=@NoDraw,
+_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0105f
+&16728"「うまいうまい！　よーし:NameSuffix！　ス～イ～カッ」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE258",0,2,0,0)
+#:NameSuffix
+&16729"「っはぁ！？　か、っかいとう！」"100("",3,2,0,0)
+100("SE258",0,2,0,0)
+&16730"ただのビーチバレーじゃつまらないというのか二季！"&16731"二季の突然の思いつきでしりとりビーチバレーになってしまった。"&16732"くっそ、考えながら返すのなんて難しいぞ。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gb")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0011g
+&16733"「……うし」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE258",0,2,0,0)
+&16734"なんだか白幸の動きがだんだん俊敏になってきてるような気がする。"&16735"もしかして運動自体は苦手なわけじゃない……？"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0106f
+&16736"「考え事とは余裕ね！　ししおどしっ！　ていっ」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE258",0,2,0,0)
+#:NameSuffix
+&16737"「しんしっ！　なんのっ！」"100("",3,2,0,0)
+100("SE258",0,2,0,0)
+_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gd")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0012g
+&16738"「し」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE258",0,2,0,0)
+#:NameSuffix
+&16739"「ずるいッ！」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ff")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0107f
+&16740"「汚いっ！　あっぁあああ～～！！」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE014",0,2,0,0)
+_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&16741"砂浜にダイブするように飛び込んだ二季の真横に、空しくもビーチボールは落下する。"&16742"ぴくりとも動かない二季。"#:NameSuffix
+&16743"「…………」"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gd")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0013g
+&16744"「……ナイスファイト……二季」"42("DEL","02CharChip.dat")&16745"グッと親指が立つ。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0108f
+&16746"「うわぁぁん！！」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+&16747"その後は。"&16748"バツゲームとして二季が砂に埋められたり。"&16749"砂の城の芸術性を競ったり。"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+&16750"開いてる海の店をまわって小規模な早食い競争をしたり。"&16751"珍しい形の貝殻なんかを集めて競ったり。"
+_DayTime=1,
+
+_Mode=1,
+52("_GRPName","bg01b")
+42("DrawBG","00Draw.dat")
+&16752"気がつけばすっかり陽は傾き。"&16753"人が見当たらない奥まった入り江で遊び疲れた３人は紅く焼ける水面を眺め続けていた。"_Mode=1,
+52("_GRPName","bg06b")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM03")
+42("BGM","00Sound.dat")
+_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0014g
+&16754"「私の圧勝ね……」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季
+&16755"「……～っ」"42("DEL","02CharChip.dat")#:NameSuffix
+&16756"「逞しいな……」"&16757"白幸のほぼ全勝。"&16758"二季は純粋に、今日を楽しみつくすつもりだったんだな。　最後の方はワリと真剣勝負だったし。"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&16759"こうして３人で遊びに来るなんて子供の頃以来か。"&16760"ゆっくりと歩く白幸は、いつもみたいに、読めない表情を浮かべていた。"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0015g
+&16761"「……昨日は二季を満足させられたの？」"42("DEL","02CharChip.dat")#:NameSuffix
+&16762"「うまくできたんじゃないか、って思ってるよ」"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gd")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0016g
+&16763"「そう……それはよかった」"42("DEL","02CharChip.dat")#:NameSuffix
+&16764"「……白幸、その事なんだけどな」"&16765"ここで言うべきではないのかもしれない。"&16766"けど、言えるうちに言うべきなんだ。"_Target=@CharC,
+_CharX=0,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gb")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0017g
+&16767"「くどいわよ……私になんて気を使わなくていいの。あなたは二季を幸せにする事を……」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=@NoDraw,
+_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fh")
+42("DrawChar","00Draw.dat")
+_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0109f
+&16768"「もーっ、遅いよ二人とも！　……何の話してたの？」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0018g
+&16769"「二季は気にしなくてもいいことよ」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+&16770"白幸はぷいっとそっぽをむいた。"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0110f
+&16771"「:NameSuffix、何の話してたの？」"42("DEL","02CharChip.dat")#:NameSuffix
+&16772"「…………」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0111f
+&16773"「まさか……白幸との事？」"42("DEL","02CharChip.dat")#:NameSuffix
+&16774"「！！」"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ge")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸
+&16775"「…………」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fj")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0112f
+&16776"「なにその反応……冗談でしょ？」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸
+&16777"「………」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fe")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0113f
+&16778"「な、なによそれ……嘘でしょ？　:NameSuffix……」"42("DEL","02CharChip.dat")#:NameSuffix
+&16779"「っ……」"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0114f
+&16780"「エッチのこととか言ってくるからもしかして……って。でも……あたし、２人の事、信じたかったのに……！」"42("DEL","02CharChip.dat")&16781"白幸、やっぱり二季に俺の事をあれこれ話していたんだな……それこそ親密にならなければ判りようのない事まで。"&16782"泣きそうな二季を直視できなかった。"#:NameSuffix
+&16783"「二季、今更何を言っても無駄かもしれないけど――」"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0019g
+&16784"「:NameSuffixは悪くないのよ二季。全て私が言ったの、二季とのために私を練習台にすればいいって」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0115f
+&16785"「練習台……って、なによそれ。どういうことなの……白幸！！」"42("DEL","02CharChip.dat")&16786"二季は今までに見た事のないくらい、声を荒げていく。"#:NameSuffix
+&16787"「違う、俺がきちんと言わなかったから。聞いてくれ、俺は――」"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gb")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0020g
+&16788"「黙りなさい」"42("DEL","02CharChip.dat")&16789"ぴしゃりと言い放つ白幸。"&16790"なんでさっきから、俺の話を遮るんだよ……！"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0116f
+&16791"「……:NameSuffixと一緒にいるだけじゃあたしは幸せになれないんだよ。白幸」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0021g
+&16792"「それはどういうこと？　だってあなたはやっと好きな人と結ばれたのよ？　それなのに……」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fa")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0117f
+&16793"「白幸はまだ全部言ってない。姉妹だからとか、そういうの関係なしに聞いてるんだよ」"42("DEL","02CharChip.dat")&16794"一人の女の子として、二季は白幸に問いかける。"&16795"白幸が一歩、たじろいだ。"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0118f
+&16796"「どうして、何も言ってくれないの……」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0022g
+&16797"「……言えるわけないじゃない。私は二季とは違うから」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0119f
+&16798"「白幸があたしの幸せを望むように、あたしも白幸の幸せを望んでるんだよ？」"42("DEL","02CharChip.dat")&16799"お互いを知り尽くしているからこその、二人の会話。"&16800"こうなっているのは間違いなく俺が元凶なのに、口をはさんではいけない空気に思えた。"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0120f
+&16801"「あたしね、白幸の事、うらやましくて仕方ない……」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ge")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0023g
+&16802"「……私を、うらやましい？　二季が？」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0121f
+&16803"「あたしは！　白幸みたいに可愛いワンピースなんて似合わないもん！　肌も白くなければ清楚でもないしうるさいし……髪もきれいじゃない」"42("DEL","02CharChip.dat")_Mode=@NoDraw,
+_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0122f
+&16804"「昔から、女の子は白幸で、あたしは、まるで男の子だった……」"42("DEL","02CharChip.dat")&16805"二季の言葉に胸が痛む。"&16806"俺も昔、二季を男の子と勘違いしてしまった。"&16807"白幸にも言われた。もっと早く二季を女の子と認識していれば……。"&16808"うつむいた二季を見て、白幸が意を決したように口を開いた。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0024g
+&16809"「……明るくて行動力があれば私だって、あなた達と一緒に喧嘩も出来たのに……。お料理もできないし社交的でもない。根暗で人との付き合い方もわからない」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0025g
+&16810"「あなただけじゃないのよ……私だって。　私だってあなたがうらやましかった」"42("DEL","02CharChip.dat")&16811"お互いがお互いをうらやんでいたんだ。"&16812"俺から見たら二人とも女の子らしくて、それぞれいいところがあって。"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fa")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0123f
+&16813"「白幸はそれ以外にも、思ってることがあるんでしょ？」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0026g
+&16814"「……ないわよ」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0124f
+&16815"「ねえ、どうして？　どうして本当の事を言ってくれないの？」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0027g
+&16816"「私は二季の為に……ずっと思って……だから……」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0125f
+&16817"「……あたしの為あたしの為って、あたしの幸せは白幸が決めるような事じゃないでしょ！！」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ge")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸
+&16818"「っ！」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0126f
+&16819"「あたし白幸に不幸だって言った事あった……？　なにか苦しいって言った事あった……？」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0028g
+&16820"「……なかった」"42("DEL","02CharChip.dat")&16821"瞳いっぱいに涙を溜めながら二季はこらえる様に吐き出した。"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0127f
+&16822"「もう、あたしの為って言って、こんな事しないで……！」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ge")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸
+&16823"「～～っ！！」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0128f
+&16824"「あたしたち双子じゃない！　なのに気づいてないと思ったの……？」"42("DEL","02CharChip.dat")&16825"痛みにひるまず、瞳いっぱいに涙を溜めながら二季は叫んだ。"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0129f
+&16826"「あたしは！！　そんなの嬉しくない！！」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸
+&16827"「……」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fa")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0130f
+&16828"「あたしの事はもういいの……今度は白幸が幸せにならなきゃ……」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0131f
+&16829"「練習台になるなんて言って、本当は白幸だって:NameSuffixの事……！」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","gk")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0029g
+&16830"「っやめて！　いくら二季でも私の気持ちを口に出さないで」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0132f
+&16831"「じゃあ、白幸から聞かせてよ」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+&16832"泣きそうな顔をしながら、白幸は俺の方を向く。"&16833"必死で泣くまいとこらえているのか頬が赤い。"&16834"大きく深呼吸をして、最後に二季のことを確認してから白幸は言った。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0030g
+&16835"「……私は二季も:NameSuffixもどちらも好きよ。二季のためって言い訳して:NameSuffixに触れることができて、触れてもらえて嬉しかった」"42("DEL","02CharChip.dat")#:NameSuffix
+&16836"「白幸……」"&16837"初めて、白幸の本音が聞けた。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0031g
+&16838"「二季が:NameSuffixの事で悩んでいる様子がひどく苦しかった……！」"42("DEL","02CharChip.dat")&16839"ぽろぽろと白幸の瞳から涙がこぼれる。"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+&16840"それを見ていた二季も同じように泣いた。"&16841"白幸は二季に抱き寄せられるようにしてとても静かに泣いた。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0032g
+&16842"「ごめんね……二季……」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0133f
+&16843"「ううん。……ありがとう、白幸」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&16844"…………。"&16845"………………。"&16846"泣き止んだ白幸と二季は、まるで憑き物が落ちたように笑った。"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fh")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0134f
+&16847"「ありがとう。:NameSuffix」"42("DEL","02CharChip.dat")#:NameSuffix
+&16848"「いや……」"&16849"俺は、見ていただけ。"&16850"礼を言われる筋合いなんてない。"&16851"むしろ、俺は謝らないといけないんだ。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0033g
+&16852"「……:NameSuffix」"42("DEL","02CharChip.dat")#:NameSuffix
+&16853"「ん？」"_Target=@CharR,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+100("",3,2,0,0)
+100("SE049",0,2,0,0)
+_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fe")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0135f
+&16854"「え」"42("DEL","02CharChip.dat")#:NameSuffix
+&16855"「え」"&16856"ふわりと香る甘い匂い。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","gd")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0034g
+&16857"「ふふ、いい顔ね」"42("DEL","02CharChip.dat")#:NameSuffix
+&16858"「！？！？」"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ff")
+42("DrawChar","00Draw.dat")
+_MoveX=20,
+_MoveY=0,
+_WaitTime=2000,
+_MoveT=@CharL,
+80(1,"01Quake_Char.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0136f
+&16859"「白幸ーーー！」"42("DEL","02CharChip.dat")_ThreNum=1,
+42("QuakeEnd","01Quake_Char.dat")
+&16860"一瞬なにが起こったのかわからなかった。"&16861"口に触れた柔らかい感触。"&16862"混乱中の二季。"&16863"したり顔の白幸。"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fe")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0137f
+&16864"「っな、なんで……！」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0035g
+&16865"「私も:NameSuffixが好きなんだもの」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fi")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0138f
+&16866"「:NameSuffixはあたしの彼氏だもん！！」"42("DEL","02CharChip.dat")&16867"大慌てで俺と白幸の間に割って入る二季。"&16868"二季が取り乱してくれるおかげで、なんとか平常心を保ててる状態だ。"&16869"途端に大胆になったな白幸……。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","gj")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0036g
+&16870"「まだまだわからないわよ……ふふっ」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0139f
+&16871"「負けないんだから！」"42("DEL","02CharChip.dat")&16872"これはもしかしなくても……俺の取り合い……ですか。"#:NameSuffix
+&16873"「いつのまに勝負になったんだ……？」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+#３　人
+&16874"「…………」"_Mode=@NoDraw,
+_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0140f
+&16875"「で、でも、大切なのは:NameSuffixの気持ちよっ」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0037g
+&16876"「……それもそうね」"42("DEL","02CharChip.dat")#:NameSuffix
+&16877"「…………」"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0141f
+&16878"「あたしの横にずっといてくれるって言ってくれたよねっ！」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0038g
+&16879"「私にも幸せになって欲しいって言っていたわよね」"42("DEL","02CharChip.dat")#:NameSuffix
+&16880"「あぁ……」"#:NameSuffix
+&16881"「俺は二季の事が好きだ」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0142f
+&16882"「……うんっ……うんっ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&16883"「白幸にも二季と同じくらい幸せになって欲しいと思っているのも本当だ」"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","gb")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0039g
+&16884"「……それって結局はどっちなのよ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&16885"「日本には譲り合いの精神っていうね……」"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","fb")
+42("DrawChar","00Draw.dat")
+#二季＆白幸
+&16886"「…………」"#:NameSuffix
+&16887"「すみません今のは間違いました」"&16888"二季との想いは譲れない。"&16889"だけど、白幸の事も気になる。"#:NameSuffix
+&16890"「俺だって、ずっと考えてた……でも、答えが出なかった」"&16891"二人とデートしてみて、わかったこと。"#:NameSuffix
+&16892"「どっちかなんて、選べないよ……」"_Target=@CharL,
+_CharX=-200,
+_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fk")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0143f
+&16893"「ちょっとはこういう結末も予想してたけどさぁ……」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0040g
+&16894"「……やっぱりというか……流石というか」"42("DEL","02CharChip.dat")&16895"チクチクとつつかれてる気分です。"&16896"俺、このまま捨てられるかも。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0041g
+&16897"「私は二季にも幸せになってもらいたい」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0144f
+&16898"「あたしは白幸の幸せも願ってる」"42("DEL","02CharChip.dat")#:NameSuffix
+&16899"「……俺はどっちも幸せになって欲しい！！」"&16900"…………。"_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","gc")
+42("DrawChar","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0042g
+&16901"「……アリなのかしら」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=2,
+_Glass=1,
+_Cheek=2,
+52("_GRPName","ga")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0145f
+&16902"「んー……こんなの普通なら在り得ないけど……」"42("DEL","02CharChip.dat")#:NameSuffix
+&16903"「？？」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+
+$reco
+
+_Mode=1,
+52("_GRPName","f06r0")
+42("DrawCG","00Draw.dat")
+52("_BGMName","BGM08")
+42("BGM","00Sound.dat")
+&16904"疑問をもった俺の目の前で２人は横たわる。"#:NameSuffix
+&16905"「！？」"&16906"わかってるでしょと言わんばかりに顔を紅潮させながら。"&16907"体と体が触れ合う２人がフレームに収まると、どうしようもなく求めてしまう。"#:NameSuffix
+&16908"「２人ともなんて格好を……」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0043g
+&16909"「……フフフ……そんな事言いながらも、体は勝手に動いているじゃない」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0146f
+&16910"「今の気持ちを確かめたいの……お願い:NameSuffix」"42("DEL","02CharChip.dat")#:NameSuffix
+&16911"「ちょ……ちょっと待て。２人一緒なのを自然に流すところだった」"#:NameSuffix
+&16912"「２人共、この状況を受け入れ済みなのか……？」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0147f
+&16913"「もちろん……でなくちゃ、２人揃ってこんな格好を晒すと思う？」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0044g
+&16914"「好きよ、:NameSuffix」"42("DEL","02CharChip.dat")#:NameSuffix
+&16915"「俺も……好きだけど」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0148f
+&16916"「あたしだって好きなんだからっ」"42("DEL","02CharChip.dat")#:NameSuffix
+&16917"「……ウン、二季も好きだ」"&16918"ハハ……考えてみれば、なんていうか……。"&16919"違和感満点なのにも関わらず、まるでそれが正しいと思い込んでしまっている。"&16920"俺ってホント……エッチが絡むとロクでもない方向に路線変更してしまうな。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0149f
+&16921"「あっ……やだ、見比べたでしょ……今」"42("DEL","02CharChip.dat")#:NameSuffix
+&16922"「へっ」"&16923"おもむろに二人の体を触り始めた時だった。"&16924"そりゃ見るけど、見比べたつもりはない。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0045g
+&16925"「……ふふ、ふふふ。:NameSuffixの好みはロングヘア……偶然私もロングヘア」"42("DEL","02CharChip.dat")#:NameSuffix
+&16926"「本当に偶然だろうけど……怖いな」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0150f
+&16927"「髪はあたしがセットしてあげないと、すぐボサボサになっちゃうんだからっ」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0046g
+&16928"「……うっ」"42("DEL","02CharChip.dat")#:NameSuffix
+&16929"「なにも、髪型だけで判断してるわけじゃないけど……」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0047g
+&16930"「そう……:NameSuffixは、やっぱり性格が明るい方がいいのね」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0151f
+&16931"「ふふっ……再会したばかりの時は気味悪がられてたもんねぇ」"42("DEL","02CharChip.dat")#:NameSuffix
+&16932"「いや、そうじゃなくてな！？　２人の全部が好きなんだよっ！！」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0152f
+&16933"「優柔不断」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0048g
+&16934"「強欲」"42("DEL","02CharChip.dat")#:NameSuffix
+&16935"「ひでぇ……」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0153f
+&16936"「ぷっ……あははは」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0049g
+&16937"「……ふふっ、うふふふふっ」"42("DEL","02CharChip.dat")&16938"きっと今、この空間には俺たちのルールしか存在しない。"&16939"皆で幸せになる方法。"&16940"それは単に気分を紛らわせているだけかもしれない。"&16941"それでも俺は２人の願いに答えたい。"#:NameSuffix
+&16942"「二季……濡れてきてるな」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0154f
+&16943"「あっ！　んぅ……別に、あたしからじゃなくても……いいんだけど」"42("DEL","02CharChip.dat")&16944"二季の内ももに手を這わせ、指が股間のふくらみに触れると、布越しでもわかるほどの熱が伝わってくる。"&16945"指先には少しばかりのしめりが絡む。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0050g
+&16946"「……照れてる」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0155f
+&16947"「ち、違うわよっ！！」"42("DEL","02CharChip.dat")&16948"とてもいとおしい。"&16949"２人のやり取りや、心からの本当の反応が。"#:NameSuffix
+&16950"「挿れるぞ……」"_Mode=1,
+52("_GRPName","f06r1")
+42("DrawCG","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0156f
+&16951"「はぁっ……ぁ、ぅ、ま、待って……あぁ、ぁぅぅ……」"42("DEL","02CharChip.dat")&16952"戸惑いを見せながらも、露になった秘裂に亀頭を押し当てられると二季は肩をすくめながら身を任せる。"&16953"心の準備をしているようにも見えるけど、恥ずかしがっているようにも見えるな。"&16954"俺よりも白幸がすごく見てる。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0051g
+&16955"「フフフッ……私は気にしないでいいのよ二季。しっかり観察させてもらうだけだから」"42("DEL","02CharChip.dat")&16956"白幸はぐっと二季に身を寄せながら、言葉どおりに俺や二季をじっくり見ている。"&16957"見てるだけでも楽しめる領域。男としてはエロ本やＡＶを生で見るようなもんだろうけど、本当にやられると、なるほど見られてる方が恥ずかしいな。"&16958"俺には盛り上がるくらいのスパイスに変換できるけど、二季の恥辱具合はひとしおに違いない。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0157f
+&16959"「ふあっ、んん……見ないで……んぁっ！　くぅぅ、:NameSuffixまでニヤニヤして……２人とも落ちつっ、あ、ああっ」"42("DEL","02CharChip.dat")&16960"頭を振りながら戸惑う二季の膣内は、細かく振るえながらどんどんと濡れていく。"&16961"白幸の熱視線の中、亀頭が先に進むほど膣を刺激されて二季は否応なく反応してしまう。"&16962"２人係りでイジめてるみたいだな……ごめん二季、この状況とても股間が熱くなるな。"&16963"……って俺がいち早く色欲に囚われてどうする。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0158f
+&16964"「あんっ……なんでこんなにゆっくりしてるのよぉ……はぁ、はぁ、もっと自分勝手にするくせに」"42("DEL","02CharChip.dat")#:NameSuffix
+&16965"「俺も白幸も二季がどんどん可愛くなってく所じっくり見たいんだ」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0159f
+&16966"「……～～っ！　普段は可愛くないって聞こえるんだけどっ……！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&16967"「そんなことないって」"&16968"二季の脚や腰に手を添えてやると、しっとりと湿った肌が指にしっかりとした肉の反発を返してくる。"&16969"結合部に集中していた二季の意識は俺の手にもそそがれ、滑らかな肌の上を指がすべるとその部位をピクリと反応させていた。"&16970"犬とか猫とかリスとか興味ないけど……この感覚に近いなら、動物を愛でる事にハマるのも理解できるな。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0052g
+&16971"「どんどん顔が緩んでる……おちんちんを挿れられると二季はこんな表情をするのね……魅せてくれるわ」"42("DEL","02CharChip.dat")&16972"責めるわけでもなく、思った言葉をそのまま紡ぐ白幸。"&16973"俺と一緒に二季の体に手を這わせたり、おっぱいにおっぱいを押し付けたりしながら、ふっと笑う。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0160f
+&16974"「ちょっと、白幸までっ、ひゃぅっ！　悪乗りしすぎ……はぁん、んんんッ！」"42("DEL","02CharChip.dat")&16975"見ないでほしいとばかりに顔を逸らすが、そんな事をされると余計に見てしまう。"&16976"膣内で感じているであろう刺激で、みるみる内に耳まで肌の色が変わり、硬く閉じようとする口は時々力なく開く。"&16977"２人の肌がこすれて肉が変形し、手足もなやましく蠢く様子に、見蕩れてしまいそうだ。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0161f
+&16978"「ひぁぁ、あはぁっ……なんでこんなにチンポ硬くしてるのよぉぉ、はぁぅぅ……んん！！」"42("DEL","02CharChip.dat")&16979"やがて、二季の股間にぴったりと俺の腰が密着する。"&16980"視界に入る情景はそのまま興奮に結びつき、肉棒は二季の熱く蕩ける秘肉の中でドクドクと力強く脈をうつ。"#:NameSuffix
+&16981"「それだけ嬉しいって事だから……」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0053g
+&16982"「おちんちんの硬さの違いがわかるくらい２人はエッチしていたの？　そんなの私聞いてないんだけど」"42("DEL","02CharChip.dat")#:NameSuffix
+&16983"「普通は聞かせないと思うけどな」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0162f
+&16984"「むぅぅ……すぐ答えなくてもいいじゃない！　あぅ、っく……いつもより、その、気持ちいいんでしょ？　あたしのお、オマンコ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&16985"「ぅ……それは……」"&16986"確かに気持ちいいけど、どうしてわざわざ、いつもよりなんて単語を使うのかっ。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸
+&16987"「…………」"42("DEL","02CharChip.dat")&16988"なんだろう。さっきまでは変な空気になりようなかったじゃないの。"&16989"もっとこう、愛と快楽に３人で絡めとられていくみたいなのが良かったんだけどっ。"&16990"……えぇいっ、今更ぁっ！！"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0163f
+&16991"「あっ！？　あぁぁん！　そん、なっ、あああっ！　いきなりっ、ひゃっ、ぁっ！　はぁああんっ！」"42("DEL","02CharChip.dat")&16992"滞りそうになった時間の流れを加速させるように、俺は膣壁にくっつけるようにしていた肉棒を引き。"&16993"二季の全身が揺れる程に腰を動かし膣奥を突き上げる。"&16994"溜め込んだ愛液のぬめりは抽送をスムーズにし、肉棒を搾り出されるような締め付けと、亀頭を押し込む時の摩擦を円やかにする。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0054g
+&16995"「……こうして見ると、とても乱暴なのね……痛くはないの……？」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0164f
+&16996"「そんなの、わか、んないぃ！　あ、はぁああっ……あんっ、んぅっ、ふぁ、あぁぁん」"42("DEL","02CharChip.dat")#:NameSuffix
+&16997"「ハァッ、ハァッ、二季っ……」"&16998"俺が腰を引くと、膣の喪失感を埋めたそうに二季の股間がついてくる。"&16999"反動にしてはあから様すぎるが、二季は自覚していそうにない。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0165f
+&17000"「はっ、あぁぁっ！　いいよっ、もっと気持ちよくなって……:NameSuffix……！」"42("DEL","02CharChip.dat")#:NameSuffix
+&17001"（本当に自覚してないのか？）"&17002"なにやら、負のプレッシャーをビンビンと横から感じるのだが。"&17003"二季も二季で白幸の表情を見て、なんか積極的になっていないか。"&17004"そして、わけもわからず張り詰めていく空気の中、俺はすぐに果ててしまいそうなんですけど。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0166f
+&17005"「チンポでいっぱい擦れてぇ、お腹、あったかぃッ……気持ちいいっ、あ、ああぁ！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&17006"「そんな腰捻ったらヤバイッ……くぅぅッ！」"&17007"右に左に揺れる腰は膣内の様相を千変万化させているようだった。"&17008"二季と密着する毎に、刺激も、摩擦の具合も違う膣肉に夢中に……。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0055g
+&17009"「させないわ」"42("DEL","02CharChip.dat")#:NameSuffix
+&17010"「イッ！？　イテテッ！」"&17011"脚から刺すような痛みが走り、我にかえらされてしまう。"&17012"白幸の指が太ももの薄皮をしっかりと抓っていた。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0167f
+&17013"「はぁはぁ……？　ぁ……もうっ、いい所だったのに……」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0056g
+&17014"「……観察は終わり。次は私よ……:NameSuffix」"42("DEL","02CharChip.dat")#:NameSuffix
+&17015"「そうだな」"_Mode=1,
+52("_GRPName","f06r0")
+42("DrawCG","00Draw.dat")
+&17016"白幸もいるのに、二季に夢中になった上に、果てたらそりゃ怒るか……。"#:NameSuffix
+&17017"「……白幸、今のってもしかしてヤキモチ……」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0057g
+&17018"「そんなハズないでしょう。ただ私の存在を忘れ始めていたから注意したまで……」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0168f
+&17019"「それをヤキモチっていうんじゃないの？」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0058g
+&17020"「……後で呪うわ」"42("DEL","02CharChip.dat")&17021"白幸がここまでわかりやすく感情をだしてくる。"&17022"求められているという事に俺は素直に喜ぼう。"&17023"二季から引き抜いた愛液やカウパーが混じった液体でベトベトの肉棒を、白幸に近づける。"_Mode=1,
+52("_GRPName","f06r2")
+42("DrawCG","00Draw.dat")
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0059g
+&17024"「……くっ……ぅ……んんっ……はぁ……はぁ……あっ」"42("DEL","02CharChip.dat")&17025"肉棒に絡み付いていたヌメりと、白幸自身の愛液で、滑らかに亀頭は膣口を捉えた。"#:NameSuffix
+&17026"（双子っていっても、ココはぜんぜん違うんだな……）"&17027"などと思ってしまうが口には出せない。どちらも比べようがないのは変わらないし。"&17028"比べるようなマネをしたら絶対また空気が淀むし。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0169f
+&17029"「あたしも、しっかり見せてもらうから！」"42("DEL","02CharChip.dat")&17030"お返しとばかりに白幸に視線をおくる二季だが、どこを見たものか迷っている風に目は泳いでいた。"&17031"白幸の食いつくような視線も恥ずかしいが、見る方に照れられても困るもんだな。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0060g
+&17032"「んっ……はぁ……二季に見られながらなんて……嬉しいわ」"52("_CCName","f")42("Start","02CharChip.dat")#二　季
+&17033"「！？」"42("DEL","02CharChip.dat")&17034"白幸に絡め手は通じなさそうだもんな。"&17035"待ち望んでいたとばかりに白幸は腰を浮かせ、肉棒を受け入れていく。"&17036"締りの強い二季とは少し違い、溝が深めで愛液を蓄えた襞壁は、亀頭、カリ首、肉幹と侵入した側から絡みついてくる。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0061g
+&17037"「ふぁっ、あぁ……はぁ……ゆっくり感じさせて……んんっ……:NameSuffixのおちんちん」"42("DEL","02CharChip.dat")&17038"快楽に溺れるのとは別の、行為への好奇心と刺激への探求といった欲望に飲まれていく白幸と俺。"&17039"肉襞をより感じられるように、深度を下げながら、小さく腰をまわして亀頭を膣壁に擦りつける。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0062g
+&17040"「はぁっ！　はあぁ……んぅ！　おまんこ、無理やり拡げられてるみたいっ……あっ……はぁぁ」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0170f
+&17041"「ホントに気持ちよさそうな顔してる……白幸のこんな所、初めて見るよ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&17042"（初めてじゃなかったら、俺が驚くぞ）"&17043"二季の迷い、泳いでいた視線は、白幸と俺の距離が縮まるほどに集中していく。"&17044"絡み合うような体の動きや、２人の表情に。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0063g
+&17045"「あっ、あぁぁ……ぅぁ、先っぽが奥にぶつかってる……んんんっ、はぁっ、あぁんっ」"42("DEL","02CharChip.dat")&17046"第三者に見られながらでも随分とハードルが高いというのに。"&17047"白幸は行為を止めず、密着した腰を揺らし続ける。"&17048"前々から思ってはいたけど……白幸ってどうすれば自分が気持ちいいか、相手が気持ちいいか、研究でもしてるんじゃないのか。"#:NameSuffix
+&17049"「白幸の中、うねってるみたいで……すご……くぅぅ」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0171f
+&17050"「:NameSuffix、ぜんぜん動いてないのに震えてる……そんなに気持ちいいの……？」"42("DEL","02CharChip.dat")#:NameSuffix
+&17051"「あぐ……ぇ？　えっと……」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0064g
+&17052"「ふふふふ……激しく動くばっかりがセックスじゃない。そうでしょう？」"42("DEL","02CharChip.dat")&17053"２人相手の時点で軽く容量オーバーな俺に聞かないでほしい。"#:NameSuffix
+&17054"「くっ……ぅ……白幸ってなんか上手いって感じで……あっ……いや、比べてるとかじゃないんだけどっ……！！」"&17055"頭の中は整理がついてないから、こんな答えしか返せません。"52("_CCName","f")42("Start","02CharChip.dat")#二　季
+&17056"「…………」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0065g
+&17057"「ふふふ、嬉しい……いろんな本を読んだ意味があったわね……はぁっ、あん……ちゃんと味わって……」"42("DEL","02CharChip.dat")#:NameSuffix
+&17058"「ああ……」"&17059"瞬時にハートをわしづかみにされた気分だった。"&17060"俺の為にエッチのハウツー本読んだとか思い込んでしまいそう。"&17061"こちらの受け入れ態勢が整っていなくてもかまわず飛び込んできてほしいくらいだ。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0066g
+&17062"「あっ、ぁぁ……ん、はぁ、はぁ……最初はゆっくり、時間をかけて……おちんちんをしっかり感じながら……はぁんっ」"42("DEL","02CharChip.dat")&17063"踊らされるように、ゆっくりとピストンする。"&17064"吸着してくるような膣肉はじっくりと肉棒の隅々を擦り、引いた肉幹を引っ張るような感覚さえ与えてくる。"&17065"腰をくっつけると、白幸は肉を揺らし、腰を回す。こちらを見ながら動きを合わせていた。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0172f
+&17066"「うぅ……なんだかあたしの時よりずっと気持ちよさそうに見える……」"42("DEL","02CharChip.dat")#:NameSuffix
+&17067"「どっちも気持ちいいって……本当」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0067g
+&17068"「比べる必要はないわよ……:NameSuffixの好みがどちらかってだけなんだから、あんっ…おちんちんは私の中で喜んでるみたい……ふふ、ふふふっ」"42("DEL","02CharChip.dat")#:NameSuffix
+&17069"（なんでそんなに選ばせたがるの！　平和にイこう！）"&17070"乙女のプライド的なものなんだろうか……とてもじゃないが読みきれない……。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0173f
+&17071"「……それで明るい笑顔の練習の成果はどうなの、白幸」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0068g
+&17072"「なっ、今は関係ないでしょうっ！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&17073"「？」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0174f
+&17074"「ハハァン……そっかぁ、あんなに熱心に尋ねて、鏡の前で練習してたのに見せてないんだぁ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&17075"「ぇ、何の話？」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0069g
+&17076"「二季、やめ……あっ！　あぐぅ……んんっ、くぅぅ……ひぁっ！　ちょっ、とっ……:NameSuffix、はげしっ、あぁぁっ」"42("DEL","02CharChip.dat")&17077"二季の話をさえぎろうとした、白幸の行動を、ゆっくりとした腰の動きを激しくして留める。"&17078"白幸は力の抜けていた体を強張らせ、唐突の刺激に耐える事に精一杯になる。"#:NameSuffix
+&17079"「白幸の練習がなんだって？」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0175f
+&17080"「んん～……どうしよっかなぁ……これって教えていいの？」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0070g
+&17081"「だめっ……はああ、あんっ！　やっ、ぁ、こんな汚い手、許さないっ……あっ、ひぁっ、んんぅぅ！」"42("DEL","02CharChip.dat")&17082"形勢逆転とばかりに微笑む二季。"&17083"今この瞬間。俺の疑問は横に置かれた気がする。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0176f
+&17084"「あたしだって、恥ずかしいところいっぱい見られたんだよ白幸、これでお互い様……だよね」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0071g
+&17085"「はぁ、ぁ、あぁぁ……はぁ、はぁっ、んんん……ああぁ……ひゃんっ、うぁっ……うぅ……」"42("DEL","02CharChip.dat")&17086"白幸は俺に激しく身体を揺さぶられながらもコクコクと頷き、二季はそれを確認すると白幸にゆっくりと密着していく。"&17087"白幸の明るい笑顔ってのも気になるけど……一見落着したなら今はいいか。"#:NameSuffix
+&17088"「ハハ。２人は本当にそっくりなんだな」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0177f
+&17089"「そうかな。全然違うと思うけど」"42("DEL","02CharChip.dat")&17090"見た目の雰囲気だけじゃなくて、もっと、根本的な……。"&17091"伝わりあってる、分かり合ってる、そういう心の部分だ。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0072g
+&17092"「そんな事よりも……:NameSuffix、もっときて。忘れられなくなるくらいめちゃくちゃにして」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0178f
+&17093"「ずるいよ白幸ばっかり！　あたしだって途中で止められて、さっきからウズウズしてるんだからぁ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&17094"「わかってるよ……」"&17095"俺達はそのまま、余りある快感の波にのまれていく。"_Mode=1,
+52("_GRPName","f06r1")
+42("DrawCG","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0179f
+&17096"「あん、ああぁっ、はぁぁっ……あっ、あぅっ、そんなに激しくしたらおかしくなっちゃうよっ、はぁ、はぁ、ひあぁんっ」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0073g
+&17097"「さっきからおっぱいばっかり……あんっ！　いいわ、もっと触って、好きなところたくさん触って……」"42("DEL","02CharChip.dat")&17098"腕を絡め、脚を絡め、それぞれ身体のあらゆる部分をこすり付けあう。"&17099"腰を振りながら、二季の膣奥をしつこく突きまわし、片腕は白幸のおっぱいへと伸ばし。"&17100"手の平だけでなく二の腕で囲うようにして、二季の身体と一緒にゆれる白幸のおっぱいの肌触りを堪能する。"_Mode=1,
+52("_GRPName","f06r2")
+42("DrawCG","00Draw.dat")
+#白　幸=w0074g
+&17101"「はぁんっ、うぁ、あっ、あぁあ！　はふっ……ぅ、ん…ちゅっ……んんぅ、ちゅむ……」　"&17102"肌で汗を、粘膜で体液を……あらゆる汁を感じ、まるで混ぜ合わせるように交換し、啜りあう。"&17103"俺の指先に指が触れれば、その手を握り締め、できるだけ近くに寄せてやる。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0180f
+&17104"「はぁ……はぁ……白幸はおちんちん入れられてるのにずるいよ……あたしにもキスして」"42("DEL","02CharChip.dat")&17105"２人の身体を濡らす愛液が、沈む日の光に照らされきらきらと反射する。"&17106"空気は重く身体中にまとわりついてくるが、わずらわしいという事もなく、むしろもっと感じていたい。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0181f
+&17107"「んぅ……ちゅく……んっ、ふ……んん、ぢゅるっ……」"42("DEL","02CharChip.dat")&17108"上でも下でも交互に繋がりを求めて貪り合っているうちに、もうどのくらいの時間が過ぎただろうか。"&17109"動かし続けていた腰はいつの間にか勝手に震えはじめる。"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0075g
+&17110"「ああぁん……んんっ、ひぁああ、あん、あぁっ、あぁぁあっ！！！」"42("DEL","02CharChip.dat")_Mode=6,
+52("_GRPName","f06r3")
+42("DrawCG","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0182f
+&17111"「アッ、アアァァ─……ッ！！　熱っ、んっ……ハァ……あ、ああぁ、ドロドロの精液いっぱい飛び出してる」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0076g
+&17112"「ハァッ、ハァッ……精子、たくさんぶつけて…身体中で感じさせてぇぇ……あぅっ、んんんっ……！」"42("DEL","02CharChip.dat")&17113"乱れ狂う２人をボンヤリとしてきた目で見ながら、腰を引いて膣奥から肉棒を抜き取り下半身の力を抜くと。"&17114"激しい脱力感と一緒に射精の開放感が全身に広がり、精液で汚れていく２人の声を頭の中に響かせる。"#:NameSuffix
+&17115"「ハァ……ハァァ……」"52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0077g
+&17116"「射精すればするほど、おちんちんがどんどん硬なっているみたい……」"42("DEL","02CharChip.dat")&17117"白幸の指が射精が収まり始めた肉棒に添えられ、優しくさすってくる。"&17118"俺はその気持ちよさに腰を震わせるばかりだった。"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0183f
+&17119"「チンポいつもよりずっと充血して、血管まで浮き出て……こんなのがあたしの中に全部入ってたんだ。まだ残った精液がトロトロって出てきてるよ」"42("DEL","02CharChip.dat")&17120"二季も白幸も俺を見ながら、お互いの身体に降り注いだ白濁を確かめるように指を這わせていく。"&17121"興奮は冷めていかず、心臓はますます鼓動を早くする。"&17122"俺達はそれぞれから目が離せていなかった。"_Mode=1,
+52("_GRPName","bg01b")
+42("DrawBG","00Draw.dat")
+52("_CharNameB","fc_fd211")_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0184f
+&17123"「:NameSuffix……もう一回、いいかな……」"42("DEL","02CharChip.dat")52("_CharNameB","fc_gd211")_CosSel=2,
+_Glass=1,
+_Cheek=1,
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0078g
+&17124"「私もして欲しいわ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&17125"「あぁ……いくらだってしてやる……」"&17126"身体の底から沸きあがって来る熱にしたがって。"&17127"３人でこのまま、沈んでしまおう……。"&17128"俺達が選んだ皆で笑顔になる方法だ。"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+&17129"…………。"&17130"…………………。"
+52("_GRPName","z02")
+42("RecoFlag","00RecoFlag.dat")
+52("_GRPName",_BGName)
+140(0)
+
+41("sc_fg_end","sc_fg_end.dat")

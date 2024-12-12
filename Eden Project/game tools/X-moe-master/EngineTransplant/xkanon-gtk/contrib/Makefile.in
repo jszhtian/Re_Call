@@ -1,0 +1,31 @@
+# Linux でPCMのドライバとして OSS を使用する場合、は -DUSE_OSS が必要
+# また、CDROM_OBJ を cdrom.Linux.o にする必要がある
+
+# OSS 以外にも ALSA(Advanced Linux Sound Architecture) と ESD(Enligtenment Sound Daemon)も
+# 動くと思われるが、未テスト。その辺についてはxsystem35 の README.music を参照。
+
+# OpenBSD / NetBSD では LFLAGS に -lossaudio が必要
+
+CFLAGS= -I../ @CFLAGS@ @DEFS@ @ALSA_CFLAGS@ @ESD_CFLAGS@ @OSDEPDEF@ -pthread -O2 # -ggdb -O0
+
+CC=@CC@
+CXX=@CXX@
+
+@SET_MAKE@
+SRC_CDROM = @SRC_CDROM@ cdrom.c
+
+all: contrib.a
+
+@AUDIO_IO@.o: @AUDIO_IO@.c @ALSAMIX_H@
+
+contrib.a: config.h music.o pcm.o movie.o koedec.o koedec_wpd.o wavfile.o wavmix.o audio.o @AUDIO_IO@.o LittleEndian.o counter.o $(SRC_CDROM:.c=.o)
+	rm -f contrib.a
+	ar clq contrib.a music.o pcm.o movie.o koedec.o koedec_wpd.o  wavfile.o wavmix.o audio.o @AUDIO_IO@.o LittleEndian.o counter.o $(SRC_CDROM:.c=.o)
+	ranlib contrib.a
+
+config.h:
+	ln -s ../config.h .
+
+clean:
+	rm -f *.o *.a *.core *.bak config.h
+

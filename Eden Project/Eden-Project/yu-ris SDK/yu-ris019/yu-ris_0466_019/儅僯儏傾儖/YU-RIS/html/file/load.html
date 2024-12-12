@@ -1,0 +1,86 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">ファイル系命令</A>＞LOAD［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="save.html">SAVE［］</A>
+　<A HREF="saveend.html">SAVEEND［］</A>
+　<A HREF="load.html">LOAD［］</A>
+　<A HREF="fileact.html">FILEACT［］</A>
+　<A HREF="fileinfo.html">FILEINFO［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=750 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■変数読出命令 LOAD[ ]</FONT>
+<FONT CLASS=t20>
+
+ファイルからデータ(値)を読み出します。
+
+「save」フォルダ内にある指定したファイルから、指定した任意のデータ(値)を読み出します。
+
+どのデータを読み出すかの指定として、
+SAVE 命令でデータ(値)を保存した時に対応づけたデータ番号を指定します。
+例えば仮に、LOAD[FILE="AAA" DNO=5 SET=@C]　とした場合、
+「ファイルＡＡＡ．ＳＤの中から、５番目のデータ(値)を、変数＠Ｃに読み出す」
+という意味でとらえていただければ分かりやすいと思います。
+
+配列変数の一括読み出しも可能です。その場合、配列変数の全要素を一括で読み出す形となります。
+LOAD[FILE="AAA" DNO=12 LET=@TEST2()] のように記述すれば、保存した配列変数を読み出せます。
+詳しくは SAVE[] 命令の項目をご覧ください。
+
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>FILE = ファイル名</FONT></TD><TD><FONT CLASS=t40>データファイル名</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DNO = 値(1～1024)</FONT></TD><TD><FONT CLASS=t40>データ番号の指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LET = 変数名</FONT></TD><TD><FONT CLASS=t40>読み出した値を格納する変数</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>ID = 文字列</FONT></TD><TD><FONT CLASS=t40>レイヤーＩＤを指定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]saveフォルダ内の「GLOBAL_FLAG.sd」から、データ番号１に対応するデータ（値）を、＠ＡＢＣという整数変数に格納する。
+
+　　<B><FONT CLASS=t60>INT[@ABC]</FONT></B>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>LOAD</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"GLOBAL_FLAG.sd"</FONT> <FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@ABC</FONT>]</FONT></B>
+
+
+[2]saveフォルダ内の「SAVE_001.sd」から、データ番号５に対応するデータ（値）を、＠ＦＦという実数変数に格納する。
+
+　　<B><FONT CLASS=t60>FLT[@FF]</FONT></B>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>LOAD</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"SAVE_001"</FONT> <FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>5</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@FF</FONT>]</FONT></B><FONT CLASS=t20>　　（※拡張子.sdを省略することも出来ます）</FONT>
+
+
+[3]saveフォルダ内の「SAVE_001.sd」から、データ番号１２３に対応する配列データ（値）を、＠ＨＡという配列変数に格納する。
+
+　　<B><FONT CLASS=t60>INT[@HA(500,20)]</FONT></B>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>LOAD</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"SAVE_001"</FONT> <FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>123</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@HA()</FONT>]</FONT></B>
+
+
+[4]saveフォルダ内の「SAVE_001.sd」から、データ番号３０に対応するデータ（文字列）を、＄Ｓという文字列変数に格納する。
+
+　　<B><FONT CLASS=t60>STR[$S]</FONT></B>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>LOAD</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"SAVE_001"</FONT> <FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>30</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$S</FONT>]</FONT></B>
+
+
+[5]saveフォルダ内の「SAVE_001.sd」から、データ番号１００に対応する画像を、ＣＧレイヤー「ＢＧ」に読み込む。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>LOAD</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"SAVE_001"</FONT> <FONT CLASS=t62>DNO</FONT>=<FONT CLASS=t63>100</FONT> <FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BG</FONT>]</FONT></B><FONT CLASS=t20></FONT>
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

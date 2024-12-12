@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "seishunf_cn", "seishunf_cn\seishunf_cn.vcxproj", "{71C825EB-EECC-4A89-BD66-94C5584A09DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71C825EB-EECC-4A89-BD66-94C5584A09DE}.Debug|x64.ActiveCfg = Debug|x64
+		{71C825EB-EECC-4A89-BD66-94C5584A09DE}.Debug|x64.Build.0 = Debug|x64
+		{71C825EB-EECC-4A89-BD66-94C5584A09DE}.Debug|x86.ActiveCfg = Debug|Win32
+		{71C825EB-EECC-4A89-BD66-94C5584A09DE}.Debug|x86.Build.0 = Debug|Win32
+		{71C825EB-EECC-4A89-BD66-94C5584A09DE}.Release|x64.ActiveCfg = Release|x64
+		{71C825EB-EECC-4A89-BD66-94C5584A09DE}.Release|x64.Build.0 = Release|x64
+		{71C825EB-EECC-4A89-BD66-94C5584A09DE}.Release|x86.ActiveCfg = Release|Win32
+		{71C825EB-EECC-4A89-BD66-94C5584A09DE}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {08DD13BA-B99E-4326-86FD-FC8BB433217C}
+	EndGlobalSection
+EndGlobal

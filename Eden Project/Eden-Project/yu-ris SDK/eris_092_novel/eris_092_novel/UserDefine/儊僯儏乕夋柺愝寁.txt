@@ -1,0 +1,194 @@
+//============================================================================
+//
+// ERIS メニュー画面設計
+//
+//
+//・ERIS ver0.61  001→002 変更点
+//　　・\MENU.FADE が追加されました。メニュー画面へ移行(フェード)する時間が
+//　　　指定可能になりました
+//　　・↓の \VER.MENUDEF がコメントアウト(//)になってしまっていたので外しました
+//
+//============================================================================
+\VER.MENUDEF(002) //定義Version
+//============================================================================
+
+//-------------------------------------------------------------------------
+//
+// 全般
+//
+//  ※(未)と記している部分は未実装の項目です。
+//
+//-------------------------------------------------------------------------
+#=es.SceneMenu.Define
+
+
+	//---------------------------------------------------------------------
+	// 各種設定
+	//---------------------------------------------------------------------
+		\MENU.FADE(0)   //画面移行時間
+
+
+	//---------------------------------------------------------------------
+	// どの画像にどの機能を割り振るかの設定
+	// 　ここで定義したボタン番号の画像が、その機能となります。
+	//   番号が大きいほうが前面に表示されます。
+	//---------------------------------------------------------------------
+		@es.CNUM.MENU.SAVE    =11 //セーブ
+		@es.CNUM.MENU.LOAD    =12 //ロード
+		@es.CNUM.MENU.QSAVE   =13 //クイックセーブ
+		@es.CNUM.MENU.QLOAD   =14 //クイックロード
+		@es.CNUM.MENU.PREVSEL =15 //直前の選択肢へ戻る
+		@es.CNUM.MENU.LOG     =16 //バックログ(文章履歴)
+		@es.CNUM.MENU.OPTION  =17 //オプション
+		@es.CNUM.MENU.ERASE   =18 //ウィンドウを消す
+		@es.CNUM.MENU.TITLE   =19 //タイトルへ戻る
+		@es.CNUM.MENU.EXIT    =20 //ゲームを終了する
+		@es.CNUM.MENU.CANCEL  =21 //キャンセル
+
+
+Return[]
+
+//-------------------------------------------------------------------------
+//
+// 画像
+//
+//-------------------------------------------------------------------------
+#=es.SceneMenu.BtnSet
+
+
+	//---------------------------------------------------------------------
+	//
+	// ボタン
+	//
+	// \BTN.CG( ボタンOFF時の画像, マウスが乗った時の画像 )
+	// \BTN.XY( 表示Ｘ座標, 表示Ｙ座標 )
+	// \BTN.MAP.A( α値のしきい値(この値以上の画像部分がボタンとして反応します) )
+	// \BTN.KEY( ショートカットキー{一回の押下で一回のみ反応} ) 
+	// \BTN.KEY.S( ショートカットキー{連続反応} ) 
+	// \BTN.SE( オンマウス時ＳＥ, クリック時ＳＥ ) ※ファイル名orＳＥ定義文字列
+	//
+	// \BTNDEF ← 最後にBTNDEFでボタンを登録します。
+	//
+	//---------------------------------------------------------------------
+
+	IF[@es.RPMODE==0] //通常モード時のボタン定義
+	{
+
+		//■背景
+		\BTN.CG("cg/menu/back")
+		\BTN.XY(000, 000)
+		\BTNDEF(01) //ボタン登録
+
+		//■ダイアログ
+		\BTN.CG("cg/menu/back_dialog")
+		\BTN.XY(269, 090)
+		\BTNDEF(02) //ボタン登録
+
+		//■バックログ
+		\BTN.CG("cg/menu/btn_log_off", "cg/menu/btn_log_over")
+		\BTN.XY(300, 138+30*00)
+		\BTNDEF(@es.CNUM.MENU.LOG) //ボタン登録
+
+		//■セーブ
+		\BTN.CG("cg/menu/btn_save_off", "cg/menu/btn_save_over")
+		\BTN.XY(300, 138+30*01)
+		\BTNDEF(@es.CNUM.MENU.SAVE) //ボタン登録
+
+		//■ロード
+		\BTN.CG("cg/menu/btn_load_off", "cg/menu/btn_load_over")
+		\BTN.XY(300, 138+30*02)
+		\BTNDEF(@es.CNUM.MENU.LOAD) //ボタン登録
+
+		//■クイックセーブ
+		\BTN.CG("cg/menu/btn_qsave_off", "cg/menu/btn_qsave_over")
+		\BTN.XY(300, 138+30*03)
+		\BTNDEF(@es.CNUM.MENU.QSAVE) //ボタン登録
+
+		//■クイックロード
+		\BTN.CG("cg/menu/btn_qload_off", "cg/menu/btn_qload_over")
+		\BTN.XY(300, 138+30*04)
+		\BTNDEF(@es.CNUM.MENU.QLOAD) //ボタン登録
+
+		//■直前の選択肢へ戻る
+		\BTN.CG("cg/menu/btn_prevselect_off", "cg/menu/btn_prevselect_over")
+		\BTN.XY(300, 138+30*05)
+		\BTNDEF(@es.CNUM.MENU.PREVSEL) //ボタン登録
+
+		//■オプション
+		\BTN.CG("cg/menu/btn_option_off", "cg/menu/btn_option_over")
+		\BTN.XY(300, 138+30*06)
+		\BTNDEF(@es.CNUM.MENU.OPTION) //ボタン登録
+
+		//■ウィンドウを消す
+		\BTN.CG("cg/menu/btn_erase_off", "cg/menu/btn_erase_over")
+		\BTN.XY(300, 138+30*07)
+		\BTNDEF(@es.CNUM.MENU.ERASE) //ボタン登録
+
+		//■タイトルへ戻る
+		\BTN.CG("cg/menu/btn_title_off", "cg/menu/btn_title_over")
+		\BTN.XY(300, 138+30*08)
+		\BTNDEF(@es.CNUM.MENU.TITLE) //ボタン登録
+
+		//■終了する
+		\BTN.CG("cg/menu/btn_exit_off", "cg/menu/btn_exit_over")
+		\BTN.XY(300, 138+30*09)
+		\BTNDEF(@es.CNUM.MENU.EXIT) //ボタン登録
+
+		//■キャンセル
+		\BTN.CG("cg/menu/btn_cancel_off", "cg/menu/btn_cancel_over")
+		\BTN.XY(300, 138+30*10)
+		\BTN.KEY("MOUSE_R", "BS", "ESC", "SPACE")
+		\BTNDEF(@es.CNUM.MENU.CANCEL) //ボタン登録
+
+	}
+	ELSE[] //回想モード時のボタン定義
+	{
+
+		//■背景
+		\BTN.CG("cg/menu/back")
+		\BTN.XY(000, 000)
+		\BTNDEF(01) //ボタン登録
+
+		//■ダイアログ
+		\BTN.CG("cg/menu/back_dialog_2")
+		\BTN.XY(269, 165)
+		\BTNDEF(02) //ボタン登録
+
+		//■バックログ
+		\BTN.CG("cg/menu/btn_log_off", "cg/menu/btn_log_over")
+		\BTN.XY(300, 213+30*00)
+		\BTNDEF(@es.CNUM.MENU.LOG) //ボタン登録
+
+		//■オプション
+		\BTN.CG("cg/menu/btn_option_off", "cg/menu/btn_option_over")
+		\BTN.XY(300, 213+30*01)
+		\BTNDEF(@es.CNUM.MENU.OPTION) //ボタン登録
+
+		//■ウィンドウを消す
+		\BTN.CG("cg/menu/btn_erase_off", "cg/menu/btn_erase_over")
+		\BTN.XY(300, 213+30*02)
+		\BTNDEF(@es.CNUM.MENU.ERASE) //ボタン登録
+
+		//■回想閲覧へ戻る
+		\BTN.CG("cg/menu/btn_replayend_off", "cg/menu/btn_replayend_over")
+		\BTN.XY(300, 213+30*03)
+		\BTNDEF(@es.CNUM.MENU.TITLE) //ボタン登録
+
+		//■終了する
+		\BTN.CG("cg/menu/btn_exit_off", "cg/menu/btn_exit_over")
+		\BTN.XY(300, 213+30*04)
+		\BTNDEF(@es.CNUM.MENU.EXIT) //ボタン登録
+
+		//■キャンセル
+		\BTN.CG("cg/menu/btn_cancel_off", "cg/menu/btn_cancel_over")
+		\BTN.XY(300, 213+30*05)
+		\BTN.KEY("MOUSE_R", "BS", "ESC", "SPACE")
+		\BTNDEF(@es.CNUM.MENU.CANCEL) //ボタン登録
+
+	}
+	IFEND[]
+
+
+return[]
+
+

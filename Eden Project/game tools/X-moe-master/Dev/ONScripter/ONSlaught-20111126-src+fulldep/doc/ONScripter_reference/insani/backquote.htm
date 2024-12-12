@@ -1,0 +1,63 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>`</h2>
+<h3>`&lt;1-byte characters&gt;</h3>
+<p>
+	The backquote (`) is a reserved flag in onscripter-20050602 and higher that allows for
+	the usage of 1-byte characters.  It should be put at the beginning of every script line in
+	which 1-byte characters are used, and also at the beginning of 1-byte character strings in
+	menu and other commands.
+</p>
+<p>
+	<u>Example 1: Text Display</u><br>
+	<i>Original Japanese:</i><br>
+		アパートに着いたときには、もう全身ずぶ濡れだった。@<br>
+		バイト帰りに道を歩いていたら、いきなり雨が降ってきやがったのだ。@<br>
+		「ちくしょー…」@<br>
+		ぶつぶつ言いながらオレは鍵を開け、我が家へと入る。@<br><br>
+	<i>English:</i><br>
+		` I was already soaked from head to toe by the time I got to my apartment.@<br>
+		` I mean, there I was, walking home from work, and then it started raining like hell.@<br>
+		`"Goddamn it--!"@<br>
+		` I grumbled as I turned the key in the lock, opened the door to my apartment, and walked in.@
+</p>
+<p>
+	<u>Example 2: Right-Click Menu</u><br>
+	<i>Original Japanese:</i><br>
+	rmenu "セーブ",save,"ロード",load,"回想モード",lookback,"ウインドウ消去",windowerase,"最初から",reset<br>
+	<br>
+	<i>English:</i><br>
+	rmenu "`Save",save,"`Load",load,"`Log Mode",lookback,"`Hide Text",windowerase,"`Back to Title Menu",reset
+</p>
+<p>
+	<u>Example 3: String Variables</u><br>
+	<i>Original Japanese:</i><br>
+	mov $chapter,"６６６．ようこそ、ハードゲイラーＭＥＮへ！"<br>
+	<br>
+	<i>English:</i><br>
+	mov $chapter,"`666. Welcome to Haado Gei RaMEN (and abandon all hope ye who enter?)!"
+</p>
+<p>
+	<u>Example 4: LSP Just-In-Time String Display</u><br>
+	<i>Original Japanese:</i><br>
+	lsp 0,":s#BEDEAD死ね！"<br>
+	<br>
+	<i>English:</i><br>
+	lsp 0,":s#BEDEAD`Now Die!"
+</p>
+
+
+</body>
+</html>

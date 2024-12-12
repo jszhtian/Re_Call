@@ -1,0 +1,127 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">制御系命令</A>＞LOOP［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="go.html">GO［］</A>
+　<A HREF="gosub.html">GOSUB［］</A>
+　<A HREF="return.html">RETURN［］</A>
+　<A HREF="loop.html">LOOP［］</A>
+　<A HREF="loopbreak.html">LOOPBREAK［］</A>
+　<A HREF="loopcontinue.html">LOOPCONTINUE［］</A>
+　<A HREF="loopend.html">LOOPEND［］</A>
+　<A HREF="wait.html">WAIT［］</A>
+</TD></TR>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="if.html">IF［］</A>
+　<A HREF="else.html">ELSE［］</A>
+　<A HREF="ifend.html">IFEND［］</A>
+　<A HREF="ifbreak.html">IFBREAK［］</A>
+　<A HREF="ifcontinue.html">IFCONTINUE［］</A>
+　<A HREF="task.html">TASK［］</A>
+　<A HREF="taskinfo.html">TASKINFO［］</A>
+　<A HREF="taskend.html">TASKEND［］</A>
+　<A HREF="end.html">END［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=650 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■繰り返し命令 LOOP[ ]～LOOPEND[ ]</FONT>
+<FONT CLASS=t20>
+
+指定した回数だけ、LOOP～LOOPEND の中をループします。
+
+<FONT CLASS=t70>LOOP[SET=<FONT color=#DDDDFF> 値 </FONT>]
+<FONT CLASS=t40>・
+・<FONT CLASS=t34> (SETで指定した回数分、この中の命令が実行される)</FONT>
+・
+<FONT CLASS=t70>LOOPEND[ ]</FONT></FONT></FONT>
+
+
+値に０がセットされた場合は、LOOP～LOOPEND ブロックの中を一度も通らず、
+LOOPEND 命令の次の位置から実行されます。
+
+また、SET キーワードの記述を省略した場合、無限ループとなります。
+
+システム変数 @_LC が、ループカウンタとして利用できます。
+５回のループとした場合、１周ループする度に、@_LC の値が 1 ～ 5 まで変化していきます。
+
+LOOP の中にさらにLOOP を書くことが出来ます(LOOPのネスト)。
+LOOP文は最大64回までネストすることが出来ます。
+
+
+LOOP～LOOPEND ブロックの中で、LOOPBREAK 命令を実行すると、
+その時点で LOOP～LOOPEND ブロックを抜け、LOOPEND 命令の次の位置から実行されます。
+
+<FONT CLASS=t70>LOOP[SET=<FONT color=#DDDDFF> 値 </FONT>]
+<FONT CLASS=t40>・
+・</FONT>
+　　 　LOOPBREAK[ ]<FONT CLASS=t34> (ここで、LOOPEND まで飛ぶ)</FONT>
+<FONT CLASS=t40>・
+・</FONT>
+<FONT CLASS=t70>LOOPEND[ ]</FONT></FONT>
+
+
+LOOP～LOOPEND ブロックの中で、LOOPCONTINUE 命令を実行すると、
+直前の LOOP 命令まで戻り、LOOP 命令の次の位置からやり直します。
+その際、ループが１回分カウントされます。
+
+<FONT CLASS=t70>LOOP[SET=<FONT color=#DDDDFF> 値 </FONT>]
+<FONT CLASS=t40>・
+・</FONT>
+　　 　LOOPCONTINUE[ ]<FONT CLASS=t34> (ここで、LOOP まで戻る)</FONT>
+<FONT CLASS=t40>・
+・</FONT>
+<FONT CLASS=t70>LOOPEND[ ]</FONT></FONT>
+
+
+また、LV キーワードを使って、LOOPBREAK や LOOPCONTINUE で戻る際のネストレベルを
+設定することもできます。
+
+<FONT CLASS=t70>LOOP[SET=<FONT color=#DDDDFF> 値 </FONT>]
+<FONT CLASS=t40>　　　　 ・
+　　　　 ・</FONT>
+<FONT CLASS=t70>　　　 LOOP[SET=<FONT color=#DDDDFF> 値 </FONT>]
+<FONT CLASS=t40>　　　　　　　　　 ・
+　　　　　　　　　 ・</FONT>
+　　　　　 　LOOPBREAK[LV=2]<FONT CLASS=t34> (ここで、いきなり※１の位置まで飛ぶ)</FONT>
+<FONT CLASS=t40>　　　　　　　　　 ・
+　　　　　　　　　 ・</FONT>
+<FONT CLASS=t70>　　　 LOOPEND[ ]</FONT></FONT>
+<FONT CLASS=t40>　　　　 ・
+　　　　 ・</FONT>
+<FONT CLASS=t70>LOOPEND[ ] // ※１</FONT></FONT>
+
+
+LOOPBREAK 命令で、通常はレベルが１段階戻るところを、LV=2 とすることで、
+２段階ネストレベルが戻ります。
+
+
+
+[1] 「レイヤーを１ドット右へ移動させる」処理と「１フレーム分待つ」処理を、100回繰り返す。
+　　（※レイヤーを左から右へアニメーションさせる）
+
+<FONT CLASS=t70>CG[ID=BG FILE="ABC.BMP"]
+LOOP[SET=100]
+　 　CG[ID=BG X+=1]
+　 　WAIT[FRAME=1]
+<FONT CLASS=t70>LOOPEND[ ]</FONT></FONT>
+
+
+</FONT></TD>
+<TD WIDTH=270 VALIGN=TOP>
+<BR><BR>
+</TD></TR></TABLE>
+
+
+</BODY></HTML>

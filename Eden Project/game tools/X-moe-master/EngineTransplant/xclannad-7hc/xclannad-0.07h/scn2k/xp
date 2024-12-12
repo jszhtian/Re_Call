@@ -1,0 +1,30 @@
+--- scn2k_grp.cc.orig	2008-09-12 01:32:10.000000000 +0900
++++ scn2k_grp.cc	2008-09-12 01:31:57.000000000 +0900
+@@ -235,7 +235,7 @@
+ }
+ void GrpObj::SetUpdate(void) {
+ 	attr = Attribute (attr | UPDATE_PICTURE);
+-	Update(); //FIXME
++//	Update(); //FIXME
+ }
+ void GrpObj::SetPos(int index, int x,int y) {
+ 	if (index < 0 || index > 8) {
+@@ -494,13 +494,16 @@
+ 		case 'S': case 's': // size
+ 			str += 1;
+ 			var = strtol(str, &next_str, 10);
++			int new_size = -1;
+ 			if (var == 0 && str == next_str) { // no parameter
+-				ts.SetSize(1);
++				new_size = 1;
+ 			} else {
+ 				if (def_size == 0) def_size = 20;
+ 				if (var <= 0) var = 1;
+-				ts.SetSize(double(var)/def_size);
++				new_size = double(var) / def_size;
+ 			}
++			if (new_size < 2 || new_size > 200) new_size = 16;
++			ts.SetSize(new_size);
+ 			break;
+ 		case 'X': case 'x': // xpos : not supported
+ 		case 'Y': case 'y': // ypos : not supported

@@ -1,0 +1,100 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">テキスト系命令</A>＞TEXT［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="text.html">TEXT［］</A>
+　<A HREF="textinfo.html">TEXTINFO［］</A>
+</TD></TR></TABLE>
+
+<PRE>
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=680 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■テキスト設定命令 TEXT[ ]</FONT>
+<FONT CLASS=t20>
+
+テキストの属性を設定します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>ID = 文字列</FONT></TD><TD><FONT CLASS=t40>テキスト自動出力モード時の出力するレイヤＩＤを設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>WAIT = 値</FONT></TD><TD><FONT CLASS=t40>メッセージ表示ウェイト(ms単位)を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>RETURN = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>１を指定すると改行を行います</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PAGE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>１を指定すると改頁を行います</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CLICK = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>１を指定するとクリック待ちを行います</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>AUTORETURN = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>１を指定すると行末で自動的に改行を行います</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>AUTOPAGE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>１を指定すると行末で自動的に改頁を行います</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>AUTOCLICK = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>１を指定すると行末で自動的にクリック待ちを行います</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>OUTPUTMODE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>テキスト出力モード(0=手動/1=自動 ※デフォルト＝自動)</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CLICKBUTTON<BR>～CLICKBUTTON4 = 値</FONT></TD><TD><FONT CLASS=t40>テキスト出力モードが自動の時の、クリックボタンの割り当て<BR>(ボタンコード指定)　※４つまで</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SKIPBUTTON<BR>～SKIPBUTTON4 = 値</FONT></TD><TD><FONT CLASS=t40>テキスト出力モードが自動の時の、スキップボタンの割り当て<BR>(ボタンコード指定)　※４つまで</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CLEAR = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>システム内部のテキストバッファを完全にクリアします。</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] テキストの表示速度を１文字あたり15msに設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TEXT</FONT>[<FONT CLASS=t62>WAIT</FONT>=<FONT CLASS=t63>15</FONT>]</FONT></B>
+
+
+[2] 自動改行（行末で自動的に改行する）設定を無効にする。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TEXT</FONT>[<FONT CLASS=t62>AUTORETURN</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[3] 自動改頁（行末で自動的に改頁する）設定を無効にする。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TEXT</FONT>[<FONT CLASS=t62>AUTOPAGE</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[4] 自動クリック待ち（行末で自動的にクリック待ちを行う）設定を無効にする。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TEXT</FONT>[<FONT CLASS=t62>AUTOCLICK</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[5] テキスト出力モードが自動の時、「右クリック」をクリックボタンとして割り当てる。
+
+　　※CLICKBUTTON キーワードには @_CODE_MOUSE_L が、
+　　　CLICKBUTTON2 キーワードには @_CODE_ENTER が起動時にデフォルトで割り当てられており、
+　　　これを設定しなおすことで別のボタンを割り当てたり、また割り当てを解除したりすることができます。
+　　※システム変数の @_CODE_～ で指定します。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TEXT</FONT>[<FONT CLASS=t62>CLICKBUTTON</FONT>=<FONT CLASS=t63>@_CODE_MOUSE_L</FONT>]</FONT></B>
+
+　　※↑の場合、CLICKBUTTON2 キーワードは未指定なので、@_CODE_ENTER はまだ有効であり、
+　　　つまり ENTER キーがクリックボタンとして割り当てられたままになっています。
+
+
+
+[6] テキスト出力モードが自動の時、クリックボタンの割り当てをすべて解除する。
+
+　　※割り当てを解除するには 0 を指定します。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TEXT</FONT>[<FONT CLASS=t62>CLICKBUTTON</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>CLICKBUTTON2</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>CLICKBUTTON3</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>CLICKBUTTON4</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+
+[7] テキスト出力モードが自動の時、「SPACE」キーと「右クリック」と「パッド０番のボタン２」をスキップボタンとして割り当てる。
+
+　　※SKIPBUTTON キーワードには @_CODE_CTRL が起動時にデフォルトで割り当てられており、
+　　　これを設定しなおすことで別のボタンを割り当てたり、また割り当てを解除したりすることができます。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TEXT</FONT>[<FONT CLASS=t62>SKIPBUTTON</FONT>=<FONT CLASS=t63>@_CODE_SPACE</FONT> <FONT CLASS=t62>SKIPBUTTON2</FONT>=<FONT CLASS=t63>@_CODE_MOUSE_L</FONT> <FONT CLASS=t62>SKIPBUTTON3</FONT>=<FONT CLASS=t63>@_CODE_PAD_BUTTON(0, 2)</FONT>]</FONT></B>
+
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

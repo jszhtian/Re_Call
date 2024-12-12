@@ -1,0 +1,1072 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="TJS2">
+      <UniqueIdentifier>{dd2b577c-6dfb-4557-9d10-805bfb0aa9c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TJS2\.h">
+      <UniqueIdentifier>{db5901fb-24bb-43c5-a0fb-9e89e2bd3553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe">
+      <UniqueIdentifier>{826b050c-a2fa-44cc-b8ec-d51e0897a80d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\base">
+      <UniqueIdentifier>{9c5a90c6-643f-4c39-a056-a9c75115ad00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\base\.h">
+      <UniqueIdentifier>{2ae78e2b-ed70-40d3-b00e-c8035e46862e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\visual">
+      <UniqueIdentifier>{20c3d6be-28ce-43f6-af95-1830999354bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\visual\.h">
+      <UniqueIdentifier>{9c58b5b7-b72d-46da-bc23-07f2de023967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\msg">
+      <UniqueIdentifier>{4163b794-876c-40a7-bff4-9f36ed9fb724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\msg\.h">
+      <UniqueIdentifier>{fa1cc13f-7b79-40e5-a071-1a1e4406d4e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\sound">
+      <UniqueIdentifier>{9f2fa5e9-2f0d-4078-8dbe-9a09f56965ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\sound\.h">
+      <UniqueIdentifier>{a60d50b4-87ba-43f1-9e76-c0649a7cc4ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\environ">
+      <UniqueIdentifier>{36bcf5c2-5fdd-450d-aae1-f6893ee55613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\environ\.h">
+      <UniqueIdentifier>{fd580e0c-38b7-4cec-b2c9-9d2681524601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\utils_forms">
+      <UniqueIdentifier>{14870ade-04f4-4020-a9c6-94b55a82f28e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\utils_forms\.h">
+      <UniqueIdentifier>{d1104d7a-e2f6-4dda-bc9d-4f485072e5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\environ_forms">
+      <UniqueIdentifier>{d0cec7b8-e10f-44bc-a94a-c4615990e5c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\environ_forms\.h">
+      <UniqueIdentifier>{46c52e52-2062-4beb-91b1-e5a82514aa7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\tools">
+      <UniqueIdentifier>{fbf29139-b1e2-4efd-ba7e-7eabbecb2745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\tools\.h">
+      <UniqueIdentifier>{f6464a5e-6396-4160-8568-2d1deac838a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\utils">
+      <UniqueIdentifier>{e45d4fde-25ea-4b2a-82e1-ec4aea524b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="krkr.eXe\utils\.h">
+      <UniqueIdentifier>{f4bd5c32-12e7-4634-bf31-1652e1c78722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="my_vcl">
+      <UniqueIdentifier>{090e5870-8f6c-4c4a-aa64-ae66e2c430ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="my_vcl\.h">
+      <UniqueIdentifier>{1b629de9-589c-497c-9d8b-d080fb0339a1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\tvpwin32.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjs.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjs.tab.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsArray.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsCompileControl.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsConfig.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsDate.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsdate.tab.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsDateParser.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsDebug.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsDictionary.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsDisassemble.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsError.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsException.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsGlobalStringMap.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsInterCodeExec.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsInterCodeGen.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsInterface.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsLex.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsMath.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsMessage.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsMT19937ar-cok.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsNamespace.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsNative.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsObject.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjspp.tab.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsRandomGenerator.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsRegExp.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsScriptBlock.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsScriptCache.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsString.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsUtils.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsVariant.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tjs2\tjsVariantString.cpp">
+      <Filter>TJS2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\CharacterSet.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\EventImpl.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\EventIntf.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\FileSelector.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\FuncStubs.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\PluginImpl.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\PluginIntf.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\ScriptMgnImpl.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\ScriptMgnIntf.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\StorageImpl.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\StorageIntf.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\SusieArchive.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\SysInitImpl.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\SysInitIntf.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\win32\SystemImpl.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\SystemIntf.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\TextStream.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\UtilStreams.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\XP3Archive.cpp">
+      <Filter>krkr.eXe\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\ComplexRect.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\DInputMgn.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\DrawDevice.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\FontSelectFormUnit.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\GraphicsLoaderIntf.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\LayerBitmapImpl.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\LayerBitmapIntf.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\LayerImpl.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\LayerIntf.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\LayerManager.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\LoadTLG.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\MenuContainerFormUnit.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\MenuItemImpl.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\MenuItemIntf.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\PassThroughDrawDevice.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\Resampler.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\TransImpl.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\TransIntf.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\tvpgl.c">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\IA32\tvpgl_ia32_intf.c">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\VideoOvlImpl.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\VideoOvlIntf.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\WindowFormUnit.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\win32\WindowImpl.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\visual\WindowIntf.cpp">
+      <Filter>krkr.eXe\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\msg\win32\MsgImpl.cpp">
+      <Filter>krkr.eXe\msg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\msg\MsgIntf.cpp">
+      <Filter>krkr.eXe\msg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\msg\win32\OptionsDesc.cpp">
+      <Filter>krkr.eXe\msg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\win32\CDDAImpl.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\CDDAIntf.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\win32\MIDIImpl.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\MIDIIntf.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\PhaseVocoderDSP.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\PhaseVocoderFilter.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\win32\SoundBufferBaseImpl.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\SoundBufferBaseIntf.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\win32\tvpsnd.c">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\win32\WaveImpl.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\WaveIntf.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\WaveLoopManager.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\sound\WaveSegmentQueue.cpp">
+      <Filter>krkr.eXe\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DetectCPU.cpp">
+      <Filter>krkr.eXe\environ</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EmergencyExit.cpp">
+      <Filter>krkr.eXe\environ</Filter>
+    </ClCompile>
+    <ClCompile Include="..\my_HintWindow.cpp">
+      <Filter>krkr.eXe\environ</Filter>
+    </ClCompile>
+    <ClCompile Include="..\WideNativeFuncs.cpp">
+      <Filter>krkr.eXe\environ</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\win32\ConsoleFormUnit.cpp">
+      <Filter>krkr.eXe\utils_forms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\win32\PadFormUnit.cpp">
+      <Filter>krkr.eXe\utils_forms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\win32\TLogViewer.cpp">
+      <Filter>krkr.eXe\utils_forms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\HaltWarnFormUnit.cpp">
+      <Filter>krkr.eXe\environ_forms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MainFormUnit.cpp">
+      <Filter>krkr.eXe\environ_forms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\VersionFormUnit.cpp">
+      <Filter>krkr.eXe\environ_forms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\WatchFormUnit.cpp">
+      <Filter>krkr.eXe\environ_forms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\tools\win32\krdevui\ConfMainFrameUnit.cpp">
+      <Filter>krkr.eXe\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\tools\win32\krdevui\ConfSettingsUnit.cpp">
+      <Filter>krkr.eXe\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\win32\ClipboardImpl.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\ClipboardIntf.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\win32\DebugImpl.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\DebugIntf.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\KAGParser.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\md5.c">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\win32\PadImpl.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\PadIntf.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\Random.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\win32\ThreadImpl.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\ThreadIntf.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\win32\TickCount.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\win32\TimerImpl.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\utils\TimerIntf.cpp">
+      <Filter>krkr.eXe\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\AnsiString.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Application.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Canvas.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Classes.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Clipbrd.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\ComCtrls.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Component.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Controls.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Dialogs.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\ExtDlgs.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Forms.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Graphics.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\IniFiles.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\ListControl.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Menus.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Registry.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Screen.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\StdCtrls.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Stream.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\systobj.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\SysUtils.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\Timer.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\ToolWin.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+    <ClCompile Include="my_vcl\vcl.cpp">
+      <Filter>my_vcl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\tjs2\tjs.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjs.tab.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsArray.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsCommHead.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsCompileControl.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsConfig.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsDate.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsdate.tab.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsDateParser.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsDebug.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsDictionary.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsError.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsError_jp.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsErrorDefs.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsException.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsGlobalStringMap.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsHashSearch.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsInterCodeExec.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsInterCodeGen.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsInterface.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsLex.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsMath.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsMessage.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsMT19937ar-cok.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsNamespace.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsNative.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsObject.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjspp.tab.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsRandomGenerator.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsRegExp.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsScriptBlock.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsScriptCache.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsString.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsTypes.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsUtils.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsVariant.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tjs2\tjsVariantString.h">
+      <Filter>TJS2\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\CharacterSet.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\common.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\win32\EventImpl.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\EventIntf.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\win32\FileSelector.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\win32\FuncStubs.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\win32\PluginImpl.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\PluginIntf.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\win32\ScriptMgnImpl.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\ScriptMgnIntf.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\win32\StorageImpl.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\StorageIntf.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\win32\SusieArchive.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\win32\SysInitImpl.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\SysInitIntf.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\win32\SystemImpl.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\SystemIntf.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\TextStream.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\UtilStreams.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\XP3Archive.h">
+      <Filter>krkr.eXe\base\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\argb.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\ComplexRect.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\DInputMgn.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\drawable.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\DrawDevice.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\FontSelectFormUnit.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\GraphicsLoaderImpl.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\GraphicsLoaderIntf.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\krmovie.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\LayerBitmapImpl.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\LayerBitmapIntf.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\LayerImpl.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\LayerIntf.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\LayerManager.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\LoadTLG.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\MenuContainerFormUnit.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\MenuItemImpl.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\MenuItemIntf.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\PassThroughDrawDevice.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\Resampler.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\transhandler.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\TransImpl.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\TransIntf.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\tvpfontstruc.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\tvpgl.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\IA32\tvpgl_ia32_intf.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\tvpinputdefs.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\VideoOvlImpl.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\VideoOvlIntf.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\voMode.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\WindowFormUnit.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\WindowFormUnit_dfm.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\win32\WindowImpl.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\visual\WindowIntf.h">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\msg\win32\MsgImpl.h">
+      <Filter>krkr.eXe\msg\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\msg\MsgIntf.h">
+      <Filter>krkr.eXe\msg\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\msg\win32\OptionsDesc.h">
+      <Filter>krkr.eXe\msg\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\win32\CDDAImpl.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\CDDAIntf.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\win32\kmp_pi.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\win32\MIDIImpl.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\MIDIIntf.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\win32\oldwaveunpacker.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\PhaseVocoderDSP.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\PhaseVocoderFilter.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\RingBuffer.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\win32\SoundBufferBaseImpl.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\SoundBufferBaseIntf.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\win32\tvpsnd.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\win32\WaveImpl.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\WaveIntf.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\WaveLoopManager.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\sound\WaveSegmentQueue.h">
+      <Filter>krkr.eXe\sound\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DetectCPU.h">
+      <Filter>krkr.eXe\environ\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EmergencyExit.h">
+      <Filter>krkr.eXe\environ\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\WideNativeFuncs.h">
+      <Filter>krkr.eXe\environ\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\ConsoleFormUnit.h">
+      <Filter>krkr.eXe\utils_forms\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\ConsoleFormUnit_dfm.h">
+      <Filter>krkr.eXe\utils_forms\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\PadFormUnit.h">
+      <Filter>krkr.eXe\utils_forms\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\PadFormUnit_dfm.h">
+      <Filter>krkr.eXe\utils_forms\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\TLogViewer.h">
+      <Filter>krkr.eXe\utils_forms\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HaltWarnFormUnit.h">
+      <Filter>krkr.eXe\environ_forms\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MainFormUnit.h">
+      <Filter>krkr.eXe\environ_forms\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MainFormUnit_dfm.h">
+      <Filter>krkr.eXe\environ_forms\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\VersionFormUnit.h">
+      <Filter>krkr.eXe\environ_forms\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\WatchFormUnit.h">
+      <Filter>krkr.eXe\environ_forms\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\tools\win32\krdevui\ConfMainFrameUnit.h">
+      <Filter>krkr.eXe\tools\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\tools\win32\krdevui\ConfSettingsUnit.h">
+      <Filter>krkr.eXe\tools\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\ClipboardImpl.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\ClipboardIntf.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\DebugImpl.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\DebugIntf.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\KAGParser.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\md5.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\ObjectList.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\PadImpl.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\PadIntf.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\Random.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\ThreadImpl.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\ThreadIntf.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\TickCount.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\win32\TimerImpl.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\utils\TimerIntf.h">
+      <Filter>krkr.eXe\utils\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\AnsiString.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Application.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Buttons.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Canvas.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Classes.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Clipbrd.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\ComCtrls.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Component.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Controls.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Dialogs.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\dir.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\ExtCtrls.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\ExtDlgs.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\FileCtrl.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Forms.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\function.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Graphics.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\ImgList.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\IniFiles.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Menus.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Messages.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Registry.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Screen.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\StdCtrls.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\Stream.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\syncobjs.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\systobj.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\SysUtils.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\ToolWin.hpp">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\vcl.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\vcl_base.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="my_vcl\vcl_enums.h">
+      <Filter>my_vcl\.h</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\visual\IA32\tvpgl_ia32vc.lib">
+      <Filter>krkr.eXe\visual</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\visual\tvpps.inc">
+      <Filter>krkr.eXe\visual\.h</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\..\..\sound\cpu\pv_def_vc.obj">
+      <Filter>krkr.eXe\sound</Filter>
+    </Object>
+    <Object Include="..\..\..\sound\cpu\pv_sse_vc.obj">
+      <Filter>krkr.eXe\sound</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\krkr_ym.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="tvpwin32.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>

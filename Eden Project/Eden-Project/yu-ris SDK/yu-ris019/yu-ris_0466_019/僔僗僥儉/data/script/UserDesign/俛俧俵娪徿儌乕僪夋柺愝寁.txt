@@ -1,0 +1,331 @@
+//============================================================================
+// ＢＧＭ鑑賞モード画面設計
+//============================================================================
+#=ES.BGMMODE.BTDEF
+
+	\BTDEF.GROUP(ES.BGMMODE)
+
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("extra/back")
+	\BT.XY(000, 000)
+	\BT.Z(010)
+	\BT.SET(TIP.BG)
+
+	\BT.NAME("■背景・枠")
+	\BT.CGSYS("extra/bgmmode/back")
+	\BT.XY(000, 000)
+	\BT.Z(020)
+	\BT.SET(TIP.BG2)
+
+
+	//[タブ]
+	\BT.NAME("■[タブ]ＣＧ鑑賞モード")
+	\BT.RADIO(1)
+	\BT.CGSYS("extra/btn_tab_cgmode")
+	\BT.XY(442, 025)
+	\BT.Z(100)
+	\BT.SET(BTN.TAB.CGMODE)
+
+	\BT.NAME("■[タブ]シーン鑑賞モード")
+	\BT.RADIO(1)
+	\BT.CGSYS("extra/btn_tab_rpmode")
+	\BT.XY(527, 025)
+	\BT.Z(100)
+	\BT.SET(BTN.TAB.RPMODE)
+
+	\BT.NAME("■[タブ]ムービー鑑賞モード")
+	\BT.RADIO(1)
+	\BT.CGSYS("extra/btn_tab_mvmode")
+	\BT.XY(612, 025)
+	\BT.Z(100)
+	\BT.SET(BTN.TAB.MVMODE)
+
+	\BT.NAME("■[タブ]ＢＧＭ鑑賞モード")
+	\BT.RADIO(1)
+	\BT.CGSYS("extra/btn_tab_bgmmode")
+	\BT.XY(697, 025)
+	\BT.Z(100)
+	\BT.SET(BTN.TAB.BGMMODE)
+
+
+	//曲プレート
+	\BT.NAME("■m01")
+	\BT.RADIO(100)
+	\BT.CGSYS("extra/bgmmode/btn_bgm01")
+	\BT.MAP.A(1)
+	\BT.XY(286, 100+040*00)
+	\BT.Z(100)
+	\BT.SET(BTN.BGMTIP, 01)
+
+	\BT.NAME("■m02")
+	\BT.RADIO(100)
+	\BT.CGSYS("extra/bgmmode/btn_bgm02")
+	\BT.MAP.A(1)
+	\BT.XY(286, 100+040*01)
+	\BT.Z(100)
+	\BT.SET(BTN.BGMTIP, 02)
+/*
+	\BT.NAME("■m03")
+	\BT.RADIO(100)
+	\BT.CGSYS("extra/bgmmode/btn_bgm03")
+	\BT.MAP.A(1)
+	\BT.XY(286, 100+040*02)
+	\BT.Z(100)
+	\BT.SET(BTN.BGMTIP, 03)
+
+	\BT.NAME("■m04")
+	\BT.RADIO(100)
+	\BT.CGSYS("extra/bgmmode/btn_bgm04")
+	\BT.MAP.A(1)
+	\BT.XY(286, 100+040*03)
+	\BT.Z(100)
+	\BT.SET(BTN.BGMTIP, 04)
+
+	\BT.NAME("■m05")
+	\BT.RADIO(100)
+	\BT.CGSYS("extra/bgmmode/btn_bgm05")
+	\BT.MAP.A(1)
+	\BT.XY(286, 100+040*04)
+	\BT.Z(100)
+	\BT.SET(BTN.BGMTIP, 05)
+*/
+
+
+
+	//テキストプレート
+	\BT.NAME("■t01")
+	\BT.CGSYS("extra/bgmmode/tip_txt01")
+	\BT.XY(286, 520)
+	\BT.Z(100)
+	\BT.SET(TIP.BGMTXT, 01)
+
+	\BT.NAME("■t02")
+	\BT.CGSYS("extra/bgmmode/tip_txt02")
+	\BT.XY(286, 520)
+	\BT.Z(100)
+	\BT.SET(TIP.BGMTXT, 02)
+/*
+	\BT.NAME("■t03")
+	\BT.CGSYS("extra/bgmmode/tip_txt03")
+	\BT.XY(286, 520)
+	\BT.Z(100)
+	\BT.SET(TIP.BGMTXT, 03)
+
+	\BT.NAME("■t04")
+	\BT.CGSYS("extra/bgmmode/tip_txt04")
+	\BT.XY(286, 520)
+	\BT.Z(100)
+	\BT.SET(TIP.BGMTXT, 04)
+
+	\BT.NAME("■t05")
+	\BT.CGSYS("extra/bgmmode/tip_txt05")
+	\BT.XY(286, 520)
+	\BT.Z(100)
+	\BT.SET(TIP.BGMTXT, 05)
+*/
+
+
+
+	//■================================================= シークバー
+	//◆目盛り・土台
+	\BT.CGSYS("extra/bgmmode/tip_gauge_base")
+	\BT.XY(286, 428)
+	\BT.Z(199)
+	\BT.SET(BTN.SEEK.GAUGE.BASE)
+
+	//◆目盛り
+	\BT.CGSYS("extra/bgmmode/tip_gauge")
+	\BT.XY(286+8, 428+2)
+	\BT.Z(200)
+	\BT.SET(BTN.SEEK.GAUGE)
+
+	//◆ツマミ
+	\BT.CGSYS("extra/bgmmode/btn_slider")
+	\BT.XY(286+8-5, 428+1) //スライダー左端の座標をセットする
+	\BT.Z(201)
+	\BT.SLIDE(254,0) //スライダーの動く範囲XY
+	\BT.SET(BTN.SEEK.SLIDER)
+
+
+
+	//■================================================= 再生制御ボタン
+	\BT.NAME("■前の曲へ")
+	\BT.CGSYS("extra/bgmmode/btn_prev")
+	\BT.MAP.A(1)
+	\BT.XY(286, 470)
+	\BT.Z(100)
+//	\BT.T(2)
+	\BT.KEY("LEFT", "UP")
+	\BT.SET(BTN.PREV)
+
+	\BT.NAME("■再生")
+	\BT.RADIO(101)
+	\BT.CGSYS("extra/bgmmode/btn_play")
+	\BT.MAP.A(1)
+	\BT.XY(341, 470)
+	\BT.Z(100)
+	\BT.KEY("ENTER")
+	\BT.SET(BTN.PLAY)
+
+	\BT.NAME("■一時停止")
+	\BT.CGSYS("extra/bgmmode/btn_pause")
+	\BT.MAP.A(1)
+	\BT.XY(396, 470)
+	\BT.Z(100)
+	\BT.SET(BTN.PAUSE)
+
+	\BT.NAME("■停止")
+	\BT.RADIO(101)
+	\BT.CGSYS("extra/bgmmode/btn_stop")
+	\BT.MAP.A(1)
+	\BT.XY(451, 470)
+	\BT.Z(100)
+	\BT.KEY("SPACE")
+	\BT.SET(BTN.STOP)
+
+	\BT.NAME("■次の曲へ")
+	\BT.CGSYS("extra/bgmmode/btn_next")
+	\BT.MAP.A(1)
+	\BT.XY(506, 470)
+	\BT.Z(100)
+//	\BT.T(2)
+	\BT.KEY("RIGHT", "DOWN")
+	\BT.SET(BTN.NEXT)
+
+
+
+	\BT.NAME("■シャッフル再生")
+	\BT.CGSYS("extra/bgmmode/btn_shuffle")
+	\BT.XY(561, 470)
+	\BT.Z(100)
+	\BT.SET(BTN.SHUFFLE)
+
+	\BT.NAME("■ランダム再生")
+	\BT.CGSYS("extra/bgmmode/btn_random")
+	\BT.XY(561, 470-30)
+	\BT.Z(100)
+	\BT.SET(BTN.RANDOM)
+
+	\BT.NAME("■１曲リピートボタン")
+	\BT.CGSYS("extra/bgmmode/btn_repeatone")
+	\BT.XY(616, 470)
+	\BT.Z(100)
+	\BT.SET(BTN.REPEAT.ONE)
+
+
+
+	//時間切り替えボタン
+	\BT.NAME("時間切り替えボタン")
+	\BT.CGSYS("extra/bgmmode/btn_timechange")
+	\BT.XY(671, 470)
+	\BT.Z(100)
+	\BT.SET(BTN.TIME.SWITCH)
+
+
+
+
+
+	//再生時間
+	\BT.NAME("再生時間")
+	\BT.CGSYS("extra/bgmmode/tip_再生時間")
+	\BT.XY(034, 430)
+	\BT.Z(200)
+	\BT.SET(TIP.TX.再生時間, 1)
+
+	//鑑賞数
+	\BT.NAME("鑑賞数")
+	\BT.CGSYS("extra/bgmmode/tip_鑑賞数")
+	\BT.XY(034, 500)
+	\BT.Z(200)
+	\BT.SET(TIP.TX.鑑賞数, 1)
+
+	//鑑賞率
+	\BT.NAME("鑑賞率")
+	\BT.CGSYS("extra/bgmmode/tip_鑑賞率")
+	\BT.XY(034, 530)
+	\BT.Z(200)
+	\BT.SET(TIP.TX.鑑賞率, 1)
+
+	//鑑賞数用
+	\BT.NAME("／")
+	\BT.CGSYS("extra/bgmmode/tip_／")
+	\BT.XY(162, 499)
+	\BT.Z(200)
+	\BT.SET(TIP.SLASH, 2)
+
+	//鑑賞率用
+	\BT.NAME("％")
+	\BT.CGSYS("extra/bgmmode/tip_％")
+	\BT.XY(200, 530)
+	\BT.Z(200)
+	\BT.SET(TIP.PER, 1)
+
+
+
+
+	//再生時間用コロン1
+	\BT.NAME("再生時間用コロン1")
+	\BT.CGSYS("extra/bgmmode/num_c")
+	\BT.XY(120+22, 430)
+	\BT.Z(200)
+	\BT.SET(TIP.COLON, 1)
+
+	//再生時間用コロン2
+	\BT.NAME("再生時間用コロン2")
+	\BT.CGSYS("extra/bgmmode/num_c")
+	\BT.XY(155+22, 430)
+	\BT.Z(200)
+	\BT.SET(TIP.COLON, 2)
+
+	//再生時間用マイナス
+	\BT.NAME("再生時間用マイナス")
+	\BT.CGSYS("extra/bgmmode/num_m")
+	\BT.XY(120-12, 430)
+	\BT.Z(200)
+	\BT.SET(TIP.MINUS)
+
+
+
+/*
+	//■================================================= 音量
+		//◆目盛り
+		\BT.CG("cgsys/extra/player/volgauge_base")
+		\BT.XY(577, 110)
+		\BT.Z(200)
+		\BT.START(VOL.GAUGE)
+
+		//◆ツマミ
+		\BT.CG("cgsys/extra/player/tip_slider_off", "cgsys/extra/player/tip_slider_over")
+		\BT.XY(576, 110) //スライダー左端の座標をセットする
+		\BT.Z(201)
+		\BT.SLIDE(50-4,0) //スライダーの動く範囲XY
+		\BT.SE("sysse/sse02", "sysse/sse03")
+		\BT.START(VOL.SLIDER)
+
+		//■ミュートボタン
+		\BT.NAME("■ミュートボタン")
+		\BT.CG("cgsys/extra/player/btn_mute_off", "cgsys/extra/player/btn_mute_over", "cgsys/extra/player/btn_mute_on", "cgsys/extra/player/btn_mute_onover")
+		\BT.SE("sysse/sse02", "sysse/sse03")
+		\BT.XY(634, 110)
+		\BT.Z(150)
+		\BT.START(VOL.MUTE, 1)
+
+*/
+
+
+
+
+	//戻る
+	\BT.NAME("■戻る")
+	\BT.CGSYS("extra/bgmmode/btn_back")
+	\BT.XY(726, 554)
+	\BT.Z(100)
+	\BT.MAP.A(1)
+	\BT.KEY("MOUSE_R", "BS", "ESC", "SPACE")
+	\BT.SET(BTN.BACK)
+
+
+
+RETURN[]
+

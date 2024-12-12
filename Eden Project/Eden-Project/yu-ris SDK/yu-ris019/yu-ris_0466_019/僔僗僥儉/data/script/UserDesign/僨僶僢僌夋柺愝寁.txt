@@ -1,0 +1,65 @@
+//============================================================================
+// デバッグ画面設計
+//============================================================================
+#=ES.DEBUGMODE.BTDEF
+{
+	IF[@_DEBUGMODE==1] //デバッグモードの時のみ
+	{
+
+		//スプライトマップビュー表示
+		\BTDEF.GROUP("ES.DEBUGMODE")
+		\BT.NAME("■SPRITEMAPVIEW")
+		\BT.CGSYS("debug/btn_sprite_off", "debug/btn_sprite_over", "debug/btn_sprite_on")
+		\BT.XY(020, -025)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY(F12)
+		\BT.SET(BTN.SPRITEMAPVIEW)
+
+		//ウォッチウィンドウ表示
+		\BTDEF.GROUP("ES.DEBUGMODE")
+		\BT.NAME("■WATCHWINDOW")
+		\BT.CGSYS("debug/btn_watch_off", "debug/btn_watch_over", "debug/btn_watch_on")
+		\BT.XY(100, -025)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY(F8)
+		\BT.SET(BTN.WATCHWINDOW)
+
+		//エディタ起動
+		\BTDEF.GROUP("ES.DEBUGMODE")
+		\BT.NAME("■EDITOR")
+		\BT.CGSYS("debug/btn_editor_off", "debug/btn_editor_over", "debug/btn_editor_on")
+		\BT.XY(180, -025)
+		\BT.Z(200)
+		\BT.MAP.A(128)
+		\BT.KEY(F11)
+		\BT.SET(BTN.EDITOR)
+
+		//再起動
+		\BTDEF.GROUP("ES.DEBUGMODE")
+		\BT.NAME("■RESTART")
+		\BT.CGSYS("debug/btn_restart_off", "debug/btn_restart_over", "debug/btn_restart_on")
+		\BT.XY(260, -025)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY(F5)
+		\BT.SET(BTN.RESTART)
+
+		//スクリーンショット
+		\BTDEF.GROUP("ES.DEBUGMODE")
+		\BT.NAME("■SCREENSHOT")
+		\BT.CGSYS("debug/btn_sshot_off", "debug/btn_sshot_over", "debug/btn_sshot_on")
+		\BT.XY(340, -025)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY(F9)
+		\BT.SET(BTN.SCREENSHOT)
+
+	}
+	IFEND[]
+
+	RETURN[]
+}
+
+

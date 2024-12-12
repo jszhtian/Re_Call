@@ -1,0 +1,1785 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 (日本) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_FRAMEWINDOW MENU
+BEGIN
+    POPUP "ファイル(&F)"
+    BEGIN
+        MENUITEM "新規作成(&N)\tCtrl+N",            ID_MENU_FILE_NEW
+        MENUITEM "開く(&O)\tCtrl+O",              ID_MENU_FILE_OPEN
+        MENUITEM "保存(&S)\tCtrl+S",              ID_MENU_FILE_SAVE
+    END
+    POPUP "配置(&S)"
+    BEGIN
+        MENUITEM "フィルム用配置",                     ID_MENU_FILMMODE
+        MENUITEM "シナリオ用配置",                     ID_MENU_STORYMODE
+    END
+    POPUP "CONFIG(&C)"
+    BEGIN
+        MENUITEM "全設定",                         ID_MENU_CONFIG, GRAYED
+        MENUITEM SEPARATOR
+        POPUP "削除警告"
+        BEGIN
+            MENUITEM "すべて行う",                       ID_MENUITEM40167
+            MENUITEM "すべて行わない",                     ID_MENUITEM40168
+            MENUITEM "フィルム",                        ID_MENUITEM40154
+            MENUITEM "コマ",                          ID_MENUITEM40155
+            MENUITEM "メッセージ",                       ID_MENUITEM40156
+            MENUITEM "ストーリー",                       ID_MENUITEM40157
+            MENUITEM "コマンド",                        ID_MENUITEM40158
+            MENUITEM "いろいろ",                        ID_MENUITEM40159
+            MENUITEM SEPARATOR
+        END
+        POPUP "起動時設定"
+        BEGIN
+            MENUITEM "前回のnnnを読みこむ",                 ID_MENUITEM40166
+            POPUP "動作画面サイズ"
+            BEGIN
+                MENUITEM "640ｘ480",                     ID_SCREENSIZE_640x480
+                MENUITEM "800ｘ600",                     ID_SCREENSIZE_800x600
+                MENUITEM "1024ｘ768",                    ID_SCREENSIZE_1024x768
+                MENUITEM "1280x720",                    ID_SCREENSIZE_1280x720
+                MENUITEM "1280ｘ960",                    ID_SCREENSIZE_1280x960
+                MENUITEM "1280ｘ1024",                   ID_SCREENSIZE_1280x1024
+                MENUITEM "1600ｘ1200",                   ID_SCREENSIZE_1600x1200
+                MENUITEM "1920ｘ1080",                   ID_SCREENSIZE_1920x1080
+                MENUITEM "1920ｘ1200",                   ID_SCREENSIZE_1920x1200
+                MENUITEM "フリー",                         ID_SCREENSIZE_FREE
+                MENUITEM SEPARATOR
+                MENUITEM "320x480",                     ID_SCREENSIZE_320x480
+                MENUITEM "320x460",                     ID_SCREENSIZE_320x460
+                MENUITEM "480x320",                     ID_SCREENSIZE_480x320
+                MENUITEM "480x300",                     ID_SCREENSIZE_480x300
+                MENUITEM SEPARATOR
+                MENUITEM "640x960",                     ID_SCREENSIZE_640x960
+                MENUITEM "640x920",                     ID_SCREENSIZE_640x920
+                MENUITEM "960x640",                     ID_SCREENSIZE_960x640
+                MENUITEM "960x600",                     ID_SCREENSIZE_960x600
+                MENUITEM SEPARATOR
+                MENUITEM "768x1024",                    ID_SCREENSIZE_768x1024
+                MENUITEM "768x1004",                    ID_SCREENSIZE_768x1004
+                MENUITEM "1024x768",                    ID_SCREENSIZE_1024x768B, GRAYED
+                MENUITEM "1024x748",                    ID_SCREENSIZE_1024x748
+            END
+        END
+        POPUP "同一名警告"
+        BEGIN
+            MENUITEM "フィルム名",                       ID_MENUITEM40169
+            MENUITEM "ストーリー名",                      ID_MENUITEM40170
+        END
+        MENUITEM SEPARATOR
+        POPUP "データ設定"
+        BEGIN
+            MENUITEM "メッセージの行数制限",                  ID_CHANGEMESSAGEGYO
+            MENUITEM "メッセージの1行ガイドライン",              ID_MESSAGEWIDTHGUIDE
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "設定の保存",                       ID_MENUITEM40307
+        MENUITEM SEPARATOR
+        POPUP "コマ画像保存"
+        BEGIN
+            MENUITEM "コマ画像保存しない",                   ID_MENU_SET_KOMASM_OFF
+            MENUITEM "コマ画像保存する",                    ID_MENU_SET_KOMASM_ON
+        END
+        POPUP "nnn画像保存"
+        BEGIN
+            MENUITEM "nnn画像保存しない",                  ID_MENU_SET_NNNSM_OFF
+            MENUITEM "nnn画像保存する",                   ID_MENU_SET_NNNSM_ON
+        END
+        MENUITEM "最大テキスト入力サイズ(XP)",             ID_MENU_INPUT_MAXTEXTEDIT
+        POPUP "コマを表現するフレーム"
+        BEGIN
+            MENUITEM "フレーム数指定タイプ",                  ID_MENU_SET_FRAMEOFKOMA_DIRECT
+            MENUITEM "%指定タイプ",                      ID_MENU_SET_FRAMEOFKOMA_PERCENT
+            MENUITEM SEPARATOR
+            MENUITEM "数値変更",                        ID_MENU_INPUT_FRAMEOFKOMA
+        END
+        POPUP "フィルムの表現コマ"
+        BEGIN
+            MENUITEM "コマ数指定タイプ",                    ID_MENU_SET_KOMAOFFILM_DIRECT
+            MENUITEM "%指定タイプ",                      ID_MENU_SET_KOMAOFFILM_PERCENT
+            MENUITEM SEPARATOR
+            MENUITEM "数値変更",                        ID_MENU_INPUT_KOMAOFFILM
+        END
+        MENUITEM SEPARATOR
+        POPUP "変数ブロック指定"
+        BEGIN
+            MENUITEM "[1000]",                      ID_MENU_SET_VARBLOCK1
+            MENUITEM "[400][600]",                  ID_MENU_SET_VARBLOCK2
+            MENUITEM "[300][200][500]",             ID_MENU_SET_VARBLOCK3
+            MENUITEM "[100]x6[400]",                ID_MENU_SET_VARBLOCK4
+        END
+        POPUP "EDIT表示フレーム"
+        BEGIN
+            MENUITEM "フレーム数指定タイプ",                  ID_MENU_SET_EDITFRAME_DIRECT
+            MENUITEM "%指定タイプ",                      ID_MENU_SET_EDITFRAME_PERCENT
+            MENUITEM SEPARATOR
+            MENUITEM "数値変更",                        ID_MENU_INPUT_EDITFRAME
+        END
+        POPUP "削除警告タイプ"
+        BEGIN
+            MENUITEM "シナリオ削除警告",                    40603
+            MENUITEM "コマンド削除警告",                    ID_MENU_WARNING_DEL_CM_ONOFF
+            MENUITEM SEPARATOR
+            MENUITEM "フィルム削除警告",                    40605
+            MENUITEM "コマ削除警告",                      40606
+            MENUITEM "メッセージ削除警告",                   40607
+            MENUITEM SEPARATOR
+            MENUITEM "パラメータ数削減警告",                  40608
+            MENUITEM "変数削除警告",                      ID_MENU_WARNING_DEL_VAR
+        END
+        MENUITEM SEPARATOR
+        POPUP "ビルド設定"
+        BEGIN
+            POPUP "シーン登録"
+            BEGIN
+                MENUITEM "行う",                          ID_MENU_AUTOSCENE_ON
+                MENUITEM "行わない",                        ID_MENU_AUTOSCENE_OFF
+            END
+            POPUP "SETCG登録"
+            BEGIN
+                MENUITEM "行う",                          ID_MENU_SETCG_ON
+                MENUITEM "行わない",                        ID_MENU_SETCG_OFF
+                MENUITEM "毎回選択する",                      ID_MENU_SETCG_SELECT
+            END
+            POPUP "同一CG登録チェック"
+            BEGIN
+                MENUITEM "行う",                          ID_MENU_CHECKSAMECG_ON
+                MENUITEM "行わない",                        ID_MENU_CHECKSAMECG_OFF
+            END
+            POPUP "SETCG変数制御"
+            BEGIN
+                MENUITEM "行わない",                        ID_SETCGVAR_NO
+                MENUITEM "自動",                          ID_SETCGVAR_AUTO
+                MENUITEM "最大値指定",                       ID_SETCGVAR_SET
+            END
+            MENUITEM "BUFFERもCGに登録する",              ID_MENU_BUFFERSETCG
+            POPUP "ルビ処理"
+            BEGIN
+                MENUITEM "行う",                          ID_MENU_BUILDRUBI_OK
+                MENUITEM "行わない",                        ID_MENU_BUILDRUBI_NOT
+                MENUITEM "毎回確認",                        ID_MENU_BUILDRUBI_SELECT
+            END
+            POPUP "カットイン処理"
+            BEGIN
+                MENUITEM "行う",                          ID_MENU_BUILDCUTIN_OK
+                MENUITEM "行わない",                        ID_MENU_BUILDCUTIN_NOT
+                MENUITEM "毎回選択",                        ID_MENU_BUILDCUTIN_SELECT
+            END
+            POPUP "シーン登録作成後確認"
+            BEGIN
+                MENUITEM "整合性チェックしない",                  ID_SCENECHECK_NO
+                MENUITEM "チェックしエラーのみ報告",                ID_SCENECHECK_ERROR
+                MENUITEM "チェックしエラーなしも報告",               ID_SCENECHECK_ERROROK
+            END
+            MENUITEM "init暗号化も行う",                  ID_INITANGOU
+            POPUP "用語登録"
+            BEGIN
+                MENUITEM "行う",                          ID_MENU_TERM_ON
+                MENUITEM "行わない",                        ID_MENU_TERM_OFF
+            END
+            MENUITEM SEPARATOR
+            POPUP "ターゲットマシン"
+            BEGIN
+                MENUITEM "Windows",                     ID_TARGETMACHINE_WINDOWS
+                MENUITEM "iPhone",                      ID_TARGETMACHINE_IPHONE
+                MENUITEM "Mac",                         ID_TARGETMACHINE_MAC, GRAYED
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "#姓名音声追加",                     ID_ADDDEFAULTVOICE
+            MENUITEM "デフォルト名設定",                    ID_SETDEFAULTMEI
+        END
+        POPUP "コンパイル設定"
+        BEGIN
+            MENUITEM "ダミー",                         ID_MENUITEM40440
+        END
+        POPUP "メッセージウィンドウ設定"
+        BEGIN
+            POPUP "設定をどこで行うか"
+            BEGIN
+                MENUITEM "ゲームのinitファイル",                ID_MENU_MESWINBYINIT
+                MENUITEM "エディターの設定",                    ID_MENU_MESWINBYSETUP
+            END
+            MENUITEM SEPARATOR
+            POPUP "メッセージ"
+            BEGIN
+                POPUP "表示モード"
+                BEGIN
+                    MENUITEM "なし",                          ID_MENU_MESWIN_NOTHING
+                    MENUITEM "ボックス",                        ID_MENU_MESWIN_BOX
+                    MENUITEM "画像",                          ID_MENU_MESWIN_PIC
+                END
+                MENUITEM "ウィンドウ座標・サイズ変更",               ID_MENU_MESWIN_SETSIZE
+                MENUITEM "メッセージ表示位置設定",                 ID_MENU_MESWIN_SETPRINT
+                MENUITEM "次の行までのサイズ設定",                 ID_MENU_SETMESNEXTY
+                MENUITEM "全体メッセージ表示位置",                 ID_MENU_MESWIN_SETLPRINT
+                MENUITEM "全体メッセージ追加表示位置",               ID_MENU_MESWIN_SETAPPEND
+                MENUITEM "ファイル名設定",                     ID_MENU_MESWIN_SETPICFILENAME
+                MENUITEM SEPARATOR
+                MENUITEM "フォントサイズ",                     ID_MENU_SETMESFONTSIZE
+            END
+            POPUP "ネームウィンドウ"
+            BEGIN
+                POPUP "表示タイプ"
+                BEGIN
+                    MENUITEM "なし",                          ID_MENU_NAMEWIN_NOTHING
+                    MENUITEM "ボックス",                        ID_MENU_NAMEWIN_BOX
+                    MENUITEM "画像",                          ID_MENU_NAMEWIN_PIC
+                END
+                MENUITEM "ウィンドウ座標・サイズ変更",               ID_MENU_NAMEWIN_SETSIZE
+                MENUITEM "名前表示位置設定",                    ID_MENU_NAMEWIN_SETPRINT
+                MENUITEM "ファイル名設定",                     ID_MENU_NAMEWIN_SETPICFILENAME
+                POPUP "自動オフ"
+                BEGIN
+                    MENUITEM "あり",                          ID_MENU_NAMEWIN_AUTOOFF
+                    MENUITEM "なし",                          ID_MENU_NAMEWIN_ALWAYSPRINT
+                END
+                MENUITEM SEPARATOR
+                MENUITEM "フォントサイズ",                     ID_MENU_SETNAMEFONTSIZE
+            END
+        END
+        POPUP "テスト用音量設定"
+        BEGIN
+            MENUITEM "曲",                           ID_MENU_SETMUSICVOLUME
+            MENUITEM "効果音",                         ID_MENU_SETSOUNDVOLUME
+            MENUITEM "音声",                          ID_MENU_SETVOICEVOLUME
+            MENUITEM "効果音音声",                       ID_MENU_SETSOUNDVOICEVOLUME
+        END
+        MENUITEM SEPARATOR
+        POPUP "エフェクト操作設定"
+        BEGIN
+            MENUITEM "前のエフェクトコピー座標移動",              ID_MENUITEM_EFFECTCOPY_MOVE
+            MENUITEM "前のエフェクトコピー座標固定",              ID_MENUITEM_EFFECTCOPY_KOTEI
+        END
+        POPUP "デフォルト値設定"
+        BEGIN
+            MENUITEM "オーバーラップタイム",                  ID_MENU_SETDEFAULTOVERRAPTIME
+            MENUITEM "BGレイヤー",                      ID_MENU_SETDEFAULTBGLAYER
+            MENUITEM "TAレイヤー",                      ID_MENU_SETDEFAULTTALAYER
+            POPUP "ムービー"
+            BEGIN
+                MENUITEM "1秒のフレーム数",                    ID_MENU_SETDEFAULTMOVIERATE
+                MENUITEM "スケール(分母)",                    ID_MENU_SETDEFAULTMOVIESCALE
+                MENUITEM SEPARATOR
+                MENUITEM "通常サイズ",                       ID_MENU_MOVIE_DEFAULTSIZE
+                MENUITEM "640x480に縮小",                  ID_MENU_MOVIE_640x480, INACTIVE
+                MENUITEM "320x240に縮小",                  ID_MENU_MOVIE_320x240, INACTIVE
+                MENUITEM "160x120に縮小",                  ID_MENU_MOVIE_160x120, INACTIVE
+                MENUITEM SEPARATOR
+                MENUITEM "高速縮小(テスト向き)",                 ID_MENU_MOVIE_SPEEDPACK
+                MENUITEM "精細縮小(低速)",                    ID_MENU_MOVIE_FULLPACK
+            END
+        END
+        POPUP "デフォルト動作設定"
+        BEGIN
+            POPUP "フィルムコマンド"
+            BEGIN
+                MENUITEM "なにもしない",                      ID_MENU_SELFILM_NO
+                MENUITEM "選択メニューを開く",                   ID_MENU_SELFILM_SEL
+                MENUITEM "入力ダイログを開く",                   ID_MENU_SELFILM_INPUT
+            END
+            POPUP "ストーリーコマンド"
+            BEGIN
+                MENUITEM "なにもしない",                      ID_MENU_SELSTORY_NO
+                MENUITEM "選択メニューを開く",                   ID_MENU_SELSTORY_SEL
+                MENUITEM "入力ダイアログを開く",                  ID_MENU_SELSTORY_INPUT
+            END
+            POPUP "計算コマンド"
+            BEGIN
+                MENUITEM "なにもしない",                      ID_MENU_SELCALCU_NO
+                MENUITEM "入力ダイアログを開く",                  ID_MENU_SELCALCU_INPUT
+            END
+            MENUITEM "%のみでオーバーラップ有",                ID_MENU_PERCENT_OVERRAP
+        END
+        POPUP "ダブルクリック設定"
+        BEGIN
+            MENUITEM "メッセージ(ダミー)",                  ID_MENUITEM40514
+        END
+        POPUP "DELETEキー設定"
+        BEGIN
+            MENUITEM "フィルム",                        ID_MENU_DELKEY_FILM
+            MENUITEM "コマ",                          ID_MENU_DELKEY_KOMA
+            MENUITEM "メッセージ",                       ID_MENU_DELKEY_MESSAGE
+            MENUITEM SEPARATOR
+            MENUITEM "ストーリー",                       ID_MENU_DELKEY_STORY
+            MENUITEM "コマンド",                        ID_MENU_DELKEY_COMMAND
+            MENUITEM SEPARATOR
+            MENUITEM "変数",                          ID_MENU_DELKEY_VAR
+        END
+        POPUP "暗号化キー設定"
+        BEGIN
+            MENUITEM "暗号化キー1(XORCODE)",             ID_MENUITEM_ANGOU_XORCODE
+            MENUITEM "暗号化キー2(XORADDCODE)",          ID_MENUITEM_ANGOU_XORADDCODE
+            MENUITEM "暗号化キー3(ADDADDCODE)",          ID_MENUITEM_ANGOU_ADDADDCODE
+            MENUITEM SEPARATOR
+            MENUITEM "キーの表示",                       ID_MENUITEM_ANGOU_PRINT
+            MENUITEM SEPARATOR
+            MENUITEM "暗号のクリアー",                     ID_MENUITEM_ANGOU_CLEAR
+        END
+        POPUP "フレーム"
+        BEGIN
+            MENUITEM "デフォルトフレーム設定",                 ID_SETDEFAULTFRAME
+            MENUITEM "フレーム値表示",                     ID_PRINTFRAME
+            MENUITEM "スキップ値表示",                     ID_PRINTSKIP
+            MENUITEM "スキップ最大数設定",                   ID_SETMAXSKIP
+            MENUITEM "スキップ期間設定",                    ID_SETSKIPINTERVAL
+        END
+        POPUP "動作設定"
+        BEGIN
+            POPUP "カットイン"
+            BEGIN
+                MENUITEM "有効",                          ID_CUTIN_ENABLE
+                MENUITEM "無効",                          ID_CUTIN_DISABLE
+            END
+            POPUP "音声読込"
+            BEGIN
+                MENUITEM "ばらばら",                        ID_VOICE_NORMAL
+                MENUITEM "パック済み",                       ID_VOICE_PACK
+            END
+            POPUP "ルビ表示"
+            BEGIN
+                MENUITEM "表示しない",                       ID_RUBI_NOTPRINT
+                MENUITEM "表示する",                        ID_RUBI_PRINT
+                MENUITEM "表変換後表示",                      ID_RUBI_HYO_PRINT
+                MENUITEM SEPARATOR
+                MENUITEM "色設定",                         ID_RUBICOLOR
+                MENUITEM "ルビ色固定",                       ID_RUBICOLORFIX
+                MENUITEM "サイズ設定",                       ID_RUBISIZE
+                MENUITEM "文字間設定",                       ID_RUBISUKIMA
+                MENUITEM "表示位置設定",                      ID_RUBIDELTAY
+            END
+            POPUP "code"
+            BEGIN
+                MENUITEM "漢字",                          ID_CODE_KANJI
+                MENUITEM "alpha",                       ID_CODE_ALPHA
+            END
+            POPUP "jpeg展開"
+            BEGIN
+                MENUITEM "MMX(高速)",                     ID_JPEG_MMX
+                MENUITEM "float(高精度)",                  ID_JPEG_FLOAT
+            END
+            POPUP "バックアップ"
+            BEGIN
+                MENUITEM "あり",                          ID_BACKUP_NNN_ON
+                MENUITEM "なし",                          ID_BACKUP_NNN_OFF
+            END
+            MENUITEM "PNGガンマ補正",                    ID_PNG_GAMMA
+            POPUP "座標表示"
+            BEGIN
+                MENUITEM "通常",                          ID_ZAHYO_NORMAL
+                MENUITEM "センター",                        ID_ZAHYO_CENTER
+            END
+        END
+        POPUP "操作設定"
+        BEGIN
+            POPUP "レイヤーコピーボタン"
+            BEGIN
+                MENUITEM "無効",                          ID_LAYERCOPYMODE_NO
+                MENUITEM "有効",                          ID_LAYERCOPYMODE_OK
+                MENUITEM "確認",                          ID_LAYERCOPYMODE_SEL
+            END
+            POPUP "座標プリセットボタン"
+            BEGIN
+                MENUITEM "有効",                          ID_PRESETBUTTON_ENABLE
+                MENUITEM "無効",                          ID_PRESETBUTTON_DISABLE
+            END
+            POPUP "追加バルーンヘルプ"
+            BEGIN
+                MENUITEM "オン",                          ID_BALLOON_ON
+                MENUITEM "オフ",                          ID_BALLOON_OFF
+            END
+            POPUP "UNDO設定"
+            BEGIN
+                MENUITEM "有効",                          ID_UNDO_ENABLE
+                MENUITEM "無効",                          ID_UNDO_DISABLE
+                MENUITEM SEPARATOR
+                POPUP "確認"
+                BEGIN
+                    MENUITEM "有り",                          ID_UNDO_KAKUNIN_ARI
+                    MENUITEM "無し",                          ID_UNDO_KAKUNIN_NASHI
+                END
+                POPUP "動作後確認"
+                BEGIN
+                    MENUITEM "有り",                          ID_UNDO_AFTER_ARI
+                    MENUITEM "無し",                          ID_UNDO_AFTER_NASHI
+                END
+            END
+        END
+        POPUP "台本追加設定"
+        BEGIN
+            MENUITEM "先頭スペース数設定",                   ID_DAIHON_WHITESPACE
+        END
+        POPUP "Ctrl-[X][C][V]", INACTIVE
+        BEGIN
+            MENUITEM "有効",                          ID_MENU_CTRL_ENABLE
+            MENUITEM "無効",                          ID_MENU_CTRL_DISABLE
+        END
+    END
+    POPUP "Window(&W)"
+    BEGIN
+        MENUITEM "画面",                          ID_WINDOW_MAINSCREEN
+        MENUITEM "コンテ",                         ID_WINDOW_CONTE
+        MENUITEM "フイルム",                        ID_WINDOW_FILM
+        MENUITEM "レイヤー",                        ID_WINDOW_LAYER
+        MENUITEM "座標",                          ID_WINDOW_ZAHYO
+        MENUITEM "メッセージ",                       ID_WINDOW_GAMEMESSAGE
+        MENUITEM "コンテメッセージ",                    ID_WINDOW_CONTEMESSAGE
+        MENUITEM "エフェクト",                       ID_WINDOW_EFFECT
+        MENUITEM "ストーリー",                       ID_WINDOW_STORY
+        MENUITEM "変数",                          ID_WINDOW_VAR
+        MENUITEM "コントロール",                      ID_WINDOW_CONTROL
+        MENUITEM "フィルムケース",                     ID_WINDOW_FILMCASE
+        MENUITEM "プログラム",                       ID_WINDOW_PROGRAM
+        MENUITEM "シナリオの本",                      ID_WINDOW_STORYBOOK
+    END
+    POPUP "プロジェクト(&P)"
+    BEGIN
+        MENUITEM "新しいののみビルド",                   ID_MENU_PROJECT_BUILD_NEW
+        MENUITEM "すべてリビルド(&R)\tCtrl+R",         ID_MENU_PROJECT_BUILD_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "プロジェクトに組み込む",                 ID_MENU_PROJECT_ADD
+        MENUITEM "プロジェクトから削除",                  ID_MENU_PROJECT_EDIT
+        MENUITEM SEPARATOR
+        MENUITEM "command追加",                   40767
+        MENUITEM "command削除",                   ID_MENU_COMMAND_EDIT
+        MENUITEM "function追加",                  ID_MENU_FUNCTION_ADD
+        MENUITEM "function削除",                  ID_MENU_FUNCTION_EDIT
+    END
+    POPUP "ビルド(&B)"
+    BEGIN
+        POPUP "コンパイル(&C)"
+        BEGIN
+            MENUITEM "すべて",                         ID_MENU_COMPILE_ALL
+            MENUITEM "シナリオ",                        ID_MENU_COMPILE_STORY
+            MENUITEM "コマンド",                        ID_MENU_COMPILE_COMMAND
+        END
+        POPUP "ビルド(&B)"
+        BEGIN
+            MENUITEM "SPT 形式",                      ID_MENU_BUILD_SPT
+            MENUITEM "TXT 形式",                      ID_MENU_BUILD_TXT
+            MENUITEM "XML形式",                       ID_MENU_BLD_XML
+            MENUITEM "JSON形式",                      ID_MENU_BUILD_JSON
+        END
+    END
+    POPUP "ユーティリティー"
+    BEGIN
+        MENUITEM "検索",                          ID_MENU_UTIL_SEARCH
+        MENUITEM "置換",                          ID_MENU_UTIL_REPLACE
+        MENUITEM SEPARATOR
+        MENUITEM "変数検索",                        ID_MENU_VARSEARCH
+        MENUITEM "変数置換",                        ID_MENU_VARREPLACE
+        MENUITEM SEPARATOR
+        MENUITEM "前のエフェクトのコピー",                 ID_MENU_UTIL_COPYEFFECT
+        MENUITEM "2つ前のエフェクトのコピー",               ID_MENU_UTIL_COPYEFFECT2
+        MENUITEM "ボイスの自動割付",                    ID_MENU_UTIL_AUTOVOICE
+        MENUITEM SEPARATOR
+        POPUP "台本作成"
+        BEGIN
+            MENUITEM "全て",                          ID_MENU_UTIL_MAKEBOOK_ALL
+            MENUITEM SEPARATOR
+            MENUITEM "全台本のみ",                       ID_MENU_UTIL_MAKEBOOK
+            MENUITEM "キャラ",                         ID_MENU_UTIL_MAKEBOOK1
+            MENUITEM "キャラ強調表示",                     ID_MENU_UTIL_MAKEBOOK2
+            MENUITEM "キャラ(本人の台詞のみ)",                ID_MENU_UTIL_MAKEBOOK3
+            MENUITEM SEPARATOR
+            MENUITEM "セリフ以外",                       ID_MENU_UTIL_MAKEBOOK4
+        END
+        MENUITEM SEPARATOR
+        POPUP "全ファイル処理"
+        BEGIN
+            MENUITEM "検索",                          ID_MENU_UTIL_SEARCH_ALL
+            MENUITEM "置換",                          ID_MENU_UTIL_REPLACE_ALL
+            MENUITEM SEPARATOR
+            MENUITEM "ボイスの自動割付",                    ID_MENU_UTIL_ALLAUTOVOICE
+            MENUITEM "同じメッセージの独逸化",                 ID_MENU_UTIL_SAMEMESSAGE_DEUTCH
+            MENUITEM "使ってるDWQファイルのぬきだし",            ID_MENU_UTIL_USEDWQ
+            MENUITEM "使ってる音ファイルの抜き出し",              ID_MENU_UTIL_USEWAV
+            MENUITEM "メッセージシリアル",                   ID_MENU_UTIL_ALLMESSAGESERIAL
+            MENUITEM "メッセージシルアル追加",                 ID_MENU_UTIL_ALLMESSAGESERIALUPDATE
+            MENUITEM "特定プレイヤーボイスの削除",               ID_MENU_UTIL_ALLDELETENONPLAYERVOICE
+            MENUITEM SEPARATOR
+            MENUITEM "DWQ存在チェック",                   ID_MENU_UTIL_CHECKDWQALL
+            MENUITEM SEPARATOR
+            MENUITEM "てすとようtxt作成",                  ID_MENU_UTIL_TESTALL
+            MENUITEM SEPARATOR
+            MENUITEM "使ってるDWQのチェックbat",             ID_MENU_UTIL_CHECKUSEDWQ
+            MENUITEM "使ってる音ファイルのチェックbat",           ID_MENU_UTIL_CHECKWAVBAT
+            MENUITEM SEPARATOR
+            MENUITEM "音声のロック",                      ID_MENUITEM_ALLLOCKVOICE
+            MENUITEM "音声のロック解除",                    ID_MENUITEM_ALLUNLOCKVOICE
+            MENUITEM SEPARATOR
+            MENUITEM "フレーム全変換",                     ID_MENU_UTIL_ALLFRAMECHANGE
+            MENUITEM SEPARATOR
+            MENUITEM "フィルム名出力",                     ID_MENU_UTIL_OUTPUTALLFILMNAME
+            MENUITEM SEPARATOR
+            MENUITEM "てすと",                         ID_MENUITEM_DEBUG
+            MENUITEM SEPARATOR
+            MENUITEM "bgmlist修正",                   ID_MENU_UTIL_CHANGEBGMLIST
+            MENUITEM "selist修正",                    ID_MENU_UTIL_CHANGESELIST
+            MENUITEM SEPARATOR
+            MENUITEM "全音声削除",                       ID_MENU_UTIL_DELETEALLVOICEALL
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "メモの変更",                       ID_MENU_UTIL_MEMO
+        MENUITEM "メッセージシリアル",                   ID_MENU_UTIL_MESSAGESERIAL
+        MENUITEM "メッセージシリアル追加",                 ID_MENU_UTIL_MESSAGESERIALUPDATE
+        MENUITEM SEPARATOR
+        MENUITEM "DWQ存在チェック",                   ID_MENU_UTIL_CHECKDWQ
+        MENUITEM SEPARATOR
+        MENUITEM "特定プレイヤーボイスの削除",               ID_MENU_UTIL_DELETENONPLAYERVOICE
+        MENUITEM SEPARATOR
+        MENUITEM "フレーム数計算",                     ID_MENU_UTIL_CALCUFRAME
+        POPUP "ムービー作成"
+        BEGIN
+            MENUITEM "全フィルム続けて",                    ID_MENU_MOVIE_ALL
+            MENUITEM "全フィルム個別に",                    ID_MENU_MOVIE_ALLFILM
+            MENUITEM "選択されたフィルム",                   ID_MENU_MOVIE_FILM
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "フレーム変換",                      ID_MENU_UTIL_FRAMECHANGE
+        MENUITEM SEPARATOR
+        MENUITEM "全音声削除",                       ID_MENU_UTIL_DELETEALLVOICE
+        POPUP "ツール呼び出し"
+        BEGIN
+            MENUITEM "init暗号化処理",                   ID_EXTUTIL_INITANGOU
+            MENUITEM "画像変換pacNyan",                 ID_EXTUTIL_PACNYAN
+            MENUITEM "音声変換nerune",                  ID_EXTUTIL_NERUNE
+            MENUITEM "シーン整合性チェック",                  ID_UTIL_CHECKSCENE
+            MENUITEM "簡易initチェック",                  ID_EXTUTIL_INITCHECK
+        END
+        MENUITEM "自動enfif追加",                   ID_MENU_UTIL_AUTOENDIF, GRAYED
+    END
+    POPUP "HELP(&H)"
+    BEGIN
+        MENUITEM "HELP",                        ID_MENU_HELP
+        MENUITEM "about NNN",                   ID_MENU_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "バージョン情報",                     ID_MENU_VERSION
+    END
+END
+
+IDR_POPUPMENU_PIC MENU
+BEGIN
+    POPUP "dummy"
+    BEGIN
+        MENUITEM "立ち絵",                         ID_SELECTPIC_TA
+        MENUITEM "背景",                          ID_SELECTPIC_BG
+        MENUITEM "イベント",                        ID_SELECTPIC_EV
+        MENUITEM "その他",                         ID_SELECTPIC_ETC
+        MENUITEM "変更",                          ID_CHANGEPICNAME, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "削除",                          ID_DELETEPIC
+    END
+END
+
+IDR_POPUPMENU_STORYCOMMAND MENU
+BEGIN
+    POPUP "シナリオようポップアップ"
+    BEGIN
+        MENUITEM "追加(&N)\tCtrl+N",              ID_MENUITEM_STORYCOMMAND_INSERT
+        MENUITEM SEPARATOR
+        POPUP "変更"
+        BEGIN
+            POPUP "条件"
+            BEGIN
+                MENUITEM "if",                          ID_MENU_COMMAND_IF
+                MENUITEM "elsif",                       ID_MENU_COMMAND_ELSIF
+                MENUITEM "else",                        ID_MENU_COMMAND_ELSE
+            END
+            POPUP "選択肢"
+            BEGIN
+                MENUITEM "1個",                          ID_MENU_COMMAND_SELECT1
+                MENUITEM "2個",                          ID_MENU_COMMAND_SELECT2
+                MENUITEM "3個",                          ID_MENU_COMMAND_SELECT3
+                MENUITEM "4個以上",                        ID_MENU_COMMAND_SELECT4, GRAYED
+            END
+            MENUITEM "シナリオ",                        ID_MENU_COMMAND_STORY
+            MENUITEM "フィルム",                        ID_MENU_COMMAND_FILM
+            POPUP "BGM"
+            BEGIN
+                POPUP "MIDI"
+                BEGIN
+                    MENUITEM "START(LOOP)",                 ID_MENU_COMMAND_MIDI_START
+                    MENUITEM "START(1回)",                   ID_MENU_COMMAND_MIDI_STARTONCE
+                    MENUITEM "STOP",                        ID_MENU_COMMAND_MIDI_STOP
+                END
+                POPUP "CD", GRAYED
+                BEGIN
+                    MENUITEM "START(LOOP)",                 ID_MENU_COMMAND_CD_START
+                    MENUITEM "START(1回)",                   ID_MENU_COMMAND_CD_STARTONCE
+                    MENUITEM "STOP",                        ID_MENU_COMMAND_CD_STOP
+                END
+                POPUP "その他", GRAYED
+                BEGIN
+                    MENUITEM "START(LOOP)",                 ID_MENU_COMMAND_ETCBGM_START
+                    MENUITEM "START(1回)",                   ID_MENU_COMMAND_ETCBGM_STARTONCE
+                    MENUITEM "STOP",                        ID_MENU_COMMAND_ETCBGM_STOP
+                END
+            END
+            POPUP "システム"
+            BEGIN
+                MENUITEM "一般",                          ID_MENU_COMMAND_SYSTEM_NORMAL
+                MENUITEM "エンディング",                      ID_MENU_COMMAND_SYSTEM_ENDING
+                MENUITEM "スタッフロール",                     ID_MENU_COMMAND_SYSTEM_STAFFROLL
+            END
+            MENUITEM "計算",                          ID_MENU_COMMAND_CALCU
+            POPUP "終わり"
+            BEGIN
+                MENUITEM "ret",                         ID_MENU_COMMAND_RET
+                MENUITEM "next",                        ID_MENU_COMMAND_NEXT
+                MENUITEM "end",                         ID_MENU_COMMAND_END
+            END
+            POPUP "特殊"
+            BEGIN
+                MENUITEM "script",                      ID_MENU_COMMAND_SCRIPT, GRAYED
+            END
+        END
+        MENUITEM "修正",                          ID_MENUITEM_STORYCOMMAND_EDIT
+        MENUITEM SEPARATOR
+        MENUITEM "切り取り\tCtrl+X",                ID_MENUITEM_STORYCOMMAND_CUT, GRAYED
+        MENUITEM "コピー(&C)\tCtrl+C",             ID_MENUITEM_STORYCOMMAND_COPY, GRAYED
+        MENUITEM "貼り付け(&P)\tCtrl+P",            ID_MENUITEM_STORYCOMMAND_PASTE, GRAYED
+        MENUITEM "削除(&D)\tDel",                 ID_MENUITEM_STORYCOMMAND_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "元に戻す(&Z)\tCtrl+Z",            ID_MENUITEM_STORYCOMMAND_UNDO, GRAYED
+        MENUITEM "やり直し(&Y)\tCtrl+Y",            ID_MENUITEM_STORYCOMMAND_REDO, GRAYED
+        POPUP "マーキング"
+        BEGIN
+            POPUP "背景色"
+            BEGIN
+                MENUITEM "黄色",                          ID_MENU_CMDCOL_BACK_YELLOW
+                MENUITEM "水色",                          ID_MENU_CMDCOL_BACK_CYAN
+                MENUITEM "紫",                           ID_MENU_CMDCOL_BACK_PURPLE
+            END
+            POPUP "文字色"
+            BEGIN
+                MENUITEM "青",                           ID_MENU_CMDCOL_BLUE
+                MENUITEM "赤",                           ID_MENU_CMDCOL_RED
+                MENUITEM "緑",                           ID_MENU_CMDCOL_GREEN
+            END
+            MENUITEM "解除",                          ID_MENU_CMDCOL_REL
+        END
+        POPUP "ブロックマーキング"
+        BEGIN
+            POPUP "背景色"
+            BEGIN
+                MENUITEM "黄色",                          ID_MENU_BLOCKCMDCOL_BACK_YELLOW
+                MENUITEM "水色",                          ID_MENU_BLOCKCMDCOL_BACK_CYAN
+                MENUITEM "紫",                           ID_MENU_BLOCKCMDCOL_BACK_PURPLE
+            END
+            POPUP "文字色"
+            BEGIN
+                MENUITEM "青",                           ID_MENU_BLOCKCMDCOL_BLUE
+                MENUITEM "赤",                           ID_MENU_BLOCKCMDCOL_RED
+                MENUITEM "緑",                           ID_MENU_BLOCKCMDCOL_GREEN
+            END
+            MENUITEM "解除",                          ID_MENU_BLOCKCMDCOL_REL
+        END
+    END
+END
+
+IDR_POPUPMENU_EFFECT MENU
+BEGIN
+    POPUP "エフェクト用ポップアップ"
+    BEGIN
+        POPUP "自然系"
+        BEGIN
+            MENUITEM "雨",                           ID_SETEFFECT_RAIN
+            MENUITEM "雨(上からor見上げて)",                ID_EFFECT_RAIN2, GRAYED
+            MENUITEM "雪",                           ID_SETEFFECT_SNOW
+            MENUITEM "雪(上からor見上げて)",                ID_EFFECT_SNOW2, GRAYED
+            MENUITEM "花びら",                         ID_SETEFFECT_FLOWER
+            MENUITEM "水面",                          ID_SETEFFECT_WATER
+            MENUITEM "太陽1",                         ID_SETEFFECT_SAN
+            MENUITEM "太陽2",                         ID_SETEFFECT_TAIYO
+            MENUITEM "陽炎",                          ID_SETEFFECT_KAGEROU
+            MENUITEM "波紋",                          ID_EFFECT_HAMON, GRAYED
+            MENUITEM "雲",                           ID_SETEFFECT_CLOUD
+            MENUITEM "海岸",                          ID_SETEFFECT_BEACH
+            MENUITEM "滝",                           ID_SETEFFECT_WATERFALL
+            MENUITEM "そよ風",                         ID_SETEFFECT_SOYOSOYO
+            MENUITEM "草原",                          ID_SETEFFECT_GRASSPLANE
+        END
+        POPUP "キャラ系"
+        BEGIN
+            MENUITEM "半透明",                         ID_SETEFFECT_TRANS
+            MENUITEM "半透明変化",                       ID_SETEFFECT_CTRANS
+            MENUITEM "チェンジ",                        ID_SETEFFECT_CHANGE
+            MENUITEM "BOSSDEATH",                   ID_SETEFFECT_BOSSDEATH
+            MENUITEM "移動のみ",                        ID_SETEFFECT_MOVE
+            POPUP "特殊移動系"
+            BEGIN
+                MENUITEM "加減速",                         ID_MENUITEM40306, GRAYED
+                MENUITEM "波(sin)",                      ID_MENUITEM40303, GRAYED
+                MENUITEM "地面弾み",                        ID_MENUITEM40305, GRAYED
+                MENUITEM "Bezier移動",                    ID_MENUITEM40302, GRAYED
+            END
+            MENUITEM "光学迷彩",                        ID_SETEFFECT_MEISAI
+            MENUITEM "スタッフロール",                     ID_SETEFFECT_STAFFROLL
+            MENUITEM "斬鉄剣",                         ID_SETEFFECT_ZANTETSU
+            MENUITEM "キャラフラッシュ",                    ID_SETEFFECT_CHARAFLASH
+            MENUITEM "レインボー",                       ID_SETEFFECT_RAINBOW
+            MENUITEM "お風呂窓",                        ID_SETEFFECT_BATHWINDOW
+            MENUITEM "色加減",                         ID_SETEFFECT_COLORADDSUB
+        END
+        POPUP "画面効果系"
+        BEGIN
+            MENUITEM "フェードイン",                      ID_SETEFFECT_FADEIN
+            MENUITEM "フェードアウト",                     ID_SETEFFECT_FADEOUT
+            MENUITEM "フラッシュ",                       ID_SETEFFECT_FLASH
+            MENUITEM "地震",                          ID_SETEFFECT_SHAKE
+            MENUITEM "LIGHT",                       ID_SETEFFECT_LIGHT
+            MENUITEM "RASTER",                      ID_SETEFFECT_RASTER
+            MENUITEM "GRADATION",                   ID_SETEFFECT_GRADATION
+            MENUITEM "BGDARK",                      ID_SETEFFECT_BGDARK
+            MENUITEM "スクロール",                       ID_SETEFFECT_SCROLL
+            MENUITEM "BGZOOMIN",                    ID_SETEFFECT_BGZOOMIN
+            MENUITEM "STRETCH",                     ID_SETEFFECT_STRETCH, GRAYED
+            MENUITEM "レリーフ",                        ID_SETEFFECT_RELEAF
+            MENUITEM "MELTDOWN",                    ID_SETEFFECT_MELTDOWN
+            MENUITEM "NEGA",                        ID_SETEFFECT_NEGA
+            MENUITEM "すな",                          ID_SETEFFECT_SUNA
+            MENUITEM "サークル",                        ID_SETEFFECT_CIRCLE
+            MENUITEM "REMEMBER",                    ID_SETEFFECT_REMEMBER
+            MENUITEM "ブラ―",                         ID_SETEFFECT_BURA
+            MENUITEM "破片",                          ID_SETEFFECT_HAHEN
+            MENUITEM "背景ゆらし",                       ID_SETEFFECT_HAIKEIYURE
+        END
+        POPUP "ワイプ系"
+        BEGIN
+            MENUITEM "標準ワイプ群",                      ID_SETEFFECT_SIMPLEWIPE
+            MENUITEM "マスクによるワイプ",                   ID_SETEFFECT_MASKWIPE
+            MENUITEM "波紋ワイプ",                       ID_SETEFFECT_HAMON
+        END
+        POPUP "なにか"
+        BEGIN
+            MENUITEM "物をとばす",                       ID_SETEFFECT_HANABIRA
+            MENUITEM "光になれ",                        ID_SETEFFECT_HOTARU
+            MENUITEM "スピード効果線縦横",                   ID_SETEFFECT_SPEEDLINE
+        END
+        POPUP "幾何学図形系"
+        BEGIN
+            POPUP "円"
+            BEGIN
+                MENUITEM "線画",                          ID_MENUITEM40281, GRAYED
+                MENUITEM "塗りつぶし",                       ID_MENUITEM40279, GRAYED
+                MENUITEM "線画加減算",                       ID_MENUITEM40280, GRAYED
+                MENUITEM "塗りつぶし加減算",                    ID_MENUITEM40286, GRAYED
+                MENUITEM "変化円",                         ID_SETEFFECT_GEO_CIRCLE
+            END
+            POPUP "楕円", GRAYED
+            BEGIN
+                MENUITEM "線画",                          ID_MENUITEM40282
+                MENUITEM "塗りつぶし",                       ID_MENUITEM40283
+                MENUITEM "線画加減算",                       ID_MENUITEM40284
+                MENUITEM "塗りつぶし加減算",                    ID_MENUITEM40285
+            END
+            POPUP "ドーナツ型"
+            BEGIN
+                MENUITEM "線画",                          ID_MENUITEM40287, GRAYED
+                MENUITEM "塗りつぶし",                       ID_MENUITEM40288, GRAYED
+                MENUITEM "線画加減算",                       ID_MENUITEM40289, GRAYED
+                MENUITEM "塗りつぶし加減算",                    ID_MENUITEM40290, GRAYED
+                MENUITEM "変化トーラス",                      ID_SETEFFECT_GEO_TORUS
+            END
+            POPUP "楕円ドーナツ型", GRAYED
+            BEGIN
+                MENUITEM "線画",                          ID_MENUITEM40291
+                MENUITEM "塗りつぶし",                       ID_MENUITEM40292
+                MENUITEM "線画加減算",                       ID_MENUITEM40293
+                MENUITEM "塗りつぶし加減算",                    ID_MENUITEM40294
+            END
+            POPUP "正多角形"
+            BEGIN
+                MENUITEM "線画",                          ID_MENUITEM40295, GRAYED
+                MENUITEM "塗りつぶし",                       ID_MENUITEM40298, GRAYED
+                MENUITEM "線画加減算",                       ID_MENUITEM40299, GRAYED
+                MENUITEM "塗りつぶし加減算",                    ID_MENUITEM40300, GRAYED
+                MENUITEM "変化正多角形",                      ID_SETEFFECT_GEO_POLYGON
+            END
+        END
+        POPUP "回転変形系"
+        BEGIN
+            MENUITEM "回転",                          ID_SETEFFECT_TURN
+            MENUITEM "単純拡大縮小",                      ID_SETEFFECT_STRETCHBLT
+            MENUITEM "簡易パース",                       ID_SETEFFECT_PERS
+        END
+        POPUP "特殊"
+        BEGIN
+            MENUITEM "にじます",                        ID_SETEFFECT_NIJIMASU, GRAYED
+            MENUITEM "ながし",                         ID_SETEFFECT_NAGASHI, GRAYED
+            MENUITEM "SURA",                        ID_SETEFFECT_SURA, GRAYED
+            MENUITEM "モザイク",                        ID_SETEFFECT_MOZAIC
+            MENUITEM "マウスモザイク",                     ID_SETEFFECT_MOUSEMOZAIC
+            MENUITEM "きらきら",                        ID_SETEFFECT_KIRA
+            MENUITEM "SOFTFOCUS",                   ID_SETEFFECT_SOFTFOCUS, GRAYED
+            MENUITEM "け",                           ID_SETEFFECT_KE, GRAYED
+            MENUITEM "ワープ",                         ID_SETEFFECT_WARP, GRAYED
+            MENUITEM "はなび",                         ID_SETEFFECT_HANABI, GRAYED
+            MENUITEM "カーテン",                        ID_SETEFFECT_CURTAIN
+        END
+        POPUP "アニメ系"
+        BEGIN
+            MENUITEM "パーツアニメ",                      ID_SETEFFECT_KOMAANIME
+            MENUITEM "アニメ",                         ID_SETEFFECT_ANIME
+            MENUITEM "フルアニメ",                       ID_SETEFFECT_FULLANIME
+            MENUITEM "目ぱち口ぱく",                      ID_SETEFFECT_MEPACHIKUCHIPAKU
+        END
+        POPUP "GETPUT"
+        BEGIN
+            MENUITEM "GET",                         ID_SETEFFECT_GET
+            MENUITEM "PUT",                         ID_SETEFFECT_PUT
+        END
+        POPUP "さくせいちゅう"
+        BEGIN
+            MENUITEM "たれ",                          ID_SETEFFECT_TARE, GRAYED
+            MENUITEM "ぬりつぶし",                       ID_SETEFFECT_FILL
+            MENUITEM "たての傷",                        ID_SETEFFECT_OLDFILM, GRAYED
+            MENUITEM "ワイプけいいろいろ",                   ID_SETEFFECT_WIPE, GRAYED
+            MENUITEM "BOXFILL",                     ID_SETEFFECT_BOXFILL, GRAYED
+            MENUITEM "ONCE",                        ID_SETEFFECT_ONCE
+            MENUITEM "すらっしゅ",                       ID_SETEFFECT_SLASH
+            MENUITEM "ぼかし",                         ID_SETEFFECT_BOKASHI
+            MENUITEM "木漏れ日",                        ID_SETEFFECT_KOMOREBI
+            MENUITEM "ふすま(まだ)",                     ID_SETEFFECT_FUSUMA
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "バッファー",                       ID_SETEFFECT_BUFFER
+        MENUITEM SEPARATOR
+        MENUITEM "前の続き",                        ID_SETEFFECT_MAE
+        MENUITEM SEPARATOR
+        POPUP "MPEG作成専用"
+        BEGIN
+            MENUITEM "ブラ―付拡大縮小",                    ID_MENUITEM40317, GRAYED
+            MENUITEM "回転",                          ID_MENUITEM40318, GRAYED
+            MENUITEM "絵の粉砕飛散",                      ID_MENUITEM40319, GRAYED
+            MENUITEM "ガラス割れ",                       ID_MENUITEM40320, GRAYED
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "拡張指定用",                       ID_SETEFFECT_EX
+        MENUITEM SEPARATOR
+        MENUITEM "削除",                          ID_DELETE_EFFECT
+    END
+END
+
+IDR_POPUPMENU_FILMCASE MENU
+BEGIN
+    POPUP "フィルムケース用ポップアップ"
+    BEGIN
+        MENUITEM "名前の変更",                       ID_MENU_FILMCASE_CHANGENAME
+        MENUITEM SEPARATOR
+        POPUP "色変更"
+        BEGIN
+            MENUITEM "青",                           ID_MENU_FILMCOLOR_BLUE
+            MENUITEM "赤",                           ID_MENU_FILMCOLOR_RED
+            MENUITEM "紫",                           ID_MENU_FILMCOLOR_PURPLE
+            MENUITEM "緑",                           ID_MENU_FILMCOLOR_GREEN
+            MENUITEM "水色",                          ID_MENU_FILMCOLOR_CYAN
+            MENUITEM "黄色",                          ID_MENU_FILMCOLOR_YELLOW
+            MENUITEM SEPARATOR
+            MENUITEM "黒",                           ID_MENU_FILMCOLOR_BLACK
+        END
+    END
+END
+
+IDR_POPUPMENU_STORYBOOK MENU
+BEGIN
+    POPUP "ストーリーブック用ポップアップ"
+    BEGIN
+        MENUITEM "名前の変更",                       ID_MENU_STORYBOOK_CHANGENAME
+    END
+END
+
+IDR_POPUPMENU_STORY MENU
+BEGIN
+    POPUP "シナリオ用ポップアップ"
+    BEGIN
+        MENUITEM "内容修正",                        ID_MENU_EDITCOMMAND
+        MENUITEM "一覧から選択",                      ID_MENU_SELECTCOMMAND
+        MENUITEM SEPARATOR
+        MENUITEM "これを選ぶ",                       ID_MENU_CHANGESELECTSTORY
+        MENUITEM SEPARATOR
+        MENUITEM "NOP",                         ID_MENU_COMMAND_NOP
+        MENUITEM "条件ブロック(&I)",                  ID_MENU_COMMAND_IF
+        POPUP "選択肢(&?)"
+        BEGIN
+            MENUITEM "1個(&1)",                      ID_MENU_COMMAND_SELECT1
+            MENUITEM "2個(&2)",                      ID_MENU_COMMAND_SELECT2
+            MENUITEM "3個(&3)",                      ID_MENU_COMMAND_SELECT3
+            MENUITEM "4個(&4)",                      ID_MENU_COMMAND_SELECT4
+        END
+        MENUITEM "選択肢ID",                       ID_MENU_COMMAND_SELECT_ID
+        MENUITEM "シナリオ(&s)",                    ID_MENU_COMMAND_STORY
+        MENUITEM "フィルム(&F)",                    ID_MENU_COMMAND_FILM
+        MENUITEM "ムービー",                        ID_MENU_COMMAND_MOVIE, INACTIVE
+        POPUP "BGM", INACTIVE
+        BEGIN
+            POPUP "MIDI"
+            BEGIN
+                MENUITEM "START(LOOP)",                 ID_MENU_COMMAND_MIDI_START
+                MENUITEM "START(1回)",                   ID_MENU_COMMAND_MIDI_STARTONCE
+                MENUITEM "STOP",                        ID_MENU_COMMAND_MIDI_STOP
+            END
+            POPUP "CD"
+            BEGIN
+                MENUITEM "START(LOOP)",                 ID_MENU_COMMAND_CD_START
+                MENUITEM "START(1回)",                   ID_MENU_COMMAND_CD_STARTONCE
+                MENUITEM "STOP",                        ID_MENU_COMMAND_CD_STOP
+            END
+            MENUITEM "WAVE",                        ID_MENUITEM40215
+            POPUP "その他"
+            BEGIN
+                MENUITEM "START(LOOP)",                 ID_MENU_COMMAND_ETCBGM_START
+                MENUITEM "START(1回)",                   ID_MENU_COMMAND_ETCBGM_STARTONCE
+                MENUITEM "STOP",                        ID_MENU_COMMAND_ETCBGM_STOP
+            END
+        END
+        MENUITEM "コマンド",                        ID_MENU_COMMAND_SYSTEMCOMMAND
+        MENUITEM "ファンクション",                     ID_MENU_COMMAND_FUNCTION
+        MENUITEM "計算(&C)",                      ID_MENU_COMMAND_CALCU
+        POPUP "終わり"
+        BEGIN
+            MENUITEM "呼ばれたシナリオに戻る",                 ID_MENU_COMMAND_RET
+            MENUITEM "sys又は上位スクリプトに戻る",             ID_MENU_COMMAND_NEXT
+            MENUITEM "sysの頭に戻る",                    ID_MENU_COMMAND_END
+            MENUITEM "タイトル画面に抜ける",                  ID_MENU_COMMAND_EXIT
+        END
+        POPUP "スクリプト呼び出し"
+        BEGIN
+            MENUITEM "スクリプト呼び出し",                   ID_MENU_COMMAND_SCRIPT
+            MENUITEM "サブスクリプト呼び出し",                 ID_MENU_COMMAND_SUBSCRIPT
+            MENUITEM "スクリプトジャンプ",                   ID_MENU_COMMAND_JUMP
+        END
+        MENUITEM "while",                       ID_MENU_COMMAND_WHILE
+        MENUITEM SEPARATOR
+        MENUITEM "デバッグメッセージ",                   ID_MENU_COMMAND_DEBUG
+        POPUP "条件"
+        BEGIN
+            MENUITEM "if",                          ID_MENU_COMMAND_IF
+            MENUITEM "elsif",                       ID_MENU_COMMAND_ELSIF
+            MENUITEM "else",                        ID_MENU_COMMAND_ELSE
+        END
+        POPUP "マーキング"
+        BEGIN
+            POPUP "背景色"
+            BEGIN
+                MENUITEM "黄色",                          ID_MENU_CMDCOL_BACK_YELLOW
+                MENUITEM "水色",                          ID_MENU_CMDCOL_BACK_CYAN
+                MENUITEM "紫",                           ID_MENU_CMDCOL_BACK_PURPLE
+            END
+            POPUP "文字色"
+            BEGIN
+                MENUITEM "青",                           ID_MENU_CMDCOL_BLUE
+                MENUITEM "赤",                           ID_MENU_CMDCOL_RED
+                MENUITEM "緑",                           ID_MENU_CMDCOL_GREEN
+            END
+            MENUITEM "解除",                          ID_MENU_CMDCOL_REL
+        END
+        POPUP "ブロックマーキング"
+        BEGIN
+            POPUP "背景色"
+            BEGIN
+                MENUITEM "黄色",                          ID_MENU_BLOCKCMDCOL_BACK_YELLOW
+                MENUITEM "水色",                          ID_MENU_BLOCKCMDCOL_BACK_CYAN
+                MENUITEM "紫",                           ID_MENU_BLOCKCMDCOL_BACK_PURPLE
+            END
+            POPUP "文字色"
+            BEGIN
+                MENUITEM "青",                           ID_MENU_BLOCKCMDCOL_BLUE
+                MENUITEM "赤",                           ID_MENU_BLOCKCMDCOL_RED
+                MENUITEM "緑",                           ID_MENU_BLOCKCMDCOL_GREEN
+            END
+            MENUITEM "解除",                          ID_MENU_BLOCKCMDCOL_REL
+        END
+    END
+END
+
+IDR_POPUPMENU_MESSAGE MENU
+BEGIN
+    POPUP "メッセージ用ポップアップ"
+    BEGIN
+        MENUITEM "メッセージ(&Print)",               ID_MENU_MESSAGE_PRINT
+        MENUITEM "全体メッセージ(&LPrint)",            ID_MENU_MESSAGE_LPRINT
+        MENUITEM "追加メッセージ(&Append)",            ID_MENU_MESSAGE_APPEND
+        MENUITEM "時間待ち(&Draw)",                 ID_MENU_MESSAGE_DRAW
+        MENUITEM SEPARATOR
+        MENUITEM "ID変更",                        ID_MENU_MESSAGE_CHANGEID
+    END
+END
+
+IDR_POPUPMENU_MESSAGE_VOICE MENU
+BEGIN
+    POPUP "メッセージ用ポップアップVOICE"
+    BEGIN
+        MENUITEM "Player番号設定",                  ID_MENU_MESSAGE_VOICEPLAYER
+        MENUITEM "ボイス番号修正",                     ID_MENU_MESSAGE_VOICENUMBER, GRAYED
+        MENUITEM "ファイル名変更",                     ID_MENU_MESSAGE_VOICEFILENAME
+        MENUITEM SEPARATOR
+        MENUITEM "音声継続",                        ID_MENU_MESSAGE_VOICE_CONTINUE
+        MENUITEM "音声完全",                        ID_MENU_MESSAGE_VOICE_COMPLETE, INACTIVE
+        MENUITEM SEPARATOR
+        MENUITEM "ループ切り替え",                     ID_MENU_MESSAGE_VOICE_LOOP, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "ボリューム",                       ID_MENU_MESSAGE_VOICE_VOLUME
+        MENUITEM "定位",                          ID_MENU_MESSAGE_VOICE_EFFECT
+        MENUITEM SEPARATOR
+        MENUITEM "削除",                          ID_MENU_MESSAGE_VOICEDELETE
+        MENUITEM SEPARATOR
+        MENUITEM "音声ロック",                       ID_MENU_MESSAGE_VOICELOCK
+        MENUITEM "ロック解除",                       ID_MENU_MESSAGE_VOICEUNLOCK
+        MENUITEM SEPARATOR
+        MENUITEM "効果音型音声の停止",                   ID_MENUITEM40556, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "フェードin/out",                  ID_MENU_MESSAGE_VOICE_FADE
+        MENUITEM "ボリュームのみ",                     ID_MENU_MESSAGE_VOICE_VOLUMEONLY
+    END
+END
+
+IDR_POPUPMENU_MESSAGE_SE MENU
+BEGIN
+    POPUP "メッセージ用ポップアップSE"
+    BEGIN
+        MENUITEM "効果音選択",                       ID_MENU_MESSAGE_SENUMBER
+        MENUITEM "停止",                          ID_MENU_MESSAGE_SE_STOP
+        MENUITEM "ボリュームのみ",                     ID_MENU_MESSAGE_SE_VOLUMEONLY
+        MENUITEM "ファイル名変更",                     ID_MENU_MESSAGE_SEFILENAME, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "ループ切り替え",                     ID_MENU_MESSAGE_SE_LOOP
+        MENUITEM "フェードin/out",                  ID_MENU_MESSAGE_SE_FADE
+        MENUITEM SEPARATOR
+        MENUITEM "ボリューム",                       ID_MENU_MESSAGE_SE_VOLUME
+        MENUITEM "定位",                          ID_MENU_MESSAGE_SE_EFFECT
+        MENUITEM SEPARATOR
+        MENUITEM "System音声",                    40880
+        MENUITEM SEPARATOR
+        MENUITEM "削除",                          ID_MENU_MESSAGE_SEDELETE
+        MENUITEM SEPARATOR
+    END
+END
+
+IDR_POPUPMENU_MESSAGE_EDIT MENU
+BEGIN
+    POPUP "メッセージ用ポップアップ4"
+    BEGIN
+        MENUITEM "内容修正",                        ID_MENU_MESSAGE_EDIT
+        MENUITEM SEPARATOR
+        POPUP "メモ色変更"
+        BEGIN
+            MENUITEM "黒",                           ID_MENU_MESSAGECOLOR_BLACK
+            MENUITEM "青",                           ID_MENU_MESSAGECOLOR_BLUE
+            MENUITEM "赤",                           ID_MENU_MESSAGECOLOR_RED
+            MENUITEM "紫",                           ID_MENU_MESSAGECOLOR_PURPLE
+            MENUITEM "緑",                           ID_MENU_MESSAGECOLOR_GREEN
+            MENUITEM "水色",                          ID_MENU_MESSAGECOLOR_CYAN
+            MENUITEM "黄色",                          ID_MENU_MESSAGECOLOR_YELLOW
+        END
+    END
+END
+
+IDR_POPUPMENU_VAR MENU
+BEGIN
+    POPUP "変数用ポップアップ"
+    BEGIN
+        MENUITEM "変更",                          ID_MENU_VAR_CHANGE
+        MENUITEM "追加",                          ID_MENU_VAR_ADD, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "削除",                          ID_MENU_VAR_DELETE, GRAYED
+        POPUP "マーキング"
+        BEGIN
+            POPUP "背景色"
+            BEGIN
+                MENUITEM "背景：黄色",                       ID_MENU_BACK_YELLOW
+                MENUITEM "背景：水色",                       ID_MENU_BACK_CYAN
+                MENUITEM "背景：紫",                        ID_MENU_BACK_PURPLE
+            END
+            POPUP "文字色"
+            BEGIN
+                MENUITEM "青",                           ID_MENU_MOJI_BLUE
+                MENUITEM "赤",                           ID_MENU_MOJI_RED
+                MENUITEM "緑",                           ID_MENU_MOJI_GREEN
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "マーク解除",                       ID_MENU_DELETEMARK
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "初期値",                         ID_MENU_VAR_INITDATA
+    END
+END
+
+IDR_POPUPMENU_KOMA MENU
+BEGIN
+    POPUP "koma"
+    BEGIN
+        MENUITEM "名前の設定",                       ID_MENU_SETKOMANAME
+    END
+END
+
+IDR_POPUPMENU_STORY_ELS MENU
+BEGIN
+    POPUP "ぽぷｐ"
+    BEGIN
+        MENUITEM "内容修正",                        ID_MENU_EDITCOMMAND
+        MENUITEM SEPARATOR
+        MENUITEM "elsif",                       ID_MENU_COMMAND_ELSIF
+        MENUITEM "else",                        ID_MENU_COMMAND_ELSE
+        POPUP "マーキング"
+        BEGIN
+            POPUP "背景色"
+            BEGIN
+                MENUITEM "黄色",                          ID_MENU_CMDCOL_BACK_YELLOW
+                MENUITEM "水色",                          ID_MENU_CMDCOL_BACK_CYAN
+                MENUITEM "紫",                           ID_MENU_CMDCOL_BACK_PURPLE
+            END
+            POPUP "文字色"
+            BEGIN
+                MENUITEM "青",                           ID_MENU_CMDCOL_BLUE
+                MENUITEM "赤",                           ID_MENU_CMDCOL_RED
+                MENUITEM "緑",                           ID_MENU_CMDCOL_GREEN
+            END
+            MENUITEM "解除",                          ID_MENU_CMDCOL_REL
+        END
+        POPUP "ブロックマーキング"
+        BEGIN
+            POPUP "背景色"
+            BEGIN
+                MENUITEM "黄色",                          ID_MENU_BLOCKCMDCOL_BACK_YELLOW
+                MENUITEM "水色",                          ID_MENU_BLOCKCMDCOL_BACK_CYAN
+                MENUITEM "紫",                           ID_MENU_BLOCKCMDCOL_BACK_PURPLE
+            END
+            POPUP "文字色"
+            BEGIN
+                MENUITEM "青",                           ID_MENU_BLOCKCMDCOL_BLUE
+                MENUITEM "赤",                           ID_MENU_BLOCKCMDCOL_RED
+                MENUITEM "緑",                           ID_MENU_BLOCKCMDCOL_GREEN
+            END
+            MENUITEM "解除",                          ID_MENU_BLOCKCMDCOL_REL
+        END
+    END
+END
+
+IDR_POPUPMENU_MESSAGE_VOICE2 MENU
+BEGIN
+    POPUP "メッセージ用ポップアップVOICE"
+    BEGIN
+        MENUITEM "Player番号設定",                  ID_MENU_MESSAGE_VOICEPLAYER, GRAYED
+        MENUITEM "ボイス番号修正",                     ID_MENU_MESSAGE_VOICENUMBER, GRAYED
+        MENUITEM "ファイル名変更",                     ID_MENU_MESSAGE_VOICEFILENAME
+        MENUITEM SEPARATOR
+        MENUITEM "音声継続",                        ID_MENU_MESSAGE_VOICE_CONTINUE, GRAYED
+        MENUITEM "音声に影響されない",                   ID_MENU_MESSAGE_VOICE_NOWAITVOICE
+        MENUITEM SEPARATOR
+        MENUITEM "ループ切り替え",                     ID_MENU_MESSAGE_VOICE_LOOP
+        MENUITEM SEPARATOR
+        MENUITEM "ボリューム",                       ID_MENU_MESSAGE_VOICE_VOLUME
+        MENUITEM "定位",                          ID_MENU_MESSAGE_VOICE_EFFECT
+        MENUITEM SEPARATOR
+        MENUITEM "削除",                          ID_MENU_MESSAGE_VOICEDELETE
+        MENUITEM SEPARATOR
+        MENUITEM "音声ロック",                       ID_MENU_MESSAGE_VOICELOCK
+        MENUITEM "ロック解除",                       ID_MENU_MESSAGE_VOICEUNLOCK
+        MENUITEM SEPARATOR
+        MENUITEM "効果音型音声の停止",                   ID_MENU_MESSAGE_VOICE_STOP
+        MENUITEM SEPARATOR
+        MENUITEM "フェードin/out",                  ID_MENU_MESSAGE_VOICE_FADE
+        MENUITEM "ボリュームのみ",                     ID_MENU_MESSAGE_VOICE_VOLUMEONLY
+    END
+END
+
+IDR_POPUPMENU_PRESET MENU
+BEGIN
+    POPUP "プリセット用ポップアップ"
+    BEGIN
+        MENUITEM "座標取り込み",                      ID_PRESET_GET
+        MENUITEM "座標入力",                        ID_40836, INACTIVE
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_TOOLBAR1            BITMAP                  "bmpresource\\toolbar1.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_TOOLBAR1 TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_BUTTON_NEW
+    BUTTON      ID_BUTTON_OPEN
+    BUTTON      ID_BUTTON_SAVE
+    SEPARATOR
+    BUTTON      ID_BUTTON_FILMMODE
+    BUTTON      ID_BUTTON_STORYMODE
+    SEPARATOR
+    BUTTON      ID_BUTTON_CONFIG
+    SEPARATOR
+    BUTTON      ID_BUTTON_MAINSCREEN
+    BUTTON      ID_BUTTON_CONTE
+    BUTTON      ID_BUTTON_FILM
+    BUTTON      ID_BUTTON_LAYER
+    BUTTON      ID_BUTTON_ZAHYO
+    BUTTON      ID_BUTTON_GAMEMESSAGE
+    BUTTON      ID_BUTTON_CONTEMESSAGE
+    BUTTON      ID_BUTTON_EFFECT
+    SEPARATOR
+    BUTTON      ID_BUTTON_STORY
+    BUTTON      ID_BUTTON_VAR
+    BUTTON      ID_BUTTON_CONTROL
+    BUTTON      ID_BUTTON_FILMCASE
+    BUTTON      ID_BUTTON_PROGRAM
+    BUTTON      ID_BUTTON_STORYBOOK
+    SEPARATOR
+    BUTTON      ID_BUTTON_PROJECT_BUILD_NEW
+    BUTTON      ID_BUTTON_PROJECT_BUILD_ALL
+    BUTTON      ID_BUTTON_PROJECT_ADD
+    BUTTON      ID_BUTTON_PROJECT_EDIT
+    SEPARATOR
+    BUTTON      ID_BUTTON_COMPILE_ALL
+    BUTTON      ID_BUTTON_COMPILE_STORY
+    BUTTON      ID_BUTTON_COMPILE_COMMAND
+    BUTTON      ID_BUTTON_BUILD_SPT
+    BUTTON      ID_BUTTON_BUILD_TXT
+    SEPARATOR
+    BUTTON      ID_BUTTON_UTIL_COPYEFFECT
+    BUTTON      ID_BUTTON_UTIL_COPYEFFECT2
+    SEPARATOR
+    BUTTON      ID_BUTTON_HELP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_CHANGEPIC DIALOG 0, 0, 187, 93
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ﾀﾞｲｱﾛｸﾞ"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,18,61,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,80,60,50,14
+    EDITTEXT        IDC_EDIT1,18,18,126,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "削除",IDC_BUTTON1,122,40,50,14
+END
+
+IDD_DIALOG_NAMEINPUT DIALOG 0, 0, 187, 93
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "名前の変更"
+FONT 20, "ＭＳ ゴシック"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,21,59,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,117,58,50,14
+    EDITTEXT        IDC_EDIT_NAMEINPUT,20,22,145,14,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_TEXTINPUT DIALOG 0, 0, 252, 201
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "メッセージ等の入力"
+FONT 20, "ＭＳ ゴシック"
+BEGIN
+    EDITTEXT        IDC_EDIT_TEXTINPUT,20,16,212,125,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,20,156,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,181,158,50,14
+    CONTROL         "全て流し込む",IDC_CHECK_INPUT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,81,148,85,10
+    CONTROL         "全画面モード",IDC_CHECK_LPRINT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,81,160,81,10
+    CONTROL         "強制改行する",IDC_CHECK_AUTOCR,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,81,172,83,8
+END
+
+IDD_DIALOG3 DIALOGEX 0, 0, 358, 268
+STYLE DS_SETFONT | WS_CHILD | WS_CLIPSIBLINGS
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
+BEGIN
+    CONTROL         "前と同じ座標に読みこむ",IDC_CHECK_SAMEZAHYO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,208,14,98,10
+    COMBOBOX        IDC_FILELENGTHFILTER_COMBO,208,34,25,172,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "フィルター",IDC_DWQFILTERBUTTON,239,34,36,14
+END
+
+IDD_DIALOG_SELECTNAME DIALOG 0, 0, 217, 243
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "選択"
+FONT 16, "ＭＳ Ｐ明朝"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,27,208,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,135,207,50,14
+    LISTBOX         IDC_LIST_NAME,20,14,172,182,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "♪",IDC_PLAYSOUND,100,208,17,14
+END
+
+IDD_DIALOG_SELECTSUUJI DIALOGEX 0, 0, 203, 205
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "数値の入力"
+FONT 12, "ＭＳ Ｐゴシック", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,63,175,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,121,175,50,14
+    EDITTEXT        IDC_EDIT_NAMEINPUT,63,150,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "0",IDC_BUTTON_0,19,28,20,14
+    PUSHBUTTON      "1",IDC_BUTTON_1,19,54,20,14
+    PUSHBUTTON      "2",IDC_BUTTON_2,50,54,20,14
+    PUSHBUTTON      "3",IDC_BUTTON_3,81,54,20,14
+    PUSHBUTTON      "4",IDC_BUTTON_4,112,54,20,14
+    PUSHBUTTON      "5",IDC_BUTTON_5,143,54,20,14
+    PUSHBUTTON      "6",IDC_BUTTON_6,19,80,20,14
+    PUSHBUTTON      "7",IDC_BUTTON_7,50,80,20,14
+    PUSHBUTTON      "8",IDC_BUTTON_8,81,80,20,14
+    PUSHBUTTON      "9",IDC_BUTTON_9,112,80,20,14
+    PUSHBUTTON      "10",IDC_BUTTON_10,143,80,20,14
+    PUSHBUTTON      "15",IDC_BUTTON_15,19,106,20,14
+    PUSHBUTTON      "20",IDC_BUTTON_20,50,106,20,14
+    PUSHBUTTON      "30",IDC_BUTTON_30,81,106,20,14
+    PUSHBUTTON      "40",IDC_BUTTON_40,112,106,20,14
+    PUSHBUTTON      "50",IDC_BUTTON_50,143,106,20,14
+    GROUPBOX        "ワンタッチ指定",IDC_STATIC,13,13,158,121
+    LTEXT           "数値指定",IDC_STATIC,21,153,36,8
+END
+
+IDD_DIALOG_SETUPWINDOW DIALOG 0, 0, 371, 331
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Window座標設定"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,43,258,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,256,256,50,14
+    EDITTEXT        IDC_EDIT_WINDOWX,43,37,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_WINDOWY,105,35,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_WINDOWSIZEX,182,149,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_WINDOWSIZEY,273,151,40,14,ES_AUTOHSCROLL
+    LTEXT           "座標(X)",IDC_STATIC,16,15,59,8
+    LTEXT           "座標(Y)",IDC_STATIC,99,16,53,8
+    LTEXT           "サイズ(X)",IDC_STATIC,186,127,51,8
+    LTEXT           "サイズ(Y)",IDC_STATIC,267,125,50,8
+END
+
+IDD_DIALOG_SETUPMESSAGE DIALOG 0, 0, 330, 257
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "メッセージ座標設定"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,56,197,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,253,193,50,14
+    EDITTEXT        IDC_EDIT_MESSAGE_DX,43,47,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_MESSAGE_DY,201,39,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_MESSAGE_NEXTY,143,113,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_MESSAGE_FONTSIZE,146,151,40,14,ES_AUTOHSCROLL
+    LTEXT           "座標DX(ウィンドウからの相対位置)",IDC_STATIC,20,21,145,8
+    LTEXT           "座標DY(ウィンドウからの相対位置)",IDC_STATIC,187,20,116,8
+    LTEXT           "次の行まで",IDC_STATIC,38,119,82,8
+    LTEXT           "フォントサイズ",IDC_STATIC,41,156,76,8
+END
+
+IDD_DIALOG_REPLACE DIALOGEX 0, 0, 319, 267
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "検索・置換"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,235,229,50,14
+    EDITTEXT        IDC_EDIT_REPLACE_FROM,134,30,150,14,ES_AUTOHSCROLL
+    CONTROL         "このメッセージ",IDC_RADIO_REPLACE_MESSAGE,"Button",BS_AUTORADIOBUTTON | WS_GROUP,31,111,58,10
+    EDITTEXT        IDC_EDIT_REPLACE_TO,134,54,150,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "次を検索",IDC_BUTTON_REPLACE_NEXT,235,120,50,14
+    PUSHBUTTON      "置換",IDC_BUTTON_REPLACE_DO,235,144,50,14
+    PUSHBUTTON      "全て置換",IDC_BUTTON_REPLACE_ALL,235,168,50,14
+    CONTROL         "このコマ",IDC_RADIO_REPLACE_KOMA,"Button",BS_AUTORADIOBUTTON,31,133,41,10
+    CONTROL         "このフィルム",IDC_RADIO_REPLACE_FILM,"Button",BS_AUTORADIOBUTTON,31,155,53,10
+    CONTROL         "このnnn",IDC_RADIO_REPLACE_NNN,"Button",BS_AUTORADIOBUTTON,31,177,39,10
+    CONTROL         "この位置から",IDC_RADIO_REPLACE_NOWSTART,"Button",BS_AUTORADIOBUTTON | WS_GROUP,132,111,55,10
+    CONTROL         "最初から",IDC_RADIO_REPLACE_TOPSTART,"Button",BS_AUTORADIOBUTTON,132,133,42,10
+    PUSHBUTTON      "音声を検索",IDC_BUTTON_SEARCHVOICE,235,96,50,14,WS_DISABLED
+    LTEXT           "検索文字列",IDC_STATIC,25,34,65,8
+    LTEXT           "置換文字列",IDC_STATIC,25,58,70,8
+    GROUPBOX        "対象",IDC_STATIC,18,91,83,115
+    GROUPBOX        "開始位置",IDC_STATIC,119,91,83,115
+END
+
+IDD_DIALOG_PROG DIALOG 0, 0, 287, 253
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "進行状況"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,37,213,50,14,WS_DISABLED
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,212,213,50,14,WS_DISABLED
+    LTEXT           "Static",IDC_MYSTATIC,44,57,176,12
+    CONTROL         "Progress1",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,47,103,198,14
+    CONTROL         "Progress2",IDC_PROGRESS2,"msctls_progress32",WS_BORDER,46,149,200,14
+END
+
+IDD_DIALOG_RECT DIALOG 0, 0, 326, 255
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ﾀﾞｲｱﾛｸﾞ"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,50,210,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,240,209,50,14
+    EDITTEXT        IDC_EDIT_LEFT,46,46,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TOP,185,43,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_WIDTH,63,148,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_HEIGHT,152,147,40,14,ES_AUTOHSCROLL
+    LTEXT           "X座標",IDC_STATIC,51,27,57,8
+    LTEXT           "Y座標",IDC_STATIC,188,20,62,8
+    LTEXT           "幅",IDC_STATIC,77,123,38,8
+    LTEXT           "高さ",IDC_STATIC,161,121,32,8
+END
+
+IDD_DIALOG_VARREPLACE DIALOGEX 0, 0, 319, 267
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ﾀﾞｲｱﾛｸﾞ"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
+BEGIN
+    LTEXT           "検索変数名",IDC_STATIC,42,26,54,8
+    LTEXT           "置換",IDC_STATIC,42,47,63,8
+    EDITTEXT        IDC_EDIT_REPLACE_FROM,137,21,154,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_REPLACE_TO,137,41,154,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,242,219,50,14
+    DEFPUSHBUTTON   "次を検索",IDC_BUTTON_REPLACE_NEXT,242,107,50,14
+    PUSHBUTTON      "置換",IDC_BUTTON_REPLACE_DO,242,131,50,14
+    PUSHBUTTON      "全て置換",IDC_BUTTON_REPLACE_ALL,242,159,50,14
+    GROUPBOX        "対象範囲",IDC_STATIC,38,71,138,64
+    CONTROL         "このブロック",IDC_RADIO_REPLACE_BLOCK,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,50,89,51,10
+    CONTROL         "全体",IDC_RADIO_REPLACE_ALLVAR,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,50,112,30,10
+    GROUPBOX        "位置指定",IDC_STATIC,38,155,138,89
+    CONTROL         "この位置から",IDC_RADIO_REPLACE_NOWSTART2,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,50,173,55,10
+    CONTROL         "この位置まで",IDC_RADIO_REPLACE_NOWEND,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,50,196,55,10
+    CONTROL         "全体",IDC_RADIO_REPLACE_TOPSTART,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,50,220,30,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_DIALOG_CHANGEPIC, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 86
+    END
+
+    IDD_DIALOG_NAMEINPUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 86
+    END
+
+    IDD_DIALOG_TEXTINPUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 245
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 194
+    END
+
+    IDD_DIALOG3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 346
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 259
+    END
+
+    IDD_DIALOG_SELECTNAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 203
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 229
+    END
+
+    IDD_DIALOG_SELECTSUUJI, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 196
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 198
+    END
+
+    IDD_DIALOG_SETUPWINDOW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 364
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 324
+    END
+
+    IDD_DIALOG_SETUPMESSAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 323
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 250
+    END
+
+    IDD_DIALOG_REPLACE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 312
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 260
+    END
+
+    IDD_DIALOG_PROG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 280
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 246
+    END
+
+    IDD_DIALOG_RECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 319
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 248
+    END
+
+    IDD_DIALOG_VARREPLACE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 312
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 260
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "bmpresource\\nnnEdit2008.ico"
+
+IDI_ICON_NNNEDIT        ICON                    "bmpresource\\icon1.ico"
+
+IDI_ICON_MDICHILDWINDOW ICON                    "bmpresource\\ico00002.ico"
+
+IDI_ICON_VARWINDOW      ICON                    "bmpresource\\ico00001.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,3
+ PRODUCTVERSION 1,0,0,3
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "CompanyName", "バグ猫ソフト"
+            VALUE "FileDescription", "nnnEdit"
+            VALUE "FileVersion", "1, 0, 0, 3"
+            VALUE "InternalName", "nnnEdit"
+            VALUE "LegalCopyright", "Copyright (C) 2001,2010"
+            VALUE "OriginalFilename", "nnnEdit.exe"
+            VALUE "ProductName", "バグ猫ソフト nnnEdit"
+            VALUE "ProductVersion", "1, 0, 0, 3"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_NODROP              CURSOR                  "bmpresource\\nodrop.cur"
+
+IDC_LAYERCOPY           CURSOR                  "bmpresource\\layercop.cur"
+
+IDC_LAYERMOVE           CURSOR                  "bmpresource\\cursor1.cur"
+
+IDC_LAYEREXCHANGE       CURSOR                  "bmpresource\\cur00001.cur"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    ID_BUTTON_MAINSCREEN    "メインスクリーン"
+    ID_BUTTON_FILM          "フィルム"
+    ID_BUTTON_LAYER         "layer"
+    ID_BUTTON_ZAHYO         "zahyo"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BUTTON_MESSAGE       "message"
+    ID_BUTTON_EFFECT        "effect"
+    ID_BUTTON_STORY         "story"
+    ID_BUTTON_CONTROL       "control"
+    ID_BUTTON_FILMCASE      "filmcase"
+    ID_BUTTON_VAR           "var"
+    ID_BUTTON_PROGRAM       "program"
+    ID_BUTTON_NEW           "新規作成"
+    ID_BUTTON_OPEN          "開く"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BUTTON_SAVE          "保存"
+    ID_BUTTON_STORYBOOK     "シナリオの本"
+END
+
+STRINGTABLE
+BEGIN
+    ID_MENUITEM40071        "新規NNNファイルを作成する"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BUTTON_CONFIG        "CONFIG"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BUTTON_HELP          "ヘルプ"
+    ID_BUTTON_FILMMODE      "フィルム用配置"
+    ID_BUTTON_STORYMODE     "ストーリー用配置"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BUTTON_PROJECT_ADD   "プロジェクトに組み込む"
+    ID_BUTTON_PROJECT_EDIT  "プロジェクトを編集"
+    ID_BUTTON_COMPILE_ALL   "すべてコンパイル"
+    ID_BUTTON_COMPILE_STORY "選択されたシナリオをコンパイル"
+    ID_BUTTON_COMPILE_COMMAND "選択されたコマンドをコンパイル"
+    ID_BUTTON_BUILD_SPT     "SPT形式でBUILD"
+    ID_BUTTON_BUILD_TXT     "TXT形式のソースを出力"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BUTTON_UTIL_COPYEFFECT "エフェクトのコピー"
+END
+
+STRINGTABLE
+BEGIN
+    ID_MENU_COMMAND_NEXT    "通常スクリプトの終わり"
+    ID_MENU_COMMAND_END     "コントロールスクリプトの終わり"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BUTTON_PROJECT_BUILD_NEW "新しいもののみBUILD"
+    ID_BUTTON_PROJECT_BUILD_ALL "すべてREBUILD"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BUTTON_CONTE         "コンテ"
+    ID_BUTTON_CONTEMESSAGE  "コンテメッセージ"
+END
+
+STRINGTABLE
+BEGIN
+    ID_MENU_COMMAND_JUMP    "作成中"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BUTTON_UTIL_COPYEFFECT2 "2つ前のエフェクトのコピー"
+END
+
+#endif    // 日本語 (日本) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

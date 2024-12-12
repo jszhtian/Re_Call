@@ -1,0 +1,89 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">プロジェクト設定命令</A>＞SYSTEMMODE［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="systemmode.html">SYSTEMMODE［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=700 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■システム設定命令 SYSTEMMODE[ ]</FONT>
+<FONT CLASS=t20>
+
+システムの設定や、起動時のウィンドウの設定などをおこないます。
+※この命令は config/projectconfig.txt 内でのみ有効な命令です。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>DEBUGMODE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>デバッグモード(=1)／リリースモード(=0)の指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SX = 値(0 または 128～2048)</FONT></TD><TD><FONT CLASS=t40>起動時のメインウィンドウのサイズ(横幅)を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SY = 値(0 または 16～2048)</FONT></TD><TD><FONT CLASS=t40>起動時のメインウィンドウのサイズ(縦幅)を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>E = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>起動時のメインウィンドウの有効(=1)／無効(=0)を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CAPTION = 文字列</FONT></TD><TD><FONT CLASS=t40>起動時のメインウィンドウのタイトルバー名を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>WINDOWFRAME = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>メインウィンドウのフレーム枠の有無を設定<BR>0 を指定するとタイトルバーとウィンドウ枠が無くなります。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>WINDOWRESIZE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>メインウィンドウのサイズ変更の有効(=1)／無効(=0)を設定<BR>有効にすると、ウィンドウの枠をドラッグしてサイズを<BR>変更できるようになります。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SOUND = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>サウンド機能の有効(=1)／無効(=0)を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SCRIPTFILEEXT = 文字列</FONT></TD><TD><FONT CLASS=t40>拡張子「yst」ファイルの他に、<BR>スクリプトファイルとして認識させる拡張子を指定<BR>※スクリプト部分とシナリオ部分に分離して、<BR>エディタでそれぞれに色分けしたい場合に便利です。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>THREAD = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>スレッドモードの有効(=1)／無効(=0)を設定<BR>有効にすると、タイトルバーを掴んでも<BR>動作が停止しないようになります。<BR>(※非推奨の機能です。極力無効にしてください)</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] デバッグモードをOFFにする(リリースモードにする)。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SYSTEMMODE</FONT>[<FONT CLASS=t62>DEBUGMODE</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[2] ウィンドウサイズを 1024x576 にする。
+　　※SX, SY 共に0にすると起動時の画面サイズがウィンドウサイズとなります。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SYSTEMMODE</FONT>[<FONT CLASS=t62>SX</FONT>=<FONT CLASS=t63>1024</FONT> <FONT CLASS=t62>SY</FONT>=<FONT CLASS=t63>576</FONT>]</FONT></B>
+
+
+[3] 起動時のウィンドウを非表示にする。
+　　
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SYSTEMMODE</FONT>[<FONT CLASS=t62>E</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[4] 起動時のタイトルバー名を「冒険物語」に設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SYSTEMMODE</FONT>[<FONT CLASS=t62>CAPTION</FONT>=<FONT CLASS=t63>"冒険物語"</FONT>]</FONT></B>
+
+
+[5] ウィンドウの枠を無しにする。
+　　枠無しはデスクトップアクセサリーの作成時などに使用します。
+　　※タイトルバー右上の[×]ボタンも無くなりますので注意してください。
+　　(画面クリックでアクティブにした後Alt+F4を押せば終了確認が出ます)
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SYSTEMMODE</FONT>[<FONT CLASS=t62>WINDOWFRAME</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[6] エンジンのサウンド機能を無効にする。(一切音が出なくなります)
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SYSTEMMODE</FONT>[<FONT CLASS=t62>SOUND</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[7] スクリプトファイルとして認識させる拡張子として「txt」を追加する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SYSTEMMODE</FONT>[<FONT CLASS=t62>SCRIPTFILEEXT</FONT>=<FONT CLASS=t63>"txt"</FONT>]</FONT></B>
+
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

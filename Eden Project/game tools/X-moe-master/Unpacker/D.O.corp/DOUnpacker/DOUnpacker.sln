@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DOUnpacker", "DOUnpacker\DOUnpacker.vcxproj", "{235A2B83-EBC2-4C14-B902-BA2C08898176}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DoScript", "DoScript\DoScript.vcxproj", "{F87ED00F-95FF-414D-AB10-84AC98679553}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{235A2B83-EBC2-4C14-B902-BA2C08898176}.Debug|Win32.ActiveCfg = Debug|Win32
+		{235A2B83-EBC2-4C14-B902-BA2C08898176}.Debug|Win32.Build.0 = Debug|Win32
+		{235A2B83-EBC2-4C14-B902-BA2C08898176}.Release|Win32.ActiveCfg = Release|Win32
+		{235A2B83-EBC2-4C14-B902-BA2C08898176}.Release|Win32.Build.0 = Release|Win32
+		{F87ED00F-95FF-414D-AB10-84AC98679553}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F87ED00F-95FF-414D-AB10-84AC98679553}.Debug|Win32.Build.0 = Debug|Win32
+		{F87ED00F-95FF-414D-AB10-84AC98679553}.Release|Win32.ActiveCfg = Release|Win32
+		{F87ED00F-95FF-414D-AB10-84AC98679553}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

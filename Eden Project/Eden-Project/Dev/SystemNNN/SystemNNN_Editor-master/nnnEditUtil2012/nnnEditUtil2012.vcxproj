@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_ver2|Win32">
+      <Configuration>Debug_ver2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_ver2|Win32">
+      <Configuration>Release_ver2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7FEEC4CD-A4C0-4CA5-91BE-6D83E1382C13}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>nnnEditUtil2012</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>nnnEditUtil2017D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'">
+    <TargetName>nnnEditUtil2017_ver2D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+    <TargetName>nnnEditUtil2017</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+    <TargetName>nnnEditUtil2017_ver2</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\nnnEdit\allEffectParam.cpp" />
+    <ClCompile Include="..\nnnEdit\aviSave.cpp" />
+    <ClCompile Include="..\nnnEdit\balloon.cpp" />
+    <ClCompile Include="..\nnnEdit\buttonPic.cpp" />
+    <ClCompile Include="..\nnnEdit\case.cpp" />
+    <ClCompile Include="..\nnnEdit\commanddata.cpp" />
+    <ClCompile Include="..\nnnEdit\commonDIB.cpp" />
+    <ClCompile Include="..\nnnEdit\configData.cpp" />
+    <ClCompile Include="..\nnnEdit\effectParam.cpp" />
+    <ClCompile Include="..\nnnEdit\filmcasedata.cpp" />
+    <ClCompile Include="..\nnnEdit\filmdata.cpp" />
+    <ClCompile Include="..\nnnEdit\komadata.cpp" />
+    <ClCompile Include="..\nnnEdit\messagedata.cpp" />
+    <ClCompile Include="..\nnnEdit\miniPic.cpp" />
+    <ClCompile Include="..\nnnEdit\minipiccache.cpp" />
+    <ClCompile Include="..\nnnEdit\myBitmap.cpp" />
+    <ClCompile Include="..\nnnEdit\myBmp.cpp" />
+    <ClCompile Include="..\nnnEdit\mybutton.cpp" />
+    <ClCompile Include="..\nnnEdit\myconfig.cpp" />
+    <ClCompile Include="..\nnnEdit\mydib.cpp" />
+    <ClCompile Include="..\nnnEdit\myPopupMenu.cpp" />
+    <ClCompile Include="..\nnnEdit\rubiMaker.cpp" />
+    <ClCompile Include="..\nnnEdit\scriptdata.cpp" />
+    <ClCompile Include="..\nnnEdit\selectdialog.cpp" />
+    <ClCompile Include="..\nnnEdit\selectobjectonly.cpp" />
+    <ClCompile Include="..\nnnEdit\starttitle.cpp" />
+    <ClCompile Include="..\nnnEdit\storybookdata.cpp" />
+    <ClCompile Include="..\nnnEdit\storydata.cpp" />
+    <ClCompile Include="..\nnnEdit\suuji.cpp" />
+    <ClCompile Include="..\nnnEdit\undoMemoryObject.cpp" />
+    <ClCompile Include="..\nnnEdit\varInitData.cpp" />
+    <ClCompile Include="..\nnnEdit\volumeControl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\nnnEdit\allEffectParam.h" />
+    <ClInclude Include="..\nnnEdit\aviSave.h" />
+    <ClInclude Include="..\nnnEdit\balloon.h" />
+    <ClInclude Include="..\nnnEdit\balloonType.h" />
+    <ClInclude Include="..\nnnEdit\buttonPic.h" />
+    <ClInclude Include="..\nnnEdit\case.h" />
+    <ClInclude Include="..\nnnEdit\commanddata.h" />
+    <ClInclude Include="..\nnnEdit\commonDIB.h" />
+    <ClInclude Include="..\nnnEdit\configData.h" />
+    <ClInclude Include="..\nnnEdit\effectParam.h" />
+    <ClInclude Include="..\nnnEdit\filmcasedata.h" />
+    <ClInclude Include="..\nnnEdit\filmdata.h" />
+    <ClInclude Include="..\nnnEdit\komadata.h" />
+    <ClInclude Include="..\nnnEdit\messagedata.h" />
+    <ClInclude Include="..\nnnEdit\miniPic.h" />
+    <ClInclude Include="..\nnnEdit\minipiccache.h" />
+    <ClInclude Include="..\nnnEdit\myBitmap.h" />
+    <ClInclude Include="..\nnnEdit\myBmp.h" />
+    <ClInclude Include="..\nnnEdit\mybutton.h" />
+    <ClInclude Include="..\nnnEdit\myconfig.h" />
+    <ClInclude Include="..\nnnEdit\mydib.h" />
+    <ClInclude Include="..\nnnEdit\myPopupMenu.h" />
+    <ClInclude Include="..\nnnEdit\rubiMaker.h" />
+    <ClInclude Include="..\nnnEdit\scriptdata.h" />
+    <ClInclude Include="..\nnnEdit\selectdialog.h" />
+    <ClInclude Include="..\nnnEdit\selectobjectonly.h" />
+    <ClInclude Include="..\nnnEdit\starttitle.h" />
+    <ClInclude Include="..\nnnEdit\storybookdata.h" />
+    <ClInclude Include="..\nnnEdit\storydata.h" />
+    <ClInclude Include="..\nnnEdit\suuji.h" />
+    <ClInclude Include="..\nnnEdit\undoMemoryObject.h" />
+    <ClInclude Include="..\nnnEdit\varInitData.h" />
+    <ClInclude Include="..\nnnEdit\volumeControl.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

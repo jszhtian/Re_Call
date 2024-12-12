@@ -1,0 +1,1439 @@
+KAGeXpress是KeyFC同人发展促进会基于吉里吉里2/Kirikiri Adventure Game 3开发的AVG开发工具。
+该工具具有以下的优点：
+     * 精简而紧凑的指令，易于学习，易于记忆。
+     * 汉化的附属工具，让你的发布、打包、素材准备等工作更加容易。
+     * 源自新一代基础系统KAGEX的action系统，为你的游戏提供更加华丽的功能。
+     * 按页随地存档，省去大量写标签的痛苦。
+     * 全面、完备的中文文档，由浅入深的详细说明。
+     * 整合各种效果插件，带给你的作品华丽的特效和与众不同的震撼力。
+     * 可选的素材、场景统一管理功能（through World.ks from KAGEX），可选的行模式。让你的开发更加轻松。
+     * KCDDP专门团队提供技术支持，并有专门的论坛、知识库提供交流。
+     * 完美支持640x480和800x600两种分辨率，新工程向导便于新手使用。
+     * 完美汉化的吉里吉里内核（最新稳定版：2.28Stable）和附属工具，帮助不懂日文的用户摆脱日文的困扰。
+　　                        1111111111111111111111111111
+　这个教程是以kcddp汉化的KAGeXpress为基础的，有部分指令可能和日文版有出入 
+首先下载了KAGeXpress之后，使用里边的Wizard.exe建立一个新工程，建立完成之后就会弹出kacg.config的窗口，这个都是中文，按照需要的内容进行设置就好，这里设置的想要修改就在新建立的那个工程文件夹中的Config.tjs里进行相应的修改 
+现在可以看一下生成的工程文件夹的结构 
+根目录下是一个krkr.exe和一个data文件夹 
+这里的krkr.exe就是真正意义上的krkr，如果单独执行它的话，会跳出目录选择对话框让你选择游戏资料的目录，然后从那个目录中寻找startup.tjs，执行里边的内容 
+但是这里我们建立的工程是已经关联好的，双击krkr.exe的话，会直接执行旁边的data文件夹里边的startup.tjs 
+KAGeXpress的执行顺序是startup.tjs->Initialize.tjs->func.ks->first.ks 
+对于初学者来说，这些都不用管，kag具体写游戏的部分从first.ks开始写 
+data文件夹里有startup.tjs，krenvprf.kep，Config.tjs，一些dll文件，11个文件夹 
+startup.tjs的作用刚才讲过了，就是让kr去执行Initialize.tjs的内容，这个文件不需要修改它 
+krenvprf.kep记录的是一些对话框的信息，删掉它还会再生成，也不需要管他 
+Config.tjs是游戏整体的一些设定，里边有大量的中文注释，建议一行一行看下去然后修改自己需要的地方。 
+一般来说，进行修改的主要内容是： 
+1.标题栏文字System.title（这里写的文字将会出现在游戏窗口的标题栏上） 
+2.使用预渲染文字global.useconfigMappfont（这个牵扯到打包字体，在以后说，不使用就是false） 
+3.窗口大小scWidth和scHeight（kr可以创建任意大小的窗口，但是请注意窗口大小很奇怪的话可能会导致全屏化出错，另外使用的素材也请一定要对比着窗口大小来制作） 
+4.存档方式freeSaveDataMode（如果打算做成lm那种打开选择文件的对话框来选择存档就写true，如果要像一般游戏那样有自己做的存读档界面就写false） 
+5.是否保存缩略图saveThumbnail（存读档界面上如果设定了需要有存档画面的就要写true） 
+6.存档地址saveDataLocation 
+7.是否在存档中保存宏saveMacros（除非你确定你的游戏绝对不会再做任何macro方面的修改了，否则建议设定为false） 
+8.自动记录已读文章autoRecordPageShowing（设定为true的时候，还没读过的文字没办法skip，这些信息记录在datasc.ksd和datasu.ksd文件里） 
+9.可用的音效缓冲数量numSEBuffers（设定为3的时候就是可以同时播放3个音效，通道为0、1、2，具体音效播放方法以后再说） 
+10.可用的layer数量numCharacterLayers(设定为3的时候就是layer0 layer1 layer2可以用，如果写了layer3就会报错，请务必注意) 
+11.可用的message数量numMessageLayers（设定为3的时候就是message0 message1 message2可以用，如果写了message3就会报错，请务必注意） 
+12.进入游戏后message0是否默认可见initialMessageLayerVisible（message0的可见在游戏里可以任意修改，这里设成什么都无所谓，但是一定要知道自己设了什么，做游戏的时候，随时明白自己的每个图层的情况是很重要的） 
+13.最多可存的进度数量numBookMarks  
+14.菜单设定Menu_visible_config 
+15.自动换行换页设定defaultAutoReturn（一般设定为true，这样文字在超过对话框的时候会自动换行或等待翻页） 
+16.背景音乐文件格式type（就是用playbgm播放的音乐，不是设定格式的就会没有声音，注意所有用插件播放的比如mp3 ogg都是设定为wave） 
+以上是通常会设定的部分，没有写到的部分要么是在游戏里可以随便改，要么是一般不太用到（好吧其实是我一般不太用到，我很少做有配音有动画之类的游戏……） 
+dll文件都是些插件，这些在funk.ks里一般都载入了，以后会讲到插件载入的方法 
+11个文件夹，这些文件夹名字都是在Initialize.tjs里设定好的，在游戏里调用素材的时候不用写路径，直接写文件名，kr就会在这11个文件夹里寻找这个名字的文件然后调用，所以说，即使是不同文件夹里的文件，也一定不要重名！相对的，如果不是放在这些文件夹里的文件，要调用的时候就要写明路径 
+这些文件夹里 
+system放置的建立起kag的tjs文件，对话等待点击时候出现的那两个动画文件（这个可以在Config.tjs里修改他们的显示，这两个动画文件随时可以用任何图片替换，放在这里其实是为了作为动画的范例给人看的），还有几个ks文件（这些是KAGeXpress新加的，里边封装了一些macro，不过个人习惯问题，我挺少用这些里边封的macro，以后的教程里应该基本也不会提到，有兴趣的人可以自己去开那些文件查看） 
+rule文件夹里边放了一些遮片素材，这些文件想要就要不想要就删，没什么关键性，遮片自己做也很方便 
+image文件夹里边放了下雨和下雪用的图片，下雨和下雪的插件是写在system的rain.ks和snow.ks里边的，这两个插件已经在funk.ks里边载入了，随时可以用，这些图片也可以更换，但是不能改动文件名，除非在插件里边做相应的修改，关于那两个插件，我以后可能会讲吧……虽然不讲也没什么大影响…… 
+scenario文件夹里边放了first.ks，游戏的脚本编写从这里开始 
+其他文件夹应该都是空的 
+到此，建立新的工程部分完结，下一部分开始讲图片的放置相关。
+                           222222222222222222222222
+　用ue或者notepad或者其他的随便什么文本编辑工具（不要用word）打开first.tjs,默认的工程中有这么几句： 
+*start 
+
+欢迎来到Kirikiri/KAG的世界！[l][r] 
+把这两行都删掉，在第一行写 
+[position layer=message0 page=fore visible=false][backlay] 
+这一行是如果在config里边没有把message0设为不可见的话，在这里把它设为不可见 
+现在开始进行图片的显示 
+在这之前要说的是，在kr里边，写在[]里边的是指令，写在@后边的是指令（[]和@意义一样，不过[]可以一行写多个指令[][][]这样排，@后边只能写一条指令，再写就要换行），写在*后边的是标签（关于标签以后会详细讲），写在;后边的是注释（就是程序当他不存在，单纯写给自己看的），直接写在外边的文字会显示在对话框上，另外如果在[]里边写了不存在的指令就会报错 
+想要在kr里用kag显示一张图片有很多种方式，可以用image,配合image的还有pimage，可以用position里的frame，可以用button…… 
+kr支持的图片类型包括jpg\bmp\png\ERI\TLG5\TLG5.听说还可以通过载入susie的插件使用其他的文件类型，不过这个我没尝试过。这些图片里，像是bmp,png,tlg5,tlg6这种自带通道的就可以直接显示透明通道，不用再做什么遮片了，如果是jpg图片，却不想直接把整张图的方形都显示上去，就要做遮片，如下图所示：
+ 白色是不透明的部分，黑色是透明的部分，灰色是半透明的部分，原文件（上边那张）命名为test.jpg的话，遮片文件（下边那张）命名为test_m.jpg，kr在读取图片的时候会自动把遮片用上的。显示的时候如下：
+  
+最常用的图片显示命令是image，其他几种方法我会在其他的地方遇到的时候详细讲解 
+首先，找到一张你想要显示的jpg图片，命名文件名为“test”（就是完整文件名为test.jpg），把这张图片放进image文件夹 
+在first.ks里第二行写入 
+
+[image layer=0 page=fore storage="test" visible=true left=0 top=100] 
+然后执行krkr.exe,可以看到图片出现在了屏幕上 
+
+但是这种出现是直接出现，一般来说，我们会希望图片出现时有一些更好看的效果，这种时候就用到了里层和表层的概念 
+kr的所有层都是分为表层（fore）和里层(back)的，表层就是可以看到的层，里层就是永远不会被你看到的层，可以通过trans把里层的内容通过各种方式复制到表层来达到一些画面效果，也可以用[backlay]把表层的内容复制到里层，所以说，表层就是表现用的层，里层就是准备用的层。 
+把first.ks里边除了第一行外删空，写入 
+[image layer=0 page=back storage="test" visible=true left=0 top=100] 
+[trans method=crossfade time=1500][wt] 
+再执行krkr.exe,可以看到图片缓缓浮现在了屏幕上
+ 
+把first.ks里边除了第一行外删空，写入 
+[image layer=0 page=back storage="test" visible=true left=0 top=100] 
+[trans method=universal rule="5" vague=100 time=500][wt] 
+
+再执行krkr.exe,可以看到图片以一种深浅不一的方式慢慢出现在了屏幕上 
+
+这就是trans的作用，可以让图片以各种方式出现。[wt]的意义是等待trans完成再进行下边的指令，注意trans不能同时进行两个 
+但是trans的时候，会一起trans所有层（其实trans也有layer的参数，但是写了的话只能单独trans base层，对其他层还是会全部一起trans），比如： 
+把first.ks里边除了第一行外删空，写入 
+[image layer=0 page=fore storage="test" visible=true left=0 top=100][l] 
+[image layer=1 page=back storage="test" visible=true left=300 top=100] 
+[trans method=crossfade time=1500][wt] 
+
+执行krkr.exe,可以看到一开始layer0的图片显示在了屏幕上，点击之后（就是那个[l]指令的作用），layer1的图片出现了，但是layer0的图片消失了。这是因为layer0直接用fore层载入了图片，但是back层还是空的，那么如果想要先出现layer0，然后点击再缓缓出现layer1的时候，就要用到backlay,这个命令就是把所有的layer 里边fore层的内容复制到back层 
+
+把first.ks里边除了第一行外删空，写入 
+[image layer=0 page=fore storage="test" visible=true left=0 top=100][l] 
+[backlay] 
+[image layer=1 page=back storage="test" visible=true left=300 top=100] 
+[trans method=crossfade time=1500][wt] 
+
+执行krkr.exe,就可以看到一开始layer0的图片显示在了屏幕上，点击之后，layer1的图片缓缓出现，但是layer0也没消失，其实layer0依然是被trans了，但是因为他的表层和里层是一样的，所以在我们看来图片没有变化
+有时候，我们需要在一张图片上覆盖另外一张图片，当然我们可以把layer1覆盖在layer0上边，但是如果我们想对这两张图片一起操作的时候，比如move，就要把这两个图层都操作到，只有两张还好，如果上边有十几张的话，就很讨厌了，这种情况下，我们可以用pimage，pimage就是把一张图片覆盖到某图层上。 
+
+把first.ks里边除了第一行外删空，写入 
+[image layer=0 page=fore storage="test" visible=true left=0 top=100][l] 
+[pimage layer=0 page=fore storage="test" visible=true dx=5 dy=5] 
+
+执行krkr.exe,就可以看到一开始出现test图片，点击后，又一张test图片覆盖在了原来的图片上，这样以后对layer0进行任何操作，都是把整个的这个画面操作了 
+不过pimage的大小不能大于底图，超出底图的部分会被自动截掉不显示 
+
+当然图片也有消失的需求，让图片消失的指令是freeimage, 
+把first.ks里边除了第一行外删空，写入 
+[image layer=0 page=fore storage="test" visible=true left=0 top=100][l] 
+[freeimage layer=0 page=fore] 
+
+执行krkr.exe,就可以看到出现的图片，点击后消失了。同样，这种消失也可以用trans来取得效果 
+把first.ks里边除了第一行外删空，写入 
+[image layer=0 page=back storage="test" visible=true left=0 top=100] 
+[trans method=crossfade time=1500][wt] 
+[l] 
+[freeimage layer=0 page=back] 
+[trans method=crossfade time=1500][wt] 
+因为trentswd问到了，于是补充一下，如果已经有一张图片了，只想让这张图片暂时不可见，可以用layopt来改变整个图层的可见，在需要的时候再恢复可见。 
+把first.ks里边除了第一行外删空，写入 
+[image layer=0 page=back storage="test" visible=true left=0 top=100] 
+[trans method=crossfade time=1500][wt] 
+[l] 
+[layopt layer=0 page=back visible=false] 
+[trans method=crossfade time=1500][wt] 
+[l] 
+[layopt layer=0 page=back visible=true] 
+[trans method=crossfade time=1500][wt] 
+
+
+可以看到，visible的效果也会被trans，事实上，trans之后，里层的所有信息都会被赋值给表层
+ 
+[image layer=0 page=back storage="test" visible=true left=0 top=100] 
+[trans method=universal rule="5" vague=100 time=500][wt]
+
+另外，用layopt还可以修改图层的上下顺位，图层有一个index属性，这个数字越大，图层被放在越上层。我在下边的image参数详解里边介绍了index的用法，如果在载入图片的时候就打算修改index当然是在image的index里边填写数字，如果是已经载入图片后想要修改图片的上下顺位，就使用layopt 
+
+把first.ks里边除了第一行外删空，写入 
+[image layer=0 page=back storage="test" visible=true left=0 top=0] 
+[image layer=1 page=back storage="test" visible=true left=50 top=50] 
+[trans method=crossfade time=1500][wt] 
+[l] 
+[layopt layer=0 page=fore index=1000] 
+[layopt layer=1 page=fore index=900] 
+
+              image指令参数详解 
+storage 
+一定要写 
+要载入的图片名 
+layer 
+一定要写  
+写base或者从0开始的整数，意味着把图片载入了这一层layer，注意：1.如果写了超过在config里设定layer数量的层就会报错（编号是从0开始的……也就是说设定层数为3就只能用0，1，2，写layer=3就会报错……）；2.用layer=base的时候，那张图片一定要和窗口一样大小，不然就会报错！3.层数越大越靠上，就是说layer2能遮住layer1的图片（这里和ns是相反的）,base是最下层 
+page 
+写back或者fore,不写就是默认fore 
+mode 
+透过方式，一般都是alpha,不写的话默认是alpha 
+grayscale 
+写true的话就是把图片转成灰度图（就是去色），不写就是默认的false 
+rgamma 
+写0.1-9.9间的数值，调整图片颜色的红值，1.0是正常显示图片的颜色，不写就是默认1.0 
+ggamma  
+调整图片颜色的绿值 
+bgamma 
+调整图片颜色的蓝值 
+rfloor 
+调整图片颜色的红色的亮度最低值，0-255间的数值，不写就是正常显示图片的0  
+gfloor 
+调整图片颜色的绿色的亮度最低值 
+bfloor 
+调整图片颜色的蓝色的亮度最低值 
+rceil 
+调整图片颜色的红色的亮度最高值，0-255间的数值，不写就是正常显示图片的255  
+gceil 
+调整图片颜色的绿色的亮度最高值 
+bceil 
+调整图片颜色的蓝色的亮度最高值 
+mcolor 
+调整整张图片的色调，数值是0xRRGGBB的形式（去ps里可以看到），不写就是不用这个效果 
+mopacity 
+配合mcolor，调整的强度，0-255的数值 
+clipleft 
+填写数字，如果不打算把一张图片全部放上去的时候，用这个可以截取图片的一部分放到layer上，这个的数字是要截取的部分的左上角x坐标，不写就是默认0 
+cliptop 
+要截取的部分的左上角y坐标  
+clipwidth 
+要截取的部分的宽度 
+clipheight 
+要截取的部分的高度 
+flipud 
+true就是将图像上下翻转载入layer，不写默认false 
+fliplr 
+true就是将图像左右翻转载入layer，不写默认false 
+visible 
+该层可见，这个不写的话默认是可见的，但是如果之前特意设定了false，不写一句visible=true就不会可见，另外要注意trans的时候会把back的可见复制到fore上，backlay同理 
+left 
+layer在整个窗口中的左上角x坐标，默认0 
+top 
+layer在整个窗口中的左上角y坐标，默认0 
+pos 
+这个是和config里边设定那个left_center right_center center之类的有关的，很鸡肋，我一般不用…… 
+opacity 
+图片透明度，0-255，默认是255不透明  
+mapimage 
+领域画像相关，领域画像这个东西也挺鸡肋，我就不讲了 
+mapaction 
+同上 
+index 
+图层的上下顺序，比如设定layer1的index=100,layer2的index=50，原本在layer1上边的layer2就会降到layer1下边去。关于index的数值，kag默认0层是100000，每层加100，如layer1就是100100，base层应该是0，就是没有能比他低的层
+ 
+
+             pimage指令参数详解 
+storage 
+一定要写 
+要载入的图片名 
+layer 
+一定要写 
+要载入的图层 
+page 
+不写就默认fore  
+key 
+透明色，写0xRRGGBB，用于没有通道的把背景涂成纯色的那种图片，不过……能用通道还是用通道吧……多方便啊……  
+dx 
+一定要写 
+放到底图上的左上角x坐标 
+dy 
+一定要写 
+放到底图上的左上角y坐标 
+sx 
+载入的图片如果不打算全部载入而只载入一个区域就写这个，相当于image的clipleft，要截取部分的左上角x坐标，不写默认0  
+sy 
+要截取部分的左上角y坐标，不写默认0  
+sw 
+要截取部分的宽 
+sh 
+要截取部分的高 
+mode 
+覆盖上去的方式，分很多种方式……翻译起来太麻烦了……我就不写了，想了解的人自己查指令集，不写的话默认就是直接把图片盖上去  
+opacity 
+覆盖上去的图片透明度
+ 
+                  trans指令参数详解 
+layer 
+写了的话也只有些layer=base有效……一般都不写…… 
+children 
+指令集里说的貌似是如果这个设定为true的话，写了layer=1,则会把123456……一起trans，不过本来layer这个就没什么用……所以这个属性也没什么用……不用填他  
+time 
+一定要写 
+trans的时间，以毫秒为单位 
+method 
+trans方式，有universal crossfade scroll turn……等很多种……请自行查阅指令集 
+rule  
+当method=universal的时候，trans用的遮片路径 
+vague 
+当method=universal的时候，trans的边缘模糊度 
+from 
+当method=scroll的时候，trans的方向，可以写 "left""top""right""bottom"四种 
+stay 
+当method=scroll的时候，trans的图片移动情况，可以写"stayfore""stayback""nostay"三种
+ 
+                 freeimage指令参数详解 
+layer 
+一定要写 
+释放图像的层数，只对layer有效，对message无效（看名字就知道了，这个指令是相对于image指令的，image只能用在layer上不能用在message上，这个也是） 
+page 
+不写的话就是默认的fore
+ 
+                  layopt参数详解 
+layer 
+一定要写  
+写base或者从0开始的整数，或者message0,message1……等等 
+page 
+写back或者fore,不写就是默认fore 
+visible 
+该层可见，这个不写的话默认是可见的，但是如果之前特意设定了false，不写一句visible=true就不会可见，另外要注意trans的时候会把back的可见复制到fore上，backlay同理 
+left 
+layer在整个窗口中的左上角x坐标，默认0 
+top 
+layer在整个窗口中的左上角y坐标，默认0 
+opacity 
+图片透明度，0-255，默认是255不透明  
+index 
+图层的上下顺序，比如设定layer1的index=100,layer2的index=50，原本在layer1上边的layer2就会降到layer1下边去。关于index的数值，kag默认0层是100000，每层加100，如layer1就是100100，base层应该是0，就是没有能比他低的层 
+autohide 
+是否跟随message0隐藏。kag里有一个指令是[hidemessage]，写了这个指令，message0就会被隐藏，下次点击的时候才会再次显示，一般被用来进行对话框关闭的功能，这里写了true的话，这个图层会在[hidemessage]时一起被隐藏，可以用于对话框上的头像之类 
+图片显示到此为止，下一步讲文字和对话框显示
+
+                              333333333333333333333333
+    
+前边已经讲过，直接写出来的文字会显示在对话框里，这里的对话框指的是message图层,kr的图层分为layer和message两种，基本划分的话layer承担显示图片的功能，message承担显示文字，显示按钮的功能（其实layer上边也可以用ptext写字，message在有需要的时候也经常被用来进行图片显示） 
+
+要显示文字，首先要设定文字，当然如果不设定的话就是默认的，默认貌似是15号字，不太记得了……||||||一般来说，为了画面效果还是要设定下的…… 
+
+设定当前层的字体的指令是deffont，如 
+[deffont face="黑体" size=20 color=0xffffff] 
+而文字的行间距，字间距等设定是defstyle，如 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+设定文字的出现速度是delay，这个数值是全局的，就是设定的话，所有message层的文字显示都是这个速度，如 
+[delay speed=10] 
+字体的临时设定指令是font，如 
+[font face="黑体" size=18 color=0xffffff edge=true edgecolor=0x787878] 
+但是font的设定在切换焦点，trans，er等情况后就会失效 
+行间距字间距的临时设定是style，如 
+[style linespacing=15 pitch=7 linesize=20] 
+除了字间距之类，style还可以设定文字出现的位置和是否自动换行，也是和font一样，trans，er等情况后就会失效 
+不过defstyle和deffont的默认设置，会在第一次[er]之后才显示，这个应该是kr的bug，所以请大家在设定完一个message打算在上边写字的时候先[er]一下 
+
+不管是什么样的字体，最后都要显示在message上才能被我们看到，下边讲下message的设定 
+使用kr的话，要养成两个习惯， 
+1.第一次使用一个message的时候，一定要先用position设定这个图层的属性，而且要同时考虑到它的fore和back的情况 
+2.要写字或者要放按钮前，一定要先将焦点current到要放字或者按钮的图层 
+经常会有人问我“啊！为什么我的对话没有显示！”“啊！怎么我设的按钮看不到！”……然后我就会问“你current在哪个层啊？”对方常常回答我“current是啥……”……………………………… 
+对于message层的操作来说，最重要的就是position和current这两个指令，如果你对这两个指令还不熟，请不要对我说你已经会用kr做对话框了…… 
+position是message设定的指令，用它可以设定message层的大小，位置，文字出现的位置，背景色或者背景图片等等，一个图层在使用前无论如何也要先用position设定为自己想要的样式才行，因为除了message0外，其他图层在在没设定的时候，长的都是一个纯黑色的15*15的小方框（layer也是），所以如果你在画面左上角看到一个这样的方块，说明你把什么图层没设定就visible=true了。 
+current是确定焦点的指令，它对焦上图层之后，后边的文字和按钮就都是放在那个图层上了，如果游戏一开始不写current就写文字或者按钮，他们会被放在message0上，如果在游戏中间，天知道你都做了什么操作之后，不写current就直接写文字或按钮，那么就只有神才知道那些东西被放在哪一层了……所以，在写文字和按钮的前边写current是非常必要的，注意trans之后也要重新current，不然也容易出错。 
+
+将下边的图片下载下来，保存为frame.png，放在image文件夹里
+  
+清空first.ks，在下边写： 
+
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+[er] 
+今天天气真好哈哈哈。[l][r] 
+[font face="黑体" size=18 color=0x000000 edge=true edgecolor=0xffffff][style linespacing=15 pitch=7 linesize=20 align="center"] 
+真是天地交泰之相啊咔咔。[l][er] 
+〔ｅｒ〕之后〔ｆｏｎｔ〕和〔ｓｔｙｌｅ〕的设定就不管用了。 
+
+有些时候，可能会有要竖着显示文字的需要，一个图层是横着写字还是竖着写字是一个图层参数vertical决定的，可以在position里边设定 
+
+清空first.ks，在下边写： 
+
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore vertical=true] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+[er] 
+今天天气真好哈哈哈。 
+
+可以看到文字是竖排出现的。 
+
+上边那些[l][er]都属于对message层上内容的操作，常用的有以下几种： 
+
+1. [l]等待点击 
+2. [r]位置换行，就是说后边的文字或者按钮会从当前行的下一行开始，行间距是开始的defstyle设定的那些数值 
+3. [p]翻页，值得注意的是，KAGeXpress的[p]还承担着即时存档的功能，也就是存档的话，会存在[p]的位置，这是因为[p]在Conductor里被跳到了autolabel.ks的*autoLabelLabel标签，又跳了回来，于是[p]其实可以看做是一个翻了页然后标签了一下的东西，因为kr的存档只能呢个存在有标签的地方，于是在对话里需要靠[p]达成即时存档的效果 
+4. [er]清空当前层上的内容，不改变用position设定的信息 
+5. [cm]清空所有层，包括对所有层的position设定信息 
+6. [ct]清空所有层，但是不改变已用position设定的信息 
+7. [nowait]取消文字一个字一个字往外蹦的效果，一下子显示，相当于把文字速度设定为0，在遇到[endnowait]之前文字都会立刻显示 
+8. [endnowait]结束[nowait]效果的指令 
+
+另外，文字显示并不是只有写在外边的这些字才可以，我们也可以用指令来显示文字，如： 
+
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+[er] 
+[emb exp="今天天气真好"] 
+
+效果和 
+
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+[er] 
+今天天气真好 
+
+是一摸一样的。把文字显示指令化的理由有两个，一是有些时候某个文字要达到一些条件才会显示，写在外边就没办法用cond来进行条件判断了，二是有些文字是存在变量里的，变量里的内容一定要通过指令才能写出来。
+ 
+第一种情况涉及到cond，我会在讲变量相关部分的时候再详细讲，第二种情况比较常用在主角姓名上边。 
+现在大部分游戏都会做成自定义主角姓名，然后把主角姓名存放在变量里。 
+
+清空first.ks，在下边写： 
+
+[eval exp="f.主角姓名='水螅'"] 
+
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+[er] 
+我的名字是[emb exp="f.主角姓名"]。 
+
+可以看到屏幕上显示出“我的名字是水螅”的文字。其中，eval那个指令是把“水螅”这个字符串赋值给“f.主角姓名”这个变量，关于它的具体用法我会在变量部分再详细解释。 
+
+除了emb外，还有ch指令也是显示文字用的， 
+[emb exp="哦呵呵呵呵"]和[ch text="哦呵呵呵呵"]的区别在于ch不会自动换行，emb能够自动换行 
+另外如果使用变量的话， [emb exp="f.主角姓名"]相当于[ch text=&f.主角姓名] ，这种格式上的区别的原因是exp=后边应该直接写用""引起来的tjs式，而text=后边需要用&来表示要用tjs式了（关于变量的所有操作都是tjs式） 
+
+另外还有一个指令，叫做hch，这个指令只有在图层vertical=true的情况下才能使用，使用方法和ch一样 
+
+清空first.ks，在下边写： 
+
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore vertical=true] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+[er] 
+我的名字是[hch text="水螅"]。 
+
+可以看到竖着的文字里边，“水螅”是横着写的。这个命令其实很少有人会用它吧……感觉上是配合日本人的书写习惯的……我们不太用得到呢……
+ 
+                    deffont参数详解 
+size 
+文字大小，写数字，这个大小是用像素做单位的 
+face 
+字体名，如果使用预渲染字体的话，这里就要写你在config里写的自渲染字体名，像是“黑体”“宋体”这种大家机器上都有的就不用预渲染了，直接写face="黑体"就会从玩家的字库里调用黑体了 
+color 
+字体颜色，0xRRGGBB格式 
+rubysize 
+注释用小字的颜色，这个是针对日文汉字注音的功能，对于中文游戏来说，其实不会用到，所以ruby的使用我就不讲了…… 
+rubyoffset 
+注释用小字大小 
+shadow 
+字体阴影，写true就是有阴影，默认false  
+shadowcolor 
+阴影颜色，0xRRGGBB格式 
+edge 
+字体包边，默认false  
+edgecolor 
+字体包边的颜色，0xRRGGBB格式 
+bold 
+粗体，默认false
+ 
+2008-10-2 16:47 回复  
+ 
+                  defstyle参数详解 
+linespacing 
+行间距 
+pitch 
+字间距 
+linesize 
+预设的行的高度，这个我不知道是干嘛的……似乎是设定linelayer的高度的……
+ 
+2008-10-2 16:47 回复  
+ 
+                delay参数详解 
+speed 
+一定要写 
+毫秒为单位的文字出现速度，也可以写“nowait”，相当于0，立刻出现，还可以写“user”，用的是kr的默认速度，就是config里设定那个
+ 
+                      font参数详解 
+size 
+文字大小，写数字，这个大小是用像素做单位的 
+face 
+字体名，如果使用预渲染字体的话，这里就要写你在config里写的自渲染字体名，像是“黑体”“宋体”这种大家机器上都有的就不用预渲染了，直接写face="黑体"就会从玩家的字库里调用黑体了 
+color 
+字体颜色，0xRRGGBB格式 
+rubysize 
+注释用小字的颜色，这个是针对日文汉字注音的功能，对于中文游戏来说，其实不会用到，所以ruby的使用我就不讲了…… 
+rubyoffset 
+注释用小字大小 
+shadow 
+字体阴影，写true就是有阴影，默认false  
+shadowcolor 
+阴影颜色，0xRRGGBB格式 
+edge 
+字体包边，默认false  
+edgecolor 
+字体包边的颜色，0xRRGGBB格式 
+bold 
+粗体，默认false  
+italic 
+斜体，默认false，唯一比deffont多的东西……表问我为啥明明机制都一样只有font有斜体deffont却没有……
+ 
+                  style参数详解 
+linespacing 
+行间距 
+pitch 
+字间距 
+linesize 
+预设的行的高度 
+align 
+文字出现方式，有"left"/"top"， "center"，"right"/"bottom"这三种，是用left还是用top视该图层文字是竖着写的还是横着写的而定 
+autoreturn 
+true的话就是自动换行，默认true
+ 
+                  position参数详解 
+layer 
+要设定的层，不写就是设定当前current的层 
+page 
+表层还是里层，不写默认表层 
+left 
+图层左上角位置x坐标 
+top 
+图层左上角位置y坐标 
+width 
+层宽 
+height 
+层高 
+frame 
+层背景图片，如果写frame=""就是不用背景图片 
+framekey 
+0xRRGGBB格式，指定背景图片的透明色，对于直接用有通道的png图片的我来说……这个参数我从来没用过…… 
+color 
+图层颜色，0xRRGGBB格式，如果不用frame的话，可以把图层整个填充成一种颜色，当然，这种方式不够华丽，另外如果有frame，frame透明的部分会填上这种颜色，就是说，frame图片是覆盖在图层整个填充的色块上的 
+opacity 
+透明度，0-255的数值，这个数值不影响frame图片的透明度，只影响color填充颜色的透明度，所以用frame的话记得这里设为0 
+marginl 
+左边空出的像素，填写像素数字 
+这个和下边几个是设定文字出现在message上的区域，一般来说，我们不希望文字密密麻麻的在一个message上排满，而是上下左右空出来一些地方，空出多少就是设定这几个参数 
+margint 
+上边空出的像素 
+marginr 
+右边空出的像素 
+marginb 
+下边空出的像素  
+vertical 
+文字是横着写还是竖着写，默认是false横着 
+visible 
+该层可见，设定为false则整个这个message层都会看不到，上边的按钮也会无法操作
+ 
+                       current参数详解 
+layer 
+一定要写 
+设定焦点的层 
+page 
+设定焦点的是表层还是里层 
+withback 
+如果这个设定为true，那么之后的操作会同时在fore和back层上进行。 
+这部分就讲到这里吧，下一部分是按钮和标签跳转的内容
+
+
+                 44444444444444444444444444444444
+
+前边曾经说到过， *后边的东西就是标签，标签这个东西的作用： 
+1.判断一段对话有没有在游戏里被读过是判断的一个标签到另一个标签之间的部分 
+2.存档存的是标签的位置 
+3.游戏跳转是要跳到标签的位置 
+
+标签的写法就是： 
+*标签名 
+
+如果这个标签要可以存档，那么要写成 
+*标签名|存档名 
+其中存档名不写也没关系，写了的话，会记录在kag.getBookMarkPageName(存档数字)这个属性变量里，可以在做存档界面的时候用emb把它显示出来 
+既然说到存档了，那么就说下，存档的指令是save，读档的指令是load，这个的具体用法我会在以后详细讲 
+跳转分为两种，一种是直接跳过去，指令是jump；一种是跳过去再跳回来，指令是call 
+清空first.ks，在下边写： 
+
+*test0 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4][er] 
+今天天气真好。[l] 
+[jump target=*test1] 
+有点想吃包子了。 
+
+*test1 
+有点想吃饺子了。 
+
+可以看到，出现的是吃饺子的文字，因为在读到吃包子前一句话的时候，跳到了*test1，然后顺序读下去的就是吃饺子的那句话。 
+
+清空first.ks，在下边写： 
+
+*test0 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff][er] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+今天天气真好。[l] 
+[call target=*test1] 
+有点想吃包子了。 
+[s] 
+
+*test1 
+有点想吃饺子了。[l] 
+[return] 
+
+可以看到，吃完饺子之后点击又跳回了吃包子，call指令会在跳转到指定的标签，然后向下一行一行执行，在执行到第一个遇到的[return]指令的时候，跳回call指令的下一句开始顺序执行 
+上边代码里，那个[s]意味着永远等待，除非用按钮或者右键进行跳转，不然什么操作都是没用的。
+那么，下边来讲一下按钮。 
+按钮分为两种，一种是文字型的link，一种是图片型的button， 
+
+清空first.ks，在下边写： 
+
+*test0 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4][er] 
+你觉得是吃包子好还是吃饺子好呢？[r] 
+[link target=*test1 hint=我要吃包子]包子[endlink]　　　　[link target=*test2 hint=我要吃饺子]饺子[endlink] 
+[s] 
+
+*test1 
+[er] 
+有点想吃包子了。 
+[s] 
+
+*test2 
+[er] 
+有点想吃饺子了。 
+[s] 
+
+可以看到，被link和endlink圈起来的字变成了按钮，并且鼠标在上边悬停一会儿可以看到hint后边的字作为注释出现。而点击这个按钮，就会跳转到link的target参数所写的那个标签。注意，按钮相当于点击之后jump，如果要想点击按钮取得call的效果，需要在link的exp参数那里写tjs式，这个我不在这种基础基础教程里讲解。 
+在介绍button之前，我要先讲一个非常重要的定位指令，locate，这个指令其实应该在文字显示部分讲的……但是他和button及link连用的场合更多一点，于是放在这里讲。 
+
+清空first.ks，在下边写： 
+
+*test0 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4][er] 
+先看一下locate的效果吧[l] 
+[locate x=100 y=30]字会从locate指定的坐标开始出现[l][er] 
+[locate x=50 y=20][link target=*test1 hint="50,20"]这里是50，20[endlink] 
+[locate x=70 y=50][link target=*test2 hint="70,50"]这里是70，50[endlink] 
+[s] 
+
+*test1 
+[er] 
+50，20 
+[s] 
+
+*test2 
+[er] 
+70，50 
+[s] 
+
+注意这里的坐标是相对于message层的左上角的，也就是说，因为message0的左上角坐标在整个屏幕的（50,430）的位置， [locate x=50 y=20]后，出现的文字就会在屏幕的（100,450）的位置 
+关于如何看坐标，请打开ps，在ps的“编辑”》“预置”》“单位和标尺”里边，将标尺选为“像素”，然后在窗口里，你的鼠标移动到的位置坐标会在信息窗口显示出来 
+另外如果一个界面元件是一个图层的话，想要查看那个界面元件的准确坐标，就选中那个图层，然后右键“自由变换”，信息栏里就会显示这个元件的准确坐标和大小 
+button的用法和link差不多，不过button是要写图片名，另外，locate对button的位置设定当然也是生效的 
+请把下边的图片下载下来，命名为button.png，放到image文件夹里
+这张图片其实是希望在游戏里显示出来的按钮的“普通”“点击”“悬停”三种状态的图横拼在一起的，这就是kr按钮的图片格式，注意这三张图一定要等大。 
+另外kr的按钮还有一种读取图片的方式是分开读的，那个也要求按钮图片等大，不过不用这样拼成一张了。这个我在例子里不介绍，使用参数会写在最后的button参数详解里，有兴趣的人可以自己试验。 
+清空first.ks，在下边写： 
+
+*test0 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4][er] 
+来看看按钮的效果吧[l] 
+[locate x=450 y=50] 
+[button graphic="button" target=*test1] 
+[s] 
+
+*test1 
+[er] 
+跳到这里来了呢。 
+[s] 
+
+可以看到[er]也是可以清除button的。 
+另外，button的图片会挡住同一层上出的文字，比如 
+清空first.ks，在下边写： 
+
+*test0 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4][er] 
+文字会被按钮挡住[l] 
+[locate x=10 y=10] 
+[button graphic="button" target=*test1] 
+[s] 
+
+*test1 
+[locate x=10 y=30] 
+[button graphic="button" target=*test2] 
+不管先出后出都会被挡住，另外没被[er]的按钮就会一直在。 
+[s] 
+
+*test2 
+[er] 
+
+当然按钮也是可以被trans的。 
+
+清空first.ks，在下边写： 
+
+*test0 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4][er] 
+文字会被按钮挡住[l][backlay] 
+[current layer=message0 page=back] 
+[locate x=10 y=10] 
+[button graphic="button" target=*test1] 
+[trans method=crossfade time=800][wt] 
+[s] 
+
+*test1 
+[current layer=message0 page=back][er] 
+[trans method=crossfade time=800][wt] 
+就像上边那样，如果back层没有按钮，然后trans了，那么按钮也就消失了。
+ 
+另外，button如果被设定在message层的区域外，是不会显示的 
+*test0 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=fore] 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4][er] 
+来看看按钮的效果吧[l] 
+[locate x=50 y=110] 
+[button graphic="button" target=*test1] 
+[s] 
+
+*test1 
+[er] 
+跳到这里来了呢。 
+[s] 
+
+可以看到，按钮超出对话框范围的部分被切掉了，如果按钮再向下设置，就会完全看不到。 
+
+另外还有一种特殊的按钮，叫做systembutton，这种按钮会像窗口上的x一样，在trans等操作的时候自动无效化，基本上用于对话框上的系统按钮，就是那种一边对话还一直出现的按钮。关于这种按钮的具体用法可以见D写过的systembutton试验笔记，http://kcddp.keyfc.net/bbs/viewthread.php?tid=367&extra=page%3D3
+ 
+                   jump参数详解 
+storage 
+要跳转到的文件名，比如"first.ks"，不写就会在当前所在的文件搜索 target给出的标签 
+target 
+要跳转到的标签名，不写就会直接跳到storage给出的文件的第一行开始执行，也就是说storage和target至少要写一个，写两个当然定位更精确，如果你一个也不写……那你根本而是在欺负kr，他会给你报错框弹出的销魂惩罚的。 
+countpage 
+这个是判断要不要把之前的整段话都判定为已读的，默认是true，就是跳转后，之前的整段话，即使是因为跳转没读到的话，也会判断会已读（好像是这样……我日文比较烂……）
+ 
+                    call参数详解 
+storage 
+要跳转到的文件名 
+target 
+要跳转到的标签名 
+countpage 
+和jump一样的……三个参数都一样
+ 
+                   link参数详解 
+storage 
+要跳转到的文件名  
+target 
+要跳转到的标签名  
+exp 
+点击后会执行的tjs式，使用方法很灵活 
+color 
+那个鼠标悬停时覆盖在文字上的半透明方块的颜色，0xRRGGBB 形式 
+hint 
+鼠标悬停时候出现的注释文字 
+onenter 
+鼠标悬停时候执行的tjs式，想要做华丽的鼠标悬停效果就靠他了……不过这个是tjs的范围，我这里不讲 
+onleave 
+鼠标移开时执行的tjs式 
+countpage 
+和jump的countpage参数一样的 
+clickse 
+点击按钮发出的声音，属于音效，相当于跳转后立刻[playse storage="音效名"] 
+clicksebuf 
+播放点击按钮音效的音效通道，默认是0 
+enterse 
+鼠标移动到按钮上时播放的音效  
+entersebuf 
+鼠标移动到按钮上时播放的音效的音效通道，默认是0  
+leavese 
+鼠标从按钮移开时播放的音效 
+leavesebuf 
+鼠标移动到按钮上时播放的音效的音效通道 ，默认是0
+ 
+              button参数详解 
+graphic 
+按钮图片名 
+normal 
+如果分开载入三种状态的按钮图片时，通常的那张图片名 
+over 
+如果分开载入三种状态的按钮图片时，鼠标悬停的那张图片名，不写就是和normal一样 
+on 
+如果分开载入三种状态的按钮图片时，鼠标点击的那张图片名，不写就是和normal一样 
+也就是说，graphic或者normal/over/on这两种一定要选一种写 
+storage 
+要跳转到的文件名  
+target 
+要跳转到的标签名  
+recthit 
+如果按钮图片有透明部分的话，鼠标移动到透明部分，按钮有没有反应，默认是true，就是没反应，如果设为false，就是鼠标在整个那张按钮图的方形范围都算按到了按钮 
+exp 
+点击后会执行的tjs式，使用方法很灵活 
+onenter 
+鼠标悬停时候执行的tjs式 
+onleave 
+鼠标移开时执行的tjs式 
+countpage 
+和jump的countpage参数一样的 
+clickse 
+点击按钮发出的声音 
+clicksebuf 
+播放点击按钮音效的音效通道，默认是0 
+enterse 
+鼠标移动到按钮上时播放的音效  
+entersebuf 
+鼠标移动到按钮上时播放的音效的音效通道，默认是0  
+leavese 
+鼠标从按钮移开时播放的音效 
+leavesebuf 
+鼠标移动到按钮上时播放的音效的音效通道 ，默认是0 
+
+这部分应该讲得差不多了……最近身体很差，持续性发烧……可能会有什么忘记讲的东西……想起来再补充吧……下一部分讲变量的使用
+ 
+                    55555555555555555555555555555555  
+
+关于变量，前边已经讲过，所有关于变量的操作都是tjs式，kag是不存在变量这种东西的，所以当开始用变量的时候，一定要注意格式要用tjs式的调用格式。我这样说的话，可能有些人会一头雾水，不知道我强调这个做什么。tjs式的使用方法和一般的数字参数不一样，经常有人会问我“为什么这里这个东西是这种格式，另一个地方却不是这种格式呢”之类的问题，事实上如果会判断出用的是不是tjs式，就会知道为什么使用那样的格式来赋值参数了。
+我们平时会在kag中用到的变量都是全局变量，全局变量可以通俗理解为任何地方都可以使用并且在任何地方都只有一个值的变量
+这些变量分为“f“,“sf“,“tf“3种，
+f是会纪录在存档里的，sf是会纪录在全局存档里的，tf是关了窗口就消失的。
+这三种变量不需要声明就可以使用，并且会根据值自动转换变量类型
+当然可以通过运算符强制更改变量类型，比如(int)f.aa，就是把f.aa强制变为整形变量， (string)f.aa就是把f.aa强制变为字符串变量
+当然kr也有局部变量
+敏感词发不出来就算了……
+关于变量的运算，首先要讲的就是赋值符“=” 
+这个符号在kr里（事实上是在几乎任何语言里）不是“等于”的意思，而是把右边的东西赋值给左边的意思，比如： 
+f.aa=123; 
+在执行这一句之前，f.aa的值是空的，在kr里写作"void"，执行了以这一句之后，f.aa的值就是123，以后除非再次给他赋值，不然不管在任何地方用到他，f.aa就相当于123这个数字。 
+kr一般的计算运算符有+ - * / \（除取整）%（除取余），使用方法的话……大家都是学过四则运算的，就不需要我讲了吧……当然还有一些其他格式的，像是++和--之类……请大家自己去tjsdoc查…… 
+不过值得注意的是，+这个运算，不仅可以对数字进行计算，也可以对字符串进行计算，比如 
+f.aa=1; 
+f.bb=2; 
+f.cc=f.aa+f.bb; 
+这时候，f.cc就是3 
+f.aa="水"; 
+f.bb="螅"; 
+f.cc=f.aa+f.bb; 
+这时候，f.cc就是"水螅"这个字符串。必须要说的是，把一个字符串赋值给变量，文字两边一定要加引号，不然kr不会判断它是字符串的。 
+要销毁一个变量使用的是delete，如：delete f.aa 
+这个我个人挺少用到……因为删除变量不会跟着删除变量指向的目的，也就是说如果用变量作为一个指针指向了一个新创建图层……把变量删掉的话那个图层就会一直一直在那里……而且无法对他进行操作…………（请大家不要进行这种尝试……||||||） 
+kr常用的判断比较运算符有==,>,>=,<,<=,!=几种，这些运算符会比较两边的变量，然后根据运算符的内容返回一个值，真（true）或者假（false），也写做1或者0，在if或者cond之类的地方，返回的值是真才会继续执行下边的东西。 
+==这个符号才是我们一般意义上常说的“等于”，它计算两边的式子的值，然后比较两个值，如果右边等于左边，则返回1，不等于则返回0。 
+其他的运算符，>就是大于，>=就是大于等于，<小于，<=小于等于，!=不等于。 
+如果觉得不适应，可以尝试把式子翻成中文念出来，大概会比较容易理解（这是初中还是小学的内容……||||||||姐姐们请回忆一下自己的童年……）： 
+1 == 2 
+上边那个式子念出来是“1等于2”，这显然是错的，于是返回的值就是0（false） 
+11 >= 9 
+11大于等于9，这是对的，返回值1（true） 
+kr的逻辑运算符是&&（与），||（或），!（非）。关于与或非，学过计算机基础课程（高中课程）的姐姐们应该在理解上没问题吧，如果对看式子不习惯，也可以通过把&&翻译成“并且”，把||翻译成“或者”，把！翻译成“不是”来对式子进行描述，比如： 
+(f.aa == 11 && f.bb >=20 && f.bb < 40) || (f.aa > 12 && f.bb <=0) 
+这个式子用中文描述就是“当变量f.aa等于11且f.bb大于等于20且f.bb小于40，或者，f.aa大于12且f.bb小于等于0,的时候，返回1” 
+如果用中文说出来还觉得不能理解的话，请放弃做游戏吧……（认真） 
+另外，kr还有一些自带的常用函数， 
+随机数random，可以取得0-1.0间的任意实数，使用方法： 
+f.aa=random; 
+这样f.aa就被赋了一个随机生成的数字。 
+另一个随机数intrandom(min, max)，里边要填两个参数，最大值和最小值，然后就会在最大值和最小值之间生成随机的整数。如： 
+f.aa=intrandom(1, 15); 
+另外，还有一些计算函数，sin,cos,tan之类……想了解更多的也请自行查找tjsdoc，使用方法： 
+f.aa=Math.sin(Math.PI*30/180); 
+这样算出的f.aa就是0.5，Math.PI就是π 
+所有的变量都有一个length的函数，用来取得变量的字符长度，这个其实对画面有讲究的话会经常用到的……所以我在这里提一下，使用方法就是： 
+f.aa="噢呵呵呵呵"; 
+f.bb=f.aa.length; 
+这样，f.bb就等于5。注意，他返回的是字符数，不管全角半角都算1个字符。 
+另一个常用的字符串变量操作的函数是substring，作用是从一个字符串里切出一段出来，格式是substring(开始切的位置, 向后切的字数)。如： 
+f.aa="噢呵啊呼吁"； 
+f.bb=f.aa.substring(2, 3)； 
+这样f.bb就等于"啊呼吁",注意那个开始切的位置里，变量的第一个字是0，第二个字才是1；向后切的字数如果不填，就是向后切到末尾。
+上边讲了这么多，但是这些都是tjs式，不能够直接就这样写在kag的脚本里边的，在kag里使用tjs式有下边几种方法
+ 
+1.在kag的指令里边作为参数使用。这种的话，要在tjs式前边加&表示后边调用的是tjs式，如果式子比较复杂，比如是个算式，最好还要加上()，如[image layer=1 storage="test" left=&tf.left top=&(tf.top+54)],&会把后边的tjs式返回的值赋给参数。 
+注意，这里的tjs式一定是会有返回值的那种。比如tf.top+54，返回的就是tf.top的值加上54计算出来的数值，如果是tf.test=tf.top+54这样的等式，是不返回任何值的。 
+同时需要说的是，kag的指令里边，几乎所有的参数都是可以通过&使用tjs式的，只要你返回的值符合这个参数的格式就行。 
+2.在kag的指令里一些需要填tjs式的地方用， 
+1）.eval，格式是[eval exp="tjs式"]，比如[eval exp="f.aa=1"]这里边调用的tjs式就相当于在tjs文档里直接写入f.aa=a;这样一行，这里需要的是不会返回值的tjs式 
+2）.cond，这是一个非常非常重要的参数，kr的几乎所有指令里都可以用这个参数，包括自己定义的macro里也可以用，这个参数需要在后边填写一个返回真假的tjs式，如果是真就执行这一句指令，如果是假就当这句指令不存在，继续执行下一行，如： 
+[image layer=1 storage="test" left=0 top=0 cond="f.aa == 1 && f.bb > 11"] 
+这样，只有当f.aa等于1且f.bb大于11的时候，这句image才会被执行 
+3）.if，格式： 
+[if exp="tjs式1"] 
+一些指令 
+[elsif exp="tjs式2"] 
+一些指令 
+[else] 
+一些指令 
+[endif] 
+其中，elsif和else有需要的时候才写，没需要的时候不写也没关系，if和cond的作用一样，tjs式返回的值为真则执行if到endif之间的那些指令，如果为假则不执行。老实说我一般都是用cond，if挺少用的，反正作用都一样…… 
+4）.button和link的onenter，onleave和exp，这三个需要填的都是不返回值的tjs式，分别是鼠标移动到按钮上时执行的tjs式，鼠标离开按钮时执行的tjs式，点击按钮时执行的tjs式，如： 
+[button normal="iteml_0" over="iteml" onenter="f.aa=1" onleave="f.aa=b" storage="note.ks" target=*itemdo recthit=true exp="f.bb=1"] 
+在鼠标移动上这个按钮时，f.aa值为1，移开时值为2，点击按钮后f.bb值为1 
+5）.emb，前边已经讲过了，格式是[emb exp="tjs式"] ，要求返回的一定是字符串（如果返回的是数字也会自动转换成字符串格式） 
+6）hact,这个指令是在对话回放上操作的，我从来没有用过……|||||||||格式是： 
+[hact exp="tjs式"]  
+一些文字之类的东西 
+[endhact] 
+有点像link的样子，被他圈住的东西就可以点击，点击后会执行exp后边的tjs式，具体怎么用，因为我没用过，有兴趣的人请自己尝试。 
+7）.waittrig，这个东西我也没有用过，应该是在name参数里写入相关的tag名字，然后在 onskip里写入执行那个tag时同时执行的tjs式吧，因为看说明里写的是 name里要写的名字是kag里定义好的……那就是要去查mainwindow.tjs或者Conductor.tjs才会知道的吧（大概），感觉上会非常麻烦，有这个精力的话自己直接写tjs更清楚吧……（个人感觉） 
+那么，变量部分到此结束，下一篇我会讲整体的一个avg游戏主要需要知道的指令，比如右键，macro之类的。
+ 
+该教程为水螅制作，未经允许，请勿转载 
+前边已经讲了大部分的基础了，于是今次把前边的部分加上一些新的内容串成游戏。 
+首先是游戏封面，游戏封面是由一张底图和几个按钮组成的，比如，我们要做这样的一个封面：
+  
+请下载这些图片或者自己寻找能替代的图片放到image文件夹里 
+ 四张图片
+将first.ks清空，写上 
+
+*first 
+[rclick enabled=false] 
+;关闭右键 
+[clickskip enabled=false] 
+;关闭点击跳过 
+[history enabled=false output=false] 
+;关闭对话会放的开启和记录，不然按了鼠标滚轮就会开启对话回放 
+[playbgm storage="start"] 
+;这句是播放音乐，请随便在bgm文件夹里放一首你喜欢的音乐把它命名为start吧，注意根据音乐格式修改config.tjs里边的BGM_config，如果是mp3，ogg类的音乐就写type = "Wave"，因为mp3和ogg是用插件播放的，播放插件在func.ks里边已经进行载入了，这里可以直接使用 
+
+[position layer=message0 page=back visible=true opacity=0 top=0 height=600 left=0 width=800 marginl=0 margint=0 marginr=0 marginb=0 frame="opbg"] 
+[current layer=message0 page=back][er] 
+[locate x=40 y=370][button normal="opbt1" over="opbt1_1" storage="open.ks" target=*open] 
+;游戏开始按钮，点了游戏开始就跳转到open.ks这个脚本的*open标签开始执行 
+[locate x=40 y=430][button normal="opbt2" over="opbt2_1" exp="kag.onCloseQuery()"] 
+;kag.onCloseQuery()是一个tjs式，其实他是kag的一个函数，就是调用kag的关闭对话框，顺便一提，可能很多教程中都会忘记说明，kag这个东西，就是整个游戏窗口的名字，所有的图层，按钮，对话框，下拉菜单bulabulabula……都是在他的基础上建立的，具体他包含什么，可以查看mainwindow.tjs，大部分在做游戏时想不通的地方都可以去查那里……当然前提是能看懂…… 
+[trans method=crossfade time=800][wt] 
+[s] 
+
+于是封面就做好了……当然如果想要有点其他特别效果就请尽情发挥你的想象力创造力和查阅指令集的能力吧~~ 
+当然此时点击“开始游戏”会报错，原因是我们根本就没有写open.ks呀卡卡卡~~ 
+那么在scenario里边新建一个txt文件，重命名为open.ks（注意请把文件夹选项里的“隐藏已知扩展名”勾选掉再改名） 
+现在打开它，这个脚本里预备放置一小段角色对话，角色对话是avg的基础元素，我基本上也就打算介绍下这个，想看到战斗场景的人请出门左转下载我的“半回合制战斗范例”，不过那个建议有一定kag基础再去尝试，对指令都不熟的话看起来会很茫然的……|||||||另外关于我的“rpg八方向行走范例”和“绘图板范例”，那基本上完全是用tjs写的，请对tjs有少许了解后再看…… 
+那么继续说open的内容，角色对话基础元素只有“背景”“对话框”“角色”“头像”这三个部分，因为懒的做素材了，于是头像我就忽略了，其实和处理角色立绘没什么不一样…
+下载下边的图片放到image文件夹（当然你喜欢也可以放在其他地方，我个人爱好image=_=）
+8图片
+然后在open.ks里写入 
+*open| 
+[position layer=message0 page=back frame=""] 
+[current layer=message0 page=back][er] 
+;清空messge1，就是把封面清除掉 
+[playse storage="test"] 
+;这里就是演示一下播放音效的效果，请大家自己随便找一个wav格式的音乐文件放到sound文件夹里，改名为test 
+[image layer=base page=back storage="bg1" visible=true left=0 top=0 opacity=255] 
+[trans method=crossfade time=500][wt] 
+;更改背景图片 
+[image layer=1 page=back storage="bt" visible=true left=100 top=0] 
+[pimage storage="btf2" layer=1 visible=true dx=260 dy=107 page=back] 
+[trans method=crossfade time=300][wt] 
+;出现人物立绘 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=back] 
+[trans method=crossfade time=800][wt] 
+;出现对话框 
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+[er] 
+我讨厌你。[p][er] 
+;输出对话文字 
+[backlay] 
+[image layer=1 page=back storage="bt" visible=true left=100 top=0] 
+[pimage storage="btf1" layer=1 visible=true dx=260 dy=107 page=back] 
+[trans method=crossfade time=300][wt] 
+;更改立绘 
+[current layer=message0 pgae=fore] 
+我真的非常非常的讨厌你。[p][er] 
+
+[position layer=message0 frame="" page=back] 
+[trans method=crossfade time=800][wt] 
+;对话框消失 
+
+[freeimage layer=1 page=back] 
+[trans method=crossfade time=300][wt] 
+;人物立绘消失 
+
+[freeimage layer=base page=back] 
+[trans method=crossfade time=500][wt] 
+;背景消失 
+
+[jump target=*first storage="first.ks"] 
+;跳回开始画面
+ 
+从上边可以看到人物立绘，对话框这种经常会用到的代码如果总是这么一段一段的写很拖沓，这种情况我们一般把他们封成一个macro，然后在使用的时候调用这个macro就等于执行了这一段代码。 
+
+清空open.ks，在里边写  
+*open| 
+[position layer=message0 page=back frame=""] 
+[current layer=message0 page=back][er] 
+;清空messge1，就是把封面清除掉 
+
+@macro name=出现人物立绘 
+[backlay] 
+[image layer=1 page=back storage="bt" visible=true left=100 top=0] 
+[pimage storage=&("btf"+mp.face) layer=1 visible=true dx=260 dy=107 page=back cond="mp.face!=void"] 
+;mp变量相当于传递参数，只用在macro里边，在外边的代码里使用[出现人物立绘 face=1]，1这个值就会被传给mp.face，然后在macro里边进行使用，因为这个立绘有两张脸，我们在出立绘的时候只要写face的参数来控制角色用的哪个表情就可以了，同理也可以用这个来控制角色站立坐标，角色使用图层，trans时间之类之类的…… 
+[trans method=crossfade time=300][wt] 
+@endmacro 
+
+@macro name=出现对话框 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=back] 
+[trans method=crossfade time=800][wt] 
+@endmacro 
+
+@macro name=更改背景图片 
+[image layer=base page=back storage=%storage visible=true left=0 top=0 opacity=255] 
+;%这个符号也是代表后边的是传参，在这里写storage=%storage和storage=&mp.storage是等效的，由这里可以看出，mp是tjs的变量，但是%后边跟的不是变量（那么他到底算什么呢……其实我也不明白……反正就是可以这样用就是了……囧）这个也是只用在macro里的 
+[trans method=crossfade time=500][wt] 
+@endmacro 
+
+@macro name=对话框消失 
+[position layer=message0 frame="" page=back] 
+[trans method=crossfade time=800][wt] 
+@endmacro 
+
+@macro name=人物立绘消失 
+[freeimage layer=1 page=back] 
+[trans method=crossfade time=300][wt] 
+@endmacro 
+
+@macro name=背景消失 
+[freeimage layer=base page=back] 
+[trans method=crossfade time=500][wt] 
+@endmacro 
+
+[playse storage="test"] 
+;这里就是演示一下播放音效的效果，请大家自己随便找一个wav格式的音乐文件放到sound文件夹里，改名为test 
+
+[更改背景图片 storage="bg1"] 
+[出现人物立绘 face=2] 
+[出现对话框] 
+
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0xffffff] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+[er] 
+我讨厌你。[p][er] 
+;输出对话文字 
+
+[出现人物立绘 face=1] 
+[current layer=message0 pgae=fore] 
+我真的非常非常的讨厌你。[p][er] 
+
+[对话框消失] 
+[人物立绘消失] 
+[背景消失] 
+
+[jump target=*first storage="first.ks"] 
+;跳回开始画面 
+
+看起来好像比之前的版本多了很多行，但是实际上在有大量对话的avg中，封装macro是非常方便的做法，也会让你的代码缩短很多……（好吧我就是很执着于代码长度的人……）
+ 
+关于右键菜单。
+其实这个D已经做了一个很清晰的范例了，于是我就不多讲了。
+右键菜单由rclick指令设定，这个指令设定的是点了右键后会触发什么，具体这个“什么”完全是由写脚本的人自己写的，
+比如你写了一个系统设定界面，然后把它关联在右键上，于是右键时就会跳到你的系统设定界面开始执行。 
+如 果 对 右 键 不 设 定，默 认 是 隐 藏 m e s s a g e 0。
+另外值得一提的是，右键的call和我们平时用的call的机制并不完全一样，平时的call指令在tjs层面用的是onConductorCall，右键的call在tjs层面用的是callExtraConductor，因为以前有人问过我，所以特别说一下，其实systembutton也经常用到这个callExtraConductor，但是这个东西很rp，在他return之前不能遇到可以存档的标签……所以，如果有使用了右键的call之后没有return就要经过某个可以存档的标签的情况……请在那个标签之前加一句[eval exp="kag.conductor.clearCallStack()"],clearCallStack()是kag的conductor的一个函数，conductor负责脚本流程的操纵，这个函数就是清空所有的call的记录，想了解更多具体情况的话可以去看conductor.tjs。 
+最后给出D的右键菜单范例的链接……顺便一提，这个范例里包含的内容不仅仅是右键菜单……http://kcddp.keyfc.net/bbs/viewthread.php?tid=505&extra=page%3D2 
+
+最后发现存档读档部分和角色自定义名称部分完全忘记讲了……囧，不过这些在我早期做的avg范例里都有……不讲应该也没什么……请大家自力更生丰衣足食吧……
+今次的指令详解……=_= 
+clickskip 
+enabled 
+必须要写，true就是可以点击跳过，false是不能 
+
+macro 
+name 
+必须要写 
+没什么好解释的，定义一个macro就是这样，[macro name=xxx] 
+
+endmacro 
+没有参数 
+macro之后一定要有这个，不然后边你写的任何东西都算作这个macro里的，顺便一提，macro里不能有标签和tjs，不然会报错 
+
+erasemacro 
+name 
+必须要写 
+这个是消除某个macro的指令，用法就是[erasemacro name=xxx]，没什么好多说的，不过好像很少看到有人用，这个的主要目的是为了节约内存么……不清楚…… 
+
+history 
+对话回放画面的设定 
+output 
+如果是false的话之后message层上的文字都不会被记录在对话回放里， 
+enabled 
+如果是true的话就可以在按鼠标滚轮的时候唤出kr自带的对话回放界面，说到这个的话，其实kag还有个指令叫showhistory，只要写[showhistory]就会直接唤出kr自带的对话回放界面 
+
+playbgm 
+播放音乐 
+storage 
+一定要写 
+音乐名，请记得加""，不然会报错的=_= 
+loop 
+不写就是默认true，会循环播放 
+
+playse 
+播放音效 
+storage 
+一定要写 
+音效名，同样请记得加"" 
+loop 
+不写就是默认false，放一次就完了 
+buf 
+用哪条音轨播放，不写就是默认0，注意这里可以填写的数目取决于config.tjs里边设定的音效轨数 
+
+rclick 
+call 
+写true的话按了右键就相当于call到storage和target指定的地方 
+jump 
+写true的话按了右键就相当于jump到storage和target指定的地方 
+call和jump这两个参数只能写一个 
+target 
+跳到的标签名 
+storage 
+跳到的文件名 
+enabled 
+false的话就是右键无效 
+name 
+这个是使用系统功能的设定，比如不写上边的call,jump,storage,target,在这里写name="default",就调用了系统下拉菜单里的“隐藏对话框”，右键的话就会把message0隐藏，具体什么名字对应什么功能……这个大概是查mainwindow.tjs吧……大概……（好吧我右键很少调系统功能……）
+ 
+*save 
+[position layer=message1 page=back left=200 top=150 width=400 height=300 marginl=0 margint=0 marginr=0 marginb=0 opacity=200 visible=true color=0x000000] 
+*save0 
+[current page=back layer=message1][er][nowait][font face="黑体" size=18 color=0xffffff] 
+[locate x=10 y=5]我是存档界面 
+
+;第一个存档位 
+[locate x=10 y=30] 
+
+[button normal=&(kag.getBookMarkFileNameAtNum(0)) cond="kag.bookMarkDates[0] != void"] 
+;kag.getBookMarkFileNameAtNum(0)是kag的一个用来获取存档路径的函数，使用这个函数就会返回指定的存档的路径，后边那个（）里边的0就是要获得的存档路径的编号，数字从0开始 
+;kag.bookMarkDates[0]是存档日期，我这里用他来判断0号存档有没有内容，如果这个存档曾经被使用过那么存档日期肯定不是空的…… 
+;这一句就是如果这个存档存在的话就用button载入存档的缩略图 
+
+[button normal="nodata" cond="kag.bookMarkDates[0] == void"] 
+;这一句是如果存档不存在就载入“NODATA”图 
+
+[locate x=180 y=50] 
+[link target=*savedata1][emb exp="kag.bookMarkDates[0]" cond="kag.bookMarkDates[0] != void"][emb exp="'--------------'" cond="kag.bookMarkDates[0] == void"][endlink] 
+;这里是把存档日期作为link显示出来，如果界面要精美一点一般都是用button作为存档按钮，然后在上边另建一个图层放上存档日期，存档画面，当前对话之类的信息，不过我这里懒得做界面了，就直接用文字link了…… 
+
+;第二个存档位 
+[locate x=10 y=180] 
+[button normal=&(kag.getBookMarkFileNameAtNum(1)) cond="kag.bookMarkDates[1] != void"] 
+[button normal="nodata" cond="kag.bookMarkDates[1] == void"] 
+[locate x=180 y=200] 
+[link target=*savedata2][emb exp="kag.bookMarkDates[1]" cond="kag.bookMarkDates[1] != void"][emb exp="'--------------'" cond="kag.bookMarkDates[1] == void"][endlink] 
+
+[endnowait] 
+[trans method=crossfade time=800][wt] 
+[rclick jump=true target=*drclick enabled=true] 
+[s] 
+;只有两个存档位我就一个一个写了，如果有很多个的话建议封成macro来写……会短很多…… 
+
+*savedata1 
+;存档在第一个位置 
+[save place=0 ask=false] 
+;存档就是这个save指令，具体内容参见下边的指令集 
+[jump target=*save0] 
+;这里跳转到save界面开头重新定义一遍界面来进行修改资料的刷新 
+
+*savedata2 
+;存档在第二个位置 
+[save place=1 ask=false] 
+[jump target=*save0] 
+
+*load 
+[position layer=message1 page=back left=200 top=150 width=400 height=300 marginl=0 margint=0 marginr=0 marginb=0 opacity=200 visible=true color=0x000000] 
+
+[current page=back layer=message1][er][nowait][font face="黑体" size=18 color=0xffffff] 
+[locate x=10 y=5]我是读档界面 
+
+;第一个存档位 
+[locate x=10 y=30] 
+[button normal=&(kag.getBookMarkFileNameAtNum(0)) cond="kag.bookMarkDates[0] != void"] 
+[button normal="nodata" cond="kag.bookMarkDates[0] == void"] 
+[locate x=180 y=50] 
+[link target=*loaddata1 cond="kag.bookMarkDates[0] != void"][emb exp="kag.bookMarkDates[0]" cond="kag.bookMarkDates[0] != void"][emb exp="'--------------'" cond="kag.bookMarkDates[0] == void"][endlink cond="kag.bookMarkDates[0] != void"] 
+
+;第二个存档位 
+[locate x=10 y=180] 
+[button normal=&(kag.getBookMarkFileNameAtNum(1)) cond="kag.bookMarkDates[1] != void"] 
+[button normal="nodata" cond="kag.bookMarkDates[1] == void"] 
+[locate x=180 y=200] 
+[link target=*loaddata1 cond="kag.bookMarkDates[1] != void"][emb exp="kag.bookMarkDates[1]" cond="kag.bookMarkDates[1] != void"][emb exp="'--------------'" cond="kag.bookMarkDates[1] == void"][endlink cond="kag.bookMarkDates[1] != void"] 
+
+[endnowait] 
+[trans method=crossfade time=800][wt] 
+[rclick jump=true target=*drclick enabled=true] 
+[s] 
+;其实这里对于条件的判断用if会更简洁一些……不过我个人偏爱用cond…… 
+
+*loaddata1 
+;读档第一个位置 
+[load place=0 ask=false] 
+;load就是读档的指令，具体内容参见下边的指令集 
+
+*loaddata2 
+;读档第二个位置 
+[load place=1 ask=false] 
+
+现在运行一下，可以看到简陋的存档读档界面了，不过这时可以发现一个问题，那就是存档缩略图截取的是执行[save place=xx ask=false]这一句时候的窗口画面，也就是说图片里边会把存读档界面那个黑框也一起显示出来，但是一般我们希望的缩略图是在唤出右键菜单前的对话时窗口里的内容，这时候就需要用到locksnapshot和unlocksnapshot指令 
+
+把之前的代码右键菜单的部分修改为： 
+*rclick 
+[locksnapshot] 
+[backlay] 
+[position layer=message1 page=back left=250 top=200 width=300 height=200 marginl=0 margint=0 marginr=0 marginb=0 opacity=200 visible=true color=0x000000] 
+[current page=back layer=message1][er][nowait][font face="黑体" size=18 color=0xffffff] 
+[locate x=0 y=10]我就是传说中的右键菜单 
+[locate x=30 y=80][link target=*save]我是存档[endlink] 
+[locate x=30 y=120][link target=*load]我是读档[endlink] 
+[endnowait] 
+[trans method=crossfade time=800][wt] 
+[rclick jump=true target=*drclick enabled=true] 
+;注意这一句，在第一次设定rclick的时候，那个右键是希望在对话进行中随时可以用右键跳转到某处，同时希望操作完了时候可以根据自己的需要再跳回来进行对话，因此我用的是call=true 
+;现在右键跳转到了这边，我们就需要把右键关掉以防玩家抽风在这个界面点击右键重复呼唤这个界面 
+;我之前说过很多次了，kag的[call]指令是可以嵌套的，但是rclick的call使用的是callExtraConductor，这个函数是不能嵌套的，如果使用rclick call到一个标签，在读到第一个return前再次rclick call的话，前边的rclick call的位置会被kr遗忘掉……=_=|||||然后一般的情况就是会报错说“call和return的数目不能一一对应”之类的…… 
+;所以为了避免出现这种错误，在设定rclick的时候注意点了一次右键进行了跳转后就把原来的右键设定关掉，或者像上边那句那样，更改rclick的设定，我这里是设定为在这个界面点击右键就Jump到*drclick这个标签 
+[s] 
+
+*drclick 
+;这里把右键菜单消除，然后return回去，程序读到了[return]这一句的时候就会自动跳回主程序里玩家按右键前执行到的那里继续执行了 
+[position layer=message1 page=back visible=false] 
+[current page=back layer=message1][er][trans method=crossfade time=800][wt] 
+[rclick call=true target=*rclick enabled=true] 
+;回到对话的时候还是要右键唤出右键菜单的，所以这里需要重新定义一遍 
+[unlocksnapshot] 
+[return] 
+
+现在再重新存档，可以看到存档缩略图变成了唤出右键菜单以前的画面。locksnapshot这个指令的作用就是把执行到它时候的游戏画面存下来，等到save的时候作为缩略图输出，使用了locksnapshot后必须在存了档之后用unlocksnapshot释放他，不然下次使用的时候会报错 
+关于存读档画面，经常用到的几个需要知道的函数如下： 
+kag.getBookMarkFileNameAtNum(place)，取得指定编号的存档的文件路径 
+kag.bookMarkDates[place]，指定编号的存档时间 
+kag.bookMarkNames[place]，指定编号的存档标签名（就是那个*start|test里的test） 
+kag.bookMarkStorages[place]，当存档时程序正在执行的ks文件名 
+kag.historyLayer.data[kag.historyLayer.dataPos-1]，存档前最后一句对话的内容 
+那么这一篇就到此为止，如果我忘了什么……以后想起来再补充吧=_= 
+
+最后是万恶的指令集，忽然发现这次只有save和load两个……真欣喜=_= 
+
+save 
+存档 
+place 
+存档位置编号，从0开始，不写就是默认0 
+ask 
+是否跳出存档确认窗口，不写就是默认false 
+
+load 
+存档 
+place 
+读档位置编号，从0开始，不写就是默认0 
+ask 
+是否跳出读档确认窗口，不写就是默认false
+
+*open| 
+[position layer=message0 page=back frame=""] 
+[current layer=message0 page=back][er] 
+
+@macro name=出现人物立绘 
+[backlay] 
+[image layer=1 page=back storage="bt" visible=true left=100 top=0] 
+[pimage storage=&("btf"+mp.face) layer=1 visible=true dx=260 dy=107 page=back cond="mp.face!=void"] 
+[trans method=crossfade time=300][wt] 
+@endmacro 
+
+@macro name=出现对话框 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=back] 
+[trans method=crossfade time=800][wt] 
+@endmacro 
+
+@macro name=更改背景图片 
+[image layer=base page=back storage=%storage visible=true left=0 top=0 opacity=255] 
+[trans method=crossfade time=500][wt] 
+@endmacro 
+
+@macro name=对话框消失 
+[position layer=message0 frame="" page=back] 
+[trans method=crossfade time=800][wt] 
+@endmacro 
+
+@macro name=人物立绘消失 
+[freeimage layer=1 page=back] 
+[trans method=crossfade time=300][wt] 
+@endmacro 
+
+@macro name=背景消失 
+[freeimage layer=base page=back] 
+[trans method=crossfade time=500][wt] 
+@endmacro 
+
+[rclick call=true target=*rclick enabled=true] 
+;这一句就是从现在开始（也就是游戏刚开始，macro里边的内容kr只是载入但是只有在脚本里边调用了这个macro的时候才会执行的）右键点击的话就会call到*rclick这个标签那里 
+
+[更改背景图片 storage="bg1"] 
+[出现人物立绘 face=2] 
+[出现对话框] 
+
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0x000000] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+[er] 
+我讨厌你。[p][er] 
+
+[rclick enabled=false] 
+;enabled=false的话右键点击就失效了，无论你怎么点都不会触发任何事件 
+
+[出现人物立绘 face=1] 
+[current layer=message0 pgae=fore] 
+所以我要关掉右键菜单。[p][er] 
+
+[rclick enabled=true] 
+;enabled=true的话右键再次开启，注意即使不用写其他的参数，也会按照最近的设置来进行跳转（当然如果遇到右键跳转变动的很频繁的情况建议每次都重新定义下以防万一=_=） 
+
+[出现人物立绘 face=2] 
+[current layer=message0 pgae=fore] 
+果然还是拒绝不了你的笑容。好吧……还是开放给你用吧。[p][er] 
+
+[对话框消失] 
+[人物立绘消失] 
+[背景消失] 
+
+[jump target=*open] 
+;跳回开始画面 
+
+*rclick 
+[backlay] 
+[position layer=message1 page=back left=250 top=200 width=300 height=200 marginl=0 margint=0 marginr=0 marginb=0 opacity=200 visible=true color=0x000000] 
+[current page=back layer=message1][er][nowait][font face="黑体" size=18 color=0xffffff] 
+[locate x=0 y=10]我就是传说中的右键菜单 
+[locate x=30 y=80][link target=*save]我是存档[endlink] 
+[locate x=30 y=120][link target=*load]我是读档[endlink] 
+[endnowait] 
+[trans method=crossfade time=800][wt] 
+[rclick jump=true target=*drclick enabled=true] 
+;注意这一句，在第一次设定rclick的时候，那个右键是希望在对话进行中随时可以用右键跳转到某处，同时希望操作完了时候可以根据自己的需要再跳回来进行对话，因此我用的是call=true 
+;现在右键跳转到了这边，我们就需要把右键关掉以防玩家抽风在这个界面点击右键重复呼唤这个界面 
+;我之前说过很多次了，kag的[call]指令是可以嵌套的，但是rclick的call使用的是callExtraConductor，这个函数是不能嵌套的，如果使用rclick call到一个标签，在读到第一个return前再次rclick call的话，前边的rclick call的位置会被kr遗忘掉……=_=|||||然后一般的情况就是会报错说“call和return的数目不能一一对应”之类的…… 
+;所以为了避免出现这种错误，在设定rclick的时候注意点了一次右键进行了跳转后就把原来的右键设定关掉，或者像上边那句那样，更改rclick的设定，我这里是设定为在这个界面点击右键就Jump到*drclick这个标签 
+[s] 
+
+*drclick 
+;这里把右键菜单消除，然后return回去，程序读到了[return]这一句的时候就会自动跳回主程序里玩家按右键前执行到的那里继续执行了 
+[position layer=message1 page=back visible=false] 
+[current page=back layer=message1][er][trans method=crossfade time=800][wt] 
+[rclick call=true target=*rclick enabled=true] 
+;回到对话的时候还是要右键唤出右键菜单的，所以这里需要重新定义一遍 
+[return]
+ 
+其实本来打算把教程做到6就到此为止的，不过貌似经常有人问到关于右键和存读档的问题，于是在这边把这几个指令稍微讲一下。 
+首先明确一下，右键设置指令rclick所能设置的只是点击了右键之后跳转到的标签的位置，没有什么更多的东西，在游戏里看到点击右键弹出菜单之类的，那是跳转到的标签下边写了具体的菜单的内容，而不是用rclick这个指令本身写了什么东西，rclick能起到的作用就是点击后jump或者点击后call
+所以写一个右键菜单，最重要的是思路清晰，而具体写起来和写其他的界面没有什么区别…… 
+那么，我们用上一篇教程里的那些代码作为基础，给他加上右键菜单，用到的素材请去上一篇里边下载图像或者自己随便找两张图片代替…… 
+
+*open| 
+[position layer=message0 page=back frame=""] 
+[current layer=message0 page=back][er] 
+
+@macro name=出现人物立绘 
+[backlay] 
+[image layer=1 page=back storage="bt" visible=true left=100 top=0] 
+[pimage storage=&("btf"+mp.face) layer=1 visible=true dx=260 dy=107 page=back cond="mp.face!=void"] 
+[trans method=crossfade time=300][wt] 
+@endmacro 
+
+@macro name=出现对话框 
+[position layer=message0 left=50 top=430 width=704 height=140 marginl=71 margint=17 marginr=73 marginb=17 opacity=0 visible=true frame="frame" page=back] 
+[trans method=crossfade time=800][wt] 
+@endmacro 
+
+@macro name=更改背景图片 
+[image layer=base page=back storage=%storage visible=true left=0 top=0 opacity=255] 
+[trans method=crossfade time=500][wt] 
+@endmacro 
+
+@macro name=对话框消失 
+[position layer=message0 frame="" page=back] 
+[trans method=crossfade time=800][wt] 
+@endmacro 
+
+@macro name=人物立绘消失 
+[freeimage layer=1 page=back] 
+[trans method=crossfade time=300][wt] 
+@endmacro 
+
+@macro name=背景消失 
+[freeimage layer=base page=back] 
+[trans method=crossfade time=500][wt] 
+@endmacro 
+
+[rclick call=true target=*rclick enabled=true] 
+;这一句就是从现在开始（也就是游戏刚开始，macro里边的内容kr只是载入但是只有在脚本里边调用了这个macro的时候才会执行的）右键点击的话就会call到*rclick这个标签那里 
+
+[更改背景图片 storage="bg1"] 
+[出现人物立绘 face=2] 
+[出现对话框] 
+
+[current layer=message0 pgae=fore] 
+[deffont face="黑体" size=20 color=0x000000] 
+[defstyle linespacing=10 pitch=0 linesize=4] 
+[er] 
+我讨厌你。[p][er] 
+
+[rclick enabled=false] 
+;enabled=false的话右键点击就失效了，无论你怎么点都不会触发任何事件 
+
+[出现人物立绘 face=1] 
+[current layer=message0 pgae=fore] 
+所以我要关掉右键菜单。[p][er] 
+
+[rclick enabled=true] 
+;enabled=true的话右键再次开启，注意即使不用写其他的参数，也会按照最近的设置来进行跳转（当然如果遇到右键跳转变动的很频繁的情况建议每次都重新定义下以防万一=_=） 
+
+[出现人物立绘 face=2] 
+[current layer=message0 pgae=fore] 
+果然还是拒绝不了你的笑容。好吧……还是开放给你用吧。[p][er] 
+
+[对话框消失] 
+[人物立绘消失] 
+[背景消失] 
+
+[jump target=*open] 
+;跳回开始画面 
+
+*rclick 
+[backlay] 
+[position layer=message1 page=back left=250 top=200 width=300 height=200 marginl=0 margint=0 marginr=0 marginb=0 opacity=200 visible=true color=0x000000] 
+[current page=back layer=message1][er][nowait][font face="黑体" size=18 color=0xffffff] 
+[locate x=0 y=10]我就是传说中的右键菜单 
+[locate x=30 y=80][link target=*save]我是存档[endlink] 
+[locate x=30 y=120][link target=*load]我是读档[endlink] 
+[endnowait] 
+[trans method=crossfade time=800][wt] 
+[rclick jump=true target=*drclick enabled=true] 
+;注意这一句，在第一次设定rclick的时候，那个右键是希望在对话进行中随时可以用右键跳转到某处，同时希望操作完了时候可以根据自己的需要再跳回来进行对话，因此我用的是call=true 
+;现在右键跳转到了这边，我们就需要把右键关掉以防玩家抽风在这个界面点击右键重复呼唤这个界面 
+;我之前说过很多次了，kag的[call]指令是可以嵌套的，但是rclick的call使用的是callExtraConductor，这个函数是不能嵌套的，如果使用rclick call到一个标签，在读到第一个return前再次rclick call的话，前边的rclick call的位置会被kr遗忘掉……=_=|||||然后一般的情况就是会报错说“call和return的数目不能一一对应”之类的…… 
+;所以为了避免出现这种错误，在设定rclick的时候注意点了一次右键进行了跳转后就把原来的右键设定关掉，或者像上边那句那样，更改rclick的设定，我这里是设定为在这个界面点击右键就Jump到*drclick这个标签 
+[s] 
+
+*drclick 
+;这里把右键菜单消除，然后return回去，程序读到了[return]这一句的时候就会自动跳回主程序里玩家按右键前执行到的那里继续执行了 
+[position layer=message1 page=back visible=false] 
+[current page=back layer=message1][er][trans method=crossfade time=800][wt] 
+[rclick call=true target=*rclick enabled=true] 
+;回到对话的时候还是要右键唤出右键菜单的，所以这里需要重新定义一遍 
+[return] 
+
+这样，一个简陋无比的右键菜单就设定完成了……当然大家自己做的时候请发挥充分的想象力和创造力做出华丽的菜单来……所谓思想有多远特效就有多远（殴） 
+需要特别注意的地方是，rclick的call跳转到的段落，在return回来之前，绝对不能遇到可存档标签（就是“*标签名|存档名”这种格式的），一遇到就会报错，大家有兴趣可以尝试看看…… 
+当然，现在点击按钮的话，他会跳出一个华丽的报错框告诉你“*save和*load标签未找到”，那么我们在下边把save和load界面做一下，把下边的这张图命名为"nodata"放到你的工程目录的image文件夹，然后将下边的代码添加到文件末尾 
+　;因为我这里写的是用到缩略图的情况，所以不要忘记把config.tjs里边的saveThumbnail设定为true

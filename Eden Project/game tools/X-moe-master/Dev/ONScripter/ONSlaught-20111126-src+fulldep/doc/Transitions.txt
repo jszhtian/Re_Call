@@ -1,0 +1,36 @@
+Transition effects:
+
+0: Do nothing. The old image remains on the screen.
+1: No effect. The new image is displayed immediately.
+Shutters:
+    Description: The screen is divided in shutters and each shutter is filled
+    with the dst in one direction:
+    step 0..<div width>: div 0..n,row/column step
+2: Rightward shutter. Shutter width: <screen width>/40.
+3: Leftward shutter. Shutter width: Same as above.
+4: Downward shutter. Shutter height: <screen height>/30.
+5: Upward shutter. Shutter height: <screen height>/30.
+Curtains:
+    Description: The screen is divided by the square root of the size of the
+    dimension, and the divisions are filled in this manner:
+    step 0..<sqrt(dimensionSize)>: div 0..step,row/column step-div
+    [0,0],[0,1][1,0],[0,2][1,1][2,0]
+6: Rightward curtain.
+7: Leftward curtain.
+8: Downward curtain.
+9: Upward curtain.
+10: Crossfade.
+Scrolls:
+    Description: The new image starts off-screen and progressively pushes the
+    old image to the opposite side.
+11: Rightward scroll.
+12: Leftward scroll.
+13: Downward scroll.
+14: Upward scroll.
+15: Hard mask. Using a separate image as the rule, the old image is
+progressively replaced by the new one.
+16: Mosaic in. The new image starts heavily pixelated and gradually becomes more
+detailed.
+17: Mosaic out. Same as 16, but reversed.
+18: Soft mask. Same as 15, but using soft edges.
+19 and above: User-defined effects.

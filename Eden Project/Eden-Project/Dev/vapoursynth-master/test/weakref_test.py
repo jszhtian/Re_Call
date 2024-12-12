@@ -1,0 +1,31 @@
+import weakref
+import unittest
+import vapoursynth as vs
+
+
+class FilterTestSequence(unittest.TestCase):
+
+    def setUp(self):
+        self.core = vs.core
+
+    def test_weakref_coreproxy(self):
+        with self.assertRaises(TypeError):
+            ref = weakref.ref(self.core)
+
+    def test_weakref_core(self):
+        ref = weakref.ref(self.core.core)
+        self.assertTrue(ref() is self.core.core)
+
+    def test_weakref_node(self):
+        video = self.core.std.BlankClip()
+        ref = weakref.ref(video)
+        self.assertTrue(ref() is video)
+
+    def test_weakref_frame(self):
+        video = self.core.std.BlankClip()
+        frame = video.get_frame(0)
+        ref = weakref.ref(frame)
+        self.assertTrue(ref() is frame)
+
+if __name__ == '__main__':
+    unittest.main()

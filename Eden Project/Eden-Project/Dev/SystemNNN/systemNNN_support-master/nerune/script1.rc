@@ -1,0 +1,145 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_SETUP DIALOGEX 0, 0, 279, 291
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "nerune"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,43,256,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,193,256,50,14
+    CONTROL         "BGM変換",IDC_CHECK_BGM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,62,45,11
+    CONTROL         "音声変換",IDC_CHECK_VOICE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,121,44,10
+    CONTROL         "sys(システム効果音)",IDC_CHECK_SYS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,180,90,11
+    CONTROL         "SE(スクリプト用効果音)",IDC_CHECK_SE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,200,99,10
+    CONTROL         "新しいもののみ",IDC_RADIO_ONLYNEW,"Button",BS_AUTORADIOBUTTON | WS_GROUP,172,65,78,10
+    CONTROL         "完全",IDC_RADIO_COMPLETE,"Button",BS_AUTORADIOBUTTON,172,85,72,10
+    CONTROL         "固める",IDC_CHECK_PACK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,138,38,10
+    ICON            IDI_ICON1,IDC_STATIC,126,15,20,20
+    EDITTEXT        IDC_EDIT_VERSION,202,232,40,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Version",IDC_STATIC,163,234,34,8
+    GROUPBOX        "効果音",IDC_STATIC,18,165,247,55
+    GROUPBOX        "変換方法",IDC_STATIC,163,50,102,64
+    CONTROL         "ogg",IDC_RADIO_OGG,"Button",BS_AUTORADIOBUTTON | WS_GROUP,82,63,26,10
+    CONTROL         "wave",IDC_RADIO_WAVE,"Button",BS_AUTORADIOBUTTON | WS_DISABLED,82,80,31,10
+    GROUPBOX        "BGM",IDC_STATIC,18,50,118,49
+    GROUPBOX        "音声",IDC_STATIC,18,107,118,49
+    CONTROL         "ogg",IDC_RADIO_OGG2,"Button",BS_AUTORADIOBUTTON | WS_GROUP,82,119,26,10
+    CONTROL         "wave",IDC_RADIO_WAVE2,"Button",BS_AUTORADIOBUTTON,82,136,31,10
+    CONTROL         "ogg",IDC_RADIO_OGG3,"Button",BS_AUTORADIOBUTTON | WS_GROUP,188,181,26,10
+    CONTROL         "wave",IDC_RADIO_WAVE3,"Button",BS_AUTORADIOBUTTON,188,198,31,10
+END
+
+IDD_DIALOG_PROCESS DIALOG  0, 0, 305, 257
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "ﾀﾞｲｱﾛｸﾞ"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,227,218,50,14,WS_DISABLED
+    CONTROL         "Progress1",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,55,170,163,14
+    LTEXT           "Static",IDC_MYSTATIC,54,59,146,8
+    CONTROL         "Progress2",IDC_PROGRESS2,"msctls_progress32",WS_BORDER,55,137,76,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG_SETUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 272
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 284
+    END
+
+    IDD_DIALOG_PROCESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 298
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 250
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "nerune.ico"
+#endif    // 日本語 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

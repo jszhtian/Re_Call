@@ -1,0 +1,102 @@
+/* css */
+
+A:link    {color:#BBFFFF; text-decoration:underline;}
+A:visited {color:#BBFFFF; text-decoration:underline;}
+A:active  {color:#FFFFFF; text-decoration:underline;}
+A:hover   {color:#FFFFFF; text-decoration:underline; BACKGROUND: #1190C0;}
+
+FONT { font-size: 14px; color:#BBFFFF; }
+.t00 { font-size: 10px; color:#BBFFFF; }
+.t01 { font-size: 10px; color:#FFFFFF; }
+.t02 { font-size: 10px; color:#FFFF44; }
+.t03 { font-size: 10px; color:#FF77BB; }
+.t04 { font-size: 10px; color:#FF4400; }
+.t05 { font-size: 10px; color:#88FF88; }
+.t10 { font-size: 11px; color:#BBFFFF; }
+.t11 { font-size: 11px; color:#FFFFFF; }
+.t12 { font-size: 11px; color:#FFFF44; }
+.t13 { font-size: 11px; color:#FF77BB; }
+.t14 { font-size: 11px; color:#FF4400; }
+.t15 { font-size: 11px; color:#88FF88; }
+.t20 { font-size: 12px; color:#BBFFFF; }
+.t21 { font-size: 12px; color:#FFFFFF; }
+.t22 { font-size: 12px; color:#FFFF44; }
+.t23 { font-size: 12px; color:#FF77BB; }
+.t24 { font-size: 12px; color:#FF4400; }
+.t25 { font-size: 12px; color:#88FF88; }
+.t30 { font-size: 14px; color:#BBFFFF; }
+.t31 { font-size: 14px; color:#FFFFFF; }
+.t32 { font-size: 14px; color:#FFFF44; }
+.t33 { font-size: 14px; color:#FF77BB; }
+.t34 { font-size: 14px; color:#FF4400; }
+.t35 { font-size: 14px; color:#88FF88; }
+.t40 { font-size: 16px; color:#BBFFFF; }
+.t41 { font-size: 16px; color:#FFFFFF; }
+.t42 { font-size: 16px; color:#FFFF44; }
+.t43 { font-size: 16px; color:#FF77BB; }
+.t44 { font-size: 16px; color:#FF4400; }
+.t45 { font-size: 16px; color:#88FF88; }
+.t50 { font-size: 18px; color:#BBFFFF; }
+.t51 { font-size: 18px; color:#FFFFFF; }
+.t52 { font-size: 18px; color:#FFFF44; }
+.t53 { font-size: 18px; color:#FF77BB; }
+.t54 { font-size: 18px; color:#FF4400; }
+.t55 { font-size: 18px; color:#88FF88; }
+.t60 { font-size: 20px; color:#BBFFFF; }
+.t61 { font-size: 20px; color:#FFFFFF; }
+.t62 { font-size: 20px; color:#FFFF44; }
+.t63 { font-size: 20px; color:#FF77BB; }
+.t64 { font-size: 20px; color:#FF4400; }
+.t65 { font-size: 20px; color:#88FF88; }
+.t70 { font-size: 24px; color:#BBFFFF; }
+.t71 { font-size: 24px; color:#FFFFFF; }
+.t72 { font-size: 24px; color:#FFFF44; }
+.t73 { font-size: 24px; color:#FF77BB; }
+.t74 { font-size: 24px; color:#FF4400; }
+.t75 { font-size: 24px; color:#88FF88; }
+
+DIV {
+	font-size:14px;
+	color:#BBFFFF;
+	border-style:solid;
+	border-color:#55BBDD;
+	border-width:2px;
+	padding:4px;
+}
+DIV.BANNER {
+	border-style:none;
+	border-width:0px;
+	width:200px;
+	height:40px;
+	padding:0px;
+}
+
+IMG {
+	border-style:none;
+}
+
+TABLE {
+	border-style:hidden;
+	padding:0px;
+
+}
+
+.T1 {
+	border-style:solid;
+	border-width:1px 0px 0px 1px;
+	padding:0px;
+	border-color:#FFFFFF;
+}
+
+.MAX {
+	width:100%;
+	border-style:hidden;
+	border-width:0px 0px 0px 0px;
+	padding:0px;
+}
+
+.n {
+	border-style:hidden;
+	padding:0px;
+	margin:0pt 0pt 0pt 10pt
+}

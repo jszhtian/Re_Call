@@ -1,0 +1,268 @@
+//============================================================================
+//
+//■数値表示
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$NM.CG(\.NM.MAX+1)]		//画像ファイル(未指定の場合はテキスト描画になる)
+	S_STR[$NM.CGID(\.NM.MAX+1)]		//画像CGID
+	S_INT[@NM.X(\.NM.MAX+1)]		//表示座標X
+	S_INT[@NM.Y(\.NM.MAX+1)]		//表示座標Y
+	S_INT[@NM.Z(\.NM.MAX+1)]		//表示座標Z
+	S_INT[@NM.SX(\.NM.MAX+1)]		//文字間隔
+	S_INT[@NM.DIG(\.NM.MAX+1)]		//桁数
+	S_INT[@NM.ZERO(\.NM.MAX+1)]		//上位桁に０を表示するか否か
+	S_INT[@NM.NOT(\.NM.MAX+1)=10]	//進数
+	S_INT[@NM.RANGE(\.NM.MAX+1)]	//範囲制限有無フラグ(0=なし/1=下限あり/2=上限あり/3=上限下限あり)
+	S_INT[@NM.MAX(\.NM.MAX+1)]		//上限値
+	S_INT[@NM.MIN(\.NM.MAX+1)]		//下限値
+	S_INT[@NM.VAL(\.NM.MAX+1)]		//数値
+
+}
+
+
+#=es.NM.SET
+{
+
+	INT[@NO=@_PINT(1)]
+
+	//格納
+	$NM.CG(@NO) = $NM.CG(0)
+	$NM.CGID(@NO) = $NM.CGID(0)
+	@NM.X(@NO) = @NM.X(0)
+	@NM.Y(@NO) = @NM.Y(0)
+	@NM.Z(@NO) = @NM.Z(0)
+	@NM.SX(@NO) = @NM.SX(0)
+	@NM.DIG(@NO) = @NM.DIG(0)
+	@NM.ZERO(@NO) = @NM.ZERO(0)
+	@NM.NOT(@NO) = @NM.NOT(0)
+	@NM.MAX(@NO) = @NM.MAX(0)
+	@NM.MIN(@NO) = @NM.MIN(0)
+	@NM.RANGE(@NO) = @NM.RANGE(0)
+	@NM.VAL(@NO) = @NM.VAL(0)
+
+	GOSUB[#=es.NM.VARINIT pint=0]
+
+
+	//バッファレイヤ生成
+	IF[$NM.CGID(@NO)==""]
+	{
+		$NM.CGID(@NO)="es.NM.BUF"
+
+		INT[@mLC]
+		STR[$sLC]
+		LOOP[SET=@NM.NOT(@NO)]
+		{
+			@mLC=@_LC-1
+			\_inttostr(@mLC, 1);$sLC=$_RSTR(1)
+
+			CG[ID=$NM.CGID(@NO)+$(@NO*10000+@mLC) Z=1 E=0 A=256 FILE=$NM.CG(@NO)+$sLC]
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	//表示レイヤ生成
+	LOOP[SET=@NM.DIG(@NO)]
+	{
+		CG[ID="es.NM"+$(@NO*10000+@_LC) X=@NM.X(@NO)+@NM.SX(@NO)*(@_LC-1) Y=@NM.Y(@NO) Z=@NM.Z(@NO) E=0 FILE=""]
+	}
+	LOOPEND[]
+//	CG[ID="es.NM"+$(@NO) X=@NM.X(@NO) Y=@NM.Y(@NO) Z=@NM.Z(@NO) E=0 A=256 SX=@NM.SX(@NO)*10 SY=20 FILE=""]
+//	CGACT[ID="es.NM"+$(@NO) RECTPAINT3=1 SET=0xff0000ff]
+
+	return[]
+}
+
+
+#=es.NM.VAL.SET.AFTER
+{
+	INT[@NO =@_PINT(1)]
+	INT[@VAL=@_PINT(2)]
+	INT[@pow]
+	INT[@flag]
+
+	//範囲制限
+	IF[(@NM.RANGE(@NO)&1)>0 && @VAL<@NM.MIN(@NO)] @VAL=@NM.MIN(@NO) IFEND[]
+	IF[(@NM.RANGE(@NO)&2)>0 && @VAL>@NM.MAX(@NO)] @VAL=@NM.MAX(@NO) IFEND[]
+
+	@flag|=(@NM.ZERO(@NO)==1) //全桁表示
+
+	LOOP[SET=@NM.DIG(@NO)]
+	{
+		@pow=@es.POW10(@NM.DIG(@NO)-@_LC)
+
+		@flag|=((@VAL/@pow)>0)
+		@flag|=(@_LC==@NM.DIG(@NO))
+
+		IF[@flag]
+		{
+	//		CGACT[COPY2=1 ID=$NM.CGID(@NO)+$(@NO*10000+(@VAL/@pow)%10) ID2="es.NM"+$(@NO)]
+	//		CGACT[MERGE=1 ID=$NM.CGID(@NO)+$(@NO*10000+(@VAL/@pow)%10) ID2="es.NM"+$(@NO) X=3 Y=3]
+	//		CG[ID="es.NM"+$(@NO) E=1]
+
+			CGACT[COPY2=1 ID=$NM.CGID(@NO)+$(@NO*10000+(@VAL/@pow)%10) ID2="es.NM"+$(@NO*10000+@_LC)]
+			CG[ID="es.NM"+$(@NO*10000+@_LC) E=1]
+		}
+		ELSE[]
+		{
+			CG[ID="es.NM"+$(@NO*10000+@_LC) E=0]
+		}
+		IFEND[]
+
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+#=es.NM.E1
+{
+	\NM.VAL.SET(@_PINT(1), @NM.VAL(@_PINT(1)))
+	return[]
+}
+
+
+#=es.NM.E0
+{
+	INT[@NO =@_PINT(1)]
+
+	LOOP[SET=@NM.DIG(@NO)]
+	{
+		CG[ID="es.NM"+$(@NO*10000+@_LC) E=0]
+	}
+	LOOPEND[]
+//	CG[ID="es.NM"+$(@NO) E=0]
+
+	return[]
+}
+
+#=es.NM.DEL
+{
+	INT[@NO =@_PINT(1)]
+
+	//これはこのままでいい.     es.NM.BUF↓
+	LOOP[SET=@NM.NOT(@NO)] CGEND[ID="es.NM.BUF"+$(@NO*10000+@_LC-1)] LOOPEND[]
+
+	LOOP[SET=@NM.DIG(@NO)] CGEND[ID="es.NM"    +$(@NO*10000+@_LC  )] LOOPEND[]
+//	CGEND[ID="es.NM"+$(@NO)]
+
+	GOSUB[#=es.NM.VARINIT pint=@NO]
+
+	return[]
+}
+
+
+#=es.NM.VARINIT
+{
+	INT[@NO =@_PINT(1)]
+
+	$NM.CG(@NO)=""
+	$NM.CGID(@NO)=""
+	@NM.X(@NO)=0
+	@NM.Y(@NO)=0
+	@NM.Z(@NO)=0
+	@NM.SX(@NO)=0
+	@NM.DIG(@NO)=0
+	@NM.ZERO(@NO)=0
+	@NM.NOT(@NO)=10 //10
+	@NM.RANGE(@NO)=0
+	@NM.MAX(@NO)=0
+	@NM.MIN(@NO)=0
+	@NM.VAL(@NO)=0
+
+	return[]
+}
+
+
+//////
+
+
+//▼画像ファイル @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NM.CG.SET
+{
+	$NM.CG(0) = $_PSTR(1)
+	return[]
+}
+
+//▼CGID @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NM.CGID.SET
+{
+	$NM.CGID(0) = $_PSTR(1)
+	return[]
+}
+
+//▼座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NM.XY.SET
+{
+	@NM.X(0) = @_PINT(1)
+	@NM.Y(0) = @_PINT(2)
+	return[]
+}
+
+//▼優先順位 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NM.Z.SET
+{
+	@NM.Z(0) = @_PINT(1)
+	return[]
+}
+
+//▼座標＆優先順位 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NM.XYZ.SET
+{
+	@NM.X(0) = @_PINT(1)
+	@NM.Y(0) = @_PINT(2)
+	@NM.Z(0) = @_PINT(3)
+	return[]
+}
+
+//▼文字間隔 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NM.SX.SET
+{
+	@NM.SX(0) = @_PINT(1)
+	return[]
+}
+
+//▼桁数 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NM.DIG.SET
+{
+	@NM.DIG(0) = @_PINT(1)
+	@NM.ZERO(0) = @_PINT(2)
+	return[]
+}
+
+//▼進数(NOTation) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NM.NOT.SET
+{
+	@NM.NOT(0) = @_PINT(1)
+	return[]
+}
+
+//▼値範囲 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NM.RANGE.SET
+{
+	IF[@_PFLG(1)] @NM.MIN(0) = @_PINT(1);@NM.RANGE(0) |= 1 IFEND[]
+	IF[@_PFLG(2)] @NM.MAX(0) = @_PINT(2);@NM.RANGE(0) |= 2 IFEND[]
+	return[]
+}
+
+//▼数値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.NM.VAL.SET
+{
+	@NM.VAL(0) = @_PINT(1)
+	return[]
+}
+

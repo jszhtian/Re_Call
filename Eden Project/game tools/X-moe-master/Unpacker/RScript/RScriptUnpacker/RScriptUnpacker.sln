@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RScriptUnpacker", "RScriptUnpacker\RScriptUnpacker.vcxproj", "{4F06996C-D10C-4F6B-9D23-FC052A75AA7A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RScriptText", "RScriptText\RScriptText.vcxproj", "{AA99D1BE-9713-4843-8AF4-AAF4F0C29234}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F06996C-D10C-4F6B-9D23-FC052A75AA7A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4F06996C-D10C-4F6B-9D23-FC052A75AA7A}.Debug|Win32.Build.0 = Debug|Win32
+		{4F06996C-D10C-4F6B-9D23-FC052A75AA7A}.Release|Win32.ActiveCfg = Release|Win32
+		{4F06996C-D10C-4F6B-9D23-FC052A75AA7A}.Release|Win32.Build.0 = Release|Win32
+		{AA99D1BE-9713-4843-8AF4-AAF4F0C29234}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AA99D1BE-9713-4843-8AF4-AAF4F0C29234}.Debug|Win32.Build.0 = Debug|Win32
+		{AA99D1BE-9713-4843-8AF4-AAF4F0C29234}.Release|Win32.ActiveCfg = Release|Win32
+		{AA99D1BE-9713-4843-8AF4-AAF4F0C29234}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

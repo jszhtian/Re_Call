@@ -1,0 +1,115 @@
+packtype == 0	BMP
+
+packtype == 1	PACKBMP
+
+packtype == 2	BMP+MASK
+
+packtype == 3	PACKBMP+MASK
+
+packtype == 4
+
+packtype == 5	JPEG
+
+packtype == 6
+
+packtype == 7	JPEG+MASK
+
+
+bit0 PACK FLAG
+bit1 MASK FLAG
+bit2 JPEG FLAG(JPEG is PACK then bit1==1)
+
+////////////////////////////////////////////////
+char header[64];
+
+
+header[57] == PACKTYPE(ascii)
+*((int)(&header[32])) == 1stDataSize
+*((int)(&header[36])) == sizeX(not bmp)
+*((int)(&header[40])) == sizeY(not bmp)
+
+
+
+
+
+packtype==0	BMP
+header[64];
+BMPFILEHEADER
+BMPINFOHEADER
+RGBQUAD[?]
+bitmapdata
+
+packtype==1	PACK BMP
+header[64];
+BMPFILEHEADER
+BMPINFOHEADER
+RGBQUAD[?]
+packedbitmapdata
+
+
+packtype == 2 BMP+MASK
+header[64]
+BMPFILEHEADER
+BMPINFOHEADER
+RGBQUAD[?]
+bitmapdata
+
+BMPFILEHEADER
+BMPINFOHEADER
+RGBQUAD[?]
+packedmaskdata
+
+
+
+packtype == 3 PACK BMP+MASK
+header[64]
+BMPFILEHEADER
+BMPINFOHEADER
+RGBQUAD[?]
+packedbitmapdata
+
+BMPFILEHEADER
+BMPINFOHEADER
+RGBQUAD[?]
+packedmaskdata
+
+
+
+
+
+
+packtype==5	JPEG
+header[64];
+JPEG DATA
+
+
+
+
+
+packtype==7	JPEG + MASK
+header[64];
+JPEG DATA
+
+
+BMPFILEHEADER
+BMPINFOHEADER
+RGBQUAD[?]
+packedmaskdata
+
+
+
+////////////////////////
+
+dir
+
+
+
+
+bmp(jpg‚à“¯—l)	->		dwq			->		gtb,gpk
+ ta						 ta					‚·‚×‚Ädwq‚É
+ bg						 bg
+ ev						 ev
+ sys					 sys
+  ta					 sys
+  sm					 sm
+  sc					 sc

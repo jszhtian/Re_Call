@@ -1,0 +1,147 @@
+modename systemmenu
+
+MenuPrintType 4
+MenuPrintTime 10
+
+optionNumber 9
+expOptionMode10 47
+expOptionMode11 38
+expOptionMode12 43
+
+
+backScreenType 2
+
+backScreenEffectNega 0
+
+backScreenEffectGrey 0
+
+backScreenEffectMulti 1
+backScreenMultiR 128
+backScreenMultiG 128
+backScreenMultiB 128
+
+backScreenEffectAddsub 0
+backScreenColorR 0
+backScreenColorG 0
+backScreenColorB 0
+
+filenameDialog ta_exitdialog
+
+filenameMenuBase ta_systemmenu_base
+basePrintX 980
+basePrintY 50
+baseSizeX 200
+baseSizeY 500
+
+saveButton 1
+loadButton 2
+configButton 3
+windowButton 4
+messageSkipButton 5
+backlogButton 6
+autoModeButton 7
+cancelButton 8
+exitButton 9
+
+dialogX 384
+dialogY 180
+dialogSizeX 512
+dialogSizeY 384
+
+dialogOkFileName ta_yes
+dialogCancelFileName ta_no
+
+
+dialogOkPrintX 20
+dialogOkPrintY 280
+dialogOkSizeX 128
+dialogOkSizeY 64
+
+dialogCancelPrintX 280
+dialogCancelPrintY 280
+dialogCancelSizeX 128
+dialogCancelSizeY 64
+
+dialogOkAnimePattern1 2
+dialogOkAnimeType1 7
+dialogOkAnimeSpeed1 50
+
+dialogCancelAnimePattern1 2
+dialogCancelAnimeType1 7
+dialogCancelAnimeSpeed1 50
+
+dialogOkClickSound 1
+dialogCancelClickSound 3
+
+dialogOkClickTime 1
+dialogCancelClickTime 1
+
+@superMenuFlag 1
+Menu1Button1FileName ta_systemmenu_save
+Menu1Button2FileName ta_systemmenu_load
+Menu1Button3FileName ta_systemmenu_config
+Menu1Button4FileName ta_systemmenu_windowoff
+Menu1Button5FileName ta_systemmenu_messageskip
+Menu1Button6FileName ta_systemmenu_backlog
+Menu1Button7FileName ta_systemmenu_automode
+Menu1Button8FileName ta_systemmenu_cancel
+Menu1Button9FileName ta_systemmenu_exitgame
+
+
+Menu1Button10FileName ta_dummy
+Menu1Button11FileName ta_dummy
+Menu1Button12FileName ta_dummy
+
+
+Menu1Button1PrintX 1000
+Menu1Button1PrintY 70
+
+Menu1Button2PrintX 1000
+Menu1Button2PrintY 120
+
+Menu1Button3PrintX 1000
+Menu1Button3PrintY 170
+
+Menu1Button4PrintX 1000
+Menu1Button4PrintY 220
+
+Menu1Button5PrintX 1000
+Menu1Button5PrintY 270
+
+Menu1Button6PrintX 1000
+Menu1Button6PrintY 320
+
+Menu1Button7PrintX 1000
+Menu1Button7PrintY 370
+
+Menu1Button8PrintX 1000
+Menu1Button8PrintY 420
+
+Menu1Button9PrintX 1000
+Menu1Button9PrintY 470
+
+Menu1Button10PrintX 1000
+Menu1Button10PrintY 520
+
+Menu1Button11PrintX 1000
+Menu1Button11PrintY 570
+
+Menu1Button12PrintX 1000
+Menu1Button12PrintY 620
+
+menu1Button1SizeX 160
+menu1Button1SizeY 48
+
+menu1Button1AnimeType1 7
+menu1Button1AnimePattern1 2
+menu1Button1AnimeSpeed1 20
+
+
+Menu1Button1ClickSound 2
+Menu1Button8ClickSound 3
+Menu1Button9ClickSound 2
+
+Menu1Button1ClickTime 1
+
+
+

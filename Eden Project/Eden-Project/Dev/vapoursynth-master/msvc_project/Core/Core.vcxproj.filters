@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="sdk">
+      <UniqueIdentifier>{7b8d16d8-0e90-4ae9-bc15-ed1a0abcc974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\kernel">
+      <UniqueIdentifier>{b24a0a3c-180b-49e5-b41e-ff88caffc192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\kernel">
+      <UniqueIdentifier>{938163e2-1d8f-4bff-a2d2-e4bddb30c2c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\kernel\x86">
+      <UniqueIdentifier>{07cba079-c686-4498-bb5c-752dda78f9d2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\core\cachefilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\exprfilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\mergefilters.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\reorderfilters.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\simplefilters.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\textfilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\vsapi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\vscore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\vslog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\vsthreadpool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\sdk\filter_skeleton.c">
+      <Filter>sdk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\sdk\invert_example.c">
+      <Filter>sdk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\sdk\vsscript_example.c">
+      <Filter>sdk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\genericfilters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\lutfilters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\vsresize.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\boxblurfilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\transpose.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\x86\transpose_sse2.c">
+      <Filter>Source Files\kernel\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\planestats.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\x86\planestats_sse2.c">
+      <Filter>Source Files\kernel\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\merge.c">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\x86\merge_sse2.c">
+      <Filter>Source Files\kernel\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\generic.cpp">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\x86\generic_sse2.cpp">
+      <Filter>Source Files\kernel\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\cpulevel.cpp">
+      <Filter>Source Files\kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\cpufeatures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\x86\merge_avx2.c">
+      <Filter>Source Files\kernel\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\x86\planestats_avx2.c">
+      <Filter>Source Files\kernel\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\kernel\x86\generic_avx2.cpp">
+      <Filter>Source Files\kernel\x86</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\VapourSynth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\VSScript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\cachefilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\cpufeatures.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\filtershared.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\ter-116n.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\vscore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\vslog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\x86utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\VSHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\jitasm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\internalfilters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\filtersharedcpp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\common\vsutf16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\kernel\transpose.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\kernel\planestats.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\kernel\merge.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\kernel\generic.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\core\kernel\cpulevel.h">
+      <Filter>Header Files\kernel</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

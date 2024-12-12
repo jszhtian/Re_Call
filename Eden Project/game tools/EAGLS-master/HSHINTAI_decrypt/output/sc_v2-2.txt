@@ -1,0 +1,401 @@
+$sc_v2-2
+_Day=15,
+_DayTime=0,
+
+_Mode=1,
+52("_GRPName","bg08a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM03")
+42("BGM","00Sound.dat")
+#:NameSuffix
+&13874"「………」"&13875"いつもなら隣の席からちょっかいをかけてくる二季も、今日はいない。"&13876"昨日の事も気になるが、二人は本当に帰ってしまったようだ。"&13877"朝からしっくり来ないまま、俺は授業にも身が入らず物思いにふけっていた。"100("",3,2,0,0)
+100("SE140",0,2,0,0)
+&13878"休み時間になり、途端に教室がガヤガヤと騒がしくなる。"#:NameSuffix
+&13879"（そういや、まりるも朝から元気なかったな……様子見に行ってみるか）"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Mode=8,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&13880"…………"&13881"…………………。"_Mode=8,
+52("_GRPName","bg07a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM04")
+42("BGM","00Sound.dat")
+#:NameSuffix
+&13882"「え？来てない？」"#女生徒
+&13883"「はい、今日は休みだって。お兄さん聞いてないんですか？」"&13884"まりるの様子を見に行ったはいいけれど。"&13885"まりるのクラスメイトが言うには、まりるは学園を休んでいるらしい。"#:NameSuffix
+&13886"「あ、はは……そういえばそうだった。ごめんね」"&13887"適当に取り繕って、その場を離れる。"_AL=0,
+_Mode=8,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+_WaitTime=2000,
+42("Wait","00Wait.dat")
+_Mode=8,
+52("_GRPName","bg07a")
+42("DrawBG","00Draw.dat")
+#:NameSuffix
+&13888"（あいつ、いつの間に……！）"&13889"隠れて学園サボるようなヤツじゃないと思ってたのに、一体どうしたっていうんだ。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0001i
+&13890"「おぉ、そこにいるのは常闇の主ではないか。いつかぶりだな」"42("DEL","02CharChip.dat")#:NameSuffix
+&13891"「ぁ……？　なんだ、山田か」"&13892"振り返れば、大きい膨らみを強調するように胸を張った山田がそこに立っていた。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ib")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0002i
+&13893"「我が名は山田ではない。ブラッディファンタズムフォンアレクセイだ」"42("DEL","02CharChip.dat")#:NameSuffix
+&13894"「……そうだな、ブラッディファンタズムフォンアレクセイ」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0108i
+&13895"「一体どうしたのだ。顔が悪いぞ」"42("DEL","02CharChip.dat")#:NameSuffix
+&13896"「それを言うなら顔色な……お前は元気そうだな」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","if")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0109i
+&13897"「私は常に精力に溢れているぞ」"42("DEL","02CharChip.dat")&13898"いつもなら喜んで見入るその大きい胸にも、逃げ出したいと思うほどウザったいボケもどうでもよかった。"&13899"というか、学園ではあまり会いたくなかったな……なんだか更に痛々しい。"#:NameSuffix
+&13900"「なぁ、前から気になってたんだけど。　学園でくらいはキャラクター作り？　やめた方がいいと思うぞ」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ic")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0116i
+&13901"「！！　それは……本気で言っているのか？　前から何か意味のわからんことを言っているのかと思えば……」"42("DEL","02CharChip.dat")#:NameSuffix
+&13902"「それはこっちのセリフだよ」"&13903"山田は一人で納得したかの様な口ぶりで、うんうん唸っている。"&13904"俺にはどういうことかわかりそうにないな……余計なお世話だったか？"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ig")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0117i
+&13905"「……お前。本当に何も知らないんだな」"42("DEL","02CharChip.dat")#:NameSuffix
+&13906"「真剣な顔して……なにがだよ」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ib")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0118i
+&13907"「私はいつでも真剣で全力だ。そうだな……言っても無駄だと思うが」"42("DEL","02CharChip.dat")#:NameSuffix
+&13908"「なんだよ。　気になる言い方だな」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ig")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0119i
+&13909"「簡単に言うぞ……我々、マリルも、エリザベートも、お前の家族も皆、『闇の住人』だ」"42("DEL","02CharChip.dat")#:NameSuffix
+&13910"「は？」"&13911"意味がわからない。"&13912"いきなり闇の住人とか言われましても……。"_Mode=3,
+52("_BGMName","")
+42("BGM","00sound.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0120i
+&13913"「お前は人間じゃない」"42("DEL","02CharChip.dat")&13914"指差して言い放つ山田。"52("_BGMName","BGM04")
+42("BGM","00Sound.dat")
+#:NameSuffix
+&13915"「……いやいや」"52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0121i
+&13916"「つまりだ。お前には吸血鬼の血が流れておる。その血はお前に絶大な力を与えたが、大きすぎる力のせいか、たびたび暴走し殺戮を求め暴れだしたのだ」"#山　田=w0121i2
+&13917"「そうなると例え相手が親であろうと兄弟であろうと力をコントロールすることが出来なくなる」"#山　田=w0122i
+&13918"「あと、この血は己の身に危機が迫ると騒ぎだし、力の一部を開放する。このとき瞳の色に変化が現れ、牙がむき出しになる」"#山　田=w0122i2
+&13919"「そして己の目の前で愛する者が倒れた時に、その真の力が解放されるのだ」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ib")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0123i
+&13920"「怒りの炎が全身に包まれてだな。もう、そうなるともはや誰にも止めることは出来ない……って、おいこら！　人の話を聞けえぇっ！」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&13921"踵を返し、この場を立ち去ろうとする俺を引き留める。"#:NameSuffix
+&13922"「いや、よくできた設定だったわ。　長くなりそうだから俺はこれで」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ie")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0124i
+&13923"「ふっ……まだほんの序章じゃ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&13924"「帰る」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ib")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0125i
+&13925"「いやいやいや、まだこれから先がいいところだから……って、おい待たんか！」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE026",0,2,0,0)
+#:NameSuffix
+&13926"「おぉ！？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ie")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0126i
+&13927"「私がこのまま帰すと思ったのか」"42("DEL","02CharChip.dat")&13928"ものすごい力で引き寄せられる。"52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0127i
+&13929"「この情報と同等の対価を払ってもらわねば割に合わん」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&13930"結局その吸血鬼がどーだこうだと聞かされるハメになった。"&13931"小説でも書こうとしてるんだろうかコイツは……。"_Mode=1,
+52("_GRPName","bg07a")
+42("DrawBG","00Draw.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0110i
+&13932"「で？　顔の悪い常闇の主よ、何をしているのだ？　またこの間のように人間の遊戯でもしようというのか？　神にお祈りにでも？」"42("DEL","02CharChip.dat")#:NameSuffix
+&13933"「お前わかってて言ってるだろ……つか神にお祈りって何だよ」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ig")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0111i
+&13934"「今日は何曜日だ？……マリル。アイツは未だに通い詰めているようだぞ」"42("DEL","02CharChip.dat")#:NameSuffix
+&13935"「今朝は普通に制服着て登校したしな、通ってるだろうけど……学園の事だよな？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ic")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0112i
+&13936"「古の記憶に囚われ、迷い子のような顔をしている今のアイツは実に情けない」"42("DEL","02CharChip.dat")&13937"やっぱり人の話は頑なに聞いてない。"&13938"しかし、こいつ。　絵里沙とならともかくまりるとも関わりがあるんだろうか。"#:NameSuffix
+&13939"「……お前、まりるとも知り合いなのか？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+&13940"山田は当然、と言いたそうな顔をしてうなずいた。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ie")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0113i
+&13941"「あやつは、私が唯一苦渋を飲まされた相手……再戦の機会を今か今かと待っているのだが……っと」"42("DEL","02CharChip.dat")#:NameSuffix
+&13942"「……なにやってんだか知らないけど、怪我すんなよ」"&13943"まりる……まさか来ていないんだろうか。"#:NameSuffix
+&13944"「まりるがどこいるか知ってるか？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ib")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0114i
+&13945"「また話を聞かぬというのか……仕方ない。先日、楽しませてくれた礼だ」"42("DEL","02CharChip.dat")#:NameSuffix
+&13946"「話聞かないのはお前だけどな？」"&13947"むすっとしたまま、山田は教えてくれた。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+&13948"まりるが街はずれの教会に、通っていると。"#:NameSuffix
+&13949"「教会……？　何でそんなところに」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ig")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0115i
+&13950"「マリルは待っているのだ。長い間、常闇の主が目覚めることを……」"42("DEL","02CharChip.dat")&13951"「常闇の主」"&13952"この語呂は夢でも聞こえた気が……。"#:NameSuffix
+&13953"「できれば普通に教えてほしいんだが」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ic")
+42("DrawChar","00Draw.dat")
+#山　田
+&13954"「…………」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&13955"ヤレヤレといった具合に山田は……。"&13956"また吸血鬼の話しをしだす。"_Mode=1,
+52("_GRPName","bg07a")
+42("DrawBG","00Draw.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ig")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&13957"「……あのな、信じられるわけ無いだろ？　俺やまりるや夢子が吸血鬼だなんて」"#:NameSuffix
+&13958"「俺は市位:NameSuffix、今まで生まれてからずっと一緒に生きてきて」"&13959"むりやり力任せに聞かされ続けたせいか俺も妙に話しに食いついてしまっているな……。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0128i
+&13960"「そう家族の人が言ったのか？」"42("DEL","02CharChip.dat")#:NameSuffix
+&13961"「言うわけないだろ、当たり前の事なんだから」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ig")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0129i
+&13962"「なるほどな……お前の家族とやらが言っていることはまやかしだぞ」"42("DEL","02CharChip.dat")#:NameSuffix
+&13963"「はぁ？」"52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0130i
+&13964"「どういうつもりかは知らぬが……」"42("DEL","02CharChip.dat")#:NameSuffix
+&13965"「あのさ、さすがの俺でも怒るぞ？　俺の家族まで巻き込むなよ」"&13966"なんなんだ。"&13967"段々腹がたってきた。"&13968"妙に心がざわめく。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ib")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0131i
+&13969"「嘘ではない……本当の」"42("DEL","02CharChip.dat")#:NameSuffix
+&13970"「お前の言うことなんか信じられるか」"&13971"もう聞きたくない。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ig")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0132i
+&13972"「……お前もその仲間なのに？」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE190",0,2,0,0)
+#:NameSuffix
+&13973"「……！」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ig")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0133i
+&13974"「……思い当たる節があるようだな。嘘だと思うなら確かめてみるがいい」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE140",0,2,0,0)
+&13975"ちょうど、休憩時間の終了を告げるチャイムが鳴った。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ig")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田
+&13976"「…………」"42("DEL","02CharChip.dat")_Target=@CharC,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&13977"山田は、意味ありげに俺を見てから、自分の教室へと戻っていった。"_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+&13978"信じちゃいない。"&13979"ただ……山田の言うとおり、確かめなきゃいけない気がした。"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0134i
+&13980"「……記憶のない主が……道標になれるのだろうか」"42("DEL","02CharChip.dat")_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&13981"…………。"&13982"…………………。"_Mode=1,
+52("_GRPName","bg08a")
+42("DrawBG","00Draw.dat")
+#先　生
+&13983"「市位、ちょっといいか」"#:NameSuffix
+&13984"「はい？」"_Mode=1,
+52("_GRPName","bg07a")
+42("DrawBG","00Draw.dat")
+100("",3,2,0,0)
+100("SE064",0,2,0,0)
+#:NameSuffix
+&13985"「どうしたんですか？」"#先　生
+&13986"「お前には伝えておこうと思うんだが。　聖がな……」"52("_BGMName","BGM07")
+42("BGM","00Sound.dat")
+#先　生
+&13987"「行方不明らしいんだ」"&13988"最初は何を言っているんだろうと思った。"&13989"だが。"&13990"思考が身体に追いついた瞬間に、身体中におぞましいほどの熱さが走る。"_Mode=6,
+52("_GRPName","j02r0")
+42("DrawCG","00Draw.dat")
+#琴　子=w0050j
+&13991"「やめて……あなた、おかしいですわ……」"_Mode=0,
+52("_GRPName","bg07a")
+42("DrawBG","00Draw.dat")
+100("",3,2,0,0)
+100("SE190",0,2,0,0)
+#:NameSuffix
+&13992"「！！？」"#先　生
+&13993"「お前を保健室に連れて行った後だな。放課後、聖の様子がおかしかったとかなかったか？」"#:NameSuffix
+&13994"「い、いえ……俺は何も」"#先　生
+&13995"「そうか……なにか思い出したり気づいた事があったら些細な事でも構わないから話してくれ」"#:NameSuffix
+&13996"「はい……」"#先　生
+&13997"「後、友達に話すような内容じゃない事はわかっているな？」"#:NameSuffix
+&13998"「……はい」"#先　生
+&13999"「……とりあえず教室に戻りなさい」"_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&14000"…………。"&14001"…………………。"&14002"何度思い返しても、昨日家に帰った記憶が思い出せない……。"&14003"気が付いたら家にいた。"&14004"そして普通に朝目が覚めた。"&14005"その間に、一体何が……。"100("",3,4,0,0)
+100("SE041",1,4,0,0)
+#:NameSuffix
+&14006"「………」"&14007"夢の事が頭から離れない。"&14008"昨日、俺は確か朝から具合が悪くて……保健室に運ばれて。"&14009"それから……。"&14010"それから…………。"&14011"夢で見た事と現実が、俺を差し置いてどんどんと繋がっていく。"&14012"吐き気すら感じていた。"&14013"夢の中で自分が啜っていたモノが、腹底から逆流してくるような……そんなワケないのに。"100("",4,4,0,0)
+&14014"…………。"&14015"つまり……。"&14016"俺が見た夢は……現実に起きていて、多分それは……。"#:NameSuffix
+&14017"（違う……）"&14018"あれは、あんなのは夢だ。"&14019"夢なんだ。"&14020"夢だろ……。"_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+#:NameSuffix
+&14021"（もし山田の言っていた事が……本当だとしたら……）"&14022"俺に隠し事してる……嘘をついている？"&14023"家族が……？"#:NameSuffix
+&14024"「なんだってんだよ……」"&14025"気がつけば俺は学園から足を踏み出していた。"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+
+_DayTime=1,
+
+_Mode=1,
+52("_GRPName","bg01b")
+42("DrawBG","00Draw.dat")
+&14026"…………。"&14027"…………………。"
+_AL=0,
+_Mode=10,
+52("_GRPName","ic45")
+42("DrawBG","00Draw.dat")
+
+_WaitTime=2000,
+42("Wait","00Wait.dat")
+
+41("sc_v2-3","sc_v2-3.dat")

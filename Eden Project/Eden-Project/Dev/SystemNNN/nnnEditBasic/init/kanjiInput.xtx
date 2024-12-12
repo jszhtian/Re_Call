@@ -1,0 +1,56 @@
+modename kanjiinput
+
+enterFadeInType 2
+enterFadeInTime 20
+
+backScriptFlag 1
+backScriptName backscript
+
+
+
+fontSize 32
+printX 300
+printY 50
+
+fontColorR 128
+fontColorG 255
+fontColorB 192
+
+kakuteiFontColorR 255
+kakuteiFontColorG 0
+kakuteiFontColorB 0
+
+henkanFontColorR 0
+henkanFontColorG 0
+henkanFontColorB 255
+
+inputFontColorR 0
+inputFontColorG 255
+inputFontColorB 0
+
+henkanSelectColorR 128
+henkanSelectColorG 128
+henkanSelectColorB 128
+henkanSelectColorA 50
+
+
+inputSelectColorR 0
+inputSelectColorG 0
+inputSelectColorB 255
+inputSelectColorA 50
+
+
+debugPrintFlag 1
+debugFontSize 16
+debugPrintX 300
+debugPrintY 500
+debugNextY 20
+
+
+kakuteiTextMax3 4
+kakuteiTextMax4 4
+
+
+
+
+

@@ -1,0 +1,1315 @@
+//====================================================================
+//
+//■グローバルセーブデータ管理
+//
+//
+////各種設定
+//@es.GSD(110,01) //ウィンドウを常に手前に表示する
+//@es.GSD(110,02) //非アクティブ時に動作を停止する
+//@es.GSD(110,03) //スクリーンセーバーの起動を防止する
+//@es.GSD(110,04) //スキップボタンでの未読スキップ
+//@es.GSD(110,05) //CTRLキーでの未読スキップ
+//@es.GSD(110,06) //選択肢後もオート持続する(=1)／しない(=0)
+//@es.GSD(110,07) //選択肢後もスキップ持続する(=1)／しない(=0)
+//@es.GSD(110,08) //選択済の選択肢の色を変える(=1)／変えない(=0)
+//@es.GSD(110,09) //既読文章の色を変える(=1)／変えない(=0)
+//@es.GSD(110,10) //none.
+//@es.GSD(110,11) //シーンジャンプ ///tri
+//@es.GSD(110,12) //ムービー再生
+//@es.GSD(110,13) //ムービーカットイン
+///
+//@es.GSD(110,14) //マウスカーソル番号
+//@es.GSD(110,15) //マウスカーソル向き
+//@es.GSD(110,16) //ウィンドウリサイズON/OFF
+//
+//@es.GSD(111,01) //オート時の音声再生終了待ち(0…音声再生終了まで待たない/1…音声再生終了まで待つ/2…次音声がある時だけ音声再生終了まで待つ)
+//@es.GSD(111,02) //音声停止タイミング（次の文章へいってもボイス再生を残す）
+//@es.GSD(111,03) //ボイスをループ再生させる
+////@es.GSD(111,04) //オート時文章を先読みする
+
+//@es.GSD(112,01) //画面エフェクト(0=オン／1=オフ)
+//@es.GSD(112,02) //既読時のテキスト表示速度(既読文章の最速表示)
+//
+//@es.GSD(113,01) //現在のフォント番号
+//@es.GSD(113,02) //現在のフォント名
+//
+//@es.GSD(114,01) //終了確認
+//@es.GSD(114,02) //タイトル確認
+//@es.GSD(114,03) //シーン鑑賞へ戻る確認
+//@es.GSD(114,04) //クイックセーブ確認
+//@es.GSD(114,05) //クイックロード確認
+//@es.GSD(114,06) //セーブ確認
+//@es.GSD(114,07) //上書きセーブ確認
+//@es.GSD(114,08) //ロード確認
+//@es.GSD(114,09) //セーブデータコピー確認
+//@es.GSD(114,10) //セーブデータ上書きコピー確認
+//@es.GSD(114,11) //セーブデータ移動確認
+//@es.GSD(114,12) //セーブデータ削除確認
+//@es.GSD(114,13) //コンフィグ設定初期化確認
+//@es.GSD(114,14) //直前の選択肢に戻る確認
+//@es.GSD(114,15) //次の選択肢へジャンプ確認
+//
+
+//
+///xCOS
+//@es.GSD(115,01) //カットイン演出
+//@es.GSD(115,02) //テキストカウント
+//@es.GSD(115,03) //次音声アイコン
+//@es.GSD(115,04) //オートモード設定
+//@es.GSD(115,05) //自動選択１
+//@es.GSD(115,06) //自動選択２
+//@es.GSD(115,08) //文字を縁取りする
+//@es.GSD(115,09) //文字に影をつける
+//@es.GSD(115,10) //バックログ背景透過度
+//@es.GSD(115,13) //none.
+//@es.GSD(115,14) //太文字にする
+//@es.GSD(115,15) //グラデ表示にする
+//@es.GSD(115,16) //---
+//@es.GSD(115,17) //ＥＳＣモード
+//
+//@es.GSD(116,01) //カットイン演出
+//@es.GSD(116,02) //カットイン演出
+//@es.GSD(116,03) //カットイン演出
+//@es.GSD(116,04) //カットイン演出
+//
+//@es.GSD(120,01) //テキスト速度
+//@es.GSD(120,02) //オート速度
+//@es.GSD(120,03) //ウィンドウ透過率
+//@es.GSD(120,04) //スキップ速度
+//@es.GSD(120,05) //演出スキップ速度 (@es.DirectSkipSp)
+//
+///xS
+//@es.GSD(121,01) //アイキャッチ
+//@es.GSD(121,02) //システムメッセージ
+//@es.GSD(121,03) //システムエフェクト
+//@es.GSD(121,04) //オートセーブ１
+//@es.GSD(121,05) //オートセーブ２
+//
+///
+//@es.GSD(121,06) //ウィンドウアイコンサイズ設定
+//@es.GSD(121,07) //オート表示アイコンサイズ設定
+//@es.GSD(121,08) //スキップ表示アイコンサイズ設定
+//
+//@es.GSD(125,01) //SuperAutoPlayMode
+//@es.GSD(125,02) //SuperAutoPlayMode・テキスト速度
+//@es.GSD(125,03) //SuperAutoPlayMode・文末停止時間
+//@es.GSD(125,04) //SuperAutoPlayMode・クリック許可
+//@es.GSD(125,05) //SuperAutoPlayMode・スキップ許可
+//
+//
+////E-mote
+//@es.GSD(131,01) //髪揺れ量
+//@es.GSD(131,02) //胸揺れ量
+//@es.GSD(131,03) //パーツ揺れ量
+//@es.GSD(131,04) //スムースON/OFF
+//
+//
+////内部用
+//@es.GSD(141,01) //システム起動回数
+//@es.GSD(141,02) //現在のスクリーンモード
+//@es.GSD(141,03) //前回GSDセーブ時点での合計起動時間(ms)
+
+//@es.GSD(150,01) //最後に開いたセーブロード画面のページ番号
+//@es.GSD(150,02) //最後にセーブしたセーブデータ番号
+//
+//@es.GSD(092,xx) //オートセーブデータ(1=最新/50=最古) ※0ならデータ存在しない
+//@es.GSD(093,xx) //オート用
+//@es.GSD(094,01) //@DBG.SW
+//@es.GSD(095,01) //デバッグリスト切替
+//@es.GSD(096,01) //GAMEMAINアクティブグループ
+//@es.GSD(097,01) //フェイスウィンドウ
+//@es.GSD(151,xx) //クイックセーブデータ新規順(1=最新/5=最古) ※0ならデータ存在しない
+//
+//
+//
+//====================================================================
+
+//----------------------------------------------------------------
+//■
+//----------------------------------------------------------------
+#=es.GSD.INIT
+{
+	INT[@mRET]
+	STR[$str]
+
+	FILEINFO[EXIST=1 FILE=$es.SAVEPATH+"kidoku.sd" LET=@mRET]
+	IF[@mRET]
+	{
+		LOAD[FILE="kidoku.sd" DNO=1 LET=@es.KMD()]
+	}
+	IFEND[]
+
+	GOSUB[#=ES.SEL.FILELOAD]
+
+	FILEINFO[EXIST=1 FILE=$es.SAVEPATH+"gsd.sd" LET=@mRET]
+	IF[@mRET]
+	{
+		LOAD[FILE="gsd.sd" DNO=01 LET=@es.GSD()]
+		LOAD[FILE="gsd.sd" DNO=02 LET=$es.GSD()]
+		LOAD[FILE="gsd.sd" DNO=03 LET=@G()]
+		LOAD[FILE="gsd.sd" DNO=04 LET=$G()]
+	//	LOAD[FILE="gsd.sd" DNO=05 LET=$str];$T(36,11)=$str
+
+		GOSUB[#=es.CGMODE.FILELOAD pint=11]
+		GOSUB[#=es.RPMODE.FILELOAD pint=12]
+		GOSUB[#=es.MVMODE.FILELOAD pint=13]
+		GOSUB[#=es.BGMMODE.FILELOAD pint=14]
+
+	}
+	ELSE[]
+	{
+		@es.GSD(101,05) = -9999 //ウィンドウサイズX
+		@es.GSD(101,06) = -9999 //ウィンドウサイズY
+
+		@es.GSD(141,01) =   0 //システム起動回数
+		@es.GSD(141,02) =   0 //現在のスクリーンモード
+		@es.GSD(141,03) =   0 //前回GSDセーブ時点での合計起動時間(ms)
+
+		@es.GSD(125,01) =   0 //@es.SuperAutoPlayMode
+		@es.GSD(125,02) =   0 //@es.SuperAutoPlayTimeTextSp // 強制オートモード時のテキスト速度
+		@es.GSD(125,03) =   0 //@es.SuperAutoPlayTimeTextSt // 強制オートモード時の文末停止時間
+		@es.GSD(125,04) =   0 //@es.SuperAutoPlayTimeTextCl // 強制オートモード時のクリック許可
+		@es.GSD(125,05) =   0 //@es.SuperAutoPlayTimeTextSk // 強制オートモード時のスキップ許可
+
+		@es.GSD(150,01) =   0 //最後に開いたセーブロード画面のページ番号
+		@es.GSD(150,02) =   0 //最後にセーブしたセーブデータ番号
+
+		LOOP[SET=(5)]
+			@es.GSD(151,@_LC)=0 //クイックセーブデータ新規順(1=最新/5=最古) ※0ならデータ存在しない
+		LOOPEND[]
+		LOOP[SET=(50)]
+			@es.GSD(092,@_LC)= 0 //オートセーブデータ(1=最新/50=最古) ※0ならデータ存在しない
+		LOOPEND[]
+
+		@es.GSD(113,01) =   0 //フォント番号
+
+		\BTDEF.LOAD(ES.CONFIG)
+		GOSUB[#=es.GSD.INIT.CFG pint=0] //0=全初期化
+		\BT.END(ES.CONFIG)
+
+///x暫定処理
+//いずれラベル検索機能実装する.
+		\_gosub(ES.CONFIG.TX.SP.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.KTX.SP.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.KTX.FAST.VDEF)
+		\_gosub(ES.CONFIG.AUTO.SP.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.SKIP.SP.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.WINDOW.A.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.LOG.A.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.MASTER.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.MASTER.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.BGM.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.BGM.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.SE.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.SE.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.VO.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.VO.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.EMASTER.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.EMASTER.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.EBGM.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.EBGM.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.ESE.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.ESE.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.EVO.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.EVO.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.E2MASTER.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.E2MASTER.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.E2BGM.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.E2BGM.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.E2SE.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.E2SE.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.E2VO.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.E2VO.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.SMASTER.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.SMASTER.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.SBGM.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.SBGM.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.SSE.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.SSE.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.SVO.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.SVO.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.S2MASTER.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.S2MASTER.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.S2BGM.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.S2BGM.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.S2SE.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.S2SE.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VOL.S2VO.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.VOL.S2VO.MUTE.VDEF)
+		\_gosub(ES.CONFIG.VO.HILIGHT.SLIDER.VDEF)
+
+		LOOP[SET=100]
+		{
+			\_gosub(ES.CONFIG.VOL.CHARA.SLIDER.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.MUTE.ON.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.MUTE.OFF.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.EVO.SLIDER.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.EVO.MUTE.ON.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.EVO.MUTE.OFF.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.E2VO.SLIDER.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.E2VO.MUTE.ON.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.E2VO.MUTE.OFF.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.SVO.SLIDER.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.SVO.MUTE.ON.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.SVO.MUTE.OFF.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.S2VO.SLIDER.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.S2VO.MUTE.ON.VDEF, @_LC)
+			\_gosub(ES.CONFIG.VOL.CHARA.S2VO.MUTE.OFF.VDEF, @_LC)
+		}
+		LOOPEND[]
+
+		\_gosub(ES.CONFIG.SKIP.BTN.VDEF)
+		\_gosub(ES.CONFIG.SKIP.CTRL.VDEF)
+		\_gosub(ES.CONFIG.KTX.COL.VDEF)
+		\_gosub(ES.CONFIG.KSEL.COL.VDEF)
+		\_gosub(ES.CONFIG.SEL.AUTO.VDEF)
+		\_gosub(ES.CONFIG.SEL.SKIP.VDEF)
+		\_gosub(ES.CONFIG.NOACTIVE.VDEF)
+		\_gosub(ES.CONFIG.ALWAYSTOP.VDEF)
+		\_gosub(ES.CONFIG.SCRSAVER.VDEF)
+		\_gosub(ES.CONFIG.EFFECT.FAST.VDEF)
+		\_gosub(ES.CONFIG.YMV.SHOW.VDEF)
+		\_gosub(ES.CONFIG.TEXTCOUNT.VDEF)
+		\_gosub(ES.CONFIG.CONF.SAVE.VDEF)
+		\_gosub(ES.CONFIG.CONF.SAVE.OW.VDEF)
+		\_gosub(ES.CONFIG.CONF.LOAD.VDEF)
+		\_gosub(ES.CONFIG.CONF.QSAVE.VDEF)
+		\_gosub(ES.CONFIG.CONF.QLOAD.VDEF)
+		\_gosub(ES.CONFIG.CONF.PREVSEL.VDEF)
+		\_gosub(ES.CONFIG.CONF.SAVEMOVE.VDEF)
+		\_gosub(ES.CONFIG.CONF.SAVECOPY.VDEF)
+		\_gosub(ES.CONFIG.CONF.SAVECOPY.OW.VDEF)
+		\_gosub(ES.CONFIG.CONF.SAVEDEL.VDEF)
+		\_gosub(ES.CONFIG.CONF.CFGINIT.VDEF)
+		\_gosub(ES.CONFIG.CONF.REPLAYEND.VDEF)
+		\_gosub(ES.CONFIG.CONF.TITLE.VDEF)
+		\_gosub(ES.CONFIG.CONF.END.VDEF)
+		\_gosub(ES.CONFIG.FONT.BOLD.VDEF)
+		\_gosub(ES.CONFIG.FONT.SHADE.VDEF)
+		\_gosub(ES.CONFIG.FONT.OUTLINE.VDEF)
+		\_gosub(ES.CONFIG.FONT.GRADATION.VDEF)
+		\_gosub(ES.CONFIG.VO.AUTO.VDEF)
+		\_gosub(ES.CONFIG.VO.STOP.VDEF)
+		\_gosub(ES.CONFIG.VO.LOOPPLAY.VDEF)
+		\_gosub(ES.CONFIG.NEXTVOICE.VDEF)
+		\_gosub(ES.CONFIG.VOL.CHARA.SYSVOICE.VDEF)
+
+		//E-mote
+		\_gosub(ES.CONFIG.EMOTE.HAIR.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.EMOTE.BUST.SLIDER.VDEF)
+		\_gosub(ES.CONFIG.EMOTE.PARTS.SLIDER.VDEF)
+		@es.GSD(131,04) = 1		//スムースON/OFF
+
+
+		@es.GSD(110,13) = 1		//YMVムービーカットイン
+		@es.GSD(115,01) = 1		//カットイン演出
+		@es.GSD(115,04) = 0		//オートモード設定
+		@es.GSD(115,05) = 0		//自動選択１
+		@es.GSD(115,06) = 0		//自動選択２
+		@es.GSD(115,16) = 0		//立ち絵の服装
+		@es.GSD(115,17) = 0		//ＥＳＣモード
+
+
+		@es.GSD(121,01) = 1		//アイキャッチ
+		@es.GSD(121,02) = 1		//システムメッセージ
+		@es.GSD(121,03) = 1		//システムエフェクト
+		@es.GSD(121,04) = 1		//オートセーブタイミング・日付変更時
+		@es.GSD(121,05) = 1		//オートセーブタイミング・選択肢表示時
+	//	@es.GSD(121,06) = 1		//ウィンドウアイコンサイズ設定
+		@es.GSD(121,07) = 2		//オート表示アイコンサイズ設定
+		@es.GSD(121,08) = 2		//スキップ表示アイコンサイズ設定
+
+		@es.GSD(143,01) = 1		//クイックセーブ
+		@es.GSD(143,02) = 1		//クイックロード
+		@es.GSD(143,03) = 1		//クイックデータなし
+		@es.GSD(143,04) = 1		//オートセーブ
+		@es.GSD(143,05) = 1		//ロード
+		@es.GSD(143,06) = 1		//用語集に項目追加
+
+		@es.GSD(002,01) = 256	//全体(MASTER)音量
+		@es.GSD(002,02) = 256	//音楽(BGM)音量
+		@es.GSD(002,03) = 256	//効果音(SE)音量
+		@es.GSD(002,04) = 256	//ボイス(VO)音量
+		@es.GSD(002,11) = 256	//[環境]全体(EMASTER)音量
+		@es.GSD(002,12) = 256	//[環境]音楽(EBGM)音量
+		@es.GSD(002,13) = 256	//[環境]効果音(ESE)音量
+		@es.GSD(002,14) = 256	//[環境]ボイス(EVO)音量
+		@es.GSD(002,21) = 256	//[環境]全体(E2MASTER)音量
+		@es.GSD(002,22) = 256	//[環境]音楽(E2BGM)音量
+		@es.GSD(002,23) = 256	//[環境]効果音(E2SE)音量
+		@es.GSD(002,24) = 256	//[環境]ボイス(E2VO)音量
+		@es.GSD(002,31) = 256	//[システム]全体(SMASTER)音量
+		@es.GSD(002,32) = 256	//[システム]音楽(SBGM)音量
+		@es.GSD(002,33) = 256	//[システム]効果音(SSE)音量
+		@es.GSD(002,34) = 256	//[システム]ボイス(SVO)音量
+		@es.GSD(002,41) = 256	//[システム]全体(S2MASTER)音量
+		@es.GSD(002,42) = 256	//[システム]音楽(S2BGM)音量
+		@es.GSD(002,43) = 256	//[システム]効果音(S2SE)音量
+		@es.GSD(002,44) = 256	//[システム]ボイス(S2VO)音量
+
+		@es.GSD(002,05) =   1	//全体(MASTER)音量ミュート
+		@es.GSD(002,06) =   1	//音楽(BGM)音量ミュート
+		@es.GSD(002,07) =   1	//効果音(SE)音量ミュート
+		@es.GSD(002,08) =   1	//ボイス(VO)音量ミュート
+		@es.GSD(002,15) =   1	//[環境]全体(EMASTER)音量ミュート
+		@es.GSD(002,16) =   1	//[環境]音楽(EBGM)音量ミュート
+		@es.GSD(002,17) =   1	//[環境]効果音(ESE)音量ミュート
+		@es.GSD(002,18) =   1	//[環境]ボイス(EVO)音量ミュート
+		@es.GSD(002,25) =   1	//[環境]全体(E2MASTER)音量ミュート
+		@es.GSD(002,26) =   1	//[環境]音楽(E2BGM)音量ミュート
+		@es.GSD(002,27) =   1	//[環境]効果音(E2SE)音量ミュート
+		@es.GSD(002,28) =   1	//[環境]ボイス(E2VO)音量ミュート
+		@es.GSD(002,35) =   1	//[システム]全体(SMASTER)音量ミュート
+		@es.GSD(002,36) =   1	//[システム]音楽(SBGM)音量ミュート
+		@es.GSD(002,37) =   1	//[システム]効果音(SSE)音量ミュート
+		@es.GSD(002,38) =   1	//[システム]ボイス(SVO)音量ミュート
+		@es.GSD(002,45) =   1	//[システム]全体(S2MASTER)音量ミュート
+		@es.GSD(002,46) =   1	//[システム]音楽(S2BGM)音量ミュート
+		@es.GSD(002,47) =   1	//[システム]効果音(S2SE)音量ミュート
+		@es.GSD(002,48) =   1	//[システム]ボイス(S2VO)音量ミュート
+
+		LOOP[SET=10]	//チャンネル別
+		{
+			@es.GSD(003,00+@_LC) = 256	//BGMチャンネル別1
+			@es.GSD(003,50+@_LC) = 1	//BGMチャンネル別1ミュート
+			@es.GSD(006,00+@_LC) = 256	//BGMチャンネル別2
+			@es.GSD(006,50+@_LC) = 1	//BGMチャンネル別2ミュート
+			@es.GSD(003,10+@_LC) = 256	//EBGMチャンネル別1
+			@es.GSD(003,60+@_LC) = 1	//EBGMチャンネル別1ミュート
+			@es.GSD(006,10+@_LC) = 256	//EBGMチャンネル別2
+			@es.GSD(006,60+@_LC) = 1	//EBGMチャンネル別2ミュート
+			@es.GSD(003,20+@_LC) = 256	//E2BGMチャンネル別1
+			@es.GSD(003,70+@_LC) = 1	//E2BGMチャンネル別1ミュート
+			@es.GSD(006,20+@_LC) = 256	//E2BGMチャンネル別2
+			@es.GSD(006,70+@_LC) = 1	//E2BGMチャンネル別2ミュート
+			@es.GSD(003,30+@_LC) = 256	//SBGMチャンネル別1
+			@es.GSD(003,80+@_LC) = 1	//SBGMチャンネル別1ミュート
+			@es.GSD(006,30+@_LC) = 256	//SBGMチャンネル別2
+			@es.GSD(006,80+@_LC) = 1	//SBGMチャンネル別2ミュート
+			@es.GSD(003,40+@_LC) = 256	//S2BGMチャンネル別1
+			@es.GSD(003,90+@_LC) = 1	//S2BGMチャンネル別1ミュート
+			@es.GSD(006,40+@_LC) = 256	//S2BGMチャンネル別2
+			@es.GSD(006,90+@_LC) = 1	//S2BGMチャンネル別2ミュート
+
+			@es.GSD(004,00+@_LC) = 256	//SEチャンネル別1
+			@es.GSD(004,50+@_LC) = 1	//SEチャンネル別1ミュート
+			@es.GSD(007,00+@_LC) = 256	//SEチャンネル別2
+			@es.GSD(007,50+@_LC) = 1	//SEチャンネル別2ミュート
+			@es.GSD(004,10+@_LC) = 256	//ESEチャンネル別1
+			@es.GSD(004,60+@_LC) = 1	//ESEチャンネル別1ミュート
+			@es.GSD(007,10+@_LC) = 256	//ESEチャンネル別2
+			@es.GSD(007,60+@_LC) = 1	//ESEチャンネル別2ミュート
+			@es.GSD(004,20+@_LC) = 256	//E2SEチャンネル別1
+			@es.GSD(004,70+@_LC) = 1	//E2SEチャンネル別1ミュート
+			@es.GSD(007,20+@_LC) = 256	//E2SEチャンネル別2
+			@es.GSD(007,70+@_LC) = 1	//E2SEチャンネル別2ミュート
+			@es.GSD(004,30+@_LC) = 256	//SSEチャンネル別1
+			@es.GSD(004,80+@_LC) = 1	//SSEチャンネル別1ミュート
+			@es.GSD(007,30+@_LC) = 256	//SSEチャンネル別2
+			@es.GSD(007,80+@_LC) = 1	//SSEチャンネル別2ミュート
+			@es.GSD(004,40+@_LC) = 256	//S2SEチャンネル別1
+			@es.GSD(004,90+@_LC) = 1	//S2SEチャンネル別1ミュート
+			@es.GSD(007,40+@_LC) = 256	//S2SEチャンネル別2
+			@es.GSD(007,90+@_LC) = 1	//S2SEチャンネル別2ミュート
+
+			@es.GSD(005,00+@_LC) = 256	//VOチャンネル別1
+			@es.GSD(005,50+@_LC) = 1	//VOチャンネル別1ミュート
+			@es.GSD(008,00+@_LC) = 256	//VOチャンネル別2
+			@es.GSD(008,50+@_LC) = 1	//VOチャンネル別2ミュート
+			@es.GSD(005,10+@_LC) = 256	//EVOチャンネル別1
+			@es.GSD(005,60+@_LC) = 1	//EVOチャンネル別1ミュート
+			@es.GSD(008,10+@_LC) = 256	//EVOチャンネル別2
+			@es.GSD(008,60+@_LC) = 1	//EVOチャンネル別2ミュート
+			@es.GSD(005,20+@_LC) = 256	//E2VOチャンネル別1
+			@es.GSD(005,70+@_LC) = 1	//E2VOチャンネル別1ミュート
+			@es.GSD(008,20+@_LC) = 256	//E2VOチャンネル別2
+			@es.GSD(008,70+@_LC) = 1	//E2VOチャンネル別2ミュート
+			@es.GSD(005,30+@_LC) = 256	//SVOチャンネル別1
+			@es.GSD(005,80+@_LC) = 1	//SVOチャンネル別1ミュート
+			@es.GSD(008,30+@_LC) = 256	//SVOチャンネル別2
+			@es.GSD(008,80+@_LC) = 1	//SVOチャンネル別2ミュート
+			@es.GSD(005,40+@_LC) = 256	//S2VOチャンネル別1
+			@es.GSD(005,90+@_LC) = 1	//S2VOチャンネル別1ミュート
+			@es.GSD(008,40+@_LC) = 256	//S2VOチャンネル別2
+			@es.GSD(008,90+@_LC) = 1	//S2VOチャンネル別2ミュート
+		}
+		LOOPEND[]
+
+		LOOP[SET=100]	//キャラクター別
+		{
+			@es.GSD(011,@_LC) = 256	//VOキャラ別ボイス2音量
+			@es.GSD(012,@_LC) = 1	//VOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+			@es.GSD(015,@_LC) = 256	//EVOキャラ別ボイス2音量
+			@es.GSD(016,@_LC) = 1	//EVOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+			@es.GSD(019,@_LC) = 256	//E2VOキャラ別ボイス2音量
+			@es.GSD(020,@_LC) = 1	//E2VOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+			@es.GSD(023,@_LC) = 256	//SVOキャラ別ボイス2音量
+			@es.GSD(024,@_LC) = 1	//SVOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+			@es.GSD(027,@_LC) = 256	//S2VOキャラ別ボイス2音量
+			@es.GSD(028,@_LC) = 1	//S2VOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+		}
+		LOOPEND[]
+
+
+		LOOP[SET=128-1]
+			$es.GSD(@_LC) = ""
+		LOOPEND[]
+
+	}
+	IFEND[]
+
+	//ウィンドウサイズ反映
+	//
+	INT[@WSX=@es.GSD(101,01)]
+	INT[@WSY=@es.GSD(101,02)]
+	INT[@MAX=@es.GSD(101,03)]
+	INT[@DSP=@es.GSD(101,04)]
+	INT[@WLX=@es.GSD(101,05)]
+	INT[@WLY=@es.GSD(101,06)]
+
+	//微妙な誤差はスナップさせる.
+	IF[@WSX>=@es.WSX-6 && @WSX<=@es.WSX+6] @WSX=@es.WSX IFEND[]
+	IF[@WSY>=@es.WSY-4 && @WSY<=@es.WSY+4] @WSY=@es.WSY IFEND[]
+
+	IF[@WSX==0] @WSX=@es.WSX IFEND[]
+	IF[@WSY==0] @WSY=@es.WSY IFEND[]
+	IF[@WSX< 128] @WSX=128 IFEND[]
+	IF[@WSY<  16] @WSY= 16 IFEND[]
+	IF[@WSX>@_SCREEN_SIZE_X] @WSX=@_SCREEN_SIZE_X IFEND[]
+	IF[@WSY>@_SCREEN_SIZE_Y] @WSY=@_SCREEN_SIZE_Y IFEND[]
+
+	IF[@_WINDOW_INIT_POS==0] //「起動時のウィンドウ位置とサイズ」が「前回終了時の状態」なら
+	{
+		  IF[@WLX==-9999 && @WLY==-9999] //初回起動時
+		ELSE[@WLX<=-9999 || @WLY<=-9999] //最小化時 -32000,-32000
+			WINDOW[NO=0 X=0 Y=0]
+		ELSE[]
+			WINDOW[NO=0 X=@WLX Y=@WLY]
+		IFEND[]
+
+		IF[@MAX]
+			WINDOW[NO=0 WSX=@es.WSX WSY=@es.WSY]
+			WINDOW[NO=0 MAXIMIZE=1]
+		ELSE[]
+			WINDOW[NO=0 WSX=@WSX WSY=@WSY]
+			@es.WSX = @WSX
+			@es.WSY = @WSY
+		IFEND[]
+	}
+	IFEND[]
+
+	\GSD.REFLECT
+
+	return[]
+}
+
+//----------------------------------------------------------------
+//
+//■各設定一括初期化処理
+//
+//  その後必ず \GSD.REFRECT を通るようにする.
+//
+//----------------------------------------------------------------
+#=es.GSD.INIT.CFG
+{
+	GOSUB[#=es.BT.VDEFLIST pstr="ES.CONFIG" pint2=@_PINT(1)] //ボタングループ番号
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■サウンドプリセット
+//----------------------------------------------------------------
+#=es.GSD.PRESET
+{
+	IF[@_PINT(1)==1]
+	{
+		@es.GSD(001,02) = 256*030/100	//音楽(BGM)音量
+		@es.GSD(001,03) = 256*050/100	//効果音(SE)音量
+		@es.GSD(001,04) = 256*100/100	//ボイス(VO)音量
+		@es.GSD(001,13) = 256*060/100	//[環境]効果音(ESE)音量
+	}
+	IFEND[]
+	IF[@_PINT(1)==2]
+	{
+		@es.GSD(001,02) = 256*050/100	//音楽(BGM)音量
+		@es.GSD(001,03) = 256*070/100	//効果音(SE)音量
+		@es.GSD(001,04) = 256*100/100	//ボイス(VO)音量
+		@es.GSD(001,13) = 256*070/100	//[環境]効果音(ESE)音量
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■
+//----------------------------------------------------------------
+#=es.GSD.SAVE
+{
+	INT[@mRET]
+
+	//---------------------------- ウィンドウサイズ取得
+	WINDOWINFO[NO=0 WSX=1 LET=@es.GSD(101,01)]
+	WINDOWINFO[NO=0 WSY=1 LET=@es.GSD(101,02)]
+	WINDOWINFO[NO=0 FULLSCREEN2=1 LET=@es.GSD(101,03)]
+	WINDOWINFO[NO=0 DISPLAYNO=1 LET=@es.GSD(101,04)]
+	WINDOWINFO[NO=0 X=1 LET=@es.GSD(101,05)]
+	WINDOWINFO[NO=0 Y=1 LET=@es.GSD(101,06)]
+
+	//---------------------------- 今回の起動時間を加算
+	@es.GSD(141,03)+=@_OS_TIME(1)
+
+	//---------------------------- 保存処理
+	SAVE[DNO=01 SET=@es.GSD()]
+	SAVE[DNO=02 SET=$es.GSD()]
+	SAVE[DNO=03 SET=@G()]
+	SAVE[DNO=04 SET=$G()]
+//	SAVE[DNO=05 SET=$T(36,11)]
+
+	GOSUB[#=es.CGMODE.FILESAVE pint=11]
+	GOSUB[#=es.RPMODE.FILESAVE pint=12]
+	GOSUB[#=es.MVMODE.FILESAVE pint=13]
+	GOSUB[#=es.BGMMODE.FILESAVE pint=14]
+
+	SAVE[FILE="gsd.sd"]
+
+	GOSUB[#=ES.SEL.FILESAVE]
+
+	FILEINFO[EXIST=1 FILE=$es.SAVEPATH+"kidoku.sd" LET=@mRET]
+	IF[@mRET==0 || @es.KMD.FLAG] //ファイルが消えてるかフラグ更新されているなら
+		@es.KMD.FLAG=0
+		SAVE[DNO=1 SET=@es.KMD()]
+		SAVE[FILE="kidoku.sd"]
+	IFEND[]
+
+	\GSD.REFLECT
+
+	return[]
+}
+
+
+
+//----------------------------------------------------------------
+//■
+//----------------------------------------------------------------
+#=es.GSD.REFLECT
+{
+	//---------------------------------------------------------------------
+	// ボリュームセット
+	//---------------------------------------------------------------------
+	//	GOSUB[#=es.SOUND.SETVOL]
+
+	//---------------------------------------------------------------------
+	// テキスト表示速度セット
+	//---------------------------------------------------------------------
+		GOSUB[#=es.TX.SPD.SET pint=@es.GSD(120,01)]
+
+	//---------------------------------------------------------------------
+	// フォント反映
+	//---------------------------------------------------------------------
+		\_gosub(es.FONT.REFRECT)
+
+	//---------------------------------------------------------------------
+	// ウィンドウを常に手前に表示する
+	//---------------------------------------------------------------------
+		WINDOW[NO=0 Z=@es.GSD(110,01)]
+
+	//---------------------------------------------------------------------
+	// 非アクティブ時の動作設定
+	//---------------------------------------------------------------------
+		SYSTEM[BACKGROUNDEXEC=@es.GSD(110,02)]
+
+	//---------------------------------------------------------------------
+	// スクリーンセーバー防止設定
+	//---------------------------------------------------------------------
+		SYSTEM[SCREENSAVER=@es.GSD(110,03)]
+
+	//---------------------------------------------------------------------
+	// 演出スキップ速度
+	//---------------------------------------------------------------------
+		GOSUB[#=es.CALC.DIRECTSKIPSP] @es.GSD(120,05) = @_RINT(1)
+
+	//---------------------------------------------------------------------
+	// E-mote揺れスケール反映
+	//---------------------------------------------------------------------
+		GOSUB[#=es.EMOTE.CFG.SET]
+
+	//---------------------------------------------------------------------
+	// マウスカーソル反映
+	//---------------------------------------------------------------------
+	//	GOSUB[#=es.MCURSOR.SET]
+
+
+	return[]
+}
+
+
+
+
+//@es.GSD(001,01) //MASTER全体1
+//@es.GSD(001,02) //BGM全体1
+//@es.GSD(001,03) //SE全体1
+//@es.GSD(001,04) //VO全体1
+//@es.GSD(001,05) //MASTER全体1ミュート
+//@es.GSD(001,06) //BGM全体1ミュート
+//@es.GSD(001,07) //SE全体1ミュート
+//@es.GSD(001,08) //VO全体1ミュート
+//@es.GSD(002,01) //MASTER全体2
+//@es.GSD(002,02) //BGM全体2
+//@es.GSD(002,03) //SE全体2
+//@es.GSD(002,04) //VO全体2
+//@es.GSD(002,05) //MASTER全体2ミュート
+//@es.GSD(002,06) //BGM全体2ミュート
+//@es.GSD(002,07) //SE全体2ミュート
+//@es.GSD(002,08) //VO全体2ミュート
+
+//@es.GSD(001,11) //EMASTER全体1
+//@es.GSD(001,12) //EBGM全体1
+//@es.GSD(001,13) //ESE全体1
+//@es.GSD(001,14) //EVO全体1
+//@es.GSD(001,15) //EMASTER全体1ミュート
+//@es.GSD(001,16) //EBGM全体1ミュート
+//@es.GSD(001,17) //ESE全体1ミュート
+//@es.GSD(001,18) //EVO全体1ミュート
+//@es.GSD(002,11) //EMASTER全体2
+//@es.GSD(002,12) //EBGM全体2
+//@es.GSD(002,13) //ESE全体2
+//@es.GSD(002,14) //EVO全体2
+//@es.GSD(002,15) //EMASTER全体2ミュート
+//@es.GSD(002,16) //EBGM全体2ミュート
+//@es.GSD(002,17) //ESE全体2ミュート
+//@es.GSD(002,18) //EVO全体2ミュート
+
+//@es.GSD(001,21) //E2MASTER全体1
+//@es.GSD(001,22) //E2BGM全体1
+//@es.GSD(001,23) //E2SE全体1
+//@es.GSD(001,24) //E2VO全体1
+//@es.GSD(001,25) //E2MASTER全体1ミュート
+//@es.GSD(001,26) //E2BGM全体1ミュート
+//@es.GSD(001,27) //E2SE全体1ミュート
+//@es.GSD(001,28) //E2VO全体1ミュート
+//@es.GSD(002,21) //E2MASTER全体2
+//@es.GSD(002,22) //E2BGM全体2
+//@es.GSD(002,23) //E2SE全体2
+//@es.GSD(002,24) //E2VO全体2
+//@es.GSD(002,25) //E2MASTER全体2ミュート
+//@es.GSD(002,26) //E2BGM全体2ミュート
+//@es.GSD(002,27) //E2SE全体2ミュート
+//@es.GSD(002,28) //E2VO全体2ミュート
+
+//@es.GSD(001,31) //SMASTER全体1
+//@es.GSD(001,32) //SBGM全体1
+//@es.GSD(001,33) //SSE全体1
+//@es.GSD(001,34) //SVO全体1
+//@es.GSD(001,35) //SMASTER全体1ミュート
+//@es.GSD(001,36) //SBGM全体1ミュート
+//@es.GSD(001,37) //SSE全体1ミュート
+//@es.GSD(001,38) //SVO全体1ミュート
+//@es.GSD(002,31) //SMASTER全体2
+//@es.GSD(002,32) //SBGM全体2
+//@es.GSD(002,33) //SSE全体2
+//@es.GSD(002,34) //SVO全体2
+//@es.GSD(002,35) //SMASTER全体2ミュート
+//@es.GSD(002,36) //SBGM全体2ミュート
+//@es.GSD(002,37) //SSE全体2ミュート
+//@es.GSD(002,38) //SVO全体2ミュート
+
+//@es.GSD(001,41) //S2MASTER全体1
+//@es.GSD(001,42) //S2BGM全体1
+//@es.GSD(001,43) //S2SE全体1
+//@es.GSD(001,44) //S2VO全体1
+//@es.GSD(001,45) //S2MASTER全体1ミュート
+//@es.GSD(001,46) //S2BGM全体1ミュート
+//@es.GSD(001,47) //S2SE全体1ミュート
+//@es.GSD(001,48) //S2VO全体1ミュート
+//@es.GSD(002,41) //S2MASTER全体2
+//@es.GSD(002,42) //S2BGM全体2
+//@es.GSD(002,43) //S2SE全体2
+//@es.GSD(002,44) //S2VO全体2
+//@es.GSD(002,45) //S2MASTER全体2ミュート
+//@es.GSD(002,46) //S2BGM全体2ミュート
+//@es.GSD(002,47) //S2SE全体2ミュート
+//@es.GSD(002,48) //S2VO全体2ミュート
+
+
+//@es.GSD(003,01～10)	//BGMチャンネル別1
+//@es.GSD(004,01～10)	//SEチャンネル別1
+//@es.GSD(005,01～10)	//VOチャンネル別1
+//@es.GSD(003,51～60)	//BGMチャンネル別1ミュート
+//@es.GSD(004,51～60)	//SEチャンネル別1ミュート
+//@es.GSD(005,51～60)	//VOチャンネル別1ミュート
+//@es.GSD(006,01～10)	//BGMチャンネル別2
+//@es.GSD(007,01～10)	//SEチャンネル別2
+//@es.GSD(008,01～10)	//VOチャンネル別2
+//@es.GSD(006,51～60)	//BGMチャンネル別2ミュート
+//@es.GSD(007,51～60)	//SEチャンネル別2ミュート
+//@es.GSD(008,51～60)	//VOチャンネル別2ミュート
+
+//@es.GSD(003,11～20)	//EBGMチャンネル別1
+//@es.GSD(004,11～20)	//ESEチャンネル別1
+//@es.GSD(005,11～20)	//EVOチャンネル別1
+//@es.GSD(003,61～70)	//EBGMチャンネル別1ミュート
+//@es.GSD(004,61～70)	//ESEチャンネル別1ミュート
+//@es.GSD(005,61～70)	//EVOチャンネル別1ミュート
+//@es.GSD(006,11～20)	//EBGMチャンネル別2
+//@es.GSD(007,11～20)	//ESEチャンネル別2
+//@es.GSD(008,11～20)	//EVOチャンネル別2
+//@es.GSD(006,61～70)	//EBGMチャンネル別2ミュート
+//@es.GSD(007,61～70)	//ESEチャンネル別2ミュート
+//@es.GSD(008,61～70)	//EVOチャンネル別2ミュート
+
+//@es.GSD(003,21～30)	//E2BGMチャンネル別1
+//@es.GSD(004,21～30)	//E2SEチャンネル別1
+//@es.GSD(005,21～30)	//E2VOチャンネル別1
+//@es.GSD(003,71～80)	//E2BGMチャンネル別1ミュート
+//@es.GSD(004,71～80)	//E2SEチャンネル別1ミュート
+//@es.GSD(005,71～80)	//E2VOチャンネル別1ミュート
+//@es.GSD(006,21～30)	//E2BGMチャンネル別2
+//@es.GSD(007,21～30)	//E2SEチャンネル別2
+//@es.GSD(008,21～30)	//E2VOチャンネル別2
+//@es.GSD(006,71～80)	//E2BGMチャンネル別2ミュート
+//@es.GSD(007,71～80)	//E2SEチャンネル別2ミュート
+//@es.GSD(008,71～80)	//E2VOチャンネル別2ミュート
+
+//@es.GSD(003,31～40)	//SBGMチャンネル別1
+//@es.GSD(004,31～40)	//SSEチャンネル別1
+//@es.GSD(005,31～40)	//SVOチャンネル別1
+//@es.GSD(003,81～90)	//SBGMチャンネル別1ミュート
+//@es.GSD(004,81～90)	//SSEチャンネル別1ミュート
+//@es.GSD(005,81～90)	//SVOチャンネル別1ミュート
+//@es.GSD(006,31～40)	//SBGMチャンネル別2
+//@es.GSD(007,31～40)	//SSEチャンネル別2
+//@es.GSD(008,31～40)	//SVOチャンネル別2
+//@es.GSD(006,81～90)	//SBGMチャンネル別2ミュート
+//@es.GSD(007,81～90)	//SSEチャンネル別2ミュート
+//@es.GSD(008,81～90)	//SVOチャンネル別2ミュート
+
+//@es.GSD(003,41～50)	//S2BGMチャンネル別1
+//@es.GSD(004,41～50)	//S2SEチャンネル別1
+//@es.GSD(005,41～50)	//S2VOチャンネル別1
+//@es.GSD(003,91～100)	//S2BGMチャンネル別1ミュート
+//@es.GSD(004,91～100)	//S2SEチャンネル別1ミュート
+//@es.GSD(005,91～100)	//S2VOチャンネル別1ミュート
+//@es.GSD(006,41～50)	//S2BGMチャンネル別2
+//@es.GSD(007,41～50)	//S2SEチャンネル別2
+//@es.GSD(008,41～50)	//S2VOチャンネル別2
+//@es.GSD(006,91～100)	//S2BGMチャンネル別2ミュート
+//@es.GSD(007,91～100)	//S2SEチャンネル別2ミュート
+//@es.GSD(008,91～100)	//S2VOチャンネル別2ミュート
+
+
+//@es.GSD(009,01～100)	//VOキャラ別ボイス1音量
+//@es.GSD(010,01～100)	//VOキャラ別ボイス1ONOFF(ON=1/OFF=0)
+//@es.GSD(011,01～100)	//VOキャラ別ボイス2音量
+//@es.GSD(012,01～100)	//VOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+//@es.GSD(013,01～100)	//EVOキャラ別ボイス1音量
+//@es.GSD(014,01～100)	//EVOキャラ別ボイス1ONOFF(ON=1/OFF=0)
+//@es.GSD(015,01～100)	//EVOキャラ別ボイス2音量
+//@es.GSD(016,01～100)	//EVOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+//@es.GSD(017,01～100)	//E2VOキャラ別システムボイス1音量
+//@es.GSD(018,01～100)	//E2VOキャラ別システムボイス1ONOFF(ON=1/OFF=0)
+//@es.GSD(019,01～100)	//E2VOキャラ別システムボイス2音量
+//@es.GSD(020,01～100)	//E2VOキャラ別システムボイス2ONOFF(ON=1/OFF=0)
+//@es.GSD(021,01～100)	//SVOキャラ別ボイス1音量
+//@es.GSD(022,01～100)	//SVOキャラ別ボイス1ONOFF(ON=1/OFF=0)
+//@es.GSD(023,01～100)	//SVOキャラ別ボイス2音量
+//@es.GSD(024,01～100)	//SVOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+//@es.GSD(025,01～100)	//S2VOキャラ別システムボイス1音量
+//@es.GSD(026,01～100)	//S2VOキャラ別システムボイス1ONOFF(ON=1/OFF=0)
+//@es.GSD(027,01～100)	//S2VOキャラ別システムボイス2音量
+//@es.GSD(028,01～100)	//S2VOキャラ別システムボイス2ONOFF(ON=1/OFF=0)
+
+
+//@es.GSD(035,01) //システムボイス設定キャラ番号
+//@es.GSD(001,09) //[ＢＧＭ鑑賞モード専用]音楽(BGM)音量
+//@es.GSD(031,09) //[ＢＧＭ鑑賞モード専用]音楽(BGM)音量ミュート
+//@es.GSD(029,01) //音声再生時のＢＧＭ減衰率
+
+
+
+
+
+
+
+//@es.LSD(001,01)	//MASTER全体1
+//@es.LSD(001,02)	//BGM全体1
+//@es.LSD(001,03)	//SE全体1
+//@es.LSD(001,04)	//VO全体1
+//@es.LSD(001,05)	//MASTER全体1ミュート
+//@es.LSD(001,06)	//BGM全体1ミュート
+//@es.LSD(001,07)	//SE全体1ミュート
+//@es.LSD(001,08)	//VO全体1ミュート
+//@es.LSD(002,01)	//MASTER全体2
+//@es.LSD(002,02)	//BGM全体2
+//@es.LSD(002,03)	//SE全体2
+//@es.LSD(002,04)	//VO全体2
+//@es.LSD(002,05)	//MASTER全体2ミュート
+//@es.LSD(002,06)	//BGM全体2ミュート
+//@es.LSD(002,07)	//SE全体2ミュート
+//@es.LSD(002,08)	//VO全体2ミュート
+
+//@es.LSD(001,11)	//EMASTER全体1
+//@es.LSD(001,12)	//EBGM全体1
+//@es.LSD(001,13)	//ESE全体1
+//@es.LSD(001,14)	//EVO全体1
+//@es.LSD(001,15)	//EMASTER全体1ミュート
+//@es.LSD(001,16)	//EBGM全体1ミュート
+//@es.LSD(001,17)	//ESE全体1ミュート
+//@es.LSD(001,18)	//EVO全体1ミュート
+//@es.LSD(002,11)	//EMASTER全体2
+//@es.LSD(002,12)	//EBGM全体2
+//@es.LSD(002,13)	//ESE全体2
+//@es.LSD(002,14)	//EVO全体2
+//@es.LSD(002,15)	//EMASTER全体2ミュート
+//@es.LSD(002,16)	//EBGM全体2ミュート
+//@es.LSD(002,17)	//ESE全体2ミュート
+//@es.LSD(002,18)	//EVO全体2ミュート
+
+//@es.LSD(001,21)	//E2MASTER全体1
+//@es.LSD(001,22)	//E2BGM全体1
+//@es.LSD(001,23)	//E2SE全体1
+//@es.LSD(001,24)	//E2VO全体1
+//@es.LSD(001,25)	//E2MASTER全体1ミュート
+//@es.LSD(001,26)	//E2BGM全体1ミュート
+//@es.LSD(001,27)	//E2SE全体1ミュート
+//@es.LSD(001,28)	//E2VO全体1ミュート
+//@es.LSD(002,21)	//E2MASTER全体2
+//@es.LSD(002,22)	//E2BGM全体2
+//@es.LSD(002,23)	//E2SE全体2
+//@es.LSD(002,24)	//E2VO全体2
+//@es.LSD(002,25)	//E2MASTER全体2ミュート
+//@es.LSD(002,26)	//E2BGM全体2ミュート
+//@es.LSD(002,27)	//E2SE全体2ミュート
+//@es.LSD(002,28)	//E2VO全体2ミュート
+
+//@es.LSD(001,31)	//SMASTER全体1
+//@es.LSD(001,32)	//SBGM全体1
+//@es.LSD(001,33)	//SSE全体1
+//@es.LSD(001,34)	//SVO全体1
+//@es.LSD(001,35)	//SMASTER全体1ミュート
+//@es.LSD(001,36)	//SBGM全体1ミュート
+//@es.LSD(001,37)	//SSE全体1ミュート
+//@es.LSD(001,38)	//SVO全体1ミュート
+//@es.LSD(002,31)	//SMASTER全体2
+//@es.LSD(002,32)	//SBGM全体2
+//@es.LSD(002,33)	//SSE全体2
+//@es.LSD(002,34)	//SVO全体2
+//@es.LSD(002,35)	//SMASTER全体2ミュート
+//@es.LSD(002,36)	//SBGM全体2ミュート
+//@es.LSD(002,37)	//SSE全体2ミュート
+//@es.LSD(002,38)	//SVO全体2ミュート
+
+//@es.LSD(002,41)	//S2MASTER全体1
+//@es.LSD(002,42)	//S2BGM全体1
+//@es.LSD(002,43)	//S2SE全体1
+//@es.LSD(002,44)	//S2VO全体1
+//@es.LSD(002,45)	//S2MASTER全体1ミュート
+//@es.LSD(002,46)	//S2BGM全体1ミュート
+//@es.LSD(002,47)	//S2SE全体1ミュート
+//@es.LSD(002,48)	//S2VO全体1ミュート
+//@es.LSD(002,41)	//S2MASTER全体2
+//@es.LSD(002,42)	//S2BGM全体2
+//@es.LSD(002,43)	//S2SE全体2
+//@es.LSD(002,44)	//S2VO全体2
+//@es.LSD(002,45)	//S2MASTER全体2ミュート
+//@es.LSD(002,46)	//S2BGM全体2ミュート
+//@es.LSD(002,47)	//S2SE全体2ミュート
+//@es.LSD(002,48)	//S2VO全体2ミュート
+
+
+//@es.LSD(003,01～10)	//BGMチャンネル別1
+//@es.LSD(004,01～10)	//SEチャンネル別1
+//@es.LSD(005,01～10)	//VOチャンネル別1
+//@es.LSD(003,51～60)	//BGMチャンネル別1ミュート
+//@es.LSD(004,51～60)	//SEチャンネル別1ミュート
+//@es.LSD(005,51～60)	//VOチャンネル別1ミュート
+//@es.LSD(006,01～10)	//BGMチャンネル別2
+//@es.LSD(007,01～10)	//SEチャンネル別2
+//@es.LSD(008,01～10)	//VOチャンネル別2
+//@es.LSD(006,51～60)	//BGMチャンネル別2ミュート
+//@es.LSD(007,51～60)	//SEチャンネル別2ミュート
+//@es.LSD(008,51～60)	//VOチャンネル別2ミュート
+
+//@es.LSD(003,11～20)	//EBGMチャンネル別1
+//@es.LSD(004,11～20)	//ESEチャンネル別1
+//@es.LSD(005,11～20)	//EVOチャンネル別1
+//@es.LSD(003,61～70)	//EBGMチャンネル別1ミュート
+//@es.LSD(004,61～70)	//ESEチャンネル別1ミュート
+//@es.LSD(005,61～70)	//EVOチャンネル別1ミュート
+//@es.LSD(006,11～20)	//EBGMチャンネル別2
+//@es.LSD(007,11～20)	//ESEチャンネル別2
+//@es.LSD(008,11～20)	//EVOチャンネル別2
+//@es.LSD(006,61～70)	//EBGMチャンネル別2ミュート
+//@es.LSD(007,61～70)	//ESEチャンネル別2ミュート
+//@es.LSD(008,61～70)	//EVOチャンネル別2ミュート
+
+//@es.LSD(003,21～30)	//E2BGMチャンネル別1
+//@es.LSD(004,21～30)	//E2SEチャンネル別1
+//@es.LSD(005,21～30)	//E2VOチャンネル別1
+//@es.LSD(003,71～80)	//E2BGMチャンネル別1ミュート
+//@es.LSD(004,71～80)	//E2SEチャンネル別1ミュート
+//@es.LSD(005,71～80)	//E2VOチャンネル別1ミュート
+//@es.LSD(006,21～30)	//E2BGMチャンネル別2
+//@es.LSD(007,21～30)	//E2SEチャンネル別2
+//@es.LSD(008,21～30)	//E2VOチャンネル別2
+//@es.LSD(006,71～80)	//E2BGMチャンネル別2ミュート
+//@es.LSD(007,71～80)	//E2SEチャンネル別2ミュート
+//@es.LSD(008,71～80)	//E2VOチャンネル別2ミュート
+
+//@es.LSD(003,31～40)	//SBGMチャンネル別1
+//@es.LSD(004,31～40)	//SSEチャンネル別1
+//@es.LSD(005,31～40)	//SVOチャンネル別1
+//@es.LSD(003,81～90)	//SBGMチャンネル別1ミュート
+//@es.LSD(004,81～90)	//SSEチャンネル別1ミュート
+//@es.LSD(005,81～90)	//SVOチャンネル別1ミュート
+//@es.LSD(006,31～40)	//SBGMチャンネル別2
+//@es.LSD(007,31～40)	//SSEチャンネル別2
+//@es.LSD(008,31～40)	//SVOチャンネル別2
+//@es.LSD(006,81～90)	//SBGMチャンネル別2ミュート
+//@es.LSD(007,81～90)	//SSEチャンネル別2ミュート
+//@es.LSD(008,81～90)	//SVOチャンネル別2ミュート
+
+//@es.LSD(003,41～50)	//S2BGMチャンネル別1
+//@es.LSD(004,41～50)	//S2SEチャンネル別1
+//@es.LSD(005,41～50)	//S2VOチャンネル別1
+//@es.LSD(003,91～100)	//S2BGMチャンネル別1ミュート
+//@es.LSD(004,91～100)	//S2SEチャンネル別1ミュート
+//@es.LSD(005,91～100)	//S2VOチャンネル別1ミュート
+//@es.LSD(006,41～50)	//S2BGMチャンネル別2
+//@es.LSD(007,41～50)	//S2SEチャンネル別2
+//@es.LSD(008,41～50)	//S2VOチャンネル別2
+//@es.LSD(006,91～100)	//S2BGMチャンネル別2ミュート
+//@es.LSD(007,91～100)	//S2SEチャンネル別2ミュート
+//@es.LSD(008,91～100)	//S2VOチャンネル別2ミュート
+
+
+//@es.LSD(009,01～100)	//VOキャラ別ボイス1音量
+//@es.LSD(010,01～100)	//VOキャラ別ボイス1ONOFF(ON=1/OFF=0)
+//@es.LSD(011,01～100)	//VOキャラ別ボイス2音量
+//@es.LSD(012,01～100)	//VOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+//@es.LSD(013,01～100)	//EVOキャラ別ボイス1音量
+//@es.LSD(014,01～100)	//EVOキャラ別ボイス1ONOFF(ON=1/OFF=0)
+//@es.LSD(015,01～100)	//EVOキャラ別ボイス2音量
+//@es.LSD(016,01～100)	//EVOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+//@es.LSD(017,01～100)	//E2VOキャラ別システムボイス1音量
+//@es.LSD(018,01～100)	//E2VOキャラ別システムボイス1ONOFF(ON=1/OFF=0)
+//@es.LSD(019,01～100)	//E2VOキャラ別システムボイス2音量
+//@es.LSD(020,01～100)	//E2VOキャラ別システムボイス2ONOFF(ON=1/OFF=0)
+//@es.LSD(021,01～100)	//SVOキャラ別ボイス1音量
+//@es.LSD(022,01～100)	//SVOキャラ別ボイス1ONOFF(ON=1/OFF=0)
+//@es.LSD(023,01～100)	//SVOキャラ別ボイス2音量
+//@es.LSD(024,01～100)	//SVOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+//@es.LSD(025,01～100)	//S2VOキャラ別システムボイス1音量
+//@es.LSD(026,01～100)	//S2VOキャラ別システムボイス1ONOFF(ON=1/OFF=0)
+//@es.LSD(027,01～100)	//S2VOキャラ別システムボイス2音量
+//@es.LSD(028,01～100)	//S2VOキャラ別システムボイス2ONOFF(ON=1/OFF=0)
+
+
+//@es.LSD(031,01)	//年
+//@es.LSD(031,02)	//月
+//@es.LSD(031,03)	//日
+//@es.LSD(031,04)	//週
+//@es.LSD(031,05)	//時
+//@es.LSD(031,06)	//分
+//@es.LSD(031,07)	//秒
+//@es.LSD(031,10)	//表示フラグ
+//
+//@es.LSD(032,01)	//雪数1
+//@es.LSD(032,02)	//雪数2
+//@es.LSD(032,03)	//雪Z1
+//@es.LSD(032,04)	//雪Z2
+//@es.LSD(032,05)	//雪Y速度1
+//@es.LSD(032,06)	//雪Y速度2
+//@es.LSD(032,07)	//雪Xスケール1
+//@es.LSD(032,08)	//雪Xスケール2
+//@es.LSD(032,09)	//雪X周期速度1
+//@es.LSD(032,10)	//雪X周期速度2
+//
+//@es.LSD(033,01)	//SP.SKDEF.CLICK
+//@es.LSD(033,02)	//SP.SKDEF.CTRL
+//@es.LSD(033,03)	//WA.SKDEF.CLICK
+//@es.LSD(033,04)	//WA.SKDEF.CTRL
+//@es.LSD(033,05)	//BG.SKDEF.CLICK
+//@es.LSD(033,06)	//BG.SKDEF.CTRL
+//@es.LSD(033,07)	//EV.SKDEF.CLICK
+//@es.LSD(033,08)	//EV.SKDEF.CTRL
+
+//@es.LSD(033,11)	//SP.SKDEF.CLICK(内部用)
+//@es.LSD(033,12)	//SP.SKDEF.CTRL(内部用)
+
+//@es.LSD(034,01)	//オートチップ表示・非表示設定
+//@es.LSD(034,02)	//スキップチップ表示・非表示設定
+
+//@es.LSD(035,01)	//自動空白挿入機能(0=オン/1=オフ)
+
+
+//----------------------------------------------------------------
+//■
+//----------------------------------------------------------------
+#=es.LSD.INIT
+{
+
+	@es.LSD(001,01)	= @T(12,01)	//MASTER全体1
+	@es.LSD(001,02)	= @T(12,02)	//BGM全体1
+	@es.LSD(001,03)	= @T(12,03)	//SE全体1
+	@es.LSD(001,04)	= @T(12,04)	//VO全体1
+	@es.LSD(001,05)	=   1		//MASTER全体1ミュート
+	@es.LSD(001,06)	=   1		//BGM全体1ミュート
+	@es.LSD(001,07)	=   1		//SE全体1ミュート
+	@es.LSD(001,08)	=   1		//VO全体1ミュート
+	@es.LSD(002,01)	= 256		//MASTER全体2
+	@es.LSD(002,02)	= 256		//BGM全体2
+	@es.LSD(002,03)	= 256		//SE全体2
+	@es.LSD(002,04)	= 256		//VO全体2
+	@es.LSD(002,05)	=   1		//MASTER全体2ミュート
+	@es.LSD(002,06)	=   1		//BGM全体2ミュート
+	@es.LSD(002,07)	=   1		//SE全体2ミュート
+	@es.LSD(002,08)	=   1		//VO全体2ミュート
+
+	@es.LSD(001,11)	= 256		//EMASTER全体1
+	@es.LSD(001,12)	= 256		//EBGM全体1
+	@es.LSD(001,13)	= @T(12,13)	//ESE全体1
+	@es.LSD(001,14)	= 256		//EVO全体1
+	@es.LSD(001,15)	=   1		//EMASTER全体1ミュート
+	@es.LSD(001,16)	=   1		//EBGM全体1ミュート
+	@es.LSD(001,17)	=   1		//ESE全体1ミュート
+	@es.LSD(001,18)	=   1		//EVO全体1ミュート
+	@es.LSD(002,11)	= 256		//EMASTER全体2
+	@es.LSD(002,12)	= 256		//EBGM全体2
+	@es.LSD(002,13)	= 256		//ESE全体2
+	@es.LSD(002,14)	= 256		//EVO全体2
+	@es.LSD(002,15)	=   1		//EMASTER全体2ミュート
+	@es.LSD(002,16)	=   1		//EBGM全体2ミュート
+	@es.LSD(002,17)	=   1		//ESE全体2ミュート
+	@es.LSD(002,18)	=   1		//EVO全体2ミュート
+
+	@es.LSD(001,21)	= 256		//E2MASTER全体1
+	@es.LSD(001,22)	= 256		//E2BGM全体1
+	@es.LSD(001,23)	= 256		//E2SE全体1
+	@es.LSD(001,24)	= 256		//E2VO全体1
+	@es.LSD(001,25)	=   1		//E2MASTER全体1ミュート
+	@es.LSD(001,26)	=   1		//E2BGM全体1ミュート
+	@es.LSD(001,27)	=   1		//E2SE全体1ミュート
+	@es.LSD(001,28)	=   1		//E2VO全体1ミュート
+	@es.LSD(002,21)	= 256		//E2MASTER全体2
+	@es.LSD(002,22)	= 256		//E2BGM全体2
+	@es.LSD(002,23)	= 256		//E2SE全体2
+	@es.LSD(002,24)	= 256		//E2VO全体2
+	@es.LSD(002,25)	=   1		//E2MASTER全体2ミュート
+	@es.LSD(002,26)	=   1		//E2BGM全体2ミュート
+	@es.LSD(002,27)	=   1		//E2SE全体2ミュート
+	@es.LSD(002,28)	=   1		//E2VO全体2ミュート
+
+	@es.LSD(001,31)	= 256		//SMASTER全体1
+	@es.LSD(001,32)	= 256		//SBGM全体1
+	@es.LSD(001,33)	= 256		//SSE全体1
+	@es.LSD(001,34)	= 256		//SVO全体1
+	@es.LSD(001,35)	=   1		//SMASTER全体1ミュート
+	@es.LSD(001,36)	=   1		//SBGM全体1ミュート
+	@es.LSD(001,37)	=   1		//SSE全体1ミュート
+	@es.LSD(001,38)	=   1		//SVO全体1ミュート
+	@es.LSD(002,31)	= 256		//SMASTER全体2
+	@es.LSD(002,32)	= 256		//SBGM全体2
+	@es.LSD(002,33)	= 256		//SSE全体2
+	@es.LSD(002,34)	= 256		//SVO全体2
+	@es.LSD(002,35)	=   1		//SMASTER全体2ミュート
+	@es.LSD(002,36)	=   1		//SBGM全体2ミュート
+	@es.LSD(002,37)	=   1		//SSE全体2ミュート
+	@es.LSD(002,38)	=   1		//SVO全体2ミュート
+
+	@es.LSD(001,41)	= 256		//S2MASTER全体1
+	@es.LSD(001,42)	= 256		//S2BGM全体1
+	@es.LSD(001,43)	= 256		//S2SE全体1
+	@es.LSD(001,44)	= 256		//S2VO全体1
+	@es.LSD(001,45)	=   1		//S2MASTER全体1ミュート
+	@es.LSD(001,46)	=   1		//S2BGM全体1ミュート
+	@es.LSD(001,47)	=   1		//S2SE全体1ミュート
+	@es.LSD(001,48)	=   1		//S2VO全体1ミュート
+	@es.LSD(002,41)	= 256		//S2MASTER全体2
+	@es.LSD(002,42)	= 256		//S2BGM全体2
+	@es.LSD(002,43)	= 256		//S2SE全体2
+	@es.LSD(002,44)	= 256		//S2VO全体2
+	@es.LSD(002,45)	=   1		//S2MASTER全体2ミュート
+	@es.LSD(002,46)	=   1		//S2BGM全体2ミュート
+	@es.LSD(002,47)	=   1		//S2SE全体2ミュート
+	@es.LSD(002,48)	=   1		//S2VO全体2ミュート
+
+
+	LOOP[SET=10]
+	{
+		@es.LSD(003,00+@_LC) = 256 //BGMチャンネル別1
+		@es.LSD(004,00+@_LC) = 256 //SEチャンネル別1
+		@es.LSD(005,00+@_LC) = 256 //VOチャンネル別1
+		@es.LSD(003,50+@_LC) =   1 //BGMチャンネル別1ミュート
+		@es.LSD(004,50+@_LC) =   1 //SEチャンネル別1ミュート
+		@es.LSD(005,50+@_LC) =   1 //VOチャンネル別1ミュート
+		@es.LSD(006,00+@_LC) = 256 //BGMチャンネル別2
+		@es.LSD(007,00+@_LC) = 256 //SEチャンネル別2
+		@es.LSD(008,00+@_LC) = 256 //VOチャンネル別2
+		@es.LSD(006,50+@_LC) =   1 //BGMチャンネル別2ミュート
+		@es.LSD(007,50+@_LC) =   1 //SEチャンネル別2ミュート
+		@es.LSD(008,50+@_LC) =   1 //VOチャンネル別2ミュート
+
+		@es.LSD(003,10+@_LC) = 256 //EBGMチャンネル別1
+		@es.LSD(004,10+@_LC) = 256 //ESEチャンネル別1
+		@es.LSD(005,10+@_LC) = 256 //EVOチャンネル別1
+		@es.LSD(003,60+@_LC) =   1 //EBGMチャンネル別1ミュート
+		@es.LSD(004,60+@_LC) =   1 //ESEチャンネル別1ミュート
+		@es.LSD(005,60+@_LC) =   1 //EVOチャンネル別1ミュート
+		@es.LSD(006,10+@_LC) = 256 //EBGMチャンネル別2
+		@es.LSD(007,10+@_LC) = 256 //ESEチャンネル別2
+		@es.LSD(008,10+@_LC) = 256 //EVOチャンネル別2
+		@es.LSD(006,60+@_LC) =   1 //EBGMチャンネル別2ミュート
+		@es.LSD(007,60+@_LC) =   1 //ESEチャンネル別2ミュート
+		@es.LSD(008,60+@_LC) =   1 //EVOチャンネル別2ミュート
+
+		@es.LSD(003,20+@_LC) = 256 //E2BGMチャンネル別1
+		@es.LSD(004,20+@_LC) = 256 //E2SEチャンネル別1
+		@es.LSD(005,20+@_LC) = 256 //E2VOチャンネル別1
+		@es.LSD(003,70+@_LC) =   1 //E2BGMチャンネル別1ミュート
+		@es.LSD(004,70+@_LC) =   1 //E2SEチャンネル別1ミュート
+		@es.LSD(005,70+@_LC) =   1 //E2VOチャンネル別1ミュート
+		@es.LSD(006,20+@_LC) = 256 //E2BGMチャンネル別2
+		@es.LSD(007,20+@_LC) = 256 //E2SEチャンネル別2
+		@es.LSD(008,20+@_LC) = 256 //E2VOチャンネル別2
+		@es.LSD(006,70+@_LC) =   1 //E2BGMチャンネル別2ミュート
+		@es.LSD(007,70+@_LC) =   1 //E2SEチャンネル別2ミュート
+		@es.LSD(008,70+@_LC) =   1 //E2VOチャンネル別2ミュート
+
+		@es.LSD(003,30+@_LC) = 256 //SBGMチャンネル別1
+		@es.LSD(004,30+@_LC) = 256 //SSEチャンネル別1
+		@es.LSD(005,30+@_LC) = 256 //SVOチャンネル別1
+		@es.LSD(003,80+@_LC) =   1 //SBGMチャンネル別1ミュート
+		@es.LSD(004,80+@_LC) =   1 //SSEチャンネル別1ミュート
+		@es.LSD(005,80+@_LC) =   1 //SVOチャンネル別1ミュート
+		@es.LSD(006,30+@_LC) = 256 //SBGMチャンネル別2
+		@es.LSD(007,30+@_LC) = 256 //SSEチャンネル別2
+		@es.LSD(008,30+@_LC) = 256 //SVOチャンネル別2
+		@es.LSD(006,80+@_LC) =   1 //SBGMチャンネル別2ミュート
+		@es.LSD(007,80+@_LC) =   1 //SSEチャンネル別2ミュート
+		@es.LSD(008,80+@_LC) =   1 //SVOチャンネル別2ミュート
+
+		@es.LSD(003,40+@_LC) = 256 //S2BGMチャンネル別1
+		@es.LSD(004,40+@_LC) = 256 //S2SEチャンネル別1
+		@es.LSD(005,40+@_LC) = 256 //S2VOチャンネル別1
+		@es.LSD(003,90+@_LC) =   1 //S2BGMチャンネル別1ミュート
+		@es.LSD(004,90+@_LC) =   1 //S2SEチャンネル別1ミュート
+		@es.LSD(005,90+@_LC) =   1 //S2VOチャンネル別1ミュート
+		@es.LSD(006,40+@_LC) = 256 //S2BGMチャンネル別2
+		@es.LSD(007,40+@_LC) = 256 //S2SEチャンネル別2
+		@es.LSD(008,40+@_LC) = 256 //S2VOチャンネル別2
+		@es.LSD(006,90+@_LC) =   1 //S2BGMチャンネル別2ミュート
+		@es.LSD(007,90+@_LC) =   1 //S2SEチャンネル別2ミュート
+		@es.LSD(008,90+@_LC) =   1 //S2VOチャンネル別2ミュート
+
+	}
+	LOOPEND[]
+
+	LOOP[SET=100]
+	{
+		@es.LSD(009,@_LC) = 256	//VOキャラ別ボイス1音量
+		@es.LSD(010,@_LC) =   1	//VOキャラ別ボイス1ONOFF(ON=1/OFF=0)
+		@es.LSD(011,@_LC) = 256	//VOキャラ別ボイス2音量
+		@es.LSD(012,@_LC) =   1	//VOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+		@es.LSD(013,@_LC) = 256	//EVOキャラ別ボイス1音量
+		@es.LSD(014,@_LC) =   1	//EVOキャラ別ボイス1ONOFF(ON=1/OFF=0)
+		@es.LSD(015,@_LC) = 256	//EVOキャラ別ボイス2音量
+		@es.LSD(016,@_LC) =   1	//EVOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+		@es.LSD(017,@_LC) = 256	//E2VOキャラ別システムボイス1音量
+		@es.LSD(018,@_LC) =   1	//E2VOキャラ別システムボイス1ONOFF(ON=1/OFF=0)
+		@es.LSD(019,@_LC) = 256	//E2VOキャラ別システムボイス2音量
+		@es.LSD(020,@_LC) =   1	//E2VOキャラ別システムボイス2ONOFF(ON=1/OFF=0)
+		@es.LSD(021,@_LC) = 256	//SVOキャラ別ボイス1音量
+		@es.LSD(022,@_LC) =   1	//SVOキャラ別ボイス1ONOFF(ON=1/OFF=0)
+		@es.LSD(023,@_LC) = 256	//SVOキャラ別ボイス2音量
+		@es.LSD(024,@_LC) =   1	//SVOキャラ別ボイス2ONOFF(ON=1/OFF=0)
+		@es.LSD(025,@_LC) = 256	//S2VOキャラ別システムボイス1音量
+		@es.LSD(026,@_LC) =   1	//S2VOキャラ別システムボイス1ONOFF(ON=1/OFF=0)
+		@es.LSD(027,@_LC) = 256	//S2VOキャラ別システムボイス2音量
+		@es.LSD(028,@_LC) =   1	//S2VOキャラ別システムボイス2ONOFF(ON=1/OFF=0)
+
+	}
+	LOOPEND[]
+
+
+	GOSUB[#=es.SOUND.SETVOL]
+
+
+	LOOP[SET=8192-1]
+	{
+		@L(@_LC) = 0
+		$L(@_LC) = ""
+	}
+	LOOPEND[]
+
+	//日付初期化
+	@es.LSD(031,01) = 0	//年
+	@es.LSD(031,02) = 1	//月
+	@es.LSD(031,03) = 1	//日
+	@es.LSD(031,04) = 0	//週
+	@es.LSD(031,05) = 0	//時
+	@es.LSD(031,06) = 0	//分
+	@es.LSD(031,07) = 0	//秒
+
+	@es.LSD(031,10) = 0	//表示フラグ
+
+	@es.LSD(033,01) = 1	//SP.SKDEF.CLICK
+	@es.LSD(033,02) = 0	//SP.SKDEF.CTRL
+	@es.LSD(033,03) = 1	//WA.SKDEF.CLICK
+	@es.LSD(033,04) = 0	//WA.SKDEF.CTRL
+	@es.LSD(033,05) = 1	//BG.SKDEF.CLICK
+	@es.LSD(033,06) = 0	//BG.SKDEF.CTRL
+	@es.LSD(033,07) = 1	//EV.SKDEF.CLICK
+	@es.LSD(033,08) = 0	//EV.SKDEF.CTRL
+	@es.LSD(033,11) = -1	//SP.SKDEF.CLICK(内部用)
+	@es.LSD(033,12) = -1	//SP.SKDEF.CTRL(内部用)
+	@es.LSD(033,13) = 0	//VO.SKDEF.CTRL
+
+	@es.LSD(034,01) = 1	//オートチップ表示・非表示設定
+	@es.LSD(034,02) = 1	//スキップチップ表示・非表示設定
+
+	LOOP[SET=128-1]
+		$es.LSD(@_LC) = ""
+	LOOPEND[]
+
+
+///xMG
+	@es.MG.AUTO=0
+	@es.MG.AUTONO=0
+	@es.MG.AUTOSKIP=0
+///xS
+	@es.SP.AUTO=0
+	@es.SP.AUTONO=0
+	@es.SP.AUTOSKIP=0
+
+
+	@es.SN.GOSUBNEST=0
+
+
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■演出スキップ速度計算
+//----------------------------------------------------------------
+#=es.CALC.DIRECTSKIPSP
+{
+	INT[@mSKIPSP]
+
+	@mSKIPSP = @es.GSD(120,04) //スキップ速度
+	  IF[@mSKIPSP>=192] @mSKIPSP = 2
+	ELSE[@mSKIPSP>=128] @mSKIPSP = 3
+	ELSE[@mSKIPSP>=064] @mSKIPSP = 5
+	ELSE[@mSKIPSP>=032] @mSKIPSP = 8
+	ELSE[@mSKIPSP>=016] @mSKIPSP = 12
+	ELSE[@mSKIPSP>=008] @mSKIPSP = 16
+//	ELSE[]              @mSKIPSP = 9999
+	ELSE[]              @mSKIPSP = 32
+	IFEND[]
+
+	return[rint=@mSKIPSP]
+}
+

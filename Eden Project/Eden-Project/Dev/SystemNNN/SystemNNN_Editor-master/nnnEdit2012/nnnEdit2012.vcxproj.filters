@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\nnnEdit\main.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nnnEdit\myapplication.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nnnEdit\resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\nnnEdit\main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nnnEdit\myapplication.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\nnnEdit\script1.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\nnnEdit\bmpresource\toolbar1.bmp">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="..\nnnEdit\bmpresource\nnnEdit2008.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="..\nnnEdit\bmpresource\icon1.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="..\nnnEdit\bmpresource\ico00002.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="..\nnnEdit\bmpresource\ico00001.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\nnnEdit\bmpresource\nodrop.cur">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="..\nnnEdit\bmpresource\layercop.cur">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="..\nnnEdit\bmpresource\cursor1.cur">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="..\nnnEdit\bmpresource\cur00001.cur">
+      <Filter>リソース ファイル</Filter>
+    </None>
+  </ItemGroup>
+</Project>

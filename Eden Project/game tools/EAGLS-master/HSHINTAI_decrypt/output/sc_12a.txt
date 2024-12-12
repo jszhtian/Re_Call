@@ -1,0 +1,437 @@
+$sc_12a
+_Day=12,
+_DayTime=0,
+
+_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM02")
+42("BGM","00Sound.dat")
+&1991"人生初デート……。"&1992"……のコースを下調べ。"&1993"いざ後日デートとなると、１人ないし友達と適当にぶらつくとか、ちょっと日用品買うとか、それ以外の街の活用法を俺はしたことがない。"#:NameSuffix
+&1994"（あまりにも無知）"_Mode=1,
+52("_GRPName","bg09a")
+42("DrawBG","00Draw.dat")
+&1995"しかし、問題が判っているのなら解決すればいいだけのこと。"&1996"情報は街に有り触れているのだからっ！！"#:NameSuffix
+&1997"「…………」"#男
+&1998"「これ、部屋に飾れば良さそうじゃん」"#女
+&1999"「そうかな？　でもぉ、ワタシ、ピンクよりもブルーの方が～」"&2000"デートコースとかお店の選び方などは適当な雑誌類には山のように情報が載っていた。"&2001"しかし、どれもこれもピンとはこなかった。"&2002"困った俺は年の近そうな男女のカップルに目をつけて、後を付回していたのだった。"#:NameSuffix
+&2003"（強気な態度をとりつつも。さりげなく女が気にしてそうなモノを勧める気配り……なるほど）"&2004"これはなかなか、奥が深そうだ。"#男
+&2005"「バカ、俺が合ってるっつったら、合ってんだよ。ショッキングピンクで行こうぜ」"#女
+&2006"「超ハデハデ！　アハハ、ウケる！」"#:NameSuffix
+&2007"（……ウケるか？）"&2008"何がウケるのかわかんねぇけどとりあず、女は笑ってる……と。"&2009"……あまり態度方面は参考にはなりそうにないが。"100("",4,2,0,0)
+&2010"フロンフロンとか言う店は使えそうだな。見た感じ、同い年とかカップルとか多いし。"&2011"実際にどこに行ってるのか見た方が安心できる。"#:NameSuffix
+&2012"（退散退散）"_Mode=8,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&2013"…………。"&2014"………………。"_Mode=8,
+52("_GRPName","bg09a")
+42("DrawBG","00Draw.dat")
+&2015"服屋に雑貨店、１人じゃまず入ることもない喫茶店の名前が携帯電話のメモ帳に羅列されていく。"&2016"うーん、カラオケとかボーリングとかもっと体動かす系の奴も加えとくべきか？"&2017"いやしかし、もしかしたら映画の方がいいって事もあるかも。"#:NameSuffix
+&2018"（普段の俺見せてもしょうがねーしなぁ……必要なのは意外性か……？　やべちょっと楽しくなってきた）"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#？？？=w0135i
+&2019"「会いたかったぞ常闇の主よ」"42("DEL","02CharChip.dat")#:NameSuffix
+&2020"「……ん？」"&2021"顔を上げると見覚えのある娘が、大きな胸をさらに強調するように立っていた。"&2022"確か名前は……。"52("_BGMName","BGM06")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","id")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0136i
+&2023"「我、デッドシャドウホライゾンサルバトーレがこの地の主の元にわざわざ赴いたというのに、なんだその顔はっ」"42("DEL","02CharChip.dat")&2024"設定を守りきる態度には感服するよ……。"#:NameSuffix
+&2025"「……山田だよな……えーと、なんか用か？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0137i
+&2026"「エリザベート達との闘いの前に、常闇の主と合間見えて宴に華を添えておくのも悪くないだろう？」"42("DEL","02CharChip.dat")#:NameSuffix
+&2027"「……えっと、まってな。解読中」"#:NameSuffix
+&2028"「……要するに俺と話しがしたいってことでいいのか？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","if")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0138i
+&2029"「クックックッ、貴様がその気なら話だけで終わらせようとは思わない！　ここで狂宴の叫びと共に舞い踊るのも一興！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2030"（……よし、半分も伝わってこない）"#:NameSuffix
+&2031"「おまわりさんいませんかぁー、狂った迷子がブラついてるんですけどぉ」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ig")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0139i
+&2032"「む？　我らが聖戦に、よそ者を招きいれようというのか！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2033"「……は？」"&2034"山田の声は喧騒を突き破り、街に響き渡るようだった。"&2035"そして、まるで安易なヒーローが変身するような構え。"&2036"自動的に立ち止まるギャラリーの数が多くなる。"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+100("",3,2,0,0)
+100("SE161",0,2,0,0)
+#通行人Ａ
+&2037"「……うわぁ、イタタッ」"#通行人Ｂ
+&2038"「あったかい季節ってこえー……」"#:NameSuffix
+&2039"「やめて、やめてください山田さん、俺は非常に恥ずかしい」"100("",4,2,0,0)
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ie")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0140i
+&2040"「ロザリオやメダイを身に着けた者まで混じっているな……フフフッ、人間を懐柔しているのか。面白い。１人２人と戯言は言わん、全員まとめてかかってくるがいい！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2041"「わぁあっ、やたらに指差すな！！」"#強面の男達
+&2042"「あン……？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ie")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0141i
+&2043"「忌まわしき太陽の下と言えど、我が闇の胎動、魂の力に場所も時間も……ふぎゅっ！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2044"「コイツほんともうなんていうか、お騒がせしました！！　通りまーす！！！！」"100("",3,2,0,0)
+100("SE003",0,2,0,0)
+&2045"空気に耐えられなくなった俺は山田を担ぎ、一目散に走り出していた。"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+52("_CharNameB","fc_ib111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0142i
+&2046"「おのれ、口上もなく主自ら戦いを汚すのか！！　えぇい、離さんかぁぁっ！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2047"「あぶなっかしーんだよっ！　ほっとけるかぁああ！！」"_Mode=8,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&2048"…………。"&2049"………………。"100("",3,2,0,0)
+_Mode=8,
+52("_GRPName","bg09a")
+42("DrawBG","00Draw.dat")
+#:NameSuffix
+&2050"「ゼー……ハー……」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0143i
+&2051"「なんだ、場所を変えたいのならそう言えばよかろう」"42("DEL","02CharChip.dat")#:NameSuffix
+&2052"「もう、戦い？　とかどうでもいいから……ぜぇぜぇ…休ませて……」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ic")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0144i
+&2053"「フム……光すら飲み込む常闇の主も堕ちたものだ。それでは戦いなどツマらんな」"42("DEL","02CharChip.dat")#:NameSuffix
+&2054"「主って誰だよ…ったく……話がしたいだけなんだろ？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0145i
+&2055"「我も名誉も力もない有象無象との戦は好かないからな。主の精鋭たちとの対峙は宴の日までとっておく事にしよう」"42("DEL","02CharChip.dat")#:NameSuffix
+&2056"「言いたい事が通じてんのかこれ……」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ie")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0146i
+&2057"「ハハハッ！　常闇の主よ、縄張りを案内しろ！　永き眠りから覚めて彷徨い歩いてばかりで何も知らんのだ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2058"「ハァ……街を案内しろってことか？　別にいいけど……山田、人の名前くらいちゃんと呼べよ……」"&2059"ものは考え様だよな、いろいろアブないけど、山田だって女の子。"&2060"デートコースの参考になる事があるかも……。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0147i
+&2061"「クックックッ、限りある時間の中で贅を尽くし、儚き流れを謳歌する事に長けた人間の創造物はいつもげに面白い」"42("DEL","02CharChip.dat")#:NameSuffix
+&2062"（ないかも……）"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&2063"…………。"&2064"………………。"_Mode=1,
+52("_GRPName","bg15a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM02")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","if")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0148i
+&2065"「このような浮遊感を伴う箱など、私の手に掛かれば……うぇ」"42("DEL","02CharChip.dat")#:NameSuffix
+&2066"「大丈夫か山田。エレベーターとか苦手か？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ic")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0149i
+&2067"「私に苦手なものなど……ないと言いたいところだが、まぁ今回は負けを認めてやろう」"42("DEL","02CharChip.dat")&2068"エレベーターって案外苦手な人いるよな。まさか山田までそうだとは。"&2069"エレベーター好きそうなのに。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","if")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0150i
+&2070"「しかしだな、もう何度かすればこのような失態は犯さないのだぞ」"42("DEL","02CharChip.dat")#:NameSuffix
+&2071"「帰りもエレベーター使って降りるんだけど大丈夫なのか？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ic")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0151i
+&2072"「……心配は無用だ。たぶん」"42("DEL","02CharChip.dat")#:NameSuffix
+&2073"「そうか……」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&2074"エレベーターに乗り込んだ途端、山田はこの調子だ。"&2075"こういうとこにも配慮できないと王子様にはなれないよな……。"#:NameSuffix
+&2076"「ま、気分転換にさ……ボーリングしようぜ？」"&2077"用があるのは別館の方。"&2078"デートコースに盛り込むべきか悩んでいたボーリングだ。"&2079"いざ盛り込んだらガーター連発なんて恥ずかしいしな。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ie")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田
+&2080"「？」"42("DEL","02CharChip.dat")#:NameSuffix
+&2081"「まじか……ボーリングってのは……」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ic")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0152i
+&2082"「いや待て。来た事はないが知っているぞ」"42("DEL","02CharChip.dat")#:NameSuffix
+&2083"「おお、そしたら大丈夫そうだな」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","id")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0153i
+&2084"「ハッハッハッ！　我を誰だと思っているのだ。闇の貴公子、デットレイシャドウホライズンだぞ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2085"「ホライズンって単語好きだな……。しかも貴公子ってお前女だろ」"&2086"ちょっと可哀想になってきた。"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+&2087"おれは手続きを済ませ、山田に簡単な遊び方を説明した。"&2088"なんだかとても関心していたけど……俺はとんでもない間違いをおかしたんじゃないか？"_Mode=1,
+52("_GRPName","sd03r0")
+42("DrawCG","00Draw.dat")
+52("_BGMName","BGM06")
+42("BGM","00Sound.dat")
+52("_CharNameB","fc_ia111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","i")42("Start","02CharChip2.dat")#山　田=w0154i
+&2089"「あの白き柱をより多く倒せばいいのだろう？」"42("DEL","02CharChip.dat")#:NameSuffix
+&2090"「うん、まぁそう」"52("_CharNameB","fc_ie111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","i")42("Start","02CharChip2.dat")#山　田=w0155i
+&2091"「策士がチェスやショーギを作り、戦士達は模造の槍で木の人形や友を敵に見立て、幼き頃から娯楽の中で武を教え込んできた……」"42("DEL","02CharChip.dat")#:NameSuffix
+&2092"「そんな大そうなモンじゃないぞー？」"52("_CharNameB","fc_if111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","i")42("Start","02CharChip2.dat")#山　田=w0156i
+&2093"「げに面白い事を考えるな人間。この球はさながら火薬を詰めた砲丸、あそこに立つ木偶は敵軍の隊列といったところだな！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2094"（それっぽく見えるからやだなっ！！）"52("_CharNameB","fc_id111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","i")42("Start","02CharChip2.dat")#山　田=w0157i
+&2095"「砲術師の知識や攻城兵器の類まで娯楽に落とし込むとは頭が下がる！　ゆえに我も全力で興じるとしよう！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2096"「やる気があるのはなによりだ……」"_Mode=1,
+52("_GRPName","sd03r1")
+42("DrawCG","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+#山　田=w0158i
+&2097"「リミッター、限定解除……我が豪腕！　とくと見よッ！　どおおぉぉぉりゃぁああああッ！」"100("",3,2,0,0)
+100("SE248",0,2,0,0)
+_FadeTime=2000,
+_Mode=1,
+52("_GRPName","white")
+42("DrawBG","00Draw.dat")
+#:NameSuffix
+&2098"「ブッ！！！」"100("",4,2,0,0)
+&2099"周りの人間の投球フォームを一切無視し、山田が大きく振りかぶった時には何もかもが手遅れだった。"_Mode=1,
+52("_GRPName","sd03r2")
+42("DrawCG","00Draw.dat")
+52("_BGMName","BGM16")
+42("BGM","00Sound.dat")
+100("",3,2,0,0)
+100("SE255",0,2,0,0)
+_X=20,
+_Y=20,
+_WaitTime=0,
+80(1,"01Quake.dat")
+&2100"まるで野球のストレートを思わせる剛速球は、一直線に居並ぶピン達のど真ん中に突き刺さる。"100("",3,2,0,0)
+_ThreNum=1,
+42("QuakeEnd","01Quake.dat")
+100("",3,2,0,0)
+100("SE044",0,2,0,0)
+52("_CharNameB","fc_ib111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","i")42("Start","02CharChip2.dat")#山　田=w0159i
+&2101"「デストロイオブザジャッジメント」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+#:NameSuffix
+&2102"「デストロイすんなっ！！」"52("_CharNameB","fc_id111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","i")42("Start","02CharChip2.dat")#山　田=w0160i
+&2103"「フハハハッ！！　相手が木偶とはいえ粉砕するのはとても気分がいい。ボーリングとは爽快だな！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2104"「粉々にして遊ぶゲームじゃないってのぉ！」"_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+100("",3,2,0,0)
+100("SE161",0,2,0,0)
+#客　Ａ
+&2105"「ば、爆発！？」"#客　Ｂ
+&2106"「なんかスゲー音聞こえたぞ！？」"#客　Ｃ
+&2107"「いま、あの娘、投げてなかったか……？」"100("",3,2,0,0)
+52("_CharNameB","fc_id111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0161i
+&2108"「皆、我が力を前に己の手を止めておるわ。褒美は何だ。家畜か？男か？」"42("DEL","02CharChip.dat")#:NameSuffix
+&2109"「出るかんなもん！　とにかく逃げるんだよっ！！」"_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+&2110"…………。"&2111"………………。"_Mode=1,
+52("_GRPName","bg09a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM04")
+42("BGM","00Sound.dat")
+#:NameSuffix
+&2112"「ヒィ……ヒィ……フゥゥ」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ib")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0162i
+&2113"「慌しい男だな。それでも領地を統べる者か？」"42("DEL","02CharChip.dat")&2114"見くびっていた。"&2115"山田の思考は世間からズレているとはおもっていたが、まさか筋力まで人間からズレてるなんて。"&2116"こんな娘と絵里沙が友達だって？"&2117"絵里沙が心配だっつの。"#:NameSuffix
+&2118"「はぁぁぁ……山田と絵里沙ってどんな付き合いしてきてんだよ……？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0163i
+&2119"「エリザベートとは犬猿の仲というか、永遠のライバルというか、そんな感じだ」"42("DEL","02CharChip.dat")#:NameSuffix
+&2120"「……？？？」"&2121"永遠のライバル……。"&2122"変なあだ名付けられて絵里沙も大変だな。"&2123"この間海で見た様子だと、仲は悪くないみたいだし。"#:NameSuffix
+&2124"「絵里沙とお前の付き合いなんて俺はしらねーよ……自爆するのは勝手だけど、絵里沙を巻き込むなよな」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","if")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0164i
+&2125"「主としてではなく眷属として祖たるエリザベートを庇い立てるか。　その器の偉大さ、賞賛に値する」"42("DEL","02CharChip.dat")#:NameSuffix
+&2126"「俺の言ってる事わかってる？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ia")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0165i
+&2127"「皆まで言うな。フフフッ。今はエリザベートよりも貴様に興味が沸いているのだ」"42("DEL","02CharChip.dat")#:NameSuffix
+&2128"「やめて、巻き込まないで」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","id")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0166i
+&2129"「貴様の意思など関係ないのだ。面白ければそれが全て正義！！」"42("DEL","02CharChip.dat")#:NameSuffix
+&2130"「えーと……」"&2131"とりあえずわかったのは、山田は人の話を聞かないっていう事。"&2132"俺じゃ山田の言ってることをあんまり理解できないということだ。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ic")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0167i
+&2133"「力の一旦を特別に行使してやって空腹だ……そろそろ失礼する事にしよう」"42("DEL","02CharChip.dat")#:NameSuffix
+&2134"「そ、そうか」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","id")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0168i
+&2135"「なかなか有意義な時間であった、常闇の主よ。この礼はいつかしてやろう」"42("DEL","02CharChip.dat")#:NameSuffix
+&2136"「お、おう。楽しみにしてる」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","if")
+42("DrawChar","00Draw.dat")
+52("_CCName","i")42("Start","02CharChip.dat")#山　田=w0169i
+&2137"「ではその時まで。さらばだ！」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+100("",3,2,0,0)
+100("SE001",0,2,0,0)
+&2138"堂々と大きな胸を更に強調するように背筋を張って闊歩しながら、街中に消えていく山田。"100("",4,2,0,0)
+#:NameSuffix
+&2139"（黙ってりゃホントかわいい娘なんだけど……残念だよなぁ……）"#:NameSuffix
+&2140"「……さて……これからどうすっかなー」"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+
+42("start","01Rand.dat")
+
+41("Start","02TU_Map.dat")

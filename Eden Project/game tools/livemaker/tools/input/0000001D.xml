@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="Shift-JIS"?>
+<LMScript Name="0000001D.lsb">
+	<Header Version="116" Flag="1">
+		<Properties>
+			<Property Id="0">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="1">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="2">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="3">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="4">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="5">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="6">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="7">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="8">7f 7f 00 28 fc 8b 00 00 80 00 01 00 88 00 f2 00 40 00 bf 00 18</Property>
+			<Property Id="9">9f 78 00 ac fc 9f 00 00 80 00 01 01 98 80 f3 00 50 00 bf 00 18</Property>
+			<Property Id="10">7b f8 7d 0e ff cb 00 00 00 00 07 00 a8 00 f2 00 00 e0 bf 01 00</Property>
+			<Property Id="11">01 00 00 0c 02 00 00 00 80 00 00 00 00 00 00 00 00 00 80 00 00</Property>
+			<Property Id="12">9f 78 00 fc fc 9b 00 00 80 00 01 00 98 80 f3 00 50 08 ff 40 00</Property>
+			<Property Id="13">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="14">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="15">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="16">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="17">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="18">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="19">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="20">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="21">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="22">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="23">1f 70 00 38 fc 9b 00 00 80 00 01 00 88 00 f2 00 40 08 bf 40 00</Property>
+			<Property Id="24">9f f8 0f aa fc 8b 24 00 80 00 01 00 98 00 f2 00 50 00 bf 00 00</Property>
+			<Property Id="25">1b 9f ef 0f fc 83 fe ff ff 3f 01 00 8a 03 f2 00 c0 e1 bf 1e 00</Property>
+			<Property Id="26">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="27">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="28">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="29">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="30">9f f8 0b 8a 0e 8c 04 00 80 00 f9 01 98 80 f3 00 70 00 bf 00 18</Property>
+			<Property Id="31">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="32">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="33">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="34">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="35">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="36">7f 78 00 0c fc 93 00 00 00 00 01 f0 c9 00 f2 01 40 00 bf 00 00</Property>
+			<Property Id="37">9b 70 00 08 fc 83 00 00 00 00 01 0e 98 00 f2 00 50 00 bf 00 00</Property>
+			<Property Id="38">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="39">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="40">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="41">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="42">05 00 00 7c 00 18 00 00 80 00 00 00 00 00 00 00 00 08 80 40 04</Property>
+			<Property Id="43">7b e1 0b 08 02 80 04 00 00 00 00 00 04 00 00 00 00 00 80 00 00</Property>
+			<Property Id="44">7b e1 0b 08 02 80 24 00 00 00 00 00 04 00 00 00 00 00 80 00 00</Property>
+			<Property Id="45">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="46">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="47">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="48">1f 78 00 08 fc 87 00 00 80 03 09 00 88 07 f2 00 40 00 bf 00 00</Property>
+			<Property Id="49">7b 70 00 0c fc 83 00 00 00 00 01 00 88 18 f2 00 40 00 bf 00 00</Property>
+			<Property Id="50">ff 18 00 08 fc 87 00 00 00 00 01 00 88 e0 ff 00 50 00 bf 00 18</Property>
+			<Property Id="51">1f 78 00 08 fe 83 00 00 00 00 01 01 88 00 f2 fe 80 01 bf 20 00</Property>
+			<Property Id="52">1f 78 00 08 fe 83 00 00 00 00 01 01 88 00 f2 fe 81 01 bf 20 00</Property>
+			<Property Id="53">1f 78 00 0c fc 83 00 00 00 00 01 00 88 00 f2 79 00 02 bf 20 00</Property>
+			<Property Id="54">1f 78 04 08 fc 83 24 00 00 00 01 00 88 00 f2 00 4e 00 bf 00 00</Property>
+			<Property Id="55">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="56">1f 70 00 08 00 88 00 00 80 03 01 00 08 03 f2 00 40 00 bf 00 00</Property>
+			<Property Id="57">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="58">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="59">01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="60">01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+		</Properties>
+	</Header>
+	<Body>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="0" Diff="0">
+			<Label Script="0000001D.lsb" Target="3" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="1" Diff="1">
+			<SetLabel>変数削除</SetLabel>
+		</Item>
+		<Item Command="Exit" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="2" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="3" Diff="1">
+			<SetLabel>0000001E</SetLabel>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="4" Diff="1">
+			<Label Script="0000001D.lsb" Target="6" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="5" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="6" Diff="1">
+			<SetLabel>00000027</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="7" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="8" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="1">
+				<Event Command="Event">
+					<EventArg Type="Str">MENUENABLED</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ぎちり、と縄が鳴った。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">どれだけあがいても、この固い縛めを解くことは難しい。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">それでも、この惨憺たる現状から逃げおおせることができるなら、手首から流れる血で縄を赤く染めていることなど気にならない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">次に彼女が帰ってきたら、今度こそ終わりかもしれないのだ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\間者\kanja_1.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">女「……う……っ……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">身体を起こそうとしたが、足腰に力が入らない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">下腹部には、鈍い痛み。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">しなやかで軽かった身体は、散々おもちゃにされたせいで、鉛のように重い。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">身体はまともに動かなくとも、この縛めさえ解くことができれば、機はあるかもしれない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ほんの僅かな希望を胸に、女は自分の両手を縛める縄を壁にこすり付ける。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ぎちり、ごりごり。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ぎちり、ごりごり。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">…………</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">……</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|地下牢０１|グラフィック\戦国CG\bg\地下牢０１.gal|NORMAL|#1|C|B|0|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">不意に、暗い部屋の端に灯りがともる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">驚いた女の身体が跳ね上がった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\間者\kanja_2.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">女「……あ……ぁ……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">身体を震わせながら、灯りの方を見る。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そこには、女が最も会いたくない人物が立っていた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|朔立ち絵|グラフィック\戦国CG\立ち絵\朔\朔A０１黒１.gal|NORMAL|#1|C|B|100|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔\saku001.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声「どうした、そのように足掻いて」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\間者\kanja_3.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">女「あ……ああっ！　あああぁァーーーーッ！！」</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]QUAKE|地下牢０１,メッセージボックス,メッセージボックス土台,朔立ち絵|QUAKE|1|50|50|1000|30</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|BGM\04.ogg|BGM|REPEAT|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">闇を劈くような悲鳴が、冷たい壁に吸い込まれる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">残された体力を無駄に消費してしまう、そういった考えが浮かぶことはない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ただ慄然とし、涙を流し、身体を縮こめる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\間者\kanja_4.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">女「ああぁ……お、お許しを……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔\saku002.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声「何を泣いておる。お前が寂しいだろうと思って遊びに来てやったのじゃぞ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ゆっくりと、声の主が近づいてくる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ひたり、ひたり。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">石の床の上を、草履の足音が響く。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔立ち絵|グラフィック\戦国CG\立ち絵\朔\朔A０４黒１.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔\saku003.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声「聞いておくれ。密かに得た情報によると、どうやら兄上はお前の国と同盟を結ぶことに決めたらしいのじゃ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\間者\kanja_5.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">女「…………」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔\saku004.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声「そうしなくて済むように、ずっと裏で手を回してきたというのに……世の中うまくいかぬものよのぅ。……のぅ？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\間者\kanja_6.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">女「……ひっ！」</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]QUAKE|地下牢０１,メッセージボックス,メッセージボックス土台|QUAKE|1|30|30|300|30</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声の主と目が合った。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">恐怖で身体が石のように固まる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔\saku005.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声「ここの所、私の鬱積は一向に晴れることがない。私が何を思い悩んでおるか、お前に分かるか？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\間者\kanja_7.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">女「……ぅ……あ、ご、ごめんなさい……ごめ……なさ……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔\saku006.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声「では特別に教えてやろう。一つ、この同盟に必要なものが何であるか、私は知っている。全てがあの御方の御意思であることも。全く、余計なことを考えて下さったものじゃ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">その言葉に、女はぎょろぎょろと視線を泳がせる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔\saku007.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声「もう一つ。……お前のような間者をよこすような国と、仲良うせねばならぬこと」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\間者\kanja_8.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">女「ひぃっ！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]QUAKE|地下牢０１,メッセージボックス,メッセージボックス土台,朔立ち絵|QUAKE|1|70|70|500|30</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔立ち絵|グラフィック\戦国CG\立ち絵\朔\朔A０１黒１.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">縄を引かれる。</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PAUSE|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">手首の傷に食い込んだが、それどころではない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">身体の震えで歯がガチガチと鳴り、声も出ない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔\saku008.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声「悲しいのう。信用のおける侍女じゃと思うたのに……裏切られるとは」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\間者\kanja_9.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">女「……ぉ、おゆるしを……どうか……どうかっ……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔\saku009.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声「ふふふ……そう怯えるでない、安心しろ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">声の主は、女の顔を覗き込んで、呟いた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|地下牢０１,朔立ち絵|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="9" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Call" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="10" Diff="1">
+			<Label Script="メッセージボックス作成.lsb" Target="0" />
+			<Str Name="Result"></Str>
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Params">
+				<Array Name="__ARG_0__">
+					<Param Name="____0" Calc="" Type="1">
+						<Str Name="">透明(真ん中)</Str>
+					</Param>
+					<Param Name="____arg" Calc="" Type="1">
+						<Var Name="">____0</Var>
+					</Param>
+				</Array>
+			</Array>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="11" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="12" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="1">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]STOPSND|BGM|300|WAIT</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔\saku09a.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="0">　　　　　　　「壊れるまで、遊んでやる」</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|2000</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|CLICK|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|2000</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="13" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Call" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="14" Diff="1">
+			<Label Script="メッセージボックス作成.lsb" Target="0" />
+			<Str Name="Result"></Str>
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Params">
+				<Array Name="__ARG_0__">
+					<Param Name="____0" Calc="" Type="1">
+						<Str Name="">(標準)</Str>
+					</Param>
+					<Param Name="____arg" Calc="" Type="1">
+						<Var Name="">____0</Var>
+					</Param>
+				</Array>
+			</Array>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="15" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="16" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="0">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="17" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="18" Diff="1">
+			<Label Script="0000001D.lsb" Target="20" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="19" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="20" Diff="1">
+			<SetLabel>00000029</SetLabel>
+		</Item>
+		<Item Command="Exit" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="21" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+	</Body>
+</LMScript>

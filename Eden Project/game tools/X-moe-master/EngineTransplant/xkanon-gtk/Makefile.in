@@ -1,0 +1,320 @@
+PREFIX=@prefix@
+BINDIR=$(PREFIX)/bin
+LOCALEDIR=$(PREFIX)/share/locale
+DATAVERSION=1
+DATADIR=@data_root_dir@/xayusys_gtk2
+SAVEDIR=@save_root_dir@
+BIN=xayusys_gtk2 xkanon xkanon-all xsense-off xsense-off-trial xair xkanon-install xkanon-all-install xsense-off-install xsense-off-trial-install xair-install
+PATCH=--patch opening
+
+@SET_MAKE@
+
+CXX = @CXX@
+CC = @CC@
+
+CFLAGS= $(LOCAL_DEF) @CFLAGS@ @DEFS@ @GTK_CFLAGS@ @ALSA_CFLAGS@ @ESD_CFLAGS@ -fpermissive -pthread -Wall -O2
+LDFLAGS = @LDFLAGS@ @GTK_LIBS@ @LIBS@ @ALSA_CFLAGS@ @ESD_CFLAGS@ @OSDEPLIB@ @ALSA_LIBS@ @ESD_LIBS@ -pthread -lm
+VISARCLDFLAGS = @LDFLAGS@ @VISARC_LIBS@ 
+CXXFLAGS = $(CFLAGS)
+
+LOCAL_DEF=-DDEFAULT_DATAPATH=\"$(DATADIR)/xkanon\" -DDEFAULT_SAVEPATH=\"$(SAVEDIR)\" \
+	-DDEFAULT_VERSION=$(DATAVERSION) -DLOCALEDIR=\"$(LOCALEDIR)\"
+
+IMAGE_OBJ=image_sys.o image_cursor.o image_stippledef.o image_di.o image_icon.o \
+	image_di_16bpp.o image_di_32bpp.o image_di_nobpp.o \
+	image_di_seldraw.o image_di_impl.o image_di_selimpl1.o image_di_selimpl2.o image_di_selimpl3.o image_pdt.o
+
+SENARIO_OBJ=senario.o senario_flags.o senario_graphics.o senario_save.o senario_patch.o senario_backlog.o
+
+MUSIC_OBJ=system_music.o contrib/contrib.a # 普通はこっち
+# MUSIC_OBJ=system_music_stab.o # 音楽をならさないときにこちらを指定する
+
+OBJ=main.o file.o initial.o $(IMAGE_OBJ) option.o game_opt.o check_cgm.o system.o system_config.o system_graphics.o anm.o ard.o $(SENARIO_OBJ) window.o window_text.o window_name.o window_menu.o window_all.o $(MUSIC_OBJ) $(TTFONT_OBJ)
+
+all: $(BIN)
+install: all install-mo
+	mkdir -p $(BINDIR)
+	cp -f $(BIN) $(BINDIR)
+
+install-mo: ayusys_gtk2.ja.mo
+	-mkdir -p $(LOCALEDIR)/ja/LC_MESSAGES
+	-cp -f ayusys_gtk2.ja.mo $(LOCALEDIR)/ja/LC_MESSAGES/ayusys_gtk2.mo
+
+ayusys_gtk2.ja.mo: ayusys_gtk2.ja.po
+	-msgfmt -o ayusys_gtk2.ja.mo ayusys_gtk2.ja.po
+
+# シェルスクリプトをつくる
+xkanon:
+	rm -f xkanon
+	echo '#!/bin/sh' > xkanon
+	echo $(BINDIR)/xayusys_gtk2 --path $(DATADIR)/xkanon $(PATCH) '$$*' '> /dev/null' >> xkanon
+	chmod a-w xkanon
+	chmod a+x xkanon
+
+xkanon-all:
+	rm -f xkanon-all
+	echo '#!/bin/sh' > xkanon-all
+	echo $(BINDIR)/xayusys_gtk2 --path $(DATADIR)/xkanon-all $(PATCH) '$$*' '> /dev/null' >> xkanon-all
+	chmod a-w xkanon-all
+	chmod a+x xkanon-all
+
+xsense-off:
+	rm -f xsense-off
+	echo '#!/bin/sh' > xsense-off
+	echo $(BINDIR)/xayusys_gtk2 --path $(DATADIR)/xsense-off '$$*' '> /dev/null' >> xsense-off
+	chmod a-w xsense-off
+	chmod a+x xsense-off
+xsense-off-trial:
+	rm -f xsense-off-trial
+	echo '#!/bin/sh' > xsense-off-trial
+	echo $(BINDIR)/xayusys_gtk2 --path $(DATADIR)/xsense-off-trial '$$*' '> /dev/null' >> xsense-off-trial
+	chmod a-w xsense-off-trial
+	chmod a+x xsense-off-trial
+
+
+xair:
+	rm -f xair
+	echo '#!/bin/sh' > xair
+	echo $(BINDIR)/xayusys_gtk2 --path $(DATADIR)/xair '$$*' '> /dev/null' >> xair
+	chmod a-w xair
+	chmod a+x xair
+
+xkanon-install: kanon-install.sh
+	rm -f xkanon-install
+	echo '#!/bin/sh' > xkanon-install
+	echo PREVINSTALLDIR=$(DATADIR)/xkanon-all >> xkanon-install
+	echo INSTALLDIR=$(DATADIR)/xkanon >> xkanon-install
+	echo FROMDIR=/cdrom >> xkanon-install
+	echo BINNAME=avg3216m.exe >> xkanon-install
+	cat kanon-install.sh >> xkanon-install
+	chmod a-w xkanon-install
+	chmod a+x xkanon-install
+
+xkanon-all-install: kanon-install.sh
+	rm -f xkanon-all-install
+	echo '#!/bin/sh' > xkanon-all-install
+	echo PREVINSTALLDIR=$(DATADIR)/xkanon >> xkanon-all-install
+	echo INSTALLDIR=$(DATADIR)/xkanon-all >> xkanon-all-install
+	echo FROMDIR=/cdrom >> xkanon-all-install
+	echo BINNAME=avg3217m.exe >> xkanon-all-install
+	cat kanon-install.sh >> xkanon-all-install
+	chmod a-w xkanon-all-install
+	chmod a+x xkanon-all-install
+
+xsense-off-install: kanon-install.sh
+	rm -f xsense-off-install
+	echo '#!/bin/sh' > xsense-off-install
+	echo INSTALLDIR=$(DATADIR)/xsense-off >> xsense-off-install
+	echo FROMDIR=/cdrom >> xsense-off-install
+	echo BINNAME=avg3217m.exe >> xsense-off-install
+	cat kanon-install.sh >> xsense-off-install
+	chmod a-w xsense-off-install
+	chmod a+x xsense-off-install
+
+xsense-off-trial-install: kanon-install.sh
+	rm -f xsense-off-trial-install
+	echo '#!/bin/sh' > xsense-off-trial-install
+	echo PREVINSTALLDIR=$(DATADIR)/xsense-off >> xsense-off-trial-install
+	echo INSTALLDIR=$(DATADIR)/xsense-off-trial >> xsense-off-trial-install
+	echo FROMDIR=/cdrom >> xsense-off-trial-install
+	echo BINNAME=avg3217m.exe >> xsense-off-trial-install
+	cat kanon-install.sh >> xsense-off-trial-install
+	chmod a-w xsense-off-trial-install
+	chmod a+x xsense-off-trial-install
+
+xair-install: kanon-install.sh
+	rm -f xair-install
+	echo '#!/bin/sh' > xair-install
+	echo INSTALLDIR=$(DATADIR)/xair >> xair-install
+	echo FROMDIR=/cdrom >> xair-install
+	echo BINNAME=avg3217m.exe >> xair-install
+	cat kanon-install.sh >> xair-install
+	chmod a-w xair-install
+	chmod a+x xair-install
+
+xayusys_gtk2: $(OBJ)
+	$(CXX) -o xayusys_gtk2 $(CFLAGS) $(OBJ) $(LDFLAGS)
+contrib/config.h: config.h
+	rm -f contrib/config.h
+	ln -s ../config.h contrib/config.h
+
+# PHONY が動かない……
+# .PHONY: contrib/contrib.a
+
+contrib/contrib.a: FORCE
+	cd contrib && $(MAKE) contrib.a
+FORCE:
+
+# senario.cc で、ダンプモードにするのに必要な設定
+SENARIO_DUMP=-DSENARIO_DUMP
+
+# senario_dump : シナリオファイルをダンプする
+senario_dump: senario_dump.o option.o game_opt.o initial.o senario2.o senario_flags2.o senario_graphics2.o senario_patch.o senario_backlog_stab.o system2.o system_config.o file.o ard.o
+	$(CXX) $(LDFLAGS) -o senario_dump senario_dump.o option.o game_opt.o initial.o senario2.o senario_flags2.o senario_patch.o senario_backlog_stab.o senario_graphics2.o system2.o system_config.o file.o ard.o
+senario_dump.o: system.h senario.h system_graphics_stab.cc system_music_stab.cc window_stab.cc
+	$(CXX) -c $(CFLAGS) $(SENARIO_DUMP) senario_dump.cc
+senario2.o: system.h senario.cc senario.h
+	$(CXX) -c $(CFLAGS) $(SENARIO_DUMP) -o senario2.o senario.cc
+senario_flags2.o: system.h senario_flags.cc senario.h
+	$(CXX) -c $(CFLAGS) $(SENARIO_DUMP) -o senario_flags2.o senario_flags.cc
+senario_graphics2.o: system.h senario_graphics.cc senario.h
+	$(CXX) -c $(CFLAGS) $(SENARIO_DUMP) -o senario_graphics2.o senario_graphics.cc
+system2.o: system.h system.cc
+	$(CXX) -c $(CFLAGS) $(SENARIO_DUMP) -DMAKE_LoadInit -DNO_GLIB -DSUPRESS_WAIT -o system2.o system.cc
+
+# system_config.cc のテスト
+system_config_test: system_config_test.o system_config.o file.o
+	$(CXX) -o system_config_test system_config_test.o system_config.o file.o $(LDFLAGS)
+system_config_test.o: system_config_test.cc system.h
+
+# visarc : archive utility
+visarc: visarc.o
+	$(CXX) -o visarc visarc.o $(VISARCLDFLAGS)
+clean:
+	rm -f *.a *.o *.core *.bak *.mo $(BIN) senario_dump visarc
+	cd contrib && $(MAKE) clean
+distclean:
+	rm -f *.a *.o *.core *.bak $(BIN) senario_dump visarc
+	rm -f config.h config.status
+	cd contrib && $(MAKE) clean
+	rm -f Makefile
+	rm -f config.log config.cache
+	rm -f contrib/Makefile
+
+#####################################################
+#
+#  dependency list
+#
+#     以下の depend: で作った物を貼り付け
+#
+
+#ALL_OBJ= anm.o ard.o check_cgm.o system_music.o file.o game_opt.o image_cursor.o image_icon.o image_di.o image_di_16bpp.o image_di_32bpp.o image_di_nobpp.o image_pdt.o image_stippledef.o image_sys.o main.o option.o senario.o senario_backlog.o senario_backlog_stab.o senario_dump.o senario_flags.o senario_graphics.o senario_patch.o senario_save.o system.o system_config.o system_graphics.o system_music_stab.o visarc.o window.o window_all.o window_menu.o window_name.o window_stab.o window_text.o
+#depend:
+#	mkdep ${CFLAGS} ${ALL_OBJ:S/.o/.cc/}
+#	sed -e 's@/usr/[^ ]*@@g' -e '\x^ *\\$$xd'< .depend>.depend2
+
+# -DDEFAULT_DATAPATH=" -DDEFAULT_SAVEPATH="~/.xkanon" -DDEFAULT_VERSION=1 -DLOCALEDIR=" -g -I -I -I -DCDROM_BSD -DHAVE_CONFIG_H -I -I -I -I -I -I -pthread -D_THREAD_SAFE -O2 anm.cc ard.cc check_cgm.cc contrib/system_music.cc file.cc game_opt.cc image_cursor.cc image_di.cc image_di_16bpp.cc image_di_32bpp.cc image_di_nobpp.cc image_pdt.cc image_stippledef.cc image_icon.cc image_sys.cc main.cc option.cc senario.cc senario_backlog.cc senario_backlog_stab.cc senario_dump.cc senario_flags.cc senario_graphics.cc senario_patch.cc senario_save.cc system.cc system_config.cc system_graphics.cc system_music_stab.cc visarc.cc window.cc window_all.cc window_menu.cc window_name.cc window_stab.cc window_text.cc
+anm.o: anm.cc   \
+   file.h \
+ anm.h system.h config.h image_pdt.h image_di.h
+ard.o: ard.cc   \
+   file.h \
+ ard.h system.h config.h
+check_cgm.o: check_cgm.cc file.h  \
+  
+system_music.o: contrib/system_music.cc  \
+  contrib/../system.h contrib/../config.h \
+  contrib/../file.h  \
+ contrib/music.h contrib/portab.h contrib/cdrom.h contrib/config.h \
+ contrib/mixer.h
+	$(CXX) $(CFLAGS) -c -o system_music.o contrib/system_music.cc
+file.o: file.cc config.h file.h  \
+ 
+game_opt.o: game_opt.cc  \
+  system.h config.h  \
+ senario.h file.h ard.h
+image_cursor.o: image_cursor.cc config.h image_cursor.h \
+  
+image_di.o: image_di.cc  \
+   image_di.h \
+ image_di_record.h  \
+  
+image_di_16bpp.o: image_di_16bpp.cc image_di.h image_di_Xbpp.h \
+ image_di_Xbpp.cc system.h config.h  \
+   
+image_di_32bpp.o: image_di_32bpp.cc image_di.h image_di_Xbpp.h \
+ image_di_Xbpp.cc system.h config.h  \
+   
+image_di_nobpp.o: image_di_nobpp.cc image_di.h  \
+  
+image_pdt.o: image_pdt.cc image_pdt.h file.h  \
+   system.h config.h \
+ image_di.h  \
+  
+image_stippledef.o: image_stippledef.cc config.h  \
+ 
+image_icon.o: image_icon.cc config.h image_di.h system.h file.h  \
+ 
+image_sys.o: image_sys.cc file.h  \
+   system.h config.h \
+ image_sys.h  \
+  image_cursor.h \
+ 
+main.o: main.cc  \
+   window.h initial.h \
+  window_all.h config.h \
+  file.h image_di.h image_sys.h system.h \
+ image_cursor.h anm.h senario.h ard.h
+option.o: option.cc   \
+   system.h config.h \
+  senario.h file.h ard.h
+senario.o: senario.cc file.h  \
+  senario.h system.h config.h ard.h image_di.h \
+ anm.h
+senario_backlog.o: senario_backlog.cc senario.h file.h \
+  system.h config.h ard.h  \
+   senario_backlog.h
+senario_backlog_stab.o: senario_backlog_stab.cc senario.h file.h \
+  system.h config.h ard.h
+senario_dump.o: senario_dump.cc  \
+  senario.h file.h  \
+ system.h config.h ard.h system_graphics_stab.cc anm.h \
+ system_music_stab.cc window_stab.cc
+senario_flags.o: senario_flags.cc file.h  \
+   senario.h system.h \
+ config.h ard.h
+senario_graphics.o: senario_graphics.cc file.h  \
+  senario.h system.h config.h ard.h image_di.h
+senario_patch.o: senario_patch.cc senario.h file.h \
+  system.h config.h ard.h
+senario_save.o: senario_save.cc senario.h file.h  \
+   system.h config.h ard.h \
+  
+system.o: system.cc system.h config.h  \
+   file.h \
+ 
+system_config.o: system_config.cc  \
+  system.h config.h image_di.h file.h
+system_graphics.o: system_graphics.cc system.h config.h \
+  image_di.h image_pdt.h file.h \
+ 
+system_music_stab.o: system_music_stab.cc system.h config.h \
+  
+visarc.o: visarc.cc config.h  \
+   file.h \
+  file.cc  \
+ 
+window.o: window.cc  \
+  window.h \
+  window_all.h config.h \
+  file.h  image_di.h \
+ image_sys.h system.h image_cursor.h anm.h image_pdt.h image_di_record.h \
+ 
+window_all.o: window_all.cc  \
+ window_all.h config.h  \
+ 
+window_menu.o: window_menu.cc  \
+   window.h \
+  window_all.h config.h \
+  file.h image_di.h image_sys.h system.h \
+ image_cursor.h anm.h
+ 
+window_name.o: window_name.cc  \
+  window.h \
+  window_all.h config.h \
+  file.h  image_di.h \
+ image_sys.h system.h image_cursor.h anm.h
+ 
+window_stab.o: window_stab.cc system.h config.h  \
+ 
+window_text.o: window_text.cc  \
+  window.h  \
+  window_all.h config.h \
+  file.h  image_di.h \
+ image_sys.h system.h image_cursor.h anm.h
+ 
+image_di_impl.cc: image_di_impl.h image_di.h
+image_di_seldraw.cc: image_di_seldraw.h image_di_impl.h image_di.h typelist.h initial.h
+image_di_selimpl1.cc: image_di_seldraw.h image_di_impl.h image_di.h typelist.h initial.h
+image_di_selimpl2.cc: image_di_seldraw.h image_di_impl.h image_di.h typelist.h initial.h
+image_di_selimpl3.cc: image_di_seldraw.h image_di_impl.h image_di.h typelist.h initial.h

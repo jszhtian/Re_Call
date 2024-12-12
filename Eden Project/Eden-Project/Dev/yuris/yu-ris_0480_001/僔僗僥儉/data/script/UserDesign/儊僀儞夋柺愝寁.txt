@@ -1,0 +1,831 @@
+//============================================================================
+// メイン画面設計
+//============================================================================
+#=ES.GAMEMAIN.BTDEF
+
+
+IF[@L(777)==0]
+{
+	//メッセージウィンドウ
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main/tip_meswindow")
+	\BT.XY(037, 452)
+	\BT.MAP.A(255)
+	\BT.Z(013)
+	\BT.SET(TIP.MESW)
+
+	//メッセージウィンドウ・テキスト部分
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main/tip_meswindow_txspace")
+	\BT.XY(037+20, 452+02+10)
+	\BT.MAP.A(255)
+	\BT.Z(012)
+	\BT.SET(TIP.MESW.TX)
+
+	//メッセージウィンドウ・後ろ（透過部分）
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main/tip_meswindow_back")
+	\BT.XY(037, 452)
+	\BT.MAP.A(255)
+	\BT.Z(011)
+	\BT.SET(TIP.MESW.A)
+
+	//名前ウィンドウ
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main/tip_namewindow")
+	\BT.XY(037, 409)
+	\BT.MAP.A(255)
+	\BT.Z(013)
+	\BT.SET(TIP.NAMEW)
+
+	//名前ウィンドウ・テキスト部分
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main/tip_namewindow_txspace")
+	\BT.XY(037, 409-1)
+	\BT.MAP.A(255)
+	\BT.Z(012)
+	\BT.SET(TIP.NAMEW.TX)
+
+	//名前ウィンドウ・後ろ（透過部分）
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main/tip_namewindow_back")
+	\BT.XY(037, 409)
+	\BT.MAP.A(255)
+	\BT.Z(011)
+	\BT.SET(TIP.NAMEW.A)
+
+	//改頁アイコン
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS.AN("main/texticon/icon_")
+	\BT.AN.NUM(16)
+	\BT.AN.TIME(100)
+//	\BT.AN.LPTYPE(3,0,1,0) //ループタイプ
+	\BT.XY(710, 535)
+	\BT.Z(021)
+	\BT.T(100)
+\BT.TYPE(0)
+//\BT.TYPE(2)
+	\BT.SET(TIP.TX.REPAGEICON)
+
+	//改行アイコン
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS.AN("main/texticon/icon_c")
+	\BT.AN.NUM(2)
+	\BT.AN.TIME(500)
+	\BT.XY(710, 535)
+	\BT.Z(021)
+\BT.TYPE(0)
+//\BT.TYPE(1)
+	\BT.SET(TIP.TX.RETURNICON)
+
+	//オートアイコン
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main/autoicon/icon_01")
+	//\BT.ANIME("main/autoicon/icon_", 1)
+	\BT.XY(800-122, 020)
+	\BT.MAP.A(255)
+	\BT.Z(021)
+	\BT.SET(TIP.AUTOICON)
+
+	//スキップアイコン
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main/skipicon/icon_01")
+	//\BT.ANIME("main/skipicon/icon_", 1)
+	\BT.XY(800-122, 020)
+	\BT.MAP.A(255)
+	\BT.Z(021)
+	\BT.SET(TIP.SKIPICON)
+
+	//次音声アイコン
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main/nextvoice/icon_01")
+	\BT.XY(715, 474)
+	\BT.MAP.A(255)
+	\BT.Z(021)
+	\BT.SET(TIP.NEXTVOICEICON)
+
+	//カウントアイコン
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS.AN("main/count/icon_")
+	\BT.AN.NUM(10)
+	\BT.AN.TIME(0)
+	\BT.XY(715, 496)
+	\BT.MAP.A(255)
+	\BT.Z(021)
+	\BT.SET(TIP.COUNTICON)
+
+
+		//■ゲーム進行用クリックチップ
+		\BT.NAME("■CLICK")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_click_bt3")
+		\BT.KEY("MOUSE_L", "MOUSE_D", "ENTER", "DOWN", "PAGEDOWN")
+		\BT.XY(-730, 10)
+		\BT.Z(001)
+		\BT.SET(TIP.CLICK)
+
+		//■ゲーム進行用CTRLスキップチップ
+		\BT.NAME("■CTRLSKIP")
+		\BT.GROUP(1,2)
+		\BT.CGSYS("main/button/btn_skip_bt4")
+		\BT.XY(-730, 30)
+		\BT.Z(001)
+		\BT.KEY.S(CTRL) //押しっぱなし対応にする
+		\BT.SET(TIP.CTRLSKIP)
+
+/*
+		//■TEMPLATE1
+		\BT.NAME("■TEMPLATE1")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_log")
+		\BT.XY(200, 200)
+		\BT.Z(019)
+		\BT.SET(BTN.TEMPLATE1)
+*/
+
+
+		//■フェイスウィンドウ背景画像
+		\BT.NAME("■FACEBACK")
+		\BT.GROUP(1,2)
+		\BT.CG("cg/face/face_back")
+		\BT.XY(010, 320)
+		\BT.Z(019)
+		\BT.SET(TIP.FACE.BACK)
+
+
+		//■日付ウィンドウ背景画像
+		\BT.NAME("■DATEBACK")
+		\BT.GROUP(1,2)
+		\BT.CGSYS("date/tip_back")
+		\BT.XY(014, 017)
+		\BT.Z(100)
+		\BT.SET(TIP.DATE.BACK)
+
+
+
+	IF[@es.RPMODE==0]
+	{
+
+		\BT.NAME("■SAVE")
+		\BT.GROUP(1)
+	\BT.CGSYS.AN("main/button/btn_save_off_", "main/button/btn_save_over_", "main/button/btn_save_over_")
+	\BT.AN.NUM(2,32,32)
+	\BT.AN.TIME(40,40)
+	\BT.T(100)
+\BT.TYPE(1)
+	//	\BT.CGSYS("main/button/btn_save_bt3")
+		\BT.XY(026+50*00, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.SAVE)
+
+		\BT.NAME("■LOAD")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_load_bt3")
+		\BT.XY(026+50*01, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.LOAD)
+
+		\BT.NAME("■QSAVE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_qsave_bt3")
+		\BT.XY(026+50*02, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.QSAVE)
+
+		\BT.NAME("■QLOAD")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_qload_bt3")
+		\BT.XY(026+50*03, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.QLOAD)
+
+		\BT.NAME("■PREVSEL")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_prevsel_bt3")
+		\BT.XY(026+50*04, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.PREVSEL)
+
+		\BT.NAME("■LOG")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_backlog_bt3")
+		\BT.XY(026+50*05, 577)
+		\BT.Z(020)
+		\BT.KEY("MOUSE_U", "PAGEUP", "UP")
+		\BT.MAP.A(128)
+		\BT.SET(BTN.LOG)
+
+		\BT.NAME("■VOICE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_voice_bt4")
+	//	\BT.CGSYS("main/button/btn_voice_off", "main/button/btn_voice_over", "main/button/btn_voice_on", "main/button/btn_voice_onover", "main/button/btn_voice_na")
+		\BT.XY(026+50*06, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.VOICE)
+
+		\BT.NAME("■AUTO")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_auto_bt4")
+		\BT.XY(026+50*07, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.AUTO)
+
+		\BT.NAME("■SKIP")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_skip_bt4")
+		\BT.XY(026+50*08, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.SKIP)
+
+		\BT.NAME("■CONFIG")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_config_bt3")
+		\BT.XY(026+50*09, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY("C")
+		\BT.SET(BTN.CONFIG)
+
+		\BT.NAME("■SCREEN")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_screen_bt3")
+		\BT.XY(026+50*10, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.SCREEN)
+
+		\BT.NAME("■ERASE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_erase_bt3")
+		\BT.XY(026+50*11, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY("MOUSE_R", "SPACE", "ESC", "BS")
+		\BT.SET(BTN.ERASE)
+
+		\BT.NAME("■TITLE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_title_bt3")
+		\BT.XY(026+50*12, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.TITLE, 0) //1=Windowsダイアログ
+
+		\BT.NAME("■END")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_end_bt3")
+		\BT.XY(026+50*13, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.END, 0) //1=Windowsダイアログ
+
+		\BT.NAME("■MENU")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_menu_bt3")
+		\BT.XY(026+50*14, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.MENU)
+
+	}
+	ELSE[]
+	{
+/*
+		\BT.NAME("■SAVE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_save_na")
+\BT.N(1)
+		\BT.XY(026+50*00, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.SAVE)
+
+		\BT.NAME("■LOAD")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_load_na")
+\BT.N(1)
+		\BT.XY(026+50*01, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.LOAD)
+
+		\BT.NAME("■QSAVE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_qsave_na")
+\BT.N(1)
+		\BT.XY(026+50*02, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.QSAVE)
+	//	\BT.SET(BTN.QSAVEDLG)
+
+		\BT.NAME("■QLOAD")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_qload_na")
+\BT.N(1)
+		\BT.XY(026+50*03, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.QLOAD)
+	//	\BT.SET(BTN.QLOADDLG)
+
+		\BT.NAME("■PREVSEL")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_prevsel_na")
+\BT.N(1)
+		\BT.XY(026+50*04, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.PREVSEL)
+*/
+		\BT.NAME("■LOG")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_backlog_bt3")
+		\BT.XY(026+50*04, 577)
+		\BT.Z(020)
+		\BT.KEY("MOUSE_U", "PAGEUP", "UP")
+		\BT.MAP.A(128)
+		\BT.SET(BTN.LOG)
+
+		\BT.NAME("■VOICE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_voice_bt4")
+	//	\BT.CGSYS("main/button/btn_voice_off", "main/button/btn_voice_over", "main/button/btn_voice_on", "main/button/btn_voice_onover", "main/button/btn_voice_na")
+		\BT.XY(026+50*05, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.VOICE)
+
+		\BT.NAME("■AUTO")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_auto_bt4")
+		\BT.XY(026+50*06, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.AUTO)
+
+		\BT.NAME("■SKIP")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_skip_bt4")
+		\BT.XY(026+50*07, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.SKIP)
+
+		\BT.NAME("■CONFIG")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_config_bt3")
+		\BT.XY(026+50*08, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY("C")
+		\BT.SET(BTN.CONFIG)
+
+		\BT.NAME("■SCREEN")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_screen_bt3")
+		\BT.XY(026+50*09, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.SCREEN)
+
+		\BT.NAME("■ERASE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_erase_bt3")
+		\BT.XY(026+50*10, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY("MOUSE_R", "SPACE", "ESC", "BS")
+		\BT.SET(BTN.ERASE)
+
+		\BT.NAME("■REPLAYBACK")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_replay_bt3")
+		\BT.XY(026+50*11, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.RPMODE, 0) //1=Windowsダイアログ
+
+		\BT.NAME("■TITLE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_title_bt3")
+		\BT.XY(026+50*12, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.TITLE, 0) //1=Windowsダイアログ
+
+		\BT.NAME("■END")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_end_bt3")
+		\BT.XY(026+50*13, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.END, 0) //1=Windowsダイアログ
+
+		\BT.NAME("■MENU")
+		\BT.GROUP(1)
+		\BT.CGSYS("main/button/btn_menu_bt3")
+		\BT.XY(026+50*14, 577)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.MENU)
+
+	}
+	IFEND[]
+
+}
+IFEND[]
+IF[@L(777)==1] //2番目のデザイン
+{
+
+	//メッセージウィンドウ
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main2/tip_meswindow")
+	\BT.XY(070, 460)
+	\BT.MAP.A(255)
+	\BT.Z(013)
+	\BT.SET(TIP.MESW)
+
+	//メッセージウィンドウ・テキスト部分
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main2/tip_meswindow_txspace")
+	\BT.XY(110, 464+10)
+	\BT.MAP.A(255)
+	\BT.Z(012)
+	\BT.SET(TIP.MESW.TX)
+
+	//メッセージウィンドウ・後ろ（透過部分）
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main2/tip_meswindow_back")
+	\BT.XY(070, 460)
+	\BT.MAP.A(255)
+	\BT.Z(011)
+	\BT.SET(TIP.MESW.A)
+
+	//名前ウィンドウ
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main2/tip_namewindow")
+	\BT.XY(030, 412)
+	\BT.MAP.A(255)
+	\BT.Z(013)
+	\BT.SET(TIP.NAMEW)
+
+	//名前ウィンドウ・テキスト部分
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main2/tip_namewindow_txspace")
+	\BT.XY(030, 418)
+	\BT.MAP.A(255)
+	\BT.Z(012)
+	\BT.SET(TIP.NAMEW.TX)
+
+	//名前ウィンドウ・後ろ（透過部分）
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main2/tip_namewindow_back")
+	\BT.XY(030, 412)
+	\BT.MAP.A(255)
+	\BT.Z(011)
+	\BT.SET(TIP.NAMEW.A)
+
+
+	//改頁アイコン
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+//	\BT.CGSYS("main/texticon/icon_01")
+//	\BT.CGSYS.AN("main/texticon/icon_", "main/texticon_over/icon_", "main/texticon/icon_c", "main/texticon_over/icon_c")
+	\BT.CGSYS.AN("main/texticon/icon_")
+	\BT.AN.NUM(16,8,8,8)
+	\BT.AN.TIME(100,50,200,100)
+//	\BT.AN.LPTYPE(3,0,1,0) //ループタイプ
+	\BT.XY(660, 550)
+	\BT.Z(021)
+	\BT.T(100)
+\BT.TYPE(0)
+//\BT.TYPE(2)
+	\BT.SET(TIP.TX.REPAGEICON)
+
+	//改行アイコン
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS.AN("main/texticon/icon_c", "main/texticon/icon_")
+	\BT.AN.NUM(8,8)
+	\BT.AN.TIME(10)
+	\BT.XY(9999710, 535-40)
+	\BT.Z(021)
+\BT.TYPE(0)
+//\BT.TYPE(1)
+	\BT.SET(TIP.TX.RETURNICON)
+
+
+
+		//■ゲーム進行用クリックチップ
+		\BT.NAME("■CLICK")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_click_bt3")
+		\BT.KEY("MOUSE_L", "MOUSE_D", "ENTER", "DOWN", "PAGEDOWN")
+		\BT.XY(-730, 10)
+		\BT.Z(001)
+		\BT.SET(TIP.CLICK)
+
+		//■ゲーム進行用CTRLスキップチップ
+		\BT.NAME("■CTRLSKIP")
+		\BT.GROUP(1,2)
+		\BT.CGSYS("main2/button/btn_skip_bt4")
+		\BT.XY(-730, 30)
+		\BT.Z(001)
+		\BT.KEY.S(CTRL) //押しっぱなし対応にする
+		\BT.SET(TIP.CTRLSKIP)
+
+
+		\BT.NAME("■SAVE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_save_off", "main2/button/btn_save_over")
+//		\BT.TYPE(1)
+		\BT.XY(210+40*00, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.SAVE)
+
+		\BT.NAME("■LOAD")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_load_off", "main2/button/btn_load_over")
+		\BT.XY(210+40*01, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.LOAD)
+
+		\BT.NAME("■QSAVE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_qsave_off", "main2/button/btn_qsave_over")
+		\BT.XY(210+40*02, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.QSAVE)
+
+		\BT.NAME("■QLOAD")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_qload_na")
+		\BT.XY(210+40*03, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.QLOAD)
+
+		\BT.NAME("■PREVSEL")
+		\BT.GROUP(1)
+//		\BT.CGSYS("main/button/btn_prevsel_bt3")
+		\BT.CGSYS("main2/button/btn_prevsel_na")
+		\BT.XY(210+40*04, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.PREVSEL)
+
+		\BT.NAME("■LOG")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_backlog_off", "main2/button/btn_backlog_over")
+		\BT.XY(210+40*05, 418)
+		\BT.Z(020)
+		\BT.KEY("MOUSE_U", "PAGEUP", "UP")
+		\BT.MAP.A(128)
+		\BT.SET(BTN.LOG)
+
+		\BT.NAME("■VOICE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_voice_off", "main2/button/btn_voice_over", "main2/button/btn_voice_over", "main2/button/btn_voice_over")
+		\BT.XY(210+40*06, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.VOICE)
+
+		\BT.NAME("■AUTO")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_auto_off", "main2/button/btn_auto_over", "main2/button/btn_auto_over")
+		\BT.XY(210+40*07, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.AUTO)
+
+		\BT.NAME("■SKIP")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_skip_off", "main2/button/btn_skip_over", "main2/button/btn_skip_over")
+		\BT.XY(210+40*08, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.SKIP)
+
+		\BT.NAME("■CONFIG")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_config_off", "main2/button/btn_config_over")
+		\BT.XY(210+40*09, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY("C")
+		\BT.SET(BTN.CONFIG)
+
+		\BT.NAME("■SCREEN")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_screen_off", "main2/button/btn_screen_over")
+		\BT.XY(210+40*10, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+	//	\BT.KEY("ALT+ENTER")
+		\BT.SET(BTN.SCREEN)
+
+		\BT.NAME("■ERASE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_erase_off", "main2/button/btn_erase_over")
+		\BT.XY(210+40*11, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY("MOUSE_R", "SPACE", "ESC", "BS")
+		\BT.SET(BTN.ERASE)
+
+		\BT.NAME("■TITLE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_title_off", "main2/button/btn_title_over")
+		\BT.XY(210+40*12, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.TITLE, 0) //1=Windowsダイアログ
+
+		\BT.NAME("■END")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_end_off", "main2/button/btn_end_over")
+		\BT.XY(210+40*13, 418)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.END, 0) //1=Windowsダイアログ
+
+		\BT.NAME("■MENU")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_menu_off", "main2/button/btn_menu_over")
+		\BT.XY(210+40*13, 458)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.SET(BTN.MENU)
+
+
+}
+IFEND[]
+
+
+
+IF[@L(777)==2] //3番目のデザイン
+{
+
+	//メッセージウィンドウ
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main3/tip_meswindow")
+	\BT.XY(000, 000)
+	\BT.MAP.A(255)
+	\BT.Z(013)
+	\BT.SET(TIP.MESW)
+
+	//メッセージウィンドウ・テキスト部分
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main3/tip_meswindow_txspace")
+	\BT.XY(030, 030)
+	\BT.MAP.A(255)
+	\BT.Z(012)
+	\BT.SET(TIP.MESW.TX)
+
+	//メッセージウィンドウ・後ろ（透過部分）
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS("main3/tip_meswindow_back")
+	\BT.XY(000, 000)
+	\BT.MAP.A(255)
+	\BT.Z(011)
+	\BT.SET(TIP.MESW.A)
+
+
+	//改頁アイコン
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+//	\BT.CGSYS("main/texticon/icon_01")
+//	\BT.CGSYS.AN("main/texticon/icon_", "main/texticon_over/icon_", "main/texticon/icon_c", "main/texticon_over/icon_c")
+	\BT.CGSYS.AN("main/texticon/icon_")
+	\BT.AN.NUM(16,8,8,8)
+	\BT.AN.TIME(100,50,200,100)
+//	\BT.AN.LPTYPE(3,0,1,0) //ループタイプ
+	\BT.XY(710, 535)
+	\BT.Z(021)
+	\BT.T(100)
+\BT.TYPE(0)
+//\BT.TYPE(2)
+	\BT.SET(TIP.TX.REPAGEICON)
+
+	//改行アイコン
+	\BTDEF.GROUP("ES.GAMEMAIN")
+	\BT.GROUP(1)
+	\BT.CGSYS.AN("main/texticon/icon_c", "main/texticon/icon_")
+	\BT.AN.NUM(8,8)
+	\BT.AN.TIME(10)
+	\BT.XY(9999710, 535-40)
+	\BT.Z(021)
+\BT.TYPE(0)
+//\BT.TYPE(1)
+	\BT.SET(TIP.TX.RETURNICON)
+
+
+
+		//■ゲーム進行用クリックチップ
+		\BT.NAME("■CLICK")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_click_bt3")
+		\BT.KEY("MOUSE_L", "MOUSE_D", "ENTER", "DOWN", "PAGEDOWN")
+		\BT.XY(-730, 10)
+		\BT.Z(001)
+		\BT.SET(TIP.CLICK)
+
+		//■ゲーム進行用CTRLスキップチップ
+		\BT.NAME("■CTRLSKIP")
+		\BT.GROUP(1,2)
+		\BT.CGSYS("main2/button/btn_skip_bt4")
+		\BT.XY(-730, 30)
+		\BT.Z(001)
+		\BT.KEY.S(CTRL) //押しっぱなし対応にする
+		\BT.SET(TIP.CTRLSKIP)
+
+
+
+		\BT.NAME("■LOG")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_backlog_off", "main2/button/btn_backlog_over")
+		\BT.XY(99999, 99999)
+		\BT.Z(020)
+		\BT.KEY("MOUSE_U", "PAGEUP", "UP")
+		\BT.SET(BTN.LOG)
+
+		\BT.NAME("■ERASE")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_erase_off", "main2/button/btn_erase_over")
+		\BT.XY(99999, 99999)
+		\BT.Z(020)
+		\BT.KEY("MOUSE_R", "SPACE", "ESC", "BS")
+		\BT.SET(BTN.ERASE)
+
+		\BT.NAME("■MENU")
+		\BT.GROUP(1)
+		\BT.CGSYS("main2/button/btn_menu_off", "main2/button/btn_menu_over")
+		\BT.XY(999, 999)
+		\BT.Z(020)
+		\BT.MAP.A(128)
+		\BT.KEY(MOUSE_R)
+		\BT.SET(BTN.MENU)
+
+
+}
+IFEND[]
+
+
+
+RETURN[]
+
+
+
+//============================================================================
+// 画面消去(ERASE)時設計
+//============================================================================
+#=ES.WINDOWERASE.BTDEF
+{
+	\BTDEF.GROUP(ES.WINDOWERASE)
+
+	\BT.NAME("■ERASE-メッセージウィンドウ再表示用チップ")
+	\BT.CGSYS("main/button/btn_show_bt3")
+	\BT.KEY("MOUSE_L", "MOUSE_R", "MOUSE_D", "ENTER", "SPACE", "DOWN", "PAGEDOWN")
+	\BT.XY(-730, 40)
+	\BT.Z(001)
+	\BT.SET(BTN.MESWSHOW)
+
+	RETURN[]
+}
+
+
+

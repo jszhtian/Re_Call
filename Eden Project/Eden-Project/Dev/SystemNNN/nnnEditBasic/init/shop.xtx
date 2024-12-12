@@ -1,0 +1,171 @@
+modename shop
+
+backScriptFlag 1
+backScriptName backscript_shop
+
+angouFlag 1
+
+canSelectLimit 1
+canSelectNoPoint 1
+
+notAppearName ひみつにゃ
+
+enterFadeInType 2
+enterFadeInTime 20
+
+filenameBG bg_shop
+filenamePlate ta_shopitem_plate
+
+lowCursor 1
+useCursorPic 0
+
+itemBlockX 2
+itemBlockY 2
+
+itemPrintX 200
+itemPrintY 200
+itemSizeX 80
+itemSizeY 60
+itemPrintNextX 220
+itemPrintNextY 200
+
+itemNamePrintFlag 1
+itemNameFontSize 24
+itemNamePrintX 10
+itemNamePrintY 5
+itemNameFontColorR 0
+itemNameFontColorG 255
+itemNameFontColorB 128
+
+
+
+itemTypeNumber 2
+
+
+
+itemTypeDataNumber1 1
+itemTypeData1_1 1
+
+itemTypeDataNumber2 3
+itemTypeData2_1 2
+itemTypeData2_2 3
+itemTypeData2_3 4
+
+
+
+upFilename ta_voice_leftarrow
+downFilename ta_voice_rightarrow
+upPrintX 10
+upPrintY 300
+downPrintX 700
+downPrintY 300
+upSizeX 64
+upSizeY 64
+downSizeX 64
+downSizeY 64
+upAnimeType1 7
+upAnimePattern1 2
+upAnimeSpeed1 10
+downAnimeType1 7
+downAnimePattern1 2
+downAnimeSpeed1 10
+
+backFilename ta_voice_back
+backPrintX 700
+backPrintY 500
+backSizeX 64
+backSizeY 64
+backAnimeType1 7
+backAnimePattern1 2
+backAnimeSpeed1 30
+
+
+
+
+shopItemType1Button1Filename ta_voiceChara1_off
+shopItemType1Button2Filename ta_voiceChara1_on
+shopItemType2Button1Filename ta_voiceChara2_off
+shopItemType2Button2Filename ta_voiceChara2_on
+
+shopItemType1Button1PrintX 100
+shopItemType1Button1PrintY 100
+shopItemType1Button2PrintX 100
+shopItemType1Button2PrintY 100
+
+shopItemType1Button1SizeX 64
+shopItemType1Button1SizeY 64
+
+shopItemType1Button1AnimeType 7
+shopItemType1Button1AnimePattern 2
+shopItemType1Button1AnimeSpeed 10
+shopItemType1Button2AnimeType 7
+shopItemType1Button2AnimePattern 2
+shopItemType1Button2AnimeSpeed 10
+
+
+shopItemType2Button1PrintX 200
+shopItemType2Button1PrintY 100
+shopItemType2Button2PrintX 200
+shopItemType2Button2PrintY 100
+
+shopItemType2Button1SizeX 64
+shopItemType2Button1SizeY 64
+
+shopItemType2Button1AnimeType 7
+shopItemType2Button1AnimePattern 2
+shopItemType2Button1AnimeSpeed 10
+shopItemType2Button2AnimeType 7
+shopItemType2Button2AnimePattern 2
+shopItemType2Button2AnimeSpeed 10
+
+gamePointPrintX 300
+gamePointPrintY 560
+gamePointFontSizeX 32
+gamePointFontSizey 32
+gamePointKeta 8
+gamePointUpZeroFlag 0
+gamePointLeftFlag 0
+filenameGamePoint ta_shop_gamepoint
+
+pricePointPrintX 30
+pricePointPrintY 50
+pricePointFontSizeX 32
+pricePointFontSizey 32
+pricePointKeta 5
+pricePointUpZeroFlag 0
+pricePointLeftFlag 0
+filenamePricePoint ta_shop_pricepoint
+
+
+
+
+okFilename ta_shop_ok
+okPrintX 400
+okPrintY 500
+okSizeX 64
+okSizeY 64
+okAnimeType1 7
+okAnimePattern1 2
+okAnimeSpeed1 30
+
+cancelFilename ta_shop_cancel
+cancelPrintX 500
+cancelPrintY 500
+cancelSizeX 64
+cancelSizeY 64
+cancelAnimeType1 7
+cancelAnimePattern1 2
+cancelAnimeSpeed1 30
+
+
+newMarkPrintFlag 1
+newMarkPrintX -20
+newMarkPrintY 0
+filenameNewMark ta_shop_newmark
+
+soldOutPrintFlag 1
+soldOutPrintX 50
+soldOutPrintY 20
+filenameSoldOut ta_shop_soldout
+
+appearVar1 ショップ新規フラグ１

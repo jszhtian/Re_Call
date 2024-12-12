@@ -1,0 +1,86 @@
+modename omake
+
+enterFadeInType 7
+enterFadeInTime 20
+
+backScriptFlag 1
+backScriptName omake_backscript
+
+filenameBG bg_omake
+
+autoCGCharaFlag 1
+autoSceneCharaFlag 1
+
+menu1Button1FileName ta_omakeButton1
+menu1Button2FileName ta_omakeButton2
+menu1Button3FileName ta_omakeButton3
+menu1Button4FileName ta_backButton
+
+menu2Button5FileName ta_omake_menu5
+menu2Button6FileName ta_omake_menu6
+menu2Button7FileName ta_omake_menu7
+menu2Button8FileName ta_omake_menu8
+
+menu1Button1SizeX 128
+menu1Button1SizeY 64
+
+menu1Button1AnimeType1 7
+menu1Button1AnimePattern1 2
+menu1Button1AnimeSpeed1 20
+
+
+menu1Button1PrintX 576
+menu1Button1PrintY 50
+
+menu1Button2PrintX 576
+menu1Button2PrintY 150
+
+menu1Button3PrintX 576
+menu1Button3PrintY 250
+
+@menu1Button4PrintX 650
+@menu1Button4PrintY 450
+
+menu2Button5PrintX 50
+menu2Button5PrintY 550
+
+menu2Button6PrintX 200
+menu2Button6PrintY 550
+
+menu2Button7PrintX 350
+menu2Button7PrintY 550
+
+menu2Button8PrintX 450
+menu2Button8PrintY 550
+
+menu1Button1ClickSound 1
+
+menu1Button4PrintX 1120
+menu1Button4PrintY 624
+menu1Button4SizeX 128
+menu1Button4SizeY 64
+menu1Button4AnimeType1 7
+menu1Button4AnimePattern1 2
+menu1Button4AnimeSpeed1 20
+
+
+
+
+bgmNumber 1
+bgmRestartFlag 0
+
+menu1Button4ClickTime 1
+
+extModeNumber 1
+extButtonNumber 4
+
+extButtonSpecialMode1 42
+extButtonSpecialMode2 44
+extButtonSpecialMode3 43
+extButtonSpecialMode4 48
+
+extModeCheckVarName Ç®Ç‹ÇØÉÅÉjÉÖÅ[ägí£
+
+
+miniGameFlag 0
+

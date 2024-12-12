@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="effect">
+      <UniqueIdentifier>{4118fb86-3c64-4d56-a02f-3979eb47162d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="effect\code">
+      <UniqueIdentifier>{c388a073-ffbf-4f41-b92b-329435862994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="effect\code\parts">
+      <UniqueIdentifier>{e0f956d3-eaaf-4052-b1ea-fb03cc13845d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="effect\code\main">
+      <UniqueIdentifier>{98bc37df-1a37-4e7f-b973-3d9381633188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="effect\creator">
+      <UniqueIdentifier>{b45fc309-f714-447d-a010-be4f8679308d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="effect\val">
+      <UniqueIdentifier>{02dba367-72d0-4233-bb09-4a5d8fad295e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="effect\func">
+      <UniqueIdentifier>{2267339d-bbed-4597-8ade-259b8174a299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="effect\semantics">
+      <UniqueIdentifier>{f0f6a300-70db-438a-a209-b63829edb562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="skin">
+      <UniqueIdentifier>{04966017-b3d3-4916-99e9-f4f3b3798d68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{d564eedd-f456-441c-b185-f37823eed87b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\tonad3d3_album.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_camera.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_d3d.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_data.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_debug_text.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_device.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_index.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_light.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_light_manager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_mesh.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_pch.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_sprite.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_state.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_surface.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_texture.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_vertex.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_source_manager.cpp">
+      <Filter>effect</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_source_val_name_manager.cpp">
+      <Filter>effect</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_lighting_and_shading_shader.cpp">
+      <Filter>effect\code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_lighting_shader.cpp">
+      <Filter>effect\code</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_parts_light.cpp">
+      <Filter>effect\code\parts</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_parts_shadow.cpp">
+      <Filter>effect\code\parts</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_main.cpp">
+      <Filter>effect\code\main</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_source_creator.cpp">
+      <Filter>effect\creator</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_source_creator_ds.cpp">
+      <Filter>effect\creator</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_source_creator_shadow_map.cpp">
+      <Filter>effect\creator</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_source_creator_skinned_mesh.cpp">
+      <Filter>effect\creator</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_effect_global_texture_val.cpp">
+      <Filter>effect\val</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_animation_controller.cpp">
+      <Filter>skin</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_frame_ex.cpp">
+      <Filter>skin</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_post_render.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_pre_render.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_render.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_render_interface.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_renderer.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_mask.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_obj.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_manager.h">
+      <Filter>effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_val_name_manager.h">
+      <Filter>effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_lighting_and_shading_shader.h">
+      <Filter>effect\code</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_lighting_shader.h">
+      <Filter>effect\code</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_parts_light.h">
+      <Filter>effect\code\parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_parts_shadow.h">
+      <Filter>effect\code\parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_main.h">
+      <Filter>effect\code\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_creator.h">
+      <Filter>effect\creator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_creator_ds.h">
+      <Filter>effect\creator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_creator_shadow_map.h">
+      <Filter>effect\creator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_creator_skinned_mesh.h">
+      <Filter>effect\creator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_global_sampler_val.h">
+      <Filter>effect\val</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_global_texture_val.h">
+      <Filter>effect\val</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_global_val.h">
+      <Filter>effect\val</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_global_val_pack.h">
+      <Filter>effect\val</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_texture_info.h">
+      <Filter>effect\val</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_func_info.h">
+      <Filter>effect\func</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_func_interface.h">
+      <Filter>effect\func</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_mrbd_color_func.h">
+      <Filter>effect\func</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_rgb_color_func.h">
+      <Filter>effect\func</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_sampler_func.h">
+      <Filter>effect\func</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_tone_curve_func.h">
+      <Filter>effect\func</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_vertex_color_func.h">
+      <Filter>effect\func</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_pixel_input_semantics_struct.h">
+      <Filter>effect\semantics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_pixel_output_semantics_struct.h">
+      <Filter>effect\semantics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_semantics_info.h">
+      <Filter>effect\semantics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_semantics_struct.h">
+      <Filter>effect\semantics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_vertex_input_semantics_struct.h">
+      <Filter>effect\semantics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_effect_vertex_output_semantics_struct.h">
+      <Filter>effect\semantics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_animation_controller.h">
+      <Filter>skin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_frame_ex.h">
+      <Filter>skin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_post_render.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_pre_render.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_render.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_render_interface.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tonad3d3_renderer.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_surface.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_texture.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_vertex.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_album.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_animation_controller.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_camera.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_d3d.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_data.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_debug_text.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_device.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_func_info.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_func_interface.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_global_sampler_val.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_global_texture_val.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_global_val.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_global_val_pack.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_lighting_and_shading_shader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_lighting_shader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_main.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_mrbd_color_func.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_parts_light.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_parts_shadow.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_pixel_input_semantics_struct.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_pixel_output_semantics_struct.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_rgb_color_func.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_sampler_func.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_semantics_info.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_semantics_struct.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_creator.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_creator_ds.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_creator_shadow_map.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_creator_skinned_mesh.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_manager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_val_name_manager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_texture_info.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_tone_curve_func.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_vertex_color_func.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_vertex_input_semantics_struct.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_effect_vertex_output_semantics_struct.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_frame_ex.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_index.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_light.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_light_manager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_mask.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_mesh.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_obj.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_pch.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_post_render.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_pre_render.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_render.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_render_interface.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_renderer.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_sprite.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\tonad3d3_state.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

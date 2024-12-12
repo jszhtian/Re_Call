@@ -1,0 +1,69 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">ウィンドウ系命令</A>＞WINDOWINFO［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="window.html">WINDOW［］</A>
+　<A HREF="windowinfo.html">WINDOWINFO［］</A>
+　<A HREF="windowend.html">WINDOWEND［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=800 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■ウィンドウ情報取得命令 WINDOWINFO[ ]</FONT>
+<FONT CLASS=t20>
+
+ウィンドウに関する各種情報を取得します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>NO = 値(0～3)</FONT></TD><TD><FONT CLASS=t40>対象のウィンドウ番号を指定します<BR>※０がメインウィンドウ、１～３がサブウィンドウになります</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LET = 変数名</FONT></TD><TD><FONT CLASS=t40>値を格納する変数を指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>EXIST = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウが存在するか否かを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>E = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウの有効／無効を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>ACTIVE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウがアクティブになっているか否かを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CAPTION = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウのキャプションを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>X = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウのＸ座標位置を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Y = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウのＹ座標位置を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SX = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウサイズＸを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SY = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウサイズＹを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FULLSCREEN = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>フルスクリーン(=1)／通常スクリーン(=0)を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FULLSCREENBUTTON = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>最大化ボタンの有効(=1)／無効(=0)を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>MINIMIZE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウが最小化しているか(=1)否か(=0)を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CLOSEMODE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>閉じるボタンを押したときの挙動を調べる場合は１を指定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]サブウィンドウ１が存在しているか調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOWINFO</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>EXIST</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT>]</FONT></B>
+
+
+[2]メインウィンドウがフルスクリーン状態か否か調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOWINFO</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>FULLSCREEN</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT>]</FONT></B>
+
+
+[3]メインウィンドウが最小化状態か否か調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOWINFO</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>MINIMIZE</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT>]</FONT></B>
+
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

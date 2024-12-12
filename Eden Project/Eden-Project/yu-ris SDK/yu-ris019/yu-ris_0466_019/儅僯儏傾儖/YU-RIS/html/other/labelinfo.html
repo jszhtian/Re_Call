@@ -1,0 +1,50 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">その他命令</A>＞LABELINFO［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="label.html">LABEL［］</A>
+　<A HREF="labelinfo.html">LABELINFO［］</A>
+　<A HREF="macro.html">MACRO［］</A>
+　<A HREF="dialog.html">DIALOG［］</A>
+　<A HREF="tray.html">TRAY［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=500 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■ラベル情報取得命令 LABELINFO[ ]</FONT>
+<FONT CLASS=t20>
+
+ラベルに関する情報を取得します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40># = 文字列</FONT></TD><TD><FONT CLASS=t40>ラベル名を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LET = 変数名</FONT></TD><TD><FONT CLASS=t40>情報値を格納する変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>EXIST = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>指定したラベルの存在を調べる場合は１を指定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] 「SCENE01_1」というラベルがスクリプトに存在しているか否か調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>LABELINFO</FONT>[<FONT CLASS=t62>#</FONT>=<FONT CLASS=t63>"SCENE01_1"</FONT> <FONT CLASS=t62>EXIST</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@RET</FONT>]</FONT></B>
+
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

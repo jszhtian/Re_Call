@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9C0FA26E-BF22-4267-B205-C852EF9B2EF5}</ProjectGuid>
+    <RootNamespace>TonaLib3</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(VaDevelop)\VisualStudio\Projects\Tona3\Libs\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <TargetName>Tona3_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(VaDevelop)\VisualStudio\Projects\Tona3\Libs\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <TargetName>Tona3</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Headers;$(VaDevelop)\VisualStudio\Common\Headers\dx5;$(VaDevelop)\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>tona3_pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)Tona3_d.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\Headers;$(VaDevelop)\VisualStudio\Common\Headers\dx5;$(VaDevelop)\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>tona3_pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)Tona3.lib</OutputFile>
+      <AdditionalLibraryDirectories>$(tnmy)\others\lib\win32\dx9;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="source\hash.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="source\oauth.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="source\sha1.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="source\tona3_allocator.cpp" />
+    <ClCompile Include="source\tona3_app.cpp" />
+    <ClCompile Include="source\tona3_csv.cpp" />
+    <ClCompile Include="source\tona3_encode.cpp" />
+    <ClCompile Include="source\tona3_error.cpp" />
+    <ClCompile Include="source\tona3_file.cpp" />
+    <ClCompile Include="source\tona3_filesys.cpp" />
+    <ClCompile Include="source\tona3_font.cpp" />
+    <ClCompile Include="source\tona3_ini.cpp" />
+    <ClCompile Include="source\tona3_input.cpp" />
+    <ClCompile Include="source\tona3_math.cpp" />
+    <ClCompile Include="source\tona3_md5.cpp" />
+    <ClCompile Include="source\tona3_pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="source\tona3_string.cpp" />
+    <ClCompile Include="source\tona3_thread.cpp" />
+    <ClCompile Include="source\tona3_util.cpp" />
+    <ClCompile Include="source\tona3_va_logo.cpp" />
+    <ClCompile Include="source\tona3_xml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Headers\pico_json.h" />
+    <ClInclude Include="..\Headers\tona3.h" />
+    <ClInclude Include="..\Headers\tona3_allocator.h" />
+    <ClInclude Include="..\Headers\tona3_app.h" />
+    <ClInclude Include="..\Headers\tona3_array.h" />
+    <ClInclude Include="..\Headers\tona3_csv.h" />
+    <ClInclude Include="..\Headers\tona3_encode.h" />
+    <ClInclude Include="..\Headers\tona3_error.h" />
+    <ClInclude Include="..\Headers\tona3_file.h" />
+    <ClInclude Include="..\Headers\tona3_filesys.h" />
+    <ClInclude Include="..\Headers\tona3_font.h" />
+    <ClInclude Include="..\Headers\tona3_ini.h" />
+    <ClInclude Include="..\Headers\tona3_input.h" />
+    <ClInclude Include="..\Headers\tona3_main.h" />
+    <ClInclude Include="..\Headers\tona3_math.h" />
+    <ClInclude Include="..\Headers\tona3_md5.h" />
+    <ClInclude Include="..\Headers\tona3_pch.h" />
+    <ClInclude Include="..\Headers\tona3_rsc_mng.h" />
+    <ClInclude Include="..\Headers\tona3_stream.h" />
+    <ClInclude Include="..\Headers\tona3_string.h" />
+    <ClInclude Include="..\Headers\tona3_thread.h" />
+    <ClInclude Include="..\Headers\tona3_tree.h" />
+    <ClInclude Include="..\Headers\tona3_util.h" />
+    <ClInclude Include="..\Headers\tona3_va_logo.h" />
+    <ClInclude Include="..\Headers\tona3_xml.h" />
+    <ClInclude Include="source\oauth.h" />
+    <ClInclude Include="source\sha1.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Program Files\Microsoft Visual Studio 8\Common7\IDE\usertype.dat" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,101 @@
+//============================================================================
+//
+//■フェイスウィンドウ処理
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@FACE.DEF.NUM]
+	S_STR[$FACE.DEF.KEY(1)]		//KEY
+	S_STR[$FACE.DEF.FOLDER(1)]	//FOLDER
+	S_INT[@FACE.DEF.X(1)]		//X
+	S_INT[@FACE.DEF.Y(1)]		//Y
+
+}
+
+//--------------------------------------------------------------------
+//■フェイス画像定義処理
+//--------------------------------------------------------------------
+#=es.FACE.DEF.SET
+{
+	@FACE.DEF.NUM+=1
+	\_strlower($_PSTR(1));\VAR.ADD($FACE.DEF.KEY, $_RSTR(1))
+	\_strlower($_PSTR(2));\VAR.ADD($FACE.DEF.FOLDER, $_RSTR(1))
+	\VAR.ADD(@FACE.DEF.X, @_PINT(3))
+	\VAR.ADD(@FACE.DEF.Y, @_PINT(4))
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■フェイス画像検索処理
+//  $_PSTR(1) : この文字列の中から検索する
+//
+//  $_RINT(1) : FOLDER
+//  @_RINT(2) : X
+//  @_RINT(3) : Y
+//--------------------------------------------------------------------
+#=es.FACE.DEF.SEARCH
+{
+	STR[$chk]
+	\_strlower($_PSTR(1))($chk)
+
+	STR[$ret1]
+	INT[@ret2]
+	INT[@ret3]
+	LOOP[SET=@FACE.DEF.NUM]
+	{
+		\_strlen($FACE.DEF.KEY(@_LC))
+		\_strleft($chk, @_RINT(1))
+		IF[$_RSTR(1)==$FACE.DEF.KEY(@_LC)]
+		{
+			$ret1=$FACE.DEF.FOLDER(@_LC)
+			@ret2=@FACE.DEF.X(@_LC)
+			@ret3=@FACE.DEF.Y(@_LC)
+			LOOPBREAK[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	return[rstr=$ret1 rint2=@ret2 rint3=@ret3]
+}
+
+
+//--------------------------------------------------------------------
+//■フェイス画像読込処理
+//--------------------------------------------------------------------
+#=es.FACE
+{
+	STR[$fn=$_PSTR(1)]
+	STR[$dir]
+	INT[@x]
+	INT[@y]
+
+	$es.LSD(1)=$fn
+
+	IF[$fn!=""] //表示
+	{
+		GOSUB[#=es.FACE.DEF.SEARCH pstr=$fn]
+		$fn= $_RSTR(1)+$fn
+		@x = @_RINT(2)
+		@y = @_RINT(3)
+
+		\BT.END(ES.GAMEMAIN, ES.GAMEMAIN.TIP.FACE)
+
+		\BTDEF.GROUP("ES.GAMEMAIN")
+		\BT.GROUP(1)
+		\BT.CG($T(38,09)+$fn)
+		\BT.XYZ(@T(15,02)+@x, @T(15,03)+@y, @T(15,04))
+		\BT.SET(TIP.FACE)
+	}
+	ELSE[] //消去
+	{
+		\BT.END(ES.GAMEMAIN, ES.GAMEMAIN.TIP.FACE)
+	}
+	IFEND[]
+
+	return[]
+}
+
+

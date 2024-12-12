@@ -1,0 +1,124 @@
+//=========================================================================
+//
+//■ERIS スクリーン切替
+//
+//=========================================================================
+
+S_INT[@MENUBARDEF.FLAG]
+S_INT[@es.MIN.FLAG]
+
+S_INT[@FULLSCREEN.FLAG]
+
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.SCREENCHANGE.LOOP
+{
+	@es.GSD(141,02) = 1 - @es.GSD(141,02)
+	GOSUB[#=ES.SCREENCHANGE_EXEC PINT=@es.GSD(141,02)]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+// スクリーン切替監視
+//--------------------------------------------------------------------
+#=ES.SCREENCHANGE_CHECK
+{
+	IF[@_KEY_ALT>0 && @_KEY_ENTER==1]
+	{
+		@_KEY_ENTER=2
+		GOSUB[#=ES.SCREENCHANGE.LOOP]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//切替処理
+//--------------------------------------------------------------------
+#=ES.SCREENCHANGE_EXEC
+{
+	@es.GSD(141,02) = @_PINT(1)
+	WINDOW[NO=0 FULLSCREEN=@es.GSD(141,02)]
+//	WINDOW[NO=0 Z=@es.GSD(141,02)] //前面or常に手前
+	WINDOW[NO=0 Z=@es.GSD(110,01)] //前面or常に手前
+
+	//Alt+Enterで切り替えた場合、手動でボタン再描画
+	IF[$es.S.NOW=="ES.CONFIG"] GOSUB[#=ES.CONFIG.SCREEN.INIT] IFEND[]
+
+	IF[@es.GSD(141,02)==1] WAIT[TIME=500] IFEND[]
+
+	return[]
+}
+
+//=========================================================================
+//
+//■ERIS ウィンドウ最小化
+//
+//=========================================================================
+#=es.WindowMinimum
+{
+
+//	@es.MIN.FLAG = 1 - @es.MIN.FLAG
+	@es.MIN.FLAG = 1
+
+	IF[@es.MIN.FLAG]
+	{
+		//---------------------------------------------------------------------
+		// メニューバー設定
+		//---------------------------------------------------------------------
+			IF[@MENUBARDEF.FLAG==0]
+			{
+				@MENUBARDEF.FLAG=1
+
+				MENU[ID=MIN/ Z=10 NAME="終了"]
+					MENU[ID=MIN/BACK Z=10 CODE=1001 NAME="元のサイズに戻す(&R)"]
+					MENU[ID=MIN/LINE Z=20           NAME=""]
+				//	MENU[ID=MIN/VER  Z=30 CODE=1002 NAME="バージョン情報"]
+					MENU[ID=MIN/QUIT Z=40 CODE=1003 NAME="閉じる(&C)"]
+			}
+			IFEND[]
+
+	//	CG[ID=ICONCG Z=1 E=0 A=0 FILE="cgsys/trayicon"]
+	//	TRAY[E=1 NAME="INJ_SYSTEM" ID=ICONCG MENUID=MIN/]
+		TRAY[E=1 NAME="ELIS LIB" MENUID=MIN/]
+
+		SOUND[ID=":/S0/" PAUSE=1]
+
+//		SYSTEM[BACKGROUNDEXEC=0]
+
+		WINDOWINFO[NO=0 FULLSCREEN=1 LET=@FULLSCREEN.FLAG]
+		IF[@FULLSCREEN.FLAG]
+			WINDOW[NO=0 FULLSCREEN=0]
+		IFEND[]
+
+		WINDOW[NO=0 MINIMIZE=1]
+
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.WindowMinimum2
+{
+	WINDOW[NO=0 MINIMIZE=0]
+
+	IF[@FULLSCREEN.FLAG]
+		@FULLSCREEN.FLAG=0
+		WINDOW[NO=0 FULLSCREEN=1]
+	IFEND[]
+
+	SOUND[ID=":/S0/" PAUSE=0]
+
+//	SYSTEM[BACKGROUNDEXEC=@es.GSD(110,02)]
+
+	TRAY[E=0]
+
+	return[]
+}

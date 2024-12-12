@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{99F6C211-DDFC-404B-832C-2DA43DF84163}</ProjectGuid>
+    <RootNamespace>TonaD3DLib3</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(VaDevelop)\VisualStudio\Projects\Tona3\Libs\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(VaDevelop)\VisualStudio\Projects\Tona3\Libs\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <PreBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</PreBuildEventUseInBuild>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TonaD3D3_d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TonaD3D3</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\Headers;$(VaDevelop)\VisualStudio\Common\Headers\g00;$(VaDevelop)\VisualStudio\Common\Headers\nama;$(VaDevelop)\VisualStudio\Common\Headers\dx9;$(VaDevelop)\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>tonad3d3_pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)TonaD3D3_d.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\Headers;$(VaDevelop)\VisualStudio\Common\Headers\g00;$(VaDevelop)\VisualStudio\Common\Headers\nama;$(VaDevelop)\VisualStudio\Common\Headers\dx9;$(VaDevelop)\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>tonad3d3_pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)TonaD3D3.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="source\tonad3d3_album.cpp" />
+    <ClCompile Include="source\tonad3d3_camera.cpp" />
+    <ClCompile Include="source\tonad3d3_d3d.cpp" />
+    <ClCompile Include="source\tonad3d3_data.cpp" />
+    <ClCompile Include="source\tonad3d3_debug_text.cpp" />
+    <ClCompile Include="source\tonad3d3_device.cpp" />
+    <ClCompile Include="source\tonad3d3_effect.cpp" />
+    <ClCompile Include="source\tonad3d3_index.cpp" />
+    <ClCompile Include="source\tonad3d3_light.cpp" />
+    <ClCompile Include="source\tonad3d3_light_manager.cpp" />
+    <ClCompile Include="source\tonad3d3_mask.cpp" />
+    <ClCompile Include="source\tonad3d3_mesh.cpp" />
+    <ClCompile Include="source\tonad3d3_obj.cpp" />
+    <ClCompile Include="source\tonad3d3_pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="source\tonad3d3_sprite.cpp" />
+    <ClCompile Include="source\tonad3d3_state.cpp" />
+    <ClCompile Include="source\tonad3d3_surface.cpp" />
+    <ClCompile Include="source\tonad3d3_texture.cpp" />
+    <ClCompile Include="source\tonad3d3_vertex.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_source_manager.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_source_val_name_manager.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_lighting_and_shading_shader.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_lighting_shader.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_parts_light.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_parts_shadow.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_main.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_source_creator.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_source_creator_ds.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_source_creator_shadow_map.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_source_creator_skinned_mesh.cpp" />
+    <ClCompile Include="source\tonad3d3_effect_global_texture_val.cpp" />
+    <ClCompile Include="source\tonad3d3_animation_controller.cpp" />
+    <ClCompile Include="source\tonad3d3_frame_ex.cpp" />
+    <ClCompile Include="source\tonad3d3_post_render.cpp" />
+    <ClCompile Include="source\tonad3d3_pre_render.cpp" />
+    <ClCompile Include="source\tonad3d3_render.cpp" />
+    <ClCompile Include="source\tonad3d3_render_interface.cpp" />
+    <ClCompile Include="source\tonad3d3_renderer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_manager.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_val_name_manager.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_lighting_and_shading_shader.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_lighting_shader.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_parts_light.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_parts_shadow.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_main.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_creator.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_creator_ds.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_creator_shadow_map.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_source_creator_skinned_mesh.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_global_sampler_val.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_global_texture_val.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_global_val.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_global_val_pack.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_texture_info.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_func_info.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_func_interface.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_mrbd_color_func.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_rgb_color_func.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_sampler_func.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_tone_curve_func.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_vertex_color_func.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_pixel_input_semantics_struct.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_pixel_output_semantics_struct.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_semantics_info.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_semantics_struct.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_vertex_input_semantics_struct.h" />
+    <ClInclude Include="..\..\include\tonad3d3_effect_vertex_output_semantics_struct.h" />
+    <ClInclude Include="..\..\include\tonad3d3_animation_controller.h" />
+    <ClInclude Include="..\..\include\tonad3d3_frame_ex.h" />
+    <ClInclude Include="..\..\include\tonad3d3_post_render.h" />
+    <ClInclude Include="..\..\include\tonad3d3_pre_render.h" />
+    <ClInclude Include="..\..\include\tonad3d3_render.h" />
+    <ClInclude Include="..\..\include\tonad3d3_render_interface.h" />
+    <ClInclude Include="..\..\include\tonad3d3_renderer.h" />
+    <ClInclude Include="..\Headers\tonad3d3.h" />
+    <ClInclude Include="..\Headers\tonad3d3_album.h" />
+    <ClInclude Include="..\Headers\tonad3d3_animation_controller.h" />
+    <ClInclude Include="..\Headers\tonad3d3_camera.h" />
+    <ClInclude Include="..\Headers\tonad3d3_d3d.h" />
+    <ClInclude Include="..\Headers\tonad3d3_data.h" />
+    <ClInclude Include="..\Headers\tonad3d3_debug_text.h" />
+    <ClInclude Include="..\Headers\tonad3d3_device.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_func_info.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_func_interface.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_global_sampler_val.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_global_texture_val.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_global_val.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_global_val_pack.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_lighting_and_shading_shader.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_lighting_shader.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_main.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_mrbd_color_func.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_parts_light.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_parts_shadow.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_pixel_input_semantics_struct.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_pixel_output_semantics_struct.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_rgb_color_func.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_sampler_func.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_semantics_info.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_semantics_struct.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_creator.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_creator_ds.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_creator_shadow_map.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_creator_skinned_mesh.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_manager.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_source_val_name_manager.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_texture_info.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_tone_curve_func.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_vertex_color_func.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_vertex_input_semantics_struct.h" />
+    <ClInclude Include="..\Headers\tonad3d3_effect_vertex_output_semantics_struct.h" />
+    <ClInclude Include="..\Headers\tonad3d3_frame_ex.h" />
+    <ClInclude Include="..\Headers\tonad3d3_index.h" />
+    <ClInclude Include="..\Headers\tonad3d3_light.h" />
+    <ClInclude Include="..\Headers\tonad3d3_light_manager.h" />
+    <ClInclude Include="..\Headers\tonad3d3_mask.h" />
+    <ClInclude Include="..\Headers\tonad3d3_mesh.h" />
+    <ClInclude Include="..\Headers\tonad3d3_obj.h" />
+    <ClInclude Include="..\Headers\tonad3d3_pch.h" />
+    <ClInclude Include="..\Headers\tonad3d3_post_render.h" />
+    <ClInclude Include="..\Headers\tonad3d3_pre_render.h" />
+    <ClInclude Include="..\Headers\tonad3d3_render.h" />
+    <ClInclude Include="..\Headers\tonad3d3_renderer.h" />
+    <ClInclude Include="..\Headers\tonad3d3_render_interface.h" />
+    <ClInclude Include="..\Headers\tonad3d3_sprite.h" />
+    <ClInclude Include="..\Headers\tonad3d3_state.h" />
+    <ClInclude Include="..\Headers\tonad3d3_surface.h" />
+    <ClInclude Include="..\Headers\tonad3d3_texture.h" />
+    <ClInclude Include="..\Headers\tonad3d3_vertex.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

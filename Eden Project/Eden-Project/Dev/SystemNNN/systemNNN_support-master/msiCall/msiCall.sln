@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msiCall", "msiCall.vcproj", "{214C367D-1B8D-4721-8C43-DA3224F52382}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{214C367D-1B8D-4721-8C43-DA3224F52382}.Debug|Win32.ActiveCfg = Debug|Win32
+		{214C367D-1B8D-4721-8C43-DA3224F52382}.Debug|Win32.Build.0 = Debug|Win32
+		{214C367D-1B8D-4721-8C43-DA3224F52382}.Release|Win32.ActiveCfg = Release|Win32
+		{214C367D-1B8D-4721-8C43-DA3224F52382}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

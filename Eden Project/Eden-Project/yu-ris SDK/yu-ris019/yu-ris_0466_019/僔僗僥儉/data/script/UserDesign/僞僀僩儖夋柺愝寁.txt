@@ -1,0 +1,173 @@
+//============================================================================
+// タイトル画面設計
+//============================================================================
+#=ES.TITLE.BTDEF
+
+	\BTDEF.GROUP(ES.TITLE)
+
+
+	//↓クリアフラグを @G 変数の1234番とした場合、
+	//↓ゲーム中に @G(1234)=1 と記述すればクリアフラグが立ったことになり、
+	//↓「クリア後のボタン定義」のほうが反映されるようになります。
+
+	INT[@flag_omake]
+	INT[@flag_true]
+	IF[@G(1234)==1] @flag_omake=1 IFEND[] //クリアフラグ
+
+
+//デバッグ用
+	@flag_omake =1
+
+
+	IF[@flag_omake==0] //「未クリア時のボタン定義」
+	{
+		\BT.NAME("■背景")
+		\BT.CGSYS("title/back")
+		\BT.XY(0, 0)
+		\BT.Z(001)
+		\BT.SET(TIP.BG)
+
+		\BT.NAME("■スタート")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_start")
+		\BT.XY(540, 260+30*0)
+		\BT.Z(020)
+		\BT.SET(BTN.START, 1)
+
+		\BT.NAME("■ロード")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_load")
+		\BT.XY(540, 260+30*1)
+		\BT.Z(020)
+		\BT.SET(BTN.LOAD)
+
+		\BT.NAME("■コンフィグ")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_config")
+		\BT.XY(540, 260+30*2)
+		\BT.Z(020)
+		\BT.SET(BTN.CONFIG)
+
+		\BT.NAME("■終了")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_end")
+		\BT.XY(540, 260+30*3)
+		\BT.Z(020)
+		\BT.KEY("ESC")
+		\BT.SET(BTN.END, 0) //1=Windowsダイアログ
+
+		\BT.NAME("■WEB")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_web")
+		\BT.XY(540, 260+30*4)
+		\BT.Z(020)
+		\BT.SET(BTN.WEB)
+
+	}
+	ELSE[] //「クリア後のボタン定義」
+	{
+
+		\BT.NAME("■背景")
+		\BT.CGSYS("title/back")
+		\BT.XY(0, 0)
+		\BT.Z(001)
+		\BT.SET(TIP.BG)
+
+		\BT.NAME("■スタート")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_start")
+		\BT.XY(100, 270+30*0)
+		\BT.Z(020)
+		\BT.SET(BTN.START, 1)
+
+		\BT.NAME("■エピローグ")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_epilogue")
+		\BT.XY(100, 270+30*1)
+		\BT.Z(020)
+		\BT.SET(BTN.START, 2)
+
+		\BT.NAME("■ロード")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_load")
+		\BT.XY(100, 270+30*2)
+		\BT.Z(020)
+		\BT.SET(BTN.LOAD)
+
+		\BT.NAME("■コンフィグ")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_config")
+		\BT.XY(100, 270+30*3)
+		\BT.Z(020)
+		\BT.SET(BTN.CONFIG)
+
+/*
+		\BT.NAME("■おまけ")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_omake")
+		\BT.XY(100, 270+30*4)
+		\BT.Z(020)
+		\BT.SET(BTN.EXTRA)
+*/
+
+		\BT.NAME("■終了")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_end")
+		\BT.XY(100, 270+30*8)
+		\BT.Z(020)
+		\BT.KEY("ESC")
+		\BT.SET(BTN.END, 0) //1=Windowsダイアログ
+
+		\BT.NAME("■WEB")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_web")
+		\BT.XY(100, 270+30*9)
+		\BT.Z(020)
+		\BT.SET(BTN.WEB)
+
+
+	//おまけ
+		\BT.NAME("■ＣＧ鑑賞")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_cgmode")
+		\BT.XY(100, 270+30*4)
+		\BT.Z(020)
+		\BT.SET(BTN.CGMODE)
+
+		\BT.NAME("■回想鑑賞")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_replaymode")
+		\BT.XY(100, 270+30*5)
+		\BT.Z(020)
+		\BT.SET(BTN.RPMODE)
+
+		\BT.NAME("■ムービー鑑賞")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_moviemode")
+		\BT.XY(100, 270+30*6)
+		\BT.Z(020)
+		\BT.SET(BTN.MVMODE)
+
+		\BT.NAME("■ＢＧＭ鑑賞")
+		\BT.GROUP(1)
+		\BT.CGSYS("title/btn_bgmmode")
+		\BT.XY(100, 270+30*7)
+		\BT.Z(020)
+		\BT.SET(BTN.BGMMODE)
+
+/*
+		\BT.NAME("■戻る")
+		\BT.GROUP(2)
+		\BT.CGSYS("title/btn_omakeback")
+		\BT.XY(100, 270+30*4)
+		\BT.Z(020)
+		\BT.KEY(MOUSE_R)
+		\BT.SET(BTN.EXTRABACK)
+*/
+
+	}
+	IFEND[]
+
+
+RETURN[]
+

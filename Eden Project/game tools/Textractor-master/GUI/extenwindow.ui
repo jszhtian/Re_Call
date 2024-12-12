@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ExtenWindow</class>
+ <widget class="QMainWindow" name="ExtenWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget">
+   <layout class="QVBoxLayout">
+    <item>
+     <widget class="QListWidget" name="extenList">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::InternalMove</enum>
+      </property>
+      <property name="defaultDropAction">
+       <enum>Qt::MoveAction</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

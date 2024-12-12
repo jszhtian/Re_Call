@@ -1,0 +1,114 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">制御系命令</A>＞GOSUB［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="go.html">GO［］</A>
+　<A HREF="gosub.html">GOSUB［］</A>
+　<A HREF="return.html">RETURN［］</A>
+　<A HREF="loop.html">LOOP［］</A>
+　<A HREF="loopbreak.html">LOOPBREAK［］</A>
+　<A HREF="loopcontinue.html">LOOPCONTINUE［］</A>
+　<A HREF="loopend.html">LOOPEND［］</A>
+　<A HREF="wait.html">WAIT［］</A>
+</TD></TR>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="if.html">IF［］</A>
+　<A HREF="else.html">ELSE［］</A>
+　<A HREF="ifend.html">IFEND［］</A>
+　<A HREF="ifbreak.html">IFBREAK［］</A>
+　<A HREF="ifcontinue.html">IFCONTINUE［］</A>
+　<A HREF="task.html">TASK［］</A>
+　<A HREF="taskinfo.html">TASKINFO［］</A>
+　<A HREF="taskend.html">TASKEND［］</A>
+　<A HREF="end.html">END［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=500 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■サブルーチンジャンプ命令 GOSUB[ ]</FONT>
+<FONT CLASS=t20>
+
+指定したラベルの位置にジャンプし、RETURN 命令で戻ってきます。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40># = ラベル名</FONT></TD><TD><FONT CLASS=t40>ジャンプ先のラベルを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PINT～PINT16 = 整数値</FONT></TD><TD><FONT CLASS=t40>ジャンプ先に渡す整数値を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PFLT～PFLT16 = 実数値</FONT></TD><TD><FONT CLASS=t40>ジャンプ先に渡す実数値を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PSTR～PSTR16 = 文字列</FONT></TD><TD><FONT CLASS=t40>ジャンプ先に渡す文字列を指定</FONT></TD></TR>
+</TABLE>
+
+
+例：　　<FONT CLASS=t40>GOSUB[#="<FONT CLASS=t40>ABC</FONT>"]</FONT>
+
+
+指定したラベルの位置にジャンプするまでは GO 命令と同じですが、ジャンプ先で
+ RETURN 命令があると、GOSUB 命令の次の位置に戻ってきます。ジャンプした先に
+さらに GOSUB 命令があった場合、さらにジャンプしていきます(GOSUBネスト)。
+GOSUBのネストは64回まで可能です。
+
+また、ジャンプ先にパラメータ（値や文字列）を受け渡しすることが出来ます。
+
+GOSUB[#="ABC" PINT=50 PINT2=100 PSTR3="APPLE"]
+
+上のように書くと、パラメータを３つ、ジャンプ先に渡すことが出来ます。
+（第１パラメータ＝50、第２パラメータ＝100、第３パラメータ＝"APPLE"）
+
+ジャンプ先（上の例だとラべル #ABC ）で、パラメータを受け取る方法として、
+システム変数 @_PINT( ), @_PFLT( ), $_PSTR( ) をそれぞれ利用します。
+
+上の命令が実行されて、実際にラベル #ABC へジャンプした時点で、システム変数
+@_PINT(1) に 50 が、@_PINT(2) に 100 が、$_PSTR(3) に "APPLE" が格納される
+こととなります。
+
+GOSUB[#="いろは" PFLT=12.3 PSTR2="ゲーム" PINT3=10]
+
+とすれば、
+@_PFLT(1) に 12.3 が、$_PSTR(2) に "ゲーム" が、@_PINT(3) に 10 が格納されます。
+
+
+パラメータ番号は重複しないようにしてください。
+たとえば、
+
+GOSUB[#="ABC" PFLT=12.3 PSTR="ゲーム" PINT3=10]
+
+は、コンパイルエラーとなります。
+何がいけないかと言うと、第１パラメータが２つ指定されてしまっています。
+「PFLT」と「PSTR」です。パラメータ番号が重複しないように、
+どちらかを第２パラメータ指定（PFLT2かPSTR2）に変更しなくてはいけません。
+
+
+同様に、RETURN 命令からパラメータを受け取ることも出来ます。
+
+RETURN[RINT=10 RINT2=20]
+
+と記述されていれば、RETURN 命令が実行されて戻ってきた時点で、
+今度はシステム変数 @_RINT(1) に 10 が、@_RINT(2) に 20 が格納されます。
+
+※@_PINT と @_RINT との違いに注意してください。
+@_PINT は GOSUB でジャンプした時に格納される変数で、
+@_RINT は RETURN でジャンプ元へ戻った時に格納される変数です。
+
+パラメータは最大16個まで受け渡しすることが出来ます。
+
+
+
+</FONT></TD>
+<TD WIDTH=280 VALIGN=TOP>
+<IMG SRC="../img/gosub_001.jpg" WIDTH=278 HEIGHT=365><BR><BR>
+</TD></TR></TABLE>
+
+
+</BODY></HTML>

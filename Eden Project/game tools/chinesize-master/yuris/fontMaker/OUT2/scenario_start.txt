@@ -1,0 +1,94 @@
+
+#SCENARIO_START_RELEASE
+
+\LOGO.NOSAVE
+
+\FOUT(0,0)
+
+
+//
+//
+
+\BG(white, 200, 0,,,, 1)  //
+
+\FIN(500)
+
+\LOGO.VOICE(-600) //
+
+/*
+//
+\SP.ANMV(logo)
+\SP.ZA(256,0)
+\SP.ZXY(0,0,0)
+\SP.ANLP(1)
+\SP.GO(LOGOMV)
+*/
+
+//Çxí€êªè°Íﬁàa
+\S(logo, item/logo_wp ,1100,0,0,199,0,0,167)
+
+\WA(3000)
+
+\S.D(logo, 800)
+
+\WA(1000)
+
+
+//èièuÖÓèûêªè°Íﬁàa
+\S(attention, item/attention_1 ,1000,0,0,199,0,0,167)
+
+\WA(3000)
+
+\S.D(attention, 800)
+
+
+/*
+\SP.2A(256,0,1000)
+\SP.GO(LOGOMV)
+*/
+
+//
+
+/*
+//
+\SP.CGSYS(caution_1)
+\SP.2A(0,256,500)
+\SP.ZXYZ(0,0,200,0)
+\SP.GO(CAUTION1)
+
+\WA(4000)
+*/
+
+\FOUT(800, 0) //
+
+//
+//
+
+
+\LOGO.SVOEND
+
+\WA(500)
+
+\LOGO.FLAG
+
+#SCENARIO_OPMOVIE
+
+\WA(500,,,1)
+
+#SCENARIO_START_DEBUG
+
+\MV.SETALL(1)
+
+#SCENARIO_TITLE
+
+\TITLE
+
+\GO.G.IF(1, "==", 1, SCENARIO_MAIN)
+\GO.G.IF(1, "==", 2, 5_TRU_101)
+
+\GO(SCENARIO_MAIN)
+
+
+\END
+
+

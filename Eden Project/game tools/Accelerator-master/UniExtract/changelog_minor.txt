@@ -1,0 +1,419 @@
+RC 2:
+  Added support for InstallScript installers
+  Added support for .bsa, .ba2 archives using BSA Browser
+  Added support for .pex scripts using Champollion
+  Added support for Bruns Engine encrypted files
+  Added support for .mo translation files using GNU gettext
+  Added support for .qm translation files using Qt Linguist
+  Added support for encrypted .wolf archives using WolfDec (plugin)
+  Added support for StuffIt X archives
+  Added support for install4j installers
+  Added TotalObserver as additional extractor choice for InstallShield
+  Added nightly update channel
+  Added changelog to update found message box
+  Added progress bar while search for update is in progress as the new updater might need more time than the old one on some systems
+  Added build date to 'About' window and feedback data
+  Added beta update channel
+  Added 'Open most recent log file' menu item
+  Fixed first-start assistant not being displayed when running from command line
+  Fixed language setting being reset if language file does not exist
+  Fixed UI images not being loaded if starting UniExtract from context menu
+  Fixed extraction from context menu if UniExtract is in scan mode
+  Fixed some files being misdetected as disk images
+  Fixed status box not being updated for some file types
+  Fixed MSI extraction failing for some files, which were supported in previous versions of Universal Extractor, thanks to mzso
+  Fixed some options ('Open folder after extraction', 'Keep Open') being ignored and UniExtract not exiting as intended 
+	   (setting exit code, delete empty output directory) after certain message boxes, thanks to davidhbrown
+  Fixed some problems with file names containing non-ASCII characters
+  Fixed GUI being cut off if Windows font scaling is enabled
+  Fixed NSIS bin files extraction: prevented error message for every bin file; status box now displays correct file information
+  Fixed 'Update failed' error message on every start of UniExtract if not connected to the internet
+  Changed preferences dialog: redesigned GUI, added option to remove additional files, replaced numeral update interval 
+							  with daily, weekly, etc. presets, removed timeout setting, added beta update setting
+  Changed file scan results message box: the name of the detector is now shown along with its result, output can now be
+										 selected and copied easily
+  Changed first start assistant: removed 2 pages and changed some wording
+  Changed msi extraction: added method selector prompt if the default extractor fails
+  Changed plugin file selector to use 'Downloads' folder as default
+  Improved file scan results for non-executable files
+  Improved UniExtract logo quality
+  Improved text quality for several dialogs
+  Removed RPGMaker Decrypter plugin, replaced with RGSS Decryptor CLI
+  Removed mpq plugin, replaced with built-in TotalObserver
+  Removed StuffIt Expander, replaced with unar
+  Removed FLV Extract CL, decompression is done with FFMPEG instead
+  Updated 7Zip to 19.00
+  Updated demoleition to 0.60
+  Updated EnigmaVB unpacker to 0.55
+  Updated fsbext to 0.3.8
+  Updated innounp to 0.48
+  Updated lessmsi to 1.6.1 mod
+  Updated QuickBMS to 0.9.0
+  Updated rmvdec to 1.1.0
+  Updated SQLite to 3.25.1
+  Updated ttarchext to 0.3.1a
+  Updated VISExt to 2.2.6777.0
+  Updated ZPAQ to 7.15
+  Updated Czech translation, thanks to DžejPý
+  Updated Chinese (Simplified) translation, thanks to deluxghost
+  Updated Chinese (Traditional) translation, thanks to jfcherng
+  Updated Croatian translaton, thanks to Alen Bajo
+  Updated Finnish translation, thanks to jyrkive
+  Updated Greek translation, thanks to gvp9000
+  Updated Italian translation, thanks to NAMP and tfr
+  Updated Korean translation, thanks to 까꿍
+  Updated Polish translaton, thanks to Barnaba and dmocha
+  Updated Russian translation, thanks to wvxwxvw
+  Updated Spanish translation, thanks to GGobbi
+  Updated Ukrainian translation, thanks to YuriPet
+
+RC 1:
+  Added support for wix installers
+  Added support for Spoon installers
+  Added support for .rpgmvp files
+  Added support for .utage files
+  Added support for MDF image files
+  Added support for Smacker video files
+  Added support for ECM compressed disk images
+  Added support for swf executables
+  Added support for OGG Vorbis audio files
+  Added support for Mole Box executables
+  Added support for NScripter version 2 archives using ns2dec
+  Added support for Smile Game Builder archives
+  Added support for UNC paths
+  Added support for Lzip archives
+  Added support for Visionaire game archives
+  Added 'Open Log Directory' menu item
+  Added 'Open Configuration File' menu item
+  Added detection support for encrypted fsb files
+  Added check on start to make sure a language file exists
+  Added Right to left UI mirroring for Arabic, Farsi and Hebrew; thanks to peterooch
+  Added new error messages: not enough free disk space, missing part for multipart archives
+  Fixed MS SFX hotfix extraction
+  Fixed 'Open folder after extraction' being always disabled when UniExtract is opened with command line parameters
+  Fixed cleanup for .chm and EnigmaVB files
+  Fixed error message after failed iso extraction: choices were mixed-up
+  Fixed missing file type information in NOTPACKED error message for FFMPEG extraction
+  Fixed missing packer name in unpack prompt
+  Fixed extractors not being found on some systems
+  Fixed pea extraction writing to wrong directory
+  Fixed cascading context menu for supported Windows Server operating system versions
+  Fixed 'Always on top' option not being saved
+  Fixed endless detection loop occuring for some .exe files
+  Fixed missing minimize controls
+  Fixed status box for .swf extraction
+  Fixed extraction being detected as failed if the output directory is a drive, not a folder
+  Fixed FFMPEG download/installation problems
+  Fixed progress display performance in status box and pattern detection
+  Fixed certain files being ignored by cleanup function
+  Fixed crash when trying to open preferences GUI if /lang directory does not exist
+  Fixed log files size display in file menu, if log directory is set to a location, which does not exist
+  Fixed DGCA plugin installation
+  Fixed language selection list not being scrollable
+  Fixed some context menu GUI items not being translated after language change
+  Fixed 'Not an InstallShield installer' option in MethodSelector not starting additional scans
+  Fixed output directory not being deleted after failed extraction (unicode mode only)
+  Fixed video extraction failing for files starting with -
+  Fixed error message when starting batch mode
+  Changed feedback GUI design, removed unneeded input fields
+  Changed feedback GUI to always pre-fill output field
+  Changed .nrg extraction method to use 7zip for improved unicode support
+  Changed .arj extraction to use 7z instead of arj
+  Changed .hlp extraction: improved logging, localized file name
+  Changed extraction to subdirectory: "."-character is now replaced to prevent collisions with existing files
+  Changed updater: each file is now updated on its own instead of using update packages, this way extractors can be 
+				   updated much easier and faster; administrator rights are now only necessary if the program directory
+				   cannot be written to
+  Changed plugin download: URLs are no longer hardcoded; instead they are requested from the server, so when something goes offline
+						   UniExtract does not have to be updated to fix the link
+  Replaced Unreal Engine package extractor with Umodel
+  Removed redundant 64-bit MediaInfo dll
+  Removed option to toggle support for game packages from settings GUI
+  Updated 7zip to 18.01
+  Updated EnigmaVB unpacker to 0.44, changed logic to use new command line parameter
+  Updated Exeinfo PE to 0.0.5.0
+  Updated unrar to 5.50
+  Updated unrpa to 1.5.2
+  Updated TrID to 2.24
+  Updated unshield to 1.4
+  Updated FFMPEG to 4.0.2
+  Updated innounp to 0.47
+  Updated Bulgarian translation, thanks to Jekov J.K.
+  Updated French translation, thanks to zorbao
+  Updated Chinese (Traditional) translation, thanks to jfcherng
+  Updated Portuguese (Brazilian) translation, thanks to igorruckert
+  Updated Greek translation, thanks to gvp9000
+  Updated Russian translation, thanks to @wvxwxvw
+  Updated Ukrainian translation, thanks to @YuriPet
+  Updated Finnish translation, thanks to @jyrkive
+
+Beta 4b:
+  Beta 4b is a bugfix update adressing failing msi extractions
+  
+  Fixed msi extraction when UniExtract is installed in a directory, which contains spaces
+  Fixed progress indicator for msi extractions
+  Fixed rare error opening changelog after update
+
+Beta 4:
+  
+  Beta 4 is planned to be the last beta version before the final release. It adds support for 
+  several new installer types, a new context menu entry 'Extract to last used directory', 
+  improved user interface, a statistics display and multiple bugfixes.
+
+  Added support for InstallAware installers
+  Added support for .gif and apng files (FFMPEG)
+  Added support for Enigma Virtual Box executables using EnigmaVB unpacker (plugin)
+  Added support for Ghost Installer Studio installers
+  Added support for Smart Install Maker installers (plugin)
+  Added lessmsi for improved support for .msi files
+  Added statistics GUI
+  Added status box when moving/copying unicode files to temp directory
+  Added timeout to some scan functions to prevent delays caused by unresponsive helper binaries
+  Added extraction to last used directory command line option and context menu
+  Changed forcing a single instance and auto-adding is now disabled if the extraction
+		  is already finished and only the result message box is opened
+  Changed unicode path logic: file is now copied instead of moved if it is on a different
+		  drive than the temp directory
+  Changed status box design
+  Fixed multiple error messages being displayed on failed update check
+  Fixed update message display problem
+  Fixed possible problems when entering relative paths in main GUI input fields
+  Fixed extraction not working when file directory contains unicode characters and
+		there is not enough free space on the drive containing the temp folder
+  Fixed free space check not taking unicode file moving into account
+  Fixed .sit extraction
+  Fixed crash when trying to extract wise installers
+  Fixed swf extraction ignoring some images and sounds
+  Removed DMGExtractor and replaced it with 7z
+  Updated language files for Portuguese, Russian, Swedish, Italian
+  Updated 7zip to 16.04
+  Updated ExeInfoPE to 0.0.4.3
+  Updated fsbext to 0.3.5
+  Updated innounp to 0.46
+  Updated QuickBMS to 0.7.5
+  Updated ttarchext to 0.2.10
+
+Beta 3:
+
+  Beta 3 brings a brand new updater, fixes several errors related to missing permissions 
+  and adds 8 formats to the list of extractable files.
+
+  Added support for .mp3, .wmv and .wma files
+  Added support for bcm compressed files using bcm
+  Added support for zpaq archives using zpaq
+  Added support for Android boot images using bootimg (plugin)
+  Added support for Excelsior Installer executables
+  Added support for ISO zipped image files using unisz
+  Added status box to sfx script extraction
+  Added output directory permission check
+  Added update summary to update prompt
+  Added back is5comp (plugin)
+  Changed .exe detection logic for speed improvements
+  Changed file type detection: TrIDLib is now used for extraction, TrID for scan only mode, the library
+		  version is much faster but returns less additional information
+  Changed settings directory: if UniExtract detects insufficient write permissions to its directory,
+		  all settings are stored in %APPDATA%; this way multiple users on the same local system can
+		  also have different preferences
+  Changed .exe extraction: UniExtract will now terminate with a NOTPACKED error instead of using 
+		  generic 7z extraction, which produces useless files
+  Changed success evaluation: if files were overwritten the extraction was often evaluated as failed
+  Changed success evaluation: improved failure detection
+  Changed keepopen option: moved from edit menu to main GUI for better usability
+  Fixed crash when clicking finish button in plugin GUI if no item has been selected before
+  Fixed helper binaries execution failing if %comspec% environment variable is unset
+  Fixed .pea detection
+  Fixed .chm extraction
+  Fixed .mht detection
+  Fixed FreeArc extraction
+  Fixed AdvancedInstaller extraction
+  Fixed registry keys are now being deleted after scanning if they did not exist before for ExeInfo, PEid
+  Fixed settings not being saved if UniExtract lays in program files directory due to lacking permission
+  Fixed updating/FFMPEG download if user has no write permissions to UniExtract's directory
+  Fixed free space check failing if output directory does not exist
+  Fixed not enough free space dialog's 'Abort' button not working
+  Fixed download progress indicator not being on top of first start GUI
+  Fixed first start GUI now shows 'Installed' if FFMPEG already exists
+  Fixed error message display bug for unicode files
+  Fixed some wrong detections
+  Fixed unicode multipart rar/7z archive extraction
+  Fixed unpack prompt in some cases being displayed again after the user clicked 'no'
+  Fixed 7zip check often returning true, even if the file cannot be extracted, leading to 'failed' extraction result
+  Fixed crash in update message when UniExtract is run from command line and 'No' is clicked
+  Fixed syntax help dialog closing automatically
+  Fixed possible false positives when using checkNSIS function
+  Fixed password detection for some .rar files
+  Fixed some untranslated terms in MethodSelect GUI
+  Removed globalprefs option and preference storage in registry
+  Removed faad and flac, extraction is now handled by FFMPEG
+  Removed unnecessary input file moves
+  Removed 7zip 15.14, reverted to 15.05 as NSIS support was dropped from newer versions
+  Updated ExeInfoPE to 0.0.4.1
+  Updated peazip to 0.53/1.0
+  Updated ttarchext to 0.2.9
+  Updated Japanese translation, thanks to A. Inaba
+  Updated Chinese (Simplified) translation, thanks to SeaHOH
+
+Beta 2b:
+  Fixed crash when extracting .exe files
+  Fixed encoding for Swedish language file
+
+Beta 2:
+  Added game mode: status box is not being displayed if a foreground fullscreen application is running
+  Added /update command line parameter
+  Added wrong password error message (exit code 10) for rar, 7z extractors
+  Added support for CreateInstall installers (plugin)
+  Added support for DGCA compressed files (plugin)
+  Added support for pcm audio tracks in video files and .mxf files
+  Added support for Advanced Installer installers
+  Added support for SQLite databases, creates .sql command file
+  Added fallback extension check for .assets files
+  Added import function to plugin GUI to simplify plugin setup
+  Fixed keepopen option not working after batch mode finished
+  Fixed SQLite dlls not being found
+  Fixed help command line parameter
+  Fixed storeguiposition and checkgame options not being saved
+  Fixed extraction failing for Gentee Installer, Installer VISE and Setup Factory
+  Fixed preferences and context menu GUI label width for some translations
+  Fixed updating 7zip binaries
+  Changed error message if no tracks to be extracted in video file
+  Changed WarnExecute messages to include full paths instead of untranslated '<outdir>'
+  Updated innounp to 0.45
+  Updated unrar to 5.31 Beta 1
+  Updated 7zip to 15.14
+  Updated extraction script for Visionaire files
+  Updated finnish translation, thanks to Jyrki Vesterinen
+  Updated portuguese (Portugal) translation, thanks to Luis Neves
+  Updated russian translation, thanks to an anonymous contributor
+  Updated Portuguese (Brazilian) translation, thanks to Igor Rückert
+
+Beta 1:
+  Added support for Ren'Py game engine's .rpa archives using unrpa
+  Added support for Unreal Engine packages (.u, .uax, .upk) using Unreal Package Extractor (plugin)
+  Added support for Telltale game archives (.ttarch)
+  Added support for Livemaker games via crass/crage (plugin)
+  Added support for .aac audio files (decompress to wav) using faad (plugin)
+  Added support for .flac audio files using flac
+  Added support for FreeArc compressed archives (.arc) using FreeArc unpacker
+  Added support for .mpq archives using MPQ Plugin for Total Commander (plugin)
+  Added support for .sfArk files using sfarkxtc
+  Added filescan with MediaInfo dll to provide additional information on media files (scan only mode)
+  Added delay to update script to prevent 'not found' error, changed execution parameter
+  Added 'Open program directory' help menu entry
+  Added file metadata (filesize, creation date,...) to log file when 'Ask for feedback' is enabled
+  Added timeout exit message
+  Added additional weblinks to help menu
+  Added option to disable video track extraction
+  Added support for Windows 10
+  Added explaining tooltips to some options
+  Added option to always keep GUI in foreground
+  Added tooltips to batch queue view
+  Added support for password list for .rar, .zip and .7z archives
+  Added input file not found error message
+  Fixed after update behaviour when other versions of UniExtract are installed
+  Fixed last update date not beeing saved when an update was found
+  Fixed AutoIt error message in first start GUI when no language file was found, now exits with error code 99
+  Fixed possible infinite loop in run function when helper binary execution terminates too fast, resulting in UniExtract not 
+        shutting down after successful extraction
+  Fixed BMS scripts were not checked if GAUP detected files, but was unable to extract them
+  Fixed game archive detection if file extension is not lower case
+  Fixed detection of Matroska files, extraction of ogg and webm tracks in video files
+  Fixed context menu GUI: alluser checkboxes not clickable despite having admin rights
+  Fixed video extraction: multiple audio/video tracks had same names when extracted, so FFMPEG always asked to overwrite, 
+        now type(audio/video) and number of track for each type is added as well as the track's language
+  Fixed folder size calculation in status box did not work correctly for FFMPEG and probably others
+  Fixed moving unicode tempfiles to output directory created subdirectory with temporary name
+  Fixed feedback success evaluation
+  Fixed some terms not using translation files
+  Fixed NSIS extraction overwriting existing files; UniExtract still creates not useful output files for some custom NSIS installers
+		but all content is now kept in output directory
+  Fixed occasionally high CPU load when reading console output
+  Fixed tray exit handler not terminating all helper binaries
+  Fixed FFMPEG updater
+  Fixed swf: extraction of .jpg files; performance slightly increased
+  Fixed GameSelect GUI: not a game message is now always the first element and preselected
+  Fixed unicode files are changed to ???????? and therefore fail to extract when adding them to batch queue
+  Fixed unicode files' extraction to subdir folder name
+  Fixed rar extraction returning success if there was a write error or access denied message
+  Fixed slowdown when extracting to drive root directory caused by size calculation
+  Fixed /prefs command line parameter not working
+  Fixed help screen closing after 15 seconds when opened from command line
+  Fixed some untranslated terms
+  Fixed rounding issues in free space check when using batch mode
+  Fixed error when trying to open SQLite database
+  Fixed scan only command being queued if batch mode is active
+  Fixed log file naming special cases
+  Changed percentage indicator detection to include float percentage values
+  Changed percentage indicator detection to include pattern x/y
+  Changed user input needed message should be more visible now
+  Changed check for update behaviour: check is only performed on start if GUI is opened; if run from command line or context menu,
+		  it will be done right before terminating, so extraction/scan will not abort after installing update
+  Changed internal behaviour for extraction and game select functions
+  Changed language files, added new %name term to reduce %s usage
+  Changed FFMPEG is now downloaded to the correct subdirectory (x86/x64), so the appropriate version is used in portable mode on 
+		  different operating systems
+  Changed feedback GUI now displays privacy agreement before sending	
+  Changed after update behaviour, most recent changelog is now opened
+  Changed translation files, removed %s variables and introduced numbered placeholders, that can be switched to 
+		  fit a language's word order; added %name shortcut
+  Changed unicode files are now renamed instead of moving them to a temporary directory if possible
+  Changed inno setup extraction to rename ',1' files to avoid extracted programs not finding some files
+  Changed GUI design on Windows 10 systems to fit standard window style
+  Changed multiple part rar files are now added only once to batch queue, so it is possible to drag and drop 
+		  all rar files onto UniExtract without having to deal with 'file exists' prompts
+  Disabled directory size calculation when extracting to drive to prevent significant slow down
+  Removed 64 bit iso.wcx plugin as it does not work correctly with QuickBMS
+  Replaced booz with unzoo (adds support for 64 bit systems, longer filenames, logging)
+  Replaced tee with mtee (adds support for unicode and longer filenames, smaller)
+  Replaced tee with wintee (Windows 10 only, due to mtee not terminating fast enough)
+  Updated AutoIt to 3.3.14.1
+  Updated unrar to 5.21
+  Updated fsbextract to 0.3.4a
+  Updated exeinfo PE to 0.0.3.8
+  Updated disunity to 0.3.4
+  Updated quickbms to 0.6.5
+  Updated innounp to 0.43
+  Updated language files, added new terms to all language files, set encoding to UTF-16, updated translation info text,
+		  changed %s to %name and %1, %2,...
+
+Alpha 4:
+  Added scroll bar to feedback edit controls
+  Added view/edit batch queue GUI
+  Added option to change path of filescan.txt (batch mode filescan log file)
+  Added /batch command line parameter to add a file to the batch queue without processing it
+  Added /clear command line parameter to clear batch queue and disable batch mode
+  Added unicodecheck option to preferences GUI
+  Added option for manual status box positioning to ini file
+  Added plugin GUI
+  Changed NO_FREE_SPACE message: file sizes are now rounded
+  Fixed deactivate batch mode on tray exit
+  Fixed disabled logging for 'silent exits'
+  Fixed automatically adding a file to batch mode by singleton logic resulted in an endless loop opening and closing UniExtract 
+		until main instance finished work
+  Fixed changes in the batch file when UniExtract is running were completely ignored until the process restarted
+  Fixed ctrl+a did not work on edit controls due to Windows API bug
+  Fixed filescan.txt should now be deleted correctly before starting new batch mode
+  Fixed batch mode not starting when clicking OK on main GUI
+  Fixed unicode check displaying message box in silent mode
+  Fixed batch file not beeing closed when clicked on 'No' on duplicate message box
+  Fixed automatic status box positioning with non-standard task bar (e.g. task bar on top of screen)
+  Updated QuickBMS to 0.6
+  
+
+Alpha 3:
+  Added delay before checking for renamed file after tridscan
+  Added no update available message box
+  Added warning before changing file associations
+  Added option to disable unicode check
+  Added 1024 bytes hex dump of input file when user decides to open feedback GUI via prompt
+  Fixed RENAME_NOTFOUND message contained '&' special character
+  Fixed possible update check failure when ini file does not contain a lastupdate value
+  Fixed batch queue file was created in working dir when using relative paths
+  Changed main gui, changing between scan and extraction mode is much easier now
+  Changed after update behaviour: now opening minor changelog instead of overall changelog
+  Changed after update behaviour: new options are now added to ini file (useful for options without corresponding GUI control)
+  Updated Exeinfo PE to 0.0.3.6
+  
+  
+Alpha 2.1:
+  Added minor changelog
+  Fixed cascading context menu

@@ -1,0 +1,30 @@
+#ifndef __GrpObjMap_H__
+#define __GraObjMap_H__
+
+#include <map>
+
+using namespace std;
+
+struct GrpObjMap : std::map<unsigned int, GrpObj>
+{
+	typedef pair<const unsigned int, GrpObj> value_type;
+	class GrpImpl* parent;
+	GrpObj& operator[](const int& k)
+	{
+		iterator it = lower_bound(k);
+		if (it == end() || it->first != k)
+		{
+			GrpObj obj;
+			obj.parent_pimpl = parent;
+			it = insert(it, value_type(k, obj));
+		}
+		return it->second;
+	}
+	GrpObjMap(class GrpImpl* p)
+	{
+		parent = p;
+	}
+};
+
+#endif
+

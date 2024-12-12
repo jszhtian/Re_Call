@@ -1,0 +1,39 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>if</h2>
+<p>
+Evaluates a conditional statement.<br>
+　if &lt;conditional statement&gt; ({&&,&} &lt;conditional statement&gt;) &lt;commands&gt;<br>
+The commands following the if statement are executed if the conditional statement(s) evaluate true; if you want branch control in which a command executes if a conditional statement is false, use notif.<br>
+The conditions can compare numerical values, else you can employ fchk.<br>
+& and && are logical 'ands', and are equivalent to one another.<br><br>
+　　　&lt;Conditions&gt;<br>
+　　　&lt;numerical variable&gt; {>,<,=,>=,<=,==,!=,<>} &lt;numerical variable&gt;<br>
+　　　- or -<br>
+　　　fchk &lt;character string&gt;<br>
+<br>
+　　　<,>，=，>=，<= should already be known to you.<br>
+　　　== and = are identical, as are != and <>.<br>
+　　　As for fchk, it returns true when the image whose name corresponds to the character string is being used.<br>
+<br>
+　　　　EX）<br>
+　　　　if %0=1 quakex 2　（basic form）<br>
+　　　　if %0=1 && %2=5 end　（multiple conditions）<br>
+　　　　if %0=2 mov %1,1:skip 2 （append additional commands with :）<br>
+　　　　notif %0=1 quakex 2　（in C, this would be if(%0!=1) quakex 2;） <br>
+</p>
+
+</body>
+</html>

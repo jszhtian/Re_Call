@@ -1,0 +1,285 @@
+//=========================================================================
+//
+//■タイトル画面 シーン
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.TITLE."]
+	S_INT[@STARTTIME]
+
+}
+
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.TITLE.LOOP
+{
+	IF[@es.STATE==1] //LOAD/CONFIG/EXTRA等から戻ってきた
+	{
+		GOSUB[#=ES.SCENARIO.INIT]	//シナリオ初期化処理
+
+		\BGM($T(19,01))	//ＢＧＭ再生
+
+		IF[@es.STATE2==0]
+			\SS.FADE(400)
+		ELSE[]
+			\SS.FADE(0)
+		IFEND[]
+		@es.STATE=4
+		@STARTTIME = @_OS_TIME(1)
+	}
+	IFEND[]
+	IF[@es.STATE==2]
+	{
+		GOSUB[#=ES.SCENARIO.INIT]	//シナリオ初期化処理
+
+		\BGM($T(19,01))	//ＢＧＭ再生
+
+		// ボイス再生
+		\_gosub(ES.TITLE.VoicePlay.1)
+
+	//	WAIT[TIME=550]
+
+		@es.STATE=3
+	}
+	IFEND[]
+	IF[@es.STATE==3]
+	{
+		\BT.ACTIVEGROUP(1)
+		\SS.FADE(400)
+		\es.CGSDELALL
+
+		@es.STATE=4
+		@STARTTIME = @_OS_TIME(1)
+	}
+	IFEND[]
+	IF[@es.STATE==4]
+	{
+		//時間制限処理
+		IF[@es.TITLEWAIT!=-1 && @es.TITLEWAIT <= @_OS_TIME(1)-@STARTTIME] //制限時間になったら0番のボタンが押されたことにして処理
+			GOSUB[#=ES.TITLE.BTN.START.ON pint=0]
+		IFEND[]
+	}
+	IFEND[]
+
+
+	//-------------------------------------------------------------------------------
+	IF[@es.STATE==5] //回想から戻ってきた → すぐさま回想メニューへ
+	{
+		\BT.ACTIVEGROUP(1)
+		\SS.FADE(0)
+		\es.CGSDELALL
+
+		\es.S.GOSUB("ES.RPMODE", 0, 0, 1, 0)
+	}
+	IFEND[]
+
+	//-------------------------------------------------------------------------------
+
+
+	IF[@es.STATE==10] //START
+	{
+
+	}
+	IFEND[]
+
+	IF[@es.STATE==70] //LOAD
+	{
+		@es.SYSVO.FLAG.TITLELOAD = 1 //「続きから始める」と、「１回だけ」喋らせるためのフラグ.
+		\es.S.GOSUB.OVER("ES.LOAD", 0, 0, 1, 0)
+	}
+	IFEND[]
+	IF[@es.STATE==80] //LLOAD
+	{
+			//ボイス再生
+			\_gosub(ES.LLOAD.VoicePlay.1)
+
+			\BGM()
+
+			LOOP[SET=64]
+			{
+				CG[ID=FOUT_B A+=4]
+				WAIT[FRAME=1]
+			}
+			LOOPEND[]
+
+			//スクリーンショット撮る
+			\es.CGTSS
+
+			// ロード
+			\LOAD(@es.sdlsaveno, 0) //セーブデータ番号
+
+			//
+			\es.S.RETURN.NUM(1, 997, 0)
+	}
+	IFEND[]
+
+
+	return[]
+}
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[START]ボタン ----------------------------------------------------
+//
+#=ES.TITLE.BTN.START.ON
+{
+	INT[@no=@_PINT(1)]
+
+	@es.TITLE.NO = @no
+
+	//-------------------------------------------- シナリオ初期化処理
+		GOSUB[#=ES.SCENARIO.INIT.2]
+
+	//-------------------------------------------- ボイス再生
+		\_gosub($BID+"VoicePlay.Start."+$(@no))
+
+	//-------------------------------------------- スクリーンショット
+		\es.CGTSS
+		\es.CGSDELALL
+
+	//-------------------------------------------- ボタン消去
+		\BT.END(ES.TITLE)
+
+	//	\es.S.GO("", 0, 0)
+	//	\SS.FADE(500)
+
+	//-------------------------------------------- 
+		\_gosub(es.Original.TitleEnd)
+
+	//-------------------------------------------- BGM停止
+		\BGM(,1000)
+
+	//-------------------------------------------- フェードアウト
+		\es.CGTFADEOUT(500)
+
+	//-------------------------------------------- 1秒ウェイト
+		\es.WAIT(1000)
+
+	//--------------------------------------------- 再生終了待ち
+		LOOP[]
+		{
+			\SVO.PCHK
+			IF[@_RINT(1)==0] LOOPBREAK[] IFEND[]
+
+			WAIT[FRAME=1]
+		}
+		LOOPEND[]
+
+	//	\BT.W1.ALL()
+
+	//-------------------------------------------- ジャンプ
+		@es.SCENARIOSTOP = 0
+	//	\es.S.RETURN("ES.GAMEMAIN", 0, 0)
+		\es.S.RETURN(996, 0)
+//		\es.S.RETURN(1, 0)
+
+	return[]
+}
+
+
+
+//■[LOAD]ボタン -----------------------------------------------------
+//
+#=ES.TITLE.BTN.LOAD.ON
+{
+	@es.STATE=70
+	return[]
+}
+
+//■[LLOAD]ボタン ----------------------------------------------------
+//
+#=ES.TITLE.BTN.LLOAD.ON
+{
+//	IF[@LASTDATA]
+	{
+		@es.STATE=80
+	}
+//	IFEND[]
+	return[]
+}
+
+//■[CONFIG]ボタン ---------------------------------------------------
+//
+#=ES.TITLE.BTN.CONFIG.ON
+{
+	\_gosub(ES.CONFIG.VoicePlay.1)	//ボイス再生
+	\es.S.GOSUB.OVER("ES.CONFIG", 10, 0, 1, 0); return[]
+}
+
+//■[CGMODE]ボタン ---------------------------------------------------
+//
+#=ES.TITLE.BTN.CGMODE.ON
+{
+	\es.S.GOSUB.OVER("ES.CGMODE", 0, 0, 1, 0); return[]
+}
+
+//■[RPMODE]ボタン ---------------------------------------------------
+//
+#=ES.TITLE.BTN.RPMODE.ON
+{
+	\es.S.GOSUB.OVER("ES.RPMODE", 0, 0, 1, 0); return[]
+}
+
+//■[MVMODE]ボタン ---------------------------------------------------
+//
+#=ES.TITLE.BTN.MVMODE.ON
+{
+	\es.S.GOSUB.OVER("ES.MVMODE", 0, 0, 1, 0); return[]
+}
+
+//■[BGMMODE]ボタン --------------------------------------------------
+//
+#=ES.TITLE.BTN.BGMMODE.ON
+{
+	\es.S.GOSUB.OVER("ES.BGMMODE", 0, 0, 1, 0); return[]
+}
+
+//■[EXMODE]ボタン ---------------------------------------------------
+//
+
+//■[AFTERMODE]ボタン ------------------------------------------------
+//
+
+//■[WEB]ボタン ------------------------------------------------------
+//
+#=ES.TITLE.BTN.WEB.ON
+{
+	\_gosub(ES.TITLE.VoicePlay.3)	// ボイス再生
+	GOSUB[#=ES.STARTWEB pstr=$T(19,02)]	//WEBページ起動処理
+	return[]
+}
+
+//■[EXTRA]ボタン ----------------------------------------------------
+//
+#=ES.TITLE.BTN.EXTRA.ON
+{
+	\BT.ACTIVEGROUP(2); return[]
+}
+
+//■[EXTRABACK]ボタン ------------------------------------------------
+//
+#=ES.TITLE.BTN.EXTRABACK.ON
+{
+	\BT.ACTIVEGROUP(1); return[]
+}
+
+//■[END]ボタン ------------------------------------------------------
+//
+#=ES.TITLE.BTN.END.ON
+{
+	IF[@_PINT(1)==0] //終了確認
+		\es.S.GOSUB.OVER("ES.ENDCONF", 0, 0, 1, 0)
+	IFEND[]
+	IF[@_PINT(1)==1] //終了確認(DIALOG)
+		GOSUB[#=ES.ENDCONF.DIALOG]
+	IFEND[]
+	return[]
+}
+
+

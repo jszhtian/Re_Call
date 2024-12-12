@@ -1,0 +1,607 @@
+﻿<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+<body lang="en-us" dir="ltr">
+<p style="margin-bottom: 0in; background: transparent"><i>This file is meant to complement the reference included in </i><font face="monospace">doc/ONScripter_reference/</font><i>. It contains corrections and additions pertinent to ONSlaught.</i></p>
+<font size=4 style="font-size: 15pt">
+<ol start=0>
+	<li/><a href="#0">How to read this document</a>
+	<li/><a href="#1">Syntax</a>
+	<ol>
+		<li/><a href="#1.1">Literals</a>
+		<li/><a href="#1.2">Identifiers</a>
+		<li/><a href="#1.3">Constants</a>
+		<li/><a href="#1.4">Data types</a>
+		<li/><a href="#1.5">Variables</a>
+		<li/><a href="#1.6">Commands</a>
+		<li/><a href="#1.7">Expressions</a>
+		<li/><a href="#1.8">Arrays</a>
+		<li/><a href="#1.9">Printing</a>
+	</ol>
+	<li/><a href="#2">Inimplemented commands</a>
+	<li/><a href="#3">Changed behaviors</a>
+	<li/><a href="#4">New commands</a>
+	<li/><a href="#5">Undocumented commands</a>
+</ol>
+</font>
+<H1><A NAME="0"></A>0. How to read this document</H1>
+This section describes the syntax that will be used to document the commands.<P/>
+<B>THE SYNTAX DESCRIBED IN THIS SECTION IS MERELY FOR THE PURPOSE OF DOCUMENTATION, AND IS UNRELATED TO THE ONE USED BY THE ENGINE.</B><P/>
+Example:<BR>
+<FONT FACE="monospace"><B>command</B> %num_var, $str_var, c%num_const, c$str_const, c#hex_color_value</FONT><P/>
+Identifier names will be descriptive of the purpose of the parameter.<P/>
+When an identifier is preceded by c% or c$, it means that the command expects as that parameter either a number or a string that will not be modified, so literals (<A HREF="#1.1">1.1</a>), expressions (<A HREF="#1.7">1.7</a>), or variables (<A HREF="#1.5">1.5</a>) may be used.<P/>
+When an identifier is preceded by c#, it means that the command expects a numerical constant, but that using a hexadecimal literal (<A HREF="#1.1">1.1</a>) will
+be easier.<P/>
+When an identifier is preceded by % or $, it means that the command expects as that parameter a numerical or string variable. Only variables may
+be used for that parameter.<P/>
+When an identifier is preceded by ?, it means that the command expects an array of some number of dimensions.<P/>
+[] syntax:<br/>
+This means that whatever is inside the brackets is optional. Brackets may be nested.<br/>
+Example:<br/>
+<FONT FACE="monospace">command [%a[, %b, %c[...]]]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;command</font> may take no, 1, 3, or more parameters.<P/>
+{|} syntax:<br/>
+This means that it's necessary to choose one of two or more options.<P/>
+Examples:<br/>
+<FONT FACE="monospace">command {%a|$a}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;command</font> may take an integer or string variable.<br/>
+<FONT FACE="monospace">command {%a|$a|some other thing}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;command</font> may take an integer variable, a string variable, or some other thing.<br/>
+<FONT FACE="monospace">command {%a|$a[, c%b]}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;command</font> may take an integer, or a string with an optional integer.</P>
+
+<H1><A NAME="1"></A>1. Syntax</H1>
+<H2><A NAME="1.1"></A>1.1. Literals</H3>
+Literals are symbols with a certain meaning. There are two kinds: integral literals, and string literals.<P/>
+Integral literals are translated into a number. There are two kinds: decimal and hexadecimal.<br/>
+A decimal integral literal is just a number. For example, &quot;10&quot; (without quotes).<br/>
+A hexadecimal integral literal is a base 16 number prefixed with a #. E.g. &quot;#00FF00&quot; (without quotes, case is ignored). They are normally used to represent colors, but a decimal literal can be used in their place, and vice versa.<br/>
+When used to represent a color, the first two digits are red, the third and fourth are green, and the fifth and sixth are blue. So it's <font color="#ff0000">RR</font><font color="#00ff00">GG</font><font color="#0000ff">BB</font>.<br/>
+Hexadecimal literals have to be exactly six digits long to be considered valid. The # is not a digit.<P/>
+String literals are enclosed by either double quotes (&quot;, U+0022) or grave accents (`, U+0060). E.g. &quot;&lt;--This `is a` string--&gt;&quot; and `&lt;--This &quot;is a&quot; string--&gt;`. In both examples, the first character is &lt; and the last one is &gt;. String literals have to be in a single line. E.g. &quot;This string<br/>
+literal is invalid.&quot;</P></P>
+
+<b><i>Update (2009-06-13):</i></b><br/>
+Extended strings: Enclosed by e&quot;&quot; or E&quot;&quot; (whitespace between the 'e' and the quote is not allowed. See below), these work just like &quot;&quot;-enclosed strings, with the addition of escape sequences:<P/>
+\\ - Backslash<br/>
+\&quot; - Quote<br/>
+\n - Newline<br/>
+\r - Newline (does exactly the same as \n)<br/>
+\x#### - Translates to the Unicode character U+####. \x0000 is not allowed and is automatically replaced by \x0020 (space). The digits A, B, C, D, E, and F may be both upper and lower case.<p/>
+Example (see <A HREF="#3">section 3</a> for an explanation of the /):<br/>
+<FONT FACE="monospace"><b>literal_print</b> e&quot;This is an \&quot;advanced\\string.\nAnd now, \&quot;ONSLAUGHT\&quot; in katak/<br/>
+ana: \x30aa\x30f3\x30b9\x30ed\x30c3\x30c8\n&quot;</font><P/>
+
+<H2><a name="1.2">1.2. Identifiers</H2>
+Identifiers are used to name various things.<p/>
+Identifiers follow the C scheme: only Latin alphabet upper and lower case letters (A-Z and a-z, U+0041-U+005A and U+0061-U+007A), Arabic numerals (0-9, U+0030-U+0039), and underscores (_, U+005F). Numerals cannot be used as the first character for an identifier.<br/>
+Note: The equivalent regular expression is <FONT FACE="monospace">[A-Za-z_][A-Za-z_0-9]*</font><p/>
+Identifiers can be of any length.</P>
+Examples:<br/>
+<b>Valid:</b><br/>
+<FONT FACE="monospace">
+id<br/>
+_variable<br/>
+var126<br/>
+var_126<br/>
+_<br/>
+__<br/>
+_10<br/>
+</font>
+<b>Invalid:</b><br/>
+<FONT FACE="monospace">
+10_var<br/>
+ЏαҐЫЮ<br/>
+Ю_var<br/>
+var 126<p/>
+</font>
+<b><i>Update (2009-05-08):</i></b><br/>
+I've just confirmed through source code that this is the scheme used by, at least, ONScripter-en, so this rule will never change.<p/>
+
+<H2><a name="1.3">1.3. Constants</a></H2>
+Constants (called aliases in the original documentation) are declared with the commands <FONT FACE="monospace">numalias</font> and <FONT FACE="monospace">stralias</font>, which declare numerical and string constants respectively.<p/>
+Constants use identifiers as names.<p/>
+The values of constants cannot be changed, so they cannot be used as parameters for a command that requires a variable as a parameter.<p/>
+
+<H2><a name="1.4">1.4. Data Types</a></h2>
+There are two data types: integer (%, U+0025), and string ($, U+0024).<p/>
+At this moment (2009-03-16), the range of integer is not guaranteed to be anything, but it can hold both positive and negative values, and in the future it will be guaranteed to at least be <font face="monospace">[-2147483648;2147483647] ([-2<sup>31</sup>;2<sup>31</sup>-1])</font>.<p/>
+Strings are Unicode, and are guaranteed to at least hold all values in the range [U+0001;U+FFFF].<p/>
+
+<H2><a name="1.5">1.5. Variables</a></h2>
+Variables are used to store data. They don't need to be declared.<p/>
+Variables are accessed with a numerical index. The valid range for this index is <font face="monospace">[-1073741824;1073741823] ([-2<sup>30</sup>;2<sup>30</sup>-1])</font>.<br/>
+Each index stores an integer-string pair. To access either, prefix % for the integer or $ for the string to the index. E.g. <FONT FACE="monospace">%0</font>, <FONT FACE="monospace">$0</font>, <FONT FACE="monospace">%1024</font>, <FONT FACE="monospace">$32768</font>.
+A constant can be used instead of a literal: <FONT FACE="monospace">%constant</font>, <FONT FACE="monospace">$constant.</font><p/>
+&lt;Optional reading&gt;<br/>
+After the %, any expression (see <a href="#1.7">section 1.7</a>) can be used. Keep in mind that, since % and $ (they're called reference operators. The third is ?) have a very high precedence, you'll have to use parentheses.<br/>
+E.g. <FONT FACE="monospace">%%0</font> is fine, but <FONT FACE="monospace">%%0+1</font> is the same as <FONT FACE="monospace">(%%0)+1</font>, not <FONT FACE="monospace">%(%0+1)</font>.<br/>
+&lt;/Optional reading&gt;<p/>
+Variables with an index lower than 200 (i.e. up to 199) are saved in each savegame. Use them to store values such as health, money, etc.<br/>
+Indices from 200 on are global, and they always keep their values between executions. Use them to store data such as configuration, how many
+times the game's been run, etc.<p/>
+
+<h2><a name="1.6">1.6. Commands</a></h2>
+Commands have to be separated from the parameters by at least 1 non-line-braking whitespace, such as space or tab. Their names are case-insensitive.<p/>
+Parameters are separated by commas. Whitespace between the parameters is ignored.<br/>
+If the last non-whitespace character in a line is a comma, the parameter list is assumed to continue on the line below.<p/>
+A colon (:, U+003A) can be used to have more than one command on a single line.<p/>
+A colon is also used to make the if command execute more than one command if the condition is true.<p/>
+Examples:<br/>
+<FONT FACE="monospace">
+<b>command</b><br/>
+<b>command</b> parameter<br/>
+<b>command</b> parameter1, parameter2 ,parameter3 , parameter4 , &quot;string&quot;,123456789<br/>
+<b>command</b> parameter1,<br/>
+parameter2:command parameter<br/>
+<b>command</b> parameter1,<br/>
+parameter2,<br/>
+parameter3,<br/>
+parameter4<br/>
+<b>if</b> %0==0 command:command parameter1 : command parameter1,<br/>
+parameter2<p/>
+</font>
+
+<h2><a name="1.7">1.7. Expressions</a></h2>
+An expression is a formula. Whenever a command asks for a constant, an expression may be used instead (e.g. <font face="monospace"><b>mov</b> %0, 10*10</font>). Note that decimal numerical literals are expressions.<p/>
+An expression that evaluates to a string (e.g. <font face="monospace">$0</font>, <font face="monospace">_itoa(10)</font>) is invalid unless the command asks for a string.<br/>
+Likewise, when a string is required, it's illegal to provide a numerical expression.<p/>
+The following operators are supported (ordered from lower to higher precedence):<br/>
+<ol>
+	<li>||, |: boolean NOT.<br/>
+	<li>&amp;&amp;, &amp;: boolean AND.<br/>
+	<li>==, =, !=, &lt;&gt;, &lt;, &gt;=, &gt;, &lt;=: relational operators.<br/>
+	<li>+, -: addition and subtraction.<br/>
+	<li>*, /: multiplication and division.<br/>
+	<li>+, -: unary NOP and sign inversion.<br/>
+	<li>[]: offset operator.<br/>
+	<li>%, $, ?: dereference operators.<br/>
+	<li>lchk, fchk, _itoa, _atoi, _eval: label and file check operators, conversion operators, and recursive evaluation operator.<br/>
+	<li>+: string concatenation<p/>
+</ol>
+
+Note: In the following subsections, an {expression} can be any of the following:<br/>
+<ul>
+	<li>An integer literal<br/>
+	<li>The result of _eval<br/>
+	<li>The result of _atoi<br/>
+	<li>An integer dereference<p/>
+</ul>
+
+<h3>1.7.1. 10th order operators</h3>
+{string}+{string}[+{string}[...]] (String concatenation operator)<br/>
+Combines two strings and gives back the result.<br/>
+Because of the way Bison works, the grammar used by the language is irredeemably ambiguous. '+' can mean two different things depending on the context, and how to tell the contexts apart is beyond the scope of Bison. For example, the expression <font face="monospace">lchk "*la"+"bel"+1</font> produces a syntax error, because by the time the parser reaches the 1, it has already decided and a string should follow and it's too late to change. The correct way to write such an expression would be <font face="monospace">(lchk "*la"+"bel")+1</font>. This exception applies only to the + operator due to its ambiguity, and to both lchk and fchk. Using <em>any</em> other arithmetical operator gives the expected result.
+
+<h3>1.7.2. 9th order operators</h3>
+<font face="monospace">lchk{string}</font> (Label check operator)<br/>
+See the original documentation.<p/>
+
+<font face="monospace">fchk{string}</font> (File check operator)<br/>
+See the original documentation.<p/>
+
+<font face="monospace">_itoa({expression})</font> (Lexical string-to-integer cast operator)<br/>
+Evaluates to a string that is the representation of the result of the expression.<p/>
+Examples:
+<font face="monospace">_itoa(16)</font> evaluates to the string "16"<br/>
+<font face="monospace">
+<b>mov</b> %0,84<br/>
+<b>mov</b> $0,_itoa(%0)<br/>
+<font color="#808080">;$0="84"<p/></font>
+</font>
+
+<font face="monospace">_atoi({string})</font> (Lexical integer-to-string cast operator)<br/>
+Evaluates to the integer that the string represents. If the string doesn't represent an integer, _atoi() evaluates to zero.<p/>
+Examples:<br/>
+<font face="monospace">_atoi(&quot;145&quot;)</font> evaluates to 145; <font face="monospace">_atoi(&quot;hello&quot;)</font> evaluates to zero.<br/>
+<font face="monospace">
+<b>mov</b> $0,"948"<br/>
+<b>mov</b> %0,_atoi($0)<br/>
+<font color="#808080">;%0=948<p/></font>
+</font>
+
+<font face="monospace">_eval({string})</font> (Recursive evaluation operator)<br/>
+Evaluates the string as an expression and returns the result.<br/>
+Examples:
+<font face="monospace">_eval(&quot;1+1&quot;)</font> evaluates to 2.<br/>
+<font face="monospace">
+<b>mov</b> $0,"1+2*3"<br/>
+<b>mov</b> %0,_eval($0)<br/>
+<font color="#808080">;%0=7<p/></font>
+</font>
+
+<h3>1.7.3. 8th order operators</h3>
+% and $ (Integer dereference and string dereference operators)<br/>
+<font face="monospace">
+%{integer}<br/>
+%({expression})<br/>
+${integer}<br/>
+$({expression})<br/>
+</font>
+These operators take integers as operands, but can also take expressions wrapped around parentheses.<p/>
+Variables are allocated in a table and indexed by an integer. What these operators do is find the variable that corresponds to the operand and get the integer or string component (as mentioned on <a href="#1.5">section 1.5</a>, variables are an integer-string pair) respectively.<p/>
+Examples:
+<font face="monospace">%0</font>,
+<font face="monospace">%%0</font>,
+<font face="monospace">$0</font>,
+<font face="monospace">$%0</font>,
+<font face="monospace">%(%0+1)</font>,
+<font face="monospace">%_atoi($0)</font>,
+<font face="monospace">$%(_atoi($0)+1)</font>.<p/>
+
+
+<font face="monospace">?{integer}</font> (Array dereference operator)<br/>
+<font face="monospace">?({expression})</font><br/>
+Does the same as % and $, except it evaluates to an array, instead of a variable (scalar).<p/>
+Unlike variables, arrays are not automatically declared, and also, they occupy a different namespace (i.e. variable 12 is unrelated to array
+12).<p/>
+The array returned by this operator cannot be used directly. It has to be indexed with the offset operator, which is explained in the next subsection.<p/>
+Examples:
+<font face="monospace">?0</font>,
+<font face="monospace">?(1+1)</font>,
+<font face="monospace">?%0</font>,
+<font face="monospace">?_atoi($0)</font>,
+<font face="monospace">?(_atoi($%0)+1)</font>.<p/>
+
+<h3>1.7.4. 7th order operators</h3>
+[] (Offset operator)<br/>
+<font face="monospace">
+{array dereference}[{expression}]<br/>
+{array obtained from []}[{expression}]<br/>
+</font>
+Placed at the right of an array obtained using the array dereference operator, it gets the element determined by the expression inside the brackets.<p/>
+Note that matrices (e.g. an array declared as <font face="monospace">?84[10][10]</font>, or <font face="monospace">?165[10][10][10]</font>) are arrays of arrays, or arrays of arrays of ..., so just one offset operator isn't enough to obtain the final element. Likewise, using the operator after the final element has been obtained is also invalid.<p/>
+Examples:<br/>
+For an array declared as <font face="monospace">?array[10][10]</font><br/>.
+<font face="monospace">
+?array+10 ;&lt;-- Invalid. Can't get the integer value of an array<br/>
+?array[10]+10 ;&lt;-- Same as above<br/>
+?array[10][10]+10 ;&lt;-- OK<br/>
+?array[10][11] ;&lt;-- The element doesn't exist. This is known as a buffer<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;overflow.<p/>
+</font>
+
+<h3>1.7.5. 6th order operators</h3>
++ (unary NOP operator)<br/>
+<font face="monospace">+{expression}<br/></font>
+Evaluates to the value of the operand.<p/>
+
+- (unary sign inversion)<br/>
+<font face="monospace">-{expression}</font><br/>
+Evaluates to the value of the operand with its sign inverted.<p/>
+
+<h3>1.7.6. 3rd order operators</h3>
+All operators in this subsection take two {expressions} as their operands. All operands compare their operands and evaluate to non-zero if the
+condition is met, and zero otherwise.<p/>
+== and =: Equals<br/>
+!= and &lt;&gt;: Not equals<br/>
+&gt;: Greater than<br/>
+&lt;=: Lower than or equal to<br/>
+&lt;: Lower than<br/>
+&gt;= Greater than or equal to<p/>
+
+<h3>1.7.7. 2nd order operators</h3>
+&amp;&amp; or &amp; (Boolean AND)<br/>
+<font face="monospace">
+{expression}&amp;&amp;{expression}<br/>
+</font>
+Evaluates to 1 if both operands are non-zero.<p/>
+
+<h3>1.7.8. 1st order operators</h3>
+|| or | (Boolean OR)<br/>
+<font face="monospace">
+{expression}||{expression}<br/>
+</font>
+Evaluates to 1 if either operand is non-zero.<br/>
+Note: Using || inside a legacy notif has undefined behavior. Refer to the original documentation to see the kind of expressions notif supports. If you want to use advanced expressions, don't use notif, or use use_new_if to force using the corrected behavior of notif.<p/>
+
+<h2><a name="1.8">1.8. Arrays</a></h2>
+An array is a finite set of integers.<p/>
+Arrays are allocated in a table and identified by an integer.<p/>
+To declare an array, use the dim command.<p/>
+E.g. <font face="monospace"><b>dim</b> ?8[5] ; create a one-dimensional array at position 8 in the table with elements [0..5].</font><p/>
+Arrays can have any number of dimensions, but keep in mind that each element in the array uses memory.<br/>
+E.g. <font face="monospace">dim ?3[5][5]</font>, <font face="monospace">dim ?74[1][2][5][3]</font><p/>
+Arrays can be used with the ?[] syntax:<br/>
+<font face="monospace">
+<b>mov</b> %var,?array[3]<br/>
+<b>mov</b> %var2,?array[%var*?array[%var]]<p/>
+</font>
+As you can see, the value in [] is an expression itself, and arrays can appear inside expressions. This allows for expressions of arbitrary complexity. See <a href="#1.7">section 1.7</a> for more information.<p/>
+
+<h2><a name="1.9">1.9. Printing</a></h2>
+This being a VN engine, printing is an important part of the language.<br/>
+A "printing line" is a special type of command, because no explicit command name needs to appear in order for the line to be considered printing.<br/>
+Any line that begins with (spaces [U+0020] and tabs [U+0009] at the start of a line are ignored) any of the following characters is considered a printing line:<br/>
+<ul>
+	<li>` (U+0060, grave accent)</li>
+	<li>\ (U+005C)</li>
+	<li>@ (U+0040)</li>
+	<li>! (U+0021)</li>
+	<li># (U+0023)</li>
+	<li>% (U+0025)</li>
+	<li>$ (U+0024)</li>
+	<li>? (U+003F)</li>
+	<li>[ (U+005B)</li>
+	<li>Any ultra-ASCII character (U+0080 and above)
+</ul>
+
+<h3>1.9.1. Text tags</h3>
+A text tag is a short, predefined string that the engine looks for in printing lines and perform some specific function.<br/>
+The following text tags are supported:<br/>
+<ul>
+	<li>!d# - See the original documentation.</li>
+	<li>!w# - See the original documentation.</li>
+	<li>!s# - See the original documentation.</li>
+	<li>!sd - See the original documentation.</li>
+	<li>#xxxxxx - See the original documentation.</li>
+	<li>!nl - Is replaced by a newline character. Very useful when using centered text.</li>
+	<li>!b - Toggles bold style.</li>
+	<li>!i - Toggles italic style.</li>
+</ul>
+
+<h3>1.9.2. Inline expressions</h3>
+Some expressions can be embedded directly into a printing line, so long as they contain no spaces. For example:<p/>
+<font face="monospace">
+mov %a,10
+`a: %a<br/>
+<font color="#808080">;Output: a: 10</font><br/>
+`a+1: %a + 1<br/>
+<font color="#808080">;Output: a+1: 10 + 1</font><p/>
+</font>
+
+<font face="monospace">literal_print</font> is a richer and more regular interface for this kind of output.<p/>
+
+<h1><a name="2">2. Unimplemented Commands</a></h1>
+<font face="monospace" color="#ff0000">linepage</font><br/>
+Reason: Redundant functionality.<p/>
+
+<font face="monospace" color="#ff0000">zenkakko</font><br/>
+Reason: Unknown purpose.<p/>
+
+<font face="monospace" color="#ff0000">soundpressplgin</font><br/>
+Reason: Deprecated and not portable.<p/>
+
+<font face="monospace" color="#ff0000">spi</font><br/>
+Reason: Not portable.<p/>
+
+<font face="monospace" color="#ff0000">getreg</font><br/>
+Reason: Not portable.<p/>
+
+<font face="monospace" color="#ff0000">killmenu</font><br/>
+Reason: Not portable.<p/>
+
+<font face="monospace" color="#ff0000">kidokuskip</font><br/>
+Reason: Doesn't seem to do anything useful.<p/>
+
+<font face="monospace" color="#ff0000">kidokumode</font><br/>
+Reason: Doesn't seem to do anything useful.<p/>
+
+<font face="monospace" color="#ff0000">skipoff</font><br/>
+Reason: Doesn't seem to do anything useful.<p/>
+
+<font face="monospace" color="#ff0000">isskip</font><br/>
+Reason: Related to kidokumode.<p/>
+
+<h1><a name="3">3. Changed Behaviors</a></h1>
+<font face="monospace" color="#ff0000">if</font><br/>
+Expression syntax has changed. See <a href="#1.7">section 1.7</a>.<br/>
+Also see use_new_if in <a href="#4">section 4</a>.<br/>
+Special note: It's possible to use any command as the if body, including printing lines (see <a href="#1.9">printing</a>). However, the parsing mechanism will fail if a printing line contains a ` in its body (<font face="monospace">`like this ->`<-</font>). For those cases, it's necessary to use a <font face="monospace">then</font> clause:<p/>
+<font face="monospace">
+<b>if</b> condition <b>then</b> `print `this<p/>
+</font>
+
+<font face="monospace" color="#ff0000">arc</font><br/>
+Does nothing.<p/>
+
+<font face="monospace" color="#ff0000">nsa</font><br/>
+Does nothing.<p/>
+
+<font face="monospace" color="#ff0000">setwindow<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c%frameStartX,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c%frameStartY,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c%frameEndX,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c%frameEndY,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c%fontHeight,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c%extraHSpacing,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c%extraVSpacing,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c%textSpeed,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c%useBoldFont,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c%renderShadow,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c#textWindowColor,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c%windowStartX,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c%windowStartY,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c%windowEndX,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c%windowEndY<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c$fileString,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c%windowStartX,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c%windowStartY<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+</font>
+The behavior changes if the command is used after a <font face="monospace">new_set_window</font>.<br/>
+Prefer this one over the older one, as it's more predictable.<br/>
+All units of space are in pixels.<br/>
+The parameters are:<br/>
+<font face="monospace">c%frameStartX</font> X coordinate of the upper left corner of the text frame.<br/>
+<b>(The text frame is the area where text can possibly be written, and it's used to compute text wrapping. It has no color.)</b><br/>
+<font face="monospace">c%frameStartY</font> Y coordinate of the upper left corner of the text frame.<br/>
+<font face="monospace">c%frameEndX</font> X coordinate of the lower right corner of the text frame.<br/>
+<font face="monospace">c%frameEndY</font> Y coordinate of the lower right corner of the text frame.<br/>
+<font face="monospace">c%fontHeight</font> Height of the font.<br/>
+<font face="monospace">c%extraHSpacing</font> Extra horinzontal spacing between characters.<br/>
+<font face="monospace">c%extraVSpacing</font> Extra vertical spacing between lines.<br/>
+<font face="monospace">c%textSpeed</font> Delay between characters in milliseconds.<br/>
+<font face="monospace">c%useBoldFont</font> Use bold font (zero is no, non-zero is yes). (Ignored.)<br/>
+<font face="monospace">c%renderShadow</font> Put shadow below text.<br/>
+{<br/>
+<font face="monospace">&nbsp;&nbsp;&nbsp;&nbsp;c#textWindowColor</font> Color of the text window. Preferably use a hex literal.<br/>
+<font face="monospace">&nbsp;&nbsp;&nbsp;&nbsp;c%windowStartX</font> X coordinate of the upper left corner of the text window.<br/>
+<b>(The text window is the colored area over which text normally appears, but note that the text frame is not bounded to it.)</b><br/>
+<font face="monospace">&nbsp;&nbsp;&nbsp;&nbsp;c%windowStartY</font> Y coordinate of the upper left corner of the text window.<br/>
+<font face="monospace">&nbsp;&nbsp;&nbsp;&nbsp;c%windowEndX</font> X coordinate of the lower right corner of the text window.<br/>
+<font face="monospace">&nbsp;&nbsp;&nbsp;&nbsp;c%windowEndY</font> Y coordinate of the lower right corner of the text window.<br/>
+|<br/>
+<font face="monospace">&nbsp;&nbsp;&nbsp;&nbsp;c$fileString</font> This image file will be used as the background for the text window. The size of the window is the same as the size of the image.<br/>
+<font face="monospace">&nbsp;&nbsp;&nbsp;&nbsp;c%windowStartX</font> X coordinate of the upper left corner of the text window.<br/>
+<font face="monospace">&nbsp;&nbsp;&nbsp;&nbsp;c%windowStartY</font> Y coordinate of the upper left corner of the text window.<br/>
+}<p/>
+
+<font face="monospace" color="#ff0000">/</font><br/>
+When a slash is the last character in a line (that is, the next character has to be either carriage return [U+000D] or line feed [U+000A]), both the slash and the newline are ignored. <s>This processing is done before <em>anything</em> else.</s> (See update below.)<p/>
+Example:<br/>
+<font face="monospace">
+<b>mov</b> $0,&quot;stri/<br/>
+ng&quot;<br/>
+<font color="#808080">;$0 now contains &quot;string&quot;.</font><br/>
+<b>mov</b> %0,2//<br/>
+2<br/>
+<font color="#808080">;%0 now contains 1</font><p/>
+</font>
+This expands the behavior from ONScripter, where the slash only worked in printing lines.<br/>
+Note: If an error occurs while executing the command, the error message will report that the error occurred on the line number where the split
+line began.<br/>
+For example,<br/>
+(Line 10) <font face="monospace">command some/</font><br/>
+(Line 11) <font face="monospace">thing:command2</font><br/>
+If an error occurs when executing command2, the error message will report that the error occurred on line 10.<p/>
+<i><b>Update (2009-08-30):</b></i><br/>
+/ processing is done after macro processing.<br/>
+The order is therefore: macro processing &#8594; / processing &#8594; everything else<p/>
+
+<font face="monospace" color="#ff0000">textgosub [*label[, c%recurse]]</font><br/>
+Sets a <font face="monospace">*label</font> to gosub to every time there's a @ or \ in the script.<br/>
+If <font face="monospace">c%recurse</font>!=0, @s and \s inside that block will not recurse.<br/>
+<font face="monospace">textgosub</font> doesn't need to be in the <font face="monospace">*define</font> block.<br/>
+Calling textgosub without parameters disables its effects.<p/>
+
+<font face="monospace" color="#ff0000">mov3<br/>
+mov4<br/>
+...<br/>
+mov10</font><br/>
+Can also be used to set strings. The condition is that the type of all the parameters must be the same.<p/>
+<font face="monospace">
+<b>mov3</b> %0,1,2,3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<font color="#808080">; <--OK</font><br/>
+<b>mov3</b> $0,"one","two","three" <font color="#808080">; <--OK</font><br/>
+<b>mov3</b> $0,"one","two",3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color="#808080">; <--Not OK</font><p/>
+</font>
+
+<h1><a name="4">4. New commands</a></h1>
+<font face="monospace" color="#ff0000">date2</font><br/>
+Same as <font face="monospace">date</font>, but the year is returned in YYYY format, not YY.<p/>
+
+<font face="monospace" color="#ff0000">getini</font><br/>
+It is back from NScripter.<p/>
+
+<font face="monospace" color="#ff0000">new_setwindow</font><br/>
+Uses the new version of <font face="monospace">setwindow</font>.<p/>
+
+<font face="monospace" color="#ff0000">set_default_font_size c%size</font><br/>
+Changes the default font size to c%size. Meant to be used with new_setwindow.<p/>
+
+<font face="monospace" color="#ff0000">literal_print {c$|c%}[, {c$|c%}[...]]</font><br/>
+Mostly reserved for debugging. It takes both strings and expressions as parameters. Strings are printed verbatim (with line and page wrapping) and expressions are evaluated and their results printed.<p/>
+Example:<br/>
+<font face="monospace">
+<b>mov</b> $0,&quot;1+2*3&quot;<br/>
+<b>literal_print</b> e&quot;This is an \&quot;advanced\\string.\nAnd now, \&quot;ONSLAUGHT\&quot; in katak/<br/>
+ana: \x30aa\x30f3\x30b9\x30ed\x30c3\x30c8\n$0 = \&quot;&quot;,$0,e&quot;\&quot; -evaluates to-&gt; &quot;, /<br/>
+_eval($0)<p/>
+</font>
+
+<font face="monospace" color="#ff0000">use_new_if</font><br/>
+There was a problem with the <font face="monospace">if</font> in the old ONScripter. According to boolean algebra, &quot;NOT (a AND b)&quot; is not the same as &quot;(NOT a) AND (NOT b)&quot;. Apparently, the original coder missed that class, and using <font face="monospace">notif a!=0 &amp;&amp; b!=0</font> is the same as using <font face="monospace">if a==0 &amp;&amp; b==0</font> instead of the correct form, <font face="monospace">if (a!=0 &amp;&amp; b!=0)==0</font><br/>
+<font face="monospace">use_new_if</font> corrects this behavior.<p/>
+
+<font face="monospace" color="#ff0000">centerh c%pivot</font><br/>
+Sets the center pivot to c%pivot percent of the screen.<br/>
+For example, centerh 0 (the default) is left-justified, centerh 50 is centered, and centerh 100 is right-justified.<p/>
+c%pivot must be in the range [0;100]. If it's below the range, zero is assumed. If above, 100 is assumed.<p/>
+
+<font face="monospace" color="#ff0000">centerv c%pivot</font><br/>
+Works the same as centerh, but for vertical centering.<br/>
+The syntax is identical to centerh.<br/>
+In order to support this command, a new text tag was added: &quot;!nl&quot;. It is replaced by a newline during the printing process.<br/>
+It is important when using centerv that all printing commands end with a \:<p/>
+<font face="monospace">
+`Sample vertically!nlcentered text.\ <font color="#808080">;&lt;-- Ok.</font><br/>
+`Sample vertically!nlcentered text. &nbsp;<font color="#808080">;&lt;-- May produce strange artifacts.</font><br/>
+\ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#808080">;&lt;-- If this appears before the next printing command, there's no problem.</font><p/>
+</font>
+Also, at the moment vertical centering produces incorrect results when the size of a page of text is greater than the size of the screen. This may be fixed in future releases.<br/>
+An example of text printed to the center of the screen:<p/>
+
+<font face="monospace">
+<b>centerh</b> 50<br/>
+<b>centerv</b> 50<br/>
+`Go tell the Spartans, passerby,!nlthat here, by Spartan law, we lie.\<br/>
+<b>centerh</b> 0<br/>
+<b>centerv</b> 0<p/>
+</font>
+
+<font face="monospace" color="#ff0000">savetime2 c%fileno, %year, %month, %day, %hour, %minute, %second</font><br/>
+The same as savetime, but also gives the year and the second the savegame was generated.<p/>
+
+<font face="monospace" color="#ff0000">async_effect {0|c%effectno, c%frequency}</font><br/>
+Starts an ansynchronous effect that's applied to the entire screen <font face="monospace">c$frequency</font> times per second.<br/>
+If 0 is passed, the effect is turned off.<br/>
+There are no built-in effects. They must be programmed using the plug-in API.<p/>
+
+<font face="monospace" color="#ff0000">add_filter {0|c%effectno, c%color, c$rule}</font><br/>
+Adds a filter to the middle filter pipeline. This is the same pipeline used for commands <font face="monospace">monocro</font> and <font face="monospace">nega</font>. This command should not be combined with those two.<br/>
+Passing a 0 clears the pipeline.<br/>
+<font face="monospace">c%color</font> can be used to pass an RGB color value in hex notation if the filter needs it.<br/>
+<font face="monospace">c$rule</font> can be used to pass a rule file if the filter needs it.<p/>
+
+<font face="monospace">
+<b>add_filter</b> 0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#808080">;clear the pipeline</font><br/>
+<b>add_filter</b> 1, #ff0000, "" &nbsp;&nbsp;<font color="#808080">;equivalent to monocro #ff0000</font><br/>
+<b>add_filter</b> 2, 0, "" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#808080">;equivalent to nega</font><br/>
+<b>add_filter</b> 3, 0, "rule.bmp" <font color="#808080">;calls a user-defined filter</font><p/>
+</font>
+
+New filters can be added using the plug-in API.<p/>
+
+<font face="monospace" color="#ff0000">add_overall_filter {0|c%effectno, c%color, c$rule}</font><br/>
+Same as <font face="monospace">add_filter</font> in every way, except the filter is applied to the entire screen over everything else, including the text window.<p/>
+
+<font face="monospace" color="#ff0000">base_resolution c%width, c%height</font><br/>
+Used to write resolution-independent scripts. The resolution passed to this command is taken to be the resolution used for geometric coordinates and sizes in the script and used by graphical resources. When the physical resolution used is different, all geometric parameters are adjusted automatically, and graphical resources are resized.<p/>
+The default base resolution is the same as the physical resolution.<p/>
+
+<font face="monospace" color="#ff0000">strip_format $dst, c$src</font><br/>
+Removes format data from a string returned by <font face="monospace">getlog</font> or <font face="monospace">gettext</font><p/>
+
+<h1><a name="5">5. Undocumented commands</a></h1>
+These are commands that, while existing in ONScripter, their documentation is either lacking or missing.<p/>
+
+<font face="monospace" color="#ff0000">fileexist %var, c$filename</font><br/>
+If <font face="monospace">c$filename</font> is either in the file system or in the archives, <font face="monospace">%var</font> is set to non-zero. Otherwise, it's set to zero.<p/>
+
+<font face="monospace" color="#ff0000">savescreenshot c$file<br/>
+savescreenshot2 c$file</font><br/>
+Save the contents of the screen to a file named <font face="monospace">$file</font>.<p/>
+
+<font face="monospace" color="#ff0000">isdown %var</font><br/>
+Sets <font face="monospace">%var</font> to 1 if the left mouse button is being pressed, and to 0 otherwise.<p/>
+
+<font face="monospace" color="#ff0000">isfull %var</font><br/>
+Sets <font face="monospace">%var</font> to 1 if the engine is in fullscreen mode, and to 0 otherwise.<p/>
+
+<font face="monospace" color="#ff0000">getcursorpos %x, %y</font><br/>
+Sets <font face="monospace">%x</font> and <font face="monospace">%y</font> to the horizontal and vertical pixel coordinates where the next
+character will be printed. The coordinates refer to the upper left corner of the glyph.<p/>
+
+<font face="monospace" color="#ff0000">ispage %var</font><br/>
+When called inside the block defined by <font face="monospace">textgosub</font>, if what caused the fork was a \, <font face="monospace">%var</font> is set to non-zero; otherwise, it's set zero.<br/>
+When called from anywhere else, <font face="monospace">%var</font> is set to zero.<p/>
+
+<font face="monospace" color="#ff0000">puttext c$string</font><br/>
+Has the same behavior as <font face="monospace">literal_print</font>.<p/>
+</BODY>
+</HTML>

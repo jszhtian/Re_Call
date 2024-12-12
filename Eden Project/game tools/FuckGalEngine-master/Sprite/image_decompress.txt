@@ -1,0 +1,112 @@
+IML32.dll
+
+69035D40 >/$  51            push    ecx
+69035D41  |.  53            push    ebx
+69035D42  |.  55            push    ebp
+69035D43  |.  56            push    esi
+69035D44  |.  57            push    edi
+69035D45  |.  8B7C24 20     mov     edi, dword ptr [esp+0x20]            ;  size
+69035D49  |.  85FF          test    edi, edi
+69035D4B  |.  0F8E DF000000 jle     69035E30
+69035D51  |.  8B5C24 18     mov     ebx, dword ptr [esp+0x18]
+69035D55  |>  8B73 10       /mov     esi, dword ptr [ebx+0x10]
+69035D58  |.  83FE 01       |cmp     esi, 0x1
+69035D5B  |.  7C 13         |jl      short 69035D70
+69035D5D  |.  8B43 0C       |mov     eax, dword ptr [ebx+0xC]
+69035D60  |.  8A08          |mov     cl, byte ptr [eax]
+69035D62  |.  40            |inc     eax
+69035D63  |.  4E            |dec     esi
+69035D64  |.  884C24 18     |mov     byte ptr [esp+0x18], cl
+69035D68  |.  8943 0C       |mov     dword ptr [ebx+0xC], eax
+69035D6B  |.  8973 10       |mov     dword ptr [ebx+0x10], esi
+69035D6E  |.  EB 15         |jmp     short 69035D85
+69035D70  |>  8D5424 18     |lea     edx, dword ptr [esp+0x18]
+69035D74  |.  6A 01         |push    0x1
+69035D76  |.  52            |push    edx
+69035D77  |.  53            |push    ebx
+69035D78  |.  E8 23FEFFFF   |call    69035BA0
+69035D7D  |.  85C0          |test    eax, eax
+69035D7F  |.  0F84 B8000000 |je      69035E3D
+69035D85  |>  0FBE7424 18   |movsx   esi, byte ptr [esp+0x18]
+69035D8A  |.  85F6          |test    esi, esi
+69035D8C  |.  7D 73         |jge     short 69035E01
+69035D8E  |.  BD 01000000   |mov     ebp, 0x1
+69035D93  |.  2BEE          |sub     ebp, esi
+69035D95  |.  3BFD          |cmp     edi, ebp
+69035D97  |.  7D 02         |jge     short 69035D9B
+69035D99  |.  8BEF          |mov     ebp, edi
+69035D9B  |>  8B73 10       |mov     esi, dword ptr [ebx+0x10]
+69035D9E  |.  83FE 01       |cmp     esi, 0x1
+69035DA1  |.  7C 13         |jl      short 69035DB6
+69035DA3  |.  8B43 0C       |mov     eax, dword ptr [ebx+0xC]
+69035DA6  |.  8A08          |mov     cl, byte ptr [eax]
+69035DA8  |.  40            |inc     eax
+69035DA9  |.  4E            |dec     esi
+69035DAA  |.  884C24 13     |mov     byte ptr [esp+0x13], cl
+69035DAE  |.  8943 0C       |mov     dword ptr [ebx+0xC], eax
+69035DB1  |.  8973 10       |mov     dword ptr [ebx+0x10], esi
+69035DB4  |.  EB 11         |jmp     short 69035DC7
+69035DB6  |>  8D5424 13     |lea     edx, dword ptr [esp+0x13]
+69035DBA  |.  6A 01         |push    0x1
+69035DBC  |.  52            |push    edx
+69035DBD  |.  53            |push    ebx
+69035DBE  |.  E8 DDFDFFFF   |call    69035BA0
+69035DC3  |.  85C0          |test    eax, eax
+69035DC5  |.  74 76         |je      short 69035E3D
+69035DC7  |>  85ED          |test    ebp, ebp
+69035DC9  |.  7E 32         |jle     short 69035DFD
+69035DCB  |.  8A4424 13     |mov     al, byte ptr [esp+0x13]
+69035DCF  |.  8B7C24 1C     |mov     edi, dword ptr [esp+0x1C]
+69035DD3  |.  8AD0          |mov     dl, al
+69035DD5  |.  8BCD          |mov     ecx, ebp
+69035DD7  |.  8AF2          |mov     dh, dl
+69035DD9  |.  8BF1          |mov     esi, ecx
+69035DDB  |.  8BC2          |mov     eax, edx
+69035DDD  |.  C1E0 10       |shl     eax, 0x10
+69035DE0  |.  66:8BC2       |mov     ax, dx
+69035DE3  |.  C1E9 02       |shr     ecx, 0x2
+69035DE6  |.  F3:AB         |rep     stos dword ptr es:[edi]
+69035DE8  |.  8BCE          |mov     ecx, esi
+69035DEA  |.  83E1 03       |and     ecx, 0x3
+69035DED  |.  F3:AA         |rep     stos byte ptr es:[edi]
+69035DEF  |.  8B4424 1C     |mov     eax, dword ptr [esp+0x1C]
+69035DF3  |.  8B7C24 20     |mov     edi, dword ptr [esp+0x20]
+69035DF7  |.  03C5          |add     eax, ebp
+69035DF9  |.  894424 1C     |mov     dword ptr [esp+0x1C], eax
+69035DFD  |>  2BFD          |sub     edi, ebp
+69035DFF  |.  EB 23         |jmp     short 69035E24
+69035E01  |>  46            |inc     esi
+69035E02  |.  3BFE          |cmp     edi, esi
+69035E04  |.  7D 02         |jge     short 69035E08
+69035E06  |.  8BF7          |mov     esi, edi
+69035E08  |>  8B4424 1C     |mov     eax, dword ptr [esp+0x1C]
+69035E0C  |.  56            |push    esi
+69035E0D  |.  50            |push    eax
+69035E0E  |.  53            |push    ebx
+69035E0F  |.  E8 8CFDFFFF   |call    69035BA0
+69035E14  |.  85C0          |test    eax, eax
+69035E16  |.  74 25         |je      short 69035E3D
+69035E18  |.  8B4C24 1C     |mov     ecx, dword ptr [esp+0x1C]
+69035E1C  |.  03CE          |add     ecx, esi
+69035E1E  |.  2BFE          |sub     edi, esi
+69035E20  |.  894C24 1C     |mov     dword ptr [esp+0x1C], ecx
+69035E24  |>  85FF          |test    edi, edi
+69035E26  |.  897C24 20     |mov     dword ptr [esp+0x20], edi
+69035E2A  |.^ 0F8F 25FFFFFF \jg      69035D55
+69035E30  |>  5F            pop     edi
+69035E31  |.  5E            pop     esi
+69035E32  |.  5D            pop     ebp
+69035E33  |.  B8 01000000   mov     eax, 0x1
+69035E38  |.  5B            pop     ebx
+69035E39  |.  59            pop     ecx
+69035E3A  |.  C2 0C00       retn    0xC
+69035E3D  |>  6A 6B         push    0x6B
+69035E3F  |.  E8 3CADFDFF   call    #1040
+69035E44  |.  5F            pop     edi
+69035E45  |.  5E            pop     esi
+69035E46  |.  5D            pop     ebp
+69035E47  |.  33C0          xor     eax, eax
+69035E49  |.  5B            pop     ebx
+69035E4A  |.  59            pop     ecx
+69035E4B  \.  C2 0C00       retn    0xC
+

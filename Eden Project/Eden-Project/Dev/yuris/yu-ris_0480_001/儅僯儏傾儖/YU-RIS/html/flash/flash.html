@@ -1,0 +1,62 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">FLASH系命令</A>＞FLASH［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="flash.html">FLASH［］</A>
+　<A HREF="flashinfo.html">FLASHINFO［］</A>
+　<A HREF="flashend.html">FLASHEND［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=680 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■FLASH再生命令 FLASH[ ]</FONT>
+<FONT CLASS=t20>
+
+FLASHファイル(swfファイル)を再生します。
+FLASHファイル再生モードになると、他のどのレイヤより最前面になります。
+
+※FLASH の再生には Internet Explorer 用の Flash Player が
+インストールされている必要があります。
+
+※swf ファイルをパックファイルに入れることは出来ません。ご了承ください。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>FILE = ファイル名</FONT></TD><TD><FONT CLASS=t40>FLASHファイル名を指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>X = 値</FONT></TD><TD><FONT CLASS=t40>表示Ｘ座標位置を指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Y = 値</FONT></TD><TD><FONT CLASS=t40>表示Ｙ座標位置を指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SX = 値</FONT></TD><TD><FONT CLASS=t40>サイズＸを指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SY = 値</FONT></TD><TD><FONT CLASS=t40>サイズＹを指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PLAY = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>１を指定すると再生します</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]「ABC.SWF」ファイルを読み込み、ウィンドウいっぱいに広げて再生する。
+  ※SX, SY キーワードを指定しなかった場合は、ウィンドウと同じサイズになります。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FLASH</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"ABC.SWF"</FONT> <FONT CLASS=t62>PLAY</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[2]「ABC.SWF」ファイルを読み込み、左上から(50,80)の位置に、幅320、縦240のサイズで再生する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FLASH</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"ABC.SWF"</FONT> <FONT CLASS=t62>X</FONT>=<FONT CLASS=t63>50</FONT> <FONT CLASS=t62>Y</FONT>=<FONT CLASS=t63>80</FONT> <FONT CLASS=t62>SX</FONT>=<FONT CLASS=t63>320</FONT> <FONT CLASS=t62>SY</FONT>=<FONT CLASS=t63>240</FONT> <FONT CLASS=t62>PLAY</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

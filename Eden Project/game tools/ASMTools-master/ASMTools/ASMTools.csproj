@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Gee.External.Capstone" Version="2.0.2" />
+    <PackageReference Include="keystoneengine.csharp" Version="0.9.1.1" />
+  </ItemGroup>
+
+</Project>

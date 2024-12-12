@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F4575B60-CF66-4A56-9D68-FC30B512FADA}</ProjectGuid>
+    <RootNamespace>namalib_grp_core</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(tnmy)\lib\$(Platform)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(tnmy)\obj\$(Platform)\nama\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(tnmy)\lib\$(Platform)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(tnmy)\obj\$(Platform)\nama\$(ProjectName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(tnmy)\mydata\include\nama;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(ProjectName)_d.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <OmitFramePointers>false</OmitFramePointers>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>$(tnmy)\mydata\include\nama;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="source\namalib_grp_tcgd_switch.cpp" />
+    <ClCompile Include="source\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_add.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_flt.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_mul.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_rsub.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_std.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_sub.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_add.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_flt.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_mul.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_rsub.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_std.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_sub.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_add.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_flt.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_mul.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_rsub.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_std.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_sub.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_add.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_flt.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_mul.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_rsub.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_std.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_sub.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lined_add.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lined_flt.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lined_mul.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lined_rsub.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lined_std.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lined_sub.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_chglbdbox_std.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_chglined_std.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_chgstdbox_std.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_bld.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_bld.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_lined_bld.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_bld.cpp" />
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_bld.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\namalib_grp_core.h" />
+    <ClInclude Include="source\namalib_grp_macro_basic.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc.h" />
+    <ClInclude Include="source\pch.h" />
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_add.h" />
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_bld.h" />
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_flt.h" />
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_mul.h" />
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_rsub.h" />
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_std.h" />
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_sub.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_lbdbox.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_lbdgrp.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_lined.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_stdbox.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_stdgrp.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_chglbdbox.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_chglined.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_chgstdbox.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_bldlbdbox.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_bldlbdgrp.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_bldlined.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_bldstdbox.h" />
+    <ClInclude Include="source\namalib_grp_macro_proc_bldstdgrp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="透明度の合成計算.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

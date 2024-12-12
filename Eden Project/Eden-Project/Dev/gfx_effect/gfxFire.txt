@@ -1,0 +1,89 @@
+// 仮想コードによるリファレンス
+// ターゲットレイヤーの幅と高さは16の倍数にする。はみ出している部分は、WrapMapの処理がされない
+// アルゴリズム上ターゲットレイヤーの下2ラインは0フィルされる(完全透明)
+class gfxFire
+{
+	//! 初期化
+	//! numOfSeeds : 省略時は1
+	function init( layer : Layer, numOfSeeds : uint )
+
+	//! 炎更新
+	function cycle()
+
+	//! ワープマップの更新
+	function updateWarpMap()
+
+	//! クールマップの更新
+	function updateCoolMap()
+
+	//! 炎の色を設定
+	function applyBlue()
+	function applyRed()
+	function applyWhite()
+	function applyCustom()
+
+	//! 種火画像のクリア - index 省略時は0
+	function clearFireSeed( index : uint )
+	//! 種火画像の設定 - index 省略時は0
+	function setFireSeed( layer : Layer, index : uint )
+	//! 種火画像の位置の設定 - index 省略時は0
+	function setFireSeedPos( x : int, y : int, index : uint )
+
+	//! カスタムカラーテーブルをレイヤーからコピーする
+	//! (幅256、高さ1のレイヤーを指定、描画対象がAddAlphaの時はAddAlphaに、左ほど温度低)
+	function setCustomColorTable( layer : Layer )
+
+	//! 種火画像の設定 - index 0 が対象
+	property seedLayer { setter } : Layer
+	//! 描画対象の設定
+	property targetLayer { setter } : Layer
+	//! 種火画像の位置の設定/取得 - index 0 が対象
+	property seedX { setter, getter } : uint
+	property seedY { setter, getter } : uint
+	//! 種火画像の数
+	property numOfSeeds { getter } : uint
+
+	//! 初期化よりも前に呼ばないと意味がない。後、設定してもたいして意味はない
+	property randomSeed { setter, getter } : uint
+
+	//! フォースの設定 ( 初期化よりも前に呼ぶか、設定後 updateWarpMap を呼ばないと反映されない )
+	//! ( b > -8 && b < 8 )
+	property forceH { setter, getter } : int
+	property forceV { setter, getter } : int
+
+	//! バウンドレンジの設定 ( 初期化よりも前に呼ぶか、設定後 updateWarpMap を呼ばないと反映されない )
+	//! ( b > 0 && b <= 16 )
+	property boundRangeH { setter, getter } : uint
+	property boundRangeV { setter, getter } : uint
+
+	//! スケーリング係数の設定/取得
+	//! ( coeff > 0.0f && coeff < 0.01 )
+	property scalingCoeff { setter, getter } : real
+
+	//! cool map のブラー適用回数の設定/取得 ( 初期化よりも前に呼ぶか、設定後 updateCoolMap を呼ばないと反映されない )
+	//! ( n > 0 )
+	property numOfBlurForCoolMap { setter, getter } : uint
+
+	//! テクスチャのフィルタリングアルゴリズムを設定する : バイリニアの方が滑らかだけど重い 0 がニアレスネイバー, 1 がバイリニア
+	property textureFilterType { setter, getter } : int
+
+	//! cool map の強さの振れ幅を設定/取得 ( 初期化よりも前に呼ぶか、設定後 updateCoolMap を呼ばないと反映されない )
+	//! ( r > 0 && r < 256 )
+	property coolRange { setter, getter } : uint
+
+	//! cool map の強さを設定/取得 ( 初期化よりも前に呼ぶか、設定後 updateCoolMap を呼ばないと反映されない )
+	//! ( s >= 0 && s < 255 )
+	property coolStrength { setter, getter } : uint
+
+	//! 冷却粒子濃度 分母の設定/取得 ( 初期化よりも前に呼ぶか、設定後 updateCoolMap を呼ばないと反映されない )
+	//! ( d > 0 )
+	property coolParticleDensityDenominator { setter, getter } : uint
+
+	//! 冷却粒子濃度 分子の設定/取得 ( 初期化よりも前に呼ぶか、設定後 updateCoolMap を呼ばないと反映されない )
+	//! ( n > 0 )
+	property coolParticleDensityNumerator { setter, getter } : uint
+
+	//! 炎の端を目立ちにくくする ( 初期化よりも前に呼ぶか、設定後 updateCoolMap を呼ばないと反映されない )
+	property edgeSmoothing { setter, getter } : bool
+};
+

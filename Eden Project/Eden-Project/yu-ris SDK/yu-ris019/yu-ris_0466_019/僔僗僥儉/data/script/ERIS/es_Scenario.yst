@@ -1,0 +1,1531 @@
+//=========================================================================
+//
+//■ERIS シナリオ シーン
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.GAMEMAIN."]
+
+	S_INT[@es.SCENARIOSTOPPED]
+
+	S_INT[@e.TITLE    =01]
+	S_INT[@e.MOVIE    =02]
+	S_INT[@e.LOG      =19]
+	S_INT[@e.CONFIG   =03]
+	S_INT[@e.SAVE     =04]
+	S_INT[@e.LOAD     =05]
+	S_INT[@e.QSAVE    =06]
+	S_INT[@e.QLOAD    =07]
+	S_INT[@e.SKIP     =08]
+	S_INT[@e.VOICE    =09]
+	S_INT[@e.AUTO     =10]
+	S_INT[@e.ERASE    =11]
+	S_INT[@e.TITLECONF=12]
+	S_INT[@e.ENDCONF  =13]
+	S_INT[@e.PREVSEL  =14]
+	S_INT[@e.MENU     =15]
+
+	S_INT[@dbg.val=1]
+}
+
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.GAMEMAIN.LOOP
+{
+	INT[@fl]
+
+
+//FONT[DRAWMODE=0 BOLD=0 COLOR=0xffffff COLOR2=0xaaaaff SX=10 SY=10 ANTIALIASING=0]
+//CGACT[ID=:/W3/DBG RECTPAINT=1 SET=0]
+//INT[@we]WINDOWINFO[NO=3 E=1 LET=@we]
+//IF[@we] CGACT[ID=:/W3/DBG Y=0 TEXT=1 SETSTR="TIME="+$(@_OS_TIME(1))+", es.STATE="+$(@es.STATE)] IFEND[]
+
+
+	LOOP[SET=1]
+	{
+		//-------------------------------------------------------
+		//■INIT
+		//-------------------------------------------------------
+		IF[@es.STATE==0]
+		{
+///xS
+			\BT.ACTIVEGROUP( 1+@es.GSD(096,01) )
+			\BT.ONOFF($BID+"BTN.OPENCLOSE",, @es.GSD(096,01))
+
+//ボタン非表示
+//\BT.ES0.ALL
+
+				//選択肢
+			//	\BTDEF.LOAD(ES.SEL)
+			//	GOSUB[#=ES.SEL.REF]
+
+			\SS.FADE(0)
+
+			//テキスト初期化処理
+			GOSUB[#=es.TextTask.Init]
+
+			// ボタンタスク起動
+			\_task(es.IDBtnTask, ES.SCENARIO.BtnLoop, 2147483647)
+
+			// シナリオタスク起動
+			\_task($es.ScenarioTaskID, "es.SCENARIO.FLOW", 002)
+
+			@es.SCENARIOSTOP=0
+			@es.STATE=100 //LOOP
+
+			LOOPBREAK[]
+
+		}
+		IFEND[]
+
+		//-------------------------------------------------------
+		//■BACK
+		//-------------------------------------------------------
+		IF[@es.STATE==1]
+		{
+			//選択肢
+			IF[@es.SELMODE==1]
+				GOSUB[#=ES.SEL.REF]
+				GOSUB[#=ES.SEL.APPEAR]
+			IFEND[]
+			IF[@es.SELMODE==2]
+				GOSUB[#=ES.CSEL.REF]
+				GOSUB[#=ES.CSEL.APPEAR]
+			IFEND[]
+
+@es.SCENARIOSTOP=0
+
+			IF[@es.STATE2==2] //ウィンドウ表示
+				\SS.FADE(0)
+			ELSE[@es.STATE2==1] //クイックセーブ確認
+			//	\SS.FADE(0)
+				\es.CGTDEL
+				GOSUB[#=es.BT.DRAW]
+			ELSE[@es.STATE2==0]
+				\SS.FADE(200)
+			IFEND[]
+
+			@es.SCENARIOSTOP = 0
+			@es.STATE=100 //LOOP
+		}
+		IFEND[]
+
+		//-------------------------------------------------------
+		//■LOOP
+		//-------------------------------------------------------
+		IF[@es.STATE==100]
+		{
+//DEBUGLIST[ADD=@es.SCENARIOSTOPPED STR="@es.SCENARIOSTOPPED"]
+
+			//-------------------------------------------------------
+			// 
+			//-------------------------------------------------------
+			IF[@es.SCENARIOSTOP] //シナリオ停止
+			{
+				IF[@es.SCENARIOSTOPPED==0]
+				{
+		//			\_dmes("シナリオ停止フラグ検知")
+
+					@es.SCENARIOSTOPPED=1
+
+					\es.TXTASK.SN.E0
+
+				}
+				IFEND[]
+
+					//-------------------------------------------- ジャンプ
+					IF[@es.SCENARIOSTOP==@e.TITLE]
+					{
+						IF[@es.RPMODE==0]
+							\es.S.GOSUB("ES.TITLE" , 2, 0, 996, 0)
+						ELSE[]
+							///x
+							CG[ID="_TMPRP" Z=@es.64BITMAX SX=@es.WSX SY=@es.WSY E=1 A=256 FILE=""]
+							CGACT[ID="_TMPRP" RECTPAINT3=1 SET=0xff000000]
+		//	IF[@es.RPMODE]
+				@es.RPMODE=0
+				\UI.RELOAD
+		//	IFEND[]
+		//					@es.RPMODE = 0
+							\es.S.GOSUB("ES.TITLE" , 5, 0, 996, 0)
+						//	\es.S.GOSUB("ES.RPMODE", 0, 0, 1, 0)
+//\UI.RELOAD
+//GOSUB[#=ES.GAMEMAIN.BTLOOP]
+
+						IFEND[]
+					}
+					IFEND[]
+					IF[@es.SCENARIOSTOP==@e.MOVIE] \es.S.GOSUB("es.MOVIEPLAY", 0, 0) IFEND[]
+
+				LOOPBREAK[]
+			}
+			ELSE[]
+			{
+				IF[@es.SCENARIOSTOPPED] //シナリオ停止→再開
+				{
+		//			\_dmes("シナリオ再開フラグ検知")
+
+					@es.SCENARIOSTOPPED=0
+
+					\es.TXTASK.SN.E1
+				}
+				IFEND[]
+			}
+			IFEND[]
+
+			//------------------------------------------------------------
+			// 演出処理
+			//------------------------------------------------------------
+				IF[@es.ERISOFFMODE==0]
+				{
+					GOSUB[#=es.EF.TASK.MAIN]
+
+					GOSUB[#=ES.SCENARIO.Direction.Main]
+				}
+				IFEND[]
+
+			//------------------------------------------------------------
+			// ボタン処理
+			//------------------------------------------------------------
+/*
+				IF[@es.TX.CSKIP==0 && @es.TX.SKIP==0] //メニュースキップおよびCTRLスキップ時はボタンを効かなくする特別処理
+				{
+					GOSUB[#=es.BT.TASK.MAIN]
+				}
+				IFEND[]
+*/
+
+			//------------------------------------------------------------
+			// ムービー処理
+			//------------------------------------------------------------
+			//	GOSUB[#=es.MVMODE]
+
+			//------------------------------------------------------------
+			// 選択肢処理
+			//------------------------------------------------------------
+			//	GOSUB[#=ES.SELMODE]
+
+			//------------------------------------------------------------
+			// 
+			//------------------------------------------------------------
+				IF[@_MOUSE_L==1]
+				{
+					@es.TX.IKKATSU=1
+					IF[@es.TX.SKIP] @es.TX.SKIP=0;@_MOUSE_L=2 IFEND[]	// スキップ中か
+			//		IF[@es.TX.AUTO] @es.TX.AUTO=0;@_MOUSE_L=2 IFEND[]	// オート中か
+				//	IF[@es.TX.SKIP] \_dmes("SKIP CANCEL.");@es.TX.SKIP=0;@_MOUSE_L=2 IFEND[]	// スキップ中か
+				//	IF[@es.TX.AUTO] \_dmes("AUTO CANCEL.");@es.TX.AUTO=0;@_MOUSE_L=2 IFEND[]	// オート中か
+				}
+				IFEND[]
+
+			//------------------------------------------------------------
+			// ロードフェードイン
+			//------------------------------------------------------------
+				IF[@es.LOADTHRU]
+				{
+					INT[@sysret]
+					CGINFO[ID="SYSBLACK" LET=@sysret EXIST=1]
+					IF[@sysret]
+					{
+						//------------------------------------------------------------
+						// シナリオタスクを一時停止
+						//------------------------------------------------------------
+							\es.TXTASK.SN.E0
+
+							GOSUB[#=es.L.LOAD2]
+
+							LOOP[SET=32]
+							{
+								CG[ID="SYSBLACK" A-=8]
+								WAIT[FRAME=1]
+							}
+							LOOPEND[]
+
+						//------------------------------------------------------------
+						// シナリオタスク再開
+						//------------------------------------------------------------
+							\es.TXTASK.SN.E1
+
+							\FACE($es.LSD(1))
+
+						//----------------------------------------------------------------
+						// 日付設定
+						//----------------------------------------------------------------
+							\DATE.YEAR(@es.LSD(031,01))
+							\DATE.MONTH(@es.LSD(031,02))
+							\DATE.DAY(@es.LSD(031,03))
+							IF[@es.LSD(031,04)==0] \DATE.WEEK(日) IFEND[]
+							IF[@es.LSD(031,04)==1] \DATE.WEEK(月) IFEND[]
+							IF[@es.LSD(031,04)==2] \DATE.WEEK(火) IFEND[]
+							IF[@es.LSD(031,04)==3] \DATE.WEEK(水) IFEND[]
+							IF[@es.LSD(031,04)==4] \DATE.WEEK(木) IFEND[]
+							IF[@es.LSD(031,04)==5] \DATE.WEEK(金) IFEND[]
+							IF[@es.LSD(031,04)==6] \DATE.WEEK(土) IFEND[]
+							\DATE.HOUR(@es.LSD(031,05))
+							\DATE.MIN(@es.LSD(031,06))
+							\DATE.SEC(@es.LSD(031,07))
+							\DATE
+
+					}
+					IFEND[]
+
+					CGEND[ID="SYSBLACK"]
+					//@es.LOADTHRU=0
+
+				}
+				IFEND[]
+
+			//------------------------------------------------------------
+			// テキスト処理
+			//------------------------------------------------------------
+				GOSUB[#=es.TEXTTASK.LOOP]
+		}
+		IFEND[]
+
+		//-------------------------------------------------------
+		//■タイトルへ戻る
+		//-------------------------------------------------------
+		IF[@es.STATE==998]
+		{
+//GOSUB[#=ES.TASK.RESET]
+
+			\BT.ACTIVEGROUP( 1 )
+		//	\BT.ES0($BID+"BTN.OPENCLOSE")
+		//	\BT.ES0($BID+"BTN.VOICE")
+
+		//	\SS.FADE(0)
+			\es.CGTDEL
+
+//WAIT[FRAME=100]
+//\_dmes(ok)
+			@es.SCENARIOSTOP = 0
+			@es.STATE=100 //LOOP
+		}
+		IFEND[]
+
+		//-------------------------------------------------------
+		//■ロード時
+		//-------------------------------------------------------
+		IF[@es.STATE==997]
+		{
+//\_dmes(init)
+//GOSUB[#=ES.TASK.RESET]
+
+			\BT.ACTIVEGROUP( 1+@es.GSD(096,01) )
+			\BT.ONOFF($BID+"BTN.OPENCLOSE",, @es.GSD(096,01))
+
+				//選択肢
+			//	\BTDEF.LOAD(ES.SEL)
+			//	GOSUB[#=ES.SEL.REF]
+
+//			\SS.FADE(0)
+
+
+			//選択肢
+			IF[@es.SELMODE]
+				\BT.W1.ALL(ES.SEL)
+	//			\BTDEF.LOAD(ES.SEL)
+				GOSUB[#=ES.SEL.REF]
+			IFEND[]
+
+			\SS.FADE(250)
+
+			@es.SCENARIOSTOP = 0
+			@es.STATE=100 //LOOP
+
+		}
+		IFEND[]
+
+		//-------------------------------------------------------
+		//■タイトルスタート時
+		//-------------------------------------------------------
+		IF[@es.STATE==996]
+		{
+//\_dmes(init)
+//GOSUB[#=ES.TASK.RESET]
+
+		//	\BT.ACTIVEGROUP( 1+@es.GSD(096,01) )
+		//	\BT.ONOFF($BID+"BTN.OPENCLOSE",, @es.GSD(096,01))
+
+			\SS.FADE(0)
+
+			@es.SCENARIOSTOP = 0
+			@es.STATE=100 //LOOP
+
+		}
+		IFEND[]
+
+
+		//-------------------------------------------------------
+		//■タイトルへ戻る
+		//-------------------------------------------------------
+		IF[@es.STATE==900]
+		{
+			@es.RPMODE=0
+			@es.STATE=998
+			GOSUB[#=GO.TITLE.R2]
+		}
+		IFEND[]
+
+		//-------------------------------------------------------
+		//■シナリオジャンプ
+		//-------------------------------------------------------
+		IF[@es.STATE==902]
+		{
+			@es.RPMODE=0
+			@es.STATE=998
+			GOSUB[#=GO.TITLE.R3]
+		}
+		IFEND[]
+
+		//-------------------------------------------------------
+		//■シーン鑑賞へ戻る
+		//-------------------------------------------------------
+		IF[@es.STATE==910]
+		{
+			@es.STATE=998
+			GOSUB[#=GO.TITLE.R2]
+		}
+		IFEND[]
+
+		//-------------------------------------------------------
+		//■タイトル確認から戻った
+		//-------------------------------------------------------
+		IF[@es.STATE==901]
+		{
+			@es.STATE=001 //CANCEL
+		}
+		IFEND[]
+
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■ボタンタスク
+//--------------------------------------------------------------------
+#=ES.SCENARIO.BtnLoop
+{
+	LOOP[]
+	{
+		///xフルスクリーン(Alt+Enter)判定をボタン処理の前であるここでする.
+		//(いずれボタン設計複数同時読込に対応させ、フルスクリーン切替をボタンとして機能させるようにするまでの暫定処理)
+		//
+		GOSUB[#=ES.SCREENCHANGE_CHECK]
+
+//		IF[@es.TX.CSKIP==0 && @es.TX.SKIP==0] //メニュースキップおよびCTRLスキップ時はボタンを効かなくする特別処理
+		IF[1]
+		{
+			GOSUB[#=es.BT.TASK.MAIN]
+		}
+		IFEND[]
+
+		WAIT[FRAME=1]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■サブタスク
+//--------------------------------------------------------------------
+#=ES.SCENARIO.SubLoop
+{
+	LOOP[]
+	{
+
+		//Sprite にも同じ処理有り.注意.
+		IF[@es.SP.AUTO==1 && @es.SP.AUTOSKIP==0]
+		{
+			IF[@es.SP.AUTONO==0] //日付演出
+			{
+				IF[@_MOUSE_L==1 || @_KEY_ENTER==1 || @_KEY_SPACE==1]
+				{
+					@es.SP.AUTOSKIP = 1
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+
+		//
+//		IF[@es.SELMODE]
+//		{
+//					IF[@es.TXM.E] //メッセージウィンドウ消去されていたら
+//					{
+//						IF[@_MOUSE_L  ==1] \_gosub(ES.GAMEMAIN.BTN.ERASE.ON);@_MOUSE_L=3;   IFEND[] // 左クリック
+//						IF[@_MOUSE_R  ==1] \_gosub(ES.GAMEMAIN.BTN.ERASE.ON);@_MOUSE_R=3;   IFEND[] // 右クリック
+//						IF[@_KEY_SPACE==1] \_gosub(ES.GAMEMAIN.BTN.ERASE.ON);@_KEY_SPACE=3; IFEND[] // SPACE
+//						IF[@_KEY_ENTER==1] \_gosub(ES.GAMEMAIN.BTN.ERASE.ON);@_KEY_ENTER=3; IFEND[] // ENTER
+//					}
+//					IFEND[]
+//		}
+//		IFEND[]
+
+
+		//-------------------------------------------------------
+		// ウィンドウ終了監視
+		//-------------------------------------------------------
+			IF[@_WINDOW_EXEC_CLOSE]
+			{
+				@_WINDOW_EXEC_CLOSE=0
+/*
+				//セーブ処理
+				IF[$es.S.NOW=="ES.GAMEMAIN" || $es.S.NOW=="ES.LOG" || $es.S.NOW=="ES.QSAVE" || $es.S.NOW=="ES.QLOAD" || $es.S.NOW=="ES.QSAVECONF" || $es.S.NOW=="ES.QLOADCONF"]
+				{
+					IF[@es.NOSAVEFLAG==0]
+					{
+///x
+						//サムネ用にスクリーンショットを撮っておく
+//						GOSUB[#=ES.SCENARIO.SS]
+//WAIT[FRAME=10]
+						IF[@es.RPMODE==0] //回想モードでなければ
+//							\_dmes(saveします)
+							\SAVE(50001, 3) //0=save,1=qsave,2=prevselsave
+						IFEND[]
+					}
+					IFEND[]
+				}
+				ELSE[]
+				{
+					//\_dmes(セーブしません)
+				}
+				IFEND[]
+*/
+				//Alt+F4でここに来た際の処理.
+				//@_KEY_ALT = 2
+				//@_KEY_F4 = 2
+
+				//終了確認
+				GOSUB[#=ES.ENDCONF.DIALOG]
+
+			}
+			IFEND[]
+
+/*
+		//-------------------------------------------------------
+		// ヘルプ画面
+		//-------------------------------------------------------
+			IF[@es.HELPALLOW==1 && (@_KEY_F12==1 || @_KEY_H==1)]
+			{
+				GOSUB[#=es.SHORTCUT]
+			}
+			IFEND[]
+
+		//-------------------------------------------------------
+		// ウィンドウ最小化監視
+		//-------------------------------------------------------
+			IF[@es.ESCALLOW==1 && @_KEY_ESC==1]
+			{
+				IF[@es.GSD(115,17)==0] //タスクトレイに格納なら
+					GOSUB[#=es.WindowMinimum]
+				ELSE[]
+					GOSUB[#=es.WindowCamouflage pint=@es.GSD(115,17)]
+				IFEND[]
+
+			}
+			IFEND[]
+*/			IF[@_MENUCODE==1001]
+			{
+				@_MENUCODE=0
+				INT[@ret]
+				\DIALOG.YESNO(@ret, "元のサイズに戻しても宜しいですか？", "確認", 2)
+				IF[@ret==1]
+				{
+			//		\DIALOG.YESNO(@ret, "本当に宜しいですか？", "確認", 2)
+			//		IF[@ret==1]
+					{
+						GOSUB[#=es.WindowMinimum2]
+					}
+			//		IFEND[]
+				}
+				IFEND[]
+			}
+			IFEND[]
+			IF[@_MENUCODE==1002]
+			{
+				@_MENUCODE=0
+				\DIALOG("ERIS LIB", "バージョン情報")
+			}
+			IFEND[]
+			IF[@_MENUCODE==1003]
+			{
+				@_MENUCODE=0
+				//\es.S.GOSUB("ES.ENDCONF", 2, 0)
+				INT[@ret2]
+				\DIALOG.YESNO(@ret2, $T(13,02), "確認", 2)
+				IF[@ret2==1]
+				{
+					\es.END
+				}
+				IFEND[]
+			}
+			IFEND[]
+
+/*
+		//-------------------------------------------------------
+		// スクリーン切替監視
+		//-------------------------------------------------------
+	//		IF[@es.MOVIEFLAG==0]
+			{
+				IF[@_KEY_ALT>0 && (@_KEY_ENTER==1 || @_KEY_ENTER==2)]
+				{
+					@_KEY_ENTER=3
+					GOSUB[#=ES.SCREENCHANGE.LOOP]
+				}
+				IFEND[]	// 画面
+			}
+	//		IFEND[]
+
+		//-------------------------------------------------------
+		// ウインドウサイズ初期化監視
+		//-------------------------------------------------------
+	//		IF[@es.MOVIEFLAG==0]
+			{
+				IF[@_MENUCODE==30001 || @_WINDOW_EXEC_CAPTION==1]
+		//		IF[@_MENUCODE==30001]
+				{
+					@_MENUCODE=0
+					@_WINDOW_EXEC_CAPTION=0
+					WINDOW[NO=0 WSX=@es.WSX WSY=@es.WSY]
+				}
+				IFEND[]	// 画面
+			}
+	//		IFEND[]
+*/
+				//-------------------------------------------------------
+				// スクリーン切替監視
+				//-------------------------------------------------------
+
+				//-------------------------------------------------------
+				// ウインドウサイズ初期化監視
+				//-------------------------------------------------------
+			//		IF[@es.MOVIEFLAG==0]
+					{
+						IF[@_MENUCODE==30001 || @_WINDOW_EXEC_CAPTION==1]
+				//		IF[@_MENUCODE==30001]
+						{
+							@_MENUCODE=0
+							@_WINDOW_EXEC_CAPTION=0
+
+							//最大化状態ならそれを解除
+							INT[@SC2]
+							WINDOWINFO[NO=0 FULLSCREEN2=1 LET=@SC2]
+							IF[@SC2==1]
+								WINDOW[NO=0 MAXIMIZE=1]
+								WAIT[FRAME=1]
+							IFEND[]
+
+							WINDOW[NO=0 WSX=@es.WSX WSY=@es.WSY]
+						}
+						IFEND[]	// 画面
+					}
+			//		IFEND[]
+/*
+				//-------------------------------------------------------
+				// 最大化監視
+				//-------------------------------------------------------
+			//		IF[@es.MOVIEFLAG==0]
+					{
+						IF[@_WINDOW_EXEC_CAPTION==1]
+						{
+							@_WINDOW_EXEC_CAPTION=0
+							WINDOW[NO=0 MAXIMIZE=1]
+						}
+						IFEND[]	// 画面
+					}
+			//		IFEND[]
+*/
+
+		//-------------------------------------------------------
+		// サウンドボリューム監視
+		//-------------------------------------------------------
+			GOSUB[#=es.SND.SETVOL.TASK]
+
+		//-------------------------------------------------------
+		// デバッグタスク
+		//-------------------------------------------------------
+			IF[@_DEBUGMODE>=@dbg.val] GOSUB[#=es.DebugTask] IFEND[]
+
+		//-------------------------------------------------------
+		// 各描画
+		//-------------------------------------------------------
+//			GOSUB[#=es.BT.DRAW]	//ボタン描画
+
+
+	//------------------------------------------------------------
+	// システムメッセージ１
+	//------------------------------------------------------------
+/*
+		IF[@es.SM==-1]
+		{
+			@es.SM=0
+			//1…セーブ完了
+			//2…ロード完了
+			//3…クイックセーブ完了
+			//4…クイックロード完了
+			//5…クイックデータなし
+			//6…オートセーブ完了
+			CG[ID=SMES1 Z=@es.64BITMAX-10+1 X=0-282 Y=007 A=@es.GSD(121,02)*256 FILE="cgsys/confirm/sysmes_save"]
+			CG[ID=SMES2 Z=@es.64BITMAX-10+2 X=0-282 Y=007 A=@es.GSD(121,02)*256 FILE="cgsys/confirm/sysmes_load"]
+			CG[ID=SMES3 Z=@es.64BITMAX-10+3 X=0-282 Y=007 A=@es.GSD(121,02)*256 FILE="cgsys/confirm/sysmes_qsave"]
+			CG[ID=SMES4 Z=@es.64BITMAX-10+4 X=0-282 Y=007 A=@es.GSD(121,02)*256 FILE="cgsys/confirm/sysmes_qload"]
+			CG[ID=SMES5 Z=@es.64BITMAX-10+5 X=0-282 Y=007 A=@es.GSD(121,02)*256 FILE="cgsys/confirm/sysmes_nodata"]
+			CG[ID=SMES6 Z=@es.64BITMAX-10+6 X=0-282 Y=007 A=@es.GSD(121,02)*256 FILE="cgsys/confirm/sysmes_autosave"]
+		}
+		IFEND[]
+		IF[@es.SM==1]
+		{
+			IF[@es.GSD(121,02)==0] //システムメッセージ開始時の段階でOFFならば、開始させない
+			{
+				@es.SM=0;@es.SMNO=0
+			}
+			IFEND[]
+
+			IF[@es.GSD(243,01)==0 && @es.SMNO==3] //クイックセーブ完了
+			{
+				@es.SM=0;@es.SMNO=0
+			}
+			IFEND[]
+			IF[@es.GSD(243,02)==0 && @es.SMNO==4] //クイックロード完了
+			{
+				@es.SM=0;@es.SMNO=0
+			}
+			IFEND[]
+			IF[@es.GSD(243,03)==0 && @es.SMNO==5] //クイックデータなし
+			{
+				@es.SM=0;@es.SMNO=0
+			}
+			IFEND[]
+			IF[@es.GSD(243,04)==0 && @es.SMNO==6] //オートセーブ
+			{
+				@es.SM=0;@es.SMNO=0
+			}
+			IFEND[]
+			IF[@es.GSD(243,05)==0 && @es.SMNO==2] //ロード完了
+			{
+				@es.SM=0;@es.SMNO=0
+			}
+			IFEND[]
+
+		}
+		IFEND[]
+		IF[@es.SM>0]
+		{
+			IF[@es.SM==1]
+			{
+				CG[ID=SMES1 X=0-406 A=@es.GSD(121,02)*256]
+				CG[ID=SMES2 X=0-406 A=@es.GSD(121,02)*256]
+				CG[ID=SMES3 X=0-406 A=@es.GSD(121,02)*256]
+				CG[ID=SMES4 X=0-406 A=@es.GSD(121,02)*256]
+				CG[ID=SMES5 X=0-406 A=@es.GSD(121,02)*256]
+				CG[ID=SMES6 X=0-406 A=@es.GSD(121,02)*256]
+			}
+			IFEND[]
+
+			IF[@es.SM<=25]
+			{
+				CG[ID="SMES"+$(@es.SMNO) X=0-406+@es.SM*(15.5) A=@es.GSD(121,02)*256]
+			}
+			ELSE[@es.SM<100]
+			{
+				CG[ID="SMES"+$(@es.SMNO) X=0-406+26*(15.5) A=@es.GSD(121,02)*256]
+			}
+			ELSE[@es.SM>=100]
+			{
+				CG[ID="SMES"+$(@es.SMNO) X=0-406+26*(15.5)-(@es.SM-100)*(15.5) A=@es.GSD(121,02)*256]
+			}
+			IFEND[]
+
+			@es.SM+=1
+			IF[@es.SM>=127]
+			{
+				CG[ID="SMES"+$(@es.SMNO) X=8000 A=@es.GSD(121,02)*256]
+			}
+			IFEND[]
+		}
+		ELSE[]
+		{
+	//		CG[ID="SMES"+$(@es.SMNO) X=8000 A=@es.GSD(121,02)*256]
+		}
+		IFEND[]
+*/
+
+	//------------------------------------------------------------
+	// メニュー開く
+	//------------------------------------------------------------
+//		GOSUB[#=es.BT.TR.SET pstr="ES.GAMEMAIN.BTN.BTNBACK" pint2=0 pint3=256*(@es.MENUOPEN.TASK-1)/(8)]
+//		GOSUB[#=es.BT.TR.END.SET pstr="ES.GAMEMAIN.BTN.BTNBACK" pint2=0]
+
+	//-------------------------------------------------------
+	// ウェイト
+	//-------------------------------------------------------
+		WAIT[FRAME=1]
+
+		//CTRLスキップフラグ初期化
+		@es.TX.CSKIP = 0
+
+	}
+	LOOPEND[]
+
+
+
+	return[]
+}
+
+#=ES.SCENARIO.SubLoop2
+{
+	LOOP[]
+	{
+		GOSUB[#=es.BT.BTLOOP]
+		GOSUB[#=es.BT.DRAW]	//ボタン描画
+		WAIT[FRAME=1]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■演出関係
+//--------------------------------------------------------------------
+#=ES.SCENARIO.Direction.Main
+{
+	IF[@es.SNOWMODE]	GOSUB[#=es.SNOWMODE.MAIN]	IFEND[]
+	IF[@es.RAINMODE]	GOSUB[#=es.RAINMODE.MAIN]	IFEND[]
+
+//	\_gosub(es.Original.Scenario)
+
+	return[]
+}
+
+#=ES.SCENARIO.Direction.End
+{
+	GOSUB[#=es.SNOWMODE.DEL]
+	GOSUB[#=es.RAINMODE.DEL]
+
+	return[]
+}
+
+
+
+//--------------------------------------------------------------------
+//■終了処理
+//--------------------------------------------------------------------
+#=ES.SCENARIO.END
+{
+
+///x
+@es.TXSTART=0
+
+			IF[@_PINT(1)==1]
+				\_task.end(es.IDTEXT)
+			IFEND[]
+			GOSUB[#=es.TextTask.END]
+
+		\es.STARTLABEL("SCENARIO_START")
+
+		//-----------------------------------------------------------------
+		// サウンドを全て停止
+		//-----------------------------------------------------------------
+			\SOUND_STOPALL(500)
+
+		//-----------------------------------------------------------------
+		// いろいろ初期化
+		//-----------------------------------------------------------------
+			@es.SCENARIOSTOP = 0
+			GOSUB[#=es.Voice.DataInit]
+
+		//-----------------------------------------------------------------
+		// 演出終了
+		//-----------------------------------------------------------------
+			GOSUB[#=ES.SCENARIO.Direction.End]
+
+		//-----------------------------------------------------------------
+		// ボタン消去
+		//-----------------------------------------------------------------
+			\BT.END(ES.GAMEMAIN, ES.GAMEMAIN.TIP.FACE)
+
+			\DATE.HIDE
+
+///xS
+//			\BT.END(ES.GAMEMAIN)
+	GOSUB[#=ES.SEL.ENDEXEC pint=10]
+	GOSUB[#=ES.CSEL.ENDEXEC pint=100]
+	GOSUB[#=ES.LOG.FIN]
+	GOSUB[#=ES.SAVE.END]
+	GOSUB[#=ES.LOAD.END]
+
+		//-----------------------------------------------------------------
+		// デバッグ文字列初期化
+		//-----------------------------------------------------------------
+			\DBG.STR(0, "")
+			\DBG.STR(1, "")
+
+		//-----------------------------------------------------------------
+		// ＳＳ
+		//-----------------------------------------------------------------
+			//\es.CGSS(5)
+
+		//-----------------------------------------------------------------
+		// フェードアウト
+		//-----------------------------------------------------------------
+			//\es.CGFADEOUT(5,500)
+			//\es.CGDEL(1)
+			//\es.CGDEL(2)
+			//\es.CGDEL(3)
+			//\es.CGDEL(4)
+			//\es.CGDEL(5)
+
+			GOSUB[#=es.SP.DELALL2.SET]
+			GOSUB[#=es.SP.QUE.INIT.ALL]
+
+		//	\SP.SKIPMODE(1)
+
+
+
+		//他もOFF
+		@es.WA.MODE  = 0
+//		@es.RPMODE = 0
+
+		@es.SP.WA.MODE = 0
+
+		@es.SEL.HIDE = 0
+
+
+		//オートスキップ解除
+		@es.TX.AUTO = 0
+		@es.TX.SKIP = 0
+		GOSUB[#=es.TX.ICON.DISABLED.RPMODE]
+
+
+	//----------------------------------------------------------------
+	// ノベルモードフラグ初期化
+	//----------------------------------------------------------------
+		\AUTOCRP(1)
+		\TX.ICON.XYAUTO(0)
+
+///xNKGR
+	\_gosub(ES.GAMEMAIN.BTLOOP.REFRESH)
+	\_gosub(ES.GAMEMAIN.BTLOOP)
+
+	//これがあるとボタン表示されずにタイトルへいく.
+	WAIT[FRAME=1]
+
+	return[]
+}
+
+
+/*
+//--------------------------------------------------------------------
+//■シナリオスクリプトからロゴシーンへ
+//--------------------------------------------------------------------
+#=es.GO.LOGO
+{
+
+	//----------------------------------------------------------------
+	// 現在の画面をスクリーンショット
+	//----------------------------------------------------------------
+		\es.CGTSS
+
+	//----------------------------------------------------------------
+	// 終了処理
+	//----------------------------------------------------------------
+		GOSUB[#=ES.SEL.ENDEXEC pint=10]
+		GOSUB[#=ES.CSEL.ENDEXEC pint=100]
+		GOSUB[#=ES.LOG.FIN]
+		GOSUB[#=ES.SAVE.END]
+		GOSUB[#=ES.LOAD.END]
+
+		GOSUB[#=ES.SCENARIO.END pint=1]
+
+	//----------------------------------------------------------------
+	// フェード＆消去
+	//----------------------------------------------------------------
+		\es.CGSDELALL
+		\es.CGTFADEOUT(0)
+
+	//----------------------------------------------------------------
+	// セーブデータにセーブ
+	//----------------------------------------------------------------
+		\GSD.SAVE
+
+WAIT[TIME=500]
+	//----------------------------------------------------------------
+	// ロゴシーン起動
+	//----------------------------------------------------------------
+		GO[#=ES.LOGO]
+
+	//----------------------------------------------------------------
+	// 自身のタスクを終了
+	//----------------------------------------------------------------
+	//	\_task.end()
+
+	return[]
+}
+*/
+
+
+//--------------------------------------------------------------------
+//■シナリオスクリプトからYU-RIS独自シーンへ
+//--------------------------------------------------------------------
+#=es.GO.ERIS.OFF
+{
+	STR[$lbl=$_PSTR(1)]
+
+	//----------------------------------------------------------------
+	// フラグON
+	//----------------------------------------------------------------
+		@es.ERISOFFMODE=1
+
+	//----------------------------------------------------------------
+	// 現在の画面をスクリーンショット
+	//----------------------------------------------------------------
+		\es.CGTSS
+
+	//----------------------------------------------------------------
+	// 終了処理
+	//----------------------------------------------------------------
+		GOSUB[#=ES.LOG.FIN]
+		GOSUB[#=ES.SAVE.END]
+		GOSUB[#=ES.LOAD.END]
+
+		GOSUB[#=ES.SCENARIO.END pint=1]
+
+	//----------------------------------------------------------------
+	// フェード＆消去
+	//----------------------------------------------------------------
+		\es.CGSDELALL
+		\es.CGTFADEOUT(0)
+
+	//----------------------------------------------------------------
+	// セーブデータにセーブ
+	//----------------------------------------------------------------
+		\GSD.SAVE
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		GO[#=$lbl]
+
+	return[]
+}
+
+
+
+//--------------------------------------------------------------------
+//■YU-RIS独自シーンからシナリオスクリプトへ
+//--------------------------------------------------------------------
+#=es.GO.ERIS.ON
+{
+	//----------------------------------------------------------------
+	// フラグOFF
+	//----------------------------------------------------------------
+		@es.ERISOFFMODE=0
+
+	//----------------------------------------------------------------
+	// ＦＰＳ設定
+	//----------------------------------------------------------------
+		FPS[SET=60 SKIP=1]
+
+	//----------------------------------------------------------------
+	// 入力設定
+	//----------------------------------------------------------------
+		INPUT[MOUSE=1 KEY=1 PAD=0]				// ユーザー入力許可設定
+		MOUSE[MODE=1 TIME=2500 CLICK=0 WHEEL=0]	// マウス表示モード設定
+
+	//----------------------------------------------------------------
+	// シナリオ再開場所設定
+	//----------------------------------------------------------------
+		\es.STARTLABEL($_PSTR(1))
+
+	//----------------------------------------------------------------
+	// シナリオシーンへ
+	//----------------------------------------------------------------
+		\GO($_PSTR(1))
+
+}
+
+
+//----------------------------------------------------------------
+//■冒頭のスクリプト位置を記憶する
+//----------------------------------------------------------------
+#=es.POSDATA.SET
+{
+	IF[@es.SCRIPTPOSSAVE.FORBIT] GO[#=es.POSDATA.SET.LEnd] IFEND[]
+
+	TASKINFO[ID=$es.ScenarioTaskID SCRIPTPOS=1 LET=$es.ScriptPosData]
+//INT[@li]
+//	TASKINFO[ID=$es.ScenarioTaskID LINE=1 LET=@li]
+//\_dmes("LINE="+$(@li))
+
+	#=es.POSDATA.SET.LEnd
+
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■サムネイル用に現在の画面のスクリーンショットを得る
+//----------------------------------------------------------------
+#=ES.SCENARIO.SS
+{
+	INT[@es.SL.THUMB.SIZE.X=@T(11,13)]
+	INT[@es.SL.THUMB.SIZE.Y=@T(11,14)]
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		IF[1] //メッセージウィンドウとボタンを消す
+		{
+			\BT.ACTIVEGROUP.ADD( 9999 )
+		}
+		IFEND[]
+/*
+		CG[ID=SMES1 E=0]
+		CG[ID=SMES2 E=0]
+		CG[ID=SMES3 E=0]
+		CG[ID=SMES4 E=0]
+		CG[ID=SMES5 E=0]
+		CG[ID=SMES6 E=0]
+		CG[ID=SMES7 E=0]
+*/
+
+
+	STR[$sid]
+	INT[@No1]
+	INT[@No2]
+	STR[$LIDBUF		="SPLBUF"]
+	STR[$LID		="SPL"]
+	STR[$LIDTR		="SPLTR"]
+	STR[$LIDTRBUF	="SPLTRBUF"]
+/*
+		//アイキャッチ用幕レイヤがあったら一瞬だけ消す
+		{
+			$sid="MAKU_FOR_EC"
+			//レイヤＩＤからレイヤ番号を調べる(無い場合は0)
+			GOSUB[#=es.LNO.GET pstr=$sid]
+			@No1=@_RINT(1)
+			IF[@No1]
+			{
+				LOOP[SET=100]
+				{
+					CG[ID=$LIDBUF  +$(1+@No1*100+@_LC-1) E=0]
+					CG[ID=$LID     +$(1+@No1*100+@_LC-1) E=0]
+				}
+				LOOPEND[]
+			}
+			IFEND[]
+		}
+*/
+		//白ヌキ用レイヤ
+		{
+			$sid="EV_W"
+			//レイヤＩＤからレイヤ番号を調べる(無い場合は0)
+			GOSUB[#=es.LNO.GET pstr=$sid]
+			@No2=@_RINT(1)
+			IF[@No2]
+			{
+				LOOP[SET=100]
+				{
+			//		CG[ID=$LIDBUF  +$(1+@No2*100+@_LC-1) E=1 A=256]
+					CG[ID=$LID     +$(1+@No2*100+@_LC-1) E=1 A=256]
+				}
+				LOOPEND[]
+			}
+			IFEND[]
+		}
+
+		//	WAIT[FRAME=1]
+
+
+		//オートスキップアイコン一時待避
+		\BT.X.ADD("ES.GAMEMAIN.TIP.AUTOICON",,-9999)
+		\BT.X.ADD("ES.GAMEMAIN.TIP.SKIPICON",,-9999)
+
+
+		//スクリーンショット
+		CG[ID="SLTEMP" Z=1 E=0 FILE=""]
+		CGACT[COPY2=1 ID=":/W0/" ID2="SLTEMP"]
+		CGACT[ID="SLTEMP" RECTPAINT2=1 SET=255]
+
+			//もし縮小サイズとウィンドウサイズの比が整数倍なら平均画素法を使う
+///x
+	//		IF[(@es.WSX % @es.SL.THUMB.SIZE.X==0) && (@es.WSY % @es.SL.THUMB.SIZE.Y==0)]
+			IF[1]
+			{
+				CGACT[ID=SLTEMP SIZE2=1 SX=@es.SL.THUMB.SIZE.X SY=@es.SL.THUMB.SIZE.Y]
+			}
+			ELSE[]
+			{
+				CGACT[ID=SLTEMP SIZE2=1 SX=@es.SL.THUMB.SIZE.X SY=@es.SL.THUMB.SIZE.Y]
+			}
+			IFEND[]
+
+
+		//オートスキップアイコン元の位置に戻す
+		\BT.X.ADD("ES.GAMEMAIN.TIP.AUTOICON",,9999)
+		\BT.X.ADD("ES.GAMEMAIN.TIP.SKIPICON",,9999)
+
+/*
+		//アイキャッチ用幕レイヤがあったら元に戻しておく
+		IF[@No1]
+		{
+			LOOP[SET=100]
+			{
+				CG[ID=$LIDBUF  +$(1+@No1*100+@_LC-1) E=1]
+				CG[ID=$LID     +$(1+@No1*100+@_LC-1) E=1]
+			}
+			LOOPEND[]
+		}
+		IFEND[]
+*/
+		IF[@No2]
+		{
+			LOOP[SET=100]
+			{
+		//		CG[ID=$LIDBUF  +$(1+@No2*100+@_LC-1) E=1 A=0]
+				CG[ID=$LID     +$(1+@No2*100+@_LC-1) E=1 A=0]
+			}
+			LOOPEND[]
+		}
+		IFEND[]
+
+/*
+		CG[ID=SMES1 E=1]
+		CG[ID=SMES2 E=1]
+		CG[ID=SMES3 E=1]
+		CG[ID=SMES4 E=1]
+		CG[ID=SMES5 E=1]
+		CG[ID=SMES6 E=1]
+		CG[ID=SMES7 E=1]
+*/
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		IF[1] //メッセージウィンドウ、ボタン再表示
+		{
+			\BT.ACTIVEGROUP.ADD( -9999 )
+		}
+		IFEND[]
+
+
+	return[]
+}
+
+
+
+///x
+//=============================
+// タイトルへ戻る処理・Ｒ２
+//=============================
+#=GO.TITLE.R2
+{
+
+			IF[@es.RPMODE]
+				@es.RPMODE=0
+				\UI.RELOAD
+				@es.RPMODE=1
+			IFEND[]
+
+		\BGM(,2000)
+
+		//-----------------------------------------------------------------
+		// 終了処理
+		//-----------------------------------------------------------------
+			GOSUB[#=ES.SEL.ENDEXEC pint=10]
+			GOSUB[#=ES.CSEL.ENDEXEC pint=100]
+			GOSUB[#=ES.LOG.FIN]
+			GOSUB[#=ES.SAVE.END]
+		//	GOSUB[#=ES.LOAD.END]
+
+			GOSUB[#=ES.SCENARIO.END pint=0]
+
+
+		\SP.DELALL
+//		\MT.DELALL
+
+
+		\es.CGTDEL
+		\es.CGSDELALL
+
+
+			GOSUB[#=ES.SEL.INIT]
+
+			@es.TX.SKIP = 0
+			@es.TX.AUTO = 0
+
+			//テキスト初期化処理
+			GOSUB[#=es.TEXTTASK.FOR.LOAD]
+
+
+		@es.SCENARIOSTOP=999
+		INT[@no = 999]
+		STR[$id = "CGS"+$(@no)]
+		LOOP[SET=32]
+		{
+			CG[ID=$id A-=8]
+//			CG[ID=$id A=256-@_LC]
+			WAIT[FRAME=1]
+		}
+		LOOPEND[]
+
+		WAIT[TIME=500]
+
+		//-------------------------------------------- 再生終了待ち
+		LOOP[]
+		{
+			\SVO.PCHK
+			IF[@_RINT(1)==0] LOOPBREAK[] IFEND[]
+			WAIT[FRAME=1]
+		}
+		LOOPEND[]
+
+		CGEND[ID=$id]
+
+
+		\es.STARTLABEL("SCENARIO_TITLE")
+
+		//es.SCENARIO.FLOWへ
+		TASK[ID=$es.ScenarioTaskID SCRIPTPOS=$es.P.GOTITLEPOS]
+		\_task.resume($es.ScenarioTaskID)
+
+
+	return[]
+}
+
+
+///x
+//=============================
+// タイトルへ戻る処理・Ｒ３
+//=============================
+#=GO.TITLE.R3
+{
+
+			IF[@es.RPMODE]
+				@es.RPMODE=0
+				\UI.RELOAD
+				@es.RPMODE=1
+			IFEND[]
+
+		//-----------------------------------------------------------------
+		// 終了処理
+		//-----------------------------------------------------------------
+			GOSUB[#=ES.SEL.ENDEXEC pint=10]
+			GOSUB[#=ES.CSEL.ENDEXEC pint=100]
+			GOSUB[#=ES.LOG.FIN]
+			GOSUB[#=ES.SAVE.END]
+		//	GOSUB[#=ES.LOAD.END]
+
+			GOSUB[#=ES.SCENARIO.END pint=0]
+
+
+		\SP.DELALL
+//		\MT.DELALL
+
+
+		\es.CGTDEL
+		\es.CGSDELALL
+
+
+			GOSUB[#=ES.SEL.INIT]
+
+			@es.TX.SKIP = 0
+			@es.TX.AUTO = 0
+
+			//テキスト初期化処理
+			GOSUB[#=es.TEXTTASK.FOR.LOAD]
+
+
+		@es.SCENARIOSTOP=999
+		INT[@no = 999]
+		STR[$id = "CGS"+$(@no)]
+
+		CGEND[ID=$id]
+
+
+		//グローバル保存
+		\GSD.SAVE
+
+		//@L,$L 初期化
+		\LSD.INIT
+
+		\es.STARTLABEL( $es.SJMODE )
+
+		//es.SCENARIO.FLOWへ
+		TASK[ID=$es.ScenarioTaskID SCRIPTPOS=$es.P.GOTITLEPOS]
+		\_task.resume($es.ScenarioTaskID)
+
+	return[]
+}
+
+
+///xINJ
+//------------------------------------------------------------
+//■ショートカット処理
+//------------------------------------------------------------
+#=es.SHORTCUT
+{
+	@_KEY_F12=3
+	@_KEY_H=3
+
+	@es.HELPMODE=1
+
+//	\SSE("")
+
+//	GOSUB[#=es.BTN.DISABLED]
+
+	CG[ID=HELP.BG                        A=256 Z=213121210000000 FILE="cgsys/shortcut/back"]
+	CG[ID=HELP.BTN.BACK.OFF  X=745 Y=545 A=256 Z=213121210100000 FILE="cgsys/shortcut/btn_back_off"]
+	CG[ID=HELP.BTN.BACK.OVER X=745 Y=545 A=000 Z=213121210200000 FILE="cgsys/shortcut/btn_back_over"]
+
+	INT[@col]
+	INT[@Chk]
+
+	LOOP[]
+	{
+		IF[@_KEY_F12==1 || @_KEY_H==1 || @_KEY_BS==1] LOOPBREAK[] IFEND[]
+		IF[@_KEY_F12==2 || @_KEY_H==2 || @_KEY_BS==2] LOOPBREAK[] IFEND[]
+
+		CGINFO[ONMOUSE2=1 ID=HELP.BTN.BACK.OFF LET=@col]
+		IF[@col>0]
+		{
+			CG[ID=HELP.BTN.BACK.OFF  A=000]
+			CG[ID=HELP.BTN.BACK.OVER A=256]
+
+			IF[@_MOUSE_L==1 || @_MOUSE_L==2] LOOPBREAK[] IFEND[]
+		}
+		ELSE[]
+		{
+			CG[ID=HELP.BTN.BACK.OFF  A=256]
+			CG[ID=HELP.BTN.BACK.OVER A=000]
+		}
+		IFEND[]
+
+		//-------------------------------------------------------
+		// ウィンドウ終了監視
+		//-------------------------------------------------------
+			IF[@_WINDOW_EXEC_CLOSE]
+			{
+				@_WINDOW_EXEC_CLOSE=0
+				DIALOG[STR="アプリケーションを終了します。宜しいですか？" CAPTION="終了確認" YESNO=1 LET=@Chk]
+
+			//	GOSUB[#=es.SceneEndConfirm pint=1] //通常の終了ダイアログ
+
+				IF[@Chk==1]
+				{
+					\es.END
+				}
+				IFEND[]
+			}
+			IFEND[]
+
+		WAIT[FRAME=1]
+	}
+	LOOPEND[]
+
+//	GOSUB[#=es.BTN.ENABLED]
+
+	CGEND[ID=HELP.BG]
+	CGEND[ID=HELP.BTN.BACK.OFF]
+	CGEND[ID=HELP.BTN.BACK.OVER]
+
+//	@_MOUSE_L=-2
+	@_MOUSE_L=2
+	@_MOUSE_R=3
+	@_KEY_ENTER=3
+	@_KEY_SPACE=3
+	@_KEY_F12=3
+	@_KEY_H=3
+	@_KEY_BS=3
+
+//	@es.CLICKFORBIT=1
+	@es.HELPMODE=0
+
+	return[]
+}
+
+
+#=es.SN.GSBCHK
+{
+	@es.SN.GOSUBNEST+=1
+	IF[@es.SN.GOSUBNEST>@es.SN.GOSUBNESTMAX]
+		\_mes("\\GOSUBネストが "+$(@es.SN.GOSUBNESTMAX)+" を越えました。\\GOSUBを減らして下さい。");END[]
+	IFEND[]
+
+	\_log('\\GOSUB($_M)')
+
+	\GSD.SAVE
+
+	\SCRIPTPOS_SAVE
+
+	return[]
+}
+
+
+//シナリオ初期化処理
+//
+#=ES.SCENARIO.INIT
+{
+
+	///xNKGR
+	@es.TXSTART=0
+
+	//グローバル保存
+	\GSD.SAVE
+
+	//@L,$L 初期化
+	\LSD.INIT
+
+	$es.RIN.LFNAME=""
+
+	///x
+	GOSUB[#=es.SP.DELALL.SET]
+	GOSUB[#=es.SP.QUE.INIT.ALL]
+
+	//ベース音量初期化
+	\BGM.BASEVOL(256)
+	\SE.BASEVOL(256)
+	\VO.BASEVOL(256)
+
+	CG[ID="TX.AUTOICON1" E=0]
+	CG[ID="TX.SKIPICON1" E=0]
+	@es.TX.AUTO=0
+	@es.TX.SKIP=0
+
+	@es.SELMODE=0
+
+	return[]
+}
+
+//シナリオ初期化処理
+//
+#=ES.SCENARIO.INIT.2
+{
+
+	GOSUB[#=es.LOG.CLEAR]
+
+	//テキスト初期化処理
+	GOSUB[#=es.TextTask.Init]
+
+	\LSD.INIT
+
+	\BT.ACTIVEGROUP( 1+@es.GSD(096,01) )
+	\BT.ONOFF("es.GAMEMAIN.BTN.OPENCLOSE",, @es.GSD(096,01))
+
+	return[]
+}
+

@@ -1,0 +1,191 @@
+This file describes the command line arguments that can be passed to ONSlaught
+to tweak its behavior.
+If a file exists in the working directory called "arguments.txt", ONSlaught
+will read its contents as UTF-8 and use them as though they were command line
+arguments.
+The actual command line arguments are processed /after/ the contents of this
+file.
+
+
+Usage: ONSlaught [options]
+
+-h
+-?
+--help
+Shows a message with all options.
+
+
+--version
+Display version number.
+
+
+-implementation
+Lists all implemented and unimplemented commands.
+
+
+-save-directory <directory name>
+Override the default save game subdirectory with a custom name.
+By default, the engine performs a partial SHA1 on the loaded script (not on the
+script file) and uses the first 64 bits to create a directory.
+For example, calling ONSlaught without this option might cause the save games to
+go in "C:\Users\User\My Documents\.ONSlaught\e38ba7ef 3bd29d16\" on Windows 7,
+and in "~/.ONSlaught/e38ba7ef 3bd29d16/" on UNIX, which is very cumbersome.
+Using the following command line:
+ONSlaught -save-directory "Parrot Sketch"
+would cause save games to go in
+"C:\Users\User\My Documents\.ONSlaught\Parrot Sketch\" under Windows XP, and in
+"~/.ONSlaught/Parrot Sketch/" under UNIX.
+
+At the time of this writing (2011-02-11), this option only has effect on UNIX
+and Windows. Any other platform the engine is compiled for will put its save
+game files in the working directory.
+
+Directory name suggestion: In order to avoid conflicts for systems with multiple
+games installed, the best naming scheme would probably be
+<Game name>-<ISO 639-1 Code>[-<version>]. The version is optional (note that
+it's not always possible or reliable to load save games for one
+script version into a different script version).
+For example, for an English version of Tsukihime, version 1.5: Tsukihime-en-1.5
+For the Czech version: Tsukihime-cs-1.5
+
+http://www.loc.gov/standards/iso639-2/php/code_list.php
+
+
+-verbosity <number>
+Sets the level of verbosity. Defaults to 0.
+Levels:
+Level 0: No logging.
+Level 1: Log line numbers being interpreted.
+Level 2: Log file streams being closed and opened.
+Level 3: Log file open failures.
+Level 4: Log results and details for expressions.
+Level >5: Log all commands being executed and their parameters.
+Level 255: Reserved for engine debugging.
+
+
+-f
+Start in fullscreen.
+
+
+-r <number> <number> <number> <number>
+Sets the screen resolution. The first two numbers are width and height of the
+virtual screen (script coordinates should be given based on this resolution).
+The second two numbers are width and height of the physical screen, or window,
+graphical output will go to. Linear interpolation is used to resize the picture,
+so the rescale ratio (realResolution/virtualResolution) should never be above 2
+(for example, if the virtual resolution is 640x480, the real resolution should
+not be greater than 1280x960). Interpolation artifacts are obvious for scales
+greater than 2. If the ratios don't match, the difference will be compensated
+with vertical black bars at the sides or horizontal bars at the top and bottom,
+depending on the case. The picture is never cropped. Wasted screen space is
+better than lost pixels, specially for resizes such as 16:9->4:3.
+
+
+-script {auto|<path> <encryption method>}
+Selects a script file and encryption method or enables auto-selection. Default
+is auto.
+Files are searched in this order (in auto):
+
+ 1. "0.txt", mode 0
+ 2. "00.txt", mode 0
+ 3. "nscr_sec.dat", mode 2
+ 4. "nscript.___", mode 3
+ 5. "nscript.dat", mode 1
+
+Encryption mode (technical) details:
+Mode 0, or no encryption.
+Mode 1, or xor84: unencrypted_byte[i]=encrypted_byte[i]^0x84;
+Mode 2, or rotating xor: Given an array ring[]={0x79,0x57,0x0D,0x80,0x04},
+    unencrypted_byte[i]=encrypted_byte[i]^ring[i%5].
+Mode 3, or transform and xor: Not supported.
+
+
+-encoding {auto|sjis|iso-8859-1|utf8}
+Selects the encoding to be used on the script file. Default is auto.
+
+
+-dump-text <filename>
+Enables text dump mode. All script text is outputted to the file given. The
+contents of the file are kept between executions.
+
+
+-s
+Disables sound.
+This doesn't just zeroes the volume, it avoids sound initialization. With this
+flag, sound can't be turned back on without restarting the engine.
+
+
+-music-format {auto|ogg|mp3|mid|it|xm|s3m|mod|aiff}
+Selects the music format to be used. 'auto's priority is as follows: ogg, mp3,
+mid, it, xm, s3m, mod, aiff.
+
+
+-music-directory <directory>
+Selects where to look for the music. Defaults to "./CD"
+
+
+-redirect
+Redirects stdout to "stdout.txt" and stderr to "stderr.txt".
+This option unconditionally disables debug.
+
+
+-!redirect
+Sends the output to the console instead of the file system.
+See "-redirect" for more info.
+
+
+-!reset-out-files
+Only used with "-redirect".
+Keeps the contents of stdout.txt, stderr.txt, and stdlog.txt when it opens them
+and puts the date and time as identification.
+
+
+-debug
+Enables debug mode. In debug mode, it is possible to view and change the value
+of variables, and to run some commands. To enter debug mode, hit Pause/Break.
+
+
+-stop-on-first-error
+Stops executing the script when the first error occurs. "Unimplemented command"
+(when the command will not be implemented) errors don't count.
+
+
+-pp-output <filename>
+Writes the preprocessor output to <filename>. The details of each macro call are
+sent to stderr.
+
+
+-pp-then-quit
+Preprocesses the script and quits. Only makes sense when used with -pp-output.
+
+
+-disable-threading
+Disables threading for blit operations.
+
+
+-play <filename>
+Play a file and quit. The file can be a graphics, audio, or video file.
+This option can be used to test whether the engine can find and read the file.
+
+
+-replace <replacement string>
+Sets characters to be replaced in the printing mechanism.
+Odd characters in the string are characters to be replaced, and even characters
+are the characters that will replace them.
+For example:
+-replace "aABb"
+This example replaces lower case 'a's with upper case 'A's, and upper case 'B's
+with lower case 'b's.
+(The string only needs to be quoted if it contains spaces or other special
+characters.)
+
+
+-use-long-audio-buffers
+Allocates longer audio buffers. This fixes some problems with sound in older
+systems.
+
+
+-default-font <filename>
+Use <filename> as the main font. Defaults to "default.ttf".
+-console-font <filename>
+Use <filename> as the font for the debugging console. Defaults to "cour.ttf".

@@ -1,0 +1,164 @@
+//=========================================================================
+//
+//■ERIS クイックロード
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.QLOADCONF."]
+	S_INT[@QSaveNo]
+
+}
+
+
+#=ES.QLOADCONF.INIT
+{
+	IF[@es.STATE==0]
+	{
+		@QSaveNo = @es.STATE2
+
+		//ロードするファイル名取得
+		\_inttostr(@QSaveNo, @es.sdketa)
+		STR[$Name="save"+$_RSTR(1)+".sd"]
+
+	//\_dmes("QLOADCONF:"+$Name)
+
+		//クイックセーブデータが有効か
+		GOSUB[#=es.SaveDataCheck pstr=$Name]
+		IF[@_RINT(1)==0]
+		{
+		//	@es.SM=1;@es.SMNO=5	//システムメッセージ：クイックデータがありません
+
+			//システムボイス：クイックデータなし
+			//ボイス再生
+			\_gosub(ES.QLOADCONF.VoicePlay.3)
+
+			\es.S.RETURN
+		}
+		ELSE[]
+		{
+			IF[@es.GSD(114,05)==1] //クイックロード確認
+			{
+				//ボイス再生
+				\_gosub(ES.QLOADCONF.VoicePlay.2)
+				\SS.FADE.TASK(150)
+
+				@es.STATE=100
+			}
+			ELSE[]
+			{
+				@es.STATE=201
+			}
+			IFEND[]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.QLOADCONF.LOOP
+{
+	INT[@yval]
+
+	IF[@es.STATE==100] //LOOP
+	{
+
+	}
+	IFEND[]
+
+	IF[@es.STATE==201] //QLOAD・確認なし
+	{
+		\es.CGTDEL
+		\BT.END(ES.QLOADCONF)
+		@es.STATE=202
+	}
+	IFEND[]
+	IF[@es.STATE==202] //QLOAD・はいボタン
+	{
+		GOSUB[#=ES.QLOADCONF.QLOAD]
+		\es.S.RETURN.LBL("ES.GAMEMAIN", 997, 0)
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+#=ES.QLOADCONF.QLOAD
+{
+	//スクリーンショット撮る
+	\es.CGTSS
+
+	//ボイス再生
+//	\_gosub(ES.QLOADCONF.VoicePlay.1)
+
+	//ロード
+	\LOAD(@QSaveNo, 1) //セーブデータ番号, Ｑロードフラグ(=1)
+
+	return[]
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[はい]ボタン -----------------------------------------------------
+//
+#=ES.QLOADCONF.BTN.YES.ON { @es.STATE=202; return[] }
+
+//■[いいえ]ボタン ---------------------------------------------------
+//
+#=ES.QLOADCONF.BTN.NO.ON { \es.S.RETURN; return[] }
+
+//■[次回以降表示しない]ボタン ---------------------------------------
+//
+#=ES.QLOADCONF.BTN.NEXT.ON { \BT.ONOFF.GET($es.BID, 0)(@es.GSD(114,05)); @es.GSD(114,05)=1-@es.GSD(114,05); return[] }
+
+
+//====================================================================
+//
+//■クイックロード確認(DIALOG版)
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.QLOADCONFDLG.LOOP
+{
+	WAIT[FRAME=1] //最新の画面を表示させておくため.
+
+	INT[@Ret=1]
+	STR[$cap]
+
+	IF[@es.GSD(114,05)==1] //クイックロード確認
+	{
+		//ボイス再生
+		\_gosub(ES.QLOADCONFDLG.VoicePlay.2)
+
+		WINDOWINFO[NO=0 CAPTION=1 LET=$cap]
+		$cap="確認"
+		DIALOG[CAPTION=$cap STR=$T(13,10) YESNO=1 LET=@Ret]
+	}
+	IFEND[]
+
+	IF[@Ret==1]
+	{
+		//クイックロード
+		GO[#=ES.QLOADCONF.QLOAD]
+	}
+	IFEND[]
+
+	\es.S.RETURN(999, 0)
+
+	return[]
+}
+
+

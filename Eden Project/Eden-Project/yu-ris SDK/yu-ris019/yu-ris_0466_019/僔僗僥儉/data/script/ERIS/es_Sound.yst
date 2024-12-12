@@ -1,0 +1,2097 @@
+//============================================================================
+//
+//■ERIS ＢＧＭ処理
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+		S_INT[@BGM.BUFMAX	=  4]		//001～010:BGM       ※デフォでループ
+		S_INT[@SE.BUFMAX	=  4]		//011～020:SE
+		S_INT[@VO.BUFMAX	= 10]		//021～030:VO
+		S_INT[@EBGM.BUFMAX	=  4]		//031～040:EBGM(BGS) ※デフォでループ
+		S_INT[@ESE.BUFMAX	=  4]		//041～050:ESE(HSE)  ※デフォでループ
+		S_INT[@EVO.BUFMAX	= 10]		//051～060:EVO(BGH)  ※デフォでループ
+		S_INT[@E2BGM.BUFMAX	=  4]		//061～070:E2BGM     ※デフォでループ
+		S_INT[@E2SE.BUFMAX	=  4]		//071～080:E2SE      ※デフォでループ
+		S_INT[@E2VO.BUFMAX	= 10]		//081～090:E2VO(BGF) ※デフォでループ
+		S_INT[@SBGM.BUFMAX	=  4]		//091～100:SBGM      ※デフォでループ
+		S_INT[@SSE.BUFMAX	=  4]		//101～110:SSE
+		S_INT[@SVO.BUFMAX	= 10]		//111～120:SVO
+		S_INT[@S2BGM.BUFMAX	=  4]		//121～130:S2BGM     ※デフォでループ
+		S_INT[@S2SE.BUFMAX	=  4]		//131～140:S2SE
+		S_INT[@S2VO.BUFMAX	= 10]		//141～150:S2VO(EYEVO)
+
+	//-------------------------------------------- SND
+		//SNDP:一時パラメータ
+		S_STR[$SNDP.FILE(20)]
+		S_INT[@SNDP.FADE.IN(20)=-1]
+		S_INT[@SNDP.FADE.OUT(20)=-1]
+		S_INT[@SNDP.VOL(20)=-1]
+		S_INT[@SNDP.THRU(20)]
+		S_INT[@SNDP.LOOP(20)=-1]
+		S_INT[@SNDP.POS.START(20)=-99999]
+		S_INT[@SNDP.POS.END(20)=-99999]
+		S_INT[@SNDP.POS.RESTART(20)=-99999]
+		S_INT[@SNDP.ENDWAIT(20)=-1]
+
+		//SNDI:現在のサウンドパラメータ情報
+		S_STR[$SNDI.FILE(201)]
+		S_INT[@SNDI.DATA(201)] //汎用データ
+		S_INT[@SNDI.SW(201)]
+		S_INT[@SNDI.FADE.IN(201)=-1]
+		S_INT[@SNDI.FADE.OUT(201)=-1]
+		S_INT[@SNDI.VOL(201)=-1]
+		S_INT[@SNDI.LOOP(201)=-1]
+		S_INT[@SNDI.POS.START(201)=-99999]
+		S_INT[@SNDI.POS.END(201)=-99999]
+		S_INT[@SNDI.POS.RESTART(201)=-99999]
+
+		S_INT[@SND.FADE.MODE(201)]
+		S_INT[@SND.FADE.STARTTIME(201)]
+		S_INT[@SND.FADE.TIME(201)]
+		S_INT[@SND.FADE.STARTVOL(201)]
+		S_INT[@SND.FADE.ENDVOL(201)]
+
+
+		//BGMD:BGM定義
+		S_INT[@BGMD.NUM]
+		S_STR[$BGMD.NAME(1)]
+		S_STR[$BGMD.FILE(1)]
+		S_INT[@BGMD.FADE.IN(1)]
+		S_INT[@BGMD.VOL(1)]
+		S_INT[@BGMD.LOOP(1)]
+		S_INT[@BGMD.POS.START(1)]
+		S_INT[@BGMD.POS.END(1)]
+		S_INT[@BGMD.POS.RESTART(1)]
+
+		//SED:SE定義
+		S_INT[@SED.NUM]
+		S_STR[$SED.NAME(1)]
+		S_STR[$SED.FILE(1)]
+		S_INT[@SED.FADE.IN(1)]
+		S_INT[@SED.VOL(1)]
+		S_INT[@SED.LOOP(1)]
+		S_INT[@SED.ENDWAIT(1)]
+		S_INT[@SED.POS.START(1)]
+		S_INT[@SED.POS.END(1)]
+		S_INT[@SED.POS.RESTART(1)]
+
+		//VOD:VO定義
+		S_INT[@VOD.NUM]
+		S_INT[@VOD.NO(1)]
+		S_STR[$VOD.STR(1)]
+		S_INT[@VOD.STR.LEN(1)]
+		S_STR[$VOD.FOLDER(1)]
+
+		S_STR[$VOP.FOLDER]
+		S_STR[$VOP.STR(4)]
+
+		S_STR[$VO.OTHER.PATH.FOLDER]
+		S_INT[@VO.OTHER.PATHDEF=1]
+
+		S_INT[@VO.HIGH.MODE]
+		S_INT[@VO.HIGH.TIME]
+		S_INT[@VO.HIGH.VOL0]
+		S_INT[@VO.HIGH.VOL=256]
+
+
+		//内部用
+		S_STR[$SND.LID(20)]
+		S_INT[@SND.BUFMAX(20)]
+		S_INT[@SND.PlayFlag(20)]
+		S_STR[$SW(2)]
+		S_FLT[@Fvol]
+		S_INT[@Ivol]
+
+//		S_INT[@FadeOutTime =2000]
+//		S_INT[@FadeWaitTime=2000]
+//		S_INT[@FadeInTime  =1500]
+///xS用
+		S_INT[@FadeOutTime =1000]
+		S_INT[@FadeWaitTime=0000]
+		S_INT[@FadeInTime  =1000]
+
+		S_INT[@SND.FASTFLAG]
+		S_INT[@SND.FASTSP=128]
+
+}
+
+
+//====================================================================
+//
+//■サウンド関係初期化処理
+//
+//====================================================================
+#=es.SOUND.INIT
+{
+	//各種代入
+	$SND.LID(00)="BGM/"
+	$SND.LID(01)="SE/"
+	$SND.LID(02)="VO/"
+	$SND.LID(03)="EBGM/"
+	$SND.LID(04)="ESE/"
+	$SND.LID(05)="EVO/"
+	$SND.LID(06)="E2BGM/"
+	$SND.LID(07)="E2SE/"
+	$SND.LID(08)="E2VO/"
+	$SND.LID(09)="SBGM/"
+	$SND.LID(10)="SSE/"
+	$SND.LID(11)="SVO/"
+	$SND.LID(12)="S2BGM/"
+	$SND.LID(13)="S2SE/"
+	$SND.LID(14)="S2VO/"
+
+	@SND.BUFMAX(00)=@BGM.BUFMAX
+	@SND.BUFMAX(01)=@SE.BUFMAX
+	@SND.BUFMAX(02)=@VO.BUFMAX
+	@SND.BUFMAX(03)=@EBGM.BUFMAX
+	@SND.BUFMAX(04)=@ESE.BUFMAX
+	@SND.BUFMAX(05)=@EVO.BUFMAX
+	@SND.BUFMAX(06)=@E2BGM.BUFMAX
+	@SND.BUFMAX(07)=@E2SE.BUFMAX
+	@SND.BUFMAX(08)=@E2VO.BUFMAX
+	@SND.BUFMAX(09)=@SBGM.BUFMAX
+	@SND.BUFMAX(10)=@SSE.BUFMAX
+	@SND.BUFMAX(11)=@SVO.BUFMAX
+	@SND.BUFMAX(12)=@S2BGM.BUFMAX
+	@SND.BUFMAX(13)=@S2SE.BUFMAX
+	@SND.BUFMAX(14)=@S2VO.BUFMAX
+
+	$SW(0)="A"
+	$SW(1)="B"
+
+	//レイヤセット生成
+	LOOP[SET=15] SOUND[ID=$SND.LID(@_LC-1) VOLUME=256 E=1] LOOPEND[]
+
+	//音量値セット
+	GOSUB[#=es.SOUND.SETVOL]
+
+///xS
+	//システムＳＥ用
+	GOSUB[#=es.SSE77.INIT]
+
+	@SNDP.THRU(00) = 1
+	@SNDP.THRU(01) = 0
+	@SNDP.THRU(02) = 0
+	@SNDP.THRU(03) = 1
+	@SNDP.THRU(04) = 0
+	@SNDP.THRU(05) = 0
+	@SNDP.THRU(06) = 1
+	@SNDP.THRU(07) = 0
+	@SNDP.THRU(08) = 0
+	@SNDP.THRU(09) = 1
+	@SNDP.THRU(10) = 0
+	@SNDP.THRU(11) = 0
+	@SNDP.THRU(12) = 1
+	@SNDP.THRU(13) = 0
+	@SNDP.THRU(14) = 0
+
+	return[]
+}
+
+
+//====================================================================
+//
+//■サウンド再生
+//
+//====================================================================
+#=es.SND
+{
+	IF[@es.MG.AUTOSKIP] GO[#=es.SND.LEnd] IFEND[]
+	IF[@es.SP.AUTOSKIP] GO[#=es.SND.LEnd] IFEND[]
+
+	INT[@ZSNO = @_PINT(1)]
+	INT[@SSNO = (@ZSNO-1)%10+1]
+
+	STR[$mNAME = $_PSTR(2)]
+	STR[$mFILE = $mNAME]
+
+	INT[@P3 = @_PINT(3)] //FADE時間
+	INT[@P4 = @_PINT(4)] //VOL
+	INT[@P5 = @_PINT(5)] //LOOP
+	INT[@P6 = @_PINT(6)] //ENDWAIT
+	INT[@P7 = @_PINT(7)] //ボイスをログに登録しないフラグ
+	INT[@P8 = @_PINT(8)] //スキップによる再生キャンセル禁止フラグ
+
+	INT[@BGM  =(@ZSNO>000 && @ZSNO<=010)]
+	INT[@SE   =(@ZSNO>010 && @ZSNO<=020)]
+	INT[@VO   =(@ZSNO>020 && @ZSNO<=030)]
+	INT[@EBGM =(@ZSNO>030 && @ZSNO<=040)]
+	INT[@ESE  =(@ZSNO>040 && @ZSNO<=050)]
+	INT[@EVO  =(@ZSNO>050 && @ZSNO<=060)]
+	INT[@E2BGM=(@ZSNO>060 && @ZSNO<=070)]
+	INT[@E2SE =(@ZSNO>070 && @ZSNO<=080)]
+	INT[@E2VO =(@ZSNO>080 && @ZSNO<=090)]
+	INT[@SBGM =(@ZSNO>090 && @ZSNO<=100)]
+	INT[@SSE  =(@ZSNO>100 && @ZSNO<=110)]
+	INT[@SVO  =(@ZSNO>110 && @ZSNO<=120)]
+	INT[@S2BGM=(@ZSNO>120 && @ZSNO<=130)]
+	INT[@S2SE =(@ZSNO>130 && @ZSNO<=140)]
+	INT[@S2VO =(@ZSNO>140 && @ZSNO<=150)]
+
+	INT[@sndp = (@ZSNO-1)/10]
+	STR[$ID = $SND.LID(@sndp)]
+
+	INT[@mFADE.IN  = -1]
+	INT[@mFADE.OUT = -1]
+	INT[@mVOL      = -1]
+	INT[@mLOOP     = -1]
+	INT[@mENDWAIT  = 0]
+
+
+	INT[@mPOS.START   =  0]
+	INT[@mPOS.END     = -99999]
+	INT[@mPOS.RESTART =  0]
+
+	STR[$voicefile]
+	INT[@voiceno]
+	INT[@data]
+
+
+	IF[@es.LOADTHRU]
+	{
+		//ループ指定ならスルー(応急処置)
+		IF[@P5==0] GO[#=es.SND.LEnd] IFEND[]
+		IF[@BGM || @EBGM || @ESE || @EVO || @E2BGM || @E2SE || @E2VO || @SBGM || @S2BGM] //デフォでループ
+			IF[@P5==-1] GO[#=es.SND.LEnd] IFEND[]
+		IFEND[]
+	}
+	IFEND[]
+
+
+	IF[@VO || @EVO || @E2VO || @SVO || @S2VO]
+	{
+		IF[$mNAME!=""]
+		{
+			IF[@P7==0 && @VO]
+				$es.VOICE.FILE(@SSNO)  = $mNAME
+			IFEND[]
+
+			$voicefile = $T(38,13)
+			GOSUB[#=es.VoiceFileCheck pint=@SSNO pstr2=$mNAME]
+			$voicefile += $_RSTR(1)+$mNAME
+			@voiceno   = @_RINT(2)
+			@data      = @voiceno
+
+//			\_dmes($(@SSNO)+":VoiceFN = "+$es.VOICE.FILE(@SSNO))
+		}
+		IFEND[]
+
+		IF[@VO]
+		{
+			IF[@P8==0]
+			{
+			//	IF[(@es.PRO.VOICEDEBUG==1 && @_DEBUGMODE==1) || (@es.TX.SKIP==0 && (@es.MG.AUTO==1 || (@es.MG.AUTO==0 && @es.TX.CSKIP==0)))]
+				IF[                                             (@es.TX.SKIP==0 && (@es.MG.AUTO==1 || (@es.MG.AUTO==0 && @es.TX.CSKIP==0)))]
+			//	IF[1]
+				{
+				}
+				ELSE[]
+				{
+					GO[#=es.SND.LEnd]
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+	}
+	IFEND[]
+/*
+	IF[@SVO]
+	{
+		IF[$mNAME!=""]
+		{
+			$voicefile = "sysvoice/"
+			GOSUB[#=es.VoiceFileCheck pint=@SSNO pstr2=$mNAME]
+			$voicefile += $_RSTR(1)
+			$voicefile += $mNAME
+			@voiceno    = @_RINT(2)
+			@data       = @voiceno
+		}
+		IFEND[]
+	}
+	IFEND[]
+*/
+
+
+	//----------------------------------------------------------------
+	// 定義文字列か否か調べる.
+	//----------------------------------------------------------------
+		IF[@BGM || @EBGM || @E2BGM || @SBGM || @S2BGM]
+		{
+			LOOP[SET=@BGMD.NUM]
+			{
+				IF[$mNAME==$BGMD.NAME(@_LC)]
+				{
+					$mFILE			= $BGMD.FILE( @_LC )
+					@mFADE.IN		= @BGMD.FADE.IN( @_LC )
+					@mFADE.OUT		= 0
+					@mVOL			= @BGMD.VOL( @_LC )
+					@mLOOP			= @BGMD.LOOP( @_LC )
+					@mPOS.START		= @BGMD.POS.START( @_LC )
+					@mPOS.END		= @BGMD.POS.END( @_LC )
+					@mPOS.RESTART	= @BGMD.POS.RESTART( @_LC )
+
+					LOOPBREAK[]
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+		}
+		IFEND[]
+		IF[@SE || @ESE || @E2SE || @SSE || @S2SE]
+		{
+			LOOP[SET=@SED.NUM]
+			{
+				IF[$mNAME==$SED.NAME(@_LC)]
+				{
+					$mFILE			= $SED.FILE( @_LC )
+					@mFADE.IN		= @SED.FADE.IN( @_LC )
+					@mFADE.OUT		= 0
+					@mVOL			= @SED.VOL( @_LC )
+					@mLOOP			= @SED.LOOP( @_LC )
+					@mENDWAIT		= @SED.ENDWAIT( @_LC )
+					@mPOS.START		= @SED.POS.START( @_LC )
+					@mPOS.END		= @SED.POS.END( @_LC )
+					@mPOS.RESTART	= @SED.POS.RESTART( @_LC )
+
+					LOOPBREAK[]
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// パラメータの個別設定があれば、それを優先的にセット.
+	//----------------------------------------------------------------
+		IF[@SNDP.FADE.IN(@sndp)  > -1] @mFADE.IN  = @SNDP.FADE.IN(@sndp)  IFEND[]
+		IF[@SNDP.FADE.OUT(@sndp) > -1] @mFADE.OUT = @SNDP.FADE.OUT(@sndp) IFEND[]
+		IF[@SNDP.VOL(@sndp)      > -1] @mVOL      = @SNDP.VOL(@sndp)      IFEND[]
+		IF[@SNDP.LOOP(@sndp)     > -1] @mLOOP     = @SNDP.LOOP(@sndp)     IFEND[]
+		IF[@SNDP.ENDWAIT(@sndp)  > -1] @mENDWAIT  = @SNDP.ENDWAIT(@sndp)  IFEND[]
+
+		IF[@SNDP.POS.START(@sndp)   > -99999] @mPOS.START   = @SNDP.POS.START(@sndp)   IFEND[]
+		IF[@SNDP.POS.END(@sndp)     > -99999] @mPOS.END     = @SNDP.POS.END(@sndp)     IFEND[]
+		IF[@SNDP.POS.RESTART(@sndp) > -99999] @mPOS.RESTART = @SNDP.POS.RESTART(@sndp) IFEND[]
+
+
+	//----------------------------------------------------------------
+	// パラメータの一括設定があれば、それを優先的にセット.
+	//----------------------------------------------------------------
+		IF[$mNAME==""]
+		{
+			IF[@P3!=-1] @mFADE.OUT = @P3 IFEND[]
+		}
+		ELSE[]
+		{
+			IF[@P3!=-1] @mFADE.IN = @P3;@mFADE.OUT = @P3 IFEND[]
+
+		}
+		IFEND[]
+
+		IF[@P4!=-1] @mVOL = @P4 IFEND[]
+		IF[@P5!=-1] @mLOOP = @P5 IFEND[]
+		IF[@P6!=-1] @mENDWAIT = @P6 IFEND[]
+
+
+	//----------------------------------------------------------------
+	// パラメータ最終調整.
+	//----------------------------------------------------------------
+		IF[@mFADE.IN < 0]
+			@mFADE.IN = 0
+			IF[@BGM || @EBGM || @E2BGM || @SBGM || @S2BGM]
+				IF[@SND.PlayFlag(@sndp)] @mFADE.IN = @T(25,01) IFEND[]
+			IFEND[]
+		IFEND[]
+
+		IF[@mFADE.OUT < 0]
+			IF[@BGM]   @mFADE.OUT = @T(25,01) IFEND[]
+			IF[@SE]    @mFADE.OUT = @T(26,01) IFEND[]
+			IF[@VO]    @mFADE.OUT = 0         IFEND[]
+			IF[@EBGM]  @mFADE.OUT = @T(25,01) IFEND[]
+			IF[@ESE]   @mFADE.OUT = 0         IFEND[]
+			IF[@EVO]   @mFADE.OUT = 0         IFEND[]
+			IF[@E2BGM] @mFADE.OUT = @T(25,01) IFEND[]
+			IF[@E2SE]  @mFADE.OUT = 0         IFEND[]
+			IF[@E2VO]  @mFADE.OUT = 0         IFEND[]
+			IF[@SBGM]  @mFADE.OUT = 0         IFEND[]
+			IF[@SSE]   @mFADE.OUT = 0         IFEND[]
+			IF[@SVO]   @mFADE.OUT = 0         IFEND[]
+			IF[@S2BGM] @mFADE.OUT = 0         IFEND[]
+			IF[@S2SE]  @mFADE.OUT = 0         IFEND[]
+			IF[@S2VO]  @mFADE.OUT = 0         IFEND[]
+		IFEND[]
+
+		IF[@mVOL < 0] @mVOL = 256 IFEND[]
+
+		IF[@mLOOP < 0]
+			IF[@BGM]   @mLOOP = 0 IFEND[]
+			IF[@SE]    @mLOOP = 1 IFEND[]
+			IF[@VO]    @mLOOP = 1 IFEND[]
+			IF[@EBGM]  @mLOOP = 0 IFEND[]
+			IF[@ESE]   @mLOOP = 0 IFEND[]
+			IF[@EVO]   @mLOOP = 0 IFEND[]
+			IF[@E2BGM] @mLOOP = 0 IFEND[]
+			IF[@E2SE]  @mLOOP = 0 IFEND[]
+			IF[@E2VO]  @mLOOP = 0 IFEND[]
+			IF[@SBGM]  @mLOOP = 0 IFEND[]
+			IF[@SSE]   @mLOOP = 1 IFEND[]
+			IF[@SVO]   @mLOOP = 1 IFEND[]
+			IF[@S2BGM] @mLOOP = 0 IFEND[]
+			IF[@S2SE]  @mLOOP = 1 IFEND[]
+			IF[@S2VO]  @mLOOP = 1 IFEND[]
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// CTRL キー押下中なら高速フェード
+	//----------------------------------------------------------------
+///tri
+//		IF[@es.MG.AUTO==0 && @es.TX.CSKIP>0]
+		IF[@es.MG.AUTO==0 && (@es.TX.CSKIP>0 || @es.TX.SKIP)]
+			@mFADE.IN /= @es.GSD(120,05)
+			@mFADE.OUT /= @es.GSD(120,05)
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// マクロ指定チェック
+	//----------------------------------------------------------------
+		IF[@mLOOP==0 && @mENDWAIT==1]
+			\_mes("「ループ再生」と「再生終了待ちフラグ」が両方指定されています。「１回再生」にするか「再生終了待ちフラグoff」にしてください。", "スクリプトエラー")
+			END[]
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// 同じサウンドが流れていないかチェック
+	//----------------------------------------------------------------
+		IF[@es.LoadFlag==0]
+		{
+			IF[@BGM || @EBGM || @E2BGM || @SBGM || @S2BGM]
+				IF[$mFILE!=""]
+					IF[@SNDP.THRU(@sndp)]
+						IF[$mFILE==$SNDI.FILE(@ZSNO)]
+						{
+							//この場合は、音量変更命令として扱う.
+							$mFILE="";@P4=0
+						}
+						IFEND[]
+					IFEND[]
+				IFEND[]
+			IFEND[]
+		}
+		ELSE[]
+		{
+			//\_dmes(LoadThru)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// 現在再生されているサウンドを停止.
+	//----------------------------------------------------------------
+		IF[$mFILE!="" || ($mFILE=="" && @P4==-1)] //ファイル名指定ありor(ファイル名指定なし&音量値指定なし)
+		{
+//\_dmes("@mFADE.OUT="+$(@mFADE.OUT))
+//\_dmes("es.SND.STOP : "+$ID)
+				GOSUB[#=es.SND.STOP PSTR=$ID PINT2=@ZSNO PINT3=@mFADE.OUT]
+
+				@SND.PlayFlag(@sndp) = 0
+
+				$SNDI.FILE(@ZSNO)			= ""
+				@SNDI.FADE.IN(@ZSNO)		= @mFADE.IN
+				@SNDI.FADE.OUT(@ZSNO)		= @mFADE.OUT
+
+				@SNDI.VOL(@ZSNO)			= @mVOL
+			IF[@BGM || @EBGM || @E2BGM || @SBGM || @S2BGM]
+				@SNDI.VOL(@ZSNO)			= 0
+			IFEND[]
+	//		IF[@SE || @ESE || @E2SE || @SSE || @S2SE]
+	//			@SNDI.VOL(@ZSNO)			= @mVOL
+	//		IFEND[]
+				@SNDI.LOOP(@ZSNO)			= @mLOOP
+				@SNDI.POS.START(@ZSNO)		= @mPOS.START
+				@SNDI.POS.END(@ZSNO)		= @mPOS.END
+				@SNDI.POS.RESTART(@ZSNO)	= @mPOS.RESTART
+
+				@SND.FADE.TIME(@ZSNO)		= @mFADE.IN
+		}
+		ELSE[] //ファイル名指定なし&音量値指定あり
+		{
+				@SND.FADE.MODE(@ZSNO)		= 1
+				@SND.FADE.STARTTIME(@ZSNO)	= @_OS_TIME(1)
+				@SND.FADE.STARTVOL(@ZSNO)	= @SNDI.VOL(@ZSNO)
+				@SND.FADE.ENDVOL(@ZSNO)		= @mVOL
+
+				@SNDI.VOL(@ZSNO)			= @mVOL
+//\_dmes("STARTVOL="+$(@SND.FADE.STARTVOL(@ZSNO))+", ENDVOL="+$(@SND.FADE.ENDVOL(@ZSNO)))
+
+				@SND.FADE.TIME(@ZSNO)		= @mFADE.OUT
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// 再生処理
+	//----------------------------------------------------------------
+		IF[$mFILE!=""]
+		{
+
+			//---------------------------------------------------------------
+			// フラグ登録
+			//---------------------------------------------------------------
+				\BGM.SET($mFILE)
+
+
+			@SNDI.DATA(@ZSNO)	= @data
+//\_dmes("@SNDI.DATA("+$(@ZSNO)+")="+$(@SNDI.DATA(@ZSNO)))
+
+///xS
+			IF[@BGM]   @es.LSD(003,00+@SSNO) = @mVOL IFEND[] //ベース音量初期化
+			IF[@EBGM]  @es.LSD(003,10+@SSNO) = @mVOL IFEND[] //ベース音量初期化
+			IF[@E2BGM] @es.LSD(003,20+@SSNO) = @mVOL IFEND[] //ベース音量初期化
+			IF[@SBGM]  @es.LSD(003,30+@SSNO) = @mVOL IFEND[] //ベース音量初期化
+			IF[@S2BGM] @es.LSD(003,40+@SSNO) = @mVOL IFEND[] //ベース音量初期化
+
+			IF[@SE]   @es.LSD(004,00+@SSNO) = @mVOL IFEND[] //ベース音量初期化
+			IF[@ESE]  @es.LSD(004,10+@SSNO) = @mVOL IFEND[] //ベース音量初期化
+			IF[@E2SE] @es.LSD(004,20+@SSNO) = @mVOL IFEND[] //ベース音量初期化
+			IF[@SSE]  @es.LSD(004,30+@SSNO) = @mVOL IFEND[] //ベース音量初期化
+			IF[@S2SE] @es.LSD(004,40+@SSNO) = @mVOL IFEND[] //ベース音量初期化
+
+
+			STR[$path]
+			IF[@ZSNO>000 && @ZSNO<=010] $path=$T(38,11)+$mFILE IFEND[] //BGM
+			IF[@ZSNO>010 && @ZSNO<=020] $path=$T(38,12)+$mFILE IFEND[] //SE
+			IF[@ZSNO>020 && @ZSNO<=030] $path=$voicefile       IFEND[] //VO
+			IF[@ZSNO>030 && @ZSNO<=040] $path=$T(38,11)+$mFILE IFEND[] //EBGM
+			IF[@ZSNO>040 && @ZSNO<=050] $path=$T(38,12)+$mFILE IFEND[] //ESE
+			IF[@ZSNO>050 && @ZSNO<=060] $path=$voicefile       IFEND[] //EVO
+			IF[@ZSNO>060 && @ZSNO<=070] $path=$T(38,11)+$mFILE IFEND[] //E2BGM
+			IF[@ZSNO>070 && @ZSNO<=080] $path=$T(38,12)+$mFILE IFEND[] //E2SE
+			IF[@ZSNO>080 && @ZSNO<=090] $path=$voicefile       IFEND[] //E2VO
+			IF[@ZSNO>090 && @ZSNO<=100] $path=$T(38,11)+$mFILE IFEND[] //SBGM
+			IF[@ZSNO>100 && @ZSNO<=110] $path=$T(38,21)+$mFILE IFEND[] //SSE
+			IF[@ZSNO>110 && @ZSNO<=120] $path=$voicefile       IFEND[] //SVO
+			IF[@ZSNO>120 && @ZSNO<=130] $path=$T(38,12)+$mFILE IFEND[] //S2BGM
+			IF[@ZSNO>130 && @ZSNO<=140] $path=$T(38,21)+$mFILE IFEND[] //S2SE
+			IF[@ZSNO>140 && @ZSNO<=150] $path=$voicefile       IFEND[] //S2VO
+
+
+//\_dmes($path+", @ZSNO="+$(@ZSNO)+", @SSNO="+$(@SSNO)+", @data="+$(@data))
+
+//				@SNDI.DATA(@ZSNO)	= @data
+
+
+@SNDI.SW(@ZSNO) = 1 - @SNDI.SW(@ZSNO)
+
+			//---------------------------------------------------------------
+			// バッファ初期化
+			// 指定したバッファが存在しない場合、
+			// 以前のバッファが再生されない様に消しておく
+			//---------------------------------------------------------------
+				SOUNDEND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO)]
+
+				IF[@_DEBUGMODE]
+				{
+					\_sound.exist($path)
+					IF[@_RINT(1)==0]
+					{
+						\_log2("◆["+$path+"]が存在しませんでした。")
+					}
+					IFEND[]
+				}
+				IFEND[]
+
+			//---------------------------------------------------------------
+			// ファイル読込
+			//---------------------------------------------------------------
+				SOUND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) FILE=$path]
+//\_dmes("$ID="+$ID+", $mNAME="+$mNAME+", $path="+$path)
+
+			//---------------------------------------------------------------
+			// 再生開始／終了／再開地点設定
+			//---------------------------------------------------------------
+				INT[@backtime]
+				IF[@BGM || @EBGM || @E2BGM || @SBGM || @S2BGM]
+					@backtime=@SND.PlayFlag(@sndp)*300 //-@SND.PlayFlag*300は、クロスフェード時にも自然に最初から聞こえるように
+				IFEND[]
+				SOUND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) START=@mPOS.START-@backtime RESTART=@mPOS.RESTART]
+
+///xSバグ対策
+//				IF[@mPOS.END!=-1]
+				IF[@mPOS.END>0]
+					SOUND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) END=@mPOS.END]
+				IFEND[]
+
+			//---------------------------------------------------------------
+			// ピッチ設定
+			//---------------------------------------------------------------
+				SOUND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) PITCH=256+(@SND.FASTFLAG*@SND.FASTSP) ]
+
+			//---------------------------------------------------------------
+			// 音量設定
+			//---------------------------------------------------------------
+				INT[@VOL]
+				IF[@ZSNO>000 && @ZSNO<=010] \VOL.BGM.GET(@VOL, @SSNO)				IFEND[] //BGM
+				IF[@ZSNO>010 && @ZSNO<=020] \VOL.SE.GET(@VOL, @SSNO)				IFEND[] //SE
+				IF[@ZSNO>020 && @ZSNO<=030] \VOL.VO.GET(@VOL, @SSNO, @voiceno)		IFEND[] //VO
+				IF[@ZSNO>030 && @ZSNO<=040] \VOL.EBGM.GET(@VOL, @SSNO)				IFEND[] //EBGM
+				IF[@ZSNO>040 && @ZSNO<=050] \VOL.ESE.GET(@VOL, @SSNO)				IFEND[] //ESE
+				IF[@ZSNO>050 && @ZSNO<=060] \VOL.EVO.GET(@VOL, @SSNO, @voiceno)		IFEND[] //EVO
+				IF[@ZSNO>060 && @ZSNO<=070] \VOL.E2BGM.GET(@VOL, @SSNO)				IFEND[] //E2BGM
+				IF[@ZSNO>070 && @ZSNO<=080] \VOL.E2SE.GET(@VOL, @SSNO)				IFEND[] //E2SE
+				IF[@ZSNO>080 && @ZSNO<=090] \VOL.E2VO.GET(@VOL, @SSNO, @voiceno)	IFEND[] //E2VO
+				IF[@ZSNO>090 && @ZSNO<=100] \VOL.SBGM.GET(@VOL, @SSNO)				IFEND[] //SBGM
+				IF[@ZSNO>100 && @ZSNO<=110] \VOL.SSE.GET(@VOL, @SSNO)				IFEND[] //SSE
+				IF[@ZSNO>110 && @ZSNO<=120] \VOL.SVO.GET(@VOL, @SSNO, @voiceno)		IFEND[] //SVO
+				IF[@ZSNO>120 && @ZSNO<=130] \VOL.S2BGM.GET(@VOL, @SSNO)				IFEND[] //S2BGM
+				IF[@ZSNO>130 && @ZSNO<=140] \VOL.S2SE.GET(@VOL, @SSNO)				IFEND[] //S2SE
+				IF[@ZSNO>140 && @ZSNO<=150] \VOL.S2VO.GET(@VOL, @SSNO, @voiceno)	IFEND[] //S2VO
+
+				SOUND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) VOLUME=@VOL]
+//\_dmes("@ZSNO="+$(@ZSNO)+", @VOL="+$(@VOL))
+
+			//---------------------------------------------------------------
+			// 再生
+			//---------------------------------------------------------------
+				SOUND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) FADE=@mFADE.IN LOOP=@mLOOP PLAY=1]
+//\_dmes("PLAY="+$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO))
+
+			//---------------------------------------------------------------
+			// 再生フラグon
+			//---------------------------------------------------------------
+				@SND.PlayFlag(@sndp)=1
+
+			//---------------------------------------------------------------
+			// 音声再生時のＢＧＭ減衰
+			//---------------------------------------------------------------
+				IF[@VO]
+			//	IF[@VO || @EVO || @E2VO || @SVO || @S2VO]
+					@VO.HIGH.MODE = 1
+					@VO.HIGH.VOL0 = @VO.HIGH.VOL
+					@VO.HIGH.TIME = @_OS_TIME(1)
+				IFEND[]
+
+			//----------------------------------------------------------------
+			// 現在のパラメータを保存(BGMまたはループ再生だった場合に限り)///x
+			//----------------------------------------------------------------
+			//	IF[@BGM || @EBGM || @E2BGM || @SBGM || @S2BGM || @SE || @ESE || @E2SE || @SSE || @S2SE || @mLOOP==0]
+				IF[@mLOOP==0]
+				{
+					$SNDI.FILE(@ZSNO)			= $mFILE
+					@SNDI.FADE.IN(@ZSNO)		= @mFADE.IN
+					@SNDI.FADE.OUT(@ZSNO)		= @mFADE.OUT
+					@SNDI.VOL(@ZSNO)			= @mVOL
+					@SNDI.LOOP(@ZSNO)			= @mLOOP
+					@SNDI.POS.START(@ZSNO)		= @mPOS.START
+					@SNDI.POS.END(@ZSNO)		= @mPOS.END
+					@SNDI.POS.RESTART(@ZSNO)	= @mPOS.RESTART
+				}
+				IFEND[]
+
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	// 再生終了待ち
+	//----------------------------------------------------------------
+//	IF[@SE || @ESE || @E2SE || @SSE || @S2SE]
+	{
+		IF[@mENDWAIT]
+		{
+			IF[$mFILE!=""]
+			{
+				@es.SND.WAIT.MODE = 1
+
+				INT[@playchk]
+				LOOP[]
+				{
+					SOUNDINFO[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) PLAY=1 LET=@playchk]
+					IF[@playchk==0] LOOPBREAK[] IFEND[]
+
+					IF[@_MOUSE_L==1] LOOPBREAK[] IFEND[]
+					IF[@_KEY_ENTER==1] LOOPBREAK[] IFEND[]
+					IF[@_KEY_DOWN==1] LOOPBREAK[] IFEND[]
+///tri
+//					IF[@_DEBUGMODE && (@es.TX.SKIP || @es.TX.CSKIP)] LOOPBREAK[] IFEND[]
+					IF[               (@es.TX.SKIP || @es.TX.CSKIP)] LOOPBREAK[] IFEND[]
+
+					WAIT[FRAME=1]
+				}
+				LOOPEND[]
+
+				@es.SND.WAIT.MODE = 0
+			}
+			ELSE[]
+			{
+				WAIT[TIME=@mFADE.OUT+20]
+			}
+			IFEND[]
+		}
+		IFEND[]
+	}
+//	IFEND[]
+
+
+	#=es.SND.LEnd
+
+	//----------------------------------------------------------------
+	// パラメータ初期化
+	//----------------------------------------------------------------
+	LOOP[SET=10]
+	{
+		$SNDP.FILE(@_LC-1) = ""
+		@SNDP.FADE.IN(@_LC-1) = -1
+		@SNDP.FADE.OUT(@_LC-1) = -1
+		@SNDP.VOL(@_LC-1) = -1
+		@SNDP.LOOP(@_LC-1) = -1
+		@SNDP.POS.START(@_LC-1) = -99999
+		@SNDP.POS.END(@_LC-1) = -99999
+		@SNDP.POS.RESTART(@_LC-1) = -99999
+		@SNDP.ENDWAIT(@_LC-1) = -1
+	}
+	LOOPEND[]
+
+	IF[@BGM]   @SNDP.THRU(00) = 1 IFEND[]
+	IF[@SE]    @SNDP.THRU(01) = 0 IFEND[]
+	IF[@VO]    @SNDP.THRU(02) = 0 IFEND[]
+	IF[@EBGM]  @SNDP.THRU(03) = 1 IFEND[]
+	IF[@ESE]   @SNDP.THRU(04) = 0 IFEND[]
+	IF[@EVO]   @SNDP.THRU(05) = 0 IFEND[]
+	IF[@E2BGM] @SNDP.THRU(06) = 1 IFEND[]
+	IF[@E2SE]  @SNDP.THRU(07) = 0 IFEND[]
+	IF[@E2VO]  @SNDP.THRU(08) = 0 IFEND[]
+	IF[@SBGM]  @SNDP.THRU(09) = 1 IFEND[]
+	IF[@SSE]   @SNDP.THRU(10) = 0 IFEND[]
+	IF[@SVO]   @SNDP.THRU(11) = 0 IFEND[]
+	IF[@S2BGM] @SNDP.THRU(12) = 1 IFEND[]
+	IF[@S2SE]  @SNDP.THRU(13) = 0 IFEND[]
+	IF[@S2VO]  @SNDP.THRU(14) = 0 IFEND[]
+
+
+	return[]
+}
+
+
+//====================================================================
+//■サウンド情報取得
+//====================================================================
+#=es.SND.INFO.GET
+{
+	STR[$ID  =$_PSTR(1)]
+	INT[@ZSNO=@_PINT(2)]
+	INT[@SSNO=(@ZSNO-1)%10+1]
+	INT[@ptime]SOUNDINFO[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) TIME=1 LET=@ptime]
+	INT[@ttime]SOUNDINFO[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) TOTALTIME=1 LET=@ttime]
+	return[rint=@ptime rint2=@ttime]
+}
+
+
+//====================================================================
+//■サウンド一時停止/再開
+//====================================================================
+#=es.SND.PAUSE
+{
+	STR[$ID  =$_PSTR(1)]
+	INT[@ZSNO=@_PINT(2)]
+	INT[@SSNO=(@ZSNO-1)%10+1]
+	INT[@FLAG=@_PINT(3)]
+	SOUND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) PAUSE=@FLAG]
+	return[]
+}
+
+
+//====================================================================
+//■サウンド停止
+//====================================================================
+#=es.SND.STOP
+{
+	STR[$ID  =$_PSTR(1)]
+	INT[@ZSNO=@_PINT(2)]
+	INT[@SSNO=(@ZSNO-1)%10+1]
+	INT[@FADE=@_PINT(3)]
+	SOUND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) FADE=@FADE PLAY=0]
+	return[]
+}
+
+//====================================================================
+//■サウンド削除
+//====================================================================
+#=es.SND.DEL
+{
+	STR[$ID  =$_PSTR(1)]
+	INT[@ZSNO=@_PINT(2)]
+	INT[@SSNO=(@ZSNO-1)%10+1]
+	SOUNDEND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO)]
+	return[]
+}
+
+
+#=es.VOICE.DEL
+{
+	LOOP[SET=(10)] GOSUB[#=es.SND.DEL PSTR=$SND.LID(02) PINT2=(20)+@_LC] LOOPEND[] //VO
+//	LOOP[SET=(10)] GOSUB[#=es.SND.DEL PSTR=$SND.LID(05) PINT2=(50)+@_LC] LOOPEND[] //EVO
+//	LOOP[SET=(10)] GOSUB[#=es.SND.DEL PSTR=$SND.LID(08) PINT2=(80)+@_LC] LOOPEND[] //E2VO
+	return[]
+}
+
+#=es.VOICE2.DEL
+{
+	GOSUB[#=es.VOICE.DEL]
+	GOSUB[#=es.Voice.DataInit]
+	return[]
+}
+
+
+//------------------------------------------------------------
+// ボイス情報初期化
+//------------------------------------------------------------
+#=es.Voice.DataInit
+{
+	LOOP[SET=(10)] $es.VOICE.FILE(@_LC)="" LOOPEND[]
+
+	return[]
+}
+
+
+
+//====================================================================
+//■指定再生時間まで待つ
+//====================================================================
+#=es.SND.WAIT
+{
+	INT[@ZSNO=@_PINT(1)]
+	INT[@SSNO=(@ZSNO-1)%10+1]
+	INT[@sndp=(@ZSNO-1)/10]
+	INT[@mTIME=@_PINT(2)]
+	INT[@Erase=@_PINT(3)]
+	INT[@ClickSkipFlag=@_PINT(4)]
+	INT[@NOW]
+	INT[@r]
+	INT[@val]
+
+//	IF[@es.MG.AUTOSKIP==0]
+	IF[@es.SP.AUTOSKIP==0]
+	{
+		@es.SND.TIMEWAIT.MODE = 1
+		IF[@Erase==0] @es.SND.TIMEWAIT.MODE = 2 IFEND[]
+
+
+		IF[@mTIME<=0] //値指定無しなら再生終了まで待つ
+		{
+			LOOP[]
+			{
+				SOUNDINFO[ID=$SND.LID(@sndp)+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) PLAY=1 LET=@r]
+				IF[@r==0] LOOPBREAK[] IFEND[]
+
+				IF[@ClickSkipFlag==0]
+					IF[@_MOUSE_L==1 || @_KEY_ENTER==1 || @_KEY_SPACE==1] LOOPBREAK[] IFEND[]
+				IFEND[]
+
+				WAIT[FRAME=1]
+			}
+			LOOPEND[]
+		}
+		ELSE[]
+		{
+			SOUNDINFO[ID=$SND.LID(@sndp)+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) PLAY=1 LET=@r]
+			IF[@r]
+			{
+				SOUNDINFO[ID=$SND.LID(@sndp)+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) TIME=1 LET=@NOW]
+				@val = @mTIME - @NOW
+				IF[@val<0] @val=0 IFEND[]
+	//\_dmes("[BGM.WAIT] 待ち時間 = "+$(@val))
+
+				INT[@starttime=@_OS_TIME(1)]
+				LOOP[]
+				{
+					IF[@es.SP.AUTOSKIP] LOOPBREAK[] IFEND[]
+
+					IF[@_OS_TIME(1)-@starttime >= @val] LOOPBREAK[] IFEND[]
+
+					IF[@ClickSkipFlag==0]
+						IF[@_MOUSE_L==1 || @_KEY_ENTER==1 || @_KEY_SPACE==1] LOOPBREAK[] IFEND[]
+					IFEND[]
+
+					WAIT[FRAME=1]
+				}
+				LOOPEND[]
+
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+		@es.SND.TIMEWAIT.MODE = 0
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.VO.WAIT
+{
+//	IF[@es.MG.AUTOSKIP==0]
+	IF[@es.SP.AUTOSKIP==0]
+	{
+		@es.VO.WAIT.MODE = 1
+
+		LOOP[]
+		{
+			\VO.PCHK
+			IF[@_RINT(1)==0] LOOPBREAK[] IFEND[]
+			WAIT[FRAME=1]
+		}
+		LOOPEND[]
+
+		@es.VO.WAIT.MODE = 0
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//====================================================================
+//■
+//====================================================================
+#=es.VoiceFileCheck
+{
+	INT[@no=-1]
+	INT[@flag]
+	STR[$s]
+	STR[$str]
+	INT[@vno]
+
+	LOOP[SET=@VOD.NUM]
+	{
+		@vno=@VOD.NO(@_LC)
+
+		\_strleft($_PSTR(2), @VOD.STR.LEN(@_LC)) //左端から指定文字数分取得.
+		$s=$_RSTR(1)
+		IF[$s==$VOD.STR(@_LC)] @flag=@vno IFEND[]
+
+		IF[@flag]
+		{
+			@no  = @flag
+			$str = $VOD.FOLDER(@_LC)
+			LOOPBREAK[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	IF[@no==-1]
+	{
+		@no  = @VO.OTHER.PATHDEF
+		$str = $VO.OTHER.PATH.FOLDER
+	}
+	IFEND[]
+
+	return[rstr=$str rint2=@no]
+}
+
+
+//====================================================================
+//■サウンド全て停止
+//====================================================================
+#=es.SOUND_STOPALL
+{
+	INT[@Time=@_PINT(1)]
+	STR[$ID]
+
+	\BGM1(, @Time); \EBGM1(, @Time); \E2BGM1(, @Time)
+	\BGM2(, @Time); \EBGM2(, @Time); \E2BGM2(, @Time)
+	\BGM3(, @Time); \EBGM3(, @Time); \E2BGM3(, @Time)
+	\BGM4(, @Time); \EBGM4(, @Time); \E2BGM4(, @Time)
+//	\SBGM1(, @Time); \S2BGM1(, @Time)
+
+	\SE1(, @Time); \ESE1(, @Time); \E2SE1(, @Time)
+	\SE2(, @Time); \ESE2(, @Time); \E2SE2(, @Time)
+	\SE3(, @Time); \ESE3(, @Time); \E2SE3(, @Time)
+	\SE4(, @Time); \ESE4(, @Time); \E2SE4(, @Time)
+//	\SSE1(, @Time); \S2SE1(, @Time)
+
+	$ID=$SND.LID(02) //VO
+	LOOP[SET=(10)]
+		SOUND[ID=$ID+"A"+$(@_LC) FADE=@Time PLAY=0]
+		SOUND[ID=$ID+"B"+$(@_LC) FADE=@Time PLAY=0]
+	LOOPEND[]
+
+	$ID=$SND.LID(05) //EVO
+	LOOP[SET=(10)]
+		SOUND[ID=$ID+"A"+$(@_LC) FADE=@Time PLAY=0]
+		SOUND[ID=$ID+"B"+$(@_LC) FADE=@Time PLAY=0]
+	LOOPEND[]
+
+	$ID=$SND.LID(08) //E2VO
+	LOOP[SET=(10)]
+		SOUND[ID=$ID+"A"+$(@_LC) FADE=@Time PLAY=0]
+		SOUND[ID=$ID+"B"+$(@_LC) FADE=@Time PLAY=0]
+	LOOPEND[]
+
+	return[]
+}
+
+
+
+//====================================================================
+//
+//■サウンドタスク
+//
+//====================================================================
+#=es.SND.SETVOL.TASK
+{
+	INT[@playflag]
+	INT[@time]
+	INT[@sndp]
+
+	//LOOP[]
+	//{
+		//-----------------------------------------------------------------
+		// サウンドフェード処理
+		//-----------------------------------------------------------------
+		LOOP[SET=(14)+1]
+		{
+			@sndp = @_LC-1
+
+			LOOP[SET=@SND.BUFMAX(@sndp)]
+			{
+				IF[@SND.FADE.MODE(@sndp*10+@_LC)]
+				{
+					@time = @_OS_TIME(1) - @SND.FADE.STARTTIME(@sndp*10+@_LC)
+
+					IF[@time <= @SND.FADE.TIME(@sndp*10+@_LC)]
+					{
+						@Ivol = @SND.FADE.STARTVOL(@sndp*10+@_LC) + (@SND.FADE.ENDVOL(@sndp*10+@_LC) - @SND.FADE.STARTVOL(@sndp*10+@_LC)) * @time / @SND.FADE.TIME(@sndp*10+@_LC)
+						IF[@sndp==00] @es.LSD(003,00+@_LC)=@Ivol IFEND[]
+						IF[@sndp==01] @es.LSD(004,00+@_LC)=@Ivol IFEND[]
+						IF[@sndp==02] @es.LSD(005,00+@_LC)=@Ivol IFEND[]
+						IF[@sndp==03] @es.LSD(003,10+@_LC)=@Ivol IFEND[]
+						IF[@sndp==04] @es.LSD(004,10+@_LC)=@Ivol IFEND[]
+						IF[@sndp==05] @es.LSD(005,10+@_LC)=@Ivol IFEND[]
+						IF[@sndp==06] @es.LSD(003,20+@_LC)=@Ivol IFEND[]
+						IF[@sndp==07] @es.LSD(004,20+@_LC)=@Ivol IFEND[]
+						IF[@sndp==08] @es.LSD(005,20+@_LC)=@Ivol IFEND[]
+						IF[@sndp==09] @es.LSD(003,30+@_LC)=@Ivol IFEND[]
+						IF[@sndp==10] @es.LSD(004,30+@_LC)=@Ivol IFEND[]
+						IF[@sndp==11] @es.LSD(005,30+@_LC)=@Ivol IFEND[]
+						IF[@sndp==12] @es.LSD(003,40+@_LC)=@Ivol IFEND[]
+						IF[@sndp==13] @es.LSD(004,40+@_LC)=@Ivol IFEND[]
+						IF[@sndp==14] @es.LSD(005,40+@_LC)=@Ivol IFEND[]
+						GOSUB[#=es.SND.SETVOL.SND pint=@sndp]
+					}
+					IFEND[]
+					IF[@time > @SND.FADE.TIME(@sndp*10+@_LC)]
+					{
+						@Ivol = @SND.FADE.ENDVOL(@sndp*10+@_LC)
+						IF[@sndp==00] @es.LSD(003,00+@_LC)=@Ivol IFEND[]
+						IF[@sndp==01] @es.LSD(004,00+@_LC)=@Ivol IFEND[]
+						IF[@sndp==02] @es.LSD(005,00+@_LC)=@Ivol IFEND[]
+						IF[@sndp==03] @es.LSD(003,10+@_LC)=@Ivol IFEND[]
+						IF[@sndp==04] @es.LSD(004,10+@_LC)=@Ivol IFEND[]
+						IF[@sndp==05] @es.LSD(005,10+@_LC)=@Ivol IFEND[]
+						IF[@sndp==06] @es.LSD(003,20+@_LC)=@Ivol IFEND[]
+						IF[@sndp==07] @es.LSD(004,20+@_LC)=@Ivol IFEND[]
+						IF[@sndp==08] @es.LSD(005,20+@_LC)=@Ivol IFEND[]
+						IF[@sndp==09] @es.LSD(003,30+@_LC)=@Ivol IFEND[]
+						IF[@sndp==10] @es.LSD(004,30+@_LC)=@Ivol IFEND[]
+						IF[@sndp==11] @es.LSD(005,30+@_LC)=@Ivol IFEND[]
+						IF[@sndp==12] @es.LSD(003,40+@_LC)=@Ivol IFEND[]
+						IF[@sndp==13] @es.LSD(004,40+@_LC)=@Ivol IFEND[]
+						IF[@sndp==14] @es.LSD(005,40+@_LC)=@Ivol IFEND[]
+						GOSUB[#=es.SND.SETVOL.SND pint=@sndp]
+						@SND.FADE.MODE(@sndp*10+@_LC) = 0
+					}
+					IFEND[]
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+		}
+		LOOPEND[]
+
+
+		//-----------------------------------------------------------------
+		// 音声再生時のＢＧＭ減衰
+		//-----------------------------------------------------------------
+		IF[@VO.HIGH.MODE]
+		{
+			//---------------------------------------------------
+			// BGM/SE下げる
+			//---------------------------------------------------
+			IF[@VO.HIGH.MODE==1]
+			{
+				@time = @_OS_TIME(1) - @VO.HIGH.TIME
+				IF[@time <= @FadeOutTime]
+				{
+					@VO.HIGH.VOL = @VO.HIGH.VOL0 + (@es.GSD(029,01) - @VO.HIGH.VOL0) * @time / @FadeOutTime
+					GOSUB[#=es.SND.SETVOL.BGM.LS]
+			//		GOSUB[#=es.SND.SETVOL.SE.LS]
+					GOSUB[#=es.SND.SETVOL.EVO]
+					GOSUB[#=es.SND.SETVOL.E2VO]
+				}
+				IFEND[]
+				IF[@time > @FadeOutTime]
+				{
+					@VO.HIGH.VOL = @es.GSD(029,01)
+					GOSUB[#=es.SND.SETVOL.BGM.LS]
+			//		GOSUB[#=es.SND.SETVOL.SE.LS]
+					GOSUB[#=es.SND.SETVOL.EVO]
+					GOSUB[#=es.SND.SETVOL.E2VO]
+				}
+				IFEND[]
+
+				//再生終了チェック
+				\VO.PCHK
+				IF[@_RINT(1)==0]
+				{
+					@VO.HIGH.MODE=2
+					@VO.HIGH.TIME=@_OS_TIME(1)
+				}
+				IFEND[]
+			}
+			IFEND[]
+
+			//---------------------------------------------------
+			// 少し待つ
+			//---------------------------------------------------
+			IF[@VO.HIGH.MODE==2]
+			{
+				@time = @_OS_TIME(1) - @VO.HIGH.TIME
+				IF[@time >= @FadeWaitTime]
+				{
+					@VO.HIGH.MODE=3
+					@VO.HIGH.TIME=@_OS_TIME(1)
+				}
+				IFEND[]
+			}
+			IFEND[]
+
+			//---------------------------------------------------
+			// BGM上げる
+			//---------------------------------------------------
+			IF[@VO.HIGH.MODE==3]
+			{
+				@time = @_OS_TIME(1) - @VO.HIGH.TIME
+				IF[@time <= @FadeInTime]
+				{
+					@VO.HIGH.VOL = @es.GSD(029,01) + (256 - @es.GSD(029,01)) * @time / @FadeInTime
+					GOSUB[#=es.SND.SETVOL.BGM.LS]
+			//		GOSUB[#=es.SND.SETVOL.SE.LS]
+					GOSUB[#=es.SND.SETVOL.EVO]
+					GOSUB[#=es.SND.SETVOL.E2VO]
+				}
+				IFEND[]
+				IF[@time > @FadeInTime]
+				{
+					@VO.HIGH.VOL=256
+					@VO.HIGH.MODE=0
+					GOSUB[#=es.SND.SETVOL.BGM.LS]
+			//		GOSUB[#=es.SND.SETVOL.SE.LS]
+					GOSUB[#=es.SND.SETVOL.EVO]
+					GOSUB[#=es.SND.SETVOL.E2VO]
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+
+	//	WAIT[FRAME=1]
+	//}
+	//LOOPEND[]
+
+	return[]
+}
+
+
+//------------------------------------------------
+//■サウンドマクロ用
+//------------------------------------------------
+#=es.SSE77.INIT
+{
+/*
+	//ファイル読み込み
+	//
+	SOUND[ID="SE/SSSE11" FILE="SYSSE/SSE01"]
+	SOUND[ID="SE/SSSE21" FILE="SYSSE/SSE02"]
+	SOUND[ID="SE/SSSE31" FILE="SYSSE/SSE03"]
+	SOUND[ID="SE/SSSE41" FILE="SYSSE/SSE04"]
+	SOUND[ID="SE/SSSE51" FILE="SYSSE/SSE05"]
+	SOUND[ID="SE/SSSE61" FILE="SYSSE/SSE06"]
+
+	SOUND[ID="SE/SSSE12" FILE="SYSSE/SSE01"]
+	SOUND[ID="SE/SSSE22" FILE="SYSSE/SSE02"]
+	SOUND[ID="SE/SSSE32" FILE="SYSSE/SSE03"]
+	SOUND[ID="SE/SSSE42" FILE="SYSSE/SSE04"]
+	SOUND[ID="SE/SSSE52" FILE="SYSSE/SSE05"]
+	SOUND[ID="SE/SSSE62" FILE="SYSSE/SSE06"]
+
+	//バッファフラグ(0～1)
+	//
+	@es.SSE77.SW(1) = 0
+	@es.SSE77.SW(2) = 0
+	@es.SSE77.SW(3) = 0
+	@es.SSE77.SW(4) = 0
+	@es.SSE77.SW(5) = 0
+	@es.SSE77.SW(6) = 0
+*/
+	return[]
+}
+
+#=es.SSE77.PLAY
+{
+/*
+	INT[@no=@_PINT(1)]
+	INT[@sw=1]
+	STR[$ID="SE/SSSE"]
+
+	@es.SSE77.SW(@no) = 1 - @es.SSE77.SW(@no)
+	@sw = @es.SSE77.SW(@no) + 1
+
+	INT[@vol]
+	\VOL.SSE.GET(@vol, @_LC)
+
+	SOUND[ID=$ID+$(@no)+$(@sw) PLAY=0]
+	SOUND[ID=$ID+$(@no)+$(@sw) PLAY=1 VOLUME=@vol LOOP=1]
+*/
+	return[]
+}
+
+
+//====================================================================
+//■ＢＧＭ定義
+//====================================================================
+#=es.BGMDEF
+{
+	@BGMD.NUM += 1
+	\VAR.ADD($BGMD.NAME, $_PSTR(1))
+	\VAR.ADD($BGMD.FILE, $_PSTR(2))
+	\VAR.ADD(@BGMD.VOL, @_PINT(3))
+	\VAR.ADD(@BGMD.LOOP, @_PINT(4))
+	\VAR.ADD(@BGMD.FADE.IN, @_PINT(5))
+	\VAR.ADD(@BGMD.POS.START, @_PINT(6))
+	\VAR.ADD(@BGMD.POS.END, @_PINT(7))
+	\VAR.ADD(@BGMD.POS.RESTART, @_PINT(8))
+
+	return[rint=@BGMD.NUM]
+}
+
+
+//====================================================================
+//■ＳＥ定義
+//====================================================================
+#=es.SEDEF
+{
+	@SED.NUM += 1
+	\VAR.ADD($SED.NAME, $_PSTR(1))
+	\VAR.ADD($SED.FILE, $_PSTR(2))
+	\VAR.ADD(@SED.VOL, @_PINT(3))
+	\VAR.ADD(@SED.LOOP, @_PINT(4))
+	\VAR.ADD(@SED.FADE.IN, @_PINT(5))
+	\VAR.ADD(@SED.ENDWAIT, @_PINT(6))
+	\VAR.ADD(@SED.POS.START, @_PINT(7))
+	\VAR.ADD(@SED.POS.END, @_PINT(8))
+	\VAR.ADD(@SED.POS.RESTART, @_PINT(9))
+
+	return[rint=@SED.NUM]
+}
+
+
+//====================================================================
+//■ボイス文字列定義＆フォルダ定義
+//====================================================================
+#=es.VO.PATHDEF
+{
+	//----------------------------------------------------------------
+	// 定義
+	//----------------------------------------------------------------
+		LOOP[SET=(4)]
+		{
+			IF[$VOP.STR(@_LC-1)!=""]
+			{
+				@VOD.NUM+=1
+				\VAR.ADD(@VOD.NO, @_PINT(1))
+				\VAR.ADD($VOD.FOLDER, $VOP.FOLDER)
+				\VAR.ADD($VOD.STR, $VOP.STR(@_LC-1))
+				\_strlen($VOP.STR(@_LC-1))
+				\VAR.ADD(@VOD.STR.LEN, @_RINT(1))
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+
+	//----------------------------------------------------------------
+	// パラメータ初期化
+	//----------------------------------------------------------------
+		$VOP.FOLDER = ""
+		$VOP.STR(0) = ""
+		$VOP.STR(1) = ""
+		$VOP.STR(2) = ""
+		$VOP.STR(3) = ""
+
+	return[]
+}
+
+
+//====================================================================
+//■サウンド情報セーブ
+// ( @No ～ @No+7 )
+//====================================================================
+#=es.SOUND.SAVE
+{
+	INT[@No=@_PINT(1)]
+
+	SAVE[DNO=@No    SET=$SNDI.FILE()]			// SNDファイル名
+	SAVE[DNO=@No+01 SET=@SNDI.VOL()]			// SND音量情報
+	SAVE[DNO=@No+02 SET=@SNDI.LOOP()]			// SNDループ情報
+	SAVE[DNO=@No+03 SET=@SNDI.FADE.IN()]		// SNDフェード情報
+	SAVE[DNO=@No+04 SET=@SNDI.FADE.OUT()]		// SNDフェード情報
+	SAVE[DNO=@No+05 SET=@SNDI.POS.START()]		// SND再生地点情報
+	SAVE[DNO=@No+06 SET=@SNDI.POS.END()]		// SND再生地点情報
+	SAVE[DNO=@No+07 SET=@SNDI.POS.RESTART()]	// SND再生地点情報
+
+	return[]
+}
+
+//====================================================================
+//■サウンド情報ロード
+//====================================================================
+/*
+#=es.SOUND.LOAD
+{
+	return[]
+}
+*/
+
+
+//====================================================================
+//■ボリュームセット
+//====================================================================
+#=es.SOUND.SETVOL
+{
+	GOSUB[#=es.SND.SETVOL.MASTER]
+
+	GOSUB[#=es.SND.SETVOL.BGM.LS]; GOSUB[#=es.SND.SETVOL.SE.LS]; GOSUB[#=es.SND.SETVOL.VO.LS]
+	GOSUB[#=es.SND.SETVOL.EBGM.LS]; GOSUB[#=es.SND.SETVOL.ESE.LS]; GOSUB[#=es.SND.SETVOL.EVO.LS]
+	GOSUB[#=es.SND.SETVOL.E2BGM.LS]; GOSUB[#=es.SND.SETVOL.E2SE.LS]; GOSUB[#=es.SND.SETVOL.E2VO.LS]
+	GOSUB[#=es.SND.SETVOL.SBGM.LS]; GOSUB[#=es.SND.SETVOL.SSE.LS]; GOSUB[#=es.SND.SETVOL.SVO.LS]
+	GOSUB[#=es.SND.SETVOL.S2BGM.LS]; GOSUB[#=es.SND.SETVOL.S2SE.LS]; GOSUB[#=es.SND.SETVOL.S2VO.LS]
+
+	GOSUB[#=es.SND.SETVOL.BGM]; GOSUB[#=es.SND.SETVOL.SE]; GOSUB[#=es.SND.SETVOL.VO]
+	GOSUB[#=es.SND.SETVOL.EBGM]; GOSUB[#=es.SND.SETVOL.ESE]; GOSUB[#=es.SND.SETVOL.EVO]
+	GOSUB[#=es.SND.SETVOL.E2BGM]; GOSUB[#=es.SND.SETVOL.E2SE]; GOSUB[#=es.SND.SETVOL.E2VO]
+	GOSUB[#=es.SND.SETVOL.SBGM]; GOSUB[#=es.SND.SETVOL.SSE]; GOSUB[#=es.SND.SETVOL.SVO]
+	GOSUB[#=es.SND.SETVOL.S2BGM]; GOSUB[#=es.SND.SETVOL.S2SE]; GOSUB[#=es.SND.SETVOL.S2VO]
+
+	return[]
+}
+
+
+#=es.SND.SETVOL.MASTER		{ \VOL.MASTER.GET(@Ivol);   SOUND[ID=":/S0/" VOLUME=@Ivol] return[] }
+
+#=es.SND.SETVOL.BGM.LS		{ \VOL.BGM.LS.GET(@Ivol);   SOUND[ID=$SND.LID(00) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.SE.LS		{ \VOL.SE.LS.GET(@Ivol);    SOUND[ID=$SND.LID(01) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.VO.LS		{ \VOL.VO.LS.GET(@Ivol);    SOUND[ID=$SND.LID(02) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.EBGM.LS		{ \VOL.EBGM.LS.GET(@Ivol);  SOUND[ID=$SND.LID(03) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.ESE.LS		{ \VOL.ESE.LS.GET(@Ivol);   SOUND[ID=$SND.LID(04) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.EVO.LS		{ \VOL.EVO.LS.GET(@Ivol);   SOUND[ID=$SND.LID(05) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.E2BGM.LS	{ \VOL.E2BGM.LS.GET(@Ivol); SOUND[ID=$SND.LID(06) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.E2SE.LS		{ \VOL.E2SE.LS.GET(@Ivol);  SOUND[ID=$SND.LID(07) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.E2VO.LS		{ \VOL.E2VO.LS.GET(@Ivol);  SOUND[ID=$SND.LID(08) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.SBGM.LS		{ \VOL.SBGM.LS.GET(@Ivol);  SOUND[ID=$SND.LID(09) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.SSE.LS		{ \VOL.SSE.LS.GET(@Ivol);   SOUND[ID=$SND.LID(10) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.SVO.LS		{ \VOL.SVO.LS.GET(@Ivol);   SOUND[ID=$SND.LID(11) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.S2BGM.LS	{ \VOL.S2BGM.LS.GET(@Ivol); SOUND[ID=$SND.LID(12) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.S2SE.LS		{ \VOL.S2SE.LS.GET(@Ivol);  SOUND[ID=$SND.LID(13) VOLUME=@Ivol] return[] }
+#=es.SND.SETVOL.S2VO.LS		{ \VOL.S2VO.LS.GET(@Ivol);  SOUND[ID=$SND.LID(14) VOLUME=@Ivol] return[] }
+
+#=es.SND.SETVOL.BGM		{ GOSUB[#=es.SND.SETVOL.SND pint=00] return[] }
+#=es.SND.SETVOL.SE		{ GOSUB[#=es.SND.SETVOL.SND pint=01] return[] }
+#=es.SND.SETVOL.VO		{ GOSUB[#=es.SND.SETVOL.SND pint=02] return[] }
+#=es.SND.SETVOL.EBGM	{ GOSUB[#=es.SND.SETVOL.SND pint=03] return[] }
+#=es.SND.SETVOL.ESE		{ GOSUB[#=es.SND.SETVOL.SND pint=04] return[] }
+#=es.SND.SETVOL.EVO		{ GOSUB[#=es.SND.SETVOL.SND pint=05] return[] }
+#=es.SND.SETVOL.E2BGM	{ GOSUB[#=es.SND.SETVOL.SND pint=06] return[] }
+#=es.SND.SETVOL.E2SE	{ GOSUB[#=es.SND.SETVOL.SND pint=07] return[] }
+#=es.SND.SETVOL.E2VO	{ GOSUB[#=es.SND.SETVOL.SND pint=08] return[] }
+#=es.SND.SETVOL.SBGM	{ GOSUB[#=es.SND.SETVOL.SND pint=09] return[] }
+#=es.SND.SETVOL.SSE		{ GOSUB[#=es.SND.SETVOL.SND pint=10] return[] }
+#=es.SND.SETVOL.SVO		{ GOSUB[#=es.SND.SETVOL.SND pint=11] return[] }
+#=es.SND.SETVOL.S2BGM	{ GOSUB[#=es.SND.SETVOL.SND pint=12] return[] }
+#=es.SND.SETVOL.S2SE	{ GOSUB[#=es.SND.SETVOL.SND pint=13] return[] }
+#=es.SND.SETVOL.S2VO	{ GOSUB[#=es.SND.SETVOL.SND pint=14] return[] }
+
+#=es.SND.SETVOL.SND
+{
+	INT[@sndp=@_PINT(1)]
+	STR[$ID=$SND.LID(@sndp)]
+	INT[@ZSNO]
+	INT[@SSNO]
+
+	LOOP[SET=(10)]
+	{
+		@ZSNO = @sndp*10 + @_LC
+		@SSNO = (@ZSNO-1)%10 + 1
+
+		GOSUB[#=es.VOL.SND.GET pint=@ZSNO];@Ivol=@_RINT(1)
+		SOUND[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) VOLUME=@Ivol]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+
+//////
+
+
+#=es.VOL.SND.GET
+{
+	INT[@zsno=@_PINT(1)]
+	INT[@ssno=(@zsno-1)%10+1]
+	INT[@sndp=(@zsno-1)/10]
+
+	IF[@sndp==00] \VOL.BGM.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==01] \VOL.SE.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==02] \VOL.VO.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==03] \VOL.EBGM.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==04] \VOL.ESE.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==05] \VOL.EVO.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==06] \VOL.E2BGM.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==07] \VOL.E2SE.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==08] \VOL.E2VO.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==09] \VOL.SBGM.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==10] \VOL.SSE.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==11] \VOL.SVO.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==12] \VOL.S2BGM.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==13] \VOL.S2SE.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+	IF[@sndp==14] \VOL.S2VO.GET(@Ivol, @ssno, @SNDI.DATA(@zsno)) IFEND[]
+
+	//通常音声再生中は環境音声をミュートする処理.
+	IF[@sndp==05 || @sndp==08] //EVO, E2VO
+	{
+		//	IF[@VO.HIGH.MODE && @SNDI.DATA(@ZSNO)==@es.VO.HIGH.CHARA] @Ivol = 0 IFEND[]
+			IF[@VO.HIGH.MODE] @Ivol = 0 IFEND[]
+	}
+	IFEND[]
+
+	return[rint=@Ivol]
+}
+
+
+//△MASTER音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.MASTER.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,01) * @es.GSD(001,05) / 256.0	//全体G1
+	@Fvol *= @es.GSD(002,01) * @es.GSD(002,05) / 256.0	//全体G2
+	@Fvol *= @es.LSD(001,01) * @es.LSD(001,05) / 256.0	//全体L1
+	@Fvol *= @es.LSD(002,01) * @es.LSD(002,05) / 256.0	//全体L2
+	return[rint=@Fvol]
+}
+
+//△BGM音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.BGM.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,02) * @es.GSD(001,06) / 256.0	//BGM全体G1
+	@Fvol *= @es.GSD(002,02) * @es.GSD(002,06) / 256.0	//BGM全体G2
+	@Fvol *= @es.LSD(001,02) * @es.LSD(001,06) / 256.0	//BGM全体L1
+	@Fvol *= @es.LSD(002,02) * @es.LSD(002,06) / 256.0	//BGM全体L2
+	@Fvol *= @VO.HIGH.VOL / 256.0						//音声再生時のＢＧＭ減衰
+	return[rint=@Fvol]
+}
+
+#=es.VOL.BGM.GET
+{
+	INT[@b=@_PINT(1)] //チャンネル番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(003,00+@b) * @es.GSD(003,50+@b) / 256.0	//BGMチャンネル別G1
+	@Fvol *= @es.GSD(006,00+@b) * @es.GSD(006,50+@b) / 256.0	//BGMチャンネル別G2
+	@Fvol *= @es.LSD(003,00+@b) * @es.LSD(003,50+@b) / 256.0	//BGMチャンネル別L1
+	@Fvol *= @es.LSD(006,00+@b) * @es.LSD(006,50+@b) / 256.0	//BGMチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△SE音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.SE.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,03) * @es.GSD(001,07) / 256.0	//SE全体G1
+	@Fvol *= @es.GSD(002,03) * @es.GSD(002,07) / 256.0	//SE全体G2
+	@Fvol *= @es.LSD(001,03) * @es.LSD(001,07) / 256.0	//SE全体L1
+	@Fvol *= @es.LSD(002,03) * @es.LSD(002,07) / 256.0	//SE全体L2
+//	@Fvol *= @VO.HIGH.VOL / 256.0						//音声再生時のＢＧＭ減衰
+	return[rint=@Fvol]
+}
+
+#=es.VOL.SE.GET
+{
+	INT[@b=@_PINT(1)] //チャンネル番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(004,00+@b) * @es.GSD(004,50+@b) / 256.0	//SEチャンネル別G1
+	@Fvol *= @es.GSD(007,00+@b) * @es.GSD(007,50+@b) / 256.0	//SEチャンネル別G2
+	@Fvol *= @es.LSD(004,00+@b) * @es.LSD(004,50+@b) / 256.0	//SEチャンネル別L1
+	@Fvol *= @es.LSD(007,00+@b) * @es.LSD(007,50+@b) / 256.0	//SEチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△VO音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.VO.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,04) * @es.GSD(001,08) / 256.0	//VO全体G1
+	@Fvol *= @es.GSD(002,04) * @es.GSD(002,08) / 256.0	//VO全体G2
+	@Fvol *= @es.LSD(001,04) * @es.LSD(001,08) / 256.0	//VO全体L1
+	@Fvol *= @es.LSD(002,04) * @es.LSD(002,08) / 256.0	//VO全体L2
+	return[rint=@Fvol]
+}
+
+#=es.VOL.VO.GET
+{
+	INT[@b = @_PINT(1)] //チャンネル番号
+	INT[@c = @_PINT(2)] //キャラ番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(009,@c) * @es.GSD(010,@c) / 256.0	//VOキャラ別G1
+	@Fvol *= @es.GSD(011,@c) * @es.GSD(012,@c) / 256.0	//VOキャラ別G2
+	@Fvol *= @es.LSD(009,@c) * @es.LSD(010,@c) / 256.0	//VOキャラ別L1
+	@Fvol *= @es.LSD(011,@c) * @es.LSD(012,@c) / 256.0	//VOキャラ別L2
+	@Fvol *= @es.GSD(005,00+@b) * @es.GSD(005,50+@b) / 256.0	//VOチャンネル別G1
+	@Fvol *= @es.GSD(008,00+@b) * @es.GSD(008,50+@b) / 256.0	//VOチャンネル別G2
+	@Fvol *= @es.LSD(005,00+@b) * @es.LSD(005,50+@b) / 256.0	//VOチャンネル別L1
+	@Fvol *= @es.LSD(008,00+@b) * @es.LSD(008,50+@b) / 256.0	//VOチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△EBGM音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.EBGM.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,12) * @es.GSD(001,16) / 256.0	//EBGM全体G1
+	@Fvol *= @es.GSD(002,12) * @es.GSD(002,16) / 256.0	//EBGM全体G2
+	@Fvol *= @es.LSD(001,12) * @es.LSD(001,16) / 256.0	//EBGM全体L1
+	@Fvol *= @es.LSD(002,12) * @es.LSD(002,16) / 256.0	//EBGM全体L2
+	@Fvol *= @VO.HIGH.VOL / 256.0						//音声再生時のＢＧＭ減衰
+	return[rint=@Fvol]
+}
+
+#=es.VOL.EBGM.GET
+{
+	INT[@b=@_PINT(1)] //チャンネル番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(003,10+@b) * @es.GSD(003,60+@b) / 256.0	//EBGMチャンネル別G1
+	@Fvol *= @es.GSD(006,10+@b) * @es.GSD(006,60+@b) / 256.0	//EBGMチャンネル別G2
+	@Fvol *= @es.LSD(003,10+@b) * @es.LSD(003,60+@b) / 256.0	//EBGMチャンネル別L1
+	@Fvol *= @es.LSD(006,10+@b) * @es.LSD(006,60+@b) / 256.0	//EBGMチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△ESE音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.ESE.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,13) * @es.GSD(001,17) / 256.0	//ESE全体G1
+	@Fvol *= @es.GSD(002,13) * @es.GSD(002,17) / 256.0	//ESE全体G2
+	@Fvol *= @es.LSD(001,13) * @es.LSD(001,17) / 256.0	//ESE全体L1
+	@Fvol *= @es.LSD(002,13) * @es.LSD(002,17) / 256.0	//ESE全体L2
+//	@Fvol *= @VO.HIGH.VOL / 256.0						//音声再生時のＢＧＭ減衰
+	return[rint=@Fvol]
+}
+
+#=es.VOL.ESE.GET
+{
+	INT[@b=@_PINT(1)] //チャンネル番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(004,10+@b) * @es.GSD(004,60+@b) / 256.0	//ESEチャンネル別G1
+	@Fvol *= @es.GSD(007,10+@b) * @es.GSD(007,60+@b) / 256.0	//ESEチャンネル別G2
+	@Fvol *= @es.LSD(004,10+@b) * @es.LSD(004,60+@b) / 256.0	//ESEチャンネル別L1
+	@Fvol *= @es.LSD(007,10+@b) * @es.LSD(007,60+@b) / 256.0	//ESEチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△EVO音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.EVO.LS.GET
+{
+/*
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,14) * @es.GSD(001,18) / 256.0	//EVO全体G1
+	@Fvol *= @es.GSD(002,14) * @es.GSD(002,18) / 256.0	//EVO全体G2
+	@Fvol *= @es.LSD(001,14) * @es.LSD(001,18) / 256.0	//EVO全体L1
+	@Fvol *= @es.LSD(002,14) * @es.LSD(002,18) / 256.0	//EVO全体L2
+*/
+//VO
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,04) * @es.GSD(001,08) / 256.0	//VO全体G1
+	@Fvol *= @es.GSD(002,04) * @es.GSD(002,08) / 256.0	//VO全体G2
+	@Fvol *= @es.LSD(001,04) * @es.LSD(001,08) / 256.0	//VO全体L1
+	@Fvol *= @es.LSD(002,04) * @es.LSD(002,08) / 256.0	//VO全体L2
+
+	return[rint=@Fvol]
+}
+
+#=es.VOL.EVO.GET
+{
+/*
+	INT[@b = @_PINT(1)] //チャンネル番号
+	INT[@c = @_PINT(2)] //キャラ番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(013,@c) * @es.GSD(014,@c) / 256.0	//EVOキャラ別G1
+	@Fvol *= @es.GSD(015,@c) * @es.GSD(016,@c) / 256.0	//EVOキャラ別G2
+	@Fvol *= @es.LSD(013,@c) * @es.LSD(014,@c) / 256.0	//EVOキャラ別L1
+	@Fvol *= @es.LSD(015,@c) * @es.LSD(016,@c) / 256.0	//EVOキャラ別L2
+	@Fvol *= @es.GSD(005,10+@b) * @es.GSD(005,60+@b) / 256.0	//EVOチャンネル別G1
+	@Fvol *= @es.GSD(008,10+@b) * @es.GSD(008,60+@b) / 256.0	//EVOチャンネル別G2
+	@Fvol *= @es.LSD(005,10+@b) * @es.LSD(005,60+@b) / 256.0	//EVOチャンネル別L1
+	@Fvol *= @es.LSD(008,10+@b) * @es.LSD(008,60+@b) / 256.0	//EVOチャンネル別L2
+*/
+//VO
+	INT[@b = @_PINT(1)] //チャンネル番号
+	INT[@c = @_PINT(2)] //キャラ番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(009,@c) * @es.GSD(010,@c) / 256.0	//VOキャラ別G1
+	@Fvol *= @es.GSD(011,@c) * @es.GSD(012,@c) / 256.0	//VOキャラ別G2
+	@Fvol *= @es.LSD(009,@c) * @es.LSD(010,@c) / 256.0	//VOキャラ別L1
+	@Fvol *= @es.LSD(011,@c) * @es.LSD(012,@c) / 256.0	//VOキャラ別L2
+	@Fvol *= @es.GSD(005,00+@b) * @es.GSD(005,50+@b) / 256.0	//VOチャンネル別G1
+	@Fvol *= @es.GSD(008,00+@b) * @es.GSD(008,50+@b) / 256.0	//VOチャンネル別G2
+	@Fvol *= @es.LSD(005,00+@b) * @es.LSD(005,50+@b) / 256.0	//VOチャンネル別L1
+	@Fvol *= @es.LSD(008,00+@b) * @es.LSD(008,50+@b) / 256.0	//VOチャンネル別L2
+
+	return[rint=@Fvol]
+}
+
+//△E2BGM音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.E2BGM.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,22) * @es.GSD(001,26) / 256.0	//E2BGM全体G1
+	@Fvol *= @es.GSD(002,22) * @es.GSD(002,26) / 256.0	//E2BGM全体G2
+	@Fvol *= @es.LSD(001,22) * @es.LSD(001,26) / 256.0	//E2BGM全体L1
+	@Fvol *= @es.LSD(002,22) * @es.LSD(002,26) / 256.0	//E2BGM全体L2
+	@Fvol *= @VO.HIGH.VOL / 256.0						//音声再生時のＢＧＭ減衰
+	return[rint=@Fvol]
+}
+
+#=es.VOL.E2BGM.GET
+{
+	INT[@b=@_PINT(1)] //チャンネル番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(003,20+@b) * @es.GSD(003,70+@b) / 256.0	//E2BGMチャンネル別G1
+	@Fvol *= @es.GSD(006,20+@b) * @es.GSD(006,70+@b) / 256.0	//E2BGMチャンネル別G2
+	@Fvol *= @es.LSD(003,20+@b) * @es.LSD(003,70+@b) / 256.0	//E2BGMチャンネル別L1
+	@Fvol *= @es.LSD(006,20+@b) * @es.LSD(006,70+@b) / 256.0	//E2BGMチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△E2SE音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.E2SE.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,23) * @es.GSD(001,27) / 256.0	//E2SE全体G1
+	@Fvol *= @es.GSD(002,23) * @es.GSD(002,27) / 256.0	//E2SE全体G2
+	@Fvol *= @es.LSD(001,23) * @es.LSD(001,27) / 256.0	//E2SE全体L1
+	@Fvol *= @es.LSD(002,23) * @es.LSD(002,27) / 256.0	//E2SE全体L2
+//	@Fvol *= @VO.HIGH.VOL / 256.0						//音声再生時のＢＧＭ減衰
+	return[rint=@Fvol]
+}
+
+#=es.VOL.E2SE.GET
+{
+	INT[@b=@_PINT(1)] //チャンネル番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(004,20+@b) * @es.GSD(004,70+@b) / 256.0	//E2SEチャンネル別G1
+	@Fvol *= @es.GSD(007,20+@b) * @es.GSD(007,70+@b) / 256.0	//E2SEチャンネル別G2
+	@Fvol *= @es.LSD(004,20+@b) * @es.LSD(004,70+@b) / 256.0	//E2SEチャンネル別L1
+	@Fvol *= @es.LSD(007,20+@b) * @es.LSD(007,70+@b) / 256.0	//E2SEチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△E2VO音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.E2VO.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,24) * @es.GSD(001,28) / 256.0	//E2VO全体G1
+	@Fvol *= @es.GSD(002,24) * @es.GSD(002,28) / 256.0	//E2VO全体G2
+	@Fvol *= @es.LSD(001,24) * @es.LSD(001,28) / 256.0	//E2VO全体L1
+	@Fvol *= @es.LSD(002,24) * @es.LSD(002,28) / 256.0	//E2VO全体L2
+	return[rint=@Fvol]
+}
+
+#=es.VOL.E2VO.GET
+{
+	INT[@b = @_PINT(1)] //チャンネル番号
+	INT[@c = @_PINT(2)] //キャラ番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(017,@c) * @es.GSD(018,@c) / 256.0	//E2VOキャラ別G1
+	@Fvol *= @es.GSD(019,@c) * @es.GSD(020,@c) / 256.0	//E2VOキャラ別G2
+	@Fvol *= @es.LSD(017,@c) * @es.LSD(018,@c) / 256.0	//E2VOキャラ別L1
+	@Fvol *= @es.LSD(019,@c) * @es.LSD(020,@c) / 256.0	//E2VOキャラ別L2
+	@Fvol *= @es.GSD(005,20+@b) * @es.GSD(005,70+@b) / 256.0	//E2VOチャンネル別G1
+	@Fvol *= @es.GSD(008,20+@b) * @es.GSD(008,70+@b) / 256.0	//E2VOチャンネル別G2
+	@Fvol *= @es.LSD(005,20+@b) * @es.LSD(005,70+@b) / 256.0	//E2VOチャンネル別L1
+	@Fvol *= @es.LSD(008,20+@b) * @es.LSD(008,70+@b) / 256.0	//E2VOチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△SBGM音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.SBGM.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,32) * @es.GSD(001,36) / 256.0	//SBGM全体G1
+	@Fvol *= @es.GSD(002,32) * @es.GSD(002,36) / 256.0	//SBGM全体G2
+	@Fvol *= @es.LSD(001,32) * @es.LSD(001,36) / 256.0	//SBGM全体L1
+	@Fvol *= @es.LSD(002,32) * @es.LSD(002,36) / 256.0	//SBGM全体L2
+	return[rint=@Fvol]
+}
+
+#=es.VOL.SBGM.GET
+{
+	INT[@b=@_PINT(1)] //チャンネル番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(003,30+@b) * @es.GSD(003,80+@b) / 256.0	//SBGMチャンネル別G1
+	@Fvol *= @es.GSD(006,30+@b) * @es.GSD(006,80+@b) / 256.0	//SBGMチャンネル別G2
+	@Fvol *= @es.LSD(003,30+@b) * @es.LSD(003,80+@b) / 256.0	//SBGMチャンネル別L1
+	@Fvol *= @es.LSD(006,30+@b) * @es.LSD(006,80+@b) / 256.0	//SBGMチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△SSE音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.SSE.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,33) * @es.GSD(001,37) / 256.0	//SSE全体G1
+	@Fvol *= @es.GSD(002,33) * @es.GSD(002,37) / 256.0	//SSE全体G2
+	@Fvol *= @es.LSD(001,33) * @es.LSD(001,37) / 256.0	//SSE全体L1
+	@Fvol *= @es.LSD(002,33) * @es.LSD(002,37) / 256.0	//SSE全体L2
+	return[rint=@Fvol]
+}
+
+#=es.VOL.SSE.GET
+{
+	INT[@b=@_PINT(1)] //チャンネル番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(004,30+@b) * @es.GSD(004,80+@b) / 256.0	//SSEチャンネル別G1
+	@Fvol *= @es.GSD(007,30+@b) * @es.GSD(007,80+@b) / 256.0	//SSEチャンネル別G2
+	@Fvol *= @es.LSD(004,30+@b) * @es.LSD(004,80+@b) / 256.0	//SSEチャンネル別L1
+	@Fvol *= @es.LSD(007,30+@b) * @es.LSD(007,80+@b) / 256.0	//SSEチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△SVO音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.SVO.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,34) * @es.GSD(001,38) / 256.0	//SVO全体G1
+	@Fvol *= @es.GSD(002,34) * @es.GSD(002,38) / 256.0	//SVO全体G2
+	@Fvol *= @es.LSD(001,34) * @es.LSD(001,38) / 256.0	//SVO全体L1
+	@Fvol *= @es.LSD(002,34) * @es.LSD(002,38) / 256.0	//SVO全体L2
+	return[rint=@Fvol]
+}
+
+#=es.VOL.SVO.GET
+{
+	INT[@b = @_PINT(1)] //チャンネル番号
+	INT[@c = @_PINT(2)] //キャラ番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(021,@c) * @es.GSD(022,@c) / 256.0	//SVOキャラ別G1
+	@Fvol *= @es.GSD(023,@c) * @es.GSD(024,@c) / 256.0	//SVOキャラ別G2
+	@Fvol *= @es.LSD(021,@c) * @es.LSD(022,@c) / 256.0	//SVOキャラ別L1
+	@Fvol *= @es.LSD(023,@c) * @es.LSD(024,@c) / 256.0	//SVOキャラ別L2
+	@Fvol *= @es.GSD(005,30+@b) * @es.GSD(005,80+@b) / 256.0	//SVOチャンネル別G1
+	@Fvol *= @es.GSD(008,30+@b) * @es.GSD(008,80+@b) / 256.0	//SVOチャンネル別G2
+	@Fvol *= @es.LSD(005,30+@b) * @es.LSD(005,80+@b) / 256.0	//SVOチャンネル別L1
+	@Fvol *= @es.LSD(008,30+@b) * @es.LSD(008,80+@b) / 256.0	//SVOチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△S2BGM音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.S2BGM.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,42) * @es.GSD(001,46) / 256.0	//S2BGM全体G1
+	@Fvol *= @es.GSD(002,42) * @es.GSD(002,46) / 256.0	//S2BGM全体G2
+	@Fvol *= @es.LSD(001,42) * @es.LSD(001,46) / 256.0	//S2BGM全体L1
+	@Fvol *= @es.LSD(002,42) * @es.LSD(002,46) / 256.0	//S2BGM全体L2
+	return[rint=@Fvol]
+}
+
+#=es.VOL.S2BGM.GET
+{
+	INT[@b=@_PINT(1)] //チャンネル番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(003,40+@b) * @es.GSD(003,90+@b) / 256.0	//S2BGMチャンネル別G1
+	@Fvol *= @es.GSD(006,40+@b) * @es.GSD(006,90+@b) / 256.0	//S2BGMチャンネル別G2
+	@Fvol *= @es.LSD(003,40+@b) * @es.LSD(003,90+@b) / 256.0	//S2BGMチャンネル別L1
+	@Fvol *= @es.LSD(006,40+@b) * @es.LSD(006,90+@b) / 256.0	//S2BGMチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△S2SE音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.S2SE.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,43) * @es.GSD(001,47) / 256.0	//S2SE全体G1
+	@Fvol *= @es.GSD(002,43) * @es.GSD(002,47) / 256.0	//S2SE全体G2
+	@Fvol *= @es.LSD(001,43) * @es.LSD(001,47) / 256.0	//S2SE全体L1
+	@Fvol *= @es.LSD(002,43) * @es.LSD(002,47) / 256.0	//S2SE全体L2
+	return[rint=@Fvol]
+}
+
+#=es.VOL.S2SE.GET
+{
+	INT[@b=@_PINT(1)] //チャンネル番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(004,40+@b) * @es.GSD(004,90+@b) / 256.0	//S2SEチャンネル別G1
+	@Fvol *= @es.GSD(007,40+@b) * @es.GSD(007,90+@b) / 256.0	//S2SEチャンネル別G2
+	@Fvol *= @es.LSD(004,40+@b) * @es.LSD(004,90+@b) / 256.0	//S2SEチャンネル別L1
+	@Fvol *= @es.LSD(007,40+@b) * @es.LSD(007,90+@b) / 256.0	//S2SEチャンネル別L2
+	return[rint=@Fvol]
+}
+
+//△S2VO音量値 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VOL.S2VO.LS.GET
+{
+	@Fvol  = 256
+	@Fvol *= @es.GSD(001,44) * @es.GSD(001,48) / 256.0	//S2VO全体G1
+	@Fvol *= @es.GSD(002,44) * @es.GSD(002,48) / 256.0	//S2VO全体G2
+	@Fvol *= @es.LSD(001,44) * @es.LSD(001,48) / 256.0	//S2VO全体L1
+	@Fvol *= @es.LSD(002,44) * @es.LSD(002,48) / 256.0	//S2VO全体L2
+	return[rint=@Fvol]
+}
+
+#=es.VOL.S2VO.GET
+{
+	INT[@b = @_PINT(1)] //チャンネル番号
+	INT[@c = @_PINT(2)] //キャラ番号
+	@Fvol  = 256
+	@Fvol *= @es.GSD(025,@c) * @es.GSD(026,@c) / 256.0	//S2VOキャラ別G1
+	@Fvol *= @es.GSD(027,@c) * @es.GSD(028,@c) / 256.0	//S2VOキャラ別G2
+	@Fvol *= @es.LSD(025,@c) * @es.LSD(026,@c) / 256.0	//S2VOキャラ別L1
+	@Fvol *= @es.LSD(027,@c) * @es.LSD(028,@c) / 256.0	//S2VOキャラ別L2
+	@Fvol *= @es.GSD(005,40+@b) * @es.GSD(005,90+@b) / 256.0	//S2VOチャンネル別G1
+	@Fvol *= @es.GSD(008,40+@b) * @es.GSD(008,90+@b) / 256.0	//S2VOチャンネル別G2
+	@Fvol *= @es.LSD(005,40+@b) * @es.LSD(005,90+@b) / 256.0	//S2VOチャンネル別L1
+	@Fvol *= @es.LSD(008,40+@b) * @es.LSD(008,90+@b) / 256.0	//S2VOチャンネル別L2
+	return[rint=@Fvol]
+}
+
+
+//△サウンドが現在再生されているか否か @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.SND.PLAYFLAG.GET
+{
+	INT[@sndp=@_PINT(1)]
+	INT[@bufno=@_PINT(2)]
+
+	STR[$ID=$SND.LID(@sndp)]
+
+	INT[@c] //キャラ番号
+	INT[@r]
+	INT[@t]
+	IF[@bufno==0]
+	{
+		LOOP[SET=@SND.BUFMAX(@sndp)]
+		{
+			SOUNDINFO[ID=$ID+$SW(0)+$(@_LC) PLAY=1 LET=@t];@r|=@t
+			SOUNDINFO[ID=$ID+$SW(1)+$(@_LC) PLAY=1 LET=@t];@r|=@t
+		}
+		LOOPEND[]
+	}
+	ELSE[]
+	{
+		SOUNDINFO[ID=$ID+$SW(0)+$(@bufno) PLAY=1 LET=@t];@r|=@t
+		SOUNDINFO[ID=$ID+$SW(1)+$(@bufno) PLAY=1 LET=@t];@r|=@t
+		@c=@SNDI.DATA(@sndp*10+@bufno) //キャラ番号取得
+	}
+	IFEND[]
+
+	return[rint=@r rint2=@c] //rint…再生有無(1/0)、rint2…VO系の場合はキャラ番号
+}
+
+
+//▼ファイル名 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.SND.INFO2.GET
+{
+/*
+	INT[@sndp=@_PINT(1)/10]
+	INT[@bufno=@_PINT(2)%10]
+	INT[@r]
+	INT[@time]
+
+		LOOP[SET=@SND.BUFMAX(@sndp)]
+		{
+			SOUNDINFO[ID=$ID+$SW(0)+$(@_LC) TIME=1 LET=@r];IF[@r>0] @time=@r
+			SOUNDINFO[ID=$ID+$SW(1)+$(@_LC) TIME=1 LET=@r];IF[@r>0] @time=@r
+		}
+		LOOPEND[]
+*/
+	STR[$ID  =$_PSTR(1)]
+	INT[@ZSNO=@_PINT(2)]
+	INT[@SSNO=(@ZSNO-1)%10+1]
+	INT[@ptime]SOUNDINFO[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) TIME=1 LET=@ptime]
+	INT[@ttime]SOUNDINFO[ID=$ID+$SW(@SNDI.SW(@ZSNO))+$(@SSNO) TOTALTIME=1 LET=@ttime]
+
+	IF[$SNDI.FILE(@ZSNO)==""] @ptime=0;@ttime=0 IFEND[]
+
+	return[rstr=$SNDI.FILE(@ZSNO) rint2=@ptime rint3=@ttime]
+}
+
+
+//////
+
+
+//▼ファイル名 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.SND.FILE.SET
+{
+	$SNDP.FILE(@_PINT(1)) = $_PSTR(2)
+	return[]
+}
+
+//▼フェード時間 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.SND.FADE.SET
+{
+	@SNDP.FADE.IN(@_PINT(1)) = @_PINT(2)
+	@SNDP.FADE.OUT(@_PINT(1)) = @_PINT(3)
+	return[]
+}
+
+//▼ループ設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.SND.LOOP.SET
+{
+	@SNDP.LOOP(@_PINT(1)) = @_PINT(2)
+	return[]
+}
+
+//▼再生開始／終了／再開地点 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.SND.POS.SET
+{
+	@SNDP.POS.START(@_PINT(1))   = @_PINT(2)
+	@SNDP.POS.END(@_PINT(1))     = @_PINT(3)
+	@SNDP.POS.RESTART(@_PINT(1)) = @_PINT(4)
+
+	IF[@_PINT(2)!=-99999 && @_PINT(3)!=-99999 && @_PINT(2)>=@_PINT(3)]
+		\_mes("再生開始地点は、終了地点より前を指定してください。");END[]
+	IFEND[]
+	IF[@_PINT(4)!=-99999 && @_PINT(3)!=-99999 && @_PINT(4)>=@_PINT(3)]
+		\_mes("再生再開始地点は、終了地点より前を指定してください。");END[]
+	IFEND[]
+	return[]
+}
+
+//▼音量設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.SND.VOL.SET
+{
+	@SNDP.VOL(@_PINT(1)) = @_PINT(2)
+	return[]
+}
+
+//▼同サウンドスルー設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.SND.THRU.SET
+{
+	@SNDP.THRU(@_PINT(1)) = @_PINT(2)
+	return[]
+}
+
+
+
+
+
+/*
+//▼ＳＥ再生終了待ち設定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.SE.WAIT.SET
+{
+	@SNDP.ENDWAIT(1) = @_PINT(1)
+	return[]
+}
+*/
+
+//▼デフォルトボイスパス @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VO.OTHER.PATH.FOLDER.SET
+{
+	$VO.OTHER.PATH.FOLDER = $_PSTR(1)
+	return[]
+}
+
+//▼デフォルトボイス番号 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VO.OTHER.PATHDEF.SET
+{
+	@VO.OTHER.PATHDEF = @_PINT(1)
+	return[]
+}
+
+//▼フォルダ分けパス @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VO.PATH.FOLDER.SET
+{
+	$VOP.FOLDER = $_PSTR(1)
+	return[]
+}
+
+//▼ファイル名先頭文字列 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.VO.PATH.STR.SET
+{
+	$VOP.STR(0) = $_PSTR(1)
+	$VOP.STR(1) = $_PSTR(2)
+	$VOP.STR(2) = $_PSTR(3)
+	$VOP.STR(3) = $_PSTR(4)
+	return[]
+}
+
+
+//▼各種ベース音量セット @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BGM.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,02)=@Ivol; GOSUB[#=es.SND.SETVOL.BGM.LS]; return[] }
+#=es.SE.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,03)=@Ivol; GOSUB[#=es.SND.SETVOL.SE.LS]; return[] }
+#=es.VO.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,04)=@Ivol; GOSUB[#=es.SND.SETVOL.VO]; return[] }
+#=es.EBGM.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,12)=@Ivol; GOSUB[#=es.SND.SETVOL.EBGM.LS]; return[] }
+#=es.ESE.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,13)=@Ivol; GOSUB[#=es.SND.SETVOL.ESE]; return[] }
+#=es.EVO.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,14)=@Ivol; GOSUB[#=es.SND.SETVOL.EVO]; return[] }
+#=es.E2BGM.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,22)=@Ivol; GOSUB[#=es.SND.SETVOL.E2BGM.LS]; return[] }
+#=es.E2SE.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,23)=@Ivol; GOSUB[#=es.SND.SETVOL.E2SE]; return[] }
+#=es.E2VO.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,24)=@Ivol; GOSUB[#=es.SND.SETVOL.E2VO]; return[] }
+#=es.SBGM.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,32)=@Ivol; GOSUB[#=es.SND.SETVOL.SBGM.LS]; return[] }
+#=es.SSE.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,33)=@Ivol; GOSUB[#=es.SND.SETVOL.SSE]; return[] }
+#=es.SVO.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,34)=@Ivol; GOSUB[#=es.SND.SETVOL.SVO]; return[] }
+#=es.S2BGM.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,42)=@Ivol; GOSUB[#=es.SND.SETVOL.S2BGM.LS]; return[] }
+#=es.S2SE.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(001,43)=@Ivol; GOSUB[#=es.SND.SETVOL.S2SE]; return[] }
+#=es.S2VO.BASEVOL.SET { @Ivol=@_PINT(1); \_range(@Ivol, 0, 256); @es.LSD(002,44)=@Ivol; GOSUB[#=es.SND.SETVOL.S2VO]; return[] }
+

@@ -1,0 +1,1068 @@
+//=========================================================================
+//
+//■ＢＧＭ鑑賞モード
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.BGMMODE."]
+
+	S_INT[@D.NUM]
+
+	S_INT[@D.FLAG(\.BGMMODE.MAX+1)]	//鑑賞フラグ
+	S_STR[$D.FILE(\.BGMMODE.MAX+1)]	//登録ファイル名
+	S_INT[@D.LIST(\.BGMMODE.MAX+1)]	//
+	S_INT[@D.LISTNUM]				//
+	S_INT[@D.LISTNO]				//
+
+	S_STR[$TMP.FILE]
+
+	S_INT[@es.BGM.SEEK]
+	S_INT[@es.BGM.SEEK.DRAG]
+
+	S_INT[@DCG.NUM] //鑑賞数
+	S_INT[@DCG.MAX] //総数
+
+	S_INT[@Z.NUM = 60000000000000]
+
+	S_INT[@PLAYBGMNO]
+	S_INT[@ACTIVEBGMNO]
+	S_INT[@PAUSECOUNT]
+	S_INT[@TIME.SWITCH]
+
+	S_INT[@time]
+	S_INT[@totaltime]
+	S_INT[@min]
+	S_INT[@sec]
+	S_INT[@mil]
+
+}
+
+
+//----------------------------------------------------------------
+//■INIT
+//----------------------------------------------------------------
+#=ES.BGMMODE.INIT
+{
+
+//	@es.BGMMODE = 1
+//	@es.GSD(001,09) = @es.GSD(001,02) //BGM
+//	@es.GSD(031,09) = @es.GSD(001,06) //BGM MUTE
+
+	@PLAYBGMNO = 0
+	@ACTIVEBGMNO = 0
+	@PAUSECOUNT = 0
+	@min = 0
+	@sec = 0
+	@mil = 0
+
+	//----------------------------------------------------------------
+	// ＢＧＭ停止処理
+	//----------------------------------------------------------------
+		\BGM()
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		GOSUB[#=es.BGMMODE.VIEW.GET]	@DCG.NUM = @_RINT(1)	//総鑑賞数
+										@DCG.MAX = @D.NUM		//総数
+
+	//----------------------------------------------------------------
+	// リスト格納
+	//----------------------------------------------------------------
+		GOSUB[#=ES.BGMMODE.SETLIST]
+
+	//----------------------------------------------------------------
+	// ボタンセット
+	//----------------------------------------------------------------
+		LOOP[SET=@D.NUM]
+		{
+			IF[@D.FLAG(@_LC)!=1] \BT.N1($BID+"BTN.BGMTIP", @_LC) IFEND[] //フラグ寝てる曲ボタンを無効にする
+		}
+		LOOPEND[]
+	
+		LOOP[SET=@D.NUM] \BT.ES0($BID+"TIP.BGMTXT", @_LC) LOOPEND[]	//コメント非表示
+
+//		\BTDEF.LOAD(ES.BGMMODE)
+
+		\BT.ON($BID+"BTN.TAB.BGMMODE") //BGMMODEタブ
+		\BT.ON($BID+"BTN.STOP") //停止ボタンON
+		\BT.ONOFF($BID+"BTN.REPEAT.ONE",, (@T(32,02)==1)) //１曲リピートボタン
+		\BT.ONOFF($BID+"BTN.RANDOM",, (@T(32,03)==1)) //ランダムボタン
+		\BT.ONOFF($BID+"BTN.SHUFFLE",, (@T(32,03)==2)) //シャッフルボタン
+
+		@TIME.SWITCH = @T(32,04)
+
+///x
+//	\BT.ONOFF($BID+"VOL.MUTE", 1, (@es.GSD(031,09)==1)) //1=ON
+//	\BT.ONOFF($BID+"VOL.MUTE", 2, (@es.GSD(031,09)==0)) //0=OFF
+//	\BT.SLIDE.PER.SET($BID+"VOL.SLIDER",, @es.GSD(001,09)) //0(=0%)～256(=100%) //BGM音量
+
+		//シークバーNA
+		\BT.W0($BID+"BTN.SEEK.GAUGE")
+		//シークバー位置初期化
+		\BT.SLIDE.PER.SET($BID+"BTN.SEEK.SLIDER",, 0)
+		\BT.N1($BID+"BTN.SEEK.SLIDER")
+
+		GOSUB[#=es.BGMMODE.Num.Load]	//数字読込
+		GOSUB[#=es.BGMMODE.Num.Show]	//数字表示
+
+		GOSUB[#=es.BGMMODE.Num2 PINT=@DCG.NUM PINT2=@DCG.MAX]	//鑑賞数、鑑賞率
+
+
+	\SS.FADE(400)
+	@es.STATE=100
+
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■LOOP
+//----------------------------------------------------------------
+#=ES.BGMMODE.LOOP
+{
+	IF[@es.BGM.SEEK.DRAG==0] //シークバーをドラッグ中じゃなければ
+	{
+		GOSUB[#=ES.BGMMODE.PLAYCHECK]
+	}
+	ELSE[@_MOUSE_L<0]	//シークバーをドラッグ中で、離した瞬間なら
+	{
+		@es.BGM.SEEK.DRAG = 0
+
+		\BGM.THRU(0)
+		\BGM.POS(@totaltime*@es.BGM.SEEK/256)
+		\BGM($D.FILE(@PLAYBGMNO), 500, , 1)
+
+		IF[@PAUSECOUNT>0]
+			GOSUB[#=es.SND.PAUSE PSTR="BGM/" PINT2=1 PINT3=1]
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■END
+//----------------------------------------------------------------
+#=ES.BGMMODE.END
+{
+//	@es.BGMMODE = 0
+	GOSUB[#=ES.BGMMODE.STOP]
+//	\BGM()
+
+		//数値画像
+		GOSUB[#=es.BGMMODE.Num.End]
+
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■PLAYCHECK
+//----------------------------------------------------------------
+#=ES.BGMMODE.PLAYCHECK
+{
+	INT[@BTN.ONE]
+	INT[@BTN.RND]
+
+	//------------------------------------------- 曲終了検知
+	IF[@PLAYBGMNO]
+	{
+		GOSUB[#=es.SND.PLAYFLAG.GET pint=00]
+		IF[@_RINT(1)==0]
+		{
+			@PLAYBGMNO=0
+
+			\BT.ONOFF.GET(@BTN.ONE, $BID+"BTN.REPEAT.ONE")
+			IF[@BTN.ONE==0]
+			{
+				GOSUB[#=ES.BGMMODE.NEXTSUB pint=1] //次の曲へ
+			}
+			IFEND[]
+
+			GOSUB[#=ES.BGMMODE.PLAY pint=@ACTIVEBGMNO] //再生
+		}
+		ELSE[] //再生中
+		{
+			GOSUB[#=es.SND.INFO.GET pstr="BGM/" pint2=1]
+			@time      = @_RINT(1)
+			@totaltime = @_RINT(2)
+
+			GOSUB[#=ES.BGMMODE.TIME.REF] //再生時間表示
+
+			IF[@es.BGM.SEEK.DRAG==0]	//ドラッグ中じゃなければ
+			{
+				@es.BGM.SEEK = @time * 256 / @totaltime
+
+				//シークバーを自動移動
+				\BT.SLIDE.PER.SET($BID+"BTN.SEEK.SLIDER",, @es.BGM.SEEK) //0(=0%)～256(=100%) //BGM音量
+			}
+			IFEND[]
+
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	//------------------------- 一時停止時の再生時間点滅表示
+	IF[@PAUSECOUNT>0]
+	{
+		@PAUSECOUNT+=1
+
+		IF[@PAUSECOUNT>=50]
+		{
+			GOSUB[#=es.NUM.Disabled pint=03] //分
+			GOSUB[#=es.NUM.Disabled pint=04] //秒
+			GOSUB[#=es.NUM.Disabled pint=05] //ミリ秒
+			\BT.ES0($BID+"TIP.COLON", 1)
+			\BT.ES0($BID+"TIP.COLON", 2)
+			\BT.ES0($BID+"TIP.MINUS")
+
+			IF[@PAUSECOUNT>100]
+			{
+				@PAUSECOUNT-=100
+
+				GOSUB[#=es.NUM.Enabled pint=03 pint2=@min] //分
+				GOSUB[#=es.NUM.Enabled pint=04 pint2=@sec] //秒
+				GOSUB[#=es.NUM.Enabled pint=05 pint2=@mil] //ミリ秒
+				\BT.ES1($BID+"TIP.COLON", 1)
+				\BT.ES1($BID+"TIP.COLON", 2)
+				\BT.ES1($BID+"TIP.MINUS")
+			}
+			IFEND[]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+
+//------------------------------------------------
+//■再生処理サブ
+//------------------------------------------------
+#=ES.BGMMODE.PLAYSUB
+{
+	INT[@no=@_PINT(1)]
+	INT[@Time=@_PINT(2)]
+
+	\BGM.THRU(0) //同じ曲でもスルーしない
+	\BGM($D.FILE(@no), @Time, , 1)
+
+	@ACTIVEBGMNO = @no
+	@PLAYBGMNO = @no
+	@PAUSECOUNT = 0
+
+	//コメント表示
+	LOOP[SET=@D.NUM] \BT.ES0($BID+"TIP.BGMTXT", @_LC) LOOPEND[]
+	\BT.ES1($BID+"TIP.BGMTXT", @no)
+
+	return[]
+}
+
+//------------------------------------------------
+//■次の(前の)曲リストへサブ
+//------------------------------------------------
+#=ES.BGMMODE.NEXTSUB
+{
+	INT[@first]
+	INT[@BTN.SHF]
+	INT[@BTN.RND]
+
+	\BT.OFF($BID+"BTN.PAUSE")
+	@PAUSECOUNT = 0
+
+	\BT.OFF($BID+"BTN.BGMTIP", @ACTIVEBGMNO)	//ボタンOFF
+
+	\BT.ONOFF.GET(@BTN.RND, $BID+"BTN.RANDOM")
+	IF[@BTN.RND] //ランダム
+	{
+		LOOP[]
+		{
+			\_rnd(1, @D.LISTNUM);@D.LISTNO = @_RINT(1)
+			IF[@ACTIVEBGMNO!=@D.LIST(@D.LISTNO) || @D.NUM<=1] LOOPBREAK[] IFEND[]
+		}
+		LOOPEND[]
+	}
+	ELSE[]
+	{
+		@D.LISTNO+=@_PINT(1)
+		IF[@_PINT(1)== 1] @first=         1 IFEND[]
+		IF[@_PINT(1)==-1] @first=@D.LISTNUM IFEND[]
+
+		IF[@D.LISTNO<1 || @D.LISTNO>@D.LISTNUM] //１巡したら
+		{
+			\BT.ONOFF.GET(@BTN.SHF, $BID+"BTN.SHUFFLE") //1=ON／0=OFF
+			IF[@BTN.SHF]
+			{
+				//現在再生している(いた)ものを１曲目から外してシャッフル
+				GOSUB[#=ES.BGMMODE.SHUFFLE pint=@ACTIVEBGMNO pint2=0 pint3=@first]
+			}
+			ELSE[]
+			{
+				GOSUB[#=ES.BGMMODE.SETLIST] //
+				@D.LISTNO = @first
+			}
+			IFEND[]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	@ACTIVEBGMNO = @D.LIST(@D.LISTNO)
+
+	\BT.ON($BID+"BTN.BGMTIP", @ACTIVEBGMNO)		//ボタンON
+
+	return[]
+}
+
+
+//====================================================================
+//■再生処理
+//====================================================================
+#=ES.BGMMODE.PLAY
+{
+	INT[@no   = @_PINT(1)]
+	INT[@Time = 50]
+
+	IF[@DCG.NUM==0]
+	{
+		GOSUB[#=ES.BGMMODE.STOP]
+		GO[#=ES.BGMMODE.PLAY.LEnd]
+	}
+	IFEND[]
+
+	\BT.ONOFF($BID+"BTN.PLAY" ,, 1)	//PLAY
+	\BT.ONOFF($BID+"BTN.PAUSE",, 0)	//PAUSE
+	\BT.ONOFF($BID+"BTN.STOP" ,, 0)	//STOP
+
+	//シークバー表示
+	\BT.W1($BID+"BTN.SEEK.GAUGE")
+	\BT.N0($BID+"BTN.SEEK.SLIDER")
+
+	IF[@ACTIVEBGMNO>0]
+	{
+		IF[@PLAYBGMNO==0] //停止中である
+		{
+			GOSUB[#=ES.BGMMODE.PLAYSUB pint=@no pint2=@Time]
+		}
+		ELSE[]
+		{
+			IF[@PAUSECOUNT>0] //一時停止中だった
+			{
+				GOSUB[#=es.SND.PAUSE PSTR="BGM/" PINT2=1 PINT3=0]
+				\BT.OFF($BID+"BTN.PAUSE")
+				@PAUSECOUNT = 0
+			}
+			ELSE[]
+			{
+		//		IF[@PLAYBGMNO!=@no] //再生中であり、現在再生中のボタンと違うボタンなら
+				IF[1] //再生ボタンは再生専用にする場合(停止しない場合)
+				{
+					GOSUB[#=ES.BGMMODE.PLAYSUB pint=@no pint2=@Time]
+				}
+				ELSE[]
+				{
+					GOSUB[#=ES.BGMMODE.STOP]
+				}
+				IFEND[]
+			}
+			IFEND[]
+
+		}
+		IFEND[]
+
+	}
+	ELSE[]
+	{
+//		\_dmes(アクティブなものがありません)
+
+		@no=1
+		\BT.ON($BID+"BTN.BGMTIP", @no)
+
+		GOSUB[#=ES.BGMMODE.PLAYSUB pint=@no pint2=@Time]
+	}
+	IFEND[]
+
+	#=ES.BGMMODE.PLAY.LEnd
+
+	return[]
+}
+
+//====================================================================
+//■停止処理
+//====================================================================
+#=ES.BGMMODE.STOP
+{
+	IF[@PAUSECOUNT]
+		\BGM(, 0)
+	ELSE[]
+		\BGM(, @T(32,01))
+	IFEND[]
+
+	\BT.OFF($BID+"BTN.BGMTIP", @ACTIVEBGMNO)
+	\BT.ON($BID+"BTN.STOP")
+	\BT.OFF($BID+"BTN.PLAY")
+	\BT.OFF($BID+"BTN.PAUSE")
+
+	//シークバーNA
+	\BT.W0($BID+"BTN.SEEK.GAUGE")
+	//シークバー位置初期化
+	\BT.SLIDE.PER.SET($BID+"BTN.SEEK.SLIDER",, 0)
+	\BT.N1($BID+"BTN.SEEK.SLIDER")
+	//コメント非表示
+	LOOP[SET=@D.NUM] \BT.ES0($BID+"TIP.BGMTXT", @_LC) LOOPEND[]
+
+	@PAUSECOUNT = 0
+	@PLAYBGMNO = 0
+	@ACTIVEBGMNO = 0
+
+	@D.LISTNO = 0
+
+	GOSUB[#=es.NUM.Enabled pint=03 pint2=0] //分
+	GOSUB[#=es.NUM.Enabled pint=04 pint2=0] //秒
+	GOSUB[#=es.NUM.Enabled pint=05 pint2=0] //ミリ秒
+	\BT.ES0($BID+"TIP.MINUS")
+	\BT.ES1($BID+"TIP.COLON", 1)
+	\BT.ES1($BID+"TIP.COLON", 2)
+
+	IF[0] //停止時に時間消去するなら1にする
+	{
+		GOSUB[#=es.NUM.Disabled pint=03] //分
+		GOSUB[#=es.NUM.Disabled pint=04] //秒
+		GOSUB[#=es.NUM.Disabled pint=05] //ミリ秒
+		\BT.ES0($BID+"TIP.COLON", 1)
+		\BT.ES0($BID+"TIP.COLON", 2)
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//====================================================================
+//■一時停止処理
+//====================================================================
+#=ES.BGMMODE.PAUSE
+{
+	//再生中なら
+	IF[@PLAYBGMNO>0]
+	{
+		@PAUSECOUNT = (@PAUSECOUNT==0)
+		GOSUB[#=es.SND.PAUSE PSTR="BGM/" PINT2=1 PINT3=@PAUSECOUNT]
+	}
+	ELSE[]
+	{
+		\BT.OFF($BID+"BTN.PAUSE")
+		@PAUSECOUNT = 0
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//====================================================================
+//■シャッフル処理
+//====================================================================
+#=ES.BGMMODE.SHUFFLE
+{
+	INT[@no=@_PINT(1)]
+	INT[@mode=@_PINT(2)]
+	INT[@firstno=@_PINT(3)] //1 か @D.LISTNUM どちらかが入る
+
+	INT[@mTempRET]
+	LOOP[SET=@D.LISTNUM]
+	{
+		\_rnd(1, @D.LISTNUM)
+		@mTempRET = @_RINT(1)
+		\_swapval( @D.LIST(@_LC) , @D.LIST(@mTempRET) )
+	}
+	LOOPEND[]
+
+	@D.LISTNO=@firstno
+
+	IF[@mode==0] //最初の曲を前回と同じ曲にしない
+	{
+		IF[@no==@D.LIST(@firstno)] //もし1曲目が前回と同じ曲だった場合
+		{
+			IF[@D.LISTNUM>=2] //曲数が2曲以上あるなら
+			{
+				IF[@firstno==1] \_rnd(2, @D.LISTNUM) IFEND[]
+				IF[@firstno==@D.LISTNUM] \_rnd(1, @D.LISTNUM-1) IFEND[]
+				@mTempRET = @_RINT(1)
+				\_swapval( @D.LIST(@firstno) , @D.LIST(@mTempRET) ) //2曲目以降のどれかと順番を交換
+			}
+			IFEND[]
+		}
+		IFEND[]
+	}
+	ELSE[] //最初の曲を指定してのシャッフル
+	{
+		LOOP[SET=@D.LISTNUM]
+		{
+			IF[@no==@D.LIST(@_LC)]
+			{
+				\_swapval( @D.LIST(@firstno) , @D.LIST(@_LC) )
+				LOOPBREAK[]
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//====================================================================
+//■リスト格納処理
+//====================================================================
+#=ES.BGMMODE.SETLIST
+{
+	LOOP[SET=\.BGMMODE.MAX] @D.LIST(@_LC)=0 LOOPEND[]
+	@D.LISTNUM=0
+	LOOP[SET=@D.NUM]
+	{
+		IF[$D.FILE(@_LC)!="" && @D.FLAG(@_LC)>0]	//フラグチェック
+		{
+			@D.LISTNUM+=1
+			@D.LIST(@D.LISTNUM)=@_LC
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■総鑑賞数を計算
+//--------------------------------------------------------------------
+#=es.BGMMODE.VIEW.GET
+{
+	INT[@r]
+
+	LOOP[SET=@D.NUM]
+	{
+//		IF[@D.PAT(@_LC)>0 && @D.FLAG(@_LC)>0] @r+=1 IFEND[]
+		IF[@D.FLAG(@_LC)>0] @r+=1 IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@r]
+}
+
+
+//====================================================================
+//■鑑賞ファイル登録
+//====================================================================
+#=ES.BGMMODE.DEF
+{
+	//----------------------------------------------------------------
+	// チェック
+	//----------------------------------------------------------------
+		IF[@_PINT(1)<1 || @_PINT(1)>(\.BGMMODE.MAX)]
+			\_mes("[ＢＧＭ鑑賞モード]定義番号が不正です。") END[]
+		IFEND[]
+		IF[$D.FILE( @_PINT(1) )!=""]
+			\_mes("[ＢＧＭ鑑賞モード]二重定義されています。") END[]
+		IFEND[]
+
+	//----------------------------------------------------------------
+	// 定義
+	//----------------------------------------------------------------
+		$D.FILE( @_PINT(1) ) = $TMP.FILE
+		@D.NUM+=1
+
+	//----------------------------------------------------------------
+	// パラメータ初期化
+	//----------------------------------------------------------------
+		$TMP.FILE = ""
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■鑑賞フラグ登録
+//--------------------------------------------------------------------
+#=es.BGMMODE.FLAG.SET
+{
+	STR[$fn=$_PSTR(1)]
+
+	LOOP[SET=@D.NUM]
+	{
+//		IF[@D.PAT( @_LC )>0]
+//		{
+			IF[$fn==$D.FILE(@_LC)]
+			{
+				//\_dmes("["+$fn+"] 発見しました。")
+				@D.FLAG(@_LC) = 1  //鑑賞フラグON
+			}
+			IFEND[]
+//		}
+//		IFEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■鑑賞フラグ強制ON/OFF
+//--------------------------------------------------------------------
+#=es.BGMMODE.SETALL
+{
+	IF[@_PINT(1)==0 || @_PINT(1)==1]
+	{
+		LOOP[SET=@D.NUM]
+		{
+//			IF[@D.PAT( @_LC )>0]
+//			{
+				@D.FLAG(@_LC) = @_PINT(1)  //鑑賞フラグON/OFF
+//			}
+//			IFEND[]
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■鑑賞フラグ登録チェック
+//--------------------------------------------------------------------
+#=es.BGMMODE.FLAG.CHK
+{
+	INT[@ret]
+
+	STR[$fn=$_PSTR(1)]
+
+	LOOP[SET=@D.NUM]
+	{
+//		IF[@D.PAT( @_LC )>0]
+//		{
+			IF[$fn==$D.FILE(@_LC)]
+			{
+				@ret=@D.FLAG(@_LC)
+				//\_dmes("["+$fn+"] 発見しました。")
+			}
+			IFEND[]
+//		}
+//		IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@ret]
+}
+
+
+//------------------------------------------------
+//■鑑賞数、鑑賞率表示
+//------------------------------------------------
+#=es.BGMMODE.Num2
+{
+	INT[@Num1=@_PINT(1)]
+	INT[@Num2=@_PINT(2)]
+	INT[@VAL=@Num1*100/@Num2]
+	FLT[@f=@Num1*100.0/@Num2];IF[@f>0 && @f<2.0] @VAL=1 IFEND[] // 0<n<2の時を1にする調整.
+
+	GOSUB[#=es.NUM.Enabled pint=13 pint2=@Num1]	//鑑賞数
+	GOSUB[#=es.NUM.Enabled pint=14 pint2=@Num2]	//総数
+	GOSUB[#=es.NUM.Enabled pint=15 pint2=@VAL]	//鑑賞率
+
+	return[]
+}
+
+
+//------------------------------------------------
+//■再生時間表示
+//------------------------------------------------
+#=ES.BGMMODE.TIME.REF
+{
+	IF[@TIME.SWITCH==0]
+		@min = (@time/1000)/60
+		@sec = (@time/1000)%60
+		@mil = (@time%1000)
+		\BT.ES20($BID+"TIP.MINUS")
+	ELSE[]
+		@min = ((@totaltime-@time)/1000)/60
+		@sec = ((@totaltime-@time)/1000)%60
+		@mil = ((@totaltime-@time)%1000)
+		\BT.ES21($BID+"TIP.MINUS")
+	IFEND[]
+
+	GOSUB[#=es.NUM.Enabled pint=03 pint2=@min] //分
+	GOSUB[#=es.NUM.Enabled pint=04 pint2=@sec] //秒
+	GOSUB[#=es.NUM.Enabled pint=05 pint2=@mil] //ミリ秒
+	\BT.ES1($BID+"TIP.COLON", 1)
+	\BT.ES1($BID+"TIP.COLON", 2)
+	\BT.ES1($BID+"TIP.MINUS")
+
+	return[]
+}
+
+
+//------------------------------------------------
+//■画像読込
+//------------------------------------------------
+#=es.BGMMODE.Num.Load
+{
+	\BT.ES0($BID+"TIP.MINUS")
+	\BT.ES20($BID+"TIP.MINUS")
+
+	//再生時間(分)
+	\NUM.FILE(03, $T(32,11))
+	\NUM.XYZ(03, @T(32,12), @T(32,13), @Z.NUM)
+	\NUM.SX(03, @T(32,14))
+	\NUM.DIG(03, 2, 1)
+	\NUM.MAX(03, 99)
+	\NUM.MIN(03, 0)
+	\NUM.VAL(03, 01)
+	\NUM.SET(03)
+
+	//再生時間(秒)
+	\NUM.FILE(04, $T(32,16))
+	\NUM.XYZ(04, @T(32,17), @T(32,18), @Z.NUM)
+	\NUM.SX(04, @T(32,19))
+	\NUM.DIG(04, 2, 1)
+	\NUM.MAX(04, 99)
+	\NUM.MIN(04, 0)
+	\NUM.VAL(04, 01)
+	\NUM.SET(04)
+
+	//再生時間(ミリ秒)
+	\NUM.FILE(05, $T(32,21))
+	\NUM.XYZ(05, @T(32,22), @T(32,23), @Z.NUM)
+	\NUM.SX(05, @T(32,24))
+	\NUM.DIG(05, 3, 1)
+	\NUM.MAX(05, 999)
+	\NUM.MIN(05, 0)
+	\NUM.VAL(05, 01)
+	\NUM.SET(05)
+
+	//鑑賞数
+	\NUM.FILE(13, $T(32,31))
+	\NUM.XYZ(13, @T(32,32), @T(32,33), @Z.NUM)
+	\NUM.SX(13, @T(32,34))
+	\NUM.DIG(13, @T(32,35), @T(32,36))
+	\NUM.MAX(13, 999)
+	\NUM.MIN(13, 0)
+	\NUM.VAL(13, 0)
+	\NUM.SET(13)
+
+	//総数
+	\NUM.FILE(14, $T(32,37))
+	\NUM.XYZ(14, @T(32,38), @T(32,39), @Z.NUM)
+	\NUM.SX(14, @T(32,40))
+	\NUM.DIG(14, @T(32,41), @T(32,42))
+	\NUM.MAX(14, 999)
+	\NUM.MIN(14, 0)
+	\NUM.VAL(14, 0)
+	\NUM.SET(14)
+
+	//鑑賞率
+	\NUM.FILE(15, $T(32,43))
+	\NUM.XYZ(15, @T(32,44), @T(32,45), @Z.NUM)
+	\NUM.SX(15, @T(32,46))
+	\NUM.DIG(15, @T(32,47), @T(32,48))
+	\NUM.MAX(15, 100)
+	\NUM.MIN(15, 0)
+	\NUM.VAL(15, 0)
+	\NUM.SET(15)
+
+	return[]
+}
+
+
+//------------------------------------------------
+//■数値画像表示
+//------------------------------------------------
+#=es.BGMMODE.Num.Show
+{
+	LOOP[SET=3] GOSUB[#=es.NUM.Enabled pint=03+@_LC-1] LOOPEND[]
+	LOOP[SET=8] GOSUB[#=es.NUM.Enabled pint=11+@_LC-1] LOOPEND[]
+	\BT.ES1($BID+"TIP.COLON", 1)
+	\BT.ES1($BID+"TIP.COLON", 2)
+	\BT.ES1($BID+"TIP.MINUS")
+	return[]
+}
+
+//------------------------------------------------
+//■画像消去
+//------------------------------------------------
+#=es.BGMMODE.Num.End
+{
+	LOOP[SET=3] GOSUB[#=es.NUM.DEL pint=03+@_LC-1] LOOPEND[]
+	LOOP[SET=8] GOSUB[#=es.NUM.DEL pint=11+@_LC-1] LOOPEND[]
+	return[]
+}
+
+//------------------------------------------------
+//■セーブ
+//------------------------------------------------
+#=es.BGMMODE.FILESAVE
+{
+	SAVE[DNO=@_PINT(1) SET=@D.FLAG()]
+	return[]
+}
+
+//------------------------------------------------
+//■ロード
+//------------------------------------------------
+#=es.BGMMODE.FILELOAD
+{
+	LOAD[FILE="gsd.sd" DNO=@_PINT(1) LET=@D.FLAG()]
+	return[]
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[シーク] --------------------------------------------------------
+//
+#=ES.BGMMODE.BTN.SEEK.GAUGE.ON	//ゲージ
+{
+	\SLIDER.SYNC($BID+"BTN.SEEK.SLIDER")	//このゲージをスライダーと連動させる
+	return[]
+}
+
+#=ES.BGMMODE.BTN.SEEK.SLIDER.DRAG	//スライダー
+{
+	@es.BGM.SEEK.DRAG = 1
+	@es.BGM.SEEK = @_PINT(2)	//ツマミの割合(0～256)
+
+	@time = @totaltime * @es.BGM.SEEK / 256
+
+	GOSUB[#=ES.BGMMODE.TIME.REF] //再生時間表示
+
+	return[]
+}
+
+/*
+//■[BGM音量] --------------------------------------------------------
+//
+#=ES.BGMMODE.BTN.VOL.GAUGE.ON		//ゲージ
+{
+	\SLIDER.SYNC($BID+"VOL.SLIDER")	//このゲージをスライダーと連動させる
+	return[]
+}
+
+#=ES.BGMMODE.BTN.VOL.SLIDER.INIT	//スライダー
+{
+	\BT.SLIDE.PER.SET($es.BID,, @es.GSD(001,09)) //0(=0%)～256(=100%) //BGM音量
+	return[]
+}
+
+#=ES.BGMMODE.BTN.VOL.SLIDER.DRAG	//スライダー
+{
+	@es.GSD(001,09) = @_PINT(2)	//ツマミの割合(0～256)
+	GOSUB[#=es.SND.SETVOL.BGM.LS]
+	return[]
+}
+
+//■[BGM音量・ミュート] ----------------------------------------------
+//
+#=ES.BGMMODE.BTN.VOL.MUTE.INIT
+{
+	\BT.ONOFF($es.BID, 1, (@es.GSD(031,09)==1)) //1=ON
+	\BT.ONOFF($es.BID, 2, (@es.GSD(031,09)==0)) //0=OFF
+	return[]
+}
+
+#=ES.BGMMODE.BTN.VOL.MUTE.ON
+{
+	\BT.ONOFF.GET(@es.GSD(031,09), $es.BID, 1) //1=ON／0=OFF
+	GOSUB[#=es.SND.SETVOL.BGM.LS]
+	return[]
+}
+*/
+
+//■[タブ・ＣＧ]ボタン -----------------------------------------------
+//
+#=ES.BGMMODE.BTN.TAB.CGMODE.ON
+{
+	\es.S.GO("ES.CGMODE", 1, 0); return[]
+}
+
+//■[タブ・回想]ボタン -----------------------------------------------
+//
+#=ES.BGMMODE.BTN.TAB.RPMODE.ON
+{
+	\es.S.GO("ES.RPMODE", 1, 0); return[]
+}
+
+//■[タブ・ＢＧＭ]ボタン ---------------------------------------------
+//
+#=ES.BGMMODE.BTN.TAB.BGMMODE.ON
+{
+	\BT.ON($es.BID); return[]
+}
+
+//■[タブ・ムービー]ボタン -------------------------------------------
+//
+#=ES.BGMMODE.BTN.TAB.MVMODE.ON
+{
+	\es.S.GO("ES.MVMODE", 1, 0); return[]
+}
+
+//■[曲]ボタン -------------------------------------------------------
+//
+#=ES.BGMMODE.BTN.BGMTIP.ON
+{
+	\BT.OFF($BID+"BTN.PAUSE")
+	@ACTIVEBGMNO = @_PINT(1)
+	GOSUB[#=ES.BGMMODE.PLAY pint=@ACTIVEBGMNO]
+
+	INT[@ret]
+	\BT.ONOFF.GET(@ret, $BID+"BTN.SHUFFLE");
+	IF[@ret]
+		GOSUB[#=ES.BGMMODE.SHUFFLE pint=@ACTIVEBGMNO pint2=1 pint3=1] //
+	IFEND[]
+
+	//@D.LISTNOを合わせる
+	LOOP[SET=@D.LISTNUM]
+	{
+		IF[@D.LIST(@_LC)==@ACTIVEBGMNO] @D.LISTNO=@_LC IFEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+//■[再生]ボタン -----------------------------------------------------
+//
+#=ES.BGMMODE.BTN.PLAY.ON
+{
+	IF[@PLAYBGMNO==0]
+		GOSUB[#=ES.BGMMODE.NEXTSUB pint=1]
+	IFEND[]
+	GOSUB[#=ES.BGMMODE.PLAY pint=@ACTIVEBGMNO]
+	return[]
+}
+
+//■[停止]ボタン -----------------------------------------------------
+//
+#=ES.BGMMODE.BTN.STOP.ON
+{
+	GOSUB[#=ES.BGMMODE.STOP]
+	return[]
+}
+
+//■[一時停止]ボタン -------------------------------------------------
+//
+#=ES.BGMMODE.BTN.PAUSE.ON
+{
+	GOSUB[#=ES.BGMMODE.PAUSE]
+	return[]
+}
+
+//■[前の曲へ]ボタン -------------------------------------------------
+//
+#=ES.BGMMODE.BTN.PREV.ON
+{
+	GOSUB[#=ES.BGMMODE.NEXTSUB pint=-1]
+	GOSUB[#=ES.BGMMODE.PLAY pint=@ACTIVEBGMNO] //再生
+	return[]
+}
+
+//■[次の曲へ]ボタン -------------------------------------------------
+//
+#=ES.BGMMODE.BTN.NEXT.ON
+{
+	GOSUB[#=ES.BGMMODE.NEXTSUB pint=1]
+	GOSUB[#=ES.BGMMODE.PLAY pint=@ACTIVEBGMNO] //再生
+	return[]
+}
+
+//■[シャッフル]ボタン -----------------------------------------------
+//
+#=ES.BGMMODE.BTN.SHUFFLE.ON
+{
+	\BT.OFF($BID+"BTN.RANDOM") //ランダムボタン
+
+	INT[@BTN.SHF]
+	\BT.ONOFF.GET(@BTN.SHF, $es.BID) //1=ON／0=OFF
+	IF[@BTN.SHF]
+	{
+		IF[@ACTIVEBGMNO]
+		{
+			//現在再生している曲を１曲目にしてシャッフル
+			GOSUB[#=ES.BGMMODE.SHUFFLE pint=@ACTIVEBGMNO pint2=1 pint3=1] //
+		}
+		ELSE[]
+		{
+			//現在再生している(いた)ものを１曲目から外してシャッフル
+			GOSUB[#=ES.BGMMODE.SHUFFLE pint=@ACTIVEBGMNO pint2=0 pint3=1]
+		}
+		IFEND[]
+	}
+	ELSE[]
+	{
+		GOSUB[#=ES.BGMMODE.SETLIST] //
+		@D.LISTNO = @ACTIVEBGMNO
+	}
+	IFEND[]
+
+	return[]
+}
+
+//■[ランダム]ボタン -------------------------------------------------
+//
+#=ES.BGMMODE.BTN.RANDOM.ON
+{
+	\BT.OFF($BID+"BTN.SHUFFLE") //シャッフルボタン
+	return[]
+}
+
+//■[時間表示切替]ボタン ---------------------------------------------
+//
+#=ES.BGMMODE.BTN.TIME.SWITCH.ON
+{
+	@TIME.SWITCH = 1 - @TIME.SWITCH
+
+	return[]
+}
+
+//■[戻る]ボタン -----------------------------------------------------
+//
+#=ES.BGMMODE.BTN.BACK.ON
+{
+///x08/07/24.RETURN 用の 自動GOSUBジャンプの時呼び出す
+	//初期化
+	@PLAYBGMNO = 0
+	@ACTIVEBGMNO = 0
+	@PAUSECOUNT = 0
+//	@es.BGMMODE = 0
+
+	\es.S.RETURN
+
+	return[]
+}
+
+
+//////
+
+
+//▼ボタン定義 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=ES.BGMMODE.FILE.SET
+{
+	$TMP.FILE = $_PSTR(1)
+	return[]
+}
+

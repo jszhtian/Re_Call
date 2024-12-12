@@ -1,0 +1,76 @@
+modename selectObjecttype1
+
+filenameBG bg_selectobject1
+
+addPrintX 10
+addPrintY 100
+
+
+objectNumber 3
+addObjectNumber 3
+objectAppearVarName1 図書館登場
+objectAppearVarName2 保健室登場
+objectAppearVarName3 食堂登場
+
+objectSelectOkVarName1 図書館行ける
+objectSelectOkVarName2 保健室行ける
+objectSelectOkVarName3 食堂行ける
+
+addVarName1 ほむら居場所
+addVarName2 吹雪居場所
+addVarName3 ねこ居場所
+
+addOnlyFlag 1
+
+
+object1SizeX 128
+object1SizeY 128
+
+object1PrintX 100
+object1PrintY 200
+object2PrintX 400
+object2PrintY 100
+
+object1Filename ta_placebutton1
+object2FIlename ta_placebutton2
+object3FIlename ta_placebutton3
+
+
+add1SizeX 64
+add1SizeY 64
+add1Filename ta_placechara1
+add2Filename ta_placechara2
+add3Filename ta_placechara3
+
+
+@↓ゲーム内日付の表示↓@ @
+
+gameDateLayerPrintFlag 1
+
+gameYearPrintFlag 0
+gameMonthPrintFlag 0
+gameDayPrintFlag 1
+gameWeekPrintFlag 0
+
+gameYearSlashPrintFlag 0
+gameMonthSlashPrintFlag 0
+gameDaySlashPrintFlag 0
+
+gameWeekYouPrintFlag 1
+gameWeekBiPrintFlag 1
+
+filenamegameTimeFont ta_partyStatusSuuji32x32
+gameTimeFontSizeX 32
+gameTimeFontSizeY 32
+gameTimeFontNextX 25
+
+gameYearUpZeroPrintFlag 0
+gameMonthUpZeroPrintFlag 1
+gameDayUpZeroPrintFlag 1
+
+gameMonthPrintX 50
+gameMonthPrintY 600
+gameDayPrintX 100
+gameDayPrintY 600
+
+gameLayerFirst 1

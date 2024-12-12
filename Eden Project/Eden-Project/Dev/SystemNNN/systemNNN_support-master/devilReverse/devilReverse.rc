@@ -1,0 +1,141 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_SETUP DIALOGEX 0, 0, 247, 221
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "デビルリバース"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,31,185,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,149,185,50,14
+    CONTROL         "DWQに分解",IDC_CHECK_TODWQ,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,37,64,74,8
+    CONTROL         "BMP,JPGに変換",IDC_CHECK_TOBMPJPG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,37,82,89,8
+    CONTROL         "VAWに分解",IDC_CHECK_TOVAW,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,37,131,87,8
+    CONTROL         "WAV,OGGに変換",IDC_CHECK_TOWAVOGG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,37,150,95,8
+    GROUPBOX        "画像",IDC_STATIC,28,46,195,58
+    GROUPBOX        "音声",IDC_STATIC,28,117,172,57
+    EDITTEXT        IDC_EDIT_VERSION,189,61,19,12,ES_AUTOHSCROLL
+    LTEXT           "固めた回数",IDC_STATIC,129,64,47,8
+    CONTROL         105,IDC_STATIC,"Static",SS_BITMAP,113,18,21,20
+END
+
+IDD_DIALOG_PROCESS DIALOGEX 0, 0, 295, 199
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "進行"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "キャンセル",IDCANCEL,221,166,50,14,WS_DISABLED
+    LTEXT           "スタティック",IDC_MYSTATIC,39,46,226,8
+    CONTROL         "",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,46,89,75,6
+    CONTROL         "",IDC_PROGRESS2,"msctls_progress32",WS_BORDER,46,123,197,6
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG_SETUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 240
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 214
+    END
+
+    IDD_DIALOG_PROCESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 288
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 192
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "re1.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP1             BITMAP                  "re1.bmp"
+#endif    // 日本語 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,2 @@
+ren *.new *.
+ren *.bss *.

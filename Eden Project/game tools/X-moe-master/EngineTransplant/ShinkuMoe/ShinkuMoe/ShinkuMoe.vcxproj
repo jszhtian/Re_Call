@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FE2027D9-F062-4776-854B-BE9584687800}</ProjectGuid>
+    <RootNamespace>ShinkuMoe</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)Lua\;$(SolutionDir)SDL2\;$(ProjectDir)Core\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)\ZLib;$(SolutionDir)\SDL;$(ProjectDir)VirtualMachine\;$(ProjectDir)Media\;$(ProjectDir)IO\;$(ProjectDir)Graph\;$(ProjectDir)Core\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\Nikaido.cpp" />
+    <ClCompile Include="Graph\ColorRGBA.cpp" />
+    <ClCompile Include="Graph\Rect.cpp" />
+    <ClCompile Include="IO\ErrorLog.cpp" />
+    <ClCompile Include="IO\FileManager.cpp" />
+    <ClCompile Include="Media\SoundManager.cpp" />
+    <ClCompile Include="ShinkuToAnz.cpp" />
+    <ClCompile Include="SystemAPI\ColorAPI.cpp" />
+    <ClCompile Include="SystemAPI\DebugAPI.cpp" />
+    <ClCompile Include="SystemAPI\OtherAPI.cpp" />
+    <ClCompile Include="SystemAPI\SoundAPI.cpp" />
+    <ClCompile Include="SystemAPI\SystemAPI.cpp" />
+    <ClCompile Include="SystemAPI\SystemPrevAPI.cpp" />
+    <ClCompile Include="SystemAPI\ThreadAPI.cpp" />
+    <ClCompile Include="VirtualMachine\CoroutineManager.cpp" />
+    <ClCompile Include="VirtualMachine\ScriptEngine.cpp" />
+    <ClCompile Include="VirtualMachine\VarInfo.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Anz.h" />
+    <ClInclude Include="Core\Mutex.h" />
+    <ClInclude Include="Core\Nikaido.h" />
+    <ClInclude Include="Graph\ColorRGBA.h" />
+    <ClInclude Include="Graph\Rect.h" />
+    <ClInclude Include="Graph\Surface.h" />
+    <ClInclude Include="IO\ErrorLog.h" />
+    <ClInclude Include="IO\FileManager.h" />
+    <ClInclude Include="Media\SoundManager.h" />
+    <ClInclude Include="SystemAPI\ColorAPI.h" />
+    <ClInclude Include="SystemAPI\DebugAPI.h" />
+    <ClInclude Include="SystemAPI\OtherAPI.h" />
+    <ClInclude Include="SystemAPI\SoundAPI.h" />
+    <ClInclude Include="SystemAPI\SystemAPI.h" />
+    <ClInclude Include="SystemAPI\SystemPrevAPI.h" />
+    <ClInclude Include="SystemAPI\ThreadAPI.h" />
+    <ClInclude Include="VirtualMachine\ArrayManager.h" />
+    <ClInclude Include="VirtualMachine\CoroutineManager.h" />
+    <ClInclude Include="VirtualMachine\GlobalVarManager.h" />
+    <ClInclude Include="VirtualMachine\ScriptEngine.h" />
+    <ClInclude Include="VirtualMachine\ScriptObject.h" />
+    <ClInclude Include="VirtualMachine\VarInfo.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

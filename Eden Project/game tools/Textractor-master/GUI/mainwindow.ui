@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Textractor</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+       QPushButton, QComboBox
+       {
+       padding-top: 3px;
+       padding-bottom: 3px;
+       padding-right: 5px;
+       padding-left: 5px;
+       text-align: left;
+       }
+     </string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout">
+    <item>
+     <widget class="QFrame" name="processFrame">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <layout class="QVBoxLayout" name="processLayout">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QComboBox" name="processCombo">
+         <property name="editable">
+          <bool>false</bool>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::InsertAtBottom</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToContents</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout">
+      <item>
+       <widget class="QComboBox" name="ttCombo">
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="maxVisibleItems">
+         <number>50</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="textOutput">
+        <property name="font">
+         <font>
+          <family>Meiryo UI</family>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::CustomContextMenu</enum>
+        </property>
+        <property name="undoRedoEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="6"/>
+ <resources/>
+ <connections/>
+</ui>

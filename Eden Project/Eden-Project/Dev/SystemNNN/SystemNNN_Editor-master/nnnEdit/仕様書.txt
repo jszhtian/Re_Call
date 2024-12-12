@@ -1,0 +1,205 @@
+CCase
+各種データの基本クラス
+内部は専用のデータと下位レベルのデータが複数個はいっている形式
+なかのデータもケースである
+
+
+
+
+
+
+
+-------------------------------------------------------------------------
+CStoryBookData
+	CStoryDataの集まり
+
+char	headerName[16] = "[STORYBOOKDATA]";
+int		tmp[16]
+			tmp[0] = objectKosuu;
+CStoryData[objectKosuu];
+
+-------------------------------------------------------------------------
+
+CStoryData
+	CCommandDataの集まり
+
+char	headerName[16] = "STORYDATA      "
+char name[64];
+int	tmp[16];
+			tmp[0] = objectKosuu;
+CCommandData[objectKosuu];
+
+
+-------------------------------------------------------------------------
+CCommandData
+char	headername[16] = "-COMMANDDATA   ";
+char	typeName[16];
+int		tmp[16];
+			tmp[0] = type;
+			tmp[1] = bufferSize;
+			tmp[2] = level;
+			tmp[3] = para;
+			tmp[4] = subKosuu;
+			tmp[5] = systemCommandType;
+			tmp[6] = systemCommandNumber;
+			tmp[7] = bgmNumber;
+			tmp[8] = serial;
+
+char buffer[bufferSize];
+
+-------------------------------------------------------------------------
+CFilmCaseData
+	CFilmDataの集まり
+
+
+
+
+CFilmData
+	CKomaDataの集まり
+
+
+CKomaData				最新バージョンは3になる
+	1つのエフェクトと
+	CMessageDataの集まり
+
+	エフェクトのバージョンによる違い
+	ver	filename		パラメータ個数
+	0	16bytesまで		16個			
+	1	16bytesまで		256個
+	2-	256bytesまで	256個
+	
+	ver	曲のフェードイン
+	0-2	無	
+	3	有
+
+
+CMessageData
+	メッセージまたは経過時間、音声、効果音等の集まり
+
+	ver	声	効果音	個別ボリューム	パン	voiceFilename	soundfilename
+	0	1	1		無				無		64				64
+	1	2	8		有				有		64*m			64*n
+
+
+CEffectData
+
+--------------------------------------------------------------------------
+削除
+	CCommandDataからBGM指定機能の一時削除
+
+
+
+--------------------------------------------------------------------------
+追加：
+エディットウィンドウでのメッセージ表示行数指定機能（現在４）
+１メッセージブロックの最大行数指定（現在４）
+
+
+
+
+
+
+
+ダブルクリック対応モード
+
+
+
+///
+名前、必須パラ個数、パラ個数
+エディット用
+名前、min、max、でふぉ
+
+
+これを
+
+
+
+
+エフェクト名
+必須パラ個数、パラ個数
+説明文１－６
+よび1
+
+{
+パラメータ名、最小、最大、デフォ
+エディットタイプ、エディットぱら
+簡単な説明１－３
+よび1
+}
+
+特殊エディット用追加設定
+パラメータ番号、設定個数、設定ぱら・・・
+
+
+
+
+
+
+
+エディットタイプ:
+0:今までと同じ
+1:スライター	ぱらで色、水平垂直などを指定
+	//
+	//mask=00000001 垂直
+	//mask=00000110 色(白、赤、緑、青)
+	//mask=00001000 数値表示なし
+	//mask=00010000	前のスライダーとの間を少しあける
+
+3:on/offボタン
+
+
+
+
+2次元設定、色見本から選ぶ、他
+
+
+
+
+///////////////////
+layerView
+setup\menu\pictureMenu.txt
+-1:DELETEPIC
+0～:SELECTPIC(TA,BG,EV,ETC...)
+setup\menu\effectMenu.txt
+-2:same
+-1:delete
+0-:effect
+
+
+layerDoc
+setup\picTypeList.txt
+	ta,ev,bg,etc...
+
+
+
+-----------------------------------
+MessageData保存形式
+	fwrite("--MESSAGEDATA  ",sizeof(char),16,file);
+tmp[16]
+
+	tmp[0] = m_messageMode;
+	tmp[1] = m_drawCount;
+	tmp[2] = m_voiceCharaNumber;
+	tmp[3] = m_voiceNumber;
+	tmp[4] = m_seNumber;
+	tmp[5] = m_voiceFileFlag;
+	tmp[6] = m_seFileFlag;
+	tmp[7] = m_serialNumber;
+	tmp[8] = m_renameFileFlag;
+	tmp[9] = m_voiceLockFlag;
+
+	tmp[10] = 1;//version 2
+
+	tmp[11] = messageSize;
+	tmp[12] = m_seControlFlag;
+	tmp[13] = m_voiceControlFlag;
+
+messageData	(512byte*n) max4096
+
+voiceFileFlagのbitに対応した数だけファイル名(各64byte)
+seFileFlagのbitに対応した数だけファイル名(各64byte)
+
+voiceControlFlagをみてn*8*intのコントロールデータ
+seControlFlagをみてn*8*intのコントロールデータ
+
+

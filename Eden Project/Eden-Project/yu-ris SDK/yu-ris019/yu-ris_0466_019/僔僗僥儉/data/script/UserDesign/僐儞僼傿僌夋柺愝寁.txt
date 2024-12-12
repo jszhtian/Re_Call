@@ -1,0 +1,2522 @@
+//============================================================================
+// コンフィグ画面設計
+//============================================================================
+#=ES.CONFIG.BTDEF
+
+	\BTDEF.GROUP(ES.CONFIG)
+
+	INT[@no]
+
+
+	//----------------------------------------------------------------
+	//■タブ
+	//----------------------------------------------------------------
+		//■[頁１]システム
+		\BT.RADIO(230)
+		\BT.CGSYS("config/btn_tab_system_bt3")
+		\BT.XY(357+85*0, 025)
+		\BT.Z(2010)
+		\BT.SET(BTN.TAB, 1)
+
+		//■[頁２]システム２
+		\BT.RADIO(230)
+		\BT.CGSYS("config/btn_tab_system2_bt3")
+		\BT.XY(357+85*1, 025)
+		\BT.Z(2010)
+		\BT.SET(BTN.TAB, 2)
+
+		//■[頁３]テキスト
+		\BT.RADIO(230)
+		\BT.CGSYS("config/btn_tab_text_bt3")
+		\BT.XY(357+85*2, 025)
+		\BT.Z(2010)
+		\BT.SET(BTN.TAB, 3)
+
+		//■[頁４]サウンド
+		\BT.RADIO(230)
+		\BT.CGSYS("config/btn_tab_sound_bt3")
+		\BT.XY(357+85*3, 025)
+		\BT.Z(2010)
+		\BT.SET(BTN.TAB, 4)
+
+		//■[頁５]ボイス
+		\BT.RADIO(230)
+		\BT.CGSYS("config/btn_tab_voice_bt3")
+		\BT.XY(357+85*4, 025)
+		\BT.Z(2010)
+		\BT.SET(BTN.TAB, 5)
+
+
+	//----------------------------------------------------------------
+	//■背景
+	//----------------------------------------------------------------
+		//■[頁１]システム
+		\BT.GROUP(1)
+		\BT.CGSYS("config/back_system")
+		\BT.XY(000, 000)
+		\BT.Z(998)
+		\BT.SET(TIP.BG, 1)
+
+		//■[頁２]システム
+		\BT.GROUP(2)
+		\BT.CGSYS("config/back_system2")
+		\BT.XY(000, 000)
+		\BT.Z(998)
+		\BT.SET(TIP.BG, 2)
+
+		//■[頁３]テキスト
+		\BT.GROUP(3)
+		\BT.CGSYS("config/back_text")
+		\BT.XY(000, 000)
+		\BT.Z(998)
+		\BT.SET(TIP.BG, 3)
+
+		//■[頁４]サウンド
+		\BT.GROUP(4)
+		\BT.CGSYS("config/back_sound")
+		\BT.XY(000, 000)
+		\BT.Z(998)
+		\BT.SET(TIP.BG, 4)
+
+		//■[頁５]ボイス
+		\BT.GROUP(5)
+		\BT.CGSYS("config/back_voice")
+		\BT.XY(000, 000)
+		\BT.Z(998)
+		\BT.SET(TIP.BG, 5)
+
+
+
+	//■////////////// タブ１
+
+	//----------------------------------------------------------------
+	//■CTRLキーでの未読スキップ
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(SKIP.CTRL, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(1)
+			\BT.RADIO(021)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(SKIP.CTRL, 0)
+			//◆OFF
+			\BT.GROUP(1)
+			\BT.RADIO(021)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(SKIP.CTRL, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■スキップボタンでの未読スキップ
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(SKIP.BTN, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(1)
+			\BT.RADIO(109)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(SKIP.BTN, 0)
+			//◆OFF
+			\BT.GROUP(1)
+			\BT.RADIO(109)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(SKIP.BTN, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■既読文章の最速表示
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(KTX.FAST, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(1)
+			\BT.RADIO(110)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(KTX.FAST, 0)
+			//◆OFF
+			\BT.GROUP(1)
+			\BT.RADIO(110)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(KTX.FAST, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■既読文章の色を変える
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(KTX.COL, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(1)
+			\BT.RADIO(113)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(KTX.COL, 0)
+			//◆OFF
+			\BT.GROUP(1)
+			\BT.RADIO(113)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(KTX.COL, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■選択済の選択肢の色を変える
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(KSEL.COL, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(1)
+			\BT.RADIO(114)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(KSEL.COL, 0)
+			//◆OFF
+			\BT.GROUP(1)
+			\BT.RADIO(114)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(KSEL.COL, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■選択肢を通過後もオートモード持続
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(SEL.AUTO, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(1)
+			\BT.RADIO(111)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(SEL.AUTO, 0)
+			//◆OFF
+			\BT.GROUP(1)
+			\BT.RADIO(111)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(SEL.AUTO, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■選択肢を通過後もスキップモード持続
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(SEL.SKIP, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(1)
+			\BT.RADIO(112)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(SEL.SKIP, 0)
+			//◆OFF
+			\BT.GROUP(1)
+			\BT.RADIO(112)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(SEL.SKIP, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■非アクティブ時の動作設定
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(NOACTIVE, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(1)
+			\BT.RADIO(102)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(NOACTIVE, 0)
+			//◆OFF
+			\BT.GROUP(1)
+			\BT.RADIO(102)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(NOACTIVE, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■ウィンドウを常に手前に表示する
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*8)
+			\BT.Z(1000)
+			\BT.SET(ALWAYSTOP, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(1)
+			\BT.RADIO(121)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*8)
+			\BT.Z(1000)
+			\BT.SET(ALWAYSTOP, 0)
+			//◆OFF
+			\BT.GROUP(1)
+			\BT.RADIO(121)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*8)
+			\BT.Z(1000)
+			\BT.SET(ALWAYSTOP, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■スクリーンセーバーの起動を防止する
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*9)
+			\BT.Z(1000)
+			\BT.SET(SCRSAVER, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(1)
+			\BT.RADIO(39)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*9)
+			\BT.Z(1000)
+			\BT.SET(SCRSAVER, 0)
+			//◆OFF
+			\BT.GROUP(1)
+			\BT.RADIO(39)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*9)
+			\BT.Z(1000)
+			\BT.SET(SCRSAVER, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■画面モード
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(1)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*10)
+			\BT.Z(1000)
+			\BT.SET(SCREEN, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆フルスクリーン
+			\BT.GROUP(1)
+			\BT.RADIO(101)
+			\BT.CGSYS("config/btn_fullscreen_bt3")
+			\BT.XY(362, 092+35*10)
+			\BT.Z(1000)
+			\BT.SET(SCREEN, 0)
+			//◆ウィンドウ
+			\BT.GROUP(1)
+			\BT.RADIO(101)
+			\BT.CGSYS("config/btn_window_bt3")
+			\BT.XY(470, 092+35*10)
+			\BT.Z(1000)
+			\BT.SET(SCREEN, 1)
+		}
+		IFEND[]
+
+
+
+	//■////////////// タブ２
+
+
+	//----------------------------------------------------------------
+	//■セーブ確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVE, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(41)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVE, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(41)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVE, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■上書きセーブ確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVE.OW, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(42)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVE.OW, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(42)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVE.OW, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■ロード確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(CONF.LOAD, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(43)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(CONF.LOAD, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(43)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(CONF.LOAD, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■クイックセーブ確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(CONF.QSAVE, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(45)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(CONF.QSAVE, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(45)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(CONF.QSAVE, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■クイックロード確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(CONF.QLOAD, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(47)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(CONF.QLOAD, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(47)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(CONF.QLOAD, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■直前の選択肢に戻る確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(CONF.PREVSEL, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(49)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(CONF.PREVSEL, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(49)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(CONF.PREVSEL, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■セーブデータコピー確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVECOPY, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(51)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVECOPY, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(51)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVECOPY, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■セーブデータ移動確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVEMOVE, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(50)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVEMOVE, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(50)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVEMOVE, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■セーブデータ削除確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*8)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVEDEL, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(53)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*8)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVEDEL, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(53)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*8)
+			\BT.Z(1000)
+			\BT.SET(CONF.SAVEDEL, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■設定初期化確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*9)
+			\BT.Z(1000)
+			\BT.SET(CONF.CFGINIT, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(55)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*9)
+			\BT.Z(1000)
+			\BT.SET(CONF.CFGINIT, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(55)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*9)
+			\BT.Z(1000)
+			\BT.SET(CONF.CFGINIT, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■シーン鑑賞へ戻る確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*10)
+			\BT.Z(1000)
+			\BT.SET(CONF.REPLAYEND, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(56)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*10)
+			\BT.Z(1000)
+			\BT.SET(CONF.REPLAYEND, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(56)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*10)
+			\BT.Z(1000)
+			\BT.SET(CONF.REPLAYEND, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■タイトル移動確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*11)
+			\BT.Z(1000)
+			\BT.SET(CONF.TITLE, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(57)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*11)
+			\BT.Z(1000)
+			\BT.SET(CONF.TITLE, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(57)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*11)
+			\BT.Z(1000)
+			\BT.SET(CONF.TITLE, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■ゲーム終了確認
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(2)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*12)
+			\BT.Z(1000)
+			\BT.SET(CONF.END, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(2)
+			\BT.RADIO(59)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*12)
+			\BT.Z(1000)
+			\BT.SET(CONF.END, 0)
+			//◆OFF
+			\BT.GROUP(2)
+			\BT.RADIO(59)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*12)
+			\BT.Z(1000)
+			\BT.SET(CONF.END, 1)
+		}
+		IFEND[]
+
+
+
+	//■////////////// タブ３
+
+
+	//----------------------------------------------------------------
+	//■文章速度
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(3)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*0)
+		\BT.Z(1000)
+		\BT.SET(TX.SP.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(3)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*0+2)
+		\BT.Z(1001)
+		\BT.SET(TX.SP.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(3)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*0+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(TX.SP.SLIDER)
+
+	//----------------------------------------------------------------
+	//■オート速度
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(3)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*1)
+		\BT.Z(1000)
+		\BT.SET(AUTO.SP.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(3)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*1+2)
+		\BT.Z(1001)
+		\BT.SET(AUTO.SP.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(3)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*1+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(AUTO.SP.SLIDER)
+
+	//----------------------------------------------------------------
+	//■スキップ速度
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(3)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*2)
+		\BT.Z(1000)
+		\BT.SET(SKIP.SP.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(3)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*2+2)
+		\BT.Z(1001)
+		\BT.SET(SKIP.SP.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(3)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*2+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(SKIP.SP.SLIDER)
+
+	//----------------------------------------------------------------
+	//■ウィンドウ透過度
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(3)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*3)
+		\BT.Z(1000)
+		\BT.SET(WINDOW.A.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(3)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*3+2)
+		\BT.Z(1001)
+		\BT.SET(WINDOW.A.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(3)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*3+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(WINDOW.A.SLIDER)
+
+	//----------------------------------------------------------------
+	//■バックログウィンドウ透過度
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(3)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*4)
+		\BT.Z(1000)
+		\BT.SET(LOG.A.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(3)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*4+2)
+		\BT.Z(1001)
+		\BT.SET(LOG.A.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(3)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*4+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(LOG.A.SLIDER)
+
+	//----------------------------------------------------------------
+	//■フォントスタイル
+	//----------------------------------------------------------------
+/*
+		//◆フォント・太字
+		\BT.GROUP(3)
+		\BT.CGSYS("config/btn_check")
+		\BT.XY(082+194+53*0, 189+62*15+45)
+		\BT.Z(1245)
+		\BT.SET(FONT.BOLD, 0)
+*/
+
+		//◆フォント・影
+		IF[0]
+		{
+			\BT.GROUP(3)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(FONT.SHADE, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(3)
+			\BT.RADIO(3010)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(FONT.SHADE, 0)
+			//◆OFF
+			\BT.GROUP(3)
+			\BT.RADIO(3010)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(FONT.SHADE, 1)
+		}
+		IFEND[]
+
+		//◆フォント・縁取り
+		IF[0]
+		{
+			\BT.GROUP(3)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(FONT.OUTLINE, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(3)
+			\BT.RADIO(3020)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(FONT.OUTLINE, 0)
+			//◆OFF
+			\BT.GROUP(3)
+			\BT.RADIO(3020)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(FONT.OUTLINE, 1)
+		}
+		IFEND[]
+
+		//◆フォント・グラデーション
+		IF[0]
+		{
+			\BT.GROUP(3)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(FONT.GRADATION, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(3)
+			\BT.RADIO(3030)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(FONT.GRADATION, 0)
+			//◆OFF
+			\BT.GROUP(3)
+			\BT.RADIO(3030)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(FONT.GRADATION, 1)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■フォント選択
+	//----------------------------------------------------------------
+		//◆フォント・リストボックス閉じ
+		\BT.GROUP(3)
+		\BT.CGSYS("config/btn_font_open")
+		\BT.XY(362, 092+35*8)
+		\BT.Z(1000)
+		\BT.SET(FONT.CLOSE)
+
+
+/*
+	//----------------------------------------------------------------
+	//■メッセージウィンドウプレビュー
+	//----------------------------------------------------------------
+		\BT.GROUP(3)
+		\BT.CGSYS("config/mes_preview_1")
+		\BT.XY(000, 000)
+		\BT.Z(1000)
+		\BT.SET(TIP.MES.PREVIEW, 1)
+
+		\BT.GROUP(3)
+		\BT.CGSYS("config/mes_preview_2")
+		\BT.XY(000, 000)
+		\BT.Z(1001)
+		\BT.SET(TIP.MES.PREVIEW, 2)
+
+		\BT.GROUP(3)
+		\BT.CGSYS("config/mes_preview_3")
+		\BT.XY(-001, 000)
+		\BT.Z(1002)
+		\BT.SET(TIP.MES.PREVIEW, 3)
+
+
+	//----------------------------------------------------------------
+	//■バックログプレビュー
+	//----------------------------------------------------------------
+		\BT.GROUP(3)
+		\BT.CGSYS("config/log_preview_1")
+		\BT.XY(000, 000)
+		\BT.Z(1000)
+		\BT.SET(TIP.LOG.PREVIEW, 1)
+
+		\BT.GROUP(3)
+		\BT.CGSYS("config/log_preview_2")
+		\BT.XY(000, 000)
+		\BT.Z(1001)
+		\BT.SET(TIP.LOG.PREVIEW, 2)
+
+		\BT.GROUP(3)
+		\BT.CGSYS("config/log_preview_3")
+		\BT.XY(000, 000)
+		\BT.Z(1002)
+		\BT.SET(TIP.LOG.PREVIEW, 3)
+*/
+
+
+
+	//■////////////// タブ４
+
+	//----------------------------------------------------------------
+	//■全体音量
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*0)
+		\BT.Z(1000)
+		\BT.SET(VOL.MASTER.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*0+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.MASTER.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(4)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*0+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.MASTER.SLIDER)
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(4)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*0-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.MASTER.MUTE, 1)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(4)
+			\BT.RADIO(077)
+			\BT.CGSYS("config/btn_on")
+			\BT.XY(300, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(VOL.MASTER.MUTE, 0)
+			//◆OFF
+			\BT.GROUP(4)
+			\BT.RADIO(077)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(300, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(VOL.MASTER.MUTE, 1)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■ＢＧＭ音量
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*1)
+		\BT.Z(1000)
+		\BT.SET(VOL.BGM.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*1+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.BGM.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(4)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*1+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.BGM.SLIDER)
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(4)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*1-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.BGM.MUTE, 1)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(4)
+			\BT.RADIO(081)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(300, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(VOL.BGM.MUTE, 0)
+			//◆OFF
+			\BT.GROUP(4)
+			\BT.RADIO(081)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(300, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(VOL.BGM.MUTE, 1)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■効果音音量
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*2)
+		\BT.Z(1000)
+		\BT.SET(VOL.SE.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*2+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.SE.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(4)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*2+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.SE.SLIDER)
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(4)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*2-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.SE.MUTE, 1)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(4)
+			\BT.RADIO(085)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(300, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(VOL.SE.MUTE, 0)
+			//◆OFF
+			\BT.GROUP(4)
+			\BT.RADIO(085)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(300, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(VOL.SE.MUTE, 1)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■システム効果音音量
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*3)
+		\BT.Z(1000)
+		\BT.SET(VOL.SSE.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*3+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.SSE.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(4)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*3+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.SSE.SLIDER)
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(4)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*3-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.SSE.MUTE, 1)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(4)
+			\BT.RADIO(089)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(300, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(VOL.SSE.MUTE, 0)
+			//◆OFF
+			\BT.GROUP(4)
+			\BT.RADIO(089)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(300, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(VOL.SSE.MUTE, 1)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■全体音声音量
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*4)
+		\BT.Z(1000)
+		\BT.SET(VOL.VO.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*4+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.VO.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(4)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*4+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.VO.SLIDER)
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(4)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*4-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.VO.MUTE, 1)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(4)
+			\BT.RADIO(093)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(300, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(VOL.VO.MUTE, 0)
+			//◆OFF
+			\BT.GROUP(4)
+			\BT.RADIO(093)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(300, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(VOL.VO.MUTE, 1)
+		}
+		IFEND[]
+
+
+/*
+	//----------------------------------------------------------------
+	//■システムボイス音量
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*4)
+		\BT.Z(1000)
+		\BT.SET(VOL.SVO.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*4+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.SVO.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(4)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*4+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.SVO.SLIDER)
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(4)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*4-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.SVO.MUTE, 1)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(4)
+			\BT.RADIO(089)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(300, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(VOL.SVO.MUTE, 1)
+			//◆OFF
+			\BT.GROUP(4)
+			\BT.RADIO(089)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(300, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(VOL.SVO.MUTE, 2)
+		}
+		IFEND[]
+*/
+
+	//----------------------------------------------------------------
+	//■音声再生時のＢＧＭ減衰率
+	//----------------------------------------------------------------
+		//◆目盛り・土台
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*5)
+		\BT.Z(1000)
+		\BT.SET(VO.HILIGHT.GAUGE.BASE)
+
+		//◆目盛り
+		\BT.GROUP(4)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*5+2)
+		\BT.Z(1001)
+		\BT.SET(VO.HILIGHT.GAUGE)
+
+		//◆ツマミ
+		\BT.GROUP(4)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*5+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VO.HILIGHT.SLIDER)
+
+
+	//----------------------------------------------------------------
+	//■音声再生の停止タイミング
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(4)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(VO.STOP, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆次の文章
+			\BT.GROUP(4)
+			\BT.RADIO(71)
+			\BT.CGSYS("config/btn_nextvoice_bt3")
+			\BT.XY(362, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(VO.STOP, 0)
+			//◆次のボイス
+			\BT.GROUP(4)
+			\BT.RADIO(71)
+			\BT.CGSYS("config/btn_nexttext_bt3")
+			\BT.XY(470, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(VO.STOP, 1)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■オート時に音声再生終了を待つ
+	//----------------------------------------------------------------
+		IF[0] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(4)
+			\BT.CGSYS("config/btn_check")
+			\BT.XY(362, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(VO.AUTO, 0)
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(4)
+			\BT.RADIO(108)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(362, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(VO.AUTO, 0)
+			//◆OFF
+			\BT.GROUP(4)
+			\BT.RADIO(108)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(470, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(VO.AUTO, 1)
+		}
+		IFEND[]
+
+
+
+	//■////////////// タブ５
+
+	//----------------------------------------------------------------
+	//■キャラ１音量
+	//----------------------------------------------------------------
+		@no=1
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*0)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*0+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*0+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*0-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_01")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*0)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ２音量
+	//----------------------------------------------------------------
+		@no=2
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*1)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*1+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*1+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*1-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_02")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*1)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ３音量
+	//----------------------------------------------------------------
+		@no=3
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*2)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*2+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*2+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*2-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_03")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ４音量
+	//----------------------------------------------------------------
+		@no=4
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*3)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*3+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*3+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*3-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_04")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*3)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ５音量
+	//----------------------------------------------------------------
+		@no=5
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*4)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*4+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*4+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*4-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_05")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*4)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ６音量
+	//----------------------------------------------------------------
+		@no=6
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*5)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*5+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*5+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*5-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_06")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*5)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ７音量
+	//----------------------------------------------------------------
+		@no=7
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*6)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*6+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*6+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*6-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_07")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*6)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ８音量
+	//----------------------------------------------------------------
+		@no=8
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*7)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*7+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*7+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*7-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_08")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*7)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ９音量
+	//----------------------------------------------------------------
+		@no=9
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*8)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*8+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*8+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*8-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_08")
+			\BT.MAP.A(1)
+			\BT.XY(300, 211)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*8)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*8)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ１０音量
+	//----------------------------------------------------------------
+		@no=10
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*9)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*9+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*9+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*9-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_08")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*9)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*9)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*9)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ１１音量
+	//----------------------------------------------------------------
+		@no=11
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*10)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*10+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*10+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*10-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_08")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*10)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*10)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*10)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+	//----------------------------------------------------------------
+	//■キャラ１２音量
+	//----------------------------------------------------------------
+		@no=12
+
+		//◆目盛り・土台
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge_base")
+		\BT.XY(362, 092+35*11)
+		\BT.Z(1000)
+		\BT.SET(VOL.CHARA.GAUGE.BASE, @no)
+
+		//◆目盛り
+		\BT.GROUP(5)
+		\BT.CGSYS("config/tip_gauge")
+		\BT.XY(362+8, 092+35*11+2)
+		\BT.Z(1001)
+		\BT.SET(VOL.CHARA.GAUGE, @no)
+
+		//◆ツマミ
+		\BT.GROUP(5)
+		\BT.CGSYS("config/btn_slider")
+		\BT.XY(362+8-5, 092+35*11+1) //スライダー左端の座標をセットする
+		\BT.Z(1002)
+		\BT.SLIDE(254,0) //スライダーの動く範囲XY
+		\BT.SET(VOL.CHARA.SLIDER, @no)
+
+
+		//ミュートボタン
+		IF[1] //チェックボタンの場合
+		{
+			//◆チェックボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_mute")
+			\BT.XY(320, 092+35*11-2)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+/*
+			//◆フェイスボタン
+			\BT.GROUP(5)
+			\BT.CGSYS("config/btn_c_08")
+			\BT.MAP.A(1)
+			\BT.XY(300, 092+35*11)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.FACE, @no)
+*/
+		}
+		ELSE[] //ON,OFFボタンの場合
+		{
+			//◆ON
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_on_bt3")
+			\BT.XY(160, 092+35*11)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.ON, @no)
+			//◆OFF
+			\BT.GROUP(5)
+			\BT.RADIO(140+@no)
+			\BT.CGSYS("config/btn_off_bt3")
+			\BT.XY(260, 092+35*11)
+			\BT.Z(1000)
+			\BT.SET(VOL.CHARA.MUTE.OFF, @no)
+		}
+		IFEND[]
+
+
+/*
+				//
+				\BT.GROUP(5)
+				\BT.RADIO(500001)
+				\BT.CGSYS("config/btn_page01")
+				\BT.XY(050+40*1, 550)
+				\BT.Z(1000)
+				\BT.SET(VOL.CHARA.SYSVOICE, 01)
+
+				//
+				\BT.GROUP(5)
+				\BT.RADIO(500001)
+				\BT.CGSYS("config/btn_page02")
+				\BT.XY(050+40*2, 550)
+				\BT.Z(1000)
+				\BT.SET(VOL.CHARA.SYSVOICE, 02)
+
+				//
+				\BT.GROUP(5)
+				\BT.RADIO(500001)
+				\BT.CGSYS("config/btn_page03")
+				\BT.XY(050+40*3, 550)
+				\BT.Z(1000)
+				\BT.SET(VOL.CHARA.SYSVOICE, 03)
+
+				//
+				\BT.GROUP(5)
+				\BT.RADIO(500001)
+				\BT.CGSYS("config/btn_page04")
+				\BT.XY(050+40*4, 550)
+				\BT.Z(1000)
+				\BT.SET(VOL.CHARA.SYSVOICE, 04)
+*/
+
+
+	//----------------------------------------------------------------
+	//■シーン鑑賞へ戻る
+	//----------------------------------------------------------------
+		IF[@es.RPMODE==1] //シーン鑑賞中であれば
+		{
+			//◆シーン鑑賞へ戻る
+			\BT.CGSYS("config/btn_rpmode_bt3")
+			\BT.GROUP(,,1,5)
+			\BT.XY(506, 554)
+			\BT.Z(2010)
+			\BT.SET(BTN.RPMODE)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■タイトルへ戻る
+	//----------------------------------------------------------------
+		IF[@es.S.NAMENEST>0]
+			IF[$es.S.NAME(@es.S.NAMENEST-1)!="ES.TITLE"] //タイトル画面モードじゃなければ表示
+			{
+				//◆タイトルへ戻る
+				\BT.CGSYS("config/btn_title_bt3")
+				\BT.GROUP(,,1,5)
+				\BT.XY(561, 554)
+				\BT.Z(2010)
+				\BT.SET(BTN.TITLE, 0) //1=Windowsダイアログ
+			}
+			IFEND[]
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■終了
+	//----------------------------------------------------------------
+		//◆END
+		\BT.CGSYS("config/btn_end_bt3")
+		\BT.GROUP(,,1,5)
+		\BT.XY(616, 554)
+		\BT.Z(2010)
+		\BT.SET(BTN.END, 0) //1=Windowsダイアログ
+
+
+	//----------------------------------------------------------------
+	//■設定初期化
+	//----------------------------------------------------------------
+		//◆設定初期化
+		\BT.CGSYS("config/btn_cfginit_bt3")
+		\BT.GROUP(,,1,5)
+		\BT.XY(671, 554)
+		\BT.Z(2010)
+		\BT.SET(BTN.CFGINIT, 0) //1=Windowsダイアログ
+
+
+	//----------------------------------------------------------------
+	//■戻る
+	//----------------------------------------------------------------
+		//◆BACK
+		\BT.CGSYS("config/btn_back_bt3")
+		\BT.GROUP(,,1,5)
+		\BT.XY(726, 554)
+		\BT.Z(2010)
+		\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+		\BT.SET(BTN.BACK)
+
+
+
+RETURN[]
+
+
+
+//============================================================================
+// コンフィグ・フォント選択画面設計
+//============================================================================
+#=ES.CONFIGSELFONT.BTDEF
+
+	\BTDEF.GROUP(ES.CONFIGSELFONT)
+
+	//----------------------------------------------------------------
+	//■フォント選択
+	//----------------------------------------------------------------
+		//◆フォント・リストボックス閉じ
+		\BT.CGSYS("config/btn_font_open_off", "config/btn_font_open_over")
+		\BT.XY(362, 092+35*8)
+		\BT.Z(100)
+		\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+		\BT.SET(FONT.CLOSE)
+
+		//◆フォント・リストボックス開き
+		\BT.CGSYS("config/tip_fontbox")
+		\BT.XY(362, 092+35*8-220)
+		\BT.Z(200)
+		\BT.SET(FONT.OPEN)
+
+		//◆フォント・目盛り
+		\BT.CGSYS("config/btn_font_gauge")
+		\BT.XY(362+237, 092+35*8-196)
+		\BT.Z(300)
+		\BT.SET(FONT.GAUGE)
+
+		//◆フォント・ツマミ
+		\BT.CGSYS("config/btn_font_slider")
+		\BT.XY(362+237, 092+35*8-196)
+		\BT.Z(500)
+		\BT.SLIDE(0,152)
+		\BT.SET(FONT.SLIDER)
+
+		//◆フォント・↑
+		\BT.CGSYS("config/btn_font_b")
+		\BT.XY(362+237, 092+35*8-217)
+		\BT.Z(500)
+		\BT.KEY.S("MOUSE_U", "UP")
+		\BT.T(1)
+		\BT.SET(FONT.UP)
+
+		//◆フォント・↓
+		\BT.CGSYS("config/btn_font_f")
+		\BT.XY(362+237, 092+35*8-23)
+		\BT.Z(500)
+		\BT.KEY.S("MOUSE_D", "DOWN")
+		\BT.T(1)
+		\BT.SET(FONT.DOWN)
+
+		//◆フォント・選択バー
+		\BT.CGSYS("config/btn_font_bar")
+		\BT.XY(0, 0) //0,0でOKです
+		\BT.Z(1000)
+		\BT.MODE(2) //減算
+		\BT.SET(FONT.BAR)
+
+
+RETURN[]
+
+
+

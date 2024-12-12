@@ -1,0 +1,131 @@
+//============================================================================
+// 選択肢画面設計
+//============================================================================
+#=ES.SEL.BTDEF
+
+	\BTDEF.GROUP(ES.SEL)
+
+	\BT.NAME("■選択肢１枠")
+//	\BT.CGSYS("select/btn_select")
+	\BT.CGSYS("select/btn_select_off", "select/btn_select_over", "select/btn_select_on", , "select/btn_select_na")
+	\BT.XY(000, 000)
+	\BT.Z(10)
+	\BT.MAP.A(1)
+	\BT.SET(BTN.BAR, 01)
+
+		\BT.NAME("■選択肢１テキスト")
+		\BT.CGSYS("select/tip_select_txspace")
+		\BT.XY(000, 000)
+		\BT.Z(20)
+		\BT.TYPE(0)
+		\BT.SET(TIP.TX, 01)
+
+	\BT.NAME("■選択肢２枠")
+//	\BT.CGSYS("select/btn_select")
+	\BT.CGSYS("select/btn_select_off", "select/btn_select_over", "select/btn_select_on", , "select/btn_select_na")
+	\BT.XY(000, 000)
+	\BT.Z(10)
+	\BT.MAP.A(1)
+	\BT.SET(BTN.BAR, 02)
+
+		\BT.NAME("■選択肢２テキスト")
+		\BT.CGSYS("select/tip_select_txspace")
+		\BT.XY(000, 000)
+		\BT.Z(20)
+		\BT.TYPE(0)
+		\BT.SET(TIP.TX, 02)
+
+	\BT.NAME("■選択肢３枠")
+//	\BT.CGSYS("select/btn_select")
+	\BT.CGSYS("select/btn_select_off", "select/btn_select_over", "select/btn_select_on", , "select/btn_select_na")
+	\BT.XY(000, 000)
+	\BT.Z(10)
+	\BT.MAP.A(1)
+	\BT.SET(BTN.BAR, 03)
+
+		\BT.NAME("■選択肢３テキスト")
+		\BT.CGSYS("select/tip_select_txspace")
+		\BT.XY(000, 000)
+		\BT.Z(20)
+		\BT.TYPE(0)
+		\BT.SET(TIP.TX, 03)
+
+	\BT.NAME("■選択肢４枠")
+//	\BT.CGSYS("select/btn_select")
+	\BT.CGSYS("select/btn_select_off", "select/btn_select_over", "select/btn_select_on", , "select/btn_select_na")
+	\BT.XY(000, 000)
+	\BT.Z(10)
+	\BT.MAP.A(1)
+	\BT.SET(BTN.BAR, 04)
+
+		\BT.NAME("■選択肢４テキスト")
+		\BT.CGSYS("select/tip_select_txspace")
+		\BT.XY(000, 000)
+		\BT.Z(20)
+		\BT.TYPE(0)
+		\BT.SET(TIP.TX, 04)
+
+	\BT.NAME("■選択肢５枠")
+//	\BT.CGSYS("select/btn_select")
+	\BT.CGSYS("select/btn_select_off", "select/btn_select_over", "select/btn_select_on", , "select/btn_select_na")
+	\BT.XY(000, 000)
+	\BT.Z(10)
+	\BT.MAP.A(1)
+	\BT.SET(BTN.BAR, 05)
+
+		\BT.NAME("■選択肢５テキスト")
+		\BT.CGSYS("select/tip_select_txspace")
+		\BT.XY(000, 000)
+		\BT.Z(20)
+		\BT.TYPE(0)
+		\BT.SET(TIP.TX, 05)
+
+	\BT.NAME("■選択肢６枠")
+//	\BT.CGSYS("select/btn_select")
+	\BT.CGSYS("select/btn_select_off", "select/btn_select_over", "select/btn_select_on", , "select/btn_select_na")
+	\BT.XY(000, 000)
+	\BT.Z(10)
+	\BT.MAP.A(1)
+	\BT.SET(BTN.BAR, 06)
+
+		\BT.NAME("■選択肢６テキスト")
+		\BT.CGSYS("select/tip_select_txspace")
+		\BT.XY(000, 000)
+		\BT.Z(20)
+		\BT.TYPE(0)
+		\BT.SET(TIP.TX, 06)
+
+	\BT.NAME("■選択肢７枠")
+//	\BT.CGSYS("select/btn_select")
+	\BT.CGSYS("select/btn_select_off", "select/btn_select_over", "select/btn_select_on", , "select/btn_select_na")
+	\BT.XY(000, 000)
+	\BT.Z(10)
+	\BT.MAP.A(1)
+	\BT.SET(BTN.BAR, 07)
+
+		\BT.NAME("■選択肢７テキスト")
+		\BT.CGSYS("select/tip_select_txspace")
+		\BT.XY(000, 000)
+		\BT.Z(20)
+		\BT.TYPE(0)
+		\BT.SET(TIP.TX, 07)
+
+	\BT.NAME("■選択肢８枠")
+//	\BT.CGSYS("select/btn_select")
+	\BT.CGSYS("select/btn_select_off", "select/btn_select_over", "select/btn_select_on", , "select/btn_select_na")
+	\BT.XY(000, 000)
+	\BT.Z(10)
+	\BT.MAP.A(1)
+	\BT.SET(BTN.BAR, 08)
+
+		\BT.NAME("■選択肢８テキスト")
+		\BT.CGSYS("select/tip_select_txspace")
+		\BT.XY(000, 000)
+		\BT.Z(20)
+		\BT.TYPE(0)
+		\BT.SET(TIP.TX, 08)
+
+
+
+RETURN[]
+

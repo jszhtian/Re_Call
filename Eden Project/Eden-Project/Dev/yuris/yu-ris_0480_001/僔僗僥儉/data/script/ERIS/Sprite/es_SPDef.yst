@@ -1,0 +1,621 @@
+//============================================================================
+//
+//■スプライト登録
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	//スプライト定義
+	S_INT[@SP.DEF.NUM]
+	S_STR[$SP.DEF.KEY1(1)]		//KEY1(先頭文字)
+	S_STR[$SP.DEF.KEY2(1)]		//KEY2(末尾文字)
+	S_STR[$SP.DEF.STR(1)]		//STR
+
+	//スプライト合成定義
+	S_INT[@SPC.DEF.NUM]
+	S_STR[$SPC.DEF.KEY1(1)]		//KEY1(先頭文字)
+	S_STR[$SPC.DEF.KEY2(1)]		//KEY2(末尾文字)
+	S_INT[@SPC.DEF.X(1)]		//X
+	S_INT[@SPC.DEF.Y(1)]		//Y
+	S_INT[@SPC.DEF.COMP(1)]		//COMP
+	S_STR[$SPC.DEF.STR(1)]		//STR
+
+	//スプライトアニメ定義
+	S_INT[@SPA.DEF.NUM]
+	S_STR[$SPA.DEF.KEY1(1)]		//KEY1(先頭文字)
+	S_STR[$SPA.DEF.KEY2(1)]		//KEY2(末尾文字)
+	S_STR[$SPA.DEF.STR(1)]		//STR
+//	S_INT[@SPA.DEF.SRCLEN(1)]	//
+	S_INT[@SPA.DEF.X(1)]		//
+	S_INT[@SPA.DEF.Y(1)]		//
+	S_INT[@SPA.DEF.ANNUM(1)]	//
+	S_INT[@SPA.DEF.SP(1)]		//
+	S_INT[@SPA.DEF.COMP(1)]		//
+
+
+	//背景
+	S_INT[@BGP.FADE=-1]
+	S_INT[@BGP.ST=-1]
+	S_STR[$BGP.FILE]
+	S_STR[$BGP.TR]
+
+	//BGD:BG定義
+	S_INT[@BGD.NUM]
+	S_STR[$BGD.NAME(1)]
+	S_STR[$BGD.FILE(1)]
+	S_INT[@BGD.FADE(1)]
+	S_STR[$BGD.TR(1)]
+
+	//イベントＣＧ
+	S_INT[@EVP.FADE=-1]
+	S_INT[@EVP.ST=-1]
+	S_STR[$EVP.FILE]
+	S_STR[$EVP.TR]
+
+	//EVD:EV定義
+	S_INT[@EVD.NUM]
+	S_STR[$EVD.NAME(1)]
+	S_STR[$EVD.FILE(1)]
+	S_INT[@EVD.FADE(1)]
+	S_STR[$EVD.TR(1)]
+
+	//トランジション
+	S_STR[$TRP.FILE]
+	S_INT[@TRP.A]
+	S_STR[$mTR.FILE]
+	S_INT[@mTR.A]
+
+	//TRD:TR定義
+	S_INT[@TRD.NUM]
+	S_STR[$TRD.NAME(1)]
+	S_STR[$TRD.FILE(1)]
+	S_INT[@TRD.A(1)]
+
+}
+
+
+//--------------------------------------------------------------------
+//■スプライトフォルダ定義処理
+//--------------------------------------------------------------------
+#=es.SP.FOLDER.DEF.SET
+{
+	@SP.DEF.NUM+=1
+	\_strlower($_PSTR(1));\VAR.ADD($SP.DEF.KEY1, $_RSTR(1))
+	\_strlower($_PSTR(2));\VAR.ADD($SP.DEF.KEY2, $_RSTR(1))
+	\_strlower($_PSTR(3));\VAR.ADD($SP.DEF.STR , $_RSTR(1))
+
+	IF[$_PSTR(3)==""]
+		\_mes("[立ち絵定義]"+\_R+"\\SP.ST.FOLDER.DEF 命令のパラメータの数が恐らく間違っています。3 個で指定してください。");END[]
+	IFEND[]
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■スプライトフォルダ定義検索処理
+//  $_PSTR(1) : この文字列の中から検索する
+//
+//  $_RSTR(1) : 文字列
+//--------------------------------------------------------------------
+#=es.SP.FOLDER.DEF.SEARCH
+{
+	STR[$chk]
+	\_strlower($_PSTR(1))($chk)
+
+	STR[$ret]
+	STR[$str1]
+	STR[$str2]
+	LOOP[SET=@SP.DEF.NUM]
+	{
+		\_strlen($SP.DEF.KEY1(@_LC));\_strleft($chk, @_RINT(1))($str1)
+		\_strlen($SP.DEF.KEY2(@_LC));\_strright($chk, @_RINT(1))($str2)
+		IF[$str1==$SP.DEF.KEY1(@_LC) && $str2==$SP.DEF.KEY2(@_LC)] { $ret=$SP.DEF.STR(@_LC); LOOPBREAK[] } IFEND[]
+	}
+	LOOPEND[]
+//\_dmes("$chk="+$chk+", $ret="+$ret)
+	return[rstr=$ret]
+}
+
+
+//--------------------------------------------------------------------
+//■スプライト合成定義処理
+//--------------------------------------------------------------------
+#=es.SPC.DEF.SET
+{
+	@SPC.DEF.NUM+=1
+	\_strlower($_PSTR(1));\VAR.ADD($SPC.DEF.KEY1, $_RSTR(1))
+	\_strlower($_PSTR(2));\VAR.ADD($SPC.DEF.KEY2, $_RSTR(1))
+	\_strlower($_PSTR(3));\VAR.ADD($SPC.DEF.STR , $_RSTR(1))
+
+	IF[(@_PINT(4)==99999 && @_PINT(5)!=99999) || (@_PINT(4)!=99999 && @_PINT(5)==99999)]
+		\_mes("[立ち絵定義]"+\_R+"\\SPC.ST.DEF 命令のパラメータの数が恐らく間違っています。3 個または 5 個で指定してください。");END[]
+	IFEND[]
+
+	\VAR.ADD(@SPC.DEF.X   , @_PINT(4))
+	\VAR.ADD(@SPC.DEF.Y   , @_PINT(5))
+	\VAR.ADD(@SPC.DEF.COMP, @_PINT(6))
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■スプライト合成定義検索処理
+//  $_PSTR(1) : この文字列の中から検索する
+//
+//  $_RSTR(1) : 文字列
+//--------------------------------------------------------------------
+#=es.SPC.DEF.SEARCH
+{
+	STR[$chk]
+	\_strlower($_PSTR(1))($chk)
+
+	STR[$str1]
+	STR[$str2]
+	STR[$str]
+	INT[@x]
+	INT[@y]
+	INT[@comp]
+	LOOP[SET=@SPC.DEF.NUM]
+	{
+		\_strlen($SPC.DEF.KEY1(@_LC));\_strleft($chk, @_RINT(1))($str1)
+		\_strlen($SPC.DEF.KEY2(@_LC));\_strright($chk, @_RINT(1))($str2)
+		IF[$str1==$SPC.DEF.KEY1(@_LC) && $str2==$SPC.DEF.KEY2(@_LC)]
+			$str=$SPC.DEF.STR(@_LC)
+			@x=@SPC.DEF.X(@_LC)
+			@y=@SPC.DEF.Y(@_LC)
+			@comp=@SPC.DEF.COMP(@_LC)
+			LOOPBREAK[]
+		IFEND[]
+	}
+	LOOPEND[]
+//\_dmes("$chk="+$chk+", $ret="+$ret)
+	return[rstr=$str rint2=@x rint3=@y rint4=@comp]
+}
+
+
+//--------------------------------------------------------------------
+//■スプライトアニメ定義処理
+//--------------------------------------------------------------------
+#=es.SPA.ST.DEF.SET
+{
+	@SPA.DEF.NUM+=1
+	\_strlower($_PSTR(1));\VAR.ADD($SPA.DEF.KEY1, $_RSTR(1))
+	\_strlower($_PSTR(2));\VAR.ADD($SPA.DEF.KEY2, $_RSTR(1))
+	\_strlower($_PSTR(3));\VAR.ADD($SPA.DEF.STR , $_RSTR(1))
+
+//	\_strlen($_PSTR(1));\VAR.ADD(@SPA.DEF.SRCLEN, @_RINT(1))
+
+	\VAR.ADD(@SPA.DEF.X    , @_PINT(4))
+	\VAR.ADD(@SPA.DEF.Y    , @_PINT(5))
+	\VAR.ADD(@SPA.DEF.ANNUM, @_PINT(6))
+	\VAR.ADD(@SPA.DEF.SP   , @_PINT(7))
+	\VAR.ADD(@SPA.DEF.COMP , @_PINT(8))
+
+	IF[@_PINT(7)==-1]
+		\_mes("[立ち絵定義]"+\_R+"\\SPA.DEF 命令のパラメータの数が恐らく間違っています。7 個で指定してください。");END[]
+	IFEND[]
+
+	IF[@_PINT(7)<10] \_mes("目パチ速度指定は 10 以上を指定してください。");END[] IFEND[]
+
+	IF[@SPA.DEF.ANNUM(@SPA.DEF.NUM)>4] \_mes("立ち絵アニメ枚数は最大4枚です。(β4仕様)");END[] IFEND[]
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■スプライトアニメ定義検索処理
+//  $_PSTR(1) : この文字列の中から検索する
+//
+//--------------------------------------------------------------------
+#=es.SPA.DEF.SEARCH
+{
+	STR[$chk]
+	\_strlower($_PSTR(1))($chk)
+
+	STR[$str1]
+	STR[$str2]
+	STR[$ret1]
+	INT[@ret2]
+	INT[@ret3]
+	INT[@ret4]
+	INT[@ret5]
+	INT[@ret6]
+	LOOP[SET=@SPA.DEF.NUM]
+	{
+		\_strlen($SPA.DEF.KEY1(@_LC));\_strleft($chk, @_RINT(1))($str1)
+		\_strlen($SPA.DEF.KEY2(@_LC));\_strright($chk, @_RINT(1))($str2)
+		IF[$str1==$SPA.DEF.KEY1(@_LC) && $str2==$SPA.DEF.KEY2(@_LC)]
+		{
+			$ret1=$SPA.DEF.STR(@_LC)
+			@ret2=@SPA.DEF.X(@_LC)
+			@ret3=@SPA.DEF.Y(@_LC)
+			@ret4=@SPA.DEF.ANNUM(@_LC)
+			@ret5=@SPA.DEF.SP(@_LC)
+			@ret6=@SPA.DEF.COMP(@_LC)
+			LOOPBREAK[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+//\_dmes("$chk="+$chk+", $ret="+$ret)
+	return[rstr=$ret1 rint2=@ret2 rint3=@ret3 rint4=@ret4 rint5=@ret5 rint6=@ret6]
+}
+
+
+//--------------------------------------------------------------------
+//■スプライトアニメ詳細定義処理
+//--------------------------------------------------------------------
+S_STR[$spa2.file]
+S_INT[@spa2.time = 100]
+S_INT[@spa2.a = 256]
+S_INT[@spa2.x]
+S_INT[@spa2.y]
+S_INT[@spa2.z]
+S_INT[@spa2.srcx]
+S_INT[@spa2.srcy]
+S_INT[@spa2.srcsx]
+S_INT[@spa2.srcsy]
+S_INT[@spa2.bx]
+S_INT[@spa2.by]
+
+S_INT[@spa2.pno]			//パターン開始変数添字番号
+S_INT[@spa2.pnum]			//パターン枚数
+S_INT[@spa2.pmax]			//パターン総枚数
+
+
+S_INT[@SPA2.DEF.NUM]
+S_STR[$SPA2.DEF.STR(1)]		//STR
+S_INT[@SPA2.DEF.PNO(1)]		//パターン開始変数添字番号
+S_INT[@SPA2.DEF.PNUM(1)]	//パターン枚数
+S_INT[@SPA2.DEF.LPNUM(1)]	//ループ回数
+S_STR[$SPA2P.DEF.FN(1)]		//ファイル名
+S_INT[@SPA2P.DEF.TIME(1)]	//
+S_INT[@SPA2P.DEF.A(1)]		//
+S_INT[@SPA2P.DEF.X(1)]		//
+S_INT[@SPA2P.DEF.Y(1)]		//
+S_INT[@SPA2P.DEF.Z(1)]		//
+S_INT[@SPA2P.DEF.SRCX(1)]	//
+S_INT[@SPA2P.DEF.SRCY(1)]	//
+S_INT[@SPA2P.DEF.SRCSX(1)]	//
+S_INT[@SPA2P.DEF.SRCSY(1)]	//
+S_INT[@SPA2P.DEF.BX(1)]		//
+S_INT[@SPA2P.DEF.BY(1)]		//
+
+
+#=es.SPA2.CG.SET
+{
+	$spa2.file  = $_PSTR(1)
+	return[]
+}
+
+#=es.SPA2.TIME.SET
+{
+	@spa2.time  = @_PINT(1)
+	return[]
+}
+
+#=es.SPA2.A.SET
+{
+	@spa2.a     = @_PINT(1)
+	return[]
+}
+
+#=es.SPA2.XYZ.SET
+{
+	@spa2.x     = @_PINT(1)
+	@spa2.y     = @_PINT(2)
+	@spa2.z     = @_PINT(3)
+	return[]
+}
+
+#=es.SPA2.SRCXY.SET
+{
+	@spa2.srcx  = @_PINT(1)
+	@spa2.srcy  = @_PINT(2)
+	return[]
+}
+
+#=es.SPA2.SRCSXY.SET
+{
+	@spa2.srcsx = @_PINT(1)
+	@spa2.srcsy = @_PINT(2)
+	return[]
+}
+
+#=es.SPA2.BXY.SET
+{
+	@spa2.bx = @_PINT(1)-100
+	@spa2.by = @_PINT(2)-100
+	return[]
+}
+
+//１パターン登録
+#=es.SPA2PATDEF.SET
+{
+	\_strlower($spa2.file)
+	\VAR.ADD($SPA2P.DEF.FN    , $_RSTR(1))
+	\VAR.ADD(@SPA2P.DEF.TIME  , @spa2.time)
+	\VAR.ADD(@SPA2P.DEF.A     , @spa2.a)
+	\VAR.ADD(@SPA2P.DEF.X     , @spa2.x)
+	\VAR.ADD(@SPA2P.DEF.Y     , @spa2.y)
+	\VAR.ADD(@SPA2P.DEF.Z     , @spa2.z)
+	\VAR.ADD(@SPA2P.DEF.SRCX  , @spa2.srcx)
+	\VAR.ADD(@SPA2P.DEF.SRCY  , @spa2.srcy)
+	\VAR.ADD(@SPA2P.DEF.SRCSX , @spa2.srcsx)
+	\VAR.ADD(@SPA2P.DEF.SRCSY , @spa2.srcsy)
+	\VAR.ADD(@SPA2P.DEF.BX    , @spa2.bx)
+	\VAR.ADD(@SPA2P.DEF.BY    , @spa2.by)
+
+	IF[@spa2.time<1] \_mes("["+$spa2.file+"]アニメ速度指定は 1 以上を指定してください。");END[] IFEND[]
+	IF[@spa2.a<0 || @spa2.a>256] \_mes("["+$spa2.file+"]不透明度は 0～256 を指定してください。");END[] IFEND[]
+
+	@spa2.pnum+=1
+	@spa2.pmax+=1
+	IF[@spa2.pmax>20000] \_mes("[登録エラー]総定義パターン数が20000パターンを超えました。");END[] IFEND[]
+
+//\_dmes("[登録] FN="+$SPA2P.DEF.FN(@spa2.pnum)+" , TIME="+$(@SPA2P.DEF.TIME(@spa2.pnum))+", A="+$(@SPA2P.DEF.A(@spa2.pnum))+", XY=("+$(@SPA2P.DEF.X(@spa2.pnum))+","+$(@SPA2P.DEF.Y(@spa2.pnum))+")"+", SRC_XY=("+$(@SPA2P.DEF.SRCX(@spa2.pnum))+","+$(@SPA2P.DEF.SRCY(@spa2.pnum))+")"+", SRC_SXY=("+$(@SPA2P.DEF.SRCSX(@spa2.pnum))+","+$(@SPA2P.DEF.SRCSY(@spa2.pnum))+")")
+
+	@spa2.time = 100
+	@spa2.a = 256
+	@spa2.x = 0
+	@spa2.y = 0
+	@spa2.z = 0
+	@spa2.srcx = 0
+	@spa2.srcy = 0
+	@spa2.srcsx = 0
+	@spa2.srcsy = 0
+	@spa2.bx = 0
+	@spa2.by = 0
+
+	return[]
+}
+
+#=es.SPA2DEF.SET
+{
+	//
+	\_strlower($_PSTR(1));\VAR.ADD($SPA2.DEF.STR, $_RSTR(1))
+
+	\VAR.ADD(@SPA2.DEF.PNO  , @spa2.pno+1)
+	\VAR.ADD(@SPA2.DEF.PNUM , @spa2.pnum)
+	\VAR.ADD(@SPA2.DEF.LPNUM, @_PINT(2))
+//\_dmes("PNO="+$(@spa2.pno+1)+", PNUM="+$(@spa2.pnum))
+
+	@spa2.pno+=@spa2.pnum
+	@spa2.pnum=0
+
+	@SPA2.DEF.NUM+=1
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■スプライトアニメ定義検索処理
+//  $_PSTR(1) : この文字列の中から検索する
+//
+//--------------------------------------------------------------------
+#=es.SPA2.DEF.SEARCH
+{
+	\_strlower($_PSTR(1))
+	STR[$chk=$_RSTR(1)]
+
+	STR[$str1]
+	INT[@ret1]
+	INT[@ret2]
+	INT[@ret3]
+	LOOP[SET=@SPA2.DEF.NUM]
+	{
+		IF[$chk==$SPA2.DEF.STR(@_LC)]
+		{
+			@ret1=@SPA2.DEF.PNO(@_LC)
+			@ret2=@SPA2.DEF.PNUM(@_LC)
+			@ret3=@SPA2.DEF.LPNUM(@_LC)
+			LOOPBREAK[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@ret1 rint2=@ret2 rint3=@ret3]
+}
+
+
+#=es.SPA2.LOAD.PDATA
+{
+	GOSUB[#=es.SPA2.DEF.SEARCH pstr=$_PSTR(1)]
+	INT[@pno =@_RINT(1)]
+	INT[@pnum=@_RINT(2)]
+	LOOP[SET=@pnum] CG[ID="es.SP.ANM."+$(@pno+@_LC-1) Z=1 E=0 X=30*@_LC Y=30*@_LC FILE="cg/"+$SPA2P.DEF.FN(@pno+@_LC-1)] LOOPEND[]
+
+	return[]
+}
+
+#=es.SPA2.DEL.PDATA
+{
+	GOSUB[#=es.SPA2.DEF.SEARCH pstr=$_PSTR(1)]
+	INT[@pno =@_RINT(1)]
+	INT[@pnum=@_RINT(2)]
+	LOOP[SET=@pnum] CGEND[ID="es.SP.ANM."+$(@pno+@_LC-1)] LOOPEND[]
+
+	return[]
+}
+
+
+//@_PINT(1):パターン番号
+//
+#=es.SPA2.GET.PDATA
+{
+	STR[$ret1=$SPA2P.DEF.FN(@_PINT(1))]
+	INT[@ret2=@SPA2P.DEF.A(@_PINT(1))]
+	INT[@ret3=@SPA2P.DEF.SRCX(@_PINT(1))]
+	INT[@ret4=@SPA2P.DEF.SRCY(@_PINT(1))]
+	INT[@ret5=@SPA2P.DEF.SRCSX(@_PINT(1))]
+	INT[@ret6=@SPA2P.DEF.SRCSY(@_PINT(1))]
+	return[rstr=$ret1 rint2=@ret2 rint3=@ret3 rint4=@ret4 rint5=@ret5 rint6=@ret6]
+}
+
+#=es.SPA2.GET.PDATA2
+{
+	INT[@ret1=@SPA2P.DEF.TIME(@_PINT(1))]
+	INT[@ret2=@SPA2P.DEF.X(@_PINT(1))]
+	INT[@ret3=@SPA2P.DEF.Y(@_PINT(1))]
+	INT[@ret4=@SPA2P.DEF.Z(@_PINT(1))]
+	INT[@ret5=@SPA2P.DEF.BX(@_PINT(1))]
+	INT[@ret6=@SPA2P.DEF.BY(@_PINT(1))]
+	return[rint=@ret1 rint2=@ret2 rint3=@ret3 rint4=@ret4 rint5=@ret5 rint6=@ret6]
+}
+
+//--------------------------------------------------------------------
+//■背景定義
+//--------------------------------------------------------------------
+#=es.BGDEF
+{
+	@BGD.NUM += 1
+	\VAR.ADD($BGD.NAME, $_PSTR(1))
+	\VAR.ADD($BGD.FILE, $BGP.FILE)
+	\VAR.ADD(@BGD.FADE, @BGP.FADE)
+	\VAR.ADD($BGD.TR, $BGP.TR)
+
+	// パラメータ初期化
+	$BGP.FILE = ""
+	@BGP.FADE = -1
+	$BGP.TR   = ""
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■背景定義文字列チェック
+//--------------------------------------------------------------------
+#=es.BGDEF.CHECK
+{
+	INT[@r]
+	STR[$s=$_PSTR(1)]
+
+	$BGD.FILE(0) = $s
+	@BGD.FADE(0) = -1
+	$BGD.TR(0)   = ""
+
+	LOOP[SET=@BGD.NUM]
+	{
+		IF[$s==$BGD.NAME(@_LC)] @r=@_LC;LOOPBREAK[] IFEND[]
+	}
+	LOOPEND[]
+
+	//return[rint=@r]
+	return[rstr=$BGD.FILE(@r) rint2=@BGD.FADE(@r) rstr3=$BGD.TR(@r)]
+}
+
+
+//--------------------------------------------------------------------
+//■イベント絵定義
+//--------------------------------------------------------------------
+#=es.EVDEF
+{
+	@EVD.NUM += 1
+	\VAR.ADD($EVD.NAME, $_PSTR(1))
+	\VAR.ADD($EVD.FILE, $EVP.FILE)
+	\VAR.ADD(@EVD.FADE, @EVP.FADE)
+	\VAR.ADD($EVD.TR, $EVP.TR)
+
+	//パラメータ初期化
+	$EVP.FILE = ""
+	@EVP.FADE = -1
+	$EVP.TR   = ""
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■イベント定義文字列チェック
+//--------------------------------------------------------------------
+#=es.EVDEF.CHECK
+{
+	INT[@r]
+	STR[$s=$_PSTR(1)]
+
+	$EVD.FILE(0) = $s
+	@EVD.FADE(0) = -1
+	$EVD.TR(0)   = ""
+
+	LOOP[SET=@EVD.NUM]
+	{
+		IF[$s==$EVD.NAME(@_LC)] @r=@_LC;LOOPBREAK[] IFEND[]
+	}
+	LOOPEND[]
+
+	//return[rint=@r]
+	return[rstr=$EVD.FILE(@r) rint2=@EVD.FADE(@r) rstr3=$EVD.TR(@r)]
+}
+
+
+//--------------------------------------------------------------------
+//■トランジション定義
+//--------------------------------------------------------------------
+#=es.TRDEF
+{
+	@TRD.NUM += 1
+	\VAR.ADD($TRD.NAME, $_PSTR(1))
+	\VAR.ADD($TRD.FILE, $TRP.FILE)
+	\VAR.ADD(@TRD.A, @TRP.A)
+
+	\_range(@TRD.A(@TRD.NUM), 0, 256)
+
+	//パラメータ初期化
+	$TRP.FILE = ""
+	@TRP.A = -1
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■トランジション定義文字列チェック
+//--------------------------------------------------------------------
+#=es.TRDEF.CHECK
+{
+	INT[@r]
+	STR[$s=$_PSTR(1)]
+
+	$TRD.FILE(0) = $s
+	@TRD.A(0)    = @T(29,01)
+	IF[$s==""] @TRD.A(0) = 0 IFEND[]
+	IF[@TRD.A(0)<0 || @TRD.A(0)>256] @TRD.A(0)=0 IFEND[]
+
+	LOOP[SET=@TRD.NUM]
+	{
+		IF[$s==$TRD.NAME(@_LC)] @r=@_LC;LOOPBREAK[] IFEND[]
+	}
+	LOOPEND[]
+
+	//return[rint=@r]
+	return[rstr=$TRD.FILE(@r) rint2=@TRD.A(@r)]
+}
+
+
+//////
+
+
+//▼ＴＲファイル名 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TR.FILE.SET
+{
+	$TRP.FILE = $_PSTR(1)
+	return[]
+}
+
+//▼ＴＲ精度 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.TR.A.SET
+{
+	@TRP.A = @_PINT(1)
+	IF[@TRP.A<0 || @TRP.A>256]
+		\_mes("[トランジション定義] 精度が不正です。"); END[]
+	IFEND[]
+	return[]
+}
+
+

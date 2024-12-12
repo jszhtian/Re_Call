@@ -1,0 +1,35 @@
+@SET_MAKE@
+CC		= @CC@
+CXX		= @CXX@
+LD		= @CXX@
+AR		= ar
+RANLIB		= @RANLIB@
+
+CFLAGS= -I.. $(LOCAL_DEF) @CFLAGS@ @DEFS@ -pthread -O2
+CXXFLAGS	= $(CFLAGS)
+LDFLAGS = @LDFLAGS@ @LIBS@ -pthread
+
+SRCS	 = file.cc \
+	   system_config.cc
+
+OBJS	 = ${SRCS:.cc=.o}
+
+all: visarc libsystem.a
+
+libsystem.a: ${OBJS}
+	rm -f libsystem.a
+	${AR} clq libsystem.a ${OBJS}
+	$(RANLIB) libsystem.a
+
+visarc: visarc.o libsystem.a
+	$(LD) -o visarc visarc.o libsystem.a $(LDFLAGS)
+
+clean:
+	rm -f visarc libsystem.a ${OBJS} *.bak
+
+.c.o:
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+.cc.o:
+	$(CXX) -c $(CFLAGS) -o $@ $<
+

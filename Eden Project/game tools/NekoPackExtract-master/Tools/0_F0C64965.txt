@@ -1,0 +1,458 @@
+//――――――――――――――――――――――――――――――――――――――
+//	コンフィグ・データ
+//――――――――――――――――――――――――――――――――――――――
+
+const NORMAL_TEXT_COLOR   = 0xFFFFFF
+const NORMAL_BORDER_COLOR = 0x000000
+const READED_TEXT_COLOR   = 0xCCCCFF
+const READED_BORDER_COLOR = 0x000066
+const LOG_TEXT_COLOR = 0xFFFFFF
+
+const SPEED_MAX = 100
+const OPACITY_MAX = 255
+const VOLUME_MAX  = 100
+
+const ID_CONFIG_DEFAULT  = 100
+const ID_CONFIG_VOLUME   = 101
+const ID_CONFIG_DIALOG   = 102
+const ID_CONFIG_SHORTCUT = 103
+
+DIALOG_TAGS <- ["OVERWRITE", "LOAD", "QSAVE", "QLOAD", "NEXT", "JUMP", "QUIT", "DEFAULT", "RESET"]
+
+// デフォルト
+ConfigDefault <- {
+	// システム
+	TextSpeed  = SPEED_MAX / 2
+	AutoSpeed  = SPEED_MAX / 2
+	BoxOpacity = OPACITY_MAX * 3/4
+	LogOpacity = OPACITY_MAX * 3/4
+	FontType   = 2
+	Font       = "ShiMei"
+	Bold       = 0
+	Border     = 1
+	NoActive   = 0
+
+	// 追加機能（目パチ、口パク）
+	MouthAnime = 0
+	EyesAnime  = 1
+
+	// システム詳細
+	Screen     = 0
+	ScreenSize = 1
+	Small      = 0
+	SkipNoRead = 0
+	KeepSkip   = 0
+	KeepAuto   = 0
+	ReadedFast = 0
+	Movie      = 1
+	Effect     = 1
+	SysEffect  = 1
+	Popup      = 1
+	CenterKey  = 0
+	SpaceKey   = 0
+	AutoSave   = 0
+	AutoSelect = 0
+	KeepIcon   = 0
+	KeepVoice  = 0
+	ReadedColor= 1
+	Climax = 1
+
+	// サウンド
+	VolMAS    = VOLUME_MAX
+	VolBGM    = VOLUME_MAX/2 + VOLUME_MAX/4
+	VolVO     = VOLUME_MAX
+	VolSE     = VOLUME_MAX/2 + VOLUME_MAX/4
+	VolENV    = VOLUME_MAX/2
+	VolBGV    = VOLUME_MAX/2
+	VolSYS    = VOLUME_MAX/2
+	VolMV     = VOLUME_MAX/2
+	
+	MuteMAS   = 0
+	MuteBGM   = 0
+	MuteVO    = 0
+	MuteSE    = 0
+	MuteENV   = 0
+	MuteBGV   = 0
+	MuteSYS   = 0
+	MuteMV    = 0
+
+	StereoVoice= 1
+	VoiceMute = {}
+	VoiceVolume = {}
+
+	// ショートカット
+	ShortCuts  = ["CONFIG","VOICE","AUTO","SKIP","SAVE","LOAD","QSAVE","QLOAD","LOG","HIDE","",""]
+
+	// ダイアログ
+	Dialog = {}
+}
+foreach(tag in VOICE_TAGS){
+	ConfigDefault.VoiceMute[tag] <- false
+	ConfigDefault.VoiceVolume[tag] <- VOLUME_MAX
+}
+foreach(tag in DIALOG_TAGS){
+	ConfigDefault.Dialog[tag] <- true
+}
+
+FontName <- ["ＭＳ ゴシック", "ＭＳ 明朝","しねきゃぷしょん"]
+
+
+//――――――――――――――――――――――――――――――――――――――
+//	コンフィグデータ
+//――――――――――――――――――――――――――――――――――――――
+function ResetConfig(){
+		Config <- clone ConfigDefault
+		Config.VoiceMute <- clone ConfigDefault.VoiceMute
+		Config.VoiceVolume <- clone ConfigDefault.VoiceVolume
+		Config.ShortCuts <- clone ConfigDefault.ShortCuts
+		Config.Dialog <- clone ConfigDefault.Dialog
+}
+function SaveConfig(){
+	local f = file(SavePath("config.sav"), "wb")
+	Save(f, Config)
+}
+function LoadConfig(){
+	try{
+		local f = file(SavePath("config.sav"), "rb")
+		Config <- delegate clone ConfigDefault: Load(f)
+	}catch(e){
+		ResetConfig()
+	}
+}
+
+// データ
+LoadConfig()
+RestoreVolume()
+RestoreScreen()
+
+//――――――――――――――――――――――――――――――――――――――
+//	ショートカットカスタマイズ
+//――――――――――――――――――――――――――――――――――――――
+class ShortCutsWindow{
+	constructor(images,x=0,y=0){
+		m_x = x
+		m_y = y
+		m_spots = Spots(images)
+		foreach(i, name in m_list){
+			m_spots.BindR(name, i+1)
+		}
+		m_spots.BindR("DELETE", ID_CANCEL)
+		m_window = images["ベース"]
+	}
+	function Select(s,base){
+		wait(0)
+		do{
+			local id = m_spots.Check(m_x,m_y)
+			switch(event()){
+			case ID_OK:
+				if(id==ID_CANCEL){ sound("OK"); return ""; }
+				if(id){ sound("OK"); return m_list[id-1]; }
+			case ID_CANCEL:
+				sound("NO");
+				return null;
+			}
+			s.Draw(base)
+			s.Draw(m_window,m_x,m_y);
+			m_spots.Draw(s,m_x,m_y);
+			s.Update()
+		}while(wait(-1))
+	}
+	function Loockup(name){
+		foreach(i,n in m_list){ if(name==n)return i+1 }
+		return 0
+	}
+	m_list = ["QSAVE", "QLOAD","SAVE", "LOAD","SKIP","AUTO","VOICE","LOG","CONFIG","DELETE","SCREEN", "HIDE"]
+	m_data  = array(12,0)
+	m_spots = Spots()
+	m_slots = Spots()
+	m_window = Sprite()
+	m_image = {}
+	m_cur = 0
+	m_x   = 0
+	m_y   = 0
+}
+
+
+//――――――――――――――――――――――――――――――――――――――
+//	コンフィグ画面（ダイアログページ）
+//――――――――――――――――――――――――――――――――――――――
+function ViewConfigDialog(){
+	sound("OK")
+	local page_i = Images("config1")
+
+	local base = Sprite()
+	base.Snap()
+	base.Draw(page_i["BASE"])
+
+	local gui = GUI()
+	gui.Bind( "Dialog",  CheckList(page_i, DIALOG_TAGS, "") )
+
+	gui.Put(Config)
+	local s = Screen()
+	wait(0)
+	do{
+		gui.Update()
+
+		// 描画
+		s.Draw(base)
+		gui.Draw(s)
+
+		// 更新
+		s.Update()
+
+		// 操作
+		if(event()==ID_CANCEL)break
+	}while(wait(-1))
+	gui.Get(Config)
+	sound("NO")
+}
+
+
+//――――――――――――――――――――――――――――――――――――――
+//	コンフィグ画面（サウンドページ）
+//――――――――――――――――――――――――――――――――――――――
+function ViewConfigSound(){
+	sound("OK")
+	local page_i = Images("config2")
+
+	local base = Sprite()
+	base.Snap()
+	base.Draw(page_i["BASE"])
+
+	local gui = GUI()
+	gui.Bind( "VoiceMute",  CheckList(page_i, VOICE_TAGS, "Mute") )
+	gui.Bind( "VoiceVolume", VolumeList(page_i, VOICE_TAGS, "Vol", VOLUME_MAX) )
+
+	gui.Put(Config)
+	local s = Screen()
+	wait(0)
+	do{
+		gui.Update()
+
+		// 描画
+		s.Draw(base)
+		gui.Draw(s)
+
+		// 更新
+		s.Update()
+
+		// 操作
+		if(event()==ID_CANCEL)break
+	}while(wait(-1))
+	gui.Get(Config)
+	sound("NO")
+}
+
+
+//――――――――――――――――――――――――――――――――――――――
+//	コンフィグ画面（ショートカットページ）
+//――――――――――――――――――――――――――――――――――――――
+function ViewConfigShortcut(){
+	sound("OK")
+	local page_i = Images("config3")
+	local spots  = Spots(page_i)
+
+	local base = Sprite()
+	base.Snap()
+	base.Draw(page_i["BASE"])
+
+	for(local i=1; i<=12; ++i){
+		spots.BindR("F"+i, ID_USER+i)
+	}
+
+	local s = Screen()
+	wait(0)
+	do{
+		local id = spots.Check()
+
+		// 描画
+		s.Draw(base)
+		spots.Draw(s)
+
+		// ショートカット
+		for(local i=0;i<12;++i){
+			local s1 = page_i[Config.ShortCuts[i]]
+			local s2 = spots ["F"+(i+1)]
+			s.Draw(s1, 0, s2.y-s1.y-6)
+		}
+
+		// 更新
+		s.Update()
+
+		// 操作
+		if(event()==ID_CANCEL)break
+		if(event()==ID_OK && id){
+			if(ID_USER<id && id<=ID_USER+12){
+				local snap = Sprite()
+				snap.Base()
+				snap.Draw(base)
+				spots.Draw(snap)
+				for(local i=0;i<12;++i){
+					local s1 = page_i[Config.ShortCuts[i]]
+					local s2 = spots ["F"+(i+1)]
+					snap.Draw(s1, 0, s2.y-s1.y-6)
+				}
+//				snap.Fill(0,128)
+				local index = id-ID_USER-1
+				local s1 = spots["F"+(index+1)]
+				local s2 = page_i["CONFIG"]
+				local sel = ShortCutsWindow(page_i,0,s1.y-s2.y-8).Select(s,snap)
+				if(sel != null)Config.ShortCuts[index] = sel
+				wait(0)
+			}
+		}
+	}while(wait(-1))
+	sound("NO")
+}
+
+
+//――――――――――――――――――――――――――――――――――――――
+//	コンフィグ画面（メイン）
+//――――――――――――――――――――――――――――――――――――――
+function ViewConfig(){
+	local image = Images("config")
+
+	local base = Sprite()
+	base.Base()
+	base.Draw(image["BASE"])
+
+	local spots  = Spots(image)
+	local gui = GUI()
+
+	// テキスト設定
+	gui.Bind( "TextSpeed",  VolumeBar(image, "TextSpeed", SPEED_MAX) )
+	gui.Bind( "AutoSpeed",  VolumeBar(image, "AutoSpeed", SPEED_MAX) )
+	gui.Bind( "FontType",   RadioButton(image, "FontType", 3) )
+	gui.Bind( "ReadedColor",CheckButton(image, "ReadedColor") )
+	gui.Bind( "SkipNoRead", CheckButton(image, "SkipNoRead") )
+	gui.Bind( "KeepAuto",   CheckButton(image, "KeepAuto") )
+	gui.Bind( "KeepSkip",   CheckButton(image, "KeepSkip") )
+
+	// エフェクト設定
+	gui.Bind( "Effect",     CheckButton(image, "Effect") )
+	gui.Bind( "SysEffect",  CheckButton(image, "SysEffect") )
+
+	// スクリーン設定
+	gui.Bind( "Screen",     RadioButton(image, "Screen",     2) )
+	gui.Bind( "ScreenSize", RadioButton(image, "ScreenSize", 3) )
+
+	gui.Bind( "BoxOpacity", VolumeBar(image, "BoxOpacity", OPACITY_MAX) )
+
+	// サウンド設定
+	gui.Bind( "VolMAS", VolumeBar(image, "VolMAS", VOLUME_MAX) )
+	gui.Bind( "VolBGM", VolumeBar(image, "VolBGM", VOLUME_MAX) )
+	gui.Bind( "VolSE",  VolumeBar(image, "VolSE",  VOLUME_MAX) )
+	gui.Bind( "VolMV",  VolumeBar(image,  "VolMV", VOLUME_MAX) )
+	gui.Bind( "MuteMAS", CheckButton(image, "MuteMA" ) )
+	gui.Bind( "MuteBGM", CheckButton(image, "MuteBGM") )
+	gui.Bind( "MuteSE",  CheckButton(image, "MuteSE" ) )
+	gui.Bind( "MuteMV",  CheckButton(image, "MuteMV" ) )
+
+	// ボイス設定
+	gui.Bind( "VolVO",   VolumeBar(image, "VolVO",  VOLUME_MAX) )
+	gui.Bind( "VolBGV",  VolumeBar(image, "VolBGV", VOLUME_MAX) )
+	gui.Bind( "MuteVO",  CheckButton(image, "MuteVO" ) )
+	gui.Bind( "MuteBGV", CheckButton(image, "MuteBGV" ) )
+	gui.Bind( "KeepVoice",  CheckButton(image, "KeepVoice" ) )
+	
+
+	// その他設定
+	gui.Bind( "Climax",  CheckButton(image, "Climax" ) )
+	gui.Bind( "AutoSelect",  CheckButton(image, "AutoSelect" ) )
+
+	// ボタン
+	spots.BindR("DEFAULT",  ID_CONFIG_DEFAULT)
+	spots.BindR("CLOSE", ID_CANCEL)
+	spots.BindR("RESET", ID_RESET)
+	spots.BindR("VOICE",    ID_CONFIG_VOLUME)
+	spots.BindR("DIALOG",   ID_CONFIG_DIALOG)
+	spots.BindR("SHORTCUT", ID_CONFIG_SHORTCUT)
+
+	gui.Put(Config)
+	local screen = gui.Get("Screen");
+	local size = gui.Get("ScreenSize");
+	local t=Timer()
+	local s = Screen()
+	wait(0)
+	do{
+		gui.Update()
+		local id = spots.Check()
+
+		// 適用
+		gui.Get(Config)
+		local screen_new = gui.Get("Screen");
+		local size_new = gui.Get("ScreenSize");
+		if((screen != screen_new) || (size != size_new)){
+			RestoreScreen(); gui.Put(Config); screen=gui.Get("Screen"); size=gui.Get("ScreenSize");
+		}
+		Config.Font = FontName[Config.FontType]
+		Config.Bold = Config.FontType
+		if(Config.VolBGM < Config.VolMV)Config.VolMV = Config.VolBGM;
+		if(Config.MuteBGM)Config.MuteMV = 1;
+		Config.VolENV = Config.VolSE
+		Config.VolSYS = Config.VolSE
+		gui.Put(Config)
+		RestoreVolume()
+
+		// 描画
+		s.Draw(base)
+		gui.Draw(s)
+		spots.Draw(s)
+
+		// 更新
+		s.Snap()
+		s.Update()
+		// メッセージ・サンプル
+		s.Draw(box_sample, 0, 0, Config.BoxOpacity)
+		g.Bold = Config.Bold
+		g.Face = Config.Font
+		local text = "メッセージ速度とフォントのサンプルです"
+		local speed = Config.TextSpeed
+		local cur = (speed<SPEED_MAX) ? (t.Get() * (speed+10) / 1000)*2 : text.len();
+		if(cur<text.len()){
+			text = text.slice(0, cur)
+		}else{
+			local auto  = 3000 - Config.AutoSpeed * 25;
+			if(auto < t.Get()){ t.Reset(); text=""; }
+		}
+		g.Print(s, text, box_text.x, box_text.y, NORMAL_BORDER_COLOR);
+
+		// 操作
+		if(event()==ID_CANCEL){ sound("NO"); break }
+		if(event()==ID_OK){
+			if(id == ID_CANCEL){ sound("NO"); break }
+			if(id == ID_RESET){ sound("OK"); if(InvokeCommand(id))break }
+			switch(id){
+			case ID_CONFIG_DEFAULT: sound("OK"); if(ViewDialog("DEFAULT"))ResetConfig(); gui.Put(Config); break
+			case ID_CONFIG_VOLUME:   s.Snap(); ViewConfigSound(); break
+			case ID_CONFIG_DIALOG:   s.Snap(); ViewConfigDialog(); break
+			case ID_CONFIG_SHORTCUT: s.Snap(); ViewConfigShortcut(); break
+			}
+		}
+	}while(wait(-1))
+	ShortCut.Init()
+	SaveConfig()
+}
+
+
+//――――――――――――――――――――――――――――――――――――――
+//	アクセス
+//――――――――――――――――――――――――――――――――――――――
+function ViewSave(){ ViewSavePage(ID_SAVE) }
+function ViewLoad(){ ViewSavePage(ID_LOAD) }
+com["config"] = function(args){ ViewConfig() }
+com["sysload"] = function(args){ ViewLoad() }
+
+
+//――――――――――――――――――――――――――――――――――――――
+//	音声
+//――――――――――――――――――――――――――――――――――――――
+function VoiceVolume(tag){
+	if(tag.len()==0)return 0
+	if(!(tag in VOICE_MAPS)){ tag = "XX" }
+	if(tag in Config.VoiceMute){
+		if(Config.VoiceMute[tag])return 0
+		return Config.VoiceVolume[tag]
+	}
+	return 100
+}

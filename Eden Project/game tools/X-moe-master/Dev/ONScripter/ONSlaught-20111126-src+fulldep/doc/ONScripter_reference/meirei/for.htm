@@ -1,0 +1,26 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>for</h2>
+<h3>for %&lt;numerical variable&gt;=&lt;number&gt; to &lt;number&gt; (step &lt;increment&gt;)<br>:Åicommands in loopÅj<br>next</h3>
+<p>
+This is essentially the same as a BASIC loop.  The for loop starts at the first number, and then increments it (or decrements it) by the step value until it has gone beyond (or below, in case of a negative step) the second number.  The step value is 1 by default.<br>
+<BR>
+If you use methods like goto or select inside a for loop, you leave the nscripter stack in an inconsistent and easily-crashable state, so please do not do this.  Do your part to eradicate spaghetti code today!<br>
+<br>
+All commands in the loop between the FOR and the NEXT will be executed.  If you want to prematurely break out of the loop, issue a BREAK command.  You can also use gosub commands to no ill effect within a loop.  In other words, it is highly recommend to compartmentalize what is *inside* a loop from what is *outside* of it.
+</p>
+
+</body>
+</html>

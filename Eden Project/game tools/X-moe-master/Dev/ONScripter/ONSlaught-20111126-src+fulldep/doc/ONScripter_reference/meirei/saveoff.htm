@@ -1,0 +1,23 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>saveoff</h2>
+<p>
+Turns save mode off.<br>
+This does not mean that you cannot save, it means that when you load, the position at which the player starts will be at the last place where saveon was defined and not saveoff.<br>
+Why would you ever want to turn save mode off?  When save mode is on, it records every sprite ever loaded into a log -- causing moderate to massive amounts of slowdown when you are attempting to do a fast animation.  In these cases, you should definitely call saveoff before you start the animation, then call saveon directly after you're finished.<br>
+</p>
+
+</body>
+</html>

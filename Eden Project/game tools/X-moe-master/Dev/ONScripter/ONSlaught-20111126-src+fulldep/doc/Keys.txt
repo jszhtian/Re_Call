@@ -1,0 +1,46 @@
+The following controls are in effect:
+
+Mouse: General interaction.
+Clicking while a text line is being drawn forces it to be completed
+immediately. Clicking while in "click wait state" -- whenever there's a @ or \
+in the script -- resumes execution.
+Right clicking while in click wait state calls the menu.
+
+Keyboard:
+F5, F6, F7: Sets the text speed to slow, medium (default), and fast. "Speed"
+means "a wait of X milliseconds between the rendering of each character".
+Unless these speeds are manually set with the defaultspeed command, slow waits
+twice as much as medium, which waits twice as much as fast. The text speed
+setting is engine-wide. I.e. Changing it in one game will be reflected in all
+others.
+F, ALT+ENTER: Toggles fullscreen.
+S: Un/Mutes audio. Note that this simply sets the internal volume to 0, and
+audio is still being processed.
+CONTROL: Fast-forward. Must be held down.
+PERIOD: Toggle fast-forward. In reality, it has the same effect as holding down
+CONTROL.
+UP, PAGE UP: Enter log mode (where the previous pages of text are displayed) if
+possible, or go back one page if already in log mode.
+DOWN, PAGE DOWN: Advance one page if in log mode.
+UP, DOWN: (only when there are clickable buttons on the screen) Cycle through
+the buttons.
+ESCAPE: Enter menu if in click wait state. Exit menu if in menu (it also exits
+the save and load dialogs). Exit log mode if in log mode.
+ENTER: Continue execution if in click wait state. Behaves as a left mouse click
+when the mouse cursor is hovering over a clickable button.
+SPACE BAR: Same as ENTER.
+F12: Take a screenshot.
+PAUSE: Enter the debugging console. The engine must be waiting for user input.
+See Console.txt for more info.
+
+Joystick:
+UP, DOWN: (only when there are clickable buttons on the screen) Cycle through
+the buttons.
+Button 1: Same behavior as ENTER.
+Button 2: Same behavior as ESCAPE.
+Button 3 (if available): Same behavior as CONTROL.
+Button 4 (if available): Same behavior as F.
+Button 5 (if available): Same behavior as F12.
+NOTE: The joystick requires at least two buttons aside from an axis control
+(e.g. a d-pad or analog stick) to be usable by the engine. If a joystick that
+doesn't meet this requirement is found, it will be ignored.

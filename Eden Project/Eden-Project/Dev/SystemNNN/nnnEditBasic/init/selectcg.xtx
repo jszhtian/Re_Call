@@ -1,0 +1,74 @@
+modename selectcg
+
+enterFadeInType 2
+enterFadeInTime 5
+
+filenameBG sys_selectcg_bg
+
+selectPrintMode 1
+
+
+filenameFuta ta_selectcg_futa
+
+
+blockNumberX 5
+blockNumberY 3
+
+printX 100
+printY 100
+nextX 200
+nextY 130
+sizeX 180
+sizeY 110
+
+
+picPrintX 10
+picPrintY 10
+
+cursorPrintX 0
+cursorPrintY 0
+cursorSizeX 180
+cursorSizeY 110
+
+picMustPrintPercent 5
+
+totalPercentPrintFlag 1
+fileNameTotalPercent ta_suuji48x48
+totalPercentPrintX 600
+totalPercentPrintY 29
+totalPercentFontSizeX 48
+totalPercentFontSizeY 48
+totalPercentFontNextX 48
+
+differencePrintFlag 1
+
+filenameDifferenceFont ta_suuji12x16
+differenceFontSizeX 12
+differenceFontSizeY 16
+differenceFontNextX 12
+differencePrintX 54
+differencePrintY 112
+
+pagePrintFlag 1
+filenamePageFont ta_suuji24x24
+pageFontSizeX 24
+pageFontSizeY 24
+pageFontNextX 24
+pagePrintX 134
+pagePrintY 541
+
+pageMaxPrintFlag 0
+slashPrintFlag 0
+pageUpZeroPrintFlag 0
+
+useCommonBackSetup 1
+useCommonUpDownSetup 1
+
+
+
+
+selectSound 5
+
+bgmNumber 0
+bgmRestartFlag 0
+

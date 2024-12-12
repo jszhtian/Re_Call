@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cresd_chs", "cresd_chs\cresd_chs.vcxproj", "{E4CD5639-8451-41FB-B148-9F7E8637561E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cresd_chs_loader", "cresd_chs_loader\cresd_chs_loader.vcxproj", "{A0C0C590-EE99-445A-87F9-775B2F31AA51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4CD5639-8451-41FB-B148-9F7E8637561E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E4CD5639-8451-41FB-B148-9F7E8637561E}.Debug|Win32.Build.0 = Debug|Win32
+		{E4CD5639-8451-41FB-B148-9F7E8637561E}.Release|Win32.ActiveCfg = Release|Win32
+		{E4CD5639-8451-41FB-B148-9F7E8637561E}.Release|Win32.Build.0 = Release|Win32
+		{A0C0C590-EE99-445A-87F9-775B2F31AA51}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A0C0C590-EE99-445A-87F9-775B2F31AA51}.Debug|Win32.Build.0 = Debug|Win32
+		{A0C0C590-EE99-445A-87F9-775B2F31AA51}.Release|Win32.ActiveCfg = Release|Win32
+		{A0C0C590-EE99-445A-87F9-775B2F31AA51}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

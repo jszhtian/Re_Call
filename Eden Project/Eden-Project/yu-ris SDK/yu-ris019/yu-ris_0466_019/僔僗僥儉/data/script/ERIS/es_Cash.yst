@@ -1,0 +1,35 @@
+//----------------------------------------------------------------
+// ‚b‚fƒLƒƒƒbƒVƒ…‚P
+//----------------------------------------------------------------
+#=es.CASHCG.1
+{
+	INT[@cashno=1]
+//	FILEACT[CGCASH=@cashno FILE="cg/tr/ysr001"]
+	FILEACT[SOUNDCASH=@cashno FILE="sysvoice/sse01"]
+	FILEACT[SOUNDCASH=@cashno FILE="sysvoice/sse02"]
+	FILEACT[SOUNDCASH=@cashno FILE="sysvoice/sse03"]
+	FILEACT[SOUNDCASH=@cashno FILE="sysvoice/sse04"]
+	FILEACT[SOUNDCASH=@cashno FILE="sysvoice/sse05"]
+	FILEACT[SOUNDCASH=@cashno FILE="sysvoice/sse06"]
+	return[]
+}
+
+//----------------------------------------------------------------
+// ‚b‚fƒLƒƒƒbƒVƒ…‚Q
+//----------------------------------------------------------------
+#=es.CASHCG.2
+{
+	INT[@cashno=2]
+//	FILEACT[CGCASH=@cashno FILE="cg/stand/xxx"]
+	return[]
+}
+
+//----------------------------------------------------------------
+// ‚b‚fƒLƒƒƒbƒVƒ…‚R
+//----------------------------------------------------------------
+#=es.MGI.CASHCG.3
+{
+	INT[@cashno=3]
+	return[]
+}
+

@@ -1,0 +1,156 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>2.7. KAG的语法</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="index.html" title="KCDDP KAGeXpress 3.0 使用手册">
+<link rel="up" href="ch02.html" title="第 2 章 基本概念">
+<link rel="prev" href="ch02-6.html" title="2.6. 关于KAG工程的一些说明">
+<link rel="next" href="ch02-8.html" title="2.8. 关于渐变的类型、参数和使用">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">2.7. KAG的语法</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch02-6.html">上一页</a> </td>
+<th width="60%" align="center">第 2 章 基本概念</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch02-8.html">下一页</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="sect1" lang="zh-CN">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ch02-7"></a>2.7. KAG的语法</h2></div></div></div>
+<div class="sect2" lang="zh-CN">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ch02-3-1"></a>2.7.1. 基本格式</h3></div></div></div>
+<p>KAG使用的剧本格式称作KAG Script，文件扩展名为.ks。</p>
+<p>该文件是ANSI或Unicode（UCS2）编码的文本文件，可以用记事本等纯文本编辑器编辑。</p>
+<p>脚本内的文字除下面将讲到的注释、命令、段落标签等内容外，一律被当作剧本文本被处理显示。</p>
+<p>
+					<span class="emphasis"><em>KS中用于控制引擎动作的部分，本文档一般称之为“命令”。由于KAG可以被视作一种标记语言，所以这些命令也被称作标记（Tag）。</em></span>
+				</p>
+<p>每个标签都可能有若干个属性（也可能完全没有属性），用于精确控制指令的行为。调用中传递的属性一般都需要附带一个属性值，定义该属性指定的具体对象（例如对于“目标文件(storage)”这样的属性，属性值一般就是文件名），但在特殊情况下也可能不需要指定这个值。</p>
+</div>
+<div class="sect2" lang="zh-CN">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ch02-3-2"></a>2.7.2. 标记命令</h3></div></div></div>
+<p>标记命令类似于HTML等标记语言，可以将控制指令插入文本当中。</p>
+<p>命令的格式为：</p>
+<p>
+					<span class="emphasis"><em>[命令名 属性1=值1 属性2=值2...]</em></span>
+				</p>
+<div class="example">
+<a name="ex2-1"></a><p class="title"><b>例 2.1. 标记命令的范例</b></p>
+<div class="example-contents">
+<p>以下的代码将在KAGeXpress中显示一幅背景图片。</p>
+<pre class="programlisting">[bg file=图片1]</pre>
+<p>下面是说明使用方法的例子。</p>
+<pre class="programlisting">这是一句话，[r]可以插入标记。[l][r]
+[bg file=图片1]
+ 当然在行首插入标记命令也是可以的。[l][r]
+[bg file=图片1] 比如像这样。[l][r]</pre>
+</div>
+</div>
+<br class="example-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[注意]" src="images/note.png"></td>
+<th align="left">注意</th>
+</tr>
+<tr><td align="left" valign="top"><p>bg是切换背景的命令，l和r是文字排版相关的命令。关于这些命令的详细功能将在解说命令时说明。详细请参见<a href="ch03.html" title="第 3 章 KAGeXpress使用入门">第 3 章 <i>KAGeXpress使用入门</i></a>
+					</p></td></tr>
+</table></div>
+<p>这种命令格式可以随意插入剧本文字中。</p>
+</div>
+<div class="sect2" lang="zh-CN">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ch02-3-3"></a>2.7.3. 行命令</h3></div></div></div>
+<p>用类似于NScripter的指令格式书写命令标签，一般占用单独的一行，用于较长的指令。</p>
+<p>命令的格式为：</p>
+<p>
+					<span class="emphasis"><em>@命令名 属性1=值1 属性2=值2...</em></span>
+				</p>
+<p>这种语法格式一般要求一条命令单独使用一行。</p>
+<div class="example">
+<a name="ex2-2"></a><p class="title"><b>例 2.2. 行命令的范例</b></p>
+<div class="example-contents">
+<pre class="programlisting">@bg file=图片1</pre>
+<p>下面是使用方法的例子。</p>
+<pre class="programlisting">@bg file=图片1
+ 一般来说，行命令是单独占用一行的。</pre>
+</div>
+</div>
+<br class="example-break"><p>请注意，KAG的标记命令和行命令两种格式在效果上是等效的。</p>
+<p>上面的例子，和<a href="ch02-7.html#ex2-1" title="例 2.1. 标记命令的范例">标记命令的例子</a>执行的结果是完全相同的。</p>
+<p>下文介绍其他命令时，将只说明命令的名称。例如，我们说到的“p命令”或“p标记”，其正确的调用方法是在ks中插入“[p]”或者“@p”。</p>
+</div>
+<div class="sect2" lang="zh-CN">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ch02-3-4"></a>2.7.4. 段落标签</h3></div></div></div>
+<p>段落标签占用单独的一行，代表了一个段落/章节的开始。</p>
+<p>分支选项、剧本跳跃、进度的存取都以段落标签作为标志。例如剧本跳跃时，就只能跳跃到指定段落标签的开始。</p>
+<p>命令的格式为：</p>
+<p>
+					<span class="emphasis"><em>*标签名|显示名</em></span>
+				</p>
+<p>标签名是标签的内部名称，建议使用简单但不重复的英文数字组合。</p>
+<p>显示名是显示在存档界面等地方的名称，可以使用较复杂的中文名。</p>
+<div class="example">
+<a name="ex2-3"></a><p class="title"><b>例 2.3. 段落标签的范例</b></p>
+<div class="example-contents"><pre class="programlisting">*ch01|第一章
+
+这里是华丽的第一章。[l][r]</pre></div>
+</div>
+<br class="example-break"><p>则如果在这章内（这个标签后，下一个标签前）存档，存档界面中显示该存档的进度名称为“第一章”。</p>
+<p>每次系统跳转到这个段落的时候，就会从段落标示的地方开始执行。</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[注意]" src="images/note.png"></td>
+<th align="left">注意</th>
+</tr>
+<tr><td align="left" valign="top"><p>与段落跳转相关的命令将在下文说明。详情参见<a href="ch03-5.html" title="3.5. 控制剧本流程">第 3.5 节 “控制剧本流程”</a>
+					</p></td></tr>
+</table></div>
+</div>
+<div class="sect2" lang="zh-CN">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ch02-3-5"></a>2.7.5. 注释</h3></div></div></div>
+<p>
+					<span class="emphasis"><em>以;符号开始，从分号到该行结尾的所有内容将被忽略。</em></span>
+				</p>
+<p>注释主要用于写入开发者的备忘、代码说明等内容。</p>
+<div class="example">
+<a name="ex2-4"></a><p class="title"><b>例 2.4. 注释的范例</b></p>
+<div class="example-contents"><pre class="programlisting">*ch01|第一章
+
+这里是华丽的第一章。[l][r] ;这是注释1
+
+;这是注释2</pre></div>
+</div>
+<br class="example-break">
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch02-6.html">上一页</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch02.html">上一级</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch02-8.html">下一页</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">2.6. 关于KAG工程的一些说明 </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
+<td width="40%" align="right" valign="top"> 2.8. 关于渐变的类型、参数和使用</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

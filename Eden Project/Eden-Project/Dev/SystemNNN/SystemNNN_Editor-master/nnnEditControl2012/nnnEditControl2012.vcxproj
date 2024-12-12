@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_ver2|Win32">
+      <Configuration>Debug_ver2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_ver2|Win32">
+      <Configuration>Release_ver2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7A27B79F-7B2F-4ECE-B0CA-44459B507B52}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>nnnEditControl2012</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>nnnEditControl2017D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'">
+    <TargetName>nnnEditControl2017_ver2D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+    <TargetName>nnnEditControl2017</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+    <TargetName>nnnEditControl2017_ver2</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\nnnEdit\autoVoice.cpp" />
+    <ClCompile Include="..\nnnEdit\changeBGMList.cpp" />
+    <ClCompile Include="..\nnnEdit\changeSeList.cpp" />
+    <ClCompile Include="..\nnnEdit\checkDWQ.cpp" />
+    <ClCompile Include="..\nnnEdit\copyPreEffect.cpp" />
+    <ClCompile Include="..\nnnEdit\defaultControl.cpp" />
+    <ClCompile Include="..\nnnEdit\deleteNonVoice.cpp" />
+    <ClCompile Include="..\nnnEdit\deleteVoice.cpp" />
+    <ClCompile Include="..\nnnEdit\filmcase.cpp" />
+    <ClCompile Include="..\nnnEdit\frameChange.cpp" />
+    <ClCompile Include="..\nnnEdit\frameChangeControl.cpp" />
+    <ClCompile Include="..\nnnEdit\lockVoice.cpp" />
+    <ClCompile Include="..\nnnEdit\makeBook.cpp" />
+    <ClCompile Include="..\nnnEdit\makeCheckDWQBat.cpp" />
+    <ClCompile Include="..\nnnEdit\makeCheckVawBat.cpp" />
+    <ClCompile Include="..\nnnEdit\makeUseDWQBat.cpp" />
+    <ClCompile Include="..\nnnEdit\makeUseSoundBat.cpp" />
+    <ClCompile Include="..\nnnEdit\makeUseVawBat.cpp" />
+    <ClCompile Include="..\nnnEdit\menuCheckControl.cpp" />
+    <ClCompile Include="..\nnnEdit\messageSerialControl.cpp" />
+    <ClCompile Include="..\nnnEdit\messageSetup.cpp" />
+    <ClCompile Include="..\nnnEdit\messageWindowControl.cpp" />
+    <ClCompile Include="..\nnnEdit\minicompiler.cpp" />
+    <ClCompile Include="..\nnnEdit\movieCreate.cpp" />
+    <ClCompile Include="..\nnnEdit\myApplicationBase.cpp" />
+    <ClCompile Include="..\nnnEdit\myfileopen.cpp" />
+    <ClCompile Include="..\nnnEdit\myframewindow.cpp" />
+    <ClCompile Include="..\nnnEdit\myinputdialog.cpp" />
+    <ClCompile Include="..\nnnEdit\myOnTimer.cpp" />
+    <ClCompile Include="..\nnnEdit\mySearchDialog.cpp" />
+    <ClCompile Include="..\nnnEdit\myVarSearchDialog.cpp" />
+    <ClCompile Include="..\nnnEdit\sameMessageDeutch.cpp" />
+    <ClCompile Include="..\nnnEdit\scriptCompiler.cpp" />
+    <ClCompile Include="..\nnnEdit\scriptSoundControl2.cpp" />
+    <ClCompile Include="..\nnnEdit\scriptVoiceControl2.cpp" />
+    <ClCompile Include="..\nnnEdit\searchOrReplace.cpp" />
+    <ClCompile Include="..\nnnEdit\termControl.cpp" />
+    <ClCompile Include="..\nnnEdit\varSearchOrReplace.cpp" />
+    <ClCompile Include="..\nnnEdit\windowUpdateControl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\nnnEdit\autoVoice.h" />
+    <ClInclude Include="..\nnnEdit\bitmapnumber.h" />
+    <ClInclude Include="..\nnnEdit\changeBGMList.h" />
+    <ClInclude Include="..\nnnEdit\checkDWQ.h" />
+    <ClInclude Include="..\nnnEdit\commanddatatype.h" />
+    <ClInclude Include="..\nnnEdit\copyPreEffect.h" />
+    <ClInclude Include="..\nnnEdit\defaultControl.h" />
+    <ClInclude Include="..\nnnEdit\define.h" />
+    <ClInclude Include="..\nnnEdit\deleteNonVoice.h" />
+    <ClInclude Include="..\nnnEdit\deleteVoice.h" />
+    <ClInclude Include="..\nnnEdit\filmcase.h" />
+    <ClInclude Include="..\nnnEdit\frameChange.h" />
+    <ClInclude Include="..\nnnEdit\frameChangeControl.h" />
+    <ClInclude Include="..\nnnEdit\lockVoice.h" />
+    <ClInclude Include="..\nnnEdit\makeBook.h" />
+    <ClInclude Include="..\nnnEdit\makeCheckDWQBat.h" />
+    <ClInclude Include="..\nnnEdit\makeCheckVawBat.h" />
+    <ClInclude Include="..\nnnEdit\makeUseDWQBat.h" />
+    <ClInclude Include="..\nnnEdit\makeUseSoundBat.h" />
+    <ClInclude Include="..\nnnEdit\makeUseVawBat.h" />
+    <ClInclude Include="..\nnnEdit\menuCheckControl.h" />
+    <ClInclude Include="..\nnnEdit\messageSerialControl.h" />
+    <ClInclude Include="..\nnnEdit\messageSetup.h" />
+    <ClInclude Include="..\nnnEdit\messageWindowControl.h" />
+    <ClInclude Include="..\nnnEdit\minicompiler.h" />
+    <ClInclude Include="..\nnnEdit\movieCreate.h" />
+    <ClInclude Include="..\nnnEdit\myApplicationBase.h" />
+    <ClInclude Include="..\nnnEdit\myfileopen.h" />
+    <ClInclude Include="..\nnnEdit\myframewindow.h" />
+    <ClInclude Include="..\nnnEdit\myinputdialog.h" />
+    <ClInclude Include="..\nnnEdit\myOnTimer.h" />
+    <ClInclude Include="..\nnnEdit\mySearchDialog.h" />
+    <ClInclude Include="..\nnnEdit\resource.h" />
+    <ClInclude Include="..\nnnEdit\sameMessageDeutch.h" />
+    <ClInclude Include="..\nnnEdit\scriptCompiler.h" />
+    <ClInclude Include="..\nnnEdit\scriptSoundControl2.h" />
+    <ClInclude Include="..\nnnEdit\scriptVoiceControl2.h" />
+    <ClInclude Include="..\nnnEdit\searchOrReplace.h" />
+    <ClInclude Include="..\nnnEdit\termControl.h" />
+    <ClInclude Include="..\nnnEdit\varSearchOrReplace.h" />
+    <ClInclude Include="..\nnnEdit\windowlist.h" />
+    <ClInclude Include="..\nnnEdit\windowUpdateControl.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

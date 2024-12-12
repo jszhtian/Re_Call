@@ -1,0 +1,38 @@
+@SET_MAKE@
+CC		= @CC@
+CXX		= @CXX@
+LD		= @CC@
+AR		= ar
+RANLIB		= @RANLIB@
+
+CFLAGS= -I.. $(LOCAL_DEF) @CFLAGS@ @DEFS@ @FT2_CFLAGS@ -pthread -O2
+CXXFLAGS	= $(CFLAGS)
+LDFLAGS = @LDFLAGS@ @FT2_LIBS@ @LIBS@ -pthread
+
+SRCS	 = font_face.cc \
+	   font_peer_fn.cc \
+	   font_peer_ft2.cc \
+	   font_peer_x11.cc \
+	   font_layout.cc \
+	   codeconv.cc \
+	   text_stream.cc \
+#	   render.c
+
+OBJS	 = ${SRCS:.cc=.o}
+
+all: libfont.a
+
+libfont.a: ${OBJS}
+	rm -f libfont.a
+	${AR} clq libfont.a ${OBJS}
+	$(RANLIB) libfont.a
+
+clean:
+	rm -f libfont.a ${OBJS} *.bak *.core
+
+.c.o:
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+.cc.o:
+	$(CXX) -c $(CFLAGS) -o $@ $<
+

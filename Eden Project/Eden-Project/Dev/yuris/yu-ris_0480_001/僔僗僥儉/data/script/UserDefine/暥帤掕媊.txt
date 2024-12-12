@@ -1,0 +1,149 @@
+//============================================================================
+//
+// 文字定義
+//
+//============================================================================
+#=ES.FONT.DEFINE
+
+
+	//---------------------------------------------------------------------
+	// ■外字として定義する記号
+	//   スクリプト中に以下で定義した記号があった場合、
+	//   指定した外字画像に置き換わります。
+	//---------------------------------------------------------------------
+		\GAIJI.MARK("＃", "g01_") //？マーク
+		\GAIJI.MARK("＠", "g02_") //汗マーク
+
+
+	//---------------------------------------------------------------------
+	// ■文字装飾定義
+	//---------------------------------------------------------------------
+		//M
+		\TD.SIZE(21, 23)              // サイズＸ, サイズＹ
+		\TD.COLOR(0x88bbdd, 0xffffff) // テキストの標準色(RGB指定)、グラデ色(第２引数として-1を指定した場合はグラデ無し)
+		\TD.SHADE.COLOR(0x000000)     // 影の色
+		\TD.SHADE.XY(1, 1)            // 影の位置
+		\TD.OUTLINE.COLOR(0x000000)   // 袋文字の色
+		\TDDEF(M)                     // 登録
+
+		//L
+		\TD.SIZE(26, 28)
+		\TD.COLOR(0x88bbdd, 0xffffff)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(L)
+
+		//LL
+		\TD.SIZE(36, 36)
+		\TD.COLOR(0x88bbdd, 0xffffff)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(LL)
+
+		//S
+		\TD.SIZE(18, 18)
+		\TD.COLOR(0x88bbdd, 0xffffff)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(S)
+
+		//SS
+		\TD.SIZE(12, 12)
+		\TD.COLOR(0x88bbdd, 0xffffff)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(SS)
+
+
+		//RUBY(ルビ用)
+		\TD.SIZE(11, 11)
+		\TD.COLOR(0x88bbdd, 0xffffff)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(RUBY)
+
+
+		//バックログ用テキスト
+		\TD.FONT("ＭＳ ゴシック")
+		\TD.SIZE(19, 19)
+		\TD.COLOR(0x88bbdd, 0xffffff)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(BACKLOG)
+
+
+		//SEL(選択肢用)
+		\TD.SIZE(24, 24)
+		\TD.COLOR(0xaaaacc, 0xffffff)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x4444ff)
+		\TDDEF(SEL)
+
+		//SEL_AL(選択肢・選択済)
+		\TD.SIZE(21, 21)
+		\TD.COLOR(0x88ccee, 0x88ccee)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(SEL_AL)
+
+		//SEL_NA(選択肢・選択不可)
+		\TD.SIZE(21, 21)
+		\TD.COLOR(0x888888, 0x888888)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(SEL_NA)
+
+
+		//セーブロード用テキスト
+		\TD.FONT("ＭＳ ゴシック")
+		\TD.SIZE(12, 12)
+		\TD.COLOR(0xffffff, 0xffffff)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(0, 0)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(SAVELOAD)
+
+
+		//コンフィグ・フォント文字
+		\TD.SIZE(15, 17)
+		\TD.COLOR(0x6699bb, 0xffffff)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(FONTSEL)
+
+		//コンフィグ・フォントリスト文字
+		\TD.SIZE(13, 14)
+		\TD.COLOR(0x6699bb, 0xffffff)
+		\TD.BOLD(1)
+		\TD.SHADE.COLOR(0x000000)
+		\TD.SHADE.XY(1, 1)
+		\TD.OUTLINE.COLOR(0x000000)
+		\TDDEF(FONTLISTSEL)
+
+
+
+
+RETURN[]
+
+

@@ -1,0 +1,395 @@
+//=========================================================================
+//
+//■桜処理
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@Sakura.SP.X(201)]
+	S_INT[@Sakura.SP.Y(201)]
+	S_INT[@Sakura.A(201)]
+	S_INT[@Sakura.Rad(201)]
+	S_INT[@Sakura.Cnt(201)]
+	S_INT[@Sakura.ED.Y(201)]
+	S_FLT[@Sakura.X(201)]
+	S_FLT[@Sakura.Y(201)]
+	S_FLT[@fVal]
+	S_INT[@Count]
+	S_INT[@mode]
+	S_INT[@mA]
+	S_INT[@mEndCount]
+	S_INT[@mEndStartTime]
+	S_INT[@mEndFadeTime]
+
+	S_INT[@Z.SAKURA1]
+	S_INT[@Z.SAKURA2]
+	S_INT[@SAKURA1.NUM]
+	S_INT[@SAKURA2.NUM]
+
+	S_INT[@sakura1.sx  = 24]
+	S_INT[@sakura1.sy  = 24]
+	S_INT[@sakura2.sx  = 24]
+	S_INT[@sakura2.sy  = 24]
+	S_INT[@sakura.ansp = 4]
+	S_INT[@sakura.num  = 1]
+
+	S_STR[$sakura.cg   = "cg/sakura"]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SAKURAMODE
+{
+	IF[@es.SAKURAMODE==0]
+	{
+		@es.LSD(032,01) = @_PINT(2)  //桜数1
+		@es.LSD(032,02) = @_PINT(1)  //桜数2
+		@es.LSD(032,03) = @_PINT(4)  //桜Z1
+		@es.LSD(032,04) = @_PINT(3)  //桜Z2
+		@es.LSD(032,05) = @_PINT(6)  //桜Y速度1
+		@es.LSD(032,06) = @_PINT(5)  //桜Y速度2
+		@es.LSD(032,07) = @_PINT(8)  //桜Xスケール1
+		@es.LSD(032,08) = @_PINT(7)  //桜Xスケール2
+		@es.LSD(032,09) = @_PINT(10) //桜X周期速度1
+		@es.LSD(032,10) = @_PINT(9)  //桜X周期速度2
+
+		IF[@es.LSD(032,01)+@es.LSD(032,02)>200]
+			\_mes("桜の数が多すぎます。表示できる数は大小合わせて最大200個です。");END[]
+		IFEND[]
+
+	@SAKURA1.NUM=@es.LSD(032,01)
+	@SAKURA2.NUM=@es.LSD(032,02)
+
+		@Z.SAKURA1 = @es.Z.SP+09000*@es.ZEX-(@es.LSD(032,03))*@es.ZEX
+		@Z.SAKURA2 = @es.Z.SP+09000*@es.ZEX-(@es.LSD(032,04))*@es.ZEX
+
+		GOSUB[#=es.SAKURAMODE.CGLOAD]
+
+		LOOP[SET=@SAKURA1.NUM]
+		{
+			@Sakura.X(@_LC) = @_LC*10
+			IF[@es.LSD(032,05)>0]
+				@Sakura.Y(@_LC) = @es.WSY
+			ELSE[]
+				@Sakura.Y(@_LC) = -50
+			IFEND[]
+			@Sakura.A(@_LC) = 256
+
+			\_rnd(0,@es.LSD(032,05)/2)
+			@Sakura.SP.Y(@_LC) = @_RINT(1) + @es.LSD(032,05)
+
+			\_rnd(0,40)
+			@Sakura.ED.Y(@_LC) = @_RINT(1) + @es.WSY
+
+			\_rnd(0,255)
+			@Sakura.Cnt(@_LC) = @_RINT(1)
+		}
+		LOOPEND[]
+
+		LOOP[SET=@SAKURA2.NUM]
+		{
+			@Sakura.X(@SAKURA1.NUM+@_LC) = @_LC*10
+			IF[@es.LSD(032,06)>0]
+				@Sakura.Y(@SAKURA1.NUM+@_LC) = @es.WSY
+			ELSE[]
+				@Sakura.Y(@SAKURA1.NUM+@_LC) = -50
+			IFEND[]
+			@Sakura.A(@SAKURA1.NUM+@_LC) = 256
+
+			\_rnd(0,@es.LSD(032,06)/2)
+			@Sakura.SP.Y(@SAKURA1.NUM+@_LC) = @_RINT(1) + @es.LSD(032,06)
+
+			\_rnd(0,40)
+			@Sakura.ED.Y(@SAKURA1.NUM+@_LC) = @_RINT(1) + @es.WSY
+
+			\_rnd(0,255)
+			@Sakura.Cnt(@SAKURA1.NUM+@_LC) = @_RINT(1)
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	@mEndCount=0
+	@mEndStartTime=0
+	@mEndFadeTime=1
+	@es.SAKURAMODE = 1
+	@mA=256
+
+	return[]
+}
+
+
+//===============================================================
+//■メイン
+//===============================================================
+#=es.SAKURAMODE.MAIN
+{
+
+	@mode+=1
+	IF[@mode%2==0]
+	{
+		//@mA=256
+		//\_range(@mA,, 256)
+
+		//IF[@mode%4==0]
+		{
+			GOSUB[#=es.SAKURAMODE.MAIN.Calc pint=0 pint2=@SAKURA1.NUM pint3=2 pint4=0 pint5=@es.LSD(032,09) pint6=@es.LSD(032,07)] //小
+		}
+		//ELSE[]
+		{
+			GOSUB[#=es.SAKURAMODE.MAIN.Calc pint=1 pint2=@SAKURA2.NUM pint3=10 pint4=0 pint5=@es.LSD(032,10) pint6=@es.LSD(032,08)] //大
+		}
+		//IFEND[]
+	}
+	IFEND[]
+
+	@Count+=1
+
+	IF[@es.SAKURAMODE==2]
+	{
+		@mA = 256 - ((@_OS_TIME(1)-@mEndStartTime) * 256 / @mEndFadeTime)
+
+		//@mEndCount+=1
+		//IF[@mEndCount>=100]
+		IF[@mA<=0]
+		{
+			GOSUB[#=es.SAKURAMODE.DEL]
+		}
+		IFEND[]
+
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//===============================================================
+//■
+//===============================================================
+#=es.SAKURAMODE.MAIN.Calc
+{
+
+	INT[@id]
+	INT[@NUM=@_PINT(2)] //数
+	INT[@MAX=@_PINT(3)]
+
+		INT[@dummy=@_PINT(4)]
+
+	FLT[@CYCLE=@_PINT(5)/10.0]
+	FLT[@SCALE=@_PINT(6)/10.0]
+
+	INT[@mmA]
+
+	LOOP[SET=@NUM]
+	{
+		//----------------------------------------------------------------
+		// 計算
+		//----------------------------------------------------------------
+			@id = @_LC + @_PINT(1)*@SAKURA1.NUM
+
+			@Sakura.Cnt(@id)+=1
+
+			\_rnd(0,@MAX)
+			@Sakura.SP.X(@id) = @_RINT(1) - @MAX/2
+
+	//		MATH[COS=1 LET=@fVal SET=(@Sakura.Rad(@id)+@Count*@CYCLE) * @_PAI / 180]
+			MATH[COS=1 LET=@fVal SET=((@Sakura.Cnt(@id)/8)+@Count*@CYCLE) * @_PAI / 180]
+			@Sakura.X(@id) += @fVal * @SCALE
+	//		@Sakura.X(@id) += @Sakura.SP.X(@id) / 10.0
+			@Sakura.Y(@id) += @Sakura.SP.Y(@id) / 10.0
+
+
+			//↓
+			IF[(@_PINT(1)==0 && @es.LSD(032,05)>0) || (@_PINT(1)==1 && @es.LSD(032,06)>0)]
+			//IF[@mEndCount==0]
+			{
+				@mmA = @mA
+				IF[@Sakura.Y(@id) > @Sakura.ED.Y(@id)-250]
+				{
+					@Sakura.A(@id) -= 8
+					IF[@Sakura.A(@id)<0] @Sakura.A(@id)=0 IFEND[]
+				}
+				IFEND[]
+
+				IF[@Sakura.Y(@id) > @Sakura.ED.Y(@id)]
+				{
+					\_rnd(0,@es.WSX)
+					@Sakura.X(@id) = @_RINT(1) - 8
+
+					\_rnd(0,@es.WSY)
+					@Sakura.Y(@id) -= @es.WSY + 100 + @_RINT(1)
+
+					@Sakura.A(@id) = 256
+
+					\_rnd(0,360)
+					@Sakura.Rad(@id) = @_RINT(1)
+
+					\_rnd(0,255)
+					@Sakura.Cnt(@id) = @_RINT(1)
+				}
+				IFEND[]
+			}
+			//IFEND[]
+			IFEND[]
+
+			//↑
+			IF[(@_PINT(1)==0 && @es.LSD(032,05)<0) || (@_PINT(1)==1 && @es.LSD(032,06)<0)]
+			//IF[@mEndCount==0]
+			{
+				@mmA = @mA
+				IF[@Sakura.Y(@id) < 250]
+				{
+					@Sakura.A(@id) -= 8
+					IF[@Sakura.A(@id)<0] @Sakura.A(@id)=0 IFEND[]
+				}
+				IFEND[]
+
+				IF[@Sakura.Y(@id) < -50]
+				{
+					\_rnd(0,@es.WSX)
+					@Sakura.X(@id) = @_RINT(1) - 8
+
+					\_rnd(0,@es.WSY)
+					@Sakura.Y(@id) += @es.WSY + 100 + @_RINT(1)
+
+					@Sakura.A(@id) = 256
+
+					\_rnd(0,360)
+					@Sakura.Rad(@id) = @_RINT(1)
+
+					\_rnd(0,255)
+					@Sakura.Cnt(@id) = @_RINT(1)
+				}
+				IFEND[]
+			}
+			//IFEND[]
+			IFEND[]
+
+
+		//----------------------------------------------------------------
+		// 表示
+		//----------------------------------------------------------------
+		IF[@_PINT(1)==0] \_cg.blockdiv.no("es.SAKURA0", "es.SAKURA1."+$(@_LC),@sakura1.sx,@sakura1.sy,(@Sakura.Cnt(@id)/@sakura.ansp)%@sakura.num,150);CG[ID="es.SAKURA1."+$(@_LC) X=@Sakura.X(@id) Y=@Sakura.Y(@id) A=@mA] IFEND[]
+		IF[@_PINT(1)==1] \_cg.blockdiv.no("es.SAKURA0", "es.SAKURA2."+$(@_LC),@sakura2.sx,@sakura2.sy,(@Sakura.Cnt(@id)/@sakura.ansp)%@sakura.num,150);CG[ID="es.SAKURA2."+$(@_LC) X=@Sakura.X(@id) Y=@Sakura.Y(@id) A=@mA] IFEND[]
+
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SAKURAMODE.CGLOAD
+{
+	CG[ID="es.SAKURA0" Z=1 E=0 FILE=$sakura.cg] //バッファ
+	LOOP[SET=@SAKURA1.NUM] CG[ID="es.SAKURA1."+$(@_LC) Z=@Z.SAKURA1 A=0 FILE="" MODE=0] LOOPEND[] //小
+	LOOP[SET=@SAKURA2.NUM] CG[ID="es.SAKURA2."+$(@_LC) Z=@Z.SAKURA2 A=0 FILE="" MODE=0] LOOPEND[] //大
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SAKURAMODE.SAVE
+{
+	INT[@No=@_PINT(1)]
+	SAVE[DNO=@No    SET=@Sakura.SP.X()]	// 
+	SAVE[DNO=@No+1  SET=@Sakura.SP.Y()]	// 
+	SAVE[DNO=@No+2  SET=@Sakura.A()]		// 
+	SAVE[DNO=@No+3  SET=@Sakura.Rad()]	// 
+	SAVE[DNO=@No+4  SET=@Sakura.ED.Y()]	// 
+	SAVE[DNO=@No+5  SET=@Sakura.X()]		// 
+	SAVE[DNO=@No+6  SET=@Sakura.Y()]		// 
+	SAVE[DNO=@No+7  SET=@fVal]			// 
+	SAVE[DNO=@No+8  SET=@Count]			// 
+	SAVE[DNO=@No+9  SET=@mode]			// 
+
+	SAVE[DNO=@No+10 SET=@mA]			// 
+	SAVE[DNO=@No+11 SET=@mEndCount]		// 
+
+	SAVE[DNO=@No+12 SET=@Z.SAKURA1]		// 
+	SAVE[DNO=@No+13 SET=@Z.SAKURA2]		// 
+	SAVE[DNO=@No+14 SET=@SAKURA1.NUM]		// 
+	SAVE[DNO=@No+15 SET=@SAKURA2.NUM]		// 
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SAKURAMODE.LOAD
+{
+	STR[$fn=$_PSTR(1)]
+	INT[@No=@_PINT(2)]
+	LOAD[FILE=$fn DNO=@No    LET=@Sakura.SP.X()]	// 
+	LOAD[FILE=$fn DNO=@No+1  LET=@Sakura.SP.Y()]	// 
+	LOAD[FILE=$fn DNO=@No+2  LET=@Sakura.A()]		// 
+	LOAD[FILE=$fn DNO=@No+3  LET=@Sakura.Rad()]	// 
+	LOAD[FILE=$fn DNO=@No+4  LET=@Sakura.ED.Y()]	// 
+	LOAD[FILE=$fn DNO=@No+5  LET=@Sakura.X()]		// 
+	LOAD[FILE=$fn DNO=@No+6  LET=@Sakura.Y()]		// 
+	LOAD[FILE=$fn DNO=@No+7  LET=@fVal]			// 
+	LOAD[FILE=$fn DNO=@No+8  LET=@Count]		// 
+	LOAD[FILE=$fn DNO=@No+9  LET=@mode]			// 
+
+	LOAD[FILE=$fn DNO=@No+10 LET=@mA]			// 
+	LOAD[FILE=$fn DNO=@No+11 LET=@mEndCount]	// 
+
+	LOAD[FILE=$fn DNO=@No+12 LET=@Z.SAKURA1]		// 
+	LOAD[FILE=$fn DNO=@No+13 LET=@Z.SAKURA2]		// 
+	LOAD[FILE=$fn DNO=@No+14 LET=@SAKURA1.NUM]	// 
+	LOAD[FILE=$fn DNO=@No+15 LET=@SAKURA2.NUM]	// 
+
+//\_dmes("@SAKURA1.NUM="+$(@SAKURA1.NUM))
+//\_dmes("@SAKURA2.NUM="+$(@SAKURA2.NUM))
+
+	GOSUB[#=es.SAKURAMODE.CGLOAD]
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SAKURAMODE.END
+{
+	@es.SAKURAMODE = 2
+	@mEndStartTime = @_OS_TIME(1)
+	@mEndFadeTime = @_PINT(1)
+	IF[@mEndFadeTime==0] @mEndFadeTime=1 IFEND[]
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SAKURAMODE.DEL
+{
+	// レイヤ消去
+	CGEND[ID="es.SAKURA0"]
+	LOOP[SET=@SAKURA1.NUM] CGEND[ID="es.SAKURA1."+$(@_LC)] LOOPEND[]
+	LOOP[SET=@SAKURA2.NUM] CGEND[ID="es.SAKURA2."+$(@_LC)] LOOPEND[]
+
+	@es.SAKURAMODE = 0
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.SAKURAMODE.CG
+{
+	$sakura.cg = "cg/"+$_PSTR(1)
+	@sakura.num = @_PINT(2)
+	return[]
+}
+

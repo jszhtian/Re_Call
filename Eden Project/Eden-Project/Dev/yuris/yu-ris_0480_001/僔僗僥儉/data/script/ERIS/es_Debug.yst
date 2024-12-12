@@ -1,0 +1,453 @@
+//============================================================================
+//
+//■デバッグ処理
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$DBG.STR(101)]   // 出力文字列
+	S_INT[@DBG.WINDOW.SX]
+	S_INT[@DBG.WINDOW.SY]
+	S_INT[@DBG.MOUSEXY=0]
+
+	S_STR[$mSTR(101)]
+	S_INT[@mRefreshFlag]
+	S_INT[@mVal]
+	S_INT[@noNum]
+
+	S_INT[@dbg.str.gno.num]
+	S_INT[@dbg.str.lno.num]
+
+	S_INT[@DBG.GNO(51)]
+	S_INT[@DBG.LNO(51)]
+	S_STR[$DBG.GNO.STR(51)]
+	S_STR[$DBG.LNO.STR(51)]
+//	S_STR[$SCRIPTINFO]
+
+	S_STR[$CGSYS2.PATH]
+
+}
+
+
+//-------------------------------------------------------------------------
+//
+//■デバッグタスク生成
+//
+//-------------------------------------------------------------------------
+#=es.DBG.INIT
+{
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		$CGSYS2.PATH=$T(38,32)
+		@DBG.WINDOW.SX=@T(37,24)
+		@DBG.WINDOW.SY=@T(37,25)
+
+	//----------------------------------------------------------------
+	// ウォッチウィンドウレイヤ生成
+	//----------------------------------------------------------------
+		CG[ID=":/W1/"    Z=1 SX=@DBG.WINDOW.SX SY=@DBG.WINDOW.SY]
+		CG[ID=":/W1/DBG" Z=1 SX=@DBG.WINDOW.SX SY=@DBG.WINDOW.SY FILE=""]
+
+		IF[@T(37,21)] GOSUB[#=ES.DEBUGMODE.BTN.WATCHWINDOW.ON] IFEND[]
+
+		IF[@T(37,31)] GOSUB[#=ES.DEBUGMODE.BTN.SPRITEMAPVIEW.ON] IFEND[]
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//
+//■デバッグタスク
+//
+//-------------------------------------------------------------------------
+#=es.DebugTask
+{
+	//----------------------------------------------------------------
+	// 文字更新チェック＆表示
+	//----------------------------------------------------------------
+		\_task.info($es.ScenarioTaskID, 1) //GOSUBネスト０情報取得
+		@mVal=@_RINT(3)
+
+		IF[@_RINT(4)]
+		{
+			$DBG.STR(0) = $_RSTR(1)
+
+			\_inttostr(@mVal)
+			$DBG.STR(1) = $_RSTR(1) + " 行目"
+		}
+		IFEND[]
+
+		//IF[@_MOUSE_X>=0 && @_MOUSE_Y>=0 && @_MOUSE_X<@es.GSX && @_MOUSE_Y<@es.GSY]
+		IF[@DBG.MOUSEXY] $DBG.STR(2) = "("+$(@_MOUSE_X)+","+$(@_MOUSE_Y)+")" IFEND[]
+
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		@noNum=3
+		LOOP[SET=50]
+		{
+			IF[@DBG.GNO(@_LC)>0]
+			{
+				\_inttostr(@DBG.GNO(@_LC),4)
+				\DBG.STR(@noNum, "@G("+$_RSTR(1)+")="+$(@G(@DBG.GNO(@_LC)))+" "+$DBG.GNO.STR(@_LC))
+				@noNum+=1
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+		LOOP[SET=50]
+		{
+			IF[@DBG.LNO(@_LC)>0]
+			{
+				\_inttostr(@DBG.LNO(@_LC),4)
+				\DBG.STR(@noNum, "@L("+$_RSTR(1)+")="+$(@L(@DBG.LNO(@_LC)))+" "+$DBG.LNO.STR(@_LC))
+				@noNum+=1
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+		LOOP[SET=50]
+		{
+			IF[$mSTR(@_LC-1) != $DBG.STR(@_LC-1)]
+			{
+				$mSTR(@_LC-1) = $DBG.STR(@_LC-1)
+				@mRefreshFlag = 1
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+
+
+	//----------------------------------------------------------------
+	// 描画
+	//----------------------------------------------------------------
+		IF[@mRefreshFlag]
+		{
+			@mRefreshFlag = 0
+
+			//変数ウォッチウィンドウ表示時のみ文字描画して負荷軽減
+			WINDOWINFO[NO=1 EXIST=1 LET=@mVal]
+			IF[@mVal] GOSUB[#=es.DebugPrint] IFEND[]
+
+			//通常スクリーン時のみ更新
+			//
+			IF[@es.GSD(141,02)==0]
+				WINDOW[NO=0 CAPTION=$T(37,01)+" "+$DBG.STR(0)+"  "+$DBG.STR(1)] //タイトルバーに表示
+			IFEND[]
+		}
+		IFEND[]
+
+
+	return[]
+}
+
+
+
+//-------------------------------------------------------------------------
+//
+//■デバッグ表示
+//
+//-------------------------------------------------------------------------
+#=es.DebugPrint
+{
+	//-----------------------------------------------------------
+	// 画面クリア
+	//-----------------------------------------------------------
+		CGACT[ID=:/W1/DBG RECTPAINT3=1 SET=0xff000000]
+
+	//-----------------------------------------------------------
+	// 文字描画
+	//-----------------------------------------------------------
+		INT[@LC]
+		LOOP[SET=50]///x
+		{
+			@LC = @_LC+3
+
+			\FONT.COLOR( 0xffffff ) //色セット
+			\FONT.SIZE( 12 )
+			\FONT.XY( 0 , (12+0)*(@_LC-1) )
+			\FONT.BOLD( 1 )
+		//	\FONT.SHADE( 1, 1, 0x0000ff )
+		//	\FONT.OUTLINE( 0x0000ff )
+			\FONT.DRAW(":/W1/DBG", $DBG.STR(@LC-1))
+		}
+		LOOPEND[]
+
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//■スクリプトファイルを開く
+//-------------------------------------------------------------------------
+#=es.OpenScriptFile
+{
+	STR[$fname=$_PSTR(1)]
+
+	INT[@len]
+	VARINFO[LENGTH=1 SET=$fname LET=@len]
+
+	//-----------------------------------------------------------------
+	// $fname に対して、最初に出てくる「￥」文字の位置を調べる.
+	//-----------------------------------------------------------------
+	\_findstrleft($fname, '\\')
+	INT[@pos = @_RINT(1)]
+
+	//-----------------------------------------------------------------
+	//「￥」が存在していたら
+	//-----------------------------------------------------------------
+	IF[@pos!=0]
+	{
+		STR[$scrfn]
+		STR[$exefn_full]
+
+		//-----------------------------------------------------------------
+		// 行数を文字列に変換
+		//-----------------------------------------------------------------
+			\_inttostr(@_PINT(2))
+			STR[$line=$_RSTR(1)]
+
+		//-----------------------------------------------------------------
+		// 「￥」の次の位置から終端までを取得
+		//-----------------------------------------------------------------
+			\_strmid($fname, @pos+1, @len-@pos)
+			$scrfn=$_PROJECT_PATH+$_RSTR(1)
+
+		//-----------------------------------------------------------------
+		// 関連づけされている実行ファイル名(フルパス)を取得
+		//-----------------------------------------------------------------
+			FILEINFO[FILE=$scrfn LET=$exefn_full RELATION=1]
+			IF[@T(37,41)] $exefn_full=$T(37,42) IFEND[]
+			VARINFO[LENGTH=1 SET=$exefn_full LET=@len]
+
+		//-----------------------------------------------------------------
+		// $fname に対して、右から調べて最初に出てくる「￥」文字の位置を調べる.
+		//-----------------------------------------------------------------
+			\_findstrright($exefn_full, '\\')
+			INT[@posR = @_RINT(1)]
+
+		//-----------------------------------------------------------------
+		// フルパスファイル名から、ファイル名のみを取得
+		//-----------------------------------------------------------------
+			\_strmid($exefn_full, @posR+1, @len-@posR)
+			STR[$exefn=$_RSTR(1)]
+
+		//-----------------------------------------------------------------
+		// ファイル名を全て小文字に変換する
+		//-----------------------------------------------------------------
+			STR[$exefn_l]
+			\_strlower($exefn)($exefn_l)
+
+		//-----------------------------------------------------------------
+		// ファイル名からエディタの種類を調べる
+		//-----------------------------------------------------------------
+//\_dmes($scrfn)
+			STR[$param]
+			STR[$dq=$_CHR(34)]
+			  IF[$exefn_l=="apsaly.exe"]    $param = "/j"+$line+" "+$scrfn			// Apsaly
+			ELSE[$exefn_l=="emeditor.exe"]  $param = $dq+$scrfn+$dq+" /l "+$line	// EmEditor
+			ELSE[$exefn_l=="ginnie.exe"]    $param = $dq+$scrfn+$dq+" /r"+$line		// Ginnie
+			ELSE[$exefn_l=="ginniefe.exe"]  $param = $dq+$scrfn+$dq+" /r"+$line		// GinnieFE
+			ELSE[$exefn_l=="jcref.exe"]     $param = $dq+$scrfn+$dq+" /r"+$line		// Jcref
+			ELSE[$exefn_l=="jmedit2.exe"]   $param = $dq+$scrfn+$dq+"/"+$line		// JmEditor
+			ELSE[$exefn_l=="k2editor.exe"]  $param = $scrfn+" /j"+$line				// K2 Editor
+			ELSE[$exefn_l=="miw.exe"]       $param = $dq+$scrfn+"+"+$line+$dq		// MIFES
+			ELSE[$exefn_l=="oseditor2.exe"] $param = "/j"+$line+" "+$scrfn			// O'sEditor2
+			ELSE[$exefn_l=="otbedit.exe"]   $param = $scrfn+" /r"+$line				// otbedit
+			ELSE[$exefn_l=="qxw32.exe"]     $param = "-J"+$line+" "+$dq+$scrfn+$dq	// QX Editor
+			ELSE[$exefn_l=="tepa.exe"]      $param = "/j"+$line+" "+$dq+$scrfn+$dq	// TepaEditor ///x絶対パス指定が必要
+			ELSE[$exefn_l=="terapad.exe"]   $param = "/jl="+$line+" "+$scrfn		// TeraPad
+			ELSE[$exefn_l=="whinny.exe"]    $param = $dq+$scrfn+"/"+$line+$dq		// WHiNNY ///x絶対パス指定が必要
+			ELSE[$exefn_l=="wzeditor.exe"]  $param = $scrfn+" /j"+$line				// WZ Editor
+			ELSE[$exefn_l=="sakura.exe"]    $param = $dq+$scrfn+$dq+" -Y="+$line	// サクラエディタ
+			ELSE[$exefn_l=="hidemaru.exe"]  $param = "/j"+$line+" "+$dq+$scrfn+$dq	// 秀丸
+
+			ELSE[]                          $param = $scrfn							// その他
+			IFEND[]
+
+		//-----------------------------------------------------------------
+		// 実行
+		//-----------------------------------------------------------------
+			FILEACT[EXEC=1 FILE=$exefn_full PARAM=$param]
+
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//-------------------------------------------------------------------------
+//■ログ出力
+//-------------------------------------------------------------------------
+#=es.MakeLog
+{
+	IF[@_DEBUGMODE]
+		///xCOM:51 $_PSTR(1)
+	IFEND[]
+	return[]
+}
+
+#=es.MakeLog2
+{
+	IF[@_DEBUGMODE]
+		///xCOM:51 $_PSTR(1)
+		///xCOM:51 $SCRIPTINFO
+		STR[$dummy]
+		///xCOM:51 $dummy
+	IFEND[]
+	return[]
+}
+
+
+//////
+
+
+//■[WATCHWINDOW]ボタン ----------------------------------------------
+//
+#=ES.DEBUGMODE.BTN.WATCHWINDOW.ON
+{
+	//変数ウォッチウィンドウ生成＆表示
+//	IF[@es.TX.CSKIP==0]
+		INT[@X]INT[@Y]
+		WINDOWINFO[NO=0 X=1 LET=@X]
+		WINDOWINFO[NO=0 Y=1 LET=@Y]
+		WINDOW[NO=1 CAPTION="変数ウォッチウィンドウ" X=@X+@T(37,22) Y=@Y+@T(37,23) SX=@DBG.WINDOW.SX SY=@DBG.WINDOW.SY Z=3 CLOSEMODE=3]
+		WINDOW[NO=1 CGID=:/W1]
+		@mRefreshFlag = 1
+//	IFEND[]
+
+	return[]
+}
+
+//■[EDITOR]ボタン ---------------------------------------------------
+//
+#=ES.DEBUGMODE.BTN.EDITOR.ON
+{
+	// スクリプトオープン
+//	IF[@es.TX.CSKIP==0]
+		\_task.info($es.ScenarioTaskID, 1) //GOSUBネスト０情報取得
+		GOSUB[#=es.OpenScriptFile PSTR=$_RSTR(1) PINT2=@_RINT(3)]
+//	IFEND[]
+
+	return[]
+}
+
+//■[RESTART]ボタン --------------------------------------------------
+//
+#=ES.DEBUGMODE.BTN.RESTART.ON
+{
+	// 高速再起動
+//	IF[@es.TX.CSKIP==0]
+		\END(1)
+//	IFEND[]
+
+	return[]
+}
+
+//■[SCREENSHOT]ボタン -----------------------------------------------
+//
+#=ES.DEBUGMODE.BTN.SCREENSHOT.ON
+{
+	// スクリーンショット
+//	IF[@es.TX.CSKIP==0]
+		CG[ID=DBGSAVESS Z=1 E=0 A=0 FILE=""]
+		CGACT[COPY2=1 ID=:/W0/ ID2=DBGSAVESS]
+		FONT[DRAWMODE=1 BOLD=1 SX=14 SY=15]
+		FONT[COLOR=0x000000 COLOR2=0x000000];CGACT[ID=DBGSAVESS TEXT=1 SET=1 X=2 Y=2 SETSTR=$T(37,01)+$DBG.STR(0)+"  "+$DBG.STR(1)] //文字列書き込み
+		FONT[COLOR=0xffffff COLOR2=0xffffff];CGACT[ID=DBGSAVESS TEXT=1 SET=0 X=2 Y=2 SETSTR=$T(37,01)+$DBG.STR(0)+"  "+$DBG.STR(1)] //文字列書き込み
+
+		STR[$date]
+		\_inttostr(@_TIME(0,0), 4);$date+=$_RSTR(1)		//年
+		\_inttostr(@_TIME(0,1), 2);$date+=$_RSTR(1)		//月
+		\_inttostr(@_TIME(0,2), 2);$date+=$_RSTR(1)+"_"	//日
+		\_inttostr(@_TIME(0,4), 2);$date+=$_RSTR(1)		//時
+		\_inttostr(@_TIME(0,5), 2);$date+=$_RSTR(1)		//分
+		\_inttostr(@_TIME(0,6), 2);$date+=$_RSTR(1)+"_"	//秒
+		\_inttostr(@_TIME(0,7), 3);$date+=$_RSTR(1)		//ミリ秒
+
+		IF[1]
+			FILEACT[ID=DBGSAVESS FILE="ss_"+$date+".jpg" JPG=1]
+		ELSE[]
+			FILEACT[ID=DBGSAVESS FILE="ss_"+$date+".png" PNG=1]
+		IFEND[]
+
+		CGEND[ID=DBGSAVESS]
+//	IFEND[]
+
+	return[]
+}
+
+//■[SPRITEMAPVIEW]ボタン --------------------------------------------
+//
+#=ES.DEBUGMODE.BTN.SPRITEMAPVIEW.ON
+{
+	//SpriteView用レイヤセット
+	INT[@DSX=@es.SMV.SX]
+	INT[@DSY=@es.SMV.SY]
+	CG[ID=:/W2/ SX=@DSX SY=@DSY Z=1]
+	CG[ID=:W2/BASE Z=1 X=0 Y=0 FILE=$CGSYS2.PATH+"map_back"]
+
+	INT[@DLX]
+	INT[@DLY]
+//	INT[@DSX=@es.SMV.SX]
+//	INT[@DSY=@es.SMV.SY]
+	WINDOWINFO[NO=0 X=1 LET=@DLX]
+	WINDOWINFO[NO=0 Y=1 LET=@DLY]
+	WINDOW[NO=2 CAPTION="Sprite Map View" CGID=:W2/ X=@DLX+@T(37,32) Y=@DLY+@T(37,33) SX=@DSX SY=@DSY CLOSEMODE=3]
+	WAIT[FRAME=1] ///xこれがないと正しく初回描画されない場合がある.あとで直す
+	WINDOW[NO=0 ACTIVE=1]
+
+	return[]
+}
+
+
+#=es.DBG.STR.GNO.DEF
+{
+	@dbg.str.gno.num+=1
+	@DBG.GNO(@dbg.str.gno.num) = @_PINT(1)
+	$DBG.GNO.STR(@dbg.str.gno.num) = $_PSTR(2)
+	return[]
+}
+
+#=es.DBG.STR.LNO.DEF
+{
+	@dbg.str.lno.num+=1
+	@DBG.LNO(@dbg.str.lno.num) = @_PINT(1)
+	$DBG.LNO.STR(@dbg.str.lno.num) = $_PSTR(2)
+	return[]
+}
+
+
+//////
+
+
+//△デバッグ出力文字列 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.DBG.STR.GET
+{
+	return[rstr=$DBG.STR(@_PINT(1))]
+}
+
+
+//▼デバッグ出力文字列 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.DBG.STR.SET
+{
+	$DBG.STR(@_PINT(1)) = $_PSTR(2)
+	return[]
+}
+
+//▼マウス座標表示モード @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.DBG.MOUSEXY.SET
+{
+	@DBG.MOUSEXY = @_RINT(1)
+	return[]
+}
+

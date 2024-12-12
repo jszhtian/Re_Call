@@ -1,0 +1,17 @@
+This document describes the save file format used by the engine.
+The saving process is as follows:
+
+1. Generate an XML document from internal state. Strings are encoded as UTF-8.
+2. Compress the XML into a BZ2 stream.
+3. Compute the SHA-1 hash of the BZ2 stream.
+4. Send the hash to the output.
+5. For every byte (input) in the BZ2 stream, treat the hash as a short program
+   where each byte is an opcode, using the following meanings:
+   * if bit 0 in the opcode is set, XOR input and opcode and store the result
+     in input.
+   * also, if bit 1 in the opcode is set, reverse (not invert) the bits in the
+     input, such that "abcd efgh" becomes "hgfe dcba".
+   * also, if bit 2 in the opcode is set, swap even and odd bits, such that
+     "abcd efgh" becomes "badc fehg".
+6. Send the encoded BZ2 stream to the output.
+7. Done.

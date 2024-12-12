@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_ver2|Win32">
+      <Configuration>Debug_ver2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_ver2|Win32">
+      <Configuration>Release_ver2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{71CC1155-FF40-4B82-9DD0-67B31A728C0D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>nnnEditView2012</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>nnnEditView2017D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'">
+    <TargetName>nnnEditView2017_ver2D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+    <TargetName>nnnEditView2017</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'">
+    <OutDir>..\..\systemNNN\nyanlib\lib\</OutDir>
+    <TargetName>nnnEditView2017_ver2</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\nnnEdit\conteDoc.cpp" />
+    <ClCompile Include="..\nnnEdit\conteMessageDoc.cpp" />
+    <ClCompile Include="..\nnnEdit\conteMessageView.cpp" />
+    <ClCompile Include="..\nnnEdit\conteView.cpp" />
+    <ClCompile Include="..\nnnEdit\controldoc.cpp" />
+    <ClCompile Include="..\nnnEdit\controlview.cpp" />
+    <ClCompile Include="..\nnnEdit\effectdoc.cpp" />
+    <ClCompile Include="..\nnnEdit\effectview.cpp" />
+    <ClCompile Include="..\nnnEdit\filmcasedoc.cpp" />
+    <ClCompile Include="..\nnnEdit\filmcaseview.cpp" />
+    <ClCompile Include="..\nnnEdit\filmdoc.cpp" />
+    <ClCompile Include="..\nnnEdit\filmview.cpp" />
+    <ClCompile Include="..\nnnEdit\gamemessagedoc.cpp" />
+    <ClCompile Include="..\nnnEdit\gamemessageview.cpp" />
+    <ClCompile Include="..\nnnEdit\layerdoc.cpp" />
+    <ClCompile Include="..\nnnEdit\layerview.cpp" />
+    <ClCompile Include="..\nnnEdit\mainscreendoc.cpp" />
+    <ClCompile Include="..\nnnEdit\mainscreenview.cpp" />
+    <ClCompile Include="..\nnnEdit\myclientwindow.cpp" />
+    <ClCompile Include="..\nnnEdit\mydocument.cpp" />
+    <ClCompile Include="..\nnnEdit\myview.cpp" />
+    <ClCompile Include="..\nnnEdit\programdoc.cpp" />
+    <ClCompile Include="..\nnnEdit\programview.cpp" />
+    <ClCompile Include="..\nnnEdit\scrollview.cpp" />
+    <ClCompile Include="..\nnnEdit\storybookdoc.cpp" />
+    <ClCompile Include="..\nnnEdit\storybookview.cpp" />
+    <ClCompile Include="..\nnnEdit\storydoc.cpp" />
+    <ClCompile Include="..\nnnEdit\storyview.cpp" />
+    <ClCompile Include="..\nnnEdit\vardoc.cpp" />
+    <ClCompile Include="..\nnnEdit\varview.cpp" />
+    <ClCompile Include="..\nnnEdit\zahyodoc.cpp" />
+    <ClCompile Include="..\nnnEdit\zahyoview.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\nnnEdit\conteDoc.h" />
+    <ClInclude Include="..\nnnEdit\conteMessageDoc.h" />
+    <ClInclude Include="..\nnnEdit\conteMessageView.h" />
+    <ClInclude Include="..\nnnEdit\conteView.h" />
+    <ClInclude Include="..\nnnEdit\controldoc.h" />
+    <ClInclude Include="..\nnnEdit\controlview.h" />
+    <ClInclude Include="..\nnnEdit\effectdoc.h" />
+    <ClInclude Include="..\nnnEdit\effectview.h" />
+    <ClInclude Include="..\nnnEdit\filmcasedoc.h" />
+    <ClInclude Include="..\nnnEdit\filmcaseview.h" />
+    <ClInclude Include="..\nnnEdit\filmdoc.h" />
+    <ClInclude Include="..\nnnEdit\filmview.h" />
+    <ClInclude Include="..\nnnEdit\gamemessagedoc.h" />
+    <ClInclude Include="..\nnnEdit\gamemessageview.h" />
+    <ClInclude Include="..\nnnEdit\layerdoc.h" />
+    <ClInclude Include="..\nnnEdit\layerview.h" />
+    <ClInclude Include="..\nnnEdit\mainscreendoc.h" />
+    <ClInclude Include="..\nnnEdit\mainscreenview.h" />
+    <ClInclude Include="..\nnnEdit\myclientwindow.h" />
+    <ClInclude Include="..\nnnEdit\mydocument.h" />
+    <ClInclude Include="..\nnnEdit\myview.h" />
+    <ClInclude Include="..\nnnEdit\programdoc.h" />
+    <ClInclude Include="..\nnnEdit\programview.h" />
+    <ClInclude Include="..\nnnEdit\scrollview.h" />
+    <ClInclude Include="..\nnnEdit\storybookdoc.h" />
+    <ClInclude Include="..\nnnEdit\storybookview.h" />
+    <ClInclude Include="..\nnnEdit\storydoc.h" />
+    <ClInclude Include="..\nnnEdit\storyview.h" />
+    <ClInclude Include="..\nnnEdit\vardoc.h" />
+    <ClInclude Include="..\nnnEdit\varview.h" />
+    <ClInclude Include="..\nnnEdit\zahyodoc.h" />
+    <ClInclude Include="..\nnnEdit\zahyoview.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

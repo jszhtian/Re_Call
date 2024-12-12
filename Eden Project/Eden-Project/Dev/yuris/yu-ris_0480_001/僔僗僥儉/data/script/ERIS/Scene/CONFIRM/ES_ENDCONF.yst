@@ -1,0 +1,130 @@
+//============================================================================
+//
+//■ERIS ゲーム終了確認
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+}
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.ENDCONF.LOOP
+{
+	IF[@es.STATE==0]
+	{
+		IF[@es.GSD(114,01)==1] //終了確認する
+			@es.STATE=1
+		ELSE[]
+			\BT.END(ES.ENDCONF)
+			@es.STATE=11
+		IFEND[]
+	}
+	IFEND[]
+
+	IF[@es.STATE==1]
+	{
+		\_gosub(ES.ENDCONF.VoicePlay.1)	// ボイス再生
+		\SS.FADE.TASK(200)
+		@es.STATE=100
+	}
+	IFEND[]
+
+	IF[@es.STATE==011] //BTN-OK
+	{
+		//	\es.CGTSS ///x確認なしverだといる？
+
+			\_gosub(ES.ENDCONF.VoicePlay.2)	// ボイス再生
+
+		//-------------------------------------------- BGMフェードアウト
+			\BGM(,300)
+
+		//-------------------------------------------- 終了処理
+			IF[@es.RPMODE] @es.RPMODE = 0 IFEND[]
+
+		//	\_task.end($es.ScenarioTaskID)
+
+			GOSUB[#=ES.SEL.ENDEXEC pint=10]
+			GOSUB[#=ES.CSEL.ENDEXEC pint=100]
+			GOSUB[#=ES.LOG.FIN]
+			GOSUB[#=ES.SAVE.END]
+			GOSUB[#=ES.LOAD.END]
+
+			GOSUB[#=ES.SCENARIO.END pint=1]
+
+		//-------------------------------------------- フェード＆消去
+			\es.CGTSS ///x確認なしverではいらない？
+			\BT.END
+
+			\es.CGSDELALL
+			\es.CGTFADEOUT(500)
+
+		//-------------------------------------------- 再生終了待ち
+			LOOP[]
+			{
+				\SVO.PCHK
+				IF[@_RINT(1)==0] LOOPBREAK[] IFEND[] //再生終了したら
+				IF[@_MOUSE_L==1 || @_KEY_ENTER==1 || @_KEY_ESC==1] LOOPBREAK[] IFEND[] //キー入力したら
+				WAIT[FRAME=1]
+			}
+			LOOPEND[]
+
+		\es.END
+	}
+	IFEND[]
+	IF[@es.STATE==013] //キャンセル
+	{
+		\es.S.RETURN(1)	//戻り値
+	}
+	IFEND[]
+
+
+	return[]
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[はい]ボタン -----------------------------------------------------
+//
+#=ES.ENDCONF.BTN.YES.ON { @es.STATE=011; return[] }
+
+//■[いいえ]ボタン ---------------------------------------------------
+//
+#=ES.ENDCONF.BTN.NO.ON { @es.STATE=013; return[] }
+
+//■[次回以降表示しない]ボタン ---------------------------------------
+//
+#=ES.ENDCONF.BTN.NEXT.ON { \BT.ONOFF.GET($es.BID, 0)(@es.GSD(114,01)); @es.GSD(114,01)=1-@es.GSD(114,01); return[] }
+
+
+//====================================================================
+// 終了確認(DIALOG版)
+//====================================================================
+#=ES.ENDCONF.DIALOG
+{
+	WAIT[FRAME=1] //最新の画面を表示させておくため.
+
+	INT[@ret=1]
+
+	IF[@es.GSD(114,01)==1] //確認あり
+	{
+		\_gosub(ES.ENDCONF.VoicePlay.1)	// ボイス再生
+
+		STR[$cap]
+		WINDOWINFO[NO=0 CAPTION=1 LET=$cap]
+		$cap="確認"
+		DIALOG[STR=$T(13,02) CAPTION=$cap YESNO=1 LET=@ret]
+	}
+	IFEND[]
+
+	IF[@ret==1] \es.END IFEND[] //OK
+
+	return[]
+}
+
+

@@ -1,0 +1,52 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>ofscpy</h2>
+
+<p>
+Copies things drawn using a blt command to the offscreen buffer.<br>
+Explanation:<br>
+Å@Once you have blitted an image onto the screen, and now you want to call an effect on it, you would use this command to copy it to the offscreen buffer.<br>
+Å@The offscreen buffer created with this command may be used in effects, just like any other screen buffer.<br>
+Å@The image and the effect will display, but they will not be remembered via load/save.<br>
+<br>
+By using blt and ofscpy together, you can create engine cutscenes and such (like those found in AIR), and indeed this is why these commands were created.  They may thus be hard to use, but please bear with us.<br>
+<br>
+Usage:<br>
+<br>
+btndef "Å`"<br>
+;read animation images<br>
+<br>
+bg Å`<br>
+ld c,Å`<br>
+;all commands up until this point have been standard image commands, so they will show fine.<br>
+<br>
+resettimer<br>
+blt Å`<br>
+waittimer 100<br>
+blt Å`<br>
+waittimer 100<br>
+;in this fashion can we display images one after the other in an engine cutscene.<br>
+<br>
+;now that we've blitted a bunch of stuff, and we want to process the images with effects and such, we'd need to copy the final product to the offscreen buffer.<br>
+ofscpy<br>
+bg Å`<br>
+<br>
+;and now you can do anything you want to either the onscreen or the offscreen buffer.<br>
+bg Å`<br>
+ld c,Å`<br>
+</p>
+
+</body>
+</html>

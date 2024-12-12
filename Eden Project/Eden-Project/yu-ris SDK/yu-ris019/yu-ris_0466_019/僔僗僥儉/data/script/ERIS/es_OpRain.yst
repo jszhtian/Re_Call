@@ -1,0 +1,223 @@
+//=========================================================================
+//
+//■ERIS 降雨処理
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@Rain.SP.X(256)]
+	S_INT[@Rain.SP.Y(256)]
+	S_INT[@Rain.A(256)]
+	S_INT[@Rain.Rad(256)]
+	S_INT[@Rain.ED.Y(256)]
+	S_FLT[@Rain.X(256)]
+	S_FLT[@Rain.Y(256)]
+	S_FLT[@fVal]
+	S_INT[@Count]
+	S_INT[@mode]
+	S_INT[@mA]
+	S_INT[@mEndCount]
+
+	S_INT[@Z.RAIN1]
+	S_INT[@Z.RAIN2]
+
+	S_INT[@num1=60]
+	S_INT[@num2=30]
+
+	S_INT[@wait=2]
+	S_INT[@rainsp=1000]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.RAINMODE
+{
+	IF[@es.RAINMODE==0]
+	{
+		@Z.RAIN1 = @es.Z.SP+10*(08)
+		@Z.RAIN2 = @es.Z.SP+10*(98)
+
+		LOOP[SET=@num1] CG[ID="RAIN" +$(@_LC) Z=@Z.RAIN1 A=0 FILE="cg/tip/rain1_035" MODE=0] LOOPEND[] //小
+		LOOP[SET=@num2] CG[ID="RAIN2"+$(@_LC) Z=@Z.RAIN2 A=0 FILE="cg/tip/rain2_035" MODE=0] LOOPEND[] //大
+
+		LOOP[SET=@num1]
+		{
+			@Rain.X(@_LC) = @_LC*10
+			\_rnd(0,200)
+			@Rain.Y(@_LC) = 600+@_RINT(1)
+			\_rnd(256,256)
+			@Rain.A(@_LC) = @_RINT(1)
+
+			@Rain.SP.Y(@_LC) = @rainsp
+
+			\_rnd(0,40)
+			@Rain.ED.Y(@_LC) = @_RINT(1) + 600
+		}
+		LOOPEND[]
+
+		LOOP[SET=@num2]
+		{
+			@Rain.X(@num1+@_LC) = @_LC*10
+			\_rnd(0,200)
+			@Rain.Y(@num1+@_LC) = 600+@_RINT(1)
+			\_rnd(256,256)
+			@Rain.A(@num1+@_LC) = @_RINT(1)
+
+			\_rnd(50,100)
+			@Rain.SP.Y(@num1+@_LC) = @rainsp+@_RINT(1)
+
+			\_rnd(0,40)
+			@Rain.ED.Y(@num1+@_LC) = @_RINT(1) + 600
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+
+	@mEndCount=0
+	@es.RAINMODE = 1
+	@mA=0
+
+	return[]
+}
+
+
+//===============================================================
+//■メイン
+//===============================================================
+#=es.RAINMODE.MAIN
+{
+
+	@mode+=1
+	IF[@mode%@wait==0]
+	{
+		GOSUB[#=es.RAINMODE.MAIN.Calc pint=0 pint2=@num1 pint3=02 pint4=0 pint5=2 pint6=2] //小
+//		GOSUB[#=es.RAINMODE.MAIN.Calc pint=1 pint2=@num2 pint3=10 pint4=0 pint5=1 pint6=20] //大
+	}
+	IFEND[]
+	IF[@mode%@wait==1]
+	{
+//		GOSUB[#=es.RAINMODE.MAIN.Calc pint=0 pint2=@num1 pint3=02 pint4=0 pint5=2 pint6=2] //小
+		GOSUB[#=es.RAINMODE.MAIN.Calc pint=1 pint2=@num2 pint3=10 pint4=0 pint5=1 pint6=20] //大
+	}
+	IFEND[]
+
+	@Count+=1
+
+	IF[@es.RAINMODE==1]
+	{
+		@mA+=2
+		\_range(@mA,, 256)
+	}
+	IFEND[]
+
+	IF[@es.RAINMODE==2]
+	{
+		//@mEndCount+=1
+		//IF[@mEndCount>=100]
+		@mA-=2
+		IF[@mA<=0]
+		{
+			@mA=0
+			GOSUB[#=es.RAINMODE.DEL]
+		}
+		IFEND[]
+
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//===============================================================
+//■
+//===============================================================
+#=es.RAINMODE.MAIN.Calc
+{
+
+	INT[@id]
+	INT[@NUM=@_PINT(2)] //数
+	INT[@MAX=@_PINT(3)]
+
+		INT[@dummy=@_PINT(4)]
+
+	INT[@CYCLE=@_PINT(5)]
+	FLT[@SCALE=@_PINT(6)/10.0]
+
+	INT[@mmA]
+
+	LOOP[SET=@NUM]
+	{
+		//----------------------------------------------------------------
+		// 計算
+		//----------------------------------------------------------------
+			@id = @_LC + @_PINT(1)*@num1
+
+			\_rnd( 0 , @MAX )
+			@Rain.SP.X(@id) = @_RINT(1) - @MAX/2
+
+			MATH[COS=1 LET=@fVal SET=(@Rain.Rad(@id)+@Count*@CYCLE) * @_PAI / 180]
+			@Rain.X(@id) += @fVal * @SCALE
+			@Rain.X(@id) += @Rain.SP.X(@id) / 10.0
+			@Rain.Y(@id) += @Rain.SP.Y(@id) / 10.0
+
+
+			//IF[@mEndCount==0]
+			{
+				IF[@Rain.Y(@id) > @Rain.ED.Y(@id)]
+				{
+					\_rnd(0,799)
+					@Rain.X(@id) = @_RINT(1) - 8
+
+					\_rnd(0,600)
+					@Rain.Y(@id) -= 600 + 100 + @_RINT(1)
+
+			//		@Rain.A(@id) = 256
+
+					\_rnd(0,360)
+					@Rain.Rad(@id) = @_RINT(1)
+				}
+				IFEND[]
+			}
+			//IFEND[]
+
+		//----------------------------------------------------------------
+		// 表示
+		//----------------------------------------------------------------
+			IF[@_PINT(1)==0] CG[ID="RAIN" +$(@_LC) X=@Rain.X(@id) Y=@Rain.Y(@id) A=@Rain.A(@id)*@mA*(@es.GSD(112,01)==0)/256] IFEND[]
+			IF[@_PINT(1)==1] CG[ID="RAIN2"+$(@_LC) X=@Rain.X(@id) Y=@Rain.Y(@id) A=@Rain.A(@id)*@mA*(@es.GSD(112,01)==0)/256] IFEND[]
+		//	IF[@_PINT(1)==0] CG[ID="RAIN" +$(@_LC) X=@Rain.X(@id) Y=600-16-@Rain.Y(@id) A=@Rain.A(@id)*@mA/256] IFEND[]
+		//	IF[@_PINT(1)==1] CG[ID="RAIN2"+$(@_LC) X=@Rain.X(@id) Y=600-16-@Rain.Y(@id) A=@Rain.A(@id)*@mA/256] IFEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.RAINMODE.END
+{
+	@es.RAINMODE = 2
+	return[]
+}
+
+//===============================================================
+//■
+//===============================================================
+#=es.RAINMODE.DEL
+{
+	//----------------------------------------------------------
+	// レイヤ消去
+	//----------------------------------------------------------
+		LOOP[SET=@num1] CGEND[ID="RAIN" +$(@_LC)] LOOPEND[]
+		LOOP[SET=@num2] CGEND[ID="RAIN2"+$(@_LC)] LOOPEND[]
+
+	@es.RAINMODE = 0
+
+	return[]
+}
+

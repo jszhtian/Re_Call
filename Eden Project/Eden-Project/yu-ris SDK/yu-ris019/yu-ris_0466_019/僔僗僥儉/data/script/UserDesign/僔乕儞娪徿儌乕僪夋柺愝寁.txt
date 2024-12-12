@@ -1,0 +1,393 @@
+//============================================================================
+// シーン鑑賞モード画面設計
+//============================================================================
+#=ES.RPMODE.BTDEF
+
+	\BTDEF.GROUP(ES.RPMODE)
+
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("extra/back")
+	\BT.XY(000, 000)
+	\BT.Z(010)
+	\BT.SET(TIP.BG)
+
+	\BT.NAME("■背景・枠")
+	\BT.CGSYS("extra/rpmode/back")
+	\BT.XY(000, 000)
+	\BT.Z(020)
+	\BT.SET(TIP.BG2)
+
+
+
+	//[タブ]
+	\BT.NAME("■[タブ]ＣＧ鑑賞モード")
+	\BT.RADIO(1)
+	\BT.CGSYS("extra/btn_tab_cgmode")
+	\BT.XY(442, 025)
+	\BT.Z(100)
+	\BT.SET(BTN.TAB.CGMODE)
+
+	\BT.NAME("■[タブ]シーン鑑賞モード")
+	\BT.RADIO(1)
+	\BT.CGSYS("extra/btn_tab_rpmode")
+	\BT.XY(527, 025)
+	\BT.Z(100)
+	\BT.SET(BTN.TAB.RPMODE)
+
+	\BT.NAME("■[タブ]ムービー鑑賞モード")
+	\BT.RADIO(1)
+	\BT.CGSYS("extra/btn_tab_mvmode")
+	\BT.XY(612, 025)
+	\BT.Z(100)
+	\BT.SET(BTN.TAB.MVMODE)
+
+	\BT.NAME("■[タブ]ＢＧＭ鑑賞モード")
+	\BT.RADIO(1)
+	\BT.CGSYS("extra/btn_tab_bgmmode")
+	\BT.XY(697, 025)
+	\BT.Z(100)
+	\BT.SET(BTN.TAB.BGMMODE)
+
+
+
+	//■グループ
+	\BT.NAME("■グループ01")
+	\BT.RADIO(201)
+	\BT.CGSYS("extra/rpmode/btn_group_01")
+	\BT.XY(029, 078+30*0)
+	\BT.Z(100)
+	\BT.SET(BTN.GROUP, 01)
+
+	\BT.NAME("■グループ02")
+	\BT.RADIO(201)
+	\BT.CGSYS("extra/rpmode/btn_group_02")
+	\BT.XY(029, 078+30*1)
+	\BT.Z(100)
+	\BT.SET(BTN.GROUP, 02)
+
+	\BT.NAME("■グループ03")
+	\BT.RADIO(201)
+	\BT.CGSYS("extra/rpmode/btn_group_03")
+	\BT.XY(029, 078+30*2)
+	\BT.Z(100)
+	\BT.SET(BTN.GROUP, 03)
+
+	\BT.NAME("■グループ04")
+	\BT.RADIO(201)
+	\BT.CGSYS("extra/rpmode/btn_group_04")
+	\BT.XY(029, 078+30*3)
+	\BT.Z(100)
+	\BT.SET(BTN.GROUP, 04)
+
+	\BT.NAME("■グループ05")
+	\BT.RADIO(201)
+	\BT.CGSYS("extra/rpmode/btn_group_05")
+	\BT.XY(029, 078+30*4)
+	\BT.Z(100)
+	\BT.SET(BTN.GROUP, 05)
+
+	\BT.NAME("■グループ06")
+	\BT.RADIO(201)
+	\BT.CGSYS("extra/rpmode/btn_group_06")
+	\BT.XY(029, 078+30*5)
+	\BT.Z(100)
+	\BT.SET(BTN.GROUP, 06)
+
+	\BT.NAME("■グループ07")
+	\BT.RADIO(201)
+	\BT.CGSYS("extra/rpmode/btn_group_07")
+	\BT.XY(029, 078+30*6)
+	\BT.Z(100)
+	\BT.SET(BTN.GROUP, 07)
+
+	\BT.NAME("■グループ08")
+	\BT.RADIO(201)
+	\BT.CGSYS("extra/rpmode/btn_group_08")
+	\BT.XY(029, 078+30*7)
+	\BT.Z(100)
+	\BT.SET(BTN.GROUP, 08)
+
+	\BT.NAME("■グループ09")
+	\BT.RADIO(201)
+	\BT.CGSYS("extra/rpmode/btn_group_09")
+	\BT.XY(029, 078+30*8)
+	\BT.Z(100)
+	\BT.SET(BTN.GROUP, 09)
+
+
+/*
+	\BT.NAME("■立ち絵01")
+	\BT.GROUP(1)
+	\BT.CGSYS("extra/rpmode/tip_c01")
+	\BT.XY(020, 180)
+	\BT.Z(099)
+	\BT.SET(TIP.CHARA, 01)
+
+	\BT.NAME("■立ち絵02")
+	\BT.GROUP(1)
+	\BT.CGSYS("extra/rpmode/tip_c02")
+	\BT.XY(020, 180)
+	\BT.Z(099)
+	\BT.SET(TIP.CHARA, 02)
+
+	\BT.NAME("■立ち絵03")
+	\BT.GROUP(1)
+	\BT.CGSYS("extra/rpmode/tip_c03")
+	\BT.XY(020, 180)
+	\BT.Z(099)
+	\BT.SET(TIP.CHARA, 03)
+
+	\BT.NAME("■立ち絵04")
+	\BT.GROUP(1)
+	\BT.CGSYS("extra/rpmode/tip_c04")
+	\BT.XY(020, 180)
+	\BT.Z(099)
+	\BT.SET(TIP.CHARA, 04)
+
+	\BT.NAME("■立ち絵05")
+	\BT.GROUP(1)
+	\BT.CGSYS("extra/rpmode/tip_c05")
+	\BT.XY(020, 180)
+	\BT.Z(099)
+	\BT.SET(TIP.CHARA, 05)
+
+	\BT.NAME("■立ち絵06")
+	\BT.GROUP(1)
+	\BT.CGSYS("extra/rpmode/tip_c06")
+	\BT.XY(020, 180)
+	\BT.Z(099)
+	\BT.SET(TIP.CHARA, 06)
+
+	\BT.NAME("■立ち絵07")
+	\BT.GROUP(1)
+	\BT.CGSYS("extra/rpmode/tip_c07")
+	\BT.XY(020, 180)
+	\BT.Z(099)
+	\BT.SET(TIP.CHARA, 07)
+
+	\BT.NAME("■立ち絵08")
+	\BT.GROUP(1)
+	\BT.CGSYS("extra/rpmode/tip_c08")
+	\BT.XY(020, 180)
+	\BT.Z(099)
+	\BT.SET(TIP.CHARA, 08)
+
+	\BT.NAME("■立ち絵09")
+	\BT.GROUP(1)
+	\BT.CGSYS("extra/rpmode/tip_c09")
+	\BT.XY(020, 180)
+	\BT.Z(099)
+	\BT.SET(TIP.CHARA, 09)
+*/
+
+
+	//■プレート
+	\BT.NAME("■プレート01")
+	\BT.CGSYS("extra/rpmode/btn_plate_back")
+	\BT.XY(245+180*0, 078+140*0)
+	\BT.Z(100)
+	\BT.SET(BTN.PLATE, 01)
+
+		\BT.NAME("■サムネイル01")
+		\BT.CGSYS("extra/rpmode/btn_thumb", "extra/rpmode/btn_thumb")
+		\BT.XY(245+180*0+2, 078+140*0+2)
+		\BT.Z(101)
+		\BT.SET(BTN.THUMB, 01)
+
+	\BT.NAME("■プレート02")
+	\BT.CGSYS("extra/rpmode/btn_plate_back")
+	\BT.XY(245+180*1, 078+140*0)
+	\BT.Z(100)
+	\BT.SET(BTN.PLATE, 02)
+
+		\BT.NAME("■サムネイル02")
+		\BT.CGSYS("extra/rpmode/btn_thumb", "extra/rpmode/btn_thumb")
+		\BT.XY(245+180*1+2, 078+140*0+2)
+		\BT.Z(101)
+		\BT.SET(BTN.THUMB, 02)
+
+	\BT.NAME("■プレート03")
+	\BT.CGSYS("extra/rpmode/btn_plate_back")
+	\BT.XY(245+180*2, 078+140*0)
+	\BT.Z(100)
+	\BT.SET(BTN.PLATE, 03)
+
+		\BT.NAME("■サムネイル03")
+		\BT.CGSYS("extra/rpmode/btn_thumb", "extra/rpmode/btn_thumb")
+		\BT.XY(245+180*2+2, 078+140*0+2)
+		\BT.Z(101)
+		\BT.SET(BTN.THUMB, 03)
+
+	\BT.NAME("■プレート04")
+	\BT.CGSYS("extra/rpmode/btn_plate_back")
+	\BT.XY(245+180*0, 078+140*1)
+	\BT.Z(100)
+	\BT.SET(BTN.PLATE, 04)
+
+		\BT.NAME("■サムネイル04")
+		\BT.CGSYS("extra/rpmode/btn_thumb", "extra/rpmode/btn_thumb")
+		\BT.XY(245+180*0+2, 078+140*1+2)
+		\BT.Z(101)
+		\BT.SET(BTN.THUMB, 04)
+
+	\BT.NAME("■プレート05")
+	\BT.CGSYS("extra/rpmode/btn_plate_back")
+	\BT.XY(245+180*1, 078+140*1)
+	\BT.Z(100)
+	\BT.SET(BTN.PLATE, 05)
+
+		\BT.NAME("■サムネイル05")
+		\BT.CGSYS("extra/rpmode/btn_thumb", "extra/rpmode/btn_thumb")
+		\BT.XY(245+180*1+2, 078+140*1+2)
+		\BT.Z(101)
+		\BT.SET(BTN.THUMB, 05)
+
+	\BT.NAME("■プレート06")
+	\BT.CGSYS("extra/rpmode/btn_plate_back")
+	\BT.XY(245+180*2, 078+140*1)
+	\BT.Z(100)
+	\BT.SET(BTN.PLATE, 06)
+
+		\BT.NAME("■サムネイル06")
+		\BT.CGSYS("extra/rpmode/btn_thumb", "extra/rpmode/btn_thumb")
+		\BT.XY(245+180*2+2, 078+140*1+2)
+		\BT.Z(101)
+		\BT.SET(BTN.THUMB, 06)
+
+	\BT.NAME("■プレート07")
+	\BT.CGSYS("extra/rpmode/btn_plate_back")
+	\BT.XY(245+180*0, 078+140*2)
+	\BT.Z(100)
+	\BT.SET(BTN.PLATE, 07)
+
+		\BT.NAME("■サムネイル07")
+		\BT.CGSYS("extra/rpmode/btn_thumb", "extra/rpmode/btn_thumb")
+		\BT.XY(245+180*0+2, 078+140*2+2)
+		\BT.Z(101)
+		\BT.SET(BTN.THUMB, 07)
+
+	\BT.NAME("■プレート08")
+	\BT.CGSYS("extra/rpmode/btn_plate_back")
+	\BT.XY(245+180*1, 078+140*2)
+	\BT.Z(100)
+	\BT.SET(BTN.PLATE, 08)
+
+		\BT.NAME("■サムネイル08")
+		\BT.CGSYS("extra/rpmode/btn_thumb", "extra/rpmode/btn_thumb")
+		\BT.XY(245+180*1+2, 078+140*2+2)
+		\BT.Z(101)
+		\BT.SET(BTN.THUMB, 08)
+
+	\BT.NAME("■プレート09")
+	\BT.CGSYS("extra/rpmode/btn_plate_back")
+	\BT.XY(245+180*2, 078+140*2)
+	\BT.Z(100)
+	\BT.SET(BTN.PLATE, 09)
+
+		\BT.NAME("■サムネイル09")
+		\BT.CGSYS("extra/rpmode/btn_thumb", "extra/rpmode/btn_thumb")
+		\BT.XY(245+180*2+2, 078+140*2+2)
+		\BT.Z(101)
+		\BT.SET(BTN.THUMB, 09)
+
+
+
+	//■←→
+	\BT.NAME("■←")
+	\BT.CGSYS("extra/rpmode/btn_prev")
+	\BT.XY(245, 495)
+	\BT.Z(100)
+	\BT.T(2)
+	\BT.KEY("LEFT")
+	\BT.SET(BTN.PREVPAGE)
+
+	\BT.NAME("■→")
+	\BT.CGSYS("extra/rpmode/btn_next")
+	\BT.XY(720, 495)
+	\BT.Z(100)
+	\BT.T(2)
+	\BT.KEY("RIGHT")
+	\BT.SET(BTN.NEXTPAGE)
+
+
+
+	//鑑賞数
+	\BT.NAME("鑑賞数")
+	\BT.CGSYS("extra/rpmode/tip_鑑賞数")
+	\BT.XY(034, 400)
+	\BT.Z(200)
+	\BT.SET(TIP.TX.鑑賞数, 1)
+
+	//鑑賞数(グループ毎)
+	\BT.NAME("鑑賞数")
+	\BT.CGSYS("extra/rpmode/tip_鑑賞数")
+	\BT.XY(034, 500)
+	\BT.Z(200)
+	\BT.SET(TIP.TX.鑑賞数, 2)
+
+	//鑑賞率
+	\BT.NAME("鑑賞率")
+	\BT.CGSYS("extra/rpmode/tip_鑑賞率")
+	\BT.XY(034, 430)
+	\BT.Z(200)
+	\BT.SET(TIP.TX.鑑賞率, 1)
+
+	//鑑賞率(グループ毎)
+	\BT.NAME("鑑賞率")
+	\BT.CGSYS("extra/rpmode/tip_鑑賞率")
+	\BT.XY(034, 530)
+	\BT.Z(200)
+	\BT.SET(TIP.TX.鑑賞率, 2)
+
+
+	//ページ用
+	\BT.NAME("／")
+	\BT.CGSYS("extra/rpmode/tip_／")
+	\BT.XY(503, 499)
+	\BT.Z(200)
+	\BT.SET(TIP.SLASH, 1)
+
+	//鑑賞数用
+	\BT.NAME("／")
+	\BT.CGSYS("extra/rpmode/tip_／")
+	\BT.XY(162, 399)
+	\BT.Z(200)
+	\BT.SET(TIP.SLASH, 2)
+
+	//鑑賞数用(グループ毎)
+	\BT.NAME("／")
+	\BT.CGSYS("extra/rpmode/tip_／")
+	\BT.XY(162, 499)
+	\BT.Z(200)
+	\BT.SET(TIP.SLASH, 3)
+
+	//鑑賞率用
+	\BT.NAME("％")
+	\BT.CGSYS("extra/rpmode/tip_％")
+	\BT.XY(200, 430)
+	\BT.Z(200)
+	\BT.SET(TIP.PER, 1)
+
+	//鑑賞率用(グループ毎)
+	\BT.NAME("％")
+	\BT.CGSYS("extra/rpmode/tip_％")
+	\BT.XY(200, 530)
+	\BT.Z(200)
+	\BT.SET(TIP.PER, 2)
+
+
+
+	//■戻る
+	\BT.NAME("■戻る")
+	\BT.CGSYS("extra/rpmode/btn_back")
+	\BT.XY(726, 554)
+	\BT.Z(100)
+	\BT.KEY("MOUSE_R", "BS", "ESC", "SPACE")
+	\BT.SET(BTN.BACK)
+
+
+
+RETURN[]
+
+

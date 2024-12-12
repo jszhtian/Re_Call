@@ -1,0 +1,134 @@
+modename listenbgm
+
+
+backScriptFlag 1
+backScriptName bgm_backscript
+
+enterFadeInType 2
+enterFadeInTime 5
+
+fillExitScreenFlag 1
+
+@musicNameCenterFlag 0
+@replaceChara _
+
+
+filenameBG dummy
+
+musicPrintNumber 10
+messageColorR 64
+messageColorG 255 
+messageColorB 128
+messageFontSize 24
+
+trackAndTimePrintFlag 0
+
+useCommonBackSetup 1
+
+UpfileName ta_up
+DownfileName ta_down
+UpPrintX 608
+UpPrintY 16
+UpSizeX 64
+UpSizeY 64
+DownPrintX 608
+DownPrintY 400
+DownSizeX 64
+DownSizeY 64
+
+UpAnimeType1 7
+UpAnimePattern1 2
+UpAnimeSpeed1 20
+
+DownAnimeType1 7
+DownAnimePattern1 2
+DOwnAnimeSpeed1 20
+
+
+
+UpClickSound 3
+DownClickSound 3
+UpClickTime 1
+DownClickTime 1
+
+
+
+rew1FileName ta_bgmbutton_rev_off
+rew2FileName ta_bgmbutton_rev_on
+ff1FileName ta_bgmbutton_ff_off
+ff2FileName ta_bgmbutton_ff_on
+play1FileName ta_bgmbutton_play_off
+play2FileName ta_bgmbutton_play_on
+pause1FileName ta_bgmbutton_pause_off
+pause2FileName ta_bgmbutton_pause_on
+stop1FileName ta_bgmbutton_stop_off
+stop2FileName ta_bgmbutton_stop_on
+
+rew1PrintX 235
+rew1PrintY 500
+rew1SizeX 80
+rew1SizeY 40
+
+ff1PrintX 455
+ff1PrintY 500
+ff1SizeX 80
+ff1SizeY 40
+
+play1PrintX 345
+play1PrintY 500
+play1SizeX 80
+play1SizeY 40
+
+pause1PrintX 125
+pause1PrintY 500
+pause1SizeX 80
+pause1SizeY 40
+
+stop1PrintX 565
+stop1PrintY 500
+stop1SizeX 80
+stop1SizeY 40
+
+
+rew1ClickTime 1
+rew2ClickTime 1
+ff1ClickTime 1
+ff2ClickTime 1
+play1ClickTime 1
+play2ClickTime 1
+pause1ClickTime 1
+pause2ClickTime 1
+stop1ClickTime 1
+stop2ClickTime 1
+
+filenameCursor ta_bgmcursor
+musicNamePrintX 85
+musicNamePrintY 1
+cursorPrintX 160
+cursorPrintY 109
+cursorSizeX 512
+cursorSizeY 40
+cursorNextX 0
+cursorNextY 26
+cursorAnimeType 7
+cursorAnimePattern 2
+cursorAnimeSpeed 20
+
+
+filenameVolume ta_dummyvolume
+volumePrintX 200
+volumePrintY 555
+volumeSizeX 400
+volumeSizeY 40
+
+checklisten 0
+@cannotMusicName 　　　　　？？　　　　　
+cannotMusicName ???
+
+
+cannotColorR 160
+cannotColorG 220
+cannotColorB 235
+
+
+volumeMin 60

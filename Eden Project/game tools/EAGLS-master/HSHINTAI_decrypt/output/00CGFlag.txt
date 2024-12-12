@@ -1,0 +1,15 @@
+$Start
+
+
+50("_VStr",1)50("_VChk",0)
+_VChk=0,
+
+59("_VStr","@%s",_GRPName,0,0,0,0)
+53(_VStr,_VChk)120,0(_VChk,0,=,){
+50(_VStr,0)}0;
+
+51("_VStr")
+51("_VChk")
+
+
+43()

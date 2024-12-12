@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cs2SystemUnpacker", "Cs2SystemUnpacker\Cs2SystemUnpacker.vcxproj", "{2F62CA27-95ED-4CA1-82DD-0962E6115F91}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HGImage", "HGImage\HGImage.vcxproj", "{7F5B5173-CA6E-4440-9F52-7C880E724143}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F62CA27-95ED-4CA1-82DD-0962E6115F91}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2F62CA27-95ED-4CA1-82DD-0962E6115F91}.Debug|Win32.Build.0 = Debug|Win32
+		{2F62CA27-95ED-4CA1-82DD-0962E6115F91}.Release|Win32.ActiveCfg = Release|Win32
+		{2F62CA27-95ED-4CA1-82DD-0962E6115F91}.Release|Win32.Build.0 = Release|Win32
+		{7F5B5173-CA6E-4440-9F52-7C880E724143}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7F5B5173-CA6E-4440-9F52-7C880E724143}.Debug|Win32.Build.0 = Debug|Win32
+		{7F5B5173-CA6E-4440-9F52-7C880E724143}.Release|Win32.ActiveCfg = Release|Win32
+		{7F5B5173-CA6E-4440-9F52-7C880E724143}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

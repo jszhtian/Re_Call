@@ -1,0 +1,83 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">システム系命令</A>＞MOUSE［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="input.html">INPUT［］</A>
+　<A HREF="mouse.html">MOUSE［］</A>
+　<A HREF="fps.html">FPS［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=600 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■マウス設定命令 MOUSE[ ]</FONT>
+<FONT CLASS=t20>
+
+マウスやマウスカーソルに関する設定をします。
+
+MODE値によって、以下のような表示設定になります。
+０・・・常にマウス非表示
+１・・・マウス表示（※）
+２・・・常にマウス表示
+
+※このモードでは、キーボードからの入力があると、TIMEで指定した時間表示後に
+　マウスが自動的に消えるようになります。そしてマウスからの入力があると再び表示されます。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>MODE = 値(0/1/2)</FONT></TD><TD><FONT CLASS=t40>マウスカーソル表示モードを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>TIME = 値</FONT></TD><TD><FONT CLASS=t40>マウスカーソル表示時間(ミリ秒単位)を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>X = 値(0～ウィンドウXサイズ)</FONT></TD><TD><FONT CLASS=t40>マウスＸ位置を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Y = 値(0～ウィンドウYサイズ)</FONT></TD><TD><FONT CLASS=t40>マウスＹ位置を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>MOVE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>マウス移動で反応させるか否か</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CLICK = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>マウスクリックで反応させるか否か</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>WHEEL = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>マウスホイールで反応させるか否か</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CURSOR = 値(0～13)</FONT></TD><TD><FONT CLASS=t40>マウスカーソルの画像を変更する<BR>0…標準の矢印（デフォルト）<BR>1…アイビーム（縦線）カーソル<BR>2…砂時計カーソル<BR>3…十字カーソル<BR>4…垂直矢印カーソル<BR>5…右下がり両方向矢印カーソル<BR>6…左下がり両方向矢印カーソル<BR>7…左右両方向矢印カーソル<BR>8…上下両矢印カーソル<BR>9…4方向矢印カーソル<BR>10…禁止カーソル<BR>11…ハンドカーソル<BR>12…矢印＋砂時計カーソル<BR>13…矢印＋？カーソル</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]マウスを強制的に表示する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MOUSE</FONT>[<FONT CLASS=t62>MODE</FONT>=<FONT CLASS=t63>2</FONT>]</FONT></B>
+
+
+[2]X=50、Y=20の位置にマウスを設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MOUSE</FONT>[<FONT CLASS=t62>X</FONT>=<FONT CLASS=t63>50</FONT> <FONT CLASS=t62>Y</FONT>=<FONT CLASS=t63>20</FONT>]</FONT></B>
+
+
+[3]キーボードからの入力があった場合、1.5秒たったら自動的に消える設定にする。
+　何かしらマウス入力があった場合、表示される。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MOUSE</FONT>[<FONT CLASS=t62>MODE</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>TIME</FONT>=<FONT CLASS=t63>1500</FONT>]</FONT></B>
+
+
+[4]キーボードからの入力があった場合、2秒たったら自動的に消える設定にする。
+　何かしらマウス入力があった場合、表示される。
+　但し、マウス移動およびホイールによる反応は無視される。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MOUSE</FONT>[<FONT CLASS=t62>MODE</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>TIME</FONT>=<FONT CLASS=t63>2000</FONT> <FONT CLASS=t62>MOVE</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>WHEEL</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[5]マウスカーソルを砂時計マークに設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MOUSE</FONT>[<FONT CLASS=t62>CURSOR</FONT>=<FONT CLASS=t63>2</FONT>]</FONT></B>
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

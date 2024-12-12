@@ -1,0 +1,16 @@
+$KeyAddr = 004350EB
+$Count = 0
+
+bp KeyAddr
+
+loop_start:
+erun
+$Key = eax
+log "key:{0}",$Key
+add Count, 1
+cmp Count, 20
+je out
+jmp loop_start
+
+out:
+ret

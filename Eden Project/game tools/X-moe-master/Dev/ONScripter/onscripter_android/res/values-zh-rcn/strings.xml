@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ONScripter-GBK</string>
+    <string name="version">ONScripter 20120101\nStudio O.G.A. Ogapee\nModify natdon</string>
+    <bool name="use_launcher">true</bool>
+    <bool name="use_download">false</bool>
+    <bool name="button_visible">true</bool>
+    <bool name="screen_centered">false</bool>
+    <string name="download_version">.20110819</string>
+    <string name="download_url">http://*.*/*/game1_pack.zip</string>
+    <string name="password"></string>
+
+    <string name="button_rclick">右键</string>
+    <string name="button_lclick">左键</string>
+    <string name="button_up">上</string>
+    <string name="button_down">下</string>
+    <string name="button_left">左</string>
+    <string name="button_right">右</string>
+    <string name="button_vol_up">音量+</string>
+    <string name="button_vol_down">音量-</string>
+    <string name="button_menu">菜单</string>
+    <string name="menu_automode">自动模式</string>
+    <string name="menu_skip">快进</string>
+    <string name="menu_speed">改变文字显示速度</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_show_buttons">显示按键</string>
+    <string name="menu_hide_buttons">隐藏按键</string>
+    <string name="menu_topleft">居左显示</string>
+    <string name="menu_center">居中显示</string>
+    <string name="menu_virtual_button">虚拟按键</string>
+    <string name="menu_version">关于</string>
+    <string name="menu_quit">退出</string>
+    <string name="mun">30820237308201a0a00302010202044eb7a114300d06092a864886f70d01010505003060310b3009060355040613026368310e300c060355040813056368696e61310e300c060355040713056368696e61310f300d060355040a13066e6174646f6e310f300d060355040b13066e6174646f6e310f300d060355040313066e6174646f6e301e170d3131313130373039313235325a170d3339303332353039313235325a3060310b3009060355040613026368310e300c060355040813056368696e61310e300c060355040713056368696e61310f300d060355040a13066e6174646f6e310f300d060355040b13066e6174646f6e310f300d060355040313066e6174646f6e30819f300d06092a864886f70d010101050003818d0030818902818100bec1bac249e85e0279a5364f6115d8dbeb894466c600c8f6ca318937662e59fb05287c79499fa9d6646d897b34fdf21e1ae62b58042f4a8d0070a5a5307f34d0a863a0ec498f5183a8cfc74ea9e75a8572e76f40106e830daaf8aaf097267138476d867f8c676e35da61b81fffc9540373acc5a2a2bf88b61066d21ddbca1f050203010001300d06092a864886f70d0101050500038181005cb3dc98fe22b343ab6d229068f5c10f04e2bcf934adbc42f377516caa01e7fb797fab46158db788f2a9077b304ab13ff55d83b42f72d220da91c38296c87cb14d1cce9e20843202d6f3d56d733ebc91ea663b2b8992f0d3f1decfa927f8b3d2c3ea14a0e283034f9351956603461efa863e47fed3418941fc123c737b047bc4
+</string>
+    <string name="info">感谢ACGF所有热心的朋友\n游戏下载可访问 bbs.acgfuture.com\n或点击访问论坛\n20120101 更新内容:\n1.增加快捷方式创建，游戏设置存储\n2.增加语言设置(英文-中文)\n3.界面调整\n4.修复部分游戏读档崩溃\n5.三点触摸退出改为三点双击退出\n\n20111124 更新内容：\n1.视频播放改为内置系统解码，无法播放可选外置播放器\n2.修复某些游戏读档后叠字问题\n3.取消掉4:3分辨率上左上角的按钮，改为虚拟按键，通过设置呼出\n自定义按键背景：将btn.png放到ons目录下即可\n按键大小计算方法：宽=宽-高*4/3，高=高/4\n\nONScripter20111111 更新内容:\n1.修复破音爆音问题\n2.界面整改\n3.提升显示质量，需使用32位色版\n4.增加屏幕设置保存,需通过菜单里的quit退出游戏\n5.增加回想模式，通过按键Left,Right操作\n6.程序优化，其他BUG修复\n自定义背景：将bg.png放到ons目录下即可\n自定义游戏图标:将icon.png放到游戏目录下即可\nby natdon"</string>
+</resources>

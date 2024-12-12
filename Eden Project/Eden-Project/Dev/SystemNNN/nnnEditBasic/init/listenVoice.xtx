@@ -1,0 +1,78 @@
+modename listenVoice
+
+unknownVoice unknown
+
+enterFadeInType 2
+enterFadeInTime 5
+
+filenameBG bg_listenVoice
+
+backScriptFlag 1
+backScriptName backscript
+
+voiceCharaNumber 2
+voicePerPage 5
+
+
+upFilename ta_voice_leftarrow
+downFilename ta_voice_rightarrow
+upPrintX 10
+upPrintY 300
+downPrintX 700
+downPrintY 300
+upSizeX 64
+upSizeY 64
+downSizeX 64
+downSizeY 64
+upAnimeType1 7
+upAnimePattern1 2
+upAnimeSpeed1 10
+downAnimeType1 7
+downAnimePattern1 2
+downAnimeSpeed1 10
+
+backFilename ta_voice_back
+backPrintX 700
+backPrintY 500
+backSizeX 64
+backSizeY 64
+backAnimeType1 7
+backAnimePattern1 2
+backAnimeSpeed1 30
+
+
+voiceChara1Button1Filename ta_voiceChara1_off
+voiceChara1Button2Filename ta_voiceChara1_on
+voiceChara2Button1Filename ta_voiceChara2_off
+voiceChara2Button2Filename ta_voiceChara2_on
+
+voiceChara1Button1PrintX 100
+voiceChara1Button1PrintY 100
+voiceChara1Button2PrintX 100
+voiceChara1Button2PrintY 100
+
+voiceChara1Button1SizeX 64
+voiceChara1Button1SizeY 64
+
+voiceChara1Button1AnimeType 7
+voiceChara1Button1AnimePattern 2
+voiceChara1Button1AnimeSpeed 10
+voiceChara1Button2AnimeType 7
+voiceChara1Button2AnimePattern 2
+voiceChara1Button2AnimeSpeed 10
+
+
+voiceChara2Button1PrintX 200
+voiceChara2Button1PrintY 100
+voiceChara2Button2PrintX 200
+voiceChara2Button2PrintY 100
+
+voiceChara2Button1SizeX 64
+voiceChara2Button1SizeY 64
+
+voiceChara2Button1AnimeType 7
+voiceChara2Button1AnimePattern 2
+voiceChara2Button1AnimeSpeed 10
+voiceChara2Button2AnimeType 7
+voiceChara2Button2AnimePattern 2
+voiceChara2Button2AnimeSpeed 10

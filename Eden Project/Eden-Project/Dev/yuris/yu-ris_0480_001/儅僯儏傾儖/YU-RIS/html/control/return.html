@@ -1,0 +1,140 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">制御系命令</A>＞RETURN［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="go.html">GO［］</A>
+　<A HREF="gosub.html">GOSUB［］</A>
+　<A HREF="return.html">RETURN［］</A>
+　<A HREF="loop.html">LOOP［］</A>
+　<A HREF="loopbreak.html">LOOPBREAK［］</A>
+　<A HREF="loopcontinue.html">LOOPCONTINUE［］</A>
+　<A HREF="loopend.html">LOOPEND［］</A>
+　<A HREF="wait.html">WAIT［］</A>
+</TD></TR>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="if.html">IF［］</A>
+　<A HREF="else.html">ELSE［］</A>
+　<A HREF="ifend.html">IFEND［］</A>
+　<A HREF="ifbreak.html">IFBREAK［］</A>
+　<A HREF="ifcontinue.html">IFCONTINUE［］</A>
+　<A HREF="task.html">TASK［］</A>
+　<A HREF="taskinfo.html">TASKINFO［］</A>
+　<A HREF="taskend.html">TASKEND［］</A>
+　<A HREF="end.html">END［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=500 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■サブルーチンジャンプバック命令 RETURN[ ]</FONT>
+<FONT CLASS=t20>
+
+指定したラベルの位置にジャンプし、RETURN 命令で戻ってきます。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40># = ラベル名</FONT></TD><TD><FONT CLASS=t40>ジャンプ先のラベルを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>RINT～RINT16 = 整数値</FONT></TD><TD><FONT CLASS=t40>ジャンプ先に渡す整数値を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>RFLT～RFLT16 = 実数値</FONT></TD><TD><FONT CLASS=t40>ジャンプ先に渡す実数値を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>RSTR～RSTR16 = 文字列</FONT></TD><TD><FONT CLASS=t40>ジャンプ先に渡す文字列を指定</FONT></TD></TR>
+</TABLE>
+
+
+例：　　<FONT CLASS=t40>RETURN[RINT=<FONT CLASS=t40>50</FONT>]</FONT>
+
+
+RETURN 命令でジャンプ元に戻る際に、パラメータを受け取ることも出来ます。
+
+上の例では、RETURN 命令が実行されてジャンプ元に戻ってきた時点で、
+システム変数 @_RINT(1) に 50 が格納されます。
+
+※@_PINT と @_RINT との違いに注意してください。
+@_PINT は GOSUB でジャンプした時に格納される変数で、
+@_RINT は RETURN でジャンプ元へ戻った時に格納される変数です。
+
+パラメータは最大16個まで受け渡しすることが出来ます。
+
+
+
+<FONT CLASS=t40>※注意!!</FONT>
+YU-RIS(β４現在)の少し特殊な仕様なのですが、
+RETURN 命令がスクリプト上の記述されていると、
+そこを通る通らないに関わらず、その時点でローカル変数は解放され、
+宣言されていない状態と同じになります。
+
+たとえば、以下の場合、コンパイルエラーとなります。
+
+    #TEST
+
+        INT[@A=1]
+
+        IF[@A==5]
+            RETURN[]   //←ここで、ローカル変数＠Ａは非宣言状態となる
+        IFEND[]
+
+        @A+=1   //←結果的にここでコンパイルエラーとなる
+
+    RETURN[]
+
+
+これを回避する場合、下のように、RETURN 命令１個だけで済むように
+記述してください。
+
+    #TEST
+
+        INT[@A=1]
+
+        IF[@A==5]
+            GO[#=TEST2]
+        IFEND[]
+
+        @A+=1
+
+    #TEST2
+
+    RETURN[]
+
+
+
+上のようにラベルを作りたくない場合、こういう書き方もあります。
+
+    #TEST
+
+        IF[1]
+
+            INT[@A=1]
+
+            IF[@A==5]
+                IFBREAK[LV=2]
+            IFEND[]
+
+            @A+=1
+
+        IFEND[]
+
+    RETURN[]
+
+
+１つのルーチンに対し、RETURN １個で済むのならば
+他のどんな書き方でも問題ないと思います。
+
+
+
+</FONT></TD>
+<TD WIDTH=280 VALIGN=TOP>
+<IMG SRC="../img/gosub_001.jpg" WIDTH=278 HEIGHT=365><BR><BR>
+</TD></TR></TABLE>
+
+
+</BODY></HTML>

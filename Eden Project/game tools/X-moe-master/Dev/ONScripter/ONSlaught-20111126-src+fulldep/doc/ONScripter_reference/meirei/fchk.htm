@@ -1,0 +1,27 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>fchk</h2>
+<h3>fchk &lt;filename&gt;</h3>
+<p><br>
+Checks to see whether an image tag has been recorded in the file log.<br>
+This is used as an argument for an if statement.  If the image has been loaded and may be used in-game, returns true.  If not, or if the filename was incorrect, returns false.<br>
+EX)<br>
+ld c,":a;test.bmp",1<br>
+if fchk ":a;test.bmp"  ;returns true<br>
+if fchk "test.bmp"   Å@;returns false<br>
+</p>
+
+</body>
+</html>

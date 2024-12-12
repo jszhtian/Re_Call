@@ -1,0 +1,37 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>setwindow</h2>
+<h3>setwindow &lt;number&gt;,&lt;number&gt;…（11 total numbers, including the 2 to the left and the 1 to the right）…&lt;number&gt;,#rrggbb,&lt;number&gt;,&lt;number&gt;,&lt;number&gt;,&lt;number&gt;<br><br>
+-or-<br><br>
+setwindow &lt;number&gt;,&lt;number&gt;…（11 total numbers, including the 2 to the left and the 1 to the right）…&lt;number&gt;,&lt;character string&gt;,&lt;number&gt;,&lt;number&gt;</h3>
+<p>
+Sets up the text window.<br>
+The first form is used when the backdrop for the text window is an alpha-layered solid color.<br>
+The second form is used when the backdrop for the text window is a graphic file.<br>
+The first 11 numbers are as follows, from left to right:<br>
+x coordinate of top left for text, y coordinate of top left for text, text columns, text lines, text font size x, text font size y, spacing x, spacing y, default text speed, boldface toggle (0 - no; 1 - yes), drop shadow toggle (0 - no; 1 - yes).<br>
+<br>
+For the first form, the remaining variables are: window color, window top left x, window top left y, window bottom right x, window bottom right y.<br>
+<br>
+For the second form, the remaining variables are: graphic file name, window top left x, window top left y, window bottom right x, window bottom right y.<br>
+<br>
+By default, the text window takes up the full screen and is somewhat translucent, the font is 26x26 pixels, the spacing is 0,1, the top left coordinate is 8,16, there are 23 2-byte columns and 16 lines, boldface and drop shadow enabled, 20 speed, and a translucent color of #999999.<br>
+<br>
+To declare the defaults manually, you would do this:<br>
+setwindow 8,16,20,23,26,26,0,2,20,1,1,#999999,0,0,639,479 <br>
+</p>
+
+</body>
+</html>

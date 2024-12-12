@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="algo">
+      <UniqueIdentifier>{e206fb78-4ff9-45d7-bc40-5d63a9ba440e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{d0a848df-6ac6-4bd0-991c-2d3b78a41316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{7e869c55-eea5-424d-af50-47b0b1043098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="system">
+      <UniqueIdentifier>{68a0510e-b498-485b-8cd9-8a50fe367c73}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="algo\crc16.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\crc32.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\fcs.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\ghash.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\gosthash.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\haval.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\md2.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\md4.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\md5.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\sha1.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\sha2.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\sizehash.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="algo\tiger.cpp">
+      <Filter>algo</Filter>
+    </ClCompile>
+    <ClCompile Include="hashmgr.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="rehash.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="clutil.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="algo\crc16.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\crc32.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\fcs.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\ghash.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\gosthash.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\haval.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\md2.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\md4.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\md5.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\sha1.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\sha2.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\sizehash.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="algo\tiger.h">
+      <Filter>algo</Filter>
+    </ClInclude>
+    <ClInclude Include="hashmgr.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="rehash.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="clutil.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="rhsyscfg.h">
+      <Filter>system</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

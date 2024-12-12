@@ -1,0 +1,33 @@
+;――――――――――――――――――――――――――――――――――――――
+;
+;	トゥルールート
+;
+;――――――――――――――――――――――――――――――――――――――
+.reset
+.route トゥルールート
+.se start
+.img white
+.wait 1
+
+.call sinarioTORF1
+.call sinarioTORF2
+.call sinarioTORF3
+.call sinarioTORF4
+.call sinarioTORF5
+.call sinarioTORF6
+.call sinarioTORF7
+.call sinarioTORF8
+.call sinarioTORF9
+.call sinarioTORF10
+.call sinarioTORF11
+.call sinarioTORF12
+.call sinarioTORF13
+.call sinarioTORF14
+.call sinarioTORF15
+.call sinarioTORF16
+.call sinarioTORF17
+.staffroll true
+.call sinarioTORF18
+.call sinarioTORF19
+
+.load title

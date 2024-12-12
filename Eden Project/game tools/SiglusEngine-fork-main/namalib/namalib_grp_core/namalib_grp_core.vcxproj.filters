@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\stdbox">
+      <UniqueIdentifier>{8b8a034f-de57-4b34-a304-0093e4fbb3f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\stdgrp">
+      <UniqueIdentifier>{05d9f21e-47ef-442e-89c3-40ded3b6fac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\lbdbox">
+      <UniqueIdentifier>{90309cf8-96e5-4671-b781-3059871acc49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\lbdgrp">
+      <UniqueIdentifier>{984c2bfe-aea0-49fc-b83c-c03f95f7589c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\lined">
+      <UniqueIdentifier>{675121e2-0927-4ae1-8be2-dacfc06cb871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\_chg">
+      <UniqueIdentifier>{acc75983-bc9f-4af3-ac5e-a3bc5f9cd207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\_bld">
+      <UniqueIdentifier>{57358e1b-adfd-4935-8af1-c89eb313a2dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\draw">
+      <UniqueIdentifier>{dd8b846a-08b1-45ea-96d7-d6c521c36d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\proc">
+      <UniqueIdentifier>{e3071a5a-de2c-4102-a04f-a45c62865bc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\proc\chg">
+      <UniqueIdentifier>{6b837d72-e6e6-40bb-ba1e-5bbcb0a8b58e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\proc\bld">
+      <UniqueIdentifier>{7971b4ce-5bd6-4b45-95a4-1330b64aaa90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\namalib_grp_tcgd_switch.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\pch.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_add.cpp">
+      <Filter>ソース ファイル\stdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_flt.cpp">
+      <Filter>ソース ファイル\stdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_mul.cpp">
+      <Filter>ソース ファイル\stdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_rsub.cpp">
+      <Filter>ソース ファイル\stdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_std.cpp">
+      <Filter>ソース ファイル\stdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_sub.cpp">
+      <Filter>ソース ファイル\stdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_add.cpp">
+      <Filter>ソース ファイル\stdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_flt.cpp">
+      <Filter>ソース ファイル\stdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_mul.cpp">
+      <Filter>ソース ファイル\stdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_rsub.cpp">
+      <Filter>ソース ファイル\stdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_std.cpp">
+      <Filter>ソース ファイル\stdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_sub.cpp">
+      <Filter>ソース ファイル\stdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_add.cpp">
+      <Filter>ソース ファイル\lbdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_flt.cpp">
+      <Filter>ソース ファイル\lbdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_mul.cpp">
+      <Filter>ソース ファイル\lbdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_rsub.cpp">
+      <Filter>ソース ファイル\lbdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_std.cpp">
+      <Filter>ソース ファイル\lbdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_sub.cpp">
+      <Filter>ソース ファイル\lbdbox</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_add.cpp">
+      <Filter>ソース ファイル\lbdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_flt.cpp">
+      <Filter>ソース ファイル\lbdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_mul.cpp">
+      <Filter>ソース ファイル\lbdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_rsub.cpp">
+      <Filter>ソース ファイル\lbdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_std.cpp">
+      <Filter>ソース ファイル\lbdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_sub.cpp">
+      <Filter>ソース ファイル\lbdgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lined_add.cpp">
+      <Filter>ソース ファイル\lined</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lined_flt.cpp">
+      <Filter>ソース ファイル\lined</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lined_mul.cpp">
+      <Filter>ソース ファイル\lined</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lined_rsub.cpp">
+      <Filter>ソース ファイル\lined</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lined_std.cpp">
+      <Filter>ソース ファイル\lined</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lined_sub.cpp">
+      <Filter>ソース ファイル\lined</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_chglbdbox_std.cpp">
+      <Filter>ソース ファイル\_chg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_chglined_std.cpp">
+      <Filter>ソース ファイル\_chg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_chgstdbox_std.cpp">
+      <Filter>ソース ファイル\_chg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdbox_bld.cpp">
+      <Filter>ソース ファイル\_bld</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lbdgrp_bld.cpp">
+      <Filter>ソース ファイル\_bld</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_lined_bld.cpp">
+      <Filter>ソース ファイル\_bld</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdbox_bld.cpp">
+      <Filter>ソース ファイル\_bld</Filter>
+    </ClCompile>
+    <ClCompile Include="source\namalib_grp_tcgd_stdgrp_bld.cpp">
+      <Filter>ソース ファイル\_bld</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\namalib_grp_core.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_basic.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\pch.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_add.h">
+      <Filter>ヘッダー ファイル\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_bld.h">
+      <Filter>ヘッダー ファイル\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_flt.h">
+      <Filter>ヘッダー ファイル\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_mul.h">
+      <Filter>ヘッダー ファイル\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_rsub.h">
+      <Filter>ヘッダー ファイル\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_std.h">
+      <Filter>ヘッダー ファイル\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_draw_tcgd_sub.h">
+      <Filter>ヘッダー ファイル\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_lbdbox.h">
+      <Filter>ヘッダー ファイル\proc</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_lbdgrp.h">
+      <Filter>ヘッダー ファイル\proc</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_lined.h">
+      <Filter>ヘッダー ファイル\proc</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_stdbox.h">
+      <Filter>ヘッダー ファイル\proc</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_stdgrp.h">
+      <Filter>ヘッダー ファイル\proc</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_chglbdbox.h">
+      <Filter>ヘッダー ファイル\proc\chg</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_chglined.h">
+      <Filter>ヘッダー ファイル\proc\chg</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_chgstdbox.h">
+      <Filter>ヘッダー ファイル\proc\chg</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_bldlbdbox.h">
+      <Filter>ヘッダー ファイル\proc\bld</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_bldlbdgrp.h">
+      <Filter>ヘッダー ファイル\proc\bld</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_bldlined.h">
+      <Filter>ヘッダー ファイル\proc\bld</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_bldstdbox.h">
+      <Filter>ヘッダー ファイル\proc\bld</Filter>
+    </ClInclude>
+    <ClInclude Include="source\namalib_grp_macro_proc_bldstdgrp.h">
+      <Filter>ヘッダー ファイル\proc\bld</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="透明度の合成計算.txt" />
+  </ItemGroup>
+</Project>

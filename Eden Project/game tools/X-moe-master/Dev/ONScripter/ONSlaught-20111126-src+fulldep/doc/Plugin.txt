@@ -1,0 +1,66 @@
+The new plug-in API can be used to add visual effects, and it's powerful enough to allow defining practically any effect conceivable. The user actually has as much power as the engine maintainer to define effects. Contrary to what might be expected, it's not at all complex to use (but it does require knowledge of the C++ language).
+
+Let's start with some definitions.
+The plug-in API can be used to define three kinds of effects:
+
+    * Transition effects
+    * Filter effects
+    * Asynchronous effects
+
+A transition effect is used to refresh the screen when something changes. The command print calls transition effects.
+The commands nega and monocro apply filter effects on the screen contents below the text window. The new command add_filter allows calling user-defined effects and adds them to a pipeline. The new command add_overall_filter allows to apply effects on the entire screen contents (including the text window).
+Asynchronous effects are new to ONSlaught. They are applied on the entire screen (including the text window) several times per second. A perfect example would be a static effect that gives the screen a sort of TV screen look. To call asynchronous effects, use the command async_effect.
+
+The entire API is explained in detail in src/Plugin/Plugin.cpp, so I won't repeat myself here. Instead, I'll explain how to compile and use the plug-in.
+Before starting, note that there's an #error directive in src/Plugin/Plugin.cpp that explains a very important point. Make sure you read it.
+
+Windows:
+Compiling with Visual C++:
+With VC++, it's pretty simple. Compiling the engine generates a .lib file (the name depends on the build configuration). To compile the plug-in, merely compile first the engine and then the plug-in. I believe CTRL+Shift+B is the default binding to build the solution. Building the solution builds everything in the correct order.
+
+Compiling with MSYS:
+MSYS by default builds only the engine. To also build the plug-in, use
+make -f Makefile.MSYS plugin
+
+Running:
+Now the plug-in is built either with VC++ or MingW. There's either a plugin_d.dll or a plugin.dll, depending on whether you built with debug information or not. An executable built with debug information will only use plugin_d.dll, and one built without debug information will only use plugin.dll. This is important. An executable built for debug should not be linked dynamically with a DLL built for release, so don't rename the DLLs. Also don't mix executables built with one compiler with DLLs built with another. It won't work.
+Windows looks for usable DLLs using the PATH environment variable, but first looks in the working directory. To prevent the engine from accidentally linking against a similarly-named DLL somewhere else in the system, it's a good idea to put plugin.dll in the same directory as the engine.
+
+Unices:
+Compiling with GCC:
+Uncomment
+add_library(plugin SHARED
+	src/Plugin/Plugin.cpp
+)
+in CMakeFiles.txt, then compile as normal (see INSTALL.txt or README-fulldep.txt, whichever applies).
+
+Running:
+Running, however, is a different story. UNIX has a slightly more complex system for looking for shared objects. I'm not entirely sure how it works, but I do know that the system will look for them considering, among other things, the LD_LIBRARY_PATH environment variable. The method I'll describe below uses this environment variable. If you've built the engine using the fulldep package, I've already done all this bureaucracy for you.
+We'll use a shell script to tell the system to look for libplugin.so in the same directory as the engine:
+
+#!/bin/sh
+# Assign to LOCATION the directory where the script is located (the engine
+# should be there, too):
+LOCATION="`dirname $0`"        
+# We don't want relative paths, so if the script was called with ./something-or-other...
+if [ $LOCATION = "." ]; then
+    # ...overwrite LOCATION with the absolute path. This doesn't work for every
+    # case, but it works with most.
+    LOCATION=$PWD
+fi
+# Look for shared objects in LOCATION.
+LD_LIBRARY_PATH=$LOCATION
+# Allows the system to use the environment variable in the next call.
+export LD_LIBRARY_PATH
+# Start the engine while also passing any and all arguments that were passed to
+# the script.
+"$LOCATION/ONSlaught" $@
+
+Now it's possible to run the engine by naming the script "ONSlaught.sh", placing
+the executable and plug-in in this directory, and calling
+
+./ONSlaught.sh
+
+You may need to give the script execution permissions:
+
+chmod +x ONSlaught.sh

@@ -1,0 +1,377 @@
+$sc_06a
+_Day=6,
+_DayTime=0,
+
+_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+&1122"皆を横に並べて代わる代わるに堪能する……我ながら現実とは思えない光景だった。"&1123"家族との事で悩みながらも、本当は俺ってみんなともっと肉体的な関係を深めたいんじゃないか？"&1124"反省と自重が不足してはいるけど……あれはあれで……。"&1125"天国だった……。"_Mode=8,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+_Mode=8,
+52("_GRPName","bg08a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM02")
+42("BGM","00Sound.dat")
+100("",3,2,0,0)
+100("SE140",0,2,0,0)
+&1126"ともあれ、切り替えていかないとな。"100("",4,2,0,0)
+&1127"（いかんいかん！こんな事ばかり考えてたら、ダメな大人まっしぐらじゃないか）"#先　生
+&1128"「授業を始める前に……」"#:NameSuffix
+&1129"（また、あんなチャンスがあるのかなぁ……）"#先　生
+&1130"「皆に新しいクラスメイト達を紹介するぞー。入ってきてくれ」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#？？？=w0382f
+&1131"「姫野　二季ですっ！　皆、これからよろしくねっ！」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE185",0,2,0,0)
+#男生徒Ａ
+&1132"（うぉぉ、夢子ちゃんとは違うタイプのレベル高さじゃね！？）"#男生徒Ｂ
+&1133"（確かにやばいな、またファン倶楽部設立の予感）"#男生徒Ｃ
+&1134"（俺このクラスで本当よかった）"100("",4,2,0,0)
+#:NameSuffix
+&1135"（お、かわいいな……。何となく見覚えがあるような……）"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+#先　生
+&1136"「それじゃあ、空いてる席はー……」"#:NameSuffix
+&1137"（姫野……姫野？二季……うーむ……）"&1138"なるほど、男連中が騒ぐのも頷ける。"&1139"元気そうで良く笑いそうな可愛い子だ。おっぱいもでかいし。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fh")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&1140"「…………」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fg")
+42("DrawChar","00Draw.dat")
+&1141"ニコッ"#:NameSuffix
+&1142"「！？」"#:NameSuffix
+&1143"（え？え？　い、今なんか飛んできたぞ！！）"#先　生
+&1144"「そこの市位:NameSuffixの隣の席だ」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0383f
+&1145"「はーい」"42("DEL","02CharChip.dat")#:NameSuffix
+&1146"（しかも俺の隣かよ！！）"100("",3,2,0,0)
+100("SE042",0,2,0,0)
+&1147"静まれ心臓！"&1148"偶然俺と目が合ったから笑って返しただけだ！　他の奴らにだって笑ってたに違いない！"100("",4,2,0,0)
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fj")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0384f
+&1149"「あーっ、やっぱり……ふふ。　えっと、市位君だよね？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1150"「お、おぅ……やっぱりって？」"&1151"見れば見るほどどこかで見たことあるような……。"&1152"最近海で見かけたのはすぐに思い出したけど。"&1153"それ以前にも……でもこんな美少女と関わった記憶はないし……。"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+#先　生
+&1154"「聞きたい事も知りたい事もあるだろうが、今は授業に集中しろなー」"#:NameSuffix
+&1155"「はいっ」"&1156"そうだ、俺には今集中すべき事がある。"&1157"この疑問は休み時間までとっとこう。"#先　生
+&1158"「それじゃあ、教科書４７ページ……」"#:NameSuffix
+&1159"「姫野さん教科書とかあるのか？　俺の貸すけど」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fh")
+42("DrawChar","00Draw.dat")
+100("",3,2,0,0)
+100("SE092",0,2,0,0)
+#男　達
+&1160"ガタッ！！"100("",4,2,0,0)
+#:NameSuffix
+&1161"（ハッ、初対面になれなれしいか俺ッ！？）"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0385f
+&1162"「ホント？　ありがとー！　じゃあ一緒に見よ♪」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+#:NameSuffix
+&1163"「それじゃ、俺は適当に隣の奴の見せてもらうから気にしなくて……！？」"100("",3,2,0,0)
+100("SE269",0,2,0,0)
+#:NameSuffix
+&1164"（えぇぇ？……へええええ！？）"100("",3,2,0,0)
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fg")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0386f
+&1165"「これでよしっ……と」"42("DEL","02CharChip.dat")&1166"そう言いながら、机と机をくっつけてきた。"&1167"（ち、近い……）"&1168"ドキドキするぞ。女の子がいつも近くにいるなんて慣れてるはずなのに。何だこの感じ。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0387f
+&1169"「あー……授業の進度が全然ちがう～……ちょっと教えてほしいかも」"42("DEL","02CharChip.dat")#:NameSuffix
+&1170"「そう、なんだ」"&1171"教科書に集中しながら、俺側に近づく二季ちゃんの身体。肩なんてもうちょっとで触れそうである。"&1172"俺は動揺を隠しつつ、彼女の胸元に視線を向ける。"&1173"目の前には机にのっかりそうな勢いのおっぱい。"#:NameSuffix
+&1174"（うほっ！？ごほんごほん）"&1175"動揺を隠すために息を吸うと、甘い香りがした。"#:NameSuffix
+&1176"「…………」"&1177"もう一度息を吸い込んだ。"#:NameSuffix
+&1178"（……♪）"&1179"うむ、今日はいい日になりそうだ。"#男生徒Ａ
+&1180"（なんなんだ:NameSuffixめ、いきなり仲よさそうじゃねーか）"#男生徒Ｂ
+&1181"（一人でポイント稼ぎやがって、ゆるせねぇぇ）"#先　生
+&1182"「……お前ら、せめて授業を受ける態度くらい見せろな」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&1183"…………。"&1184"………………。"52("_BGMName","BGM04")
+42("BGM","00Sound.dat")
+_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+
+#:NameSuffix
+&1185"「デンジャァァ……」"&1186"休み時間になって、俺は廊下の窓辺に肘をつき、風に当たりながら頭を冷やす。"&1187"（おっぱいといいにおいのせいで授業が全く上の空だったわ）"_Mode=1,
+52("_GRPName","bg07a")
+42("DrawBG","00Draw.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fa")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0388f
+&1188"「市位君？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1189"「うぉっ！？」"&1190"本人の顔が唐突に視界に現れて心臓が飛び出しそうだった。"#:NameSuffix
+&1191"「あーぇー……なんか用？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0389f
+&1192"「授業始まりそうなのに戻ってこないからどうしたのかなーって思って。様子見にきちゃった」"42("DEL","02CharChip.dat")#:NameSuffix
+&1193"「おっと、もうそんな時間か。わざわざどうも……？」"52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0390f
+&1194"「……ねぇ、市位君」"42("DEL","02CharChip.dat")#:NameSuffix
+&1195"「うん？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0391f
+&1196"「このまま２人で授業さぼっちゃおっか？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1197"「エッ！？」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fh")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季
+&1198"「…………」"42("DEL","02CharChip.dat")_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fi")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0392f
+&1199"「ぷっ……アハハッ！　やだもー。　ほんとに気づいてないの？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1200"「へ……えっと……ぉ？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fj")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0393f
+&1201"「ショックだなぁ、あたしはすぐ気づいたのに……:NameSuffix」"42("DEL","02CharChip.dat")#:NameSuffix
+&1202"「……っ」"&1203"ズイッと近づいてくる姫野さんに思わず気おされてしまう。"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fk")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0394f
+&1204"「家族と一緒にいるのを邪魔しちゃだめかなーと思って、海で見かけた時は遠慮したんだよ？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1205"「それは、どういう……」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fd")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0395f
+&1206"「ニッキーなんてニックネームで呼び合って、昔は一緒に悪ふざけしてたじゃない」"42("DEL","02CharChip.dat")#:NameSuffix
+&1207"「二季……ニッキー……あ、ああっ！」"52("_BGMName","BGM03")
+42("BGM","00Sound.dat")
+&1208"それは今をさかのぼる事俺がまだランドセル背負ってた時代。"&1209"でっかい家の前で２人で遊ぶ双子との出会いがあった。"&1210"おもいっきりボールをぶつけられたんだニッキーに。"
+#:NameSuffix
+&1211"「あれ、でもニッキーって……」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fh")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季
+&1212"「？」"42("DEL","02CharChip.dat")&1213"俺も腹が立って、その『男の子』に思いっきりボールを投げ返して、ドッチボールが始まって。"&1214"それ以来楽しい事もケンカもいっつも一緒にやる親友同士になったんだ。"#:NameSuffix
+&1215"「男だったじゃん……？」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ff")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0396f
+&1216"「はぁぁぁあ！？　ちょ、ちょ、ちょっとまってよ。　あたしは生まれたときから女の子だったわよっ！」"42("DEL","02CharChip.dat")#:NameSuffix
+&1217"「エーッ！　だって髪とか超短くて力も強くて俺より身長高かったぞ！　俺の知ってるニッキーは！」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fi")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0397f
+&1218"「そっちがおっきくなったんでしょ！　あたし達とプールだって行った事もあるのになんでソコに気づかないの！？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1219"「えーと、まて、今思い出すからな……」"&1220"そうだ。俺は確かニッキーの家族とプールに連れてってもらった事があった。"&1221"あの時確か俺はー……。"#:NameSuffix
+&1222"「ユッキーが超かわいかった事くらいしか」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ff")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0398f
+&1223"「……～っ！！　アホォォッ！！」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE024",0,2,0,0)
+_X=20,
+_Y=20,
+_WaitTime=2000,
+80(1,"01Quake.dat")
+#:NameSuffix
+&1224"「ブッ！！」"_ThreNum=1,
+42("QuakeEnd","01Quake.dat")
+100("",3,2,0,0)
+&1225"わき腹に肘鉄がめり込み、俺はその場にかがみ込んだ。"#:NameSuffix
+&1226"「ぐっ……この痛み……まさしくニッキー」"_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0399f
+&1227"「はぁ……はぁ……思い出したっ？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1228"「あははっ、そうかニッキーか！！」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&1229"嬉しさのあまり駆け出した脚。"&1230"戸惑う二季を待たせて教室に飛び込む。"&1231"…………。"_Mode=1,
+52("_GRPName","bg07a")
+42("DrawBG","00Draw.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ce")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0219c
+&1232"「もう授業が始まるのに、一体どうしたの」"42("DEL","02CharChip.dat")&1233"そして、夢子を引っ張ってきてしまった。"_Target=@CharC,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=@NoDraw,
+_Target=@CharL,
+_CharX=-200,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","ca")
+42("DrawChar","00Draw.dat")
+_Target=@CharR,
+_CharX=200,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fc")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0400f
+&1234"「夢子は覚えてくれてるよね、あたしの事！」"42("DEL","02CharChip.dat")#:NameSuffix
+&1235"「ニッキーだよ、ニッキー！　夢子も一緒に遊んだろ！！」"52("_CCName","c")42("Start","02CharChip.dat")#夢　子
+&1236"「…………」"52("_CCName","f")42("Start","02CharChip.dat")#二　季
+&1237"「…………」"42("DEL","02CharChip.dat")_Target=@CharL,
+_CharX=-200,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","cc")
+42("DrawChar","00Draw.dat")
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0220c
+&1238"「あー……え？　ニッキーは男の子じゃなかったかしら……？」"42("DEL","02CharChip.dat")#:NameSuffix
+&1239"「ほらみろ！！」"_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_GRPName","fi")
+42("DrawChar","00Draw.dat")
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0401f
+&1240"「何でそんな扱いなのよっ！」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE024",0,2,0,0)
+_X=20,
+_Y=20,
+_WaitTime=2000,
+80(1,"01Quake.dat")
+#:NameSuffix
+&1241"「ホォッ！？」"_ThreNum=1,
+42("QuakeEnd","01Quake.dat")
+100("",3,2,0,0)
+&1242"どこか嬉しい痛みを増やしながら。"&1243"俺の青春に新たな転換期が訪れた。"
+@Note[6]=1,
+
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+
+42("start","01Rand.dat")
+
+41("sc_06b","sc_06b.dat")
+

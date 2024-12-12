@@ -1,0 +1,72 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">サウンド系命令</A>＞SOUNDINFO［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="sound.html">SOUND［］</A>
+　<A HREF="soundinfo.html">SOUNDINFO［］</A>
+　<A HREF="soundend.html">SOUNDEND［］</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■サウンドレイヤ情報取得命令 SOUNDINFO[ ]</FONT>
+<FONT CLASS=t20>
+
+サウンドレイヤに関する各種情報を取得します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>ID = 文字列</FONT></TD><TD><FONT CLASS=t40>サウンドレイヤＩＤを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LET = 変数名</FONT></TD><TD><FONT CLASS=t40>情報値を格納する変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>EXIST = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤの存在を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FILE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤに読み込まれたファイル名を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>E = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤの有効無効を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PLAY = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>現在再生されているか否かを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LOOP = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>設定されたループ回数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PAUSE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>現在一時停止されているか否かを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LOOPCOUNT = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>再生が何回ループしたかを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>START = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>設定された開始位置を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>RESTART = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>設定されたループ後の開始位置を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>END = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>設定された終端位置／ループ位置を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>VOLUME = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤに設定されたボリューム値を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PAN = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤに設定されたパンの設定値を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PITCH = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤに設定されたピッチの設定値を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>TIME = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>現在の再生位置（単位：ミリ秒）を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>TOTALTIME = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>サウンドの長さ（単位：ミリ秒）を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CHANNEL = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>サウンドデータのチャンネル数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>BIT = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>サウンドデータのビット数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SAMPLE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>サウンドデータのサンプリング数を調べる場合は１を指定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] サウンドレイヤ「BGM」が存在するか否か調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SOUNDINFO</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BGM</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>EXIST</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[2] サウンドレイヤ「SE」のボリューム値を調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SOUNDINFO</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>SE</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>VOLUME</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[3] サウンドレイヤ「BGM2」のパンの設定値を調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SOUNDINFO</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BGM2</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>PAN</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[4] サウンドレイヤ「VO」のピッチの設定値を調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>SOUNDINFO</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>VO</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>PITCH</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+</FONT>
+
+
+</BODY></HTML>

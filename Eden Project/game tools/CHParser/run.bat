@@ -1,0 +1,1 @@
+for %%s in (*.asb) do CHParser %%s

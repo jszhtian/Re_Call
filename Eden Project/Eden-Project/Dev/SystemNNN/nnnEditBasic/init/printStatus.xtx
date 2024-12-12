@@ -1,0 +1,170 @@
+modename printStatus
+
+enterFadeInType 2
+enterFadeInTime 100
+
+backScriptFlag 1
+backScriptName backscript
+
+
+effectTime 50
+
+
+filenameBG bg_status
+
+setNumber 6
+
+set1GraphNumber 5
+set1GraphType 1
+set1_1SizeX 320
+set1_1SizeY 64
+set1NextX 0
+set1NextY 80
+set1_1PrintX 150
+set1_1PrintY 50
+
+set1_1VarName 好感度その１
+set1_2VarName 好感度その２
+set1_3VarName 好感度その３
+set1_4VarName 好感度その４
+set1_5VarName 好感度その５
+
+set1PicFlag 1
+set1_1Filename ta_koukandobar1
+set1_2Filename ta_koukandobar1
+set1_3Filename ta_koukandobar1
+set1_4Filename ta_koukandobar1
+set1_5Filename ta_koukandobar2
+
+
+set2GraphNumber 2
+set2GraphType 2
+set2_1SizeX 64
+set2_1SizeY 256
+set2NextX 80
+set2NextY 0
+set2_1PrintX 550
+set2_1PrintY 580
+
+set2_1VarName 好感度その１
+set2_2VarName 好感度その２
+
+set2PicFlag 0
+set2_1Filename ta_tatebar1
+set2_2Filename ta_tatebar1
+set2_1ColorR 32
+set2_1ColorG 255
+set2_1ColorB 64
+set2_1ColorA 128
+
+set2_2ColorR 128
+set2_2ColorG 128
+set2_2ColorB 192
+set2_2ColorA 128
+
+
+
+set3GraphNumber 7
+set3GraphType 5
+set3_1SizeX 128
+set3_1SizeY 128
+@set3NextX 80
+@set3NextY 0
+set3_1PrintX 600
+set3_1PrintY 400
+
+set3_1VarName 好感度その１
+set3_2VarName 好感度その２
+set3_3VarName 好感度その３
+set3_4VarName 好感度その４
+set3_5VarName 好感度その１
+set3_6VarName 好感度その２
+set3_7VarName 好感度その２
+
+set3_1ColorR 255
+set3_1ColorG 192
+set3_1ColorB 64
+set3_1ColorA 128
+
+set4GraphNumber 7
+set4GraphType 5
+set4_1SizeX 256
+set4_1SizeY 256
+@set4NextX 80
+@set4NextY 0
+set4_1PrintX 500
+set4_1PrintY 100
+
+set4_1VarName 好感度その１
+set4_2VarName 好感度その２
+set4_3VarName 好感度その３
+set4_4VarName 好感度その４
+set4_5VarName 好感度その１
+set4_6VarName 好感度その２
+set4_7VarName 好感度その２
+
+set4PicFlag 1
+set4_1filename ta_radar
+
+
+
+set5GraphNumber 4
+set5GraphType 4
+set5_1SizeX 256
+set5_1SizeY 256
+set5NextX 80
+set5NextY 0
+set5_1PrintX 400
+set5_1PrintY 400
+
+set5_1VarName 好感度その１
+set5_2VarName 好感度その２
+set5_3VarName 好感度その３
+set5_4VarName 好感度その４
+
+set5PicFlag 1
+set5_1filename ta_graph_heart
+
+set5_1ColorR 64
+set5_1ColorG 192
+set5_1ColorB 255
+@set5_1ColorA 128
+
+
+set6GraphNumber 2
+set6GraphType 3
+set6_1SizeX 128
+set6_1SizeY 128
+@set6NextX 80
+@set6NextY 0
+set6_1PrintX 200
+set6_1PrintY 300
+
+set6_1VarName 好感度その４
+set6_2VarName 好感度その５
+
+set6_1ColorR 32
+set6_1ColorG 255
+set6_1ColorB 64
+set6_1ColorA 128
+
+set6_2ColorR 128
+set6_2ColorG 128
+set6_2ColorB 192
+set6_2ColorA 128
+
+set6PerFlag 1
+
+
+@set6PicFlag 1
+@set6_1filename ta_graph_en
+
+
+backFilename ta_voice_back
+backPrintX 700
+backPrintY 500
+backSizeX 64
+backSizeY 64
+backAnimeType1 7
+backAnimePattern1 2
+backAnimeSpeed1 30

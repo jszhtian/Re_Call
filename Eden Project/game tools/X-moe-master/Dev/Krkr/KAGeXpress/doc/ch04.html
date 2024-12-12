@@ -1,0 +1,228 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>第 4 章 KAGeXpress高级技巧</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="index.html" title="KCDDP KAGeXpress 3.0 使用手册">
+<link rel="up" href="index.html" title="KCDDP KAGeXpress 3.0 使用手册">
+<link rel="prev" href="ch03-6.html" title="3.6. 调试与发布">
+<link rel="next" href="ch04-2.html" title="4.2. 文字菜单的制作">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">第 4 章 KAGeXpress高级技巧</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch03-6.html">上一页</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="ch04-2.html">下一页</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="chapter" lang="zh-CN">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="ch04"></a>第 4 章 KAGeXpress高级技巧</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch04.html#ch04-1">4.1. 条件判断与变量的使用</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch04.html#ch04-1-1">4.1.1. TJS语言简介</a></span></dt>
+<dt><span class="sect2"><a href="ch04.html#ch04-1-2">4.1.2. KAG中的变量操作</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch04-2.html">4.2. 文字菜单的制作</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch04-2.html#ch04-2-1">4.2.1. locate、nowait与s指令</a></span></dt>
+<dt><span class="sect2"><a href="ch04-2.html#ch04-2-2">4.2.2. 简单的菜单制作</a></span></dt>
+</dl></dd>
+</dl>
+</div>
+<div class="sect1" lang="zh-CN">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ch04-1"></a>4.1. 条件判断与变量的使用</h2></div></div></div>
+<div class="sect2" lang="zh-CN">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ch04-1-1"></a>4.1.1. TJS语言简介</h3></div></div></div>
+<p>TJS语言，是吉里吉里使用的编程语言。该语言具有类似C语言的语法，与JavaScript和Java语言有一定相似性。TJS语言具有结构清晰，易学易用的特点。</p>
+<p>运行在吉里吉里上的KAG系统自身使用了TJS编写而成。因而，KAG系统允许在脚本中使用TJS程序代码。利用TJS，用户可以轻易写出逻辑复杂的程序结构，自幼控制引擎的工作，甚至写出特殊的应用功能和小游戏。</p>
+<p>由于TJS语言自身已经具有良好的数据类型支持，以及完备的逻辑结构，KAG系统直接使用了TJS的部分功能来处理剧本中的变量操作和条件判断。因而，我们将简单介绍以下基本的TJS知识。</p>
+<div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[提示]" src="images/tip.png"></td>
+<th align="left">提示</th>
+</tr>
+<tr><td align="left" valign="top"><p>有C/C++、PHP、Java或者Javascript等编程语言的使用经验的可以跳过这一章节。</p></td></tr>
+</table></div>
+<div class="sect3" lang="zh-CN">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ch04-1-1-1"></a>4.1.1.1. TJS的表达式</h4></div></div></div>
+<p>TJS表达式由数据与运算符构成，其中数据可以是一个常数，也可以是变量、函数调用或者其他的TJS表达式。</p>
+<p>24+32 就是一个简单而且合法的TJS表达式。</p>
+</div>
+<div class="sect3" lang="zh-CN">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ch04-1-1-2"></a>4.1.1.2. TJS常用运算符</h4></div></div></div>
+<p>TJS常用的运算符见下表</p>
+<div class="table">
+<a name="tab4-1"></a><p class="title"><b>表 4.1. TJS常用运算符一览表</b></p>
+<div class="table-contents"><table summary="TJS常用运算符一览表" border="0" style="border-collapse: collapse;border-top: 0.5pt solid ; border-bottom: 0.5pt solid ; border-left: 0.5pt solid ; border-right: 0.5pt solid ; ">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">运算符类型</th>
+<th style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">运算符</th>
+<th style="border-bottom: 0.5pt solid ; ">说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">四则运算</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">+ - * / \ %</td>
+<td style="border-bottom: 0.5pt solid ; ">分别为加、减、乘、除（实数商）、除（整数商）、取余数</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">赋值</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">=</td>
+<td style="border-bottom: 0.5pt solid ; ">把等号右边的值赋予左边的变量。如 f.a=1 。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">条件判断</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">== &gt;= &lt;= &gt; &lt; !=</td>
+<td style="border-bottom: 0.5pt solid ; ">按照表达式判断运算符左右是否满足条件。满足则该式值为非0（真），否则该式值为0（假）</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">括号</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">( )</td>
+<td style="border-bottom: 0.5pt solid ; ">如同数学式一般，括号中的表达式将被作为一个整体。此外，调用函数时括号也被用来包裹参数。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; ">逻辑判断</td>
+<td style="border-right: 0.5pt solid ; ">&amp;&amp; || !</td>
+<td style="">
+										<p>分别表示逻辑的与、或、非的关系。</p>
+										<p>与(&amp;&amp;)，即&amp;&amp;左右两边都为真时，该式为真。</p>
+										<p>或(||)，即||左右两边有一个以上为真，则该式为真。</p>
+										<p>非（!），即右式不为真时，该式为真。</p>
+										<p>例：(5&gt;3)&amp;&amp;(8&gt;2)为真（非0）</p>
+									</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break">
+</div>
+</div>
+<div class="sect2" lang="zh-CN">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="ch04-1-2"></a>4.1.2. KAG中的变量操作</h3></div></div></div>
+<div class="sect3" lang="zh-CN">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ch04-1-2-1"></a>4.1.2.1. 变量</h4></div></div></div>
+<p>KAG中总共有三类的变量可以使用。</p>
+<p>以 f. 开头的变量，为游戏变量。该类变量将随着进度存档被保存。这类变量用于和游戏进度相关的数据。</p>
+<p>以 sf. 开头的是系统变量。该类变量将在系统存档中被自动保存，在正常且没有改动的情况下将一直保持。这类变量用于与系统设置及游戏全局变量相关的数据。</p>
+<p>以 tf. 开头的是全局变量。该类变量不会被保存，一旦程序退出就将丢失，用于临时使用的数据。</p>
+<p>一般情况下，不要随便在KAG剧本中使用不以这三种类型开头的变量。此外，建议变量名用半角英文开头，但如果有需要，也可以使用中文。</p>
+<p>以上这三类变量将在第一次使用时被自动声明。不需要单独的声明或者定义。</p>
+</div>
+<div class="sect3" lang="zh-CN">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ch04-1-2-2"></a>4.1.2.2. eval命令</h4></div></div></div>
+<p>KAG中的eval命令，可以执行特定的TJS表达式。</p>
+<p>使用时，请将表达式作为eval指令的exp属性传递。</p>
+<p>例如：[eval exp="tf.t1=1+2"]，这一句将执行TJS式 tf.t1=1+2 。也就是将1+2的值赋予临时变量tf.t1</p>
+</div>
+<div class="sect3" lang="zh-CN">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ch04-1-2-3"></a>4.1.2.3. cond属性</h4></div></div></div>
+<p>除了极少数例外之外，大部分KAGeXpress指令都存在一个cond，也就是条件属性。</p>
+<p>cond属性值为一个TJS表达式。执行一个带有cond属性的命令之前，系统会先评估cond属性的表达式。如果该式值为真，则该指令才会被执行。</p>
+<div class="example">
+<a name="ex4-1-1"></a><p class="title"><b>例 4.1. cond标签的例子</b></p>
+<div class="example-contents">
+<pre class="programlisting">
+@eval exp="tf.t1 = 3"	
+@bg storage="bg01" cond="tf.t1 == 4" time=1000
+@cl all cond="tf.t1 != 3"
+						</pre>
+<p>则背景将被切换为bg01，且不会被cl命令清除（因为cl命令没有执行）。</p>
+</div>
+</div>
+<br class="example-break">
+</div>
+<div class="sect3" lang="zh-CN">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ch04-1-2-4"></a>4.1.2.4. if指令的例子</h4></div></div></div>
+<p>if与endif只见可以包围大段KAG剧本，如if的exp属性中TJS式为真，则if与endif之间的代码才会被执行。</p>
+<div class="example">
+<a name="ex4-1-2"></a><p class="title"><b>例 4.2. if..endif的使用例子</b></p>
+<div class="example-contents"><pre class="programlisting">
+@eval exp="tf.t1 = 3"	
+@if exp="tf.t1 == 3" ;这边到endif的指令将被执行
+因为tf.t1值为3，所以这里被执行了。[l][r]
+@endif
+
+@if exp="tf.t1 &gt; 12"
+因为tf.t1不大于12，这里会被忽略。[l][r]
+@endif
+						</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="sect3" lang="zh-CN">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ch04-1-2-5"></a>4.1.2.5. emb指令</h4></div></div></div>
+<p>emb指令将把exp属性中的TJS式求值，把求出的值作为剧本文本显示出来。</p>
+<div class="example">
+<a name="ex4-1-3"></a><p class="title"><b>例 4.3. emb指令的例子</b></p>
+<div class="example-contents"><pre class="programlisting">
+@eval exp="tf.t1 = 120"
+tf.t1的值为[emb exp="tf.t1"]而tf.t1加上20的值为[emb exp="tf.t1+20"]。[l][r]
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="sect3" lang="zh-CN">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="ch04-1-2-6"></a>4.1.2.6. &amp;符号</h4></div></div></div>
+<p>在KAG指令的属性中传递&amp;符号，则&amp;符号后的内容将被作为TJS式求值，然后把返回的值作为指令的参数。</p>
+<div class="example">
+<a name="ex4-1-4"></a><p class="title"><b>例 4.4. &amp;符号的例子</b></p>
+<div class="example-contents">
+<pre class="programlisting">
+@eval exp="tf.t1 = 1200"
+@bg storage="bg01" time=&amp;tf.t1
+						</pre>
+<p>上面的例子将以tf.t1中的1200作为bg指令的time属性。也就是将执行一个1200秒渐变将背景换为bg01。</p>
+</div>
+</div>
+<br class="example-break">
+</div>
+</div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch03-6.html">上一页</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="ch04-2.html">下一页</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">3.6. 调试与发布 </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
+<td width="40%" align="right" valign="top"> 4.2. 文字菜单的制作</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

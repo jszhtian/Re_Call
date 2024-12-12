@@ -1,0 +1,108 @@
+//============================================================================
+//
+// 標準汎用マクロ
+//
+//============================================================================
+macro[prefix="_"]
+//============================================================================
+
+//------------------------------------------------
+// メッセージ表示
+//------------------------------------------------
+macro[name=MES    name2=mes    str="GOSUB[#=es._mes pint=0 pstr2=$_M pstr3=$_M2]" def="''" def2="''" ]
+macro[name=MESVAL name2=mesval str="GOSUB[#=es._mes pint=1 pint2=$_M pstr3=$_M2]" def= "0" def2="''" ]
+macro[name=MESFLT name2=mesflt str="GOSUB[#=es._mes pint=2 pflt2=$_M pstr3=$_M2]" def= "0" def2="''" ]
+
+
+//------------------------------------------------
+// メッセージ表示 (デバッグモード時のみ有効)
+//------------------------------------------------
+macro[name=DMES    name2=dmes    str="IF[@_DEBUGMODE]GOSUB[#=es._mes pint=0 pstr2=$_M pstr3=$_M2]IFEND[]" def="''" def2="''" ]
+macro[name=DMESVAL name2=dmesval str="IF[@_DEBUGMODE]GOSUB[#=es._mes pint=1 pint2=$_M pstr3=$_M2]IFEND[]" def= "0" def2="''" ]
+macro[name=DMESFLT name2=dmesflt str="IF[@_DEBUGMODE]GOSUB[#=es._mes pint=2 pflt2=$_M pstr3=$_M2]IFEND[]" def= "0" def2="''" ]
+
+
+//------------------------------------------------
+// フォント系
+//------------------------------------------------
+macro[name=TXSIZE  name2=txsize  str="GOSUB[#=es._txsize pint=$_M pint2=$_M2]" def="24" def2="0" ]
+macro[name=TXCOLOR name2=txcolor str="GOSUB[#=es._txcolor pint=$_M pint2=$_M2 pint3=$_M3]" def="0xffffff" def2="-1" def3="0" ]
+macro[name=TXFONT  name2=txfont  str="GOSUB[#=es._txfont pstr=$_M]" def="''" ]
+
+
+//------------------------------------------------
+// 文字列操作系
+//------------------------------------------------
+macro[name=STRLEFT      name2=strleft      str="GOSUB[#=es._strleft PSTR=$_M PINT2=$_M2]" def="''" def2="1"]
+macro[name=STRMID       name2=strmid       str="GOSUB[#=es._strmid PSTR=$_M PINT2=$_M2 PINT3=$_M3]" def="''" def2="1" def3="1"]
+macro[name=STRRIGHT     name2=strright     str="GOSUB[#=es._strright PSTR=$_M PINT2=$_M2]" def="''" def2="1"]
+macro[name=STRINS       name2=strins       str="GOSUB[#=es._strins PSTR=$_M PSTR2=$_M2 PINT3=$_M3]" def="''" def2="''" def3="1"]
+macro[name=INTTOSTR     name2=inttostr     str="GOSUB[#=es._inttostr PINT=$_M PINT2=$_M2 PINT3=$_M3]" def="0" def2="0" def3="1"]
+macro[name=STRTOINT     name2=strtoint     str="GOSUB[#=es._strtoint PSTR=$_M]" def="''"]
+macro[name=STRSPLIT.NUM name2=strsplit.num str="GOSUB[#=es._strsplit.num PSTR=$_M PINT2=$_M2]" def="''" def2="0"]
+macro[name=STRSPLIT.STR name2=strsplit.str str="GOSUB[#=es._strsplit.str PSTR=$_M PSTR2=$_M2]" def="''" def2="''"]
+macro[name=STRUPPER     name2=strupper     str="GOSUB[#=es._strupper PSTR=$_M]" def="''"]
+macro[name=STRUPPER2    name2=strupper2    str="GOSUB[#=es._strupper PSTR=$_M PINT2=1]" def="''"]
+macro[name=STRLOWER     name2=strlower     str="GOSUB[#=es._strlower PSTR=$_M]" def="''"]
+macro[name=STRLOWER2    name2=strlower2    str="GOSUB[#=es._strlower PSTR=$_M PINT2=1]" def="''"]
+
+
+//------------------------------------------------
+// 文字列情報取得系
+//------------------------------------------------
+macro[name=STRLEN       name2=strlen       str="GOSUB[#=es._strlen PSTR=$_M]" def="''"]
+macro[name=STRRND       name2=strrnd       str="GOSUB[#=es._strrnd pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6 pstr7=$_M7 pstr8=$_M8 pstr9=$_M9 pstr10=$_M10]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" def9="''" def10="''" ]
+macro[name=STRTYPE      name2=strtype      str="GOSUB[#=es._strtype PSTR=$_M]" def="''"]
+macro[name=FINDSTRLEFT  name2=findstrleft  str="GOSUB[#=es._findstrleft PSTR=$_M PSTR2=$_M2]" def="''" def2="''"]
+macro[name=FINDSTRRIGHT name2=findstrright str="GOSUB[#=es._findstrright PSTR=$_M PSTR2=$_M2]" def="''" def2="''"]
+
+
+//------------------------------------------------
+// 変数、値系
+//------------------------------------------------
+macro[name=SWAPVAL name2=swapval str="GOSUB[#=es._swapval PINT=$_M PINT2=$_M2];$_M=@_RINT(1);$_M2=@_RINT(2);" def="0" def2="0" ]
+macro[name=SWAPSTR name2=swapstr str="GOSUB[#=es._swapstr PSTR=$_M PSTR2=$_M2];$_M=$_RSTR(1);$_M2=$_RSTR(2);" def="''" def2="''" ]
+macro[name=RANGE   name2=range   str="IF[$_M<$_M2]$_M=$_M2;IFEND[]IF[$_M>$_M3]$_M=$_M3;IFEND[];" def="''" def2="-9223372036854775807" def3="9223372036854775807" ]
+macro[name=RND     name2=rnd     str="GOSUB[#=es._rnd PINT=$_M PINT2=$_M2]" def="0" def2="0"]
+macro[name=SQRT    name2=sqrt    str="GOSUB[#=es._sqrt PFLT=$_M]" def="0" ]
+
+
+//------------------------------------------------
+// タスク系
+//------------------------------------------------
+macro[name=TASK            name2=task            str="GOSUB[#=es._task PSTR=$_M PSTR2=$_M2 PINT3=$_M3]" def="''" def2="''" def3="1" ]
+macro[name=TASK.PAUSE      name2=task.pause      str="GOSUB[#=es._task.pause PSTR=$_M]" def="''" ]
+macro[name=TASK.RESUME     name2=task.resume     str="GOSUB[#=es._task.resume PSTR=$_M]" def="''" ]
+macro[name=TASK.END        name2=task.end        str="GOSUB[#=es._task.end PSTR=$_M]" def="''" ]
+macro[name=TASK.INFO.EXIST name2=task.info.exist str="GOSUB[#=es._task.info.exist PSTR=$_M]" def="''" ]
+macro[name=TASK.INFO       name2=task.info       str="GOSUB[#=es._task.info PSTR=$_M PINT2=$_M2]" def="''" def2="0" ]
+
+
+//------------------------------------------------
+// ラベル系
+//------------------------------------------------
+macro[name=LABEL.INFO.EXIST name2=label.info.exist str="GOSUB[#=es._label.info.exist PSTR=$_M]" def="''" ]
+macro[name=GO               name2=go               str="\_label.info.exist($_M);IF[@_RINT(1)] GO[#=$_M] IFEND[]" def="''" ]
+macro[name=GOSUB            name2=gosub            str="\_label.info.exist($_M);IF[@_RINT(1)] GOSUB[#=$_M PINT=$_M2 PINT2=$_M3 PINT3=$_M4 PINT4=$_M5] IFEND[]" def="''" def2="0" def3="0" def4="0" def5="0" ]
+macro[name=LETIF            name2=letif            str="IF[$_M];$_M2;ELSE[];$_M3;IFEND[]" def="1" def2="" def3="" ]
+
+
+//------------------------------------------------
+// ファイル系
+//------------------------------------------------
+macro[name=FILE.INFO.EXIST name2=file.info.exist str="GOSUB[#=es._file.info.exist PSTR=$_M]" def="''" ]
+macro[name=CG.EXIST name2=cg.exist str="GOSUB[#=es._cg.exist PSTR=$_M]" def="''" ]
+macro[name=SOUND.EXIST name2=sound.exist str="GOSUB[#=es._sound.exist PSTR=$_M]" def="''" ]
+
+
+//------------------------------------------------
+// キー／マウスコード系
+//------------------------------------------------
+macro[name=STRTOCODE name2=strtocode str="GOSUB[#=es._strtocode PSTR=$_M]" def="''" ]
+
+
+//------------------------------------------------
+// メニュー系
+//------------------------------------------------
+macro[name=MENU.INFO.A name2=menu.info.a str="GOSUB[#=es._menu.info.a PSTR=$_M]" def="''" ]
+

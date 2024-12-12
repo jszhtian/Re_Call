@@ -1,0 +1,49 @@
+#!/bin/sh
+# シナリオのダンプアウトから、
+# テキストと音楽の切り替えだけ抜き出す
+
+# 画像が補完できれば重い ayusys なんか
+# いらないし〜
+
+# 名前設定
+a='相沢'; b='祐一'; c=''; d='';
+mode='default(KANON)'
+
+# コマンドラインの解析
+flag=0
+
+for path in $* ; do
+	if [ $path = --path ] ; then
+		flag=1
+		continue
+	fi
+	case $flag in
+		0) case $path in # オプションかシナリオ番号
+			-*) flag=2;;
+			[0-9]*) number=$path;;
+			all) number=$path;;
+		   esac ;;
+		1) case $path in # パス指定
+			*kanon-all*) a='相沢'; b='祐一'; c=''; d=''; mode=KANON; VERSION=2 ;;
+			*kanon*) a='相沢'; b='祐一'; c=''; d=''; mode=KANON; VERSION=1 ;;
+			*air*)   a='往人'; b='国崎'; c='田淵'; d='たぶち'; mode=AIR; VERSION=3 ;;
+			*sense*) a='直弥'; b='杜浦'; c=''; d=''; mode=sense-off; VERSION=2 ;;
+		   esac
+		   flag=0 ;;
+		2) # オプションの引数
+		   flag=0 ;;
+	esac
+done
+
+if [ "X$number" = X ] ; then # シナリオの指定がない -> リストを表示
+	echo Text dump : list up all senario number and title >& 2
+	./senario_dump --version $VERSION $*
+else
+	echo Text dump of senario $*, mode $mode >&2
+	echo ./senario_dump --version $VERSION --with-text $* >& 2
+	echo "./senario_dump --version $VERSION --with-text $* | grep -e '^text' -e global -e '<music>' | sed 's/^text: //' | sed 's/^.*global //' | sed 's/^.*<music> //' " >& 2
+	./senario_dump --version $VERSION --with-text $* | grep -e '^text' -e global -e '<music>' | \
+		sed 's/^text: //' | sed 's/^.*global //' | sed 's/^.*<music> //' |  \
+		sed -e "s/＊Ａ/$a/g" -e "s/＊Ｂ/$b/g" -e "s/＊Ｃ/$c/g" -e "s/＊Ｄ/$d/g"
+fi
+

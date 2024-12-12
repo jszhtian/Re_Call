@@ -1,0 +1,449 @@
+//============================================================================
+// 終了確認画面設計
+//============================================================================
+#=ES.ENDCONF.BTDEF
+
+	\BTDEF.GROUP(ES.ENDCONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/black")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BLACK)
+
+	\BT.NAME("■枠")
+	\BT.CGSYS("confirm/dialog_end")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// タイトル確認画面設計
+//============================================================================
+#=ES.TITLECONF.BTDEF
+
+	\BTDEF.GROUP(ES.TITLECONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/black")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BLACK)
+
+	\BT.NAME("■枠")
+	\BT.CGSYS("confirm/dialog_title")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// シーン鑑賞モードに戻る確認画面設計
+//============================================================================
+#=ES.RPMODECONF.BTDEF
+
+	\BTDEF.GROUP(ES.RPMODECONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/black")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BLACK)
+
+	\BT.NAME("■枠")
+	\BT.CGSYS("confirm/dialog_rpmode")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// セーブ確認画面
+//============================================================================
+#=ES.SAVECONF.BTDEF
+
+	\BTDEF.GROUP(ES.SAVECONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/back")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BG)
+
+	//セーブ確認
+	\BT.NAME("■セーブ確認ダイアログ")
+	\BT.GROUP(01)
+	\BT.CGSYS("confirm/dialog_save")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG, 1)
+
+	//上書きセーブ確認
+	\BT.NAME("■上書きセーブ確認ダイアログ")
+	\BT.GROUP(02)
+	\BT.CGSYS("confirm/dialog_save_ow")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG, 2)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// ロード確認画面
+//============================================================================
+#=ES.LOADCONF.BTDEF
+
+	\BTDEF.GROUP(ES.LOADCONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/back")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BG)
+
+	\BT.NAME("■枠")
+	\BT.CGSYS("confirm/dialog_load")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// セーブデータコピー確認画面
+//============================================================================
+#=ES.SDCOPYCONF.BTDEF
+
+	\BTDEF.GROUP(ES.SDCOPYCONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/back")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BG)
+
+	\BT.NAME("■コピー確認ダイアログ")
+	\BT.GROUP(01)
+	\BT.CGSYS("confirm/dialog_savecopy")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG, 1)
+
+	\BT.NAME("■上書きコピー確認ダイアログ")
+	\BT.GROUP(02)
+	\BT.CGSYS("confirm/dialog_savecopy_ow")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG, 2)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// セーブデータ移動確認画面
+//============================================================================
+#=ES.SDMOVECONF.BTDEF
+
+	\BTDEF.GROUP(ES.SDMOVECONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/back")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BG)
+
+	\BT.NAME("■枠")
+	\BT.CGSYS("confirm/dialog_savemove")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// セーブデータ削除確認画面
+//============================================================================
+#=ES.SDDELCONF.BTDEF
+
+	\BTDEF.GROUP(ES.SDDELCONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/back")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BG)
+
+	\BT.NAME("■枠")
+	\BT.CGSYS("confirm/dialog_savedelete")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// クイックセーブ確認画面設計
+//============================================================================
+#=ES.QSAVE.BTDEF
+
+	\BTDEF.GROUP(ES.QSAVE)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/back")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BG)
+
+	\BT.NAME("■枠")
+	\BT.CGSYS("confirm/dialog_qsave")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// クイックロード確認画面設計
+//============================================================================
+#=ES.QLOADCONF.BTDEF
+
+	\BTDEF.GROUP(ES.QLOADCONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/back")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BG)
+
+	\BT.NAME("■枠")
+	\BT.CGSYS("confirm/dialog_qload")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// 直前の選択肢へ戻る確認画面設計
+//============================================================================
+#=ES.PREVSELCONF.BTDEF
+
+	\BTDEF.GROUP(ES.PREVSELCONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/back")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BG)
+
+	\BT.NAME("■枠")
+	\BT.CGSYS("confirm/dialog_prevsel")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+
+
+//============================================================================
+// コンフィグ設定初期化確認画面設計
+//============================================================================
+#=ES.CONFIGINITCONF.BTDEF
+
+	\BTDEF.GROUP(ES.CONFIGINITCONF)
+
+	\BT.NAME("■背景")
+	\BT.CGSYS("confirm/back")
+	\BT.XY(000, 000)
+	\BT.Z(1030000000-1)
+	\BT.SET(TIP.BG)
+
+	\BT.NAME("■枠")
+	\BT.CGSYS("confirm/dialog_cfginit")
+	\BT.XY(245, 204)
+	\BT.Z(1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	\BT.NAME("■はい")
+	\BT.CGSYS("confirm/btn_yes")
+	\BT.XY(312, 292)
+	\BT.Z(1030000001)
+	\BT.SET(BTN.YES)
+
+	\BT.NAME("■いいえ")
+	\BT.CGSYS("confirm/btn_no")
+	\BT.XY(412, 292)
+	\BT.Z(1030000001)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.NO)
+
+
+RETURN[]
+

@@ -1,0 +1,142 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>2.3. 关于支持的素材格式</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.1">
+<link rel="start" href="index.html" title="KCDDP KAGeXpress 3.0 使用手册">
+<link rel="up" href="ch02.html" title="第 2 章 基本概念">
+<link rel="prev" href="ch02-2.html" title="2.2. KAGeXpress的目录结构">
+<link rel="next" href="ch02-4.html" title="2.4. KAG的图层结构">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr><th colspan="3" align="center">2.3. 关于支持的素材格式</th></tr>
+<tr>
+<td width="20%" align="left">
+<a accesskey="p" href="ch02-2.html">上一页</a> </td>
+<th width="60%" align="center">第 2 章 基本概念</th>
+<td width="20%" align="right"> <a accesskey="n" href="ch02-4.html">下一页</a>
+</td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="sect1" lang="zh-CN">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="ch02-3"></a>2.3. 关于支持的素材格式</h2></div></div></div>
+<p>Krkr支持丰富的素材格式。下面是一个简单的列表。</p>
+<div class="table">
+<a name="tab2-2"></a><p class="title"><b>表 2.2. KAGeXpress支持的素材格式</b></p>
+<div class="table-contents"><table summary="KAGeXpress支持的素材格式" border="0" style="border-collapse: collapse;border-top: 0.5pt solid ; border-bottom: 0.5pt solid ; border-left: 0.5pt solid ; border-right: 0.5pt solid ; ">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">后缀名</th>
+<th style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">文件类型</th>
+<th style="border-bottom: 0.5pt solid ; ">说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">BMP</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">位图图像</td>
+<td style="border-bottom: 0.5pt solid ; ">标准的Windows BMP以及32-bit带Alpha通道的BMP都可以被支持。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">JPG、JPEG</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">JPEG（Joint Picture Expert Group）图像</td>
+<td style="border-bottom: 0.5pt solid ; ">标准的JPEG图像，不支持Alpha通道，用作立绘时可以使用蒙版图像。压缩算法有损，但文件体积非常小，适合网络发布用的小型游戏。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">PNG</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">PNG（Portable Network Graphics）图像</td>
+<td style="border-bottom: 0.5pt solid ; ">标准的带Alpha通道的PNG图像，大小适中，无损压缩。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">TLG</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">TLG5、TLG6图像格式</td>
+<td style="border-bottom: 0.5pt solid ; ">吉里吉里专用的无损压缩图像格式。可以用专用的图形转换器(krkrtpc)生成。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">ERI</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">小惠理图像格式</td>
+<td style="border-bottom: 0.5pt solid ; ">日本人开发的无损高压缩率压缩格式，貌似性能不错但在国内不流行。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">WAV</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">微软PCM波形声音格式</td>
+<td style="border-bottom: 0.5pt solid ; ">常用的标准的波形声音格式，没有压缩，体积较大但音质不错。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">WAV</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">微软AD-PCM波形声音格式</td>
+<td style="border-bottom: 0.5pt solid ; ">相比标准PCM，体积更小。但似乎需要特别的软件生成。不常用。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">OGG</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">Ogg Vorbis音频格式</td>
+<td style="border-bottom: 0.5pt solid ; ">Xing.org开发的基于心理声学算法开发的自由开源的有损压缩格式。文件大小和音效都相当理想，支持也比较稳定。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">MP3</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">MPEG-1 Layer-3音频格式</td>
+<td style="border-bottom: 0.5pt solid ; ">不用说了吧，就是大家熟悉的MP3。建议使用Ogg Vorbis格式代替。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">TCW</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">TCW</td>
+<td style="border-bottom: 0.5pt solid ; ">Krkr的专用无损音频压缩格式</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">CD-DA</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">CD音乐格式</td>
+<td style="border-bottom: 0.5pt solid ; ">播放在游戏光盘上以标准音乐CD的格式存储的音乐。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">MID</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">MIDI序列格式</td>
+<td style="border-bottom: 0.5pt solid ; ">标准MIDI序列格式。在吉里吉里中播放时将使用DirectMusic渲染。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">MPG</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">MPEG-PS视频格式</td>
+<td style="border-bottom: 0.5pt solid ; ">标准的MPEG-PS视频格式，目前支持MPEG-1视频。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">WMV</td>
+<td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; ">Windows Media Video 9</td>
+<td style="border-bottom: 0.5pt solid ; ">微软公司的专有格式。目前吉里吉里只支持ASF格式封装的Windows Media V9视频。</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid ; ">SWF</td>
+<td style="border-right: 0.5pt solid ; ">Shockwave Flash格式</td>
+<td style="">Adobe(原Macromedia)的Flash媒体格式。可以通过ActionScript与KAG系统互动。</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><p>如果在游戏中调用文件名没有包含扩展名，系统将在整个工程文件夹下按照一定的顺序搜索其支持的格式。如果同时存在两个主文件名相同而扩展名不同的文件，则可能会发生混乱。请留心。</p>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="ch02-2.html">上一页</a> </td>
+<td width="20%" align="center"><a accesskey="u" href="ch02.html">上一级</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="ch02-4.html">下一页</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">2.2. KAGeXpress的目录结构 </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
+<td width="40%" align="right" valign="top"> 2.4. KAG的图层结构</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DFD1E633-A714-4E99-BC49-1D55ED66A6B7}</ProjectGuid>
+    <RootNamespace>MusicPlayer2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>bass.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>bass_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>bass.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>bass_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="Help.txt" />
+    <Text Include="Help_en_us.txt" />
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AboutDlg.h" />
+    <ClInclude Include="AddToPlaylistDlg.h" />
+    <ClInclude Include="AllMediaDlg.h" />
+    <ClInclude Include="AppearanceSettingDlg.h" />
+    <ClInclude Include="AudioCommon.h" />
+    <ClInclude Include="AudioTag.h" />
+    <ClInclude Include="bass.h" />
+    <ClInclude Include="BassCore.h" />
+    <ClInclude Include="BASSEncodeLibrary.h" />
+    <ClInclude Include="BASSMidiLibrary.h" />
+    <ClInclude Include="BassMixLibrary.h" />
+    <ClInclude Include="BASSWmaLibrary.h" />
+    <ClInclude Include="BrowseEdit.h" />
+    <ClInclude Include="CDonateDlg.h" />
+    <ClInclude Include="CFloatPlaylistDlg.h" />
+    <ClInclude Include="CHotKey.h" />
+    <ClInclude Include="CHotkeyManager.h" />
+    <ClInclude Include="CHotKeySettingDlg.h" />
+    <ClInclude Include="CListBoxEnhanced.h" />
+    <ClInclude Include="CListenTimeStatisticsDlg.h" />
+    <ClInclude Include="CUIDrawer.h" />
+    <ClInclude Include="CMainDialogBase.h" />
+    <ClInclude Include="ColorStaticEx.h" />
+    <ClInclude Include="CueFile.h" />
+    <ClInclude Include="Define.h" />
+    <ClInclude Include="DesktopLyric.h" />
+    <ClInclude Include="DllLib.h" />
+    <ClInclude Include="FolderExploreDlg.h" />
+    <ClInclude Include="GdiPlusTool.h" />
+    <ClInclude Include="LyricsWindow.h" />
+    <ClInclude Include="MciCore.h" />
+    <ClInclude Include="CMediaLibDlg.h" />
+    <ClInclude Include="CMiniModeUI.h" />
+    <ClInclude Include="CNotifyIcon.h" />
+    <ClInclude Include="CommonData.h" />
+    <ClInclude Include="COSUPlayerHelper.h" />
+    <ClInclude Include="CoverDownloadCommon.h" />
+    <ClInclude Include="CoverDownloadDlg.h" />
+    <ClInclude Include="CPlayerUI.h" />
+    <ClInclude Include="CPlayerUI2.h" />
+    <ClInclude Include="CPlayerUIBase.h" />
+    <ClInclude Include="CPlayerUIHelper.h" />
+    <ClInclude Include="crashtool.h" />
+    <ClInclude Include="CSelectPlaylist.h" />
+    <ClInclude Include="CTabCtrlEx.h" />
+    <ClInclude Include="CTest.h" />
+    <ClInclude Include="CVariant.h" />
+    <ClInclude Include="FileRelateDlg.h" />
+    <ClInclude Include="InputDlg.h" />
+    <ClInclude Include="IPlayerCore.h" />
+    <ClInclude Include="IPlayerUI.h" />
+    <ClInclude Include="MediaClassifyDlg.h" />
+    <ClInclude Include="MediaLibHelper.h" />
+    <ClInclude Include="MediaLibSettingDlg.h" />
+    <ClInclude Include="MediaLibTabDlg.h" />
+    <ClInclude Include="MusicPlayerCmdHelper.h" />
+    <ClInclude Include="PlayerProgressBar.h" />
+    <ClInclude Include="PlayerToolBar.h" />
+    <ClInclude Include="Playlist.h" />
+    <ClInclude Include="PlaylistMgr.h" />
+    <ClInclude Include="PlaySettingsDlg.h" />
+    <ClInclude Include="RecorderDlg.h" />
+    <ClInclude Include="GaussBlur.h" />
+    <ClInclude Include="IniHelper.h" />
+    <ClInclude Include="RegFileRelate.h" />
+    <ClInclude Include="SearchEditCtrl.h" />
+    <ClInclude Include="SimpleXML.h" />
+    <ClInclude Include="SongInfo.h" />
+    <ClInclude Include="StaticEx.h" />
+    <ClInclude Include="SupportedFormatDlg.h" />
+    <ClInclude Include="TabDlg.h" />
+    <ClInclude Include="TagEditDlg.h" />
+    <ClInclude Include="TestDlg.h" />
+    <ClInclude Include="TreeCtrlEx.h" />
+    <ClInclude Include="UpdateHelper.h" />
+    <ClInclude Include="WinVersionHelper.h" />
+    <ClInclude Include="WmaEncodeCfgDlg.h" />
+    <ClInclude Include="FilePathHelper.h" />
+    <ClInclude Include="ColorConvert.h" />
+    <ClInclude Include="ColorStatic.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="CortanaLyric.h" />
+    <ClInclude Include="DataSettingsDlg.h" />
+    <ClInclude Include="DrawCommon.h" />
+    <ClInclude Include="EditEx.h" />
+    <ClInclude Include="EqualizerDlg.h" />
+    <ClInclude Include="FindDlg.h" />
+    <ClInclude Include="FolderBrowserDlg.h" />
+    <ClInclude Include="FormatConvertDlg.h" />
+    <ClInclude Include="MessageDlg.h" />
+    <ClInclude Include="InternetCommon.h" />
+    <ClInclude Include="ListCtrlEx.h" />
+    <ClInclude Include="LyricDownloadCommon.h" />
+    <ClInclude Include="LyricBatchDownloadDlg.h" />
+    <ClInclude Include="LyricDownloadDlg.h" />
+    <ClInclude Include="LyricEditDlg.h" />
+    <ClInclude Include="MiniModeDlg.h" />
+    <ClInclude Include="MP3EncodeCfgDlg.h" />
+    <ClInclude Include="MyComboBox.h" />
+    <ClInclude Include="OggEncodeCfgDlg.h" />
+    <ClInclude Include="PlayListCtrl.h" />
+    <ClInclude Include="Lyric.h" />
+    <ClInclude Include="MusicPlayer2.h" />
+    <ClInclude Include="MusicPlayerDlg.h" />
+    <ClInclude Include="OptionsDlg.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="LyricSettingsDlg.h" />
+    <ClInclude Include="PropertyDlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ReverbDlg.h" />
+    <ClInclude Include="SetPathDlg.h" />
+    <ClInclude Include="SoundEffectDlg.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Time.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AboutDlg.cpp" />
+    <ClCompile Include="AddToPlaylistDlg.cpp" />
+    <ClCompile Include="AllMediaDlg.cpp" />
+    <ClCompile Include="AppearanceSettingDlg.cpp" />
+    <ClCompile Include="AudioCommon.cpp" />
+    <ClCompile Include="AudioTag.cpp" />
+    <ClCompile Include="BassCore.cpp" />
+    <ClCompile Include="BASSEncodeLibrary.cpp" />
+    <ClCompile Include="BASSMidiLibrary.cpp" />
+    <ClCompile Include="BassMixLibrary.cpp" />
+    <ClCompile Include="BASSWmaLibrary.cpp" />
+    <ClCompile Include="BrowseEdit.cpp" />
+    <ClCompile Include="CDonateDlg.cpp" />
+    <ClCompile Include="CFloatPlaylistDlg.cpp" />
+    <ClCompile Include="CHotKey.cpp" />
+    <ClCompile Include="CHotkeyManager.cpp" />
+    <ClCompile Include="CHotKeySettingDlg.cpp" />
+    <ClCompile Include="CListBoxEnhanced.cpp" />
+    <ClCompile Include="CListenTimeStatisticsDlg.cpp" />
+    <ClCompile Include="CUIDrawer.cpp" />
+    <ClCompile Include="CMainDialogBase.cpp" />
+    <ClCompile Include="ColorStaticEx.cpp" />
+    <ClCompile Include="CueFile.cpp" />
+    <ClCompile Include="DesktopLyric.cpp" />
+    <ClCompile Include="DllLib.cpp" />
+    <ClCompile Include="FolderExploreDlg.cpp" />
+    <ClCompile Include="GdiPlusTool.cpp" />
+    <ClCompile Include="LyricsWindow.cpp" />
+    <ClCompile Include="MciCore.cpp" />
+    <ClCompile Include="CMediaLibDlg.cpp" />
+    <ClCompile Include="CMiniModeUI.cpp" />
+    <ClCompile Include="CNotifyIcon.cpp" />
+    <ClCompile Include="COSUPlayerHelper.cpp" />
+    <ClCompile Include="CoverDownloadCommon.cpp" />
+    <ClCompile Include="CoverDownloadDlg.cpp" />
+    <ClCompile Include="CPlayerUI.cpp" />
+    <ClCompile Include="CPlayerUI2.cpp" />
+    <ClCompile Include="CPlayerUIBase.cpp" />
+    <ClCompile Include="CPlayerUIHelper.cpp" />
+    <ClCompile Include="crashtool.cpp" />
+    <ClCompile Include="CSelectPlaylist.cpp" />
+    <ClCompile Include="CTabCtrlEx.cpp" />
+    <ClCompile Include="CTest.cpp" />
+    <ClCompile Include="CVariant.cpp" />
+    <ClCompile Include="FileRelateDlg.cpp" />
+    <ClCompile Include="InputDlg.cpp" />
+    <ClCompile Include="MediaClassifyDlg.cpp" />
+    <ClCompile Include="MediaLibHelper.cpp" />
+    <ClCompile Include="MediaLibSettingDlg.cpp" />
+    <ClCompile Include="MediaLibTabDlg.cpp" />
+    <ClCompile Include="MusicPlayerCmdHelper.cpp" />
+    <ClCompile Include="PlayerProgressBar.cpp" />
+    <ClCompile Include="PlayerToolBar.cpp" />
+    <ClCompile Include="Playlist.cpp" />
+    <ClCompile Include="PlaylistMgr.cpp" />
+    <ClCompile Include="PlaySettingsDlg.cpp" />
+    <ClCompile Include="RecorderDlg.cpp" />
+    <ClCompile Include="GaussBlur.cpp" />
+    <ClCompile Include="IniHelper.cpp" />
+    <ClCompile Include="RegFileRelate.cpp" />
+    <ClCompile Include="SearchEditCtrl.cpp" />
+    <ClCompile Include="SimpleXML.cpp" />
+    <ClCompile Include="StaticEx.cpp" />
+    <ClCompile Include="SupportedFormatDlg.cpp" />
+    <ClCompile Include="TabDlg.cpp" />
+    <ClCompile Include="TagEditDlg.cpp" />
+    <ClCompile Include="TestDlg.cpp" />
+    <ClCompile Include="TreeCtrlEx.cpp" />
+    <ClCompile Include="UpdateHelper.cpp" />
+    <ClCompile Include="WinVersionHelper.cpp" />
+    <ClCompile Include="WmaEncodeCfgDlg.cpp" />
+    <ClCompile Include="FilePathHelper.cpp" />
+    <ClCompile Include="ColorConvert.cpp" />
+    <ClCompile Include="ColorStatic.cpp" />
+    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="CortanaLyric.cpp" />
+    <ClCompile Include="DataSettingsDlg.cpp" />
+    <ClCompile Include="DrawCommon.cpp" />
+    <ClCompile Include="EditEx.cpp" />
+    <ClCompile Include="EqualizerDlg.cpp" />
+    <ClCompile Include="FindDlg.cpp" />
+    <ClCompile Include="FolderBrowserDlg.cpp" />
+    <ClCompile Include="FormatConvertDlg.cpp" />
+    <ClCompile Include="MessageDlg.cpp" />
+    <ClCompile Include="InternetCommon.cpp" />
+    <ClCompile Include="ListCtrlEx.cpp" />
+    <ClCompile Include="LyricDownloadCommon.cpp" />
+    <ClCompile Include="LyricBatchDownloadDlg.cpp" />
+    <ClCompile Include="LyricDownloadDlg.cpp" />
+    <ClCompile Include="LyricEditDlg.cpp" />
+    <ClCompile Include="MiniModeDlg.cpp" />
+    <ClCompile Include="MP3EncodeCfgDlg.cpp" />
+    <ClCompile Include="MyComboBox.cpp" />
+    <ClCompile Include="OggEncodeCfgDlg.cpp" />
+    <ClCompile Include="PlayListCtrl.cpp" />
+    <ClCompile Include="Lyric.cpp" />
+    <ClCompile Include="MusicPlayer2.cpp" />
+    <ClCompile Include="MusicPlayerDlg.cpp" />
+    <ClCompile Include="OptionsDlg.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="LyricSettingsDlg.cpp" />
+    <ClCompile Include="PropertyDlg.cpp" />
+    <ClCompile Include="ReverbDlg.cpp" />
+    <ClCompile Include="SetPathDlg.cpp" />
+    <ClCompile Include="SoundEffectDlg.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MusicPlayer2.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\drag.cur" />
+    <None Include="res\MusicPlayer2.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\about.bmp" />
+    <Image Include="res\AddTag.ico" />
+    <Image Include="res\add_d.ico" />
+    <Image Include="res\album_d.ico" />
+    <Image Include="res\artist_d.ico" />
+    <Image Include="res\close_d.ico" />
+    <Image Include="res\Cortana_black.bmp" />
+    <Image Include="res\Cortana_white.bmp" />
+    <Image Include="res\default_cover.bmp" />
+    <Image Include="res\default_cover_new.ico" />
+    <Image Include="res\DeleteTag.ico" />
+    <Image Include="res\donate.bmp" />
+    <Image Include="res\donate_wechat.bmp" />
+    <Image Include="res\double_line_d.ico" />
+    <Image Include="res\edit_d.ico" />
+    <Image Include="res\eq.ico" />
+    <Image Include="res\eq_d.ico" />
+    <Image Include="res\explorer_folder.ico" />
+    <Image Include="res\favourite.ico" />
+    <Image Include="res\favourite_d.ico" />
+    <Image Include="res\file_icon.ico" />
+    <Image Include="res\file_playlist_icon.ico" />
+    <Image Include="res\Find.ico" />
+    <Image Include="res\folder_explore_d.ico" />
+    <Image Include="res\genre_d.ico" />
+    <Image Include="res\heart.ico" />
+    <Image Include="res\lock_d.ico" />
+    <Image Include="res\lyric_delay.ico" />
+    <Image Include="res\lyric_forward.ico" />
+    <Image Include="res\media_lib.ico" />
+    <Image Include="res\media_lib_d.ico" />
+    <Image Include="res\menu.ico" />
+    <Image Include="res\menu_d.ico" />
+    <Image Include="res\mini.ico" />
+    <Image Include="res\mini_d.ico" />
+    <Image Include="res\MusicPlayer2.ico" />
+    <Image Include="res\next_dark.ico" />
+    <Image Include="res\next_white.ico" />
+    <Image Include="res\pause_dark.ico" />
+    <Image Include="res\pause_white.ico" />
+    <Image Include="res\play_dark.ico" />
+    <Image Include="res\play_white.ico" />
+    <Image Include="res\previous_dark.ico" />
+    <Image Include="res\previous_white.ico" />
+    <Image Include="res\recent_songs_d.ico" />
+    <Image Include="res\Replace.ico" />
+    <Image Include="res\ReplaceTag.ico" />
+    <Image Include="res\Save.ico" />
+    <Image Include="res\setting.ico" />
+    <Image Include="res\setting_d.ico" />
+    <Image Include="res\skn.ico" />
+    <Image Include="res\skn_d.ico" />
+    <Image Include="res\stop_dark.ico" />
+    <Image Include="res\stop_white.ico" />
+    <Image Include="res\toolbar1.bmp" />
+    <Image Include="res\year_d.ico" />
+    <Image Include="res\上一曲.ico" />
+    <Image Include="res\下一曲.ico" />
+    <Image Include="res\停止.ico" />
+    <Image Include="res\全屏.ico" />
+    <Image Include="res\全屏1.ico" />
+    <Image Include="res\全屏1_d.ico" />
+    <Image Include="res\全屏_d.ico" />
+    <Image Include="res\列表循环.ico" />
+    <Image Include="res\列表循环_d.ico" />
+    <Image Include="res\单曲循环.ico" />
+    <Image Include="res\单曲循环_d.ico" />
+    <Image Include="res\快进.ico" />
+    <Image Include="res\快退.ico" />
+    <Image Include="res\播放.ico" />
+    <Image Include="res\播放_暂停.ico" />
+    <Image Include="res\播放列表.ico" />
+    <Image Include="res\播放列表_d.ico" />
+    <Image Include="res\文件夹.ico" />
+    <Image Include="res\文件夹_d.ico" />
+    <Image Include="res\暂停.ico" />
+    <Image Include="res\曲目信息.ico" />
+    <Image Include="res\曲目信息_d.ico" />
+    <Image Include="res\查找.ico" />
+    <Image Include="res\查找_d.ico" />
+    <Image Include="res\随机播放.ico" />
+    <Image Include="res\随机播放_d.ico" />
+    <Image Include="res\顺序播放.ico" />
+    <Image Include="res\顺序播放_d.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="MusicPlayer2.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

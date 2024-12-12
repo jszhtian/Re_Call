@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_ver2_Win7|Win32">
+      <Configuration>Debug_ver2_Win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Win7|Win32">
+      <Configuration>Debug_Win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_ver2_win7|Win32">
+      <Configuration>Release_ver2_win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Win7|Win32">
+      <Configuration>Release_Win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{72FFAFF3-D789-4090-96A3-791BA789E9EB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>nyanWipeLib2012</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>nyanWipeLib2017D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">
+    <TargetName>nyanWipeLib2017D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">
+    <TargetName>nyanWipeLib2017_ver2_win7D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+    <TargetName>nyanWipeLib2017</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+    <TargetName>nyanWipeLib2017</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+    <TargetName>nyanWipeLib2017_ver2_win7</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\allSimpleWipe.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeAdd.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeBeach.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeCenter.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeChecker.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeCircle.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeclock.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecommon.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecurtain.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecurtain2.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeDoor.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeGaza.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeGrav.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeHahen.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeHeart.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMekuri.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMove.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMozaic.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMulti.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeNaname.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeNurikae.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeoverrap.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipePage.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRadical.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRandomStrip.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRaster.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeShape.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeslide1.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeslide2.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeSlot.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeStar.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeSudare.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTogari.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTokoroten.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTurnStar.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipewarp1.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeWTogari.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectsimplewipezebra.h" />
+    <ClInclude Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeZoom.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\allSimpleWipe.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeAdd.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeAddSub.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeBeach.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeCenter.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeChecker.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeCircle.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeclock.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecommon.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecurtain.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipecurtain2.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeDoor.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeGaza.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeGrav.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeHahen.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeHeart.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMekuri.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMove.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMozaic.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeMulti.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeNaname.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeNurikae.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeoverrap.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipePage.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRadical.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRandomStrip.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeRaster.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeShape.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeslide1.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipeslide2.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeSlot.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeStar.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeSudare.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTogari.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTokoroten.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeTurnStar.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipewarp1.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeWTogari.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectsimplewipezebra.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeZoom.cpp" />
+    <ClCompile Include="..\..\systemNNN\nyanWipeLib\effectSimpleWipeZoom1.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

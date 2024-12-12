@@ -1,0 +1,724 @@
+//============================================================================
+//
+//■フォント処理
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$FONT.LIST(1)]		//フォント名
+
+	S_INT[@FONT.LISTNUM]		//フォント数
+	S_INT[@FONT.LIST.DEF]		//デフォルトフォント番号
+
+	S_INT[@FONT.TEXTSYNC = 0]	//フォントボックス内のフォント名画像を実際のフォントで表示する(=1)／しない(=0)
+
+	S_INT[@Z.FONTL0]
+	S_INT[@Z.FONTL1]
+
+	S_STR[$FONT.FONT]
+	S_INT[@FONT.X]
+	S_INT[@FONT.Y]
+	S_INT[@FONT.COLOR =0xffffff]
+	S_INT[@FONT.COLOR2=-1]
+	S_INT[@FONT.SIZE]
+	S_INT[@FONT.SIZE2]
+	S_INT[@FONT.BOLD]
+	S_INT[@FONT.SHADE.X]
+	S_INT[@FONT.SHADE.Y]
+	S_INT[@FONT.SHADE.COLOR]
+	S_INT[@FONT.OUTLINE=-1]
+
+
+	S_INT[@GAIJI.MARK.NUM]
+	S_STR[$GAIJI.MARK(1)]
+	S_STR[$GAIJI.CG(1)]
+
+	S_STR[$TD.FONT]
+	S_INT[@TD.SX]
+	S_INT[@TD.SY]
+	S_INT[@TD.COLOR]
+	S_INT[@TD.COLOR2]
+	S_INT[@TD.BOLD]
+	S_INT[@TD.SHADE.COLOR]
+	S_INT[@TD.SHADE.X]
+	S_INT[@TD.SHADE.Y]
+	S_INT[@TD.OUTLINE.COLOR]
+
+	//TDD:TD定義
+	S_INT[@TDD.NUM]
+	S_STR[$TDD.DEF.KEY(1)]
+	S_STR[$TDD.FONT(1)]
+	S_INT[@TDD.SX(1)]
+	S_INT[@TDD.SY(1)]
+	S_INT[@TDD.COLOR(1)]
+	S_INT[@TDD.COLOR2(1)]
+	S_INT[@TDD.BOLD(1)]
+	S_INT[@TDD.SHADE(1)]
+	S_INT[@TDD.SHADE.COLOR(1)]
+	S_INT[@TDD.SHADE.X(1)]
+	S_INT[@TDD.SHADE.Y(1)]
+	S_INT[@TDD.OUTLINE(1)]
+	S_INT[@TDD.OUTLINE.COLOR(1)]
+	S_INT[@TDD.OUTLINE.COLOR2(1)]
+
+
+	S_INT[@FS.SX]
+	S_INT[@FS.SY]
+	S_INT[@FS.COLOR]
+	S_INT[@FS.COLOR2]
+	S_INT[@FS.BOLD]
+	S_INT[@FS.SHADE.COLOR]
+	S_INT[@FS.SHADE.X]
+	S_INT[@FS.SHADE.Y]
+	S_INT[@FS.OUTLINE.COLOR]
+	S_STR[$FS.FONT]
+
+	S_INT[@FL.SX]
+	S_INT[@FL.SY]
+	S_INT[@FL.COLOR]
+	S_INT[@FL.COLOR2]
+	S_INT[@FL.BOLD]
+	S_INT[@FL.SHADE.COLOR]
+	S_INT[@FL.SHADE.X]
+	S_INT[@FL.SHADE.Y]
+	S_INT[@FL.OUTLINE.COLOR]
+	S_STR[$FL.FONT]
+
+}
+
+
+//--------------------------------------------------------------------
+//■
+//--------------------------------------------------------------------
+#=es.FONT.INIT
+{
+///xS
+//	@Z.FONTL = @es.Z.BT + (247) - 1 //フォントバーボタン - 1 ///x
+//	@Z.FONTL = @es.Z.BT + 9999999999999 - 1 //フォントバーボタン - 1 ///x
+	@Z.FONTL0 = @es.Z.BT + 5000 - 1 //フォントバーボタン - 1 ///x
+	@Z.FONTL1 = @es.Z.BT +  500 - 1 //フォントバーボタン - 1 ///x
+
+	INT[@mFontNum]
+	STR[$mFontName]
+	INT[@mFontLang]
+
+	FONT[COLOR=0xffffff]
+	FONT[ANTIALIASING=1]
+
+
+	//----------------------------------------------------------------
+	// 
+	//----------------------------------------------------------------
+		GOSUB[#=es.TDDEF.SEARCH pstr=$T(18,01)]
+		@FS.SX = @_RINT(1) / 65536
+		@FS.SY = @_RINT(1) % 65536
+		@FS.COLOR  = @_RINT(2)
+		@FS.COLOR2 = @_RINT(3)
+		@FS.SHADE.X = @_RINT(5) / 65536
+		@FS.SHADE.Y = @_RINT(5) % 65536
+		@FS.SHADE.COLOR = @_RINT(6)
+		@FS.OUTLINE.COLOR = @_RINT(7)
+		$FS.FONT = $_RSTR(8)
+
+		GOSUB[#=es.TDDEF.SEARCH pstr=$T(18,04)]
+		@FL.SX = @_RINT(1) / 65536
+		@FL.SY = @_RINT(1) % 65536
+		@FL.COLOR  = @_RINT(2)
+		@FL.COLOR2 = @_RINT(3)
+		@FL.SHADE.X = @_RINT(5) / 65536
+		@FL.SHADE.Y = @_RINT(5) % 65536
+		@FL.SHADE.COLOR = @_RINT(6)
+		@FL.OUTLINE.COLOR = @_RINT(7)
+		$FL.FONT = $_RSTR(8)
+
+
+	//----------------------------------------------------------------
+	// フォントの総数を調べる
+	//----------------------------------------------------------------
+		FONTINFO[LET=@mFontNum NUM=1]
+
+
+	//----------------------------------------------------------------
+	// 全フォント名取得
+	//----------------------------------------------------------------
+		LOOP[SET=@mFontNum]
+		{
+			FONTINFO[LET=@mFontLang LANG=1 NO=@_LC]
+			IF[@mFontLang] LOOPCONTINUE[] IFEND[]
+
+			FONTINFO[LET=$mFontName NAME=1 NO=@_LC]
+			\_strleft($mFontName,1)
+			IF[$_RSTR(1)=="@"] LOOPCONTINUE[] IFEND[]
+			IF[$mFontName=="System"] LOOPCONTINUE[] IFEND[]
+			IF[$mFontName=="Terminal"] LOOPCONTINUE[] IFEND[]
+			IF[$mFontName=="FixedSys"] LOOPCONTINUE[] IFEND[]
+
+			@FONT.LISTNUM+=1
+			\VAR.ADD($FONT.LIST, $mFontName)
+		}
+		LOOPEND[]
+
+
+	//----------------------------------------------------------------
+	// デフォルトフォント名取得
+	//----------------------------------------------------------------
+		@FONT.LIST.DEF = 0
+		$FONT.LIST(0) = $T(36,11)
+
+		LOOP[SET=@FONT.LISTNUM]
+		{
+			IF[$FONT.LIST(@_LC)==$T(36,11)]
+			{
+				@FONT.LIST.DEF = @_LC
+
+///xINJ
+IF[$es.GSD(113)==""]
+{
+				@es.GSD(113,01)  = @_LC
+				$es.GSD(113) = $T(36,11)
+}
+IFEND[]
+				LOOPBREAK[]
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+	//	$T(36,11) = $FONT.LIST( @es.GSD(113,01) )  // デフォルトフォント
+
+
+	//----------------------------------------------------------------
+	// フォント文字表示レイヤ作成
+	//----------------------------------------------------------------
+		INT[@fontlist.space.y=@T(18,08)]
+		INT[@fontlist.size.x=@T(18,07)]
+
+		INT[@lx  = @T(18,02)]
+		INT[@ly  = @T(18,03)]
+		INT[@lsx = @fontlist.size.x]
+		INT[@lsy = @FS.SY+@fontlist.space.y]
+
+		{
+			CG[ID="FONTL"+$(1+(0)) SX=@lsx SY=@lsy X=@lx Y=@ly Z=@Z.FONTL0 E=0 FILE=""]
+		}
+
+
+		@lx  = @T(18,05)
+		@ly  = @T(18,06)
+		@lsy = @FL.SY+@fontlist.space.y
+
+		INT[@fontlist.num=@T(18,09)]
+		LOOP[SET=@fontlist.num]
+		{
+			CG[ID="FONTL"+$(1+@_LC) SX=@lsx SY=@lsy X=@lx Y=@ly+@lsy*(@_LC-1) Z=@Z.FONTL1 E=0 FILE=""]
+			CGACT[ID="FONTL"+$(1+@_LC) RECTPAINT3=1 SET=@es.COL.CLEAR]
+		}
+		LOOPEND[]
+
+	//----------------------------------------------------------------
+	// フォント初期化
+	//----------------------------------------------------------------
+		FONT[NAME=$T(36,11)]
+
+
+	return[]
+}
+
+
+#=es.FONTLIST.Y.SET
+{
+	INT[@fontlist.num=@T(18,09)]
+	INT[@fontlist.space.y=@T(18,08)]
+	INT[@lsy=@FL.SY+@fontlist.space.y]
+
+	INT[@ly = @T(18,03)]
+	CG[ID="FONTL"+$(1) Y=@_PINT(1)+@ly]
+	@ly = @T(18,06)
+	LOOP[SET=@fontlist.num] CG[ID="FONTL"+$(@_LC+1) Y=@_PINT(2)+@ly+@lsy*(@_LC-1)] LOOPEND[]
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■
+//--------------------------------------------------------------------
+#=es.FONTLIST.SHOW
+{
+	//いったん全部非表示にする.
+	//
+	GOSUB[#=es.FONT.Disabled.2]
+
+	INT[@No=@_PINT(1)]
+
+	INT[@fontlist.space.y=@T(18,08)]
+	INT[@fontlist.num=@T(18,09)]
+
+	INT[@lsy=@FL.SY+@fontlist.space.y]
+	INT[@writeX]
+	INT[@writeY]
+
+	//指定した番号から @fontlist.num 分表示
+	//
+	LOOP[SET=@fontlist.num]
+	{
+			IF[@FONT.TEXTSYNC]
+			{
+				FONT[NAME=$FONT.LIST(@No+@_LC-1)]	//フォント反映する場合
+			}
+			ELSE[]
+			{
+///xINJ
+				IF[$FL.FONT!=""] FONT[NAME=$FL.FONT]	//フォント反映する場合
+				ELSE[]           FONT[NAME="ＭＳ ゴシック"]
+				IFEND[]
+			}
+			IFEND[]
+
+			CGACT[ID="FONTL"+$(1+@_LC) RECTPAINT3=1 SET=@es.COL.CLEAR]
+
+			@writeX = 0
+			@writeY = (@lsy-@FL.SY)/2 - 1
+			IF[@writeY<0] @writeY=0 IFEND[]
+
+			IF[@No+@_LC-1<=@FONT.LISTNUM]
+			{
+				\FONT.XY( @writeX , @writeY )
+				\FONT.COLOR( @FL.COLOR )
+				\FONT.SIZE( @FL.SX, @FL.SY )
+				IF[@es.GSD(115,14)==1] \FONT.BOLD( 1 ) IFEND[]
+				IF[@es.GSD(115,09)==1] \FONT.SHADE( @FL.SHADE.X, @FL.SHADE.Y, @FL.SHADE.COLOR ) IFEND[]
+				IF[@es.GSD(115,08)==1] \FONT.OUTLINE( @FL.OUTLINE.COLOR ) IFEND[]
+				IF[@es.GSD(115,15)==1] \FONT.COLOR( @FL.COLOR, @FL.COLOR2 ) IFEND[]
+				\FONT.DRAW("FONTL"+$(1+@_LC), $FONT.LIST(@No+@_LC-1))
+
+				CG[ID="FONTL"+$(1+@_LC) E=1]
+			}
+			IFEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■
+//--------------------------------------------------------------------
+#=es.FONT.Enabled
+{
+		CGACT[ID="FONTL"+$(1+(0)) RECTPAINT3=1 SET=@es.COL.CLEAR]
+
+	//----------------------------------------------------------------
+	// フォント表示
+	//----------------------------------------------------------------
+		//フォント名
+		GOSUB[#=es.FONT.NAME.GET pint=@es.GSD(113,01)]
+		STR[$fontname=$_RSTR(1)]
+//\_dmes("@es.GSD(113,01)="+$(@es.GSD(113,01))+"  $fontname="+$fontname)
+		\FONT.FONT( $fontname )
+		\FONT.COLOR( @FS.COLOR )
+		\FONT.SIZE( @FS.SX, @FS.SY )
+		\FONT.XY( 0 , 0 )
+		IF[@es.GSD(115,14)==1] \FONT.BOLD( 1 ) IFEND[]
+		IF[@es.GSD(115,09)==1] \FONT.SHADE( @FS.SHADE.X, @FS.SHADE.Y, @FS.SHADE.COLOR ) IFEND[]
+		IF[@es.GSD(115,08)==1] \FONT.OUTLINE( @FS.OUTLINE.COLOR ) IFEND[]
+		IF[@es.GSD(115,15)==1] \FONT.COLOR( @FS.COLOR, @FS.COLOR2 ) IFEND[]
+		\FONT.DRAW("FONTL"+$(1+(0)), $fontname)
+
+		CG[ID="FONTL"+$(1+(0)) E=1]
+
+	return[]
+}
+
+
+
+
+
+//--------------------------------------------------------------------
+//■
+//--------------------------------------------------------------------
+#=es.FONT.Disabled
+{
+	CG[ID="FONTL"+$(1+(0)) E=0]
+	return[]
+}
+
+
+#=es.FONT.Disabled.2
+{
+	INT[@fontlist.num=@T(18,09)]
+	LOOP[SET=@fontlist.num] CG[ID="FONTL"+$(1+@_LC) E=0] LOOPEND[]
+	return[]
+}
+
+
+//////
+
+
+//△ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.FONT.NAME.GET
+{
+	STR[$fnt="ＭＳ ゴシック"]
+	IF[@_PINT(1)<=@FONT.LISTNUM] $fnt=$FONT.LIST(@_PINT(1)) IFEND[]
+	return[rstr=$fnt]
+}
+
+//△ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.FONT.NUM.GET
+{
+	return[rint=@FONT.LISTNUM]
+}
+
+
+//▼ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.FONT.SET
+{
+	INT[@no=@_PINT(1)]
+	IF[@no>@FONT.LISTNUM] @no=0 IFEND[]
+	FONT[NAME=$FONT.LIST(@no)]
+	return[]
+}
+
+
+
+//--------------------------------------------------------------------
+//■文字描画
+//--------------------------------------------------------------------
+#=es.FONT.FONT.SET
+{
+	$FONT.FONT=$_PSTR(1)
+	return[]
+}
+
+#=es.FONT.XY.SET
+{
+	@FONT.X=@_PINT(1)
+	@FONT.Y=@_PINT(2)
+	return[]
+}
+
+#=es.FONT.COLOR.SET
+{
+	@FONT.COLOR =@_PINT(1)
+	@FONT.COLOR2=@_PINT(2)
+	return[]
+}
+
+#=es.FONT.SIZE.SET
+{
+	@FONT.SIZE =@_PINT(1)
+	@FONT.SIZE2=@_PINT(2)
+	return[]
+}
+
+#=es.FONT.BOLD.SET
+{
+	@FONT.BOLD=@_PINT(1)
+	return[]
+}
+
+#=es.FONT.SHADE.SET
+{
+	@FONT.SHADE.X=@_PINT(1)
+	@FONT.SHADE.Y=@_PINT(2)
+	@FONT.SHADE.COLOR=@_PINT(3)
+	return[]
+}
+
+#=es.FONT.OUTLINE.SET
+{
+	@FONT.OUTLINE=@_PINT(1)
+	return[]
+}
+
+#=es.BT.FONT.DRAW.SET
+{
+	\BT.ID.OFF.GET($_PSTR(1), @_PINT(2))
+	\FONT.DRAW($_RSTR(1), $_PSTR(3))
+	return[]
+}
+
+#=es.FONT.DRAW.SET
+{
+	STR[$ID=$_PSTR(1)]
+	STR[$TX=$_PSTR(2)]
+	STR[$fonttemp]
+
+	//------------------------------------------------------------
+	// 外字割当文字かどうかチェック
+	//------------------------------------------------------------
+	GOSUB[#=es.GAIJI.MARK.SEARCH pstr=$TX]
+
+	IF[$_RSTR(1)!=""] // 外字割当文字だったら
+	{
+			  IF[@FONT.SIZE==48] CG[ID=TX.GAIJI.BUF E=0 Z=1 FILE=$T(38,07)+$_RSTR(1)+"48"]
+			ELSE[@FONT.SIZE==36] CG[ID=TX.GAIJI.BUF E=0 Z=1 FILE=$T(38,07)+$_RSTR(1)+"36"]
+			ELSE[]               CG[ID=TX.GAIJI.BUF E=0 Z=1 FILE=$T(38,07)+$_RSTR(1)+"22"]
+			IFEND[]
+
+			CG[ID=TX.GAIJI1 E=0 Z=1 FILE=""]
+			CGACT[ID=TX.GAIJI.BUF ID2=TX.GAIJI1 SIZE2=1 SX=@FONT.SIZE SY=@FONT.SIZE]
+			CGACT[ID=TX.GAIJI1 MEIDO=1 SET=@FONT.COLOR]
+
+			IF[@FONT.SHADE.X!=0 || @FONT.SHADE.Y!=0]
+			{
+				CG[ID=TX.GAIJI2 E=0 Z=1 FILE=""]
+				CGACT[ID=TX.GAIJI.BUF ID2=TX.GAIJI2 SIZE2=1 SX=@FONT.SIZE SY=@FONT.SIZE]
+				CGACT[ID=TX.GAIJI2 MEIDO=1 SET=@FONT.SHADE.COLOR]
+
+				CGACT[MERGE2=1 ID=TX.GAIJI2 ID2=$ID X=@FONT.X+2+1 Y=@FONT.Y+2-1]
+				CGACT[MERGE2=1 ID=TX.GAIJI2 ID2=$ID X=@FONT.X+2+1 Y=@FONT.Y+2+1]
+				CGACT[MERGE2=1 ID=TX.GAIJI2 ID2=$ID X=@FONT.X+2+0 Y=@FONT.Y+2-1]
+				CGACT[MERGE2=1 ID=TX.GAIJI2 ID2=$ID X=@FONT.X+2+0 Y=@FONT.Y+2+1]
+				CGACT[MERGE2=1 ID=TX.GAIJI2 ID2=$ID X=@FONT.X+2-1 Y=@FONT.Y+2-1]
+				CGACT[MERGE2=1 ID=TX.GAIJI2 ID2=$ID X=@FONT.X+2-1 Y=@FONT.Y+2+1]
+			}
+			IFEND[]
+
+			IF[@FONT.OUTLINE>-1]
+			{
+				CG[ID=TX.GAIJI3 E=0 Z=1 FILE=""]
+				CGACT[ID=TX.GAIJI.BUF ID2=TX.GAIJI3 SIZE2=1 SX=@FONT.SIZE SY=@FONT.SIZE]
+				CGACT[ID=TX.GAIJI3 MEIDO=1 SET=@FONT.OUTLINE]
+
+				CGACT[MERGE2=1 ID=TX.GAIJI3 ID2=$ID X=@FONT.X+1 Y=@FONT.Y-1]
+				CGACT[MERGE2=1 ID=TX.GAIJI3 ID2=$ID X=@FONT.X+1 Y=@FONT.Y+1]
+				CGACT[MERGE2=1 ID=TX.GAIJI3 ID2=$ID X=@FONT.X+0 Y=@FONT.Y-1]
+				CGACT[MERGE2=1 ID=TX.GAIJI3 ID2=$ID X=@FONT.X+0 Y=@FONT.Y+1]
+				CGACT[MERGE2=1 ID=TX.GAIJI3 ID2=$ID X=@FONT.X-1 Y=@FONT.Y-1]
+				CGACT[MERGE2=1 ID=TX.GAIJI3 ID2=$ID X=@FONT.X-1 Y=@FONT.Y+1]
+			}
+			IFEND[]
+
+			CGACT[MERGE2=1 ID=TX.GAIJI1 ID2=$ID X=@FONT.X Y=@FONT.Y]
+			CGEND[ID=TX.GAIJI.BUF]
+			CGEND[ID=TX.GAIJI1]
+			CGEND[ID=TX.GAIJI2]
+			CGEND[ID=TX.GAIJI3]
+
+	}
+	ELSE[]
+	{
+
+			FONT[DRAWMODE=1]
+		//	FONT[ANTIALIASING=0]
+
+			IF[$FONT.FONT!=""]
+				\_txfont($FONT.FONT)
+				$fonttemp = $_RSTR(1)
+			IFEND[]
+
+			FONT[BOLD=@FONT.BOLD]
+
+			IF[@FONT.SIZE >0]
+				IF[@FONT.SIZE2==-1] @FONT.SIZE2=@FONT.SIZE IFEND[]
+				\_txsize(@FONT.SIZE, @FONT.SIZE2)  //サイズセット
+			ELSE[]
+				\_mes(フォントサイズが不正です);END[]
+			IFEND[]
+
+		//	IF[@FONT.OUTLINE==1] \_swapval(@FONT.COLOR, @FONT.SHADE.COLOR) IFEND[]
+
+			//影
+			IF[@FONT.SHADE.X!=0 || @FONT.SHADE.Y!=0]
+			{
+				\_txcolor(@FONT.SHADE.COLOR) //色セット
+				IF[@FONT.OUTLINE>-1]
+			//	IF[0]
+				{
+					CGACT[ID=$ID TEXT=1 SET=0 X=@FONT.X+@FONT.SHADE.X+1 Y=@FONT.Y+@FONT.SHADE.Y   SETSTR=$TX]
+					CGACT[ID=$ID TEXT=1 SET=0 X=@FONT.X+@FONT.SHADE.X+1 Y=@FONT.Y+@FONT.SHADE.Y+1 SETSTR=$TX]
+					CGACT[ID=$ID TEXT=1 SET=0 X=@FONT.X+@FONT.SHADE.X   Y=@FONT.Y+@FONT.SHADE.Y+1 SETSTR=$TX]
+				}
+				ELSE[]
+				{
+					CGACT[ID=$ID TEXT=1 SET=0 X=@FONT.X+@FONT.SHADE.X   Y=@FONT.Y+@FONT.SHADE.Y   SETSTR=$TX]
+				}
+				IFEND[]
+			}
+			IFEND[]
+
+			//通常
+			{
+				IF[@FONT.OUTLINE>-1]
+				{
+					\_txcolor(@FONT.OUTLINE) //色セット
+
+					CGACT[ID=$ID TEXT=1 SET=1 X=@FONT.X Y=@FONT.Y SETSTR=$TX]
+				}
+				IFEND[]
+
+				\_txcolor(@FONT.COLOR, @FONT.COLOR2) //色セット
+
+				CGACT[ID=$ID TEXT=1 SET=0 X=@FONT.X Y=@FONT.Y SETSTR=$TX]
+			}
+
+			FONT[DRAWMODE=0]
+
+			IF[$FONT.FONT!=""]
+				\_txfont($fonttemp)		//フォント元に戻す
+			IFEND[]
+	}
+	IFEND[]
+
+
+	$FONT.FONT			= ""
+	@FONT.COLOR			= 0xffffff
+	@FONT.COLOR2		= -1
+	@FONT.SIZE			= 0
+	@FONT.BOLD			= 0
+	@FONT.SHADE.X		= 0
+	@FONT.SHADE.Y		= 0
+	@FONT.SHADE.COLOR	= 0
+	@FONT.X				= 0
+	@FONT.Y				= 0
+	@FONT.OUTLINE		= -1
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//
+//■外字認識記号定義処理
+//
+//--------------------------------------------------------------------
+#=es.GAIJI.MARK.SET
+{
+	@GAIJI.MARK.NUM += 1
+	\VAR.ADD($GAIJI.MARK, $_PSTR(1))
+	\VAR.ADD($GAIJI.CG, $_PSTR(2))
+
+	return[]
+}
+
+#=es.GAIJI.MARK.SEARCH
+{
+	STR[$s=$_PSTR(1)]
+	STR[$r]
+	LOOP[SET=@GAIJI.MARK.NUM]
+	{
+		IF[$s==$GAIJI.MARK(@_LC)] $r=$GAIJI.CG(@_LC);LOOPBREAK[] IFEND[]
+	}
+	LOOPEND[]
+
+	return[rstr=$r]
+}
+
+
+//--------------------------------------------------------------------
+//
+//■文字定義処理
+//
+//--------------------------------------------------------------------
+#=es.TD.FONT.SET
+{
+	$TD.FONT=$_PSTR(1)
+	return[]
+}
+
+#=es.TD.SIZE.SET
+{
+	@TD.SX=@_PINT(1)
+	@TD.SY=@_PINT(2)
+	\_range(@TD.SX, 0, 65535)
+	\_range(@TD.SY, 0, 65535)
+	return[]
+}
+
+#=es.TD.COLOR.SET
+{
+	@TD.COLOR =@_PINT(1)
+	@TD.COLOR2=@_PINT(2)
+	return[]
+}
+
+#=es.TD.BOLD.SET
+{
+	@TD.BOLD=@_PINT(1)
+	return[]
+}
+
+#=es.TD.SHADE.COLOR.SET
+{
+	@TD.SHADE.COLOR=@_PINT(1)
+	return[]
+}
+
+#=es.TD.SHADE.XY.SET
+{
+	@TD.SHADE.X=@_PINT(1)
+	@TD.SHADE.Y=@_PINT(2)
+	\_range(@TD.SHADE.X, 0, 65535)
+	\_range(@TD.SHADE.Y, 0, 65535)
+	return[]
+}
+
+#=es.TD.OUTLINE.COLOR.SET
+{
+	@TD.OUTLINE.COLOR=@_PINT(1)
+	return[]
+}
+
+
+#=es.TDDEF.SET
+{
+	//----------------------------------------------------------------
+	// 登録
+	//----------------------------------------------------------------
+	@TDD.NUM += 1
+	\_strlower($_PSTR(1));\VAR.ADD($TDD.DEF.KEY, $_RSTR(1))
+
+	\VAR.ADD($TDD.FONT			, $TD.FONT			)
+	\VAR.ADD(@TDD.SX			, @TD.SX			)
+	\VAR.ADD(@TDD.SY			, @TD.SY			)
+	\VAR.ADD(@TDD.COLOR			, @TD.COLOR			)
+	\VAR.ADD(@TDD.COLOR2		, @TD.COLOR2		)
+	\VAR.ADD(@TDD.BOLD			, @TD.BOLD			)
+	\VAR.ADD(@TDD.SHADE.COLOR	, @TD.SHADE.COLOR	)
+	\VAR.ADD(@TDD.SHADE.X		, @TD.SHADE.X		)
+	\VAR.ADD(@TDD.SHADE.Y		, @TD.SHADE.Y		)
+	\VAR.ADD(@TDD.OUTLINE.COLOR	, @TD.OUTLINE.COLOR	)
+
+	//----------------------------------------------------------------
+	// 初期化
+	//----------------------------------------------------------------
+	$TD.FONT			= ""
+	@TD.SX				= 0
+	@TD.SY				= 0
+	@TD.COLOR			= 0
+	@TD.COLOR2			= 0
+	@TD.BOLD			= 0
+	@TD.SHADE.COLOR		= 0
+	@TD.SHADE.X			= 0
+	@TD.SHADE.Y			= 0
+	@TD.OUTLINE.COLOR	= 0
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■文字情報検索処理
+//  $_PSTR(1) : この文字列の中から検索する
+//
+//--------------------------------------------------------------------
+#=es.TDDEF.SEARCH
+{
+	STR[$chk]
+	\_strlower($_PSTR(1))($chk)
+	INT[@no]
+	LOOP[SET=@TDD.NUM]
+	{
+		IF[$chk==$TDD.DEF.KEY(@_LC)] @no=@_LC; LOOPBREAK[] IFEND[]
+	}
+	LOOPEND[]
+	IF[@no==0] \_mes("文字定義["+$chk+"]がありませんでした。");END[] IFEND[]
+
+//\_dmes($TDD.DEF.KEY(@_LC))
+	return[rint=@TDD.SX(@no)*65536+@TDD.SY(@no) rint2=@TDD.COLOR(@no) rint3=@TDD.COLOR2(@no) rint4=@TDD.BOLD(@no) rint5=@TDD.SHADE.X(@no)*65536+@TDD.SHADE.Y(@no) rint6=@TDD.SHADE.COLOR(@no) rint7=@TDD.OUTLINE.COLOR(@no) rstr8=$TDD.FONT(@no)]
+}
+

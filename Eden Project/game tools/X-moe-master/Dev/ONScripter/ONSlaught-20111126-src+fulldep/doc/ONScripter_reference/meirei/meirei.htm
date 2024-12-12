@@ -1,0 +1,1283 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+<title></title>
+<link rel="stylesheet" href="./default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>Function Categorization Table</h2>
+
+<table border="0">
+    <tr>
+        <td width="75" bgcolor="#FFCCCC"><font size="2">Predefined Syntax</font></td>
+        <td><font size="2">Keywords or labels with predefined functions</font></td>
+    </tr>
+    <tr>
+        <td width="75" bgcolor="#FFFFCC"><font size="2">F Commands</font></td>
+        <td><font size="2">Commands that may only be used in the definition block</font></td>
+    </tr>
+    <tr>
+        <td width="75" bgcolor="#CCFFFF"><font size="2">E Commands</font></td>
+        <td><font size="2">Commands that may only be used in the program block</font></td>
+    </tr>
+    <tr>
+        <td width="75" bgcolor="#CCFFCC"><font size="2">F/E Commands</font></td>
+        <td><font size="2">Commands that may be used in the program or the definition block</font></td>
+    </tr>
+    <tr>
+        <td width="75" bgcolor="#CCCCFF"><font size="2">Special Characters</font></td>
+        <td><font size="2">Special characters that may be used as command substitutes within displayed text blocks</font></td>
+    </tr>
+</table>
+
+<h5>Game Start/Reset/Quit</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFCCCC" class="line"><a
+        href="define.htm"><strong>*define</strong></a></td>
+        <td width="500" bgcolor="#FFCCCC" class="line">label denoting the start of the definition block</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFCCCC" class="line"><a
+        href="start.htm"><strong>*start</strong></a></td>
+        <td width="500" bgcolor="#FFCCCC" class="line">label denoting the start of the program block</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="game.htm" target="sc"><strong>game</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">end definition block and execute game</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="reset.htm" target="sc"><strong>reset</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">reset game</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="definereset.htm" target="sc"><strong>definereset</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">force total script reset</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="end.htm" target="sc"><strong>end</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">end game and close window</td>
+    </tr>
+</table>
+
+<h5>Syntax Markers</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFCCCC" class="line"><a
+        href="syosiki01.htm"><strong>*</strong></a></td>
+        <td width="500" bgcolor="#FFCCCC" class="line">prefix for labels</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFCCCC" class="line"><a
+        href="syosiki02.htm"><strong>;</strong></a></td>
+        <td width="500" bgcolor="#FFCCCC" class="line">prefix for comments</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFCCCC" class="line"><a
+        href="syosiki03.htm"><strong>:</strong></a></td>
+        <td width="500" bgcolor="#FFCCCC" class="line">write and execute multiple commands on a line</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFCCCC" class="line"><a
+        href="syosiki04.htm"><strong>%</strong></a></td>
+        <td width="500" bgcolor="#FFCCCC" class="line">prefix for numerical variables</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFCCCC" class="line"><a
+        href="syosiki05.htm"><strong>$</strong></a></td>
+        <td width="500" bgcolor="#FFCCCC" class="line">prefix for character variables</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFCCCC" class="line"><a
+        href="syosiki06.htm"><strong>?</strong></a></td>
+        <td width="500" bgcolor="#FFCCCC" class="line">prefix for array variables</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFCCCC" class="line"><a
+        href="syosiki07.htm"><strong>~</strong></a></td>
+        <td width="500" bgcolor="#FFCCCC" class="line">destination point for jumpf/jumpb</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="../insani/backquote.htm" target="sc"><strong>`</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">allow 1-byte-character display</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu04.htm" target="sc"><strong>/</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">ignore linefeed</td>
+    </tr>
+</table>
+
+<h5>Text Window</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="setwindow.htm" target="sc"><strong>setwindow</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">set up text window and character display attributes</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="setwindow2.htm" target="sc"><strong>setwindow2</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">modify text window appearnace</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="textoff.htm" target="sc"><strong>textoff</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">hide text window</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="texton.htm" target="sc"><strong>texton</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">show text window</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="windoweffect.htm" target="sc"><strong>windoweffect</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">specify an effect for the text window</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="erasetextwindow.htm" target="sc"><strong>erasetextwindow</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">toggle text display at effect runtime</td>
+    </tr>
+</table>
+
+<h5>Text Display</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="defaultfont.htm" target="sc"><strong>defaultfont</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">specify default font</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu05.htm" target="sc"><strong>!s</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">designate character display speed</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu06.htm" target="sc"><strong>#</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">change character color</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="textclear.htm" target="sc"><strong>textclear</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">clear displayed text</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="locate.htm" target="sc"><strong>locate</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">change the position of characters without changing the position of the text window</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="puttext.htm" target="sc"><strong>puttext</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">write out little indications (after if statements, for instance)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="br.htm" target="sc"><strong>br</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">insert a carriage return into the displayed text</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="textspeed.htm" target="sc"><strong>textspeed</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">change text display speed</td>
+    </tr>
+</table>
+
+<h5>Click Wait</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu01.htm" target="sc"><strong>@</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">enter click wait state</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu02.htm" target="sc"><strong>\</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">enter carriage return wait state</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="clickstr.htm" target="sc"><strong>clickstr</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">enter click wait state upon hitting the specified string</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu03.htm" target="sc">_</a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">ignore the next click</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="linepage.htm" target="sc"><strong>linepage</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">wait for click at the end of line</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="clickvoice.htm" target="sc"><strong>clickvoice</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">play a specified sound at time of click</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="autoclick.htm" target="sc"><strong>autoclick</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">continue to progress even in the absence of a click</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="click.htm" target="sc"><strong>click</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">enter click wait state without displaying the click wait cursor</td>
+    </tr>
+</table>
+
+<h5>Cursor</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="setcursor.htm" target="sc"><strong>setcursor</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">specify graphic file for click wait cursor</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="abssetcursor.htm" target="sc"><strong>abssetcursor</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">lock mouse position and specify graphic file for click wait cursor</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="mousecursor.htm" target="sc"><strong>mousecursor</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">specify graphic file for general mouse cursor (presently NOT recommended)</td>
+    </tr>
+</table>
+
+<h5>Image Display</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="transmode.htm" target="sc"><strong>transmode</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">change alpha blend transparency mode</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="underline.htm" target="sc"><strong>underline</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">set ground line for standing images</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="bgalia.htm" target="sc"><strong>bgalia</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">set parameters for a nonstandard background</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="humanz.htm" target="sc"><strong>humanz</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">designate overlap priority for sprites and standing images</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="windowback.htm" target="sc"><strong>windowback</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">insert text window at the same position as the standing image(s)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="bg.htm" target="sc"><strong>bg</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">set background image</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="ld.htm" target="sc"><strong>ld</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">set standing image</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="cl.htm" target="sc"><strong>cl</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">erase specified standing image</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="tal.htm" target="sc"><strong>tal</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">modify standing image transparency</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="print.htm" target="sc"><strong>print</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">display all images, removing those that should not be present</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="lsp.htm" target="sc"><strong>lsp</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">load sprite into memory so that it may be displayed</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="lsph.htm" target="sc"><strong>lsph</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">load sprite into memory, overwriting the last invalid sprite</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="csp.htm" target="sc"><strong>csp</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">delete sprite from memory</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="vsp.htm" target="sc"><strong>vsp</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">toggle sprite display (must be loaded via lsp/lsph first)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="spstr.htm" target="sc"><strong>spstr</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">change the text string on a complex button by rewriting the text sprite</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="msp.htm" target="sc"><strong>msp</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">change sprite position (method 1)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="amsp.htm" target="sc"><strong>amsp</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">change sprite position (method 2)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="cell.htm" target="sc"><strong>cell</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">manually designate the cell of a sprite</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="blt.htm" target="sc"><strong>blt</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">blit image onto screen instantaneously</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="ofscpy.htm" target="sc"><strong>ofscpy</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">transfer an image drawn by blt onto the offscreen buffer</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="repaint.htm" target="sc"><strong>repaint</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">redraw screen</td>
+    </tr>
+</table>
+
+<h5>Image Effects</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="effect.htm" target="sc"><strong>effect</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">designate effect</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="effectblank.htm" target="sc"><strong>effectblank</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">designate wait time after effect is over</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="effectcut.htm" target="sc"><strong>effectcut</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">toggle effect runtime during choice dialog</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="quake.htm" target="sc"><strong>quake</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">cause a quake effect onscreen</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="quakex.htm" target="sc"><strong>quakex</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">cause a horizontal shaking effect onscreen</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="quakey.htm" target="sc"><strong>quakey</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">cause a vertical shaking effect onscreen</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="monocro.htm" target="sc"><strong>monocro</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">make screen monochrome</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="nega.htm" target="sc"><strong>nega</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">make screen negative</td>
+    </tr>
+</table>
+
+<h5>Characters/Numbers/Bar Display</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu10.htm" target="sc"><strong>%</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">display contents of numerical variable</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu09.htm" target="sc"><strong>$</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">display contents of character variable</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="bar.htm" target="sc"><strong>bar</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">create and display the bar</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="barclear.htm" target="sc" 　　　><strong>barclear</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">clear the bar display
+        </td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="prnum.htm" target="sc"><strong>prnum</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">initialize a numerical label</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="prnumclear.htm" target="sc"><strong>prnumclear</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">clear a numerical label</td>
+    </tr>
+</table>
+
+<h5>Music/SFX Playback</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="cdfadeout.htm" target="sc"><strong>cdfadeout</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">designate CD-DA fadeout time</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="mp3fadeout.htm" target="sc"><strong>mp3fadeout</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">designate mp3 fadeout time</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="play.htm" target="sc"><strong>play</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">play CD-DA or MIDI</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="playonce.htm" target="sc"><strong>playonce</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">play specified CD-DA track or MIDI file only once</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="playstop.htm" target="sc"><strong>playstop</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">stop CD-DA or MIDI playback</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="wave.htm" target="sc"><strong>wave</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">play a WAV file only once</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="waveloop.htm" target="sc"><strong>waveloop</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">loop WAV file playback</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="wavestop.htm" target="sc"><strong>wavestop</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">stop WAV file playback</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="mp3.htm" target="sc"><strong>mp3</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">play specified mp3 file only once</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="mp3loop.htm" target="sc"><strong>mp3loop</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">loop mp3 file playback</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="mp3save.htm" target="sc"><strong>mp3save</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">if game saved amidst mp3 playback, when game is loaded, resume playback at that spot</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="dsound.htm" target="sc"><strong>dsound</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">declare that you are using DirectSound (not necessary in latest versions)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="dwave.htm" target="sc"><strong>dwave</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">play WAV file using DirectSound only once</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="dwaveloop.htm" target="sc"><strong>dwaveloop</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">loop WAV file using DirectSound</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="dwavestop.htm" target="sc"><strong>dwavestop</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">stop WAV file playback in DirectSound</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="dwaveload.htm" target="sc"><strong>dwaveload </strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">load WAV file into memory</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="dwaveplay.htm" target="sc"><strong>dwaveplay </strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">play a WAV file already in memory once</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="dwaveplayloop.htm" target="sc"><strong>dwaveplayloop</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">loop playback of a WAV file already in memory</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="stop.htm" target="sc"><strong>stop</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">stop all music playback</td>
+    </tr>
+</table>
+
+<h5>Movie Playback</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="avi.htm" target="sc"><strong>avi</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">playback an AVI file</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="mpegplay.htm" target="sc"><strong>mpegplay</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">playback an MPEG file</td>
+    </tr>
+</table>
+
+<h5>Choices</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="selectcolor.htm" target="sc"><strong>selectcolor</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">designate choice text color</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="selectvoice.htm" target="sc"><strong>selectvoice</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">designate sound to play upon choice select</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="select.htm" target="sc"><strong>select</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">set up a choice</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="selgosub.htm" target="sc"><strong>selgosub</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">set up a choice that jumps to a subroutine</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="selnum.htm" target="sc"><strong>selnum</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">display chosen choice and add its result to the specified numerical variable</td>
+    </tr>
+</table>
+
+<h5>Jump</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="goto.htm" target="sc"><strong>goto</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">jump to designated label</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="skip.htm" target="sc"><strong>skip</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">skip the next x lines of script</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="gosub.htm" target="sc"><strong>gosub</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">call a subroutine</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="return.htm" target="sc"><strong>return</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">return from a subroutine</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="jumpf.htm" target="sc"><strong>jumpf</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">jump to the position of the next ~ symbol</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="jumpb.htm" target="sc"><strong>jumpb</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">jump to the position of the last ~ symbol</td>
+    </tr>
+</table>
+
+<h5>Jump to Flag on Click</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="trap.htm" target="sc"><strong>trap</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">jump to specified label on left click</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="../meirei/lr_trap.htm" target="sc"><strong>lr_trap</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">jump to specified label on left or right click</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="../meirei/trap2.htm" target="sc"><strong>trap2</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">jump to specified label on left click when 「skip to next choice」 is set</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="../meirei/lr_trap2.htm" target="sc"><strong>lr_trap2</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">jump to specified label on left or right click when 「skip to next choice」 is set</td>
+    </tr>
+</table>
+
+<h5>Image Buttons</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="btndef.htm" target="sc"><strong>btndef</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">load button graphic file into memory.</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="btn.htm" target="sc"><strong>btn</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">initialize image as button (method 1)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="btnwait.htm" target="sc"><strong>btnwait</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">display image button and put it in click wait state (method 1)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="btnwait2.htm" target="sc"><strong>btnwait2</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">display image button and put it in click wait state (method 2)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="spbtn.htm" target="sc"><strong>spbtn</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">designate sprite as image button</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="getbtntimer.htm" target="sc"><strong>getbtntimer</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">acquire how much time has passed since we have entered btnwait into a numerical variable</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="btntime.htm" target="sc"><strong>btntime</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">create a time restraint for image button functionality</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="exbtn.htm" target="sc"><strong>exbtn</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">create a complex (composite) button</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="exbtn_d.htm" target="sc"><strong>exbtn_d</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">specify cursor behavior on utilization of a complex button</td>
+    </tr>
+</table>
+
+<h5>Wait/Timer</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu07.htm" target="sc"><strong>!d</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">wait for the specified time</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu08.htm" target="sc"><strong>!w</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">wait for the specified time, ignoring clicks</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="delay.htm" target="sc"><strong>delay</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">cause a time delay (method 1)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="wait.htm" target="sc"><strong>wait</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">cause a time delay (method 2)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="resettimer.htm" target="sc"><strong>resettimer</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">reset internal timer</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="waittimer.htm" target="sc"><strong>waittimer</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">wait until specified time (as counted by the internal time) elapses</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="gettimer.htm" target="sc"><strong>gettimer</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">get value of internal timer</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="spwait.htm" target="sc"><strong>spwait</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">wait until the designated sprite number's animation has ended</td>
+    </tr>
+</table>
+
+<h5>Variable Manipulation/Calculations</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="stralias.htm" target="sc"><strong>stralias</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">create a character string alias/filename alias</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="numalias.htm" target="sc"><strong>numalias</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">create a numerical variable alias</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="intlimit.htm" target="sc"><strong>intlimit</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">set maximum and minimum for numerical variables</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="dim.htm" target="sc"><strong>dim</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">declare an array variable</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="mov.htm" target="sc"><strong>mov</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">load a value into a numerical or character variable</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="movn.htm" target="sc"><strong>mov3～mov10</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">load a value into multiple numerical or character variables</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="movl.htm" target="sc"><strong>movl</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">load an entire line into an array</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="add.htm" target="sc"><strong>add</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">add numbers</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="sub.htm" target="sc"><strong>sub</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">subtract numbers</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="inc.htm" target="sc"><strong>inc</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">increment variable</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="dec.htm" target="sc"><strong>dec</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">decrement variable</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="mul.htm" target="sc"><strong>mul</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">multiply numbers</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="div.htm" target="sc"><strong>div</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">divide numbers</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="mod.htm" target="sc"><strong>mod</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">mod (note that this is a programmatic mod, not a true modulo)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="rnd.htm" target="sc"><strong>rnd</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">create a random number (method 1)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="rnd2.htm" target="sc"><strong>rnd2</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">create a random number (method 2)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="itoa.htm" target="sc"><strong>itoa</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">change a numerical variable into a character or character string</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="atoi.htm" target="sc"><strong>atoi</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">change a character variable into a number</td>
+    </tr>
+</table>
+
+<h5>Conditional Expressions/Loops</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="if.htm" target="sc"><strong>if</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">if(conditional statement) { commands }</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="notif.htm" target="sc"><strong>notif</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">if (!(conditional statement)) { commands }</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="cmp.htm" target="sc"><strong>cmp</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">compare character variables</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="fchk.htm" target="sc"><strong>fchk</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">check whether specified image tag has been read or not</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="lchk.htm" target="sc"><strong>lchk</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">check whether specified label has been read or not</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="for.htm" target="sc"><strong>for～next</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">loop commands</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="break.htm" target="sc"><strong>break</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">break out of a for loop</td>
+    </tr>
+</table>
+
+<h5>Right-Click Functionality</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="rmenu.htm" target="sc"><strong>rmenu</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">initialize and display a menu upon right click</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="menusetwindow.htm" target="sc"><strong>menusetwindow</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">initialize window for right click menu</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="savename.htm" target="sc"><strong>savename</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">specify save filename for right click menu</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="menuselectcolor.htm" target="sc"><strong>menuselectcolor</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">specify color for right click menu text</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="menuselectvoice.htm" target="sc"><strong>menuselectvoice</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">specify system sound for right click menu</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="rlookback.htm" target="sc"><strong>rlookback</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">jump to Log Mode upon right click</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="roff.htm" target="sc"><strong>roff</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">ignore right clicks</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="rmode.htm" target="sc"><strong>rmode</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">toggle availability of right clicks on and off</td>
+    </tr>
+</table>
+
+<h5>Log Mode</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="lookbackbutton.htm" target="sc"><strong>lookbackbutton</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">specify image button for entry into Log Mode</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="lookbackcolor.htm" target="sc"><strong>lookbackcolor</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">designate text color for Log Mode</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="lookbackvoice.htm" target="sc"><strong>lookbackvoice</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">play a sound on page up/page down in Log Mode</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="lookbackflush.htm" target="sc"><strong>lookbackflush</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">clear Log Mode</td>
+    </tr>
+</table>
+
+<h5>Skip Mode</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="kidokuskip.htm" target="sc"><strong>kidokuskip</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">turn Skip Mode on</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="mode_wave_demo.htm" target="sc"><strong>mode_wave_demo</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">play WAVE files even when 「skip to next choice」 is specified</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="skipoff.htm" target="sc"><strong>skipoff</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">turn Skip Mode off</td>
+    </tr>
+</table>
+
+<h5>File Access Logs/Global Variables</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="filelog.htm" target="sc"><strong>filelog</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">attempt to create/utilize file access log</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="globalon.htm" target="sc"><strong>globalon</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">allow for use of global variables</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="labellog.htm" target="sc"><strong>labellog</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">access log of labels</td>
+    </tr>
+</table>
+
+<h5>Save/Load</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="savenumber.htm" target="sc"><strong>savenumber</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">modify limit of number of saves</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="savegame.htm" target="sc"><strong>savegame</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">save game in designated save file</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="loadgame.htm" target="sc"><strong>loadgame</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">load game from designated save file</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="savefileexist.htm" target="sc"><strong>savefileexist</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">check whether save file exists or not</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="saveon.htm" target="sc"><strong>saveon</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">enter save dialog</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="saveoff.htm" target="sc"><strong>saveoff</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">escape from save dialog</td>
+    </tr>
+</table>
+
+<h5>Additional Functions</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="mesbox.htm" target="sc"><strong>mesbox</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">create a message box</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="inputstr.htm" target="sc"><strong>inputstr</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">wait for character input by player (method 1)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="input.htm" target="sc"><strong>input</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">wait for character input by player (method 2)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="clickpos.htm" target="sc"><strong>clickpos</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">get coordinates of cursor on click</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="systemcall.htm" target="sc"><strong>systemcall</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">perform an action listed in the right click menu</td>
+    </tr>
+</table>
+
+<h5>Mode Customization Functions</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="automode.htm" target="sc"><strong>automode</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">allow for use of Auto Mode</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="automode_time.htm" target="sc"><strong>automode_time</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">specify character delay time in Auto Mode when sounds are not being played</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="defvoicecol.htm" target="sc"><strong>defvoicevol</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">set default volume for voices (new command)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="defsevol.htm" target="sc"><strong>defsevol</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">set default volume for SFX</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="defmp3vol.htm" target="sc"><strong>defmp3vol</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">set default volume for mp3 files</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="mode_saya.htm" target="sc"><strong>mode_saya</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">allow for use of the mode seen in the doujin game "Saya ~Labyrinth of Immorality~".</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="automode.htm" target="sc"><strong>mode_ext</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">allow for use of the Auto Mode utilized by "Gin'iro"</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="mode800.htm" target="sc"><strong>mode800</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">set screen size to 800x600</td>
+    </tr>
+</table>
+
+<h5>Plugins/Archives</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="soundpressplgin.htm" target="sc"><strong>soundpressplgin</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">load compressed audio functionality via plugin/dll (nowadays one can just use the DirectSound commands)</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="spi.htm" target="sc"><strong>spi</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">load compressed image functionality via plugin/dll</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="arc.htm" target="sc"><strong>arc</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">use specified archive</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="nsa.htm" target="sc"><strong>nsa</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">turn NSA archive access on</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="nsadir.htm" target="sc"><strong>nsadir</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">designate folder where NSA archives are located</td>
+    </tr>
+</table>
+
+<h5>Console</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="versionstr.htm" target="sc"><strong>versionstr</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">modify version string</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="caption.htm" target="sc"><strong>caption</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">modify window title</td>
+    </tr>
+</table>
+
+<h5>Data Parsing</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="date.htm" target="sc"><strong>date</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">Get year, month, and day</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="time.htm" target="sc"><strong>time</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">get current time by hours, minutes, and seconds</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="savetime.htm" target="sc"><strong>savetime</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">get the date that the specified savefile was saved on</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="getversion.htm" target="sc"><strong>getversion</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">get the version string of the current NScripter build</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="getreg.htm" target="sc"><strong>getreg</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">get a value from the Windows registry</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFCC" class="line"><a
+        href="getini.htm" target="sc"><strong>getini</strong></a></td>
+        <td width="500" bgcolor="#CCFFCC" class="line">read an ini file</td>
+    </tr>
+</table>
+
+<h5>Menubar Functions</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="killmenu.htm" target="sc"><strong>killmenu</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">erase menubar</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><a
+        href="defaultspeed.htm" target="sc"><strong>defaultspeed</strong></a></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">designate text display speed as selectable on the menubar</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCCCFF" class="line"><a
+        href="tokusyu11.htm" target="sc"><strong>!sd</strong></a></td>
+        <td width="500" bgcolor="#CCCCFF" class="line">use the text display speed handed down by the defaultspeed command</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="menu_full.htm" target="sc"><strong>menu_full</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">enter fullscreen mode</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="menu_window.htm" target="sc"><strong>menu_window</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">enter window mode</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="menu_click_def.htm" target="sc"><strong>menu_click_def</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">enter default menubar operation mode</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><a
+        href="menu_click_page.htm" target="sc"><strong>menu_click_page</strong></a></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">enter a mode in which menu displays with every page</td>
+    </tr>
+</table>
+
+<h5>System Customization Functions</h5>
+
+<table border="0" cellpadding="3" cellspacing="0" class="line">
+    <tr>
+        <td width="100" bgcolor="#FFCCCC" class="line"><strong>*customsel</strong></td>
+        <td width="500" bgcolor="#FFCCCC" class="line">a label that interacts with the csel command</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#FFFFCC" class="line"><strong>textgosub
+        </strong></td>
+        <td width="500" bgcolor="#FFFFCC" class="line">generally used to provide a popup text during click wait state within system customization</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><strong>csel</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">delineate choices within system customization</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><strong>cselbtn</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">create buttons with choice text</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><strong>getcselnum</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">get number of csel choice branches</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><strong>cselgoto</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">jump to a label created by csel</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><strong>textbtnwait</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">enter click wait state as defined by customwait</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><strong>selectbtnwait</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">enter click wait state as defined by customsel</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><strong>texec</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">delete text while waiting for repagination</td>
+    </tr>
+    <tr>
+        <td width="100" bgcolor="#CCFFFF" class="line"><strong>getcursorpos</strong></td>
+        <td width="500" bgcolor="#CCFFFF" class="line">get current position of text cursor</td>
+    </tr>
+</table>
+</body>
+</html>

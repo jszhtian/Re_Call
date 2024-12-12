@@ -1,0 +1,33 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>arc</h2>
+<h3>arc &lt;character string&gt;</h3>
+<p>
+Designate archive decompression plugin.<br>
+The character string's form is "&lt;archive name&gt;|&lt;plugin dll name&gt;".<br>
+Although it will dearchive sounds, music, and images, it will not run scripts.<br>
+<br>
+　　　EX）arc "arc.sar|scrunarc.dll"<br>
+<br>
+By combining this with registry read commands, you can do many things.  For instance, you could very easily read the registry, find out that the machine had "To Heart" installed, and  designate the proper archive to decompress accordingly.<br>
+<br>
+　　　(sample source)<br>
+	getreg $0,"software\leaf\toheart","datadir"<br>
+	add $0,"\lvns3dat.pak|axlfpak.spi"<br>
+	arc $0<br>
+</p>
+
+</body>
+</html>

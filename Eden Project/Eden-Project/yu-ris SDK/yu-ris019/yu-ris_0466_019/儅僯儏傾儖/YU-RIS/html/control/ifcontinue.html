@@ -1,0 +1,212 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">制御系命令</A>＞IFCONTINUE［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="go.html">GO［］</A>
+　<A HREF="gosub.html">GOSUB［］</A>
+　<A HREF="return.html">RETURN［］</A>
+　<A HREF="loop.html">LOOP［］</A>
+　<A HREF="loopbreak.html">LOOPBREAK［］</A>
+　<A HREF="loopcontinue.html">LOOPCONTINUE［］</A>
+　<A HREF="loopend.html">LOOPEND［］</A>
+　<A HREF="wait.html">WAIT［］</A>
+</TD></TR>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="if.html">IF［］</A>
+　<A HREF="else.html">ELSE［］</A>
+　<A HREF="ifend.html">IFEND［］</A>
+　<A HREF="ifbreak.html">IFBREAK［］</A>
+　<A HREF="ifcontinue.html">IFCONTINUE［］</A>
+　<A HREF="task.html">TASK［］</A>
+　<A HREF="taskinfo.html">TASKINFO［］</A>
+　<A HREF="taskend.html">TASKEND［］</A>
+　<A HREF="end.html">END［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=500 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■条件分岐命令 IF[ ]～ELSE[ ]～IFEND[ ]</FONT>
+<FONT CLASS=t20>
+
+指定した条件の真偽により、分岐します。
+
+式を検証し、それが正しい場合(真の場合)には、
+IF命令の次の位置からELSE命令が来るまでの間の命令を実行し、
+正しくない場合(偽の場合)には、ELSE命令の位置までジャンプし、
+その次の位置からIFEND命令が来るまでの間の命令を実行します。
+
+
+<FONT CLASS=t70>IF[<FONT color=#DDDDFF> 式 </FONT>]
+<FONT CLASS=t40>  ・
+  ・<FONT CLASS=t34> (条件が真のとき、この中の命令が実行される)</FONT>
+  ・
+<FONT CLASS=t70>ELSE[ ]</FONT>
+  ・
+  ・<FONT CLASS=t34> (条件が偽のときにはこの中の命令が実行される)</FONT>
+  ・
+<FONT CLASS=t70>IFEND[ ]</FONT></FONT></FONT>
+
+
+条件が真の時の式だけで良い場合、ELSE の記述を省略できます。
+
+<FONT CLASS=t70>IF[<FONT color=#DDDDFF> 式 </FONT>]
+<FONT CLASS=t40>  ・
+  ・<FONT CLASS=t34> (条件が真のとき、この中の命令が実行される)</FONT>
+  ・
+<FONT CLASS=t70>IFEND[ ]</FONT></FONT></FONT>
+
+
+また、次のような書き方もできます。
+
+<FONT CLASS=t70>IF[<FONT color=#DDDDFF> 式１ </FONT>]
+<FONT CLASS=t40>  ・
+  ・<FONT CLASS=t34> (式１の条件が真のとき、この中の命令が実行される)</FONT>
+  ・
+<FONT CLASS=t70>ELSE[<FONT color=#DDDDFF> 式２ </FONT>]</FONT>
+  ・
+  ・<FONT CLASS=t34> (式１の条件が偽で、式２の条件が真のとき、この中の命令が実行される)</FONT>
+  ・
+<FONT CLASS=t70>ELSE[ ]</FONT>
+  ・
+  ・<FONT CLASS=t34> (上記の全ての式が偽のときには、この中の命令が実行される)</FONT>
+  ・
+<FONT CLASS=t70>IFEND[ ]</FONT></FONT></FONT>
+
+
+
+条件式の書き方としては、以下のようになります。
+
+
+<TABLE CLASS=T1 BORDER=1 BGCOLOR=#BBFFFF CELLSPACING=1 CELLPADDING=1>
+<TR BGCOLOR=#000000>
+<TD><FONT CLASS=t60>@a == @b</FONT></TD>
+<TD><FONT CLASS=t60>@aは@bと等しい</FONT></TD>
+</TR>
+<TR BGCOLOR=#000000>
+<TD><FONT CLASS=t60>@a != @b</FONT></TD>
+<TD><FONT CLASS=t60>@aは@bと等しくない</FONT></TD>
+</TR>
+<TR BGCOLOR=#000000>
+<TD WIDTH=100><FONT CLASS=t60>@a > @b</FONT></TD>
+<TD WIDTH=240><FONT CLASS=t60>@aは@bより大きい</FONT></TD>
+</TR>
+<TR BGCOLOR=#000000>
+<TD><FONT CLASS=t60>@a >= @b</FONT></TD>
+<TD><FONT CLASS=t60>@aは@b以上</FONT></TD>
+</TR>
+<TR BGCOLOR=#000000>
+<TD WIDTH=100><FONT CLASS=t60>@a < @b</FONT></TD>
+<TD WIDTH=240><FONT CLASS=t60>@aは@bより小さい</FONT></TD>
+</TR>
+<TR BGCOLOR=#000000>
+<TD><FONT CLASS=t60>@a <= @b</FONT></TD>
+<TD><FONT CLASS=t60>@aは@b以下</FONT></TD>
+</TR>
+<TR BGCOLOR=#000000>
+<TD><FONT CLASS=t60>(式1) && (式2)</FONT></TD>
+<TD><FONT CLASS=t60>(式１) かつ (式２)</FONT></TD>
+</TR>
+<TR BGCOLOR=#000000>
+<TD><FONT CLASS=t60>(式1) || (式2)</FONT></TD>
+<TD><FONT CLASS=t60>(式1) または (式2)</FONT></TD>
+</TR>
+</TABLE>
+
+
+<FONT CLASS=t40>例</FONT>
+
+<FONT CLASS=t60>IF[@A == 5]</FONT>  ← ＠Ａが５と等しいなら（＠Ａが５なら）真
+<FONT CLASS=t60>IF[@A != 5]</FONT>  ← ＠Ａが５と等しくないなら（＠Ａが５じゃないなら）真
+<FONT CLASS=t60>IF[@A > 5]</FONT>    ← ＠Ａが５より大きいなら真
+<FONT CLASS=t60>IF[@A >= 5]</FONT>  ← ＠Ａが５以上なら真
+<FONT CLASS=t60>IF[@A < 5]</FONT>    ← ＠Ａが５より小さいなら真
+<FONT CLASS=t60>IF[@A <= 5]</FONT>  ← ＠Ａが５以下なら真
+<FONT CLASS=t60>IF[@A>=5 && @B<3]</FONT>  ← ＠Ａが５以上で、かつ＠Ｂが３より小さければ真
+<FONT CLASS=t60>IF[@A>=5 || @B<3]</FONT>  ← ＠Ａが５以上か、または＠Ｂが３より小さければ真
+
+
+
+<FONT CLASS=t40>例２</FONT>
+
+文字列同士の比較評価をおこなうことも出来ます。
+
+<FONT CLASS=t60>IF[$A == "りんご"]</FONT>  ← ＄Ａの内容が「りんご」なら真
+<FONT CLASS=t60>IF[$A != "みかん"]</FONT>  ← ＄Ａの内容が「みかん」ではないなら真
+<FONT CLASS=t60>IF[$A == $B + $C]</FONT>    ← ＄Ａの内容が＄Ｂと＄Ｃを連結したものと同じなら真
+
+
+
+
+IF文の中にさらにIF文を書くことが出来ます(IFのネスト)。
+IF文は最大16回までネストすることが出来ます。
+
+
+
+IF ブロックの中で、IFBREAK 命令を実行すると、その時点で IF ブロックを抜け、
+次の IFEND までジャンプします。
+
+<FONT CLASS=t70>IF[<FONT color=#DDDDFF> 式 </FONT>]
+<FONT CLASS=t40>      ・
+      ・</FONT>
+   IFBREAK[ ]<FONT CLASS=t34> (ここで、IFEND まで飛ぶ)</FONT>
+<FONT CLASS=t40>      ・
+      ・</FONT>
+<FONT CLASS=t70>IFEND[ ]</FONT></FONT>
+
+
+
+IF ブロックの中で、IFCONTINUE 命令を実行すると、直前の IF 命令まで戻り、
+IF 命令からやり直します。
+
+<FONT CLASS=t70>IF[<FONT color=#DDDDFF> 式 </FONT>]
+<FONT CLASS=t40>      ・
+      ・</FONT>
+   IFCONTINUE[ ]<FONT CLASS=t34> (ここで、IF まで戻る)</FONT>
+<FONT CLASS=t40>      ・
+      ・</FONT>
+<FONT CLASS=t70>IFEND[ ]</FONT></FONT>
+
+
+
+また、LV キーワードを使って、IFBREAK や IFCONTINUE で戻る際のネストレベルを
+設定することもできます。
+
+<FONT CLASS=t70>IF[<FONT color=#DDDDFF> 式 </FONT>]
+<FONT CLASS=t40>      ・
+      ・</FONT>
+<FONT CLASS=t70>   IF[<FONT color=#DDDDFF> 式 </FONT>]
+<FONT CLASS=t40>           ・
+           ・</FONT>
+      IFBREAK[LV=2]<FONT CLASS=t34> (ここで、いきなり※１の位置まで飛ぶ)</FONT>
+<FONT CLASS=t40>           ・
+           ・</FONT>
+<FONT CLASS=t70>   IFEND[ ]</FONT></FONT>
+<FONT CLASS=t40>      ・
+      ・</FONT>
+<FONT CLASS=t70>IFEND[ ]<FONT CLASS=t34> // ※１</FONT></FONT></FONT>
+
+
+IFBREAK 命令で、通常はレベルが１段階戻るところを、LV=2 とすることで、
+２段階ネストレベルが戻ります。
+
+
+
+
+</FONT></TD>
+<TD WIDTH=270 VALIGN=TOP>
+<IMG SRC="../img/if_001.jpg" WIDTH=270 HEIGHT=226><BR><BR>
+</TD></TR></TABLE>
+
+
+</BODY></HTML>

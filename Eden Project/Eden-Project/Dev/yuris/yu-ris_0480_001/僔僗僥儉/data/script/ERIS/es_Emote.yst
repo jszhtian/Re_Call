@@ -1,0 +1,372 @@
+//============================================================================
+// EMVO
+//============================================================================
+#=es.EMOTE.EMVO
+{
+	STR[$str=$_PSTR(1)]
+	STR[$lid=$_PSTR(2)]
+
+	//区切り文字数を調べる
+	GOSUB[#=es.EMOTE.STRCNT pstr=$str pstr2=\EM.SEP]
+	INT[@VARNUM = @_RINT(1) / 3] //変数の数 = 区切り文字数/3
+
+	INT[@pos]
+	STR[$tmp]
+	INT[@val]
+
+	STR[$VARNAME]
+	INT[@CNO]
+	INT[@PARAM]
+
+	@VARNUM=1 ///x現状１つ
+	LOOP[SET=@VARNUM]
+	{
+		//変数名
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($VARNAME)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//キャラ番号
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@CNO = @($tmp)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//パラメータ
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@val = @($tmp)
+		@PARAM = @val / 100.0
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+//		\_dmes("$VARNAME = "+$VARNAME+", @CNO = "+$(@CNO)+", @PARAM = "+$(@PARAM))
+	}
+	LOOPEND[]
+
+	return[rstr=$VARNAME rint2=@CNO rflt3=@PARAM]
+}
+
+
+//============================================================================
+// EMV
+//============================================================================
+#=es.EMOTE.EMV
+{
+	STR[$str=$_PSTR(1)]
+	STR[$lid=$_PSTR(2)]
+
+	//区切り文字数を調べる
+	GOSUB[#=es.EMOTE.STRCNT pstr=$str pstr2=\EM.SEP]
+	INT[@VARNUM = @_RINT(1) / 3] //変数の数 = 区切り文字数/3
+
+	INT[@pos]
+	STR[$tmp]
+	INT[@val]
+
+	STR[$VARNAME]
+	FLT[@VARVAL]
+	INT[@TIME]
+
+/*
+	//それまでの演出をスキップする.
+	INT[@an]
+	EMOTEINFO[ID=$lid ANIMATION=1 LET=@an]
+	IF[@an]
+		EMOTE[ID=$lid SKIP=1]
+	IFEND[]
+*/
+
+	LOOP[SET=@VARNUM]
+	{
+		//変数名
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($VARNAME)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//値
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@val = @($tmp)
+		@VARVAL = @val / 100.0
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//時間
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@TIME = @($tmp)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+//		\_dmes("$VARNAME = "+$VARNAME+", @VARVAL = "+$(@VARVAL)+", @TIME = "+$(@TIME))
+
+		EMOTE[ID=$lid VAR=$VARNAME VAR2=@VARVAL VARNUM=1 TIME=@TIME]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+//============================================================================
+// EMP
+//============================================================================
+#=es.EMOTE.EMP
+{
+	STR[$str=$_PSTR(1)]
+	STR[$lid=$_PSTR(2)]
+
+	//区切り文字数を調べる
+	GOSUB[#=es.EMOTE.STRCNT pstr=$str pstr2=\EM.SEP]
+	INT[@VARNUM = @_RINT(1) / 3] //変数の数 = 区切り文字数/3
+
+	INT[@pos]
+	STR[$tmp]
+	INT[@val]
+
+	STR[$TLNAME]
+	INT[@TIME]
+	INT[@RATIO]
+
+
+	@VARNUM=1 ///x現状１つ
+	LOOP[SET=@VARNUM]
+	{
+		//変数名
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($TLNAME)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//時間
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@TIME = @($tmp)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//レート
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@val = @($tmp)
+		@RATIO = @val / 100.0
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+//		\_dmes("$TLNAME = "+$TLNAME+", @TIME = "+$(@TIME)+", @RATIO = "+$(@RATIO))
+
+		EMOTE[ID=$lid LABEL=$TLNAME PLAY=1] //通常再生
+	}
+	LOOPEND[]
+
+	return[rstr=$TLNAME]
+}
+
+
+//============================================================================
+// EMPA
+//============================================================================
+#=es.EMOTE.EMPA
+{
+	STR[$str=$_PSTR(1)]
+	STR[$lid=$_PSTR(2)]
+
+	//区切り文字数を調べる
+	GOSUB[#=es.EMOTE.STRCNT pstr=$str pstr2=\EM.SEP]
+	INT[@VARNUM = @_RINT(1) / 3] //変数の数 = 区切り文字数/3
+
+	INT[@pos]
+	STR[$tmp]
+	INT[@val]
+
+	STR[$TLNAME]
+	INT[@TIME]
+	INT[@RATIO]
+
+
+	@VARNUM=1 ///x現状１つ
+	LOOP[SET=@VARNUM]
+	{
+		//変数名
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($TLNAME)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//時間
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@TIME = @($tmp)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//レート
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@val = @($tmp)
+		@RATIO = @val / 100.0
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+//		\_dmes("$TLNAME = "+$TLNAME+", @TIME = "+$(@TIME)+", @RATIO = "+$(@RATIO))
+
+		EMOTE[ID=$lid LABEL=$TLNAME PLAY=2 TIME=@TIME RATIO=@RATIO*100] //足し込み再生
+	}
+	LOOPEND[]
+
+	return[rstr=$TLNAME rint2=@RATIO*100]
+}
+
+
+//============================================================================
+// EMS
+//============================================================================
+#=es.EMOTE.EMS
+{
+	STR[$str=$_PSTR(1)]
+	STR[$lid=$_PSTR(2)]
+
+	//区切り文字数を調べる
+	GOSUB[#=es.EMOTE.STRCNT pstr=$str pstr2=\EM.SEP]
+	INT[@VARNUM = @_RINT(1) / 3] //変数の数 = 区切り文字数/3
+
+	INT[@pos]
+	STR[$tmp]
+	INT[@val]
+
+	STR[$TLNAME]
+	INT[@TIME]
+	INT[@RATIO]
+
+
+	@VARNUM=1 ///x現状１つ
+	LOOP[SET=@VARNUM]
+	{
+		//変数名
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($TLNAME)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//時間
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@TIME = @($tmp)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//レート
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@val = @($tmp)
+		@RATIO = @val / 100.0
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+//		\_dmes("$TLNAME = "+$TLNAME+", @TIME = "+$(@TIME)+", @RATIO = "+$(@RATIO))
+
+		EMOTE[ID=$lid LABEL=$TLNAME STOP=1]
+	}
+	LOOPEND[]
+
+	return[rstr=$TLNAME]
+}
+
+
+//============================================================================
+// EMSA
+//============================================================================
+#=es.EMOTE.EMSA
+{
+	STR[$str=$_PSTR(1)]
+	STR[$lid=$_PSTR(2)]
+
+	//区切り文字数を調べる
+	GOSUB[#=es.EMOTE.STRCNT pstr=$str pstr2=\EM.SEP]
+	INT[@VARNUM = @_RINT(1) / 3] //変数の数 = 区切り文字数/3
+
+	INT[@pos]
+	STR[$tmp]
+	INT[@val]
+
+	STR[$TLNAME]
+	INT[@TIME]
+	INT[@RATIO]
+
+
+	@VARNUM=1 ///x現状１つ
+	LOOP[SET=@VARNUM]
+	{
+		//変数名
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($TLNAME)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//時間
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@TIME = @($tmp)
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+		//レート
+		\_findstrleft($str, \EM.SEP)(@pos)
+		\_strleft($str, @pos-1)($tmp)
+		@val = @($tmp)
+		@RATIO = @val / 100.0
+
+		\_strmid($str, @pos+1, 99999)($str)
+
+//		\_dmes("$TLNAME = "+$TLNAME+", @TIME = "+$(@TIME)+", @RATIO = "+$(@RATIO))
+
+		EMOTE[ID=$lid LABEL=$TLNAME STOP=2 TIME=@TIME]
+	}
+	LOOPEND[]
+
+	return[rstr=$TLNAME]
+}
+
+
+//============================================================================
+// 
+//============================================================================
+#=es.EMOTE.CFG.SET
+{
+	EMOTE[HAIR=@T(51,01)*@es.GSD(131,01)/256]
+	EMOTE[BUST=@T(51,02)*@es.GSD(131,02)/256]
+	EMOTE[PARTS=@T(51,03)*@es.GSD(131,03)/256]
+	EMOTE[SMOOTH=@es.GSD(131,04)]
+
+	return[]
+}
+
+
+
+//============================================================================
+//文字列内の特定文字の数を取得
+//============================================================================
+#=es.EMOTE.STRCNT
+{
+	STR[$str=$_PSTR(1)]
+	STR[$chk=$_PSTR(2)]
+
+	INT[@num]
+	INT[@len]
+	\_strlen($str)(@len)
+
+	LOOP[SET=@len]
+	{
+		\_strmid($str, @_LC, 1)
+		IF[$_RSTR(1)==$chk] @num+=1 IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@num]
+}
+
+

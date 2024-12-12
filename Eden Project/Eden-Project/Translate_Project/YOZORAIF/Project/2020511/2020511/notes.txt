@@ -1,0 +1,53 @@
+解压到根目录就好
+运行 advhd_u8_pnafix.exe 以用utf-8读取
+
+在 lua 文件夹下面
+font.lua 中可以改游戏字体 我写了一些注释
+quiz.lua 拿来汉化谜题
+等正式发布的时候再把这个打包进 script.arc
+暂时这样方便
+
+我整体过了一遍
+现在应该没啥问题了
+
+对了 设置的文字汉化 需要修图 假如要汉化 我再去提取出来
+
+不过有个bug比较奇怪
+yozora_IF_com_009d 的 我将笔递给她们、两个人开始认真的盯着短签。
+这一行之后程序有概率会崩掉 但是在这一行存档出去再进去玩下去就不会崩掉
+可是我测试了原版 原版也崩掉了
+不知道是自带bug 还是因为我在测试的时候存档是混中日的 
+暂时没找到原因
+
+extract_neat 里
+是我重写了解包 打包等功能
+(对我来讲代码干净了很多..当然也修了蛮多bug)
+使用是 cmd cd到这个目录
+或是在这个目录shift加右键打开powershell
+然后 ruby xxx.rb 参数 
+
+ruby extract.rb Rio1
+把Rio1解包到 extract/Rio1 下面
+
+ruby extract_ws2.rb Rio1
+把 extract/Rio1 里的ws2中文本提取到 extract/Rio1/oritxts/
+每个ws2对应一个txt 格式就是
+文本
+文本
+角色名
+文本
+...
+
+ruby pack_ws2.rb Rio1
+把 extract/Rio1/reptxts 下的文本打包到 extract/Rio1/rep/
+此步需要原ws2文件存在
+
+ruby fix_ws2.rb
+在打包为ws2后对某几个ws2进行修正
+因为有些它里面是绝对寻址 尺寸不一会导致表现不正常 修修ok
+
+ruby pack.rb Rio1
+打包 Rio1 到当前目录 Rio1.arc
+会检查 extract/Rio1/rep/ 下有没有同名文件 有则替换
+
+rorl.rb 是一个模块

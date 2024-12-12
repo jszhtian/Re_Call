@@ -1,0 +1,1 @@
+for %%a in (*.png) do BGITextureConvert.exe e %%a

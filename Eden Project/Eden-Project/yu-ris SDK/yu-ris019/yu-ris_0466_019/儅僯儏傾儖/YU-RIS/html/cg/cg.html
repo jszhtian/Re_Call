@@ -1,0 +1,137 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">CG系命令</A>＞<B CLASS=t30>CG［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="cg.html">CG［］</A>
+　<A HREF="cgact.html">CGACT［］</A>
+　<A HREF="cginfo.html">CGINFO［］</A>
+　<A HREF="cgend.html">CGEND［］</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■ＣＧレイヤ設定命令 CG[ ]</FONT>
+<FONT CLASS=t20>
+
+ＣＧレイヤに画像をロードしたり、ＣＧレイヤの属性を設定します。
+
+対応している画像ファイル形式は BMP, PNG, JPG, GIF ファイルです。
+・BMPファイルは32bitBMP(24bit画像＋α画像)に対応、またPNG, GIFファイルも透過画像に対応しています。(内部マスク指定)
+
+※β4では、アニメーションGIF のフレーム番号を指定しての表示や、AVI の表示は出来なくなりました。
+  ご了承ください。
+
+
+●レイヤセットについて
+
+レイヤセットとは、Windows で言うところの、
+ファイル（レイヤ）を入れておくフォルダ（レイヤセット）のようなものです。
+
+例として、「A_FOLDER」というレイヤセットと、その中に「A1」「A2」「A3」の３つのレイヤが存在したとします。
+「A_FOLDER」の不透明度を128に設定した場合、それ以下の「A1」「A2」「A3」全てのレイヤを“レイヤ合成したもの”が
+不透明度128で表示されることになります。
+「A_FOLDER」を E = 0（無効）にした場合は、「A1」「A2」「A3」全て表示されなくなります。
+また、CGACT 命令の COPY キーワードを利用すれば、「A1」「A2」「A3」を“レイヤ合成したもの”を、複製できます。
+（スクリーンショット機能）
+
+また他にも、レイヤセットのサイズを設定することで範囲マスクとしても使えたりできます。
+
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>ID = 文字列</FONT></TD><TD><FONT CLASS=t40>レイヤＩＤを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FILE = ファイル名</FONT></TD><TD><FONT CLASS=t40>読み込む画像ファイルを指定。 ※ FILE="" で1x1サイズの黒画像生成</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>E = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤの有効(１)／無効(０)を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>MID = 文字列</FONT></TD><TD><FONT CLASS=t40>マスクとして適用するレイヤＩＤを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>A = 値(0～256)</FONT></TD><TD><FONT CLASS=t40>レイヤの不透明度を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>T = 値(0～256)</FONT></TD><TD><FONT CLASS=t40>トランジション進行度を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>TID = 文字列</FONT></TD><TD><FONT CLASS=t40>トランジションレイヤＩＤを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>TA = 値(0～256)</FONT></TD><TD><FONT CLASS=t40>トランジション精度を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>X = 値</FONT></TD><TD><FONT CLASS=t40>レイヤのＸ座標を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Y = 値</FONT></TD><TD><FONT CLASS=t40>レイヤのＹ座標を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Z = 値</FONT></TD><TD><FONT CLASS=t40>レイヤの優先順位（Ｚ）を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SX = 値</FONT></TD><TD><FONT CLASS=t40>レイヤセットの幅(Ｘ)を指定　※レイヤセットに対してのみ有効</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SY = 値</FONT></TD><TD><FONT CLASS=t40>レイヤセットの高さ(Ｙ)を指定　※レイヤセットに対してのみ有効</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>MODE=値(0～18)</FONT></TD><TD><FONT CLASS=t40>描画モードを設定<BR>0=通常／1=加算／2=減算／3=乗算／4=除算／5=スクリーン／<BR>6=比較(明)／7=比較(暗)／8=差分／9=除外／10=オーバーレイ／<BR>11=覆い焼きカラー／12=焼き込みカラー／13=焼き込みリニア／<BR>14=ハードライト／15=ソフトライト／16=ビビットライト／17=リニアライト／<BR>18=ピンライト<BR>※覆い焼きリニア＝加算モード</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] レイヤ「BG」に、画像ファイル「ABC.bmp」をロードする。
+
+<FONT style='FONT-SIZE:12px'>　　　（ FILE キーワードを指定するとＣＧレイヤを生成します。すでにＣＧレイヤが存在していた場合は
+　　　　画像ファイルが差し変わるだけで、不透明度やレイヤ位置などの属性値はそのまま保持されます。）</FONT>
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>CG</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BG</FONT> <FONT CLASS=t62>Z</FONT>=<FONT CLASS=t63>3</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"ABC.bmp"</FONT>]</FONT></B>
+
+　　　　ファイルの拡張子は記述を省略することができます。その場合、拡張子を探しに行く順番は
+　　　　「.PNG」「.BMP」「.JPG」「.GIF」の順になります。
+
+　　　　例えば、FILE="ABC" と記述した場合、まず"ABC.PNG"というファイルを探しに行きます。
+　　　　なければ次に"ABC.BMP"が有るかどうかを探しに行き、それでもなければ"ABC.JPG"を、
+　　　　さらになければ"ABC.GIF"という順に探しに行きます。
+
+
+
+[2] レイヤ「BG」に、不透明度256分の96で、画像ファイル「abc.bmp」をロードする。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>CG</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BG</FONT> <FONT CLASS=t62>Z</FONT>=<FONT CLASS=t63>3</FONT> <FONT CLASS=t62>A</FONT>=<FONT CLASS=t63>96</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"abc.bmp"</FONT>]</FONT></B>
+
+
+[3] レイヤ「BG」に、縦横１ピクセルの黒色の画像ファイルを生成する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>CG</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BG</FONT> <FONT CLASS=t62>Z</FONT>=<FONT CLASS=t63>3</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>""</FONT>]</FONT></B>
+
+
+[4] レイヤ「BG」のＸ座標の位置を50に設定する。
+
+<FONT style='FONT-SIZE:12px'>　　　（レイヤが存在していない場合はエラーとなります）</FONT>
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>CG</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BG</FONT> <FONT CLASS=t62>X</FONT>=<FONT CLASS=t63>50</FONT>]</FONT></B>
+
+
+[5] レイヤ「BG」を無効状態にする。
+
+<FONT style='FONT-SIZE:12px'>　　　（無効状態にすると、そのレイヤは表示されなくなります）</FONT>
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>CG</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BG</FONT> <FONT CLASS=t62>E</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[6] レイヤ「BG」の描画モードを乗算表示モードにする。
+
+<FONT style='FONT-SIZE:12px'>　　　（レイヤ「BG」と、それより下のレイヤを乗算合成して表示します）</FONT>
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>CG</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>BG</FONT> <FONT CLASS=t62>MODE</FONT>=<FONT CLASS=t63>3</FONT>]</FONT></B>
+
+
+[7] レイヤ「MSK」にマスク用画像を見えない状態でロードしておき、
+　　レイヤ「ST」のレイヤに立ち絵ＣＧをロード。
+　　そしてレイヤ「ST」のマスク属性にレイヤ「MSK」を指定する。(外部マスク指定)
+
+<FONT style='FONT-SIZE:12px'>　　　（こうする事で、レイヤ「ST」の画像は「MSK」のマスク画像と合成されて表示されます。</FONT>
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>CG</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>MSK</FONT> <FONT CLASS=t62>Z</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>E</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"CHARA_MASK.BMP"</FONT>]</FONT></B>
+　　<B><FONT CLASS=t60><FONT CLASS=t64>CG</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>ST</FONT> <FONT CLASS=t62>MID</FONT>=<FONT CLASS=t63>MSK</FONT> <FONT CLASS=t62>Z</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"CHARA.BMP"</FONT>]</FONT></B>
+
+
+[8] 幅400, 高さ300, 優先度10 のレイヤセット「ABC」を生成する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>CG</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>ABC/</FONT> <FONT CLASS=t62>Z</FONT>=<FONT CLASS=t63>10</FONT> <FONT CLASS=t62>SX</FONT>=<FONT CLASS=t63>400</FONT> <FONT CLASS=t62>SY</FONT>=<FONT CLASS=t63>300</FONT>]</FONT></B>
+
+
+[9] レイヤセット「ABC」の不透明度を64に設定する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>CG</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>ABC/</FONT> <FONT CLASS=t62>A</FONT>=<FONT CLASS=t63>64</FONT>]</FONT></B>
+
+
+
+</FONT>
+
+
+</BODY></HTML>

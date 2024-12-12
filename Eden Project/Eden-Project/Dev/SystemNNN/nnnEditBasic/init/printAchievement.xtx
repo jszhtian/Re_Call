@@ -1,0 +1,103 @@
+modename printAchievement
+
+enterFadeInType 2
+enterFadeInTime 5
+
+achievementNumber 3
+
+backScriptFlag 1
+backScriptName backscript
+
+achievementType1 ending
+achievementParamNumber1 1
+achievement1Param1 1
+
+achievementType2 ending
+achievementParamNumber2 2
+achievement2Param1 2
+achievement2Param2 3
+
+achievementType3 endingrange
+achievementParamNumber3 2
+achievement3Param1 1
+achievement3Param2 3
+
+backFilename ta_voice_back
+backPrintX 700
+backPrintY 500
+backSizeX 64
+backSizeY 64
+backAnimeType1 7
+backAnimePattern1 2
+backAnimeSpeed1 30
+
+filenameBG dummy
+
+Filenameachievement1ok ta_achievement1_ok
+achievement1okPattern 2
+achievement1okSpeed 10
+achievement1okType 7
+achievement1okSizeX 128
+achievement1okSizeY 128
+achievement1okPrintX 100
+achievement1okPrintY 100
+
+Filenameachievement1not ta_achievement_not
+achievement1notPattern 2
+achievement1notSpeed 10
+achievement1notType 7
+achievement1notSizeX 128
+achievement1notSizeY 128
+achievement1notPrintX 100
+achievement1notPrintY 100
+
+Filenameachievement2ok ta_achievement2_ok
+achievement2okPattern 2
+achievement2okSpeed 10
+achievement2okType 7
+achievement2okSizeX 128
+achievement2okSizeY 128
+achievement2okPrintX 250
+achievement2okPrintY 50
+
+Filenameachievement2not ta_achievement_not
+achievement2notPattern 2
+achievement2notSpeed 10
+achievement2notType 7
+achievement2notSizeX 128
+achievement2notSizeY 128
+achievement2notPrintX 250
+achievement2notPrintY 50
+
+Filenameachievement3ok ta_achievement3_ok
+achievement3okPattern 2
+achievement3okSpeed 10
+achievement3okType 7
+achievement3okSizeX 128
+achievement3okSizeY 128
+achievement3okPrintX 400
+achievement3okPrintY 100
+
+Filenameachievement3not ta_achievement_not
+achievement3notPattern 2
+achievement3notSpeed 10
+achievement3notType 7
+achievement3notSizeX 128
+achievement3notSizeY 128
+achievement3notPrintX 400
+achievement3notPrintY 100
+
+percentPrintFlag 1
+
+FilenameSuuji ta_suuji24x24
+suujiFontSizeX 24
+suujiFontSizeY 24
+
+
+
+
+
+
+
+
+

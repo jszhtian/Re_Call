@@ -1,0 +1,303 @@
+body
+{
+	background-color: #ffffff;
+	font-size: 90%;
+	font-family: sans-serif;
+}
+a
+{
+	text-decoration: none;
+}
+a:link
+{
+	color: #6666FF;
+}
+
+a:visited
+{
+	color: #7560CC;
+}
+a:hover
+{
+	color: #5809FF;
+	text-decoration: underline;
+}
+div.Space
+{
+	clear: both;
+	padding-left: 1px;
+}
+div#INDEX
+{
+	font-size: 95%;
+	font-weight: bold;
+}
+div#INDEX .Category
+{
+	font-size: 80%;
+	padding-bottom: 4px;
+}
+div#SIDEBAR
+{
+	width: 25%;
+	/*
+	position: absolute;
+	left: 75%;
+	*/
+	float: right;
+}
+/* for list */
+div#UNFRAMED
+{
+	width: 75%;
+}
+div#LIST
+{
+	float: left;
+	margin-bottom: 20px;
+}
+div.T
+{
+	background-color: #CECFFF;
+}
+div.S
+{
+	background-color: #FFCCCC;
+}
+div.F
+{
+	background-color: #FFFFCC;
+}
+div.E
+{
+	background-color: #CCFFFF;
+}
+div.FE
+{
+	background-color: #CCFFCC;
+}
+div#LIST .Word
+{
+	border-top: solid 1px;
+	width: 100%;
+	font-size: 95%;
+}
+div#LIST .WordLiteral
+{
+	float: left;
+	width: 25%;
+	font-weight: bold;
+}
+div#LIST .Function
+{
+	float: left;
+	width: 70%;
+	padding-left: 1em;
+}
+/* for main */
+div#MAIN
+{
+	clear: both;
+	width: 100%;
+}
+span.WordPhonetic
+{
+	font-size: 50%;
+	margin-top: 1px;
+	margin-bottom: 0px;
+}
+span.WordField
+{
+	font-size: 50%;
+	margin-top: 1px;
+	margin-left: 1em;
+	margin-bottom: 0px;
+}
+span.WordVersion
+{
+	color: blue;
+	background-color: white;
+/*	border: 1px solid #AAAACC;*/
+	font-size: 50%;
+	margin-top: 0px;
+	margin-bottom: 1px;
+}
+/* hn */
+h2
+{
+	width: 100%;
+	font-size: 180%;
+	font-weight: bold;
+	color: #6666ff;
+
+	background-repeat: no-repeat;
+	background-color: #DDDDFF;
+
+	padding-top: 6px;
+	padding-left: 5px;
+	padding-bottom: 4px;
+	padding-right: 0px;
+
+	margin-top: 15px;
+	margin-left: 3px;
+/*	margin-bottom: 12px; */
+	margin-bottom: 0px;
+	margin-right: 3px;
+
+	border-left: #6666FF 10px solid;
+	border-bottom: #9999CC 2px solid;
+	border-right: #9999CC 2px solid;
+}
+h3
+{
+	background-color: transparent;
+
+	width: 95%;
+	font-size: 100%;
+	color: #ff3333;
+	font-weight: bold;
+
+	padding-top: 3px;
+	padding-left: 3px;
+	padding-bottom: 3px;
+	padding-right:3px;
+
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+	margin-right: 15px;
+
+	border: #6666FF 1px solid;
+}
+h4
+{
+	background-color: #6666cc;
+
+	width: 95%;
+	font-size: 80%;
+	color: #FFFFFF;
+	font-weight: bold;
+
+	text-align: left;
+	vertical-align: middle;
+
+	padding-top: 3px;
+	padding-left: 3px;
+	padding-bottom: 3px;
+	padding-right:3px;
+
+	margin-top: 0px;
+	margin-left: 10px;
+	margin-bottom: 5px;
+	margin-right: 10px;
+
+	border-bottom: #333399 2px solid;
+	border-right: #333399 2px solid;
+
+}
+a.WordCategory
+{
+	color: white;
+}
+a.WordCategory:link
+{
+	color: white;
+}
+a.WordCategory:visited
+{
+	color: white;
+}
+a.WordCategory:hover
+{
+	color: white;
+}
+/* Arguments */
+div.Arguments
+{
+	width: 100%;
+	font-size: 80%;
+/*	color: #ff3333; */
+	color: #cc3333;
+
+	padding-top: 3px;
+	padding-left: 3px;
+	padding-bottom: 3px;
+	padding-right:3px;
+
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+	margin-right: 15px;
+
+}
+span.ArgType
+{
+	float: left;
+	width: 15%;
+}
+span.ArgMeaning
+{
+	float: left;
+	width: 80%;
+	padding-left: 1em;
+}
+div.ContentBody
+{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+p.Description
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+	font-size: 100%;
+	width: 100%;
+}
+span.Indent
+{
+	padding-left: 2em;
+}
+div.NoticeHead
+{
+	float: left;
+	width: 1em;
+	color: red;
+}
+div.NoticeBody
+{
+	margin-left: 1em;
+	margin-bottom: 1em;
+	font-size: 80%;
+	color: red;
+}
+div.Example
+{
+	clear: both;
+}
+pre.ExSource
+{
+	margin-top: 2px;
+	background-color: #e0e0e0;
+  /* various browser-specific word-wrapping techniques */
+  white-space: pre-wrap; /* For IE and various */
+  white-space: -pre-wrap; /* For older Opera */
+  white-space: o-pre-wrap; /* For Opera */
+  white-space: -moz-pre-wrap; /* For FireFox and Mozilla Browsers */
+  word-wrap: break-word; /* For IE 5.5+ */
+}
+span.ExHeading
+{
+	font-weight: bold;
+}
+table#VALUE_EXPLANATION_TABLE td
+{
+	font-size: smaller;
+}
+table#NUMBER_RANGE_TABLE td
+{
+	font-size: smaller;
+}
+table#BGCOLOR_EXPLANATION_TABLE
+{
+	font-size: smaller;
+}

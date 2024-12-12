@@ -1,0 +1,71 @@
+modename selectmessage
+
+useScrollFlag 1
+selectSound 1
+
+messageprintX 64
+messageprintY 440
+messagenextX 0
+messagenextY 30
+cursorDeltaX -53
+cursorDeltaY -1
+cursorSizeX 778
+cursorSizeY 30
+
+messagePrintGyo 4
+
+animePatternNumber 3
+animeFrame 20
+animePrintType 5
+animeReverse 0
+
+fontSize 28
+backlogOK 1
+optionOK 1
+
+messageColorR 255
+messageColorG 255
+messageColorB 255
+
+cursorFileName ta_select
+
+windowPrintFlag 1
+windowFileName ta_dummymessagewindow
+windowprintX 20
+windowprintY 410
+windowsizeX 760
+windowsizeY 186
+
+
+firstAppearType 2
+firstAppearTime 10
+
+backPrintMode 2
+backColorR 128
+backColorG 64
+backColorB 192
+
+UpfileName ta_up
+DownfileName ta_down
+UpPrintX 5
+UpPrintY 9
+UpSizeX 64
+UpSizeY 64
+DownPrintX 5
+DownPrintY 540
+DownSizeX 64
+DownSizeY 64
+UpAnimeType1 7
+UpAnimePattern1 2
+UpAnimeSpeed1 50
+DownAnimeType1 7
+DownAnimePattern1 2
+DownAnimeSpeed1 50
+UpClickSound 3
+DownClickSound 3
+UpClickTime 1
+DownClickTime 1
+
+
+
+

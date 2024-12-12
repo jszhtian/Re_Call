@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageInfo>
+  <Language>
+    <Lang_Menu_RunTheFile>在指定語言區域中加載 "{0}"...(&amp;R)</Lang_Menu_RunTheFile>
+    <Lang_Menu_EditFileInfo>創建或修改 "{0}" 的區域語言配置...(&amp;S)</Lang_Menu_EditFileInfo>
+    <Lang_Menu_CleanFileInfo>清除 "{0}" 的配置信息...(&amp;C)</Lang_Menu_CleanFileInfo>
+    <Lang_Menu_LangOther>其他...</Lang_Menu_LangOther>
+    <Lang_Win_DelSelect>移除選中項目</Lang_Win_DelSelect>
+    <Lang_Win_FileConfigWinTitle>應用程序語言區域設置</Lang_Win_FileConfigWinTitle>
+    <Lang_Win_GlobalConfigWinTitle>全局設置</Lang_Win_GlobalConfigWinTitle>
+    <Lang_Win_FilePath>文件路徑</Lang_Win_FilePath>
+    <Lang_Win_SelectSystemLoadMode>選擇系統加載模式</Lang_Win_SelectSystemLoadMode>
+    <Lang_Win_SystemGenerallyMode>通常模式</Lang_Win_SystemGenerallyMode>
+    <Lang_Win_SystemCompulsoryMode>強制模式</Lang_Win_SystemCompulsoryMode>
+    <Lang_Win_LockFontName>鎖定字體</Lang_Win_LockFontName>
+    <Lang_Win_FontSize>文字縮放比例</Lang_Win_FontSize>
+    <Lang_Win_SelectLanguage>語言區域</Lang_Win_SelectLanguage>
+    <Lang_Win_SelectTimeZone>時區</Lang_Win_SelectTimeZone>
+    <Lang_Win_AdvancedOptions>高級選項</Lang_Win_AdvancedOptions>
+    <Lang_Win_ChangeUILanguageID>更改用戶界面的語言ID</Lang_Win_ChangeUILanguageID>
+    <Lang_Win_ChinesePathCompatibilityMode>中文路徑/用戶名兼容模式</Lang_Win_ChinesePathCompatibilityMode>
+    <Lang_Win_MouseRightLanguageManage>右鍵備選語言管理</Lang_Win_MouseRightLanguageManage>
+    <Lang_Win_InstallInfo>安裝狀態</Lang_Win_InstallInfo>
+    <Lang_Win_IsNotInstall>未安裝</Lang_Win_IsNotInstall>
+    <Lang_Win_IsInstalled>已安裝</Lang_Win_IsInstalled>
+    <Lang_Win_Install>安裝</Lang_Win_Install>
+    <Lang_Win_Uninstall>卸載</Lang_Win_Uninstall>
+    <Lang_Win_AutoTakeoverExeFile>自動接管 .exe 文件</Lang_Win_AutoTakeoverExeFile>
+    <Lang_Win_upButton>↑ 上移</Lang_Win_upButton>
+    <Lang_Win_downButton>↓ 下移</Lang_Win_downButton>
+    <Lang_Win_delButton>－ 移除</Lang_Win_delButton>
+    <Lang_Win_addButton>＋ 添加</Lang_Win_addButton>
+    <Lang_Win_OK>確定</Lang_Win_OK>
+    <Lang_Win_Run>運行</Lang_Win_Run>
+    <Lang_Win_Cancel>取消</Lang_Win_Cancel>
+    <Lang_Win_ClickToConfig>點擊此處更改配置...</Lang_Win_ClickToConfig>
+    <Lang_Win_InfoNoFile>拖動可執行文件到此處添加配置信息</Lang_Win_InfoNoFile>
+    <Lang_Info_NotFindFile>無法找到需求的文件"{0}"。</Lang_Info_NotFindFile>
+    <Lang_Info_CheckDriverError>在處理請求期間發生了一個錯誤。</Lang_Info_CheckDriverError>
+    <Lang_Info_InstallPathIsNotAllEnglishWord>為了保證兼容性，本程序的安裝目錄只能由英文字母、數字、空格、單字節符號組成。</Lang_Info_InstallPathIsNotAllEnglishWord>
+    <Lang_Info_UninstallNeedReloadDesktop>卸載本程序將會重載桌面，所有已打開的文件夾窗口將會關閉，是否繼續？</Lang_Info_UninstallNeedReloadDesktop>
+    <Lang_Info_SelectedLanguageHasBeenInList>所選語言已經存在於列表中了。</Lang_Info_SelectedLanguageHasBeenInList>
+    <Lang_Info_FilePathLanguageError>要打開的文件路徑中包含"{0}"不兼容的字符，請修改路徑。
+
+原路徑:
+"{1}"
+
+轉換為"{0}"後的文件路徑:
+"{2}"</Lang_Info_FilePathLanguageError>
+  </Language>
+</LanguageInfo>

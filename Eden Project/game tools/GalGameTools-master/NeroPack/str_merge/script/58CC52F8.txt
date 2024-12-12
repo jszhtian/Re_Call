@@ -1,0 +1,69 @@
+;――――――――――――――――――――――――――――――――――――――
+;
+;	共通ルート
+;
+;――――――――――――――――――――――――――――――――――――――
+.reset
+.route 　
+.se start
+.img white
+.wait 1
+
+.call sinarioTORK1
+.call sinarioTORK2
+.call sinarioTORK3
+.call sinarioTORK4
+.call sinarioTORK5
+.call sinarioTORK6
+.call sinarioTORK7
+.call sinarioTORK8
+.call sinarioTORK9
+.call sinarioTORK10
+.call sinarioTORK11
+.call sinarioTORK12
+.call sinarioTORK13
+.call sinarioTORK14
+.call sinarioTORK15
+.call sinarioTORK16
+.call sinarioTORK17
+.call sinarioTORK18
+.call sinarioTORK19
+.call sinarioTORK20
+.call sinarioTORK21
+.call sinarioTORK22
+.call sinarioTORK23
+.movie op.wmv
+.call sinarioTORK24
+.call sinarioTORK25
+.call sinarioTORK26
+.call sinarioTORK27
+.call sinarioTORK28
+.call sinarioTORK29
+.call sinarioTORK30
+.call sinarioTORK31
+
+;中間ルート分岐（カナ or 汐里）
+.if 同盟を続けない
+	.if カナの好感度 < 汐里の好感度
+		.load storySHIORI
+	.else
+		.load storyKANA
+	.end
+.end
+
+.call sinarioTORK32
+.call sinarioTORK33
+.call sinarioTORK34
+.call sinarioTORK35
+.call sinarioTORK36
+.call sinarioTORK37
+.call sinarioTORK38
+.call sinarioTORK39
+.call sinarioTORK40
+.call sinarioTORK41
+.call sinarioTORK42
+
+;最終ルート分岐（亜依 or 茜）
+.load storyAI if 亜依ルート確定
+.load storyAKANE
+

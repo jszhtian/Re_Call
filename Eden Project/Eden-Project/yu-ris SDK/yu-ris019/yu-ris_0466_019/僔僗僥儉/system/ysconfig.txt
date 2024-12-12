@@ -1,0 +1,36 @@
+//=========================================================================
+//
+// YU-RISシステム設定
+//
+//=========================================================================
+
+//-------------------------------------------------------------------------
+// ■プロジェクトフォルダ設定
+//
+// 　ここの設定を変えることで、
+// 　フォルダ毎に複数のプロジェクト(作品)を管理できます。
+//
+// フォルダ配置例：
+// 　./project 　　　←作品１
+// 　./project2　　　←作品２
+// 　./project3　　　←作品３
+// 　./system
+// 　./yu-ris.exe
+//
+//-------------------------------------------------------------------------
+
+PROJECTFOLDER[PROJECTFOLDER="./data"]
+
+//PROJECTFOLDER[PROJECTFOLDER="./sample_001"]  // YU-RIS サンプル
+//PROJECTFOLDER[PROJECTFOLDER="./sample_002"]  // 選択肢、クエイクサンプル
+//PROJECTFOLDER[PROJECTFOLDER="./sample_003"]  // シューティングサンプル
+//PROJECTFOLDER[PROJECTFOLDER="./sample_004"]  // スクリプトセーブロードサンプル
+//PROJECTFOLDER[PROJECTFOLDER="./sample_005"]  // 拡大縮小回転サンプル
+//PROJECTFOLDER[PROJECTFOLDER="./sample_006"]  // マウスドラッグサンプル
+//PROJECTFOLDER[PROJECTFOLDER="./sample_007"]  // テキスト処理サンプル
+//PROJECTFOLDER[PROJECTFOLDER="./sample_008"]  // マウスゲームサンプル
+//PROJECTFOLDER[PROJECTFOLDER="./sample_009"]  // FLASH(SWF)再生サンプル
+//PROJECTFOLDER[PROJECTFOLDER="./sample_010"]  // スクリーンセーバーサンプル
+//PROJECTFOLDER[PROJECTFOLDER="./sample_011"]  // FLASH(FLV)再生サンプル
+
+

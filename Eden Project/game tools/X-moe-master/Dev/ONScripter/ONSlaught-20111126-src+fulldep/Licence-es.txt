@@ -1,0 +1,77 @@
+La siguiente licencia se aplica a todos los archivos bajo src/, a menos que se
+indique lo contrario:
+
+* Copyright (c) 2008-2011, Helios (helios.vmg@gmail.com)
+* Todos los derechos reservados.
+*
+* La siguiente es una traducción de la licencia original en inglés, provista
+* con el único propósito de que los que no saben inglés puedan tener una vaga
+* idea de su contenido. Dado que el autor no es un abogado ni mucho menos, la
+* misma carece de toda validez legal en ningún lado. En cambio, siempre se
+* aplicará la licencia original, aunque el licenciado no pueda leerla.
+* La redistribución y el uso en formato de código fuente y binario, con y sin
+* modificaciones, están permitidos siempre y cuando se complan las siguientes
+* condiciones:
+*     * Toda redistribución, ya sea de código fuente y/o binario, debe incluír
+*       la licencia original en inglés y atenerse a sus condiciones.
+*     * Las redistribuciones de código fuente deben mantener el aviso de
+*       copyright anterior, esta lista de condiciones, y la exención posterior.
+*     * Las redistribuciones en formato binario deben reproducir el aviso de
+*       copyright anterior, esta lista de condiciones, y la exención posterior
+*       en la documentación y/u otros materiales provistos en la distribución.
+*     * El nombre del autor no podrá usarse para apoyar o promover productos
+*       derivados de este software sin previo permiso escrito específico.
+*     * Productos derivados de este software no podrán llamarse "ONSlaught" ni
+*       podrá "ONSlaught" aparecer en sus nombres sin previo permiso escrito
+*       específico del autor.
+*
+* ESTE SOFTWARE ES PROVISTO POR HELIOS "TAL CUAL", Y CUALQUIER GARANTÍA EXPRESA
+* O IMPLÍCITA, INCLUYENDO, PERO NO LIMITADO A, LAS GARANTÍAS IMPLÍCITAS DE
+* COMERCIALIZACIÓN Y UTILIDAD PARA UN PROPÓSITO EN PARTICULAR, QUEDAN
+* RENUNCIADAS. EN NINGÚN CASO SERÁ HELIOS RESPONSABLE POR DAÑOS DIRECTOS,
+* INDIRECTOS, INCIDENTALES, ESPECIALES, EJEMPLARES, O CONSECUENTES (INCLUYENDO,
+* PERO NO LIMITADO A, PROCURACIÓN DE BIENES O SERVICIOS SUBSITUTOS; PÉRDIDA DE
+* FUNCIONALIDAD, DATOS, O BENEFICIOS; O INTERRUPCIÓN DE ACTIVIDADES) SIN
+* IMPORTAR COMO HAYA SIDO CAUSADO Y EN CUALQUIER TEORÍA DE RESPONSABILIDAD, YA
+* SEA EN CONTRATO, RESPONSABILIDAD OBJETIVA, O AGRAVIO INDEMNIZABLE (INCLUYENDO
+* NEGLIGENCIA O CUALQUIER OTRO) QUE HAYA DEVENIDO DE CUALQUIER MODO DE USO DE
+* ESTE SOFTWARE, AUNQUE HAYA SIDO AVISADO DE LA POSIBILIDAD DE TALES DAÑOS.
+
+--------------------------------------------------------------------------------
+
+A continuación, las excepciones a la licencia anterior:
+
+--------------------------------------------------------------------------------
+
+                                Domínio Público
+
+Igor Pavlov:
+src/LZMA.c
+src/LZMA.h
+tools/src/LZMA.c
+tools/src/LZMA.h
+
+--------------------------------------------------------------------------------
+
+                              Licencias permisivas
+
+Mark Adler (madler@alumni.caltech.edu):
+src/puff.c
+src/puff.h
+
+Paul E. Jones (paulej@arid.us):
+src/sha1.cpp
+src/sha1.h
+
+--------------------------------------------------------------------------------
+
+                         Licencia Pública General (GPL)
+                            (con excepción especial)
+
+Bison:
+src/INIParser.tab.cpp
+src/INIParser.tab.hpp
+src/MacroParser.tab.cpp
+src/MacroParser.tab.hpp
+src/ExpressionParser.tab.cpp
+src/ExpressionParser.tab.hpp

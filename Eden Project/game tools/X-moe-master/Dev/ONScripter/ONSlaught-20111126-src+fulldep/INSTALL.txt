@@ -1,0 +1,41 @@
+This document describes the compilation and/or installation for the various
+platforms.
+
+Windows:
+Compilation:
+Compiling for Windows is pretty much straightforward. The src package includes
+projects for Visual C++ 2008, plus static dependencies. The only thing
+noteworthy is that ONSlaught doesn't compile with MinGW 3.x and below; only
+with MinGW 4.x and above. This is because 3.x has an incomplete implementation
+of the C++ standard library.
+
+To compile using MinGW, you'll also need MSYS. Run
+  make -f Makefile.MSYS
+
+Runtime:
+A binary built with the static libraries and build scripts provided has no
+external dependencies.
+Note that building with VC++ also produces a file called "ONSlaught.lib" (the
+MinGW equivalent is "libONSlaught.a"). This file is only used to build optional
+modules, such as the video player. You can safely delete it if you don't need
+to do this.
+
+
+Unices:
+Compilation:
+  cmake .
+  make
+
+After a successful build, the binary will be put in ./ONSlaught.
+
+There's also a separate package (fulldep) that includes all the dependecies
+with their sources, in case the target system doesn't have them. This package
+is almost guaranteed to produce a correct executable.
+
+For people with more than one CPU core:
+By adding -jn (replacing n with the number of CPU cores youre system has) to
+the make command line you can significantly decrease the compilation time.
+
+Installation:
+The best way to install is to move this file to /usr/bin/ (most likely will
+require root priviledges). Failing that, ~/bin/ should also work.

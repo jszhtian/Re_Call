@@ -1,0 +1,90 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">その他命令</A>＞DIALOG［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="label.html">LABEL［］</A>
+　<A HREF="labelinfo.html">LABELINFO［］</A>
+　<A HREF="macro.html">MACRO［］</A>
+　<A HREF="dialog.html">DIALOG［］</A>
+　<A HREF="tray.html">TRAY［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=800 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■ダイアログ表示命令 DIALOG[ ]</FONT>
+<FONT CLASS=t20>
+
+指定した文字と共にダイアログボックスを表示します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>STR = 文字列</FONT></TD><TD><FONT CLASS=t40>表示させる文字列を記述</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CAPTION = 文字列</FONT></TD><TD><FONT CLASS=t40>ダイアログのキャプション文字列を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DEFSTR = 文字列</FONT></TD><TD><FONT CLASS=t40>文字列入力欄に最初から表示されている文字列を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LETSTR = ＄変数名</FONT></TD><TD><FONT CLASS=t40>文字列入力欄に入力された文字列を格納する変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LET = ＠変数名</FONT></TD><TD><FONT CLASS=t40>『左から何番目のボタン』が押されたかを格納する変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>OK = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>「ＯＫ」ボタンを表示させる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>OKCANCEL = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>「ＯＫ」「キャンセル」ボタンを表示させる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>YESNO = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>「はい」「いいえ」ボタンを表示させる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>YESNOCANCEL = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>「はい」「いいえ」「キャンセル」ボタンを表示させる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>INPUT = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字列入力欄を表示させる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DEFBUTTON = 値(1～3)</FONT></TD><TD><FONT CLASS=t40>左から何番目のボタンをデフォルトボタンにするかを設定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] 「ヘルプ」というキャプション名のダイアログを表示し、その上に「バージョン１．０」という文字を表示する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>DIALOG</FONT>[<FONT CLASS=t62>CAPTION</FONT>=<FONT CLASS=t63>"ヘルプ"</FONT> <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"バージョン１．０"</FONT>]</FONT></B>
+
+
+[2] ダイアログを表示し、その上に「終了しますか？」という文字と、「はい」「いいえ」ボタンを表示する。
+　　そして、左から何番目のボタンが押されたかを示す値を、変数＠Ｒに格納する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>DIALOG</FONT>[<FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"終了しますか？"</FONT> <FONT CLASS=t62>YESNO</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@R</FONT>]</FONT></B>
+
+
+[3] ダイアログを表示し、その上に「終了しますか？」という文字と、「はい」「いいえ」ボタンを表示する。
+　　その際「いいえ」ボタンをデフォルトボタンとして設定する。
+　　そして、左から何番目のボタンが押されたかを示す値を、変数＠Ｒに格納する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>DIALOG</FONT>[<FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"終了しますか？"</FONT> <FONT CLASS=t62>YESNO</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>DEFBUTTON</FONT>=<FONT CLASS=t63>2</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@R</FONT>]</FONT></B>
+
+
+[4] ダイアログを表示し、その上に「終了しますか？」という文字と、「はい」「いいえ」「キャンセル」ボタンを表示する。
+　　そして、左から何番目のボタンが押されたかを示す値を、変数＠Ｒに格納する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>DIALOG</FONT>[<FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"終了しますか？"</FONT> <FONT CLASS=t62>YESNOCANCEL</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@R</FONT>]</FONT></B>
+
+
+[5] ダイアログを表示し、その上に「名前を入力してください」という文字と、文字列入力欄を表示する。
+　　そして入力された文字列を、変数＄ＮＡＭＥに格納する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>DIALOG</FONT>[<FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"名前を入力してください"</FONT> <FONT CLASS=t62>INPUT</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>LETSTR</FONT>=<FONT CLASS=t63>$NAME</FONT>]</FONT></B>
+
+
+[6] ダイアログを表示し、その上に「名前を入力してください」という文字と、文字列入力欄を表示する。
+　　文字列入力欄には、最初から「恵一」という名前を表示させておく。
+　　そして入力された文字列を、変数＄ＮＡＭＥに格納する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>DIALOG</FONT>[<FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"名前を入力してください"</FONT> <FONT CLASS=t62>INPUT</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>DEFSTR</FONT>=<FONT CLASS=t63>"恵一"</FONT> <FONT CLASS=t62>LETSTR</FONT>=<FONT CLASS=t63>$NAME</FONT>]</FONT></B>
+
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

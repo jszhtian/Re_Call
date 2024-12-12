@@ -1,0 +1,52 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "NPK3Tool/5.4.0": {
+        "dependencies": {
+          "Zstandard.Net": "1.1.7"
+        },
+        "runtime": {
+          "NPK3Tool.dll": {}
+        }
+      },
+      "System.Buffers/4.5.0": {},
+      "Zstandard.Net/1.1.7": {
+        "dependencies": {
+          "System.Buffers": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Zstandard.Net.dll": {
+            "assemblyVersion": "1.1.7.0",
+            "fileVersion": "1.1.7.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NPK3Tool/5.4.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Buffers/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A==",
+      "path": "system.buffers/4.5.0",
+      "hashPath": "system.buffers.4.5.0.nupkg.sha512"
+    },
+    "Zstandard.Net/1.1.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jzFW0nUyaXaOPYrNMF7RIYdFNzp7ebiiv8otX1JxaLHnkP3bqTCYDIU5Mvvwo4+56QF3/vRJkldhMoKUDVbJig==",
+      "path": "zstandard.net/1.1.7",
+      "hashPath": "zstandard.net.1.1.7.nupkg.sha512"
+    }
+  }
+}

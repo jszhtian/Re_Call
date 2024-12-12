@@ -1,0 +1,150 @@
+//============================================================================
+//
+//■ERIS テンプレート画面１
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.TEMPLATE1."]
+
+}
+
+//--------------------------------------------------------------------
+//■INIT
+//--------------------------------------------------------------------
+#=ES.TEMPLATE1.INIT
+{
+		\BTDEF.GROUP("ES.TEMPLATE1")
+
+			\BT.NAME("■背景")
+			\BT.CGSYS("template1/back_1")
+			\BT.XY(000, 000)
+			\BT.Z(501)
+			\BT.SET(TIP.BG)
+
+			\BT.NAME("■背景2")
+			\BT.CGSYS("template1/back_2")
+			\BT.XY(000, 000)
+			\BT.Z(502)
+			\BT.SET(TIP.BG2)
+
+
+			\BT.NAME("■セーブ画面に進む")
+			\BT.CGSYS("main/button/btn_qsave_off", "main/button/btn_qsave_over")
+			\BT.XY(050, 050)
+			\BT.MAP.A(1)
+			\BT.Z(550)
+			\BT.SET(BTN.GOSUB1)
+
+			\BT.NAME("■セーブ画面に進む")
+			\BT.CGSYS("main/button/btn_qsave_off", "main/button/btn_qsave_over")
+			\BT.XY(150, 050)
+			\BT.MAP.A(1)
+			\BT.Z(550)
+			\BT.SET(BTN.GO1)
+
+			\BT.NAME("■メイン画面に戻る")
+			\BT.CGSYS("backlog/btn_back_off", "backlog/btn_back_over", "backlog/btn_back_on")
+			\BT.XY(010, 010)
+			\BT.MAP.A(1)
+			\BT.Z(550)
+			\BT.SET(BTN.BACK)
+
+	//----------------------------------------------------------------
+	// フェードアウト
+	//----------------------------------------------------------------
+		\SS.FADE(250)
+
+		@es.STATE=100
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.TEMPLATE1.LOOP
+{
+	IF[@es.STATE==1] //戻った
+	{
+		\BTDEF.GROUP("ES.TEMPLATE1")
+
+			\BT.NAME("■背景")
+			\BT.CGSYS("template1/back_1")
+			\BT.XY(000, 000)
+			\BT.Z(501)
+			\BT.SET(TIP.BG)
+
+			\BT.NAME("■背景2")
+			\BT.CGSYS("template1/back_2")
+			\BT.XY(000, 000)
+			\BT.Z(502)
+			\BT.SET(TIP.BG2)
+
+
+			\BT.NAME("■セーブ画面に進む")
+			\BT.CGSYS("main/button/btn_qsave_off", "main/button/btn_qsave_over")
+			\BT.XY(050, 050)
+			\BT.MAP.A(1)
+			\BT.Z(550)
+			\BT.SET(BTN.GOSUB1)
+
+			\BT.NAME("■セーブ画面に進む")
+			\BT.CGSYS("main/button/btn_qsave_off", "main/button/btn_qsave_over")
+			\BT.XY(150, 050)
+			\BT.MAP.A(1)
+			\BT.Z(550)
+			\BT.SET(BTN.GO1)
+
+			\BT.NAME("■メイン画面に戻る")
+			\BT.CGSYS("backlog/btn_back_off", "backlog/btn_back_over", "backlog/btn_back_on")
+			\BT.XY(010, 010)
+			\BT.MAP.A(1)
+			\BT.Z(550)
+			\BT.SET(BTN.BACK)
+
+	//----------------------------------------------------------------
+	// フェードアウト
+	//----------------------------------------------------------------
+		\SS.FADE(250)
+
+		@es.STATE=100
+
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[GOSUB1]ボタン ---------------------------------------------------
+//
+#=ES.TEMPLATE1.BTN.GOSUB1.ON
+{
+	\es.S.GOSUB("ES.TEMPLATE2", 0, 0)
+	return[]
+}
+
+//■[GO1]ボタン -------------------------------------------------------
+//
+#=ES.TEMPLATE1.BTN.GO1.ON
+{
+	\es.S.GOSUB("ES.TEMPLATE3", 0, 0)
+	return[]
+}
+
+//■[BACK]ボタン -----------------------------------------------------
+//
+#=ES.TEMPLATE1.BTN.BACK.ON
+{
+	\es.S.RETURN
+	return[]
+}
+
+

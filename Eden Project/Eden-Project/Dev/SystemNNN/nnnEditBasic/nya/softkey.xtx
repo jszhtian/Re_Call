@@ -1,0 +1,49 @@
+name softkey
+
+@customSize 1
+@customKey 1
+@customCommand 1
+
+
+dialogPrintX 100
+dialogPrintY 110
+
+softKeyPrintX 50
+softKeyPrintY 30
+
+dialog1Filename ta_softkey1
+dialog2Filename ta_softkey2
+dialog3Filename ta_softkey3
+dialog4Filename ta_softkey4
+
+softKeySizeX 24
+softKeySizeY 24
+softKeyFontSize 24
+
+useFont 1
+fontColorR 128
+fontColorG 255
+fontColorB 255
+
+softKeyNextX 32
+softKeyNextY 32
+softKeyBlockX 5
+softKeyBlockY 1
+softKeySkipX 16
+softKeySkipY 0
+
+customSize 0
+customPoint 0
+customCommand 0
+
+shift3 4
+shift4 3
+
+selectColorR 255
+selectColorG 255
+selectColorB 0
+selectColorA 30
+
+kakuteiTextMax 6
+henkanTextMax 6
+inputTextMax 6

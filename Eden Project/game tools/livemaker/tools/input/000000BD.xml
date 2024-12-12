@@ -1,0 +1,4623 @@
+<?xml version="1.0" encoding="Shift-JIS"?>
+<LMScript Name="000000BD.lsb">
+	<Header Version="116" Flag="1">
+		<Properties>
+			<Property Id="0">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="1">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="2">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="3">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="4">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="5">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="6">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="7">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="8">7f 7f 00 28 fc 8b 00 00 80 00 01 00 88 00 f2 00 40 00 bf 00 18</Property>
+			<Property Id="9">9f 78 00 ac fc 9f 00 00 80 00 01 01 98 80 f3 00 50 00 bf 00 18</Property>
+			<Property Id="10">7b f8 7d 0e ff cb 00 00 00 00 07 00 a8 00 f2 00 00 e0 bf 01 00</Property>
+			<Property Id="11">01 00 00 0c 02 00 00 00 80 00 00 00 00 00 00 00 00 00 80 00 00</Property>
+			<Property Id="12">9f 78 00 fc fc 9b 00 00 80 00 01 00 98 80 f3 00 50 08 ff 40 00</Property>
+			<Property Id="13">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="14">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="15">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="16">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="17">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="18">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="19">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="20">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="21">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="22">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="23">1f 70 00 38 fc 9b 00 00 80 00 01 00 88 00 f2 00 40 08 bf 40 00</Property>
+			<Property Id="24">9f f8 0f aa fc 8b 24 00 80 00 01 00 98 00 f2 00 50 00 bf 00 00</Property>
+			<Property Id="25">1b 9f ef 0f fc 83 fe ff ff 3f 01 00 8a 03 f2 00 c0 e1 bf 1e 00</Property>
+			<Property Id="26">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="27">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="28">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="29">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="30">9f f8 0b 8a 0e 8c 04 00 80 00 f9 01 98 80 f3 00 70 00 bf 00 18</Property>
+			<Property Id="31">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="32">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="33">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="34">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="35">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="36">7f 78 00 0c fc 93 00 00 00 00 01 f0 c9 00 f2 01 40 00 bf 00 00</Property>
+			<Property Id="37">9b 70 00 08 fc 83 00 00 00 00 01 0e 98 00 f2 00 50 00 bf 00 00</Property>
+			<Property Id="38">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="39">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="40">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="41">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="42">05 00 00 7c 00 18 00 00 80 00 00 00 00 00 00 00 00 08 80 40 04</Property>
+			<Property Id="43">7b e1 0b 08 02 80 04 00 00 00 00 00 04 00 00 00 00 00 80 00 00</Property>
+			<Property Id="44">7b e1 0b 08 02 80 24 00 00 00 00 00 04 00 00 00 00 00 80 00 00</Property>
+			<Property Id="45">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="46">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="47">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="48">1f 78 00 08 fc 87 00 00 80 03 09 00 88 07 f2 00 40 00 bf 00 00</Property>
+			<Property Id="49">7b 70 00 0c fc 83 00 00 00 00 01 00 88 18 f2 00 40 00 bf 00 00</Property>
+			<Property Id="50">ff 18 00 08 fc 87 00 00 00 00 01 00 88 e0 ff 00 50 00 bf 00 18</Property>
+			<Property Id="51">1f 78 00 08 fe 83 00 00 00 00 01 01 88 00 f2 fe 80 01 bf 20 00</Property>
+			<Property Id="52">1f 78 00 08 fe 83 00 00 00 00 01 01 88 00 f2 fe 81 01 bf 20 00</Property>
+			<Property Id="53">1f 78 00 0c fc 83 00 00 00 00 01 00 88 00 f2 79 00 02 bf 20 00</Property>
+			<Property Id="54">1f 78 04 08 fc 83 24 00 00 00 01 00 88 00 f2 00 4e 00 bf 00 00</Property>
+			<Property Id="55">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="56">1f 70 00 08 00 88 00 00 80 03 01 00 08 03 f2 00 40 00 bf 00 00</Property>
+			<Property Id="57">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="58">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="59">01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+			<Property Id="60">01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</Property>
+		</Properties>
+	</Header>
+	<Body>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="0" Diff="0">
+			<Label Script="000000BD.lsb" Target="3" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="1" Diff="1">
+			<SetLabel>変数削除</SetLabel>
+		</Item>
+		<Item Command="Exit" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="2" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="3" Diff="1">
+			<SetLabel>000000BE</SetLabel>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="4" Diff="1">
+			<Label Script="000000BD.lsb" Target="6" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="5" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="6" Diff="1">
+			<SetLabel>00000130</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="7" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="8" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="1">
+				<Event Command="Event">
+					<EventArg Type="Str">MENUENABLED</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">それから、二月余りが過ぎた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|背景|グラフィック\戦国CG\bg\朔の部屋０１.gal|NORMAL|#1|C|B|0|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">控えめな早春の日差しが、朔の部屋の廊下に注がれている。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">鶯の谷渡りの声が、ほのかに届く部屋。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">CREATECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉１口１.gal|NORMAL|#1|30|B|100|||||</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|柚々|グラフィック\戦国CG\立ち絵\柚々\柚々Ａ０１目３眉１口２.gal|NORMAL|#1|400|B|100|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">はにかむように微笑む柚々を前に、朔は、息を呑む。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0906.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……真か？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu660.ogg|VOICE|NORMAL|800|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「はい」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々は嬉しそうに返事をし、そっと腹をなでる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0907.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「真に、孕んだというのか。私の子を……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|柚々|グラフィック\戦国CG\立ち絵\柚々\柚々Ａ０１目２眉１口２.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu662b.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「はい。ちゃんとお医者様に診てもらいました。……朔お姉様の、御子です」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0908.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……そう、か」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0909.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔にとって、それは待ち望んでいた報告のはずだった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">しかし、あまりの現実味の無さに、漫然と柚々を見つめたまま、黙り込んでしまう。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|暗転|$000000|NORMAL|#1|C|B|400|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|BGM\09.ogg|BGM|REPEAT|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">――柚々が、孕んだ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">それはつまり、自分には子供を作る能力があることを、証明できたということ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">以前、兄に取り付けた約束を思い出す。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">“「では、私が女子を相手に子を孕んだり孕ませたりできれば縁組はやめて頂けますか？」”</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">“「ああそうじゃな、そんなことが出来るならお主は嫁がずとも一人前じゃ」”</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ぞくり、と背が震えた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">成した――のか？</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">兄上にこの事実を説明すれば、もうこれで、嫁がなくて済むのか？</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">本当に？</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">本当に？</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|柚々|グラフィック\戦国CG\立ち絵\柚々\柚々Ａ０１目１眉１口５.gal|NORMAL|||||</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|暗転|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu663.ogg|VOICE|NORMAL|800|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……お姉様……？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">様子を伺うように、柚々が覗き込む。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0910.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉１口６.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0911.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「そう……これで、私は嫁ぐ必要がなくなったのじゃ。柚々、でかした！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そう言って、朔は目の前の柚々を抱きしめる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|朔,柚々|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu664.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様は、これでずっと織田の姫君でいられるのですよね？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0912.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「ああ、そうじゃ。もう何も心配いらない。後は私に任せておけ。ふふ、私は兄上に勝ったのじゃ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu665.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「良かった……。お姉様、ずっと一緒ですよね」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0913.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「ああ。これからも私はずっとここにいる。そなたと、生まれてくる子と一緒にな」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu666.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「はい。嬉しいです……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">嬉しそうに目を細める柚々の髪を撫でながら、朔は空を見た。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|背景|グラフィック\戦国CG\bg\廊下と庭.gal|NORMAL|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">――しかし、何だろう、この気持ちは。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">自分で自分の生きる道を切り開けたことを、この空のように晴れ晴れしく感じるかと思いきや、朔の心はまだ僅かに、燻ったままだった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ずっと溜め込んでいた鬱積が、この柚々の妊娠一つで、綺麗に取り払える気がしないのだ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">――世の中の男も皆、このような気持ちなのだろうか。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">自分の子が出来たと言われても、それをすぐ実感できないのだ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">嬉しいはずなのに。待ち望んでいたことのはずなのに。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0914.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「とにかく、兄上に報告じゃ。約束はきっちりと守っていただこう」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu667.ogg|VOICE|NORMAL|800|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「はい」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|背景|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]STOPSND|BGM|3000|WAIT</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|背景|グラフィック\戦国CG\bg\謁見の間.gal|NORMAL|#1|C|B|0|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">CREATECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉１口６.gal|NORMAL|#1|30|B|100|||||</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目２眉１口１.gal|NORMAL|#1|400|B|100|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|500|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0915.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「と、言うわけです。兄上、約束はちゃんと覚えておいでですね？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目２眉５口６.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0916.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「女子を孕ませることができれば、縁組は必要ない。そういうお話でございましたよね、兄上」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">黙り込んだままの信長に、まくし立てるように話を進める朔。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々と、その場に居合わせた数人の家臣達が、緊張した面持ちで見守っていた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉１口６.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0917.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「念のために、私も立ち会ってもう一度医者に診せましたが、本当に身篭っておるようです」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0918.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">得意げに語る朔だったが、信長があまりにも何も言わないため、少し苛立ちを見せ始める。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉４口３.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0919.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「聞いておりますか、兄上？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0920.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「私の子です。私が柚々を」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉２口１.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「黙れ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉２口１.gal|NORMAL|1|300|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0921.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……っ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">一声、唸り声のように低い声が響いたかと思うと、信長はゆらりと立ち上がった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">次の瞬間。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\効果音(ザ・マッチメイカァズ)\hit_p13_a.ogg|SE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0922.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「っ！！」</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|朔|1|200|0|0|</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\WEB WAVE LIB\HitB@11.ogg|SE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">頬を張り倒された朔が、冷たい床の上に転がった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu668.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様っ！？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|信長|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉２口３.gal|NORMAL|#1|C|B|100|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「この……愚か者が！！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|BGM\15.ogg|BGM|REPEAT|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">頭上から、震えるような怒声を浴びせられる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔は状況が掴めず、床に這い蹲ったまま、じんじんと痛む頬に手を当て固まる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「我が儘な妹だとは思っておったが、まさか自分の都合のためにここまで他人を巻き込むとは。見損なったぞ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0924.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉２口４汗１.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「柚々殿を孕ませて、それを自分の子だなどと。いったいどういう神経だとそんな非道なことが言えるのじゃ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0923.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「な……っ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「三左にどう詫びればいい！？　大切な娘を預かっておきながら、適当な男を宛がわれて傷物になってしまったなど」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|信長|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">CREATECG|柚々|グラフィック\戦国CG\立ち絵\柚々\柚々Ａ０１目１眉２口４汗.gal|NORMAL|#1|30|B|100|||||</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉２口４汗１.gal|NORMAL|#1|400|B|100|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu669a.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「ち、違います、お屋形様！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">頬を押さえたまま呆然としている朔の前に、柚々が思わず飛び出す。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu670.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「この子は本当にお姉様の御子です！　わ、私とお姉様の御子なんです」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|信長|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|勝三郎|グラフィック\戦国CG\立ち絵\勝三郎\勝三郎A０１目１口２眉２汗.gal|NORMAL|#1|400|B|100|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">勝三郎「柚々殿、いけません口を挟んでは！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu671.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「でも、本当に……！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|勝三郎|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉２口４.gal|NORMAL|#1|400|B|100|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「柚々殿」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">怒りを灯した瞳が柚々に向けられ、ぎくり、と柚々の身体が強張る。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「この馬鹿娘のことは一切庇うな。本当は誰の子なのじゃ、申してみよ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|柚々|グラフィック\戦国CG\立ち絵\柚々\柚々Ａ０１目３眉２口５汗.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu672.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……そんな。ほ、本当に、お姉様の……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉２口３.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「女同士で子など、作れる訳がないであろうが！！！」</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]QUAKE|背景,柚々,信長,メッセージボックス|QUAKE|1|50|50|500|30</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|柚々|グラフィック\戦国CG\立ち絵\柚々\柚々Ａ０１目２眉３口４汗.gal|NORMAL|1|300|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長の一喝が、広間にじんと響く。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">その場に居た全員がすくみ上がるような、鬼気迫る怒声。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|柚々|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々は、力が抜けたようにその場にへたり込んだ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu673.ogg|VOICE|NORMAL|800|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……お……お姉、様……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">瞳に涙を浮かべながら、隣りに転がったままの朔を見る。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔は――</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">頬に添えた手を、わなわなと震わせ――</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉２口１.gal|NORMAL|#1|30|B|100|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ゆっくり、立ち上がった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0925.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……許せませぬ、兄上」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉２口４.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「何？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0926.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「兄上は、私のことを最初から、何も、理解しようとして下さらぬ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉３口４.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0927.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「兄上は……兄上は！！　私が何を思って、どう行動して、どんな気持ちで今ここでこうしているかなど、本当にちっとも、露ほども気にならぬのか！！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">今にも泣き出しそうな、悲鳴のような叫び。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「……私はお主のことを、そこまで細やかに理解しておかねばならぬのか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「私が悪いから、柚々殿が傷物になったのは私のせいだとでも言うのか！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0928.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「違う！　そんな話はしておらぬではないか！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目２眉１口１.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「ああ、それともこういうことか？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「柚々殿が、立場上よくない相手の子を身篭ってしまい、お主は柚々殿を庇って自分の子だなどと」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔Ａ０１目３口３眉４.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0929.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「違う違う！　柚々の腹の子の親は私なのだと、それを伝えたいだけなのに！　何度言えば分かるのじゃ！！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目２眉２口３汗１.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「この馬鹿娘が！　どうやって子を作るというのじゃ！　お主は女で、柚々殿も女であろうが！！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">怒りともどかしさに狂った二人が、今にも掴みかからんばかりに怒鳴りあう。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々はそれを、泣きながら見守ることしかできない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉２口１.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0930.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「どうやってなどと……！　お、女の口から言わせるおつもりですか！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉２口１.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「自分を理解しろなどと言うならば、はっきり申してみよ。どうやって柚々殿と子を作った！？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0931.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「それは……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ちら、と柚々の顔を見て、言った。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目３眉２口３.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0932.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「柚々と……まぐわったから子が出来たのです」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「女同士でまぐわっても子は出来ぬ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目３眉２口４.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0933.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「柚々の中に、私の子種を放ったのです。だから！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目２眉２口３汗１.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「女には子種など無い！　ふざけるのも大概にいたせ！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉２口４.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0934.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「あります！　私には子種があります。男と同じモノだって、私には生えております！！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉２口４.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「………………」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔のその、あまりに常軌を逸した言い草に、信長は絶句した。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">黙って様子を伺っていた臣下達も、俄かにざわめき立つ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「…………」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「……そうか。お主には、男のモノが生えているのか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉２口１.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0935.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「はい」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「子供の頃は、生えていなかったと記憶しておるが」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0936.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「最近生えてきたのです」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉１口１.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「…………そうか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長の表情から、煮えるような怒りが、消えた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">代わりに、憐憫を含むような眼差しで、朔を見据える。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「では、悪いが確認させてくれぬか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0937.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……え」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]STOPSND|BGM|4000|PASS</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「皆の者、しばらく壁を向いておれ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長の一言で、臣下達はそそくさと壁を向き、目を閉じる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉４口３.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0938.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「さあ、これで良いであろう。私にだけでいい、生えているというならそれを見せるのじゃ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0939.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……あ……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「どうした。さあ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0940.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|朔|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|柚々|グラフィック\戦国CG\立ち絵\柚々\柚々Ａ０１目１眉２口４汗.gal|NORMAL|#1|30|B|100|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu674.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様……？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔は、固まっていた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">着物の裾を抑えたまま、何もせず、何も言わず、呆然としている。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu675.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様……お恥ずかしいでしょうが、これで、お姉様の御子だと証明できます」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「そうじゃ。証明してみせるがいい。私の前で」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0941.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|柚々,信長|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">黙したままの朔の反応を伺うように、誰も何も言わず、水を打ったようにしんとする。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">憮然とした表情のまま、朔はかすかに、唇を振るわせた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0942.ogg|VOICE|NORMAL|800|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「…………ない……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「ん？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目１眉３口１.gal|NORMAL|#1|30|B|100|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0943.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0944.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「見せとう、ない……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|柚々|グラフィック\戦国CG\立ち絵\柚々\柚々Ａ０１目１眉２口４汗.gal|NORMAL|#1|400|B|100|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|BGM\14.ogg|BGM|REPEAT|1000|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu676.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……！？　お姉様、どうして……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|朔|グラフィック\戦国CG\立ち絵\朔\朔A０１目３眉３口１.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0945.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……柚々……すまぬ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|柚々|グラフィック\戦国CG\立ち絵\柚々\柚々Ａ０１目３眉２口５汗.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu677.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……お姉、様……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔の、その消え入りそうな声に、愕然とする。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">震えながら、柚々は朔にすがり付く。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">この期に及んで、見せたくないなどと言う朔を、理解できないと、その瞳ははっきりと語っていた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">だがそれきり、朔は口を閉ざしたまま、言い訳も何も、一切口にすることはなかった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|柚々|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|信長|グラフィック\戦国CG\立ち絵\信長\信長A０１目１眉１口１.gal|NORMAL|#1|400|B|100|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「もういい、分かった」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0946.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「そうじゃな、お主の言う通りじゃ。私はお主のことを何も分かっておらなんだ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0947.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「今まで、向き合わないようにしていて、悪かった」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|信長,朔,背景|1|2000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「朔。</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PAUSE|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">…………お主は、普通ではない」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長「お主は、織田の癌じゃ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">信長の命令で、朔はその場で捕縛された。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">無抵抗のまま、連れて行かれる朔。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">泣き喚く柚々の声がどんどん小さくなるのを、朔は漫然と聞いていた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|3000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]STOPSND|BGM|4000|WAIT</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|3000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="9" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="10" Diff="1">
+			<Label Script="000000BD.lsb" Target="12" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="11" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="12" Diff="1">
+			<SetLabel>00000131</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="13" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="14" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="1">
+				<Event Command="Event">
+					<EventArg Type="Str">MENUENABLED</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">それから、丸二日が経った。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|3000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|BGM\08.ogg|BGM|REPEAT|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">墨を塗りこめたように沈んだ夜。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">雲がかかっているせいで、月の光がまともに射さず、前がほとんど見えない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そんな闇の中、小さな人影が動く。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">灯りも持たずに、周りを警戒しながら、少しずつ進む。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|3000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">やっとの思いでその人影がたどり着いたのは、古めかしい、大きな蔵だった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">その蔵の戸に手を当てながら、ゆっくりと錠前に触れる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">懐から大切そうに取り出した鍵を、そっと差し込む。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">大きな物音を立ててしまわないように、こっそり、確かめるように。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\WEB WAVE LIB\ChakiC@22.ogg|SE|WAIT|900|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\零式マテリアル\kisimi02.ogg|SE|WAIT|800|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔵の中は、さらに深い、飲み込まれるような闇。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">その闇の中を、手さぐりでゆっくりと進む。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">やがて――</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">手が、目の前の障害物を探り当てた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">それが何であるのか、恐る恐る、ゆっくりと手を当てていく。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">……。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">…………。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">………………。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">格子だ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔵の中に、格子がある。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">この格子が、進路を全て遮断している。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ひょっとしたらここは座敷牢のような作りになっていて、格子の戸を開けなければその先へ進めないのではないか。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そう、直感した。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="300">………………</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|500|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">格子を開ける鍵は、持っていない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そんな鍵が存在することすら、知らなかったのだ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ここまで来て、先に進めないなんて。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">……でも、ここまで来れただけでも進歩なのかもしれない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔵の入り口を開ける鍵ですら厳重に管理されており、持ち出すために大変な苦労をしたのだ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]STOPSND|BGM|4000|PASS</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">………………。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">……今はここまでしか来れなかったが、せめて、本当にここにあの人がいるのかだけでも確認したい。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">もう一度、蔵の外に誰もいないか、しっかりと確認する。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そして、その格子の向こうへと、小さく声をかけた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu678.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">静謐な空気に、驚くほど声がよく通ってしまう。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">周りを気にしながら、もう一度声をかけようか悩んでいると、蔵の中から僅かに、衣擦れの音がした。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\ちょい音\布０２.ogg|SE|WAIT|700|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0948.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……柚々、か？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu679.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様！　お姉様……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">泣きそうになりながら、柚々は冷たい格子にしがみ付く。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu680.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「こんな所に閉じ込められて、おかわいそうに……お姉様。寒くはありませんか。お腹は減っていませんか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0949.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「何をしに来た」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|BGM\10.ogg|BGM|REPEAT|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔の言葉には、力が無く、真っ黒な空気に溶け込むようだった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0950.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「私を責めに来たのか。任せておけなどと大口を叩いておきながら、何も出来なかった私を」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々にとって、そこは問い詰めたいところであっただろう。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">しかし、その気持ちを払拭するように、柚々は言った。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu682.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お助けしに来たのです、お姉様」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0951.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0952.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……私の処遇が決まったのか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0953.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「あの馬鹿娘は気が触れているから、一生幽閉するしかない、とでも言われたか。それとも……最悪、殺されるかの」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0954.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「兄上と話をして、兄上の反応を見て、よく分かったわ。女同士で子を作ったなど、話せば話すほど滑稽で、愚にも付かぬ話よの」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0955.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「兄上が信じぬのも無理は無い。……本当に、浅はかだった」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0956.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「私のこれを見せたところで、物の怪に憑かれたとでも思われるであろう。そうなったら……その腹の子は、産ませてはもらえなかったろうの」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu683.ogg|VOICE|NORMAL|800|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">暗闇の中、弱々しい朔の呟きを聞きながら、柚々はぽろぽろと涙を零した。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">唯一、朔の役に立つだろうと思っていたことは、こんなにも無力だった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">それどころか、そのせいで、朔の立場は非常に危ういものになってしまった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔を、追い込んでしまった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔を、傷付けてしまった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">それが、胸を引き裂くほどに、悲しかったのだ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0957.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「泣くな、柚々。……もう、いいのじゃ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0958.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「私の中では、もう、何もかも終わった」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0959.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0960.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「私が、兄上ともっと、気持ちを通じ合えるような兄妹であったなら、あるいは……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu684.ogg|VOICE|NORMAL|800|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……朔、お姉様……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">格子の向こうにいる朔の温度を感じ取ろうとするかのように、柚々は身体を格子に寄り添わせる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">一番側にいてあげたいと思うときに、抱きしめてあげられない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">一番抱きしめて欲しいときに、側にいてもらえない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ひんやりとした格子に体温を奪われ、冷えていく身体を震わせながら、柚々は頬を濡らした。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">冷たさや苦しさから庇うように、そっと腹に手を添えながら。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu685.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「私……どうにかして、ここからお姉様をお助けします。だから、一緒に逃げましょう」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0961.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu686.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様が、織田の姫君というお立場に誇りをお持ちなのは分かります。でも、こうなってしまっては、もう……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu687.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「今逃げないと、このまま、気が触れた姫として、ずっとどこかへ幽閉されて過ごさなくてはならなくなります」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu688.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「私自身も、お屋形様の勧めで、どこかへ嫁がされることになります。それは、やっぱり嫌です……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu689.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様とずっと、一緒にいたいのです。お腹の子と一緒に、お姉様と三人で、どこか遠い地で、ひっそりと暮らしましょう。ね、お姉様……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0962.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「そうじゃな。そうできれば、楽しかったであろうな……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">かみ締めるように、朔は言った。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">全てを諦めてしまったようなその言葉に、柚々は狼狽の色を見せる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu690.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お、お姉様。私は」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0963.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「柚々。あのな」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0964.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「兄上が……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0965.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「兄上が私を……織田の癌だと言ったのじゃ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">震える声が、暗闇から届く。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">月明かりの差し込まない蔵の中にいるその人の、涙を流しているであろうその顔が、闇に包まれていて見ることができない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu691.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様、どうか気を落とさないで下さい。今はお辛いでしょうが、これからはもう、お立場のことなど気にせずに――」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0966.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「すまない、柚々。……私には、無理じゃ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0967.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「こんな辱めに耐えて、生きていくことは、もう……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\効果音(ザ・マッチメイカァズ)\crash26.wav|SE|WAIT|1000|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]STOPSND|BGM|4000|PASS</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔の言葉が途切れたと思った瞬間、蔵の中から、陶器の割れるような音が響く。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu692.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……お姉様？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ちゃり、と破片を拾う音。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\零式マテリアル\heart.ogg|SE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々の心臓が跳ね上がる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu693.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様、何をしているのですか！？　お姉様！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu694.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「返事をして下さい！　お姉様！　お姉様ぁ！！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「…………</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0968.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">さようなら」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="15" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="16" Diff="1">
+			<Label Script="000000BD.lsb" Target="19" />
+			<Array Name="Calc">
+				<Param Name="____1" Calc="" Type="12">
+					<Var Name="">K</Var>
+					<Flag Name="">TRUE</Flag>
+				</Param>
+				<Param Name="____3" Calc="" Type="12">
+					<Var Name="">F</Var>
+					<Flag Name="">TRUE</Flag>
+				</Param>
+				<Param Name="____4" Calc="" Type="7">
+					<Var Name="">____3</Var>
+					<Var Name="">____1</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____4</Var>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="17" Diff="1">
+			<Label Script="000000BD.lsb" Target="25" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="18" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="19" Diff="1">
+			<SetLabel>00000132</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="20" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="21" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="1">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|効果|$0501B6|NORMAL|#1|C|B|0|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|効果|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">暗く、黒く、何も見えないはずの空気が、一瞬、赤く染まったような気がした。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">人が倒れるような振動が微かに床を伝わり、柚々の細い身体に届いた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu695.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「あ……ぁ……っ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu696.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「いやあぁぁああああああぁぁぁ！！！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|BGM\15.ogg|BGM|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|背景|グラフィック\戦国CG\bg\効果０５.gal|NORMAL|#1|C|B|0|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々の絶叫で、深夜の見回りをしていた警護の侍達が異変を感じ、集まってくる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔵の中で泣き叫ぶ柚々を見て察した一人が、急いで格子の錠を明けようとする。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">しかし、全てはもう遅い。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">その扉の向こうにあるのは、織田の姫として産まれ、織田のために暗躍し、支えてきた姫の、最早どうすることもできない、抜け殻なのだから。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|背景|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">月明かりも差し込まない、漆黒の蔵の中。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">赤いはずの血はその色彩を見せず、ただひたすら、黒かった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="22" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="23" Diff="1">
+			<Label Script="000000BD.lsb" Target="73" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="24" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="25" Diff="1">
+			<SetLabel>00000133</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="26" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="27" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="1">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\零式マテリアル\heart.ogg|SE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu697.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……っ！！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">最悪の事態に柚々が悲鳴を上げかけた、その時。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">雲の切れ目から、柔らかな月明かりが届く。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">その光は、窓から差し込み、蔵の中を僅かに照らした。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そして、柚々の瞳に、その光景が映り込む。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu698.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……あ……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|イベント|グラフィック\戦国CG\イベント絵\イベント２０a.gal|NORMAL|#1|C|B|0|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|BGM\15.ogg|BGM|REPEAT|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">割れた陶器の欠片を、首筋に当てようとする朔。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">その手首をしっかりと掴み、離そうとしない、蔓の姿。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\蔓\kazura_165.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔓「申し訳ありません。遅くなってしまいました」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0969.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……どういうつもりじゃ、蔓」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">手の動きを封じられたまま、朔は蔓を見やる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\蔓\kazura_166.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔓「姫様が無事に落ち延びることができるよう、手回しをしておりました」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0970.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「そのような命令をした覚えは無いぞ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\蔓\kazura_167.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔓「はい。私の独断で動きました」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0971.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……私に、生き恥を晒せと言うのか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔の声が、僅かに気色ばむ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２０b.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">小首をかしげ、蔓は小さく言った。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\蔓\kazura_168.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔓「生きたくは、ありませんでしたか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２０c.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0972.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「この期に及んで、生きとうなどない！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">吐き捨てるように、言い放つ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\蔓\kazura_169.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔓「柚々様が泣いてしまいます。もう泣いています」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0973.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「矜持の方が大切じゃ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔓「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0974.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「手を離せ。もうどうでもいいのじゃ。私はもう、何もかも失った。これ以上生きている意味など」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu699.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「せ……責任を取ってください！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２０d.gal|NORMAL|1|500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">窓の外から、柚々が声を上げる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">泣き腫らした瞳の柚々が、必死に格子にかじりついていた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々３\yuyu700.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「世の中の男性は、女性を孕ませたら責任を取って、幸せにしなければならないのです。だからお姉様も、ちゃんと責任を取って、私を幸せにして下さい！」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0975.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu701.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様に生きる意味がもう無いと言うのなら、私と、お腹の子のためだけに生きて下さい。お願いします」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu702.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「私、お姉様のお側に居られれば、幸せです……幸せなんです……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0976.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">涙を流しながら、必死に訴える。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">漫然とする朔に、どれだけその声が届いているのかは分からない。それでも、想いを叫ぶ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２０e.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu703.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……楽しかったあの頃に戻りたい……いえ、戻りましょう、お姉様」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu704.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「いつもお姉様と一緒にいて、一緒にお菓子を食べて、お話して、笑って。そんな毎日を、当たり前のように繰り返して」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu705.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様が私をお側に置いて下さりさえすれば、いつだってそんな生活を望めるのです」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu706a.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様はもう、何も苦しむ必要は無いのです。織田のことも縁組のことも関係なく、毎日、ただ笑って過ごしていられるようになるのです」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0977.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu707a.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「お姉様」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">涙を拭い、呼吸を整える。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そして、いつもの暖かい笑顔で、言った。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu708.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「私は、今も昔も、何も変わりません。ただただ、大好きなお姉様のお側で、笑ってお仕えいたします」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２０f.gal|NORMAL|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0978.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔の身体から、強張りが解ける。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0979.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「…………ああ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２０g.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔の首に当てられていた陶器の破片が、するりと落下して割れる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柔らかい月の光に包まれた、柚々の笑顔。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">それを、朔はじっと見つめ――</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２０h.gal|NORMAL|1|1500|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ゆっくり、瞳を閉じた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="400">朔「……………………</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|500|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0980.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そう、じゃな」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0981.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「柚々が私の側で、笑っていたいと言うのなら、私は……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２０i.gal|NORMAL|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0982.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「せめてその想いだけでも、守るべき、なのじゃな……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|$FFFFFF|NORMAL|1|2000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">閉じられた瞳を、朔の白い両手が覆う。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">静謐な空気に包まれ、衣擦れの音だけが僅かに響く。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0983.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「……蔓」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\蔓\kazura_170.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔓「はい」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0984.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「私と柚々が、笑って過ごしていけるような場所はあるのか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|イベント|1|3000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]STOPSND|BGM|4000|PASS</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="28" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="29" Diff="1">
+			<Label Script="000000BD.lsb" Target="33" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="30" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="31" Diff="1">
+			<SetLabel>00000134</SetLabel>
+		</Item>
+		<Item Command="Exit" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="32" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="33" Diff="1">
+			<SetLabel>00000136</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="34" Diff="1">
+			<Array Name="Calc">
+				<Param Name="２０" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="35" Diff="1">
+			<Label Script="000000BD.lsb" Target="45" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="36" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="37" Diff="1">
+			<SetLabel>00000137</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="38" Diff="1">
+			<Array Name="Calc">
+				<Param Name="２１" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="39" Diff="1">
+			<Label Script="000000BD.lsb" Target="59" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="40" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="41" Diff="1">
+			<SetLabel>00000138</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="42" Diff="1">
+			<Array Name="Calc">
+				<Param Name="２２" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="43" Diff="1">
+			<Label Script="000000BD.lsb" Target="73" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="44" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="45" Diff="1">
+			<SetLabel>00000139</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="46" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="47" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="0">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="48" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Call" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="49" Diff="1">
+			<Label Script="メッセージボックス作成.lsb" Target="0" />
+			<Str Name="Result"></Str>
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Params">
+				<Array Name="__ARG_0__">
+					<Param Name="____0" Calc="" Type="1">
+						<Str Name="">透明(真ん中)</Str>
+					</Param>
+					<Param Name="____arg" Calc="" Type="1">
+						<Var Name="">____0</Var>
+					</Param>
+				</Array>
+			</Array>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="50" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="51" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="1">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|CLICK|SKIP</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="0">　　　　　　　　　 それから、一月後。</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|1000</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|3000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|1000</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="52" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Call" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="53" Diff="1">
+			<Label Script="メッセージボックス作成.lsb" Target="0" />
+			<Str Name="Result"></Str>
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Params">
+				<Array Name="__ARG_0__">
+					<Param Name="____0" Calc="" Type="1">
+						<Str Name="">(標準)</Str>
+					</Param>
+					<Param Name="____arg" Calc="" Type="1">
+						<Var Name="">____0</Var>
+					</Param>
+				</Array>
+			</Array>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="54" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="55" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="1">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|BGM\23.ogg|BGM|REPEAT|1000|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|イベント|グラフィック\戦国CG\イベント絵\イベント２１ａ.gal|NORMAL|#1|C|B|0|1|3000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">古い、小さな屋敷の廊下で、暖かい日差しを浴びながら、白湯を飲む二人の姿があった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu709.ogg|VOICE|NORMAL|900|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「今日はかなり暖かいですね、お姉様」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0985.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「ああ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu710.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「今夜は、蔓さんが滋養のある川魚を獲ってきて下さるそうですよ。楽しみですね」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0986.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「それはいいな。骨まで食べておけ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu711a.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「ほ、骨までですか。……確かに、その方が丈夫な子が産まれるのかも……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\朔３\saku0987.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔「冗談じゃ。喉に刺さるぞ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu712.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「あ、もう。お姉様ったら。うふふふ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔓に導かれ、二人が落ち延びた所は、蔓の里である甲賀だった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そこで二人が匿われ生活していることを、信長はおろか、誰一人として突き止められない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">質素で、ささやかな生活であったが、安穏に暮らすことが出来る場所だった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">何より、柚々が幸せそうに笑っている。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔にとって、それだけが唯一の生きる意味だった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">今までずっと心の中で煮えていた、黒く歪な執念を、朔は全て捨て去った。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">何も望まない。もう、何にも固執することはない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ただ、柚々のためだけに生きる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">――柚々が幸せなら、それでいい。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そんな朔の表情は、決して晴れやかなものではなかった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">織田の姫としての矜持を失ったこと。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">織田を、捨てたこと。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">どうしようもないほど胸を抉る、喪失感。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">憔悴した心と身体は、そう簡単に癒えたりしない。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">蔓からの報告によると、縁組が無くなったことによって、浅井との同盟話もまた、無くなったらしい。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">そのことも、気がかりだった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">――でももう……どうでもいい。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々が幸せなら、それでいい。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々を守れるなら、それでいい。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">たった一つの、小さな笑顔のためだけに生きる。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔が、己という空箱に留めて置きたいと願うのは、ただそれだけだった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">しかし――</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\bg\効果０１.gal|NORMAL|1|2000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">男根を生やす薬のせいか、朔は相変わらず、しばしば張り裂けるような性衝動に駆られた。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">だが、朔は最早、それを柚々にぶつけようとはしなかった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">ただただ、自分の手で必死に慰めるだけ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々はそんな朔を気遣い、自分にぶつけてもいいと言う。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">だが、朔はそれを拒否した。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">朔にとって、柚々を少しでも傷付けることは、生きる意味に反しているのだ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\bg\効果０４.gal|NORMAL|1|2000|0|0|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">その甲斐があったのか、衝動に駆られ、悶え苦しむ夜は徐々に減りつつあった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">穏やかに、何事もなく過ごせる日々のおかげで、朔の精神状態は悪化することなく、少しずつ、落ち着いていく。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々に見守られながら。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々の膝の温もりを感じながら。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">何に煩わされることもなく、何も考えず、まどろむように生きていけることが、心地よかった。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２１b.gal|NORMAL|1|3000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々と二人、穏やかな午後。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柔らかな髪の感触に、自然に頬を緩める。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">今、そんな朔の考えていることは一つ。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">――穏やかに眠りたい。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">春の、暖かな陽気の下で。</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu713b.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「……お姉様。眠ってしまったのですか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|ボイス\柚々４\yuyu714.ogg|VOICE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">柚々「おやすみなさい」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|500</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|イベント|1|3000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]STOPSND|BGM|5000|WAIT</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="56" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="57" Diff="1">
+			<Label Script="000000BD.lsb" Target="37" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="58" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="59" Diff="1">
+			<SetLabel>0000013A</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="60" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="61" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="0">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="62" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Call" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="63" Diff="1">
+			<Label Script="メッセージボックス作成.lsb" Target="0" />
+			<Str Name="Result"></Str>
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Params">
+				<Array Name="__ARG_0__">
+					<Param Name="____0" Calc="" Type="1">
+						<Str Name="">透明(真ん中)</Str>
+					</Param>
+					<Param Name="____arg" Calc="" Type="1">
+						<Var Name="">____0</Var>
+					</Param>
+				</Array>
+			</Array>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="64" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="65" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="1">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|CLICK|SKIP</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">0</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="0">　　　　　　それから、数年の月日が流れた。</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|1000</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|3000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|1000</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="66" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Call" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="67" Diff="1">
+			<Label Script="メッセージボックス作成.lsb" Target="0" />
+			<Str Name="Result"></Str>
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Params">
+				<Array Name="__ARG_0__">
+					<Param Name="____0" Calc="" Type="1">
+						<Str Name="">(標準)</Str>
+					</Param>
+					<Param Name="____arg" Calc="" Type="1">
+						<Var Name="">____0</Var>
+					</Param>
+				</Array>
+			</Array>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="68" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="69" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="1">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\効果音(ザ・マッチメイカァズ)\ame01.ogg|BGM|REPEAT|0|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHGVOL|BGM|1000|5000|WAIT</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\零式マテリアル\kaminari.ogg|SE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|イベント|$000000|NORMAL|#1|C|B|0|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「お屋形様。いかがなさいまするか」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「ふむ……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「織田が滅び、斎藤を捻じ伏せ、更には今川を根絶やしとした」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「は。我が甲斐武田の力はますます強固なものとなっております」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「……」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「かねてより、手中にせんと思うていたところがある」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「は。それは……？」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「近江国は伊賀、そして甲賀。</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PAUSE|</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">……忍共の里ぞ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「上杉が軒猿、北条が風魔を例に取るまでもなく、忍は脅威よ。彼奴らが業が諸国へと渡るる前に、我等が手の内のみにて留め置くべし」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２２.gal|NORMAL|14|200|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\零式マテリアル\kaminari.ogg|SE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|500|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|イベント|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESON|500</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「成る程。されば、忍の里を」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「うむ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「忍共の里を潰す。その業を伝うる幾人のみを捕らえ、残る者共は、殺せ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="String">
+					<EventArg Type="CharString" ExtraData="50">「皆殺しじゃ。老若男女一切の隔てなく、殺れ」</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]MESOFF|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CHANGECG|イベント|グラフィック\戦国CG\イベント絵\イベント２２.gal|NORMAL|14|200|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]PLAYSND|効果音\零式マテリアル\kaminari.ogg|SE|NORMAL|1000|0</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|500|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|イベント|1|1000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="70" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="71" Diff="1">
+			<Label Script="000000BD.lsb" Target="41" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="72" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Label" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="73" Diff="1">
+			<SetLabel>00000157</SetLabel>
+		</Item>
+		<Item Command="Calc" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="74" Diff="1">
+			<Array Name="Calc">
+				<Param Name="__メッセージ終了" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="TextIns" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="75" Diff="1">
+			<EventBlock Name="TpWord102" HasFurigana="0">
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|1000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]CREATECG|背景|グラフィック\戦国CG\bg\終.gal|NORMAL|#1|C|B|0|1|2000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|4000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]DELETECG|背景|1|2000|0|0|</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]STOPSND|BGM|4000|PASS</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]WAIT|2000|NORMAL|SKIP</EventArg>
+				</Event>
+				<Event Command="Return">
+					<EventArg Type="Byte">1</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">[\x01]</EventArg>
+				</Event>
+				<Event Command="Event">
+					<EventArg Type="Str">MESEND</EventArg>
+				</Event>
+			</EventBlock>
+
+			<Array Name="__UNK_1__">
+				<Param Name="____0" Calc="" Type="1">
+					<Str Name="">メッセージボックス</Str>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="__UNK_2__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_3__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+			<Array Name="__UNK_4__">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="76" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____0" Calc="Not" Type="11">
+					<Var Name="">__メッセージ終了</Var>
+				</Param>
+				<Param Name="____arg" Calc="" Type="1">
+					<Var Name="">____0</Var>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Jump" Indent="0" Mute="0" NotUpdate="1" Color="0" Id="77" Diff="1">
+			<Label Script="000000BD.lsb" Target="31" />
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+		</Item>
+		<Item Command="Wait" Indent="0" Mute="0" NotUpdate="0" Color="0" Id="78" Diff="1">
+			<Array Name="Calc">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">TRUE</Flag>
+				</Param>
+			</Array>
+			<Array Name="Time">
+				<Param Name="____arg" Calc="" Type="1">
+					<Int Name="">0</Int>
+				</Param>
+			</Array>
+			<Array Name="StopEvent">
+				<Param Name="____arg" Calc="" Type="1">
+					<Flag Name="">FALSE</Flag>
+				</Param>
+			</Array>
+		</Item>
+	</Body>
+</LMScript>

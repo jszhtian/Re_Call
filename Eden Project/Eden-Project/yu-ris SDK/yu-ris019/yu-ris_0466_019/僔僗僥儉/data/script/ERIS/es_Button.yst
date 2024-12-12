@@ -1,0 +1,4743 @@
+//=========================================================================
+//
+//■ERIS ボタン
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BT.FILE(\.BT.MAX+1)]
+	S_STR[$BT.OFF(\.BT.MAX+1)]
+	S_STR[$BT.OVER(\.BT.MAX+1)]
+	S_STR[$BT.ON(\.BT.MAX+1)]
+	S_STR[$BT.ONOVER(\.BT.MAX+1)]
+	S_STR[$BT.NA(\.BT.MAX+1)]
+	S_STR[$BT.MASK(\.BT.MAX+1)]
+
+	S_INT[@BT.SEQ.OFF(\.BT.MAX+1)]
+	S_INT[@BT.SEQ.OVER(\.BT.MAX+1)]
+	S_INT[@BT.SEQ.ON(\.BT.MAX+1)]
+	S_INT[@BT.SEQ.ONOVER(\.BT.MAX+1)]
+	S_INT[@BT.SEQ.NA(\.BT.MAX+1)]
+	S_INT[@BT.SEQ.MASK(\.BT.MAX+1)]
+/*
+	S_INT[@BT.PAC.OFF(\.BT.MAX+1)]
+	S_INT[@BT.PAC.OVER(\.BT.MAX+1)]
+	S_INT[@BT.PAC.ON(\.BT.MAX+1)]
+	S_INT[@BT.PAC.ONOVER(\.BT.MAX+1)]
+	S_INT[@BT.PAC.NA(\.BT.MAX+1)]
+	S_INT[@BT.PAC.MASK(\.BT.MAX+1)]
+*/
+/*
+	S_INT[@BE.OFF(\.BT.MAX+1)]
+	S_INT[@BE.OVER(\.BT.MAX+1)]
+	S_INT[@BE.ON(\.BT.MAX+1)]
+	S_INT[@BE.ONOVER(\.BT.MAX+1)]
+	S_INT[@BE.NA(\.BT.MAX+1)]
+	S_INT[@BE.MASK(\.BT.MAX+1)]
+*/
+
+	S_STR[$BT.GRPNAME]
+	S_STR[$BT.NAME(\.BT.MAX+1)]
+	S_STR[$BT.GRP(\.BT.MAX+1)]
+	S_STR[$BT.LBL(\.BT.MAX+1)]
+	S_INT[@BT.LBL2(\.BT.MAX+1)]
+	S_STR[$BT.LBLS(\.BT.MAX+1)]		//高速サーチ用
+
+	S_INT[@BT.NO(\.BT.MAX+1)]		//
+	S_INT[@BT.A(\.BT.MAX+1)]		//可視不可視(1/0)   (Alpha)
+	S_INT[@BT.ES(\.BT.MAX+1)]		//可視不可視(1/0)   (Enabled)
+	S_INT[@BT.ES2(\.BT.MAX+1)]		//可視不可視2(1/0)  (Enabled2)
+	S_INT[@BT.N(\.BT.MAX+1)]		//NA有効無効(1/0)   (N/A)
+	S_INT[@BT.W(\.BT.MAX+1)]		//機能有効無効(1/0) (Work)
+	S_INT[@BT.MST(\.BT.MAX+1)]		//マウス状態(0=off/1=over/2=on瞬間/3=on-off/4=on-over)
+	S_INT[@BT.OLD.MST(\.BT.MAX+1)]	//マウス状態
+	S_INT[@BT.T(\.BT.MAX+1)]		//ON残り時間
+	S_INT[@BT.TMAX(\.BT.MAX+1)]		//ON時間
+	S_INT[@BT.IX(\.BT.MAX+1)]		//初期位置Ｘ座標
+	S_INT[@BT.IY(\.BT.MAX+1)]		//初期位置Ｙ座標
+	S_INT[@BT.IZ(\.BT.MAX+1)]		//初期位置Ｚ座標
+	S_INT[@BT.X(\.BT.MAX+1)]		//Ｘ座標
+	S_INT[@BT.Y(\.BT.MAX+1)]		//Ｙ座標
+	S_INT[@BT.Z(\.BT.MAX+1)]		//Ｚ座標
+	S_INT[@BT.VAL(\.BT.MAX+1)]		//
+	S_INT[@BT.TH(\.BT.MAX+1)]		//スルー
+	S_INT[@BT.SX(\.BT.MAX+1)]		//サイズ指定Ｘ(0=デフォルトサイズ)
+	S_INT[@BT.SY(\.BT.MAX+1)]		//サイズ指定Ｙ(0=デフォルトサイズ)
+	S_INT[@BT.PX(\.BT.MAX+1)]		//サイズ指定Ｘ(100=デフォルトサイズ)
+	S_INT[@BT.PY(\.BT.MAX+1)]		//サイズ指定Ｙ(100=デフォルトサイズ)
+	S_INT[@BT.DX(\.BT.MAX+1)]		//ドラッグ相対位置Ｘ
+	S_INT[@BT.DY(\.BT.MAX+1)]		//ドラッグ相対位置Ｙ
+	S_INT[@BT.DCX(\.BT.MAX+1)]		//ドラッグ中心位置Ｘ(ゲージのほうをクリックした時、マウス位置にこの中心位置がくる)
+	S_INT[@BT.DCY(\.BT.MAX+1)]		//ドラッグ中心位置Ｙ(ゲージのほうをクリックした時、マウス位置にこの中心位置がくる)
+	S_INT[@BT.MODE(\.BT.MAX+1)]		//
+	S_INT[@BT.TYPE(\.BT.MAX+1)]		//0=OFFレイヤ/1=ONOVERボタン/2=ONOFFボタン/3=ONOFFラジオボタン
+	S_INT[@BT.BTFLAG(\.BT.MAX+1)]	//
+	S_INT[@BT.SEQ(\.BT.MAX+1)]		//連結ボタンフラグ
+
+
+	//アニメ
+	S_INT[@BT.ANTM(\.BT.MAX+1)]		//現在の時間
+	S_INT[@BT.ANCM(\.BT.MAX+1,6)]	//現在のコマ
+	S_INT[@BT.ANNUM(\.BT.MAX+1,6)]	//アニメーション枚数
+	S_INT[@BT.ANTIME(\.BT.MAX+1,6)]	//1コマ当たりの表示時間
+	S_INT[@BT.ANSTOP(\.BT.MAX+1)]
+//	S_INT[@BT.ANLP(\.BT.MAX+1)]
+	S_INT[@BT.ANLPTYPE(\.BT.MAX+1,6)] //0…順/1…逆/2…順＆逆/3…逆＆順/4…(内部用)順＆逆の逆の状態/5…(内部用)逆＆順の順の状態
+
+
+	S_INT[@BT.GNO]
+
+	S_INT[@BT.CURSORMODE]
+	S_INT[@BT.CURSORMODE.X]
+	S_INT[@BT.CURSORMODE.Y]
+	S_INT[@BT.ACTIVE]
+	S_INT[@BT.C.STARTFLAG]
+	S_STR[$BT.C.START]
+	S_INT[@BT.C.START2]
+
+	S_STR[$BT.C.UP(\.BT.MAX+1)]
+	S_STR[$BT.C.DOWN(\.BT.MAX+1)]
+	S_STR[$BT.C.LEFT(\.BT.MAX+1)]
+	S_STR[$BT.C.RIGHT(\.BT.MAX+1)]
+	S_INT[@BT.C.UP2(\.BT.MAX+1)]
+	S_INT[@BT.C.DOWN2(\.BT.MAX+1)]
+	S_INT[@BT.C.LEFT2(\.BT.MAX+1)]
+	S_INT[@BT.C.RIGHT2(\.BT.MAX+1)]
+
+	S_INT[@BT.MAP.A(\.BT.MAX+1)]
+	S_INT[@BT.KEY(\.BT.MAX+1,8)]	//ショートカットキー(複数押し対応)
+	S_INT[@BT.KEY.S(\.BT.MAX+1,8)]	//ショートカットキー(連続押し専用)
+	S_INT[@BT.KEY.NUM(\.BT.MAX+1,8)]//ショートカットキー登録数
+	S_STR[$BT.SSE.OVER(\.BT.MAX+1)]	//システム効果音(over)
+	S_STR[$BT.SSE.ON(\.BT.MAX+1)]	//システム効果音(on)
+
+	S_INT[@BT.SW(\.BT.MAX+1)]
+	S_INT[@BT.STATUS(\.BT.MAX+1)]
+
+	S_INT[@BT.GROUP1(\.BT.MAX+1)]
+	S_INT[@BT.GROUP2(\.BT.MAX+1)]
+	S_INT[@BT.GROUPMIN(\.BT.MAX+1)]
+	S_INT[@BT.GROUPMAX(\.BT.MAX+1)]
+	S_INT[@BT.RADIO(\.BT.MAX+1)]
+	S_INT[@BT.SLIDE.SX(\.BT.MAX+1)]
+	S_INT[@BT.SLIDE.SY(\.BT.MAX+1)]
+	S_INT[@BT.SLIDE.X(\.BT.MAX+1)]
+	S_INT[@BT.SLIDE.Y(\.BT.MAX+1)]
+
+	S_INT[@BT.L.INIT(\.BT.MAX+1)]
+	S_INT[@BT.L.OVER(\.BT.MAX+1)]
+	S_INT[@BT.L.OVER.ONCE(\.BT.MAX+1)]
+	S_INT[@BT.L.LEAVE(\.BT.MAX+1)]
+	S_INT[@BT.L.LEAVE.ONCE(\.BT.MAX+1)]
+	S_INT[@BT.L.ON(\.BT.MAX+1)]
+	S_INT[@BT.L.DRAG(\.BT.MAX+1)]
+
+	S_INT[@BT.F.INIT(\.BT.MAX+1)]
+	S_INT[@BT.F.OVER(\.BT.MAX+1)]
+	S_INT[@BT.F.OVER.ONCE(\.BT.MAX+1)]
+	S_INT[@BT.F.LEAVE(\.BT.MAX+1)]
+	S_INT[@BT.F.LEAVE.ONCE(\.BT.MAX+1)]
+	S_INT[@BT.F.ON(\.BT.MAX+1)]
+	S_INT[@BT.F.DRAG(\.BT.MAX+1)]
+
+
+	S_INT[@BT.GX(257)] //グループ位置X
+	S_INT[@BT.GY(257)] //グループ位置Y
+	S_INT[@BT.GZ(257)] //グループ位置Z
+
+	S_INT[@BT.GROUPNO]
+
+
+
+
+	//キュー情報
+	S_INT[@QUE.MAX=24]
+	S_INT[@Q.GUNO(2001)]
+	S_INT[@Q.FLAG(2001)]
+	S_INT[@Q.FLAG.END(2001)]
+	S_INT[@Q.TNOW(2001)]
+	S_INT[@Q.TOLD(2001)]
+	S_STR[$Q.NAME(2001)]
+	S_STR[$Q.SPID(2001)]
+	S_INT[@Q.LNO(2001)]
+	S_INT[@Q.COM(2001)]
+	S_INT[@Q.FTYPE(2001)]
+	S_STR[$Q.FCG(2001)]
+
+	S_STR[$Q.LBL(2001)]
+	S_INT[@Q.LBL2(2001)]
+	S_INT[@Q.I1(2001)]
+	S_INT[@Q.I2(2001)]
+	S_INT[@Q.I3(2001)]
+	S_INT[@Q.I4(2001)]
+	S_INT[@Q.I5(2001)]
+	S_INT[@Q.I6(2001)]
+	S_INT[@Q.I7(2001)]
+	S_INT[@Q.I8(2001)]
+	S_STR[$Q.S1(2001)]
+	S_STR[$Q.S2(2001)]
+	S_STR[$Q.S3(2001)]
+	S_STR[$Q.S4(2001)]
+	S_STR[$Q.S5(2001)]
+	S_STR[$Q.S6(2001)]
+	S_STR[$Q.S7(2001)]
+	S_STR[$Q.S8(2001)]
+
+	//引数保存用
+	S_STR[$P.LBL(48)]
+	S_INT[@P.LBL2(48)]
+	S_INT[@P.I1(48)]
+	S_INT[@P.I2(48)]
+	S_INT[@P.I3(48)]
+	S_INT[@P.I4(48)]
+	S_INT[@P.I5(48)]
+	S_INT[@P.I6(48)]
+	S_INT[@P.I7(48)]
+	S_INT[@P.I8(48)]
+	S_STR[$P.S1(48)]
+	S_STR[$P.S2(48)]
+	S_STR[$P.S3(48)]
+	S_STR[$P.S4(48)]
+	S_STR[$P.S5(48)]
+	S_STR[$P.S6(48)]
+	S_STR[$P.S7(48)]
+	S_STR[$P.S8(48)]
+
+	S_INT[@e_BTGRP			=01]
+	S_INT[@e_GRP			=02]
+	S_INT[@e_NAME			=03]
+	S_INT[@e_CG				=04]
+	S_INT[@e_CGAN			=05]
+//	S_INT[@e_CGSYS			=06]
+//	S_INT[@e_CGSYSAN		=07]
+	S_INT[@e_A				=06]
+	S_INT[@e_N				=07]
+	S_INT[@e_W				=08]
+	S_INT[@e_X				=09]
+	S_INT[@e_Y				=10]
+	S_INT[@e_Z				=11]
+	S_INT[@e_SEQ			=12]
+	S_INT[@e_MAPA			=13]
+	S_INT[@e_MAPCG			=14]
+	S_INT[@e_ANNUM			=15]
+	S_INT[@e_ANTIME			=16]
+	S_INT[@e_ANLPTYPE		=17]
+	S_INT[@e_KEY			=18]
+	S_INT[@e_KEYS			=19]
+	S_INT[@e_KEYNUM			=20]
+	S_INT[@e_RADIO			=21]
+	S_INT[@e_SLIDE			=22]
+	S_INT[@e_E				=23]
+	S_INT[@e_E2				=24]
+	S_INT[@e_T				=25]
+	S_INT[@e_SE				=26]
+	S_INT[@e_MODE			=27]
+	S_INT[@e_TYPE			=28]
+	S_INT[@e_BTFLAG			=29]
+	S_INT[@e_END			=30]
+	S_INT[@e_VAL			=31]
+	S_INT[@e_TH				=32]
+	S_INT[@e_BTSTOP			=33]
+
+	S_INT[@e_CURSOR.UP		=34]
+	S_INT[@e_CURSOR.DOWN	=35]
+	S_INT[@e_CURSOR.LEFT	=36]
+	S_INT[@e_CURSOR.RIGHT	=37]
+	S_INT[@e_CURSOR.START	=38]
+
+	S_INT[@e_SX				=39]
+	S_INT[@e_SY				=40]
+	S_INT[@e_PX				=41]
+	S_INT[@e_PY				=42]
+
+	S_INT[@e_BTSET			=47]
+
+	S_STR[$comstr(48)]
+	S_INT[@H.COM(48)]
+
+	S_INT[@GUNO]
+
+
+/*
+	S_INT[@BTST.MOF= 1]
+	S_INT[@BTST.MOV= 2]
+	S_INT[@BTST.MON= 4]
+	S_INT[@BTST.E0 = 8]
+	S_INT[@BTST.E1 =16]
+	S_INT[@BTST.OFF=32]
+	S_INT[@BTST.ON =64]
+*/
+	S_INT[@BT.DD.FLAG]
+	S_INT[@BT.DD.NO]
+//	S_INT[@BT.DD.CX]
+//	S_INT[@BT.DD.CY]
+	S_INT[@BT.DD.MOVEFLAG]
+	S_INT[@BT.DD.X]
+	S_INT[@BT.DD.Y]
+
+	S_INT[@BT.MAX=\.BT.MAX]
+	S_INT[@BT.NUM]
+
+	S_INT[@BTUSE.Z]
+
+	S_INT[@BTCASHMODE]
+
+	S_STR[$SSE.PATH]
+	S_STR[$CG.PATH]
+	S_STR[$CGSYS.PATH]
+
+	S_INT[@mTADD]
+	S_INT[@mTOLD]
+
+}
+
+
+//--------------------------------------------------------------------
+//■
+//--------------------------------------------------------------------
+#=es.BT.GROUP.CHECK
+{
+	INT[@no=@_PINT(1)]
+	INT[@GNO=@_PINT(2)]
+	INT[@ret]
+
+	IF[(@BT.GROUPMIN(@no)==0) && (@BT.GROUPMAX(@no)==0)]
+	{
+		IF[@BT.GROUP1(@no)==0 && @BT.GROUP2(@no)==0] @ret=1
+		ELSE[@BT.GROUP1(@no)==@GNO] @ret=1
+		ELSE[@BT.GROUP2(@no)==@GNO] @ret=1
+		IFEND[]
+	}
+	ELSE[]
+	{
+		IF[@BT.GROUP1(@no)==0 && @BT.GROUP2(@no)==0] @ret=1
+		ELSE[@BT.GROUP1(@no)==@GNO] @ret=1
+		ELSE[@BT.GROUP2(@no)==@GNO] @ret=1
+		IFEND[]
+
+		IF[(@BT.GROUPMIN(@no)<=@GNO) && (@BT.GROUPMAX(@no)>=@GNO)] //番号がMIN～MAXの範囲内
+		{
+			@ret=1
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[rint=@ret]
+}
+
+//--------------------------------------------------------------------
+//■
+//--------------------------------------------------------------------
+#=es.BT.VDEFLIST
+{
+	STR[$GRP=$_PSTR(1)]
+	INT[@GNO=@_PINT(2)]
+	INT[@no]
+
+	LOOP[SET=@BT.NUM]
+	{
+		@no = @BT.NUM - @_LC + 1
+
+		IF[$BT.GRP(@no)==$GRP]
+		{
+			GOSUB[#=es.BT.GROUP.CHECK pint=@no pint2=@GNO]
+		//	IF[@_RINT(1) && @BT.ES(@no) && @BT.ES2(@no) && @BT.N(@no)==0 && @BT.W(@no) && @BT.TYPE(@no)>0]
+			IF[@_RINT(1)]
+			{
+//\_label.info.exist($BT.LBL(@no)+".VDEF")
+//IF[@_RINT(1)] \_dmes($BT.LBL(@no)+".VDEF, "+$(@BT.LBL2(@no))) IFEND[]
+				\_gosub($BT.LBL(@no)+".VDEF", @BT.LBL2(@no))
+			}
+			IFEND[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■
+//--------------------------------------------------------------------
+#=es.BT.TASK.INIT
+{
+	$CGSYS.PATH=$T(38,31)
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■ボタンタスクメイン
+//--------------------------------------------------------------------
+#=es.BT.TASK.MAIN
+{
+/*
+//DEBUGLIST[ADD=@BT.GROUPNO STR="@BT.GROUPNO"]
+LOOP[SET=50]
+	DEBUGLIST[ADD=$BT.NAME(@_LC-1) STR="$NAME"]
+	DEBUGLIST[ADD=@BT.STATUS(@_LC-1) STR="@BT.STATUS"]
+//	DEBUGLIST[ADD=@BT.X(@_LC-1) STR="@BT.X"]
+LOOPEND[]
+*/
+
+	INT[@no]
+	INT[@mPushFlag]
+	INT[@mOverFlag]
+
+	INT[@CURSOR_THRU_FLAG]
+
+	INT[@FORBIT_FLAG] //以降のボタンは反応させないフラグ
+
+//	FONT[DRAWMODE=0 BOLD=0 COLOR=0xffffff COLOR2=0xaaaaff SX=10 SY=10 ANTIALIASING=0]
+//	CGACT[ID=:/W3/DBG RECTPAINT=1 SET=0]
+//	INT[@we]WINDOWINFO[NO=3 E=1 LET=@we]
+
+///xS
+	IF[@es.KEYOP.THRU.COUNT>0] @es.KEYOP.THRU.COUNT-=1 IFEND[]
+	IF[@es.KEYOP.THRU.COUNT<0] @es.KEYOP.THRU.COUNT=0 IFEND[]
+
+	//経過時間算出
+	@mTADD = @_OS_TIME(1) - @mTOLD
+	@mTOLD = @_OS_TIME(1)
+
+	//-----------------------------------------------------------------
+	// 全てのボタンに対して処理する.
+	//-----------------------------------------------------------------
+	LOOP[SET=@BT.NUM]
+	{
+
+///xINJ
+IF[@es.ESCMODE] LOOPBREAK[] IFEND[]
+IF[@es.ERISOFFMODE] LOOPBREAK[] IFEND[]
+
+//		IF[@we] CGACT[ID=:/W3/DBG Y=(@_LC-1)*9 TEXT=1 SETSTR="["+$(@_LC)+"]["+$(@BT.MST(@_LC))+"]"+$BT.LBL(@_LC)] IFEND[]
+
+		//-----------------------------------------------------------------
+		// 上に存在するボタンから処理していくため、逆順にする.
+		//-----------------------------------------------------------------
+			@no = @BT.NUM - @_LC + 1
+	//		@no = @BT.LIST(@_LC)
+
+
+		//-----------------------------------------------------------------
+		// グループ
+		//-----------------------------------------------------------------
+			GOSUB[#=es.BT.GROUP.CHECK pint=@no pint2=@BT.GROUPNO]
+			IF[@_RINT(1) && @BT.ES(@no) && @BT.ES2(@no) && @BT.N(@no)==0 && @BT.W(@no) && @BT.TYPE(@no)>0]
+			{
+				//-----------------------------------------------------------------
+				// ドラッグ状態でなければ
+				//-----------------------------------------------------------------
+				IF[@BT.DD.FLAG==0]
+				{
+					//-----------------------------------------------------------------
+					// ショートカットキー判定
+					// 対応キー押していたら2が入る.ただし MOUSE_L/R/M による反応の場合は1. (特別にSSE鳴るように)
+					//-----------------------------------------------------------------
+///xS
+						GOSUB[#=es.BT.KEYCHECK pint=@no]
+						@mPushFlag=@_RINT(1)
+
+//IF[@BT.E2(@mLC1)==1]
+{
+	IF[@BT.CURSORMODE==0]
+	{
+					//-----------------------------------------------------------------
+					// マウス判定
+					//-----------------------------------------------------------------
+						IF[@FORBIT_FLAG==0 && @es.KEYOP.THRU.COUNT==0]
+						{
+							GOSUB[#=es.BT.MOUSECHECK pint=@no]
+							@mPushFlag|=@_RINT(1) //左ボタン押していたら1が入る.
+							@mOverFlag =@_RINT(2) //乗っていたら1が入る.
+					//		@mPushFlag=0
+					//		@mOverFlag=0
+						}
+						ELSE[]
+						{
+							@mOverFlag=0
+						}
+						IFEND[]
+
+					//-----------------------------------------------------------------
+					// 
+					//-----------------------------------------------------------------
+///xS
+						IF[@mPushFlag && @es.SS.FADE.TASK==0]
+						{
+							IF[@BT.MST(@no)<2] @BT.OLD.MST(@no)=@BT.MST(@no) IFEND[]
+							IF[@mPushFlag==1] @BT.MST(@no)=2 IFEND[] //マウスの時だけON瞬間状態
+							IF[@mPushFlag>=2] @BT.MST(@no)=3 IFEND[]
+
+							GOSUB[#=es.BT.DOWN pint=@no]
+
+							IF[@BT.OLD.MST(@no)<=1]
+							{
+//@BT.ANTM(@no)=0
+//@BT.ANCM(@no)=1
+
+								@BT.F.ON(@no)=1
+///xS
+								IF[$BT.SSE.ON(@no)!=""] \SSE( $BT.SSE.ON(@no) ) IFEND[]
+//ON で、かつマウス押下によるものならば
+
+///xS
+/*
+								IF[$BT.SSE.ON(@no)!="" && @mPushFlag==1]
+									  IF[$BT.SSE.ON(@no)=="sysse/sse01"] \SSE77(1)
+									ELSE[$BT.SSE.ON(@no)=="sysse/sse02"] \SSE77(2)
+									ELSE[$BT.SSE.ON(@no)=="sysse/sse03"] \SSE77(3)
+									ELSE[$BT.SSE.ON(@no)=="sysse/sse04"] \SSE77(4)
+									ELSE[$BT.SSE.ON(@no)=="sysse/sse05"] \SSE77(5)
+									ELSE[$BT.SSE.ON(@no)=="sysse/sse06"] \SSE77(6)
+									ELSE[]								 \SSE( $BT.SSE.ON(@no) )
+									IFEND[]
+								IFEND[]
+*/
+							}
+							IFEND[]
+
+							IF[@BT.TH(@no)==0] @FORBIT_FLAG=1 IFEND[]
+
+						}
+						ELSE[@mOverFlag]
+						{
+//\DBG.STR(4, "$BT.NAME="+$BT.NAME(@no)+", $BT.LBL="+$BT.LBL(@no))
+							@BT.F.OVER(@no)=1
+
+							IF[@BT.MST(@no)!=1] @BT.OLD.MST(@no)=@BT.MST(@no) IFEND[]
+							@BT.MST(@no)=1
+							IF[@BT.OLD.MST(@no)==0]
+							{
+//@BT.ANTM(@no)=0
+//@BT.ANCM(@no)=1
+
+///x
+@BT.OLD.MST(@no)=1
+								@BT.F.OVER.ONCE(@no)=1
+
+								IF[$BT.SSE.OVER(@no)!=""] \SSE( $BT.SSE.OVER(@no) ) IFEND[]
+///xS
+/*
+								IF[$BT.SSE.OVER(@no)!=""]
+									  IF[$BT.SSE.OVER(@no)=="sysse/sse01"] \SSE77(1)
+									ELSE[$BT.SSE.OVER(@no)=="sysse/sse02"] \SSE77(2)
+									ELSE[$BT.SSE.OVER(@no)=="sysse/sse03"] \SSE77(3)
+									ELSE[$BT.SSE.OVER(@no)=="sysse/sse04"] \SSE77(4)
+									ELSE[$BT.SSE.OVER(@no)=="sysse/sse05"] \SSE77(5)
+									ELSE[$BT.SSE.OVER(@no)=="sysse/sse06"] \SSE77(6)
+									ELSE[]								   \SSE( $BT.SSE.OVER(@no) )
+									IFEND[]
+								IFEND[]
+*/
+							}
+							IFEND[]
+
+							IF[@BT.TH(@no)==0] @FORBIT_FLAG=1 IFEND[]
+						}
+						ELSE[]
+						{
+							IF[@BT.MST(@no)!=0] @BT.OLD.MST(@no)=@BT.MST(@no) IFEND[]
+							@BT.MST(@no)=0
+							IF[@BT.OLD.MST(@no)>=1]
+							{
+//@BT.ANTM(@no)=0
+//@BT.ANCM(@no)=1
+
+///x
+@BT.OLD.MST(@no)=0
+								@BT.F.LEAVE.ONCE(@no)=1
+							}
+							IFEND[]
+						}
+						IFEND[]
+	}
+	ELSE[]
+	{
+					//-----------------------------------------------------------------
+					// ボタン押下処理
+					//-----------------------------------------------------------------
+						IF[@mPushFlag && @es.SS.FADE.TASK==0]
+						{
+							IF[@BT.MST(@no)<2] @BT.OLD.MST(@no)=@BT.MST(@no) IFEND[]
+							IF[@mPushFlag==1] @BT.MST(@no)=2 IFEND[]
+							IF[@mPushFlag>=2] @BT.MST(@no)=3 IFEND[]
+							GOSUB[#=es.BT.DOWN pint=@no]
+							IF[@BT.OLD.MST(@no)<=1]
+							{
+								@BT.F.ON(@no)=1
+								IF[$BT.SSE.ON(@no)!=""] \SSE( $BT.SSE.ON(@no) ) IFEND[]
+							}
+							IFEND[]
+
+							@CURSOR_THRU_FLAG=1
+						}
+						ELSE[]
+						{
+							//-----------------------------------------------------------------
+							// カーソル離した処理
+							//-----------------------------------------------------------------
+							IF[@BT.ACTIVE!=@no]
+							{
+								IF[@BT.MST(@no)!=0] @BT.OLD.MST(@no)=@BT.MST(@no) IFEND[]
+								@BT.MST(@no)=0
+								IF[@BT.OLD.MST(@no)>=1] @BT.F.LEAVE.ONCE(@no)=1 IFEND[]
+							}
+							IFEND[]
+							//-----------------------------------------------------------------
+							// カーソル選択処理
+							//-----------------------------------------------------------------
+							IF[@BT.ACTIVE==@no]
+							{
+								IF[@BT.MST(@no)!=1] @BT.OLD.MST(@no)=@BT.MST(@no) IFEND[]
+								@BT.MST(@no)=1
+								IF[@BT.OLD.MST(@no)==0]
+								{
+///x
+@BT.OLD.MST(@no)=1
+									@BT.F.OVER.ONCE(@no)=1
+									IF[$BT.SSE.OVER(@no)!=""] \SSE( $BT.SSE.OVER(@no) ) IFEND[]
+								}
+								IFEND[]
+							}
+							IFEND[]
+							//-----------------------------------------------------------------
+							// カーソル決定処理
+							//-----------------------------------------------------------------
+							IF[@BT.ACTIVE==@no && @_KEY_ENTER==1]
+							{
+								IF[@BT.MST(@no)<2] @BT.OLD.MST(@no)=@BT.MST(@no) IFEND[]
+								IF[@mPushFlag==1] @BT.MST(@no)=2 IFEND[]
+								IF[@mPushFlag>=2] @BT.MST(@no)=3 IFEND[]
+								GOSUB[#=es.BT.DOWN pint=@no]
+								IF[@BT.OLD.MST(@no)<=1]
+								{
+									@BT.F.ON(@no)=1
+									IF[$BT.SSE.ON(@no)!=""] \SSE( $BT.SSE.ON(@no) ) IFEND[]
+								}
+								IFEND[]
+							}
+							IFEND[]
+						}
+						IFEND[]
+
+	}
+	IFEND[]
+}
+//IFEND[]
+
+				}
+				IFEND[]
+				//-----------------------------------------------------------------
+				// ドラッグ処理
+				//-----------------------------------------------------------------
+				IF[@BT.DD.FLAG==1 && @BT.DD.NO==@no]
+				{
+					GOSUB[#=es.BT.DD]
+				}
+				IFEND[]
+
+			}
+			IFEND[]
+
+		//-----------------------------------------------------------------
+		// 時間制限つき ON→OFF
+		//-----------------------------------------------------------------
+			IF[@BT.T(@no)>0]
+			{
+				@BT.T(@no)-=1
+				IF[@BT.T(@no)==0] @BT.SW(@no)=0 IFEND[]
+			}
+			IFEND[]
+
+	}
+	LOOPEND[]
+
+
+	//-----------------------------------------------------------------
+	// カーソル移動キー判定
+	//-----------------------------------------------------------------
+	IF[@CURSOR_THRU_FLAG==0]
+		GOSUB[#=es.CURSOR.KEYCHECK]
+	IFEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■ボタン描画処理
+//--------------------------------------------------------------------
+#=es.BT.DRAW
+{
+	LOOP[SET=@BT.NUM]
+	{
+		GOSUB[#=es.BT.DRAW.NO PINT=@_LC]
+	}
+	LOOPEND[]
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■ボタン処理
+//--------------------------------------------------------------------
+#=es.BT.BTLOOP
+{
+	\_gosub(ES.GAMEMAIN.BTLOOP)
+
+	IF[@es.SELMODE==1]
+		\_gosub(ES.SEL.BTLOOP)
+	IFEND[]
+	IF[@es.SELMODE==2]
+		\_gosub(ES.CSEL.BTLOOP)
+	IFEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■ボタンレイヤ描画
+//--------------------------------------------------------------------
+#=es.BT.DRAW.NO
+{
+	INT[@no=@_PINT(1)]
+
+	IF[@no<1 || @no>=@BT.MAX] GO[#=es.BT.DRAW.NO.LEnd] IFEND[]
+	IF[@BT.NO(@no)==0] GO[#=es.BT.DRAW.NO.LEnd] IFEND[]
+
+	//0=非表示/1=off表示/2=over表示/3=on表示/4=onover表示/5=na表示
+	INT[@btn.draw.old=@BT.STATUS(@no)]
+	INT[@btn.draw]
+
+	GOSUB[#=es.BT.GROUP.CHECK pint=@no pint2=@BT.GROUPNO]
+	IF[@_RINT(1) && @BT.ES(@no) && @BT.ES2(@no)]
+	{
+		IF[@BT.N(@no)==0] //NAでない
+		{
+			@btn.draw = 1
+
+			IF[@BT.W(@no) && @BT.MST(@no)!=3] //ボタンが機能していて、ショートカットキーによる反応でなければ
+			{
+				IF[$BT.ON(@no)=="" || @BT.SW(@no)==0] //スイッチOFF状態なら
+				{
+					IF[$BT.OVER(@no)!="" && $BT.ON(@no)!=""] //OVER画像もON画像もあるなら
+					{
+						  IF[@BT.MST(@no)==1] @btn.draw = 2
+						ELSE[@BT.MST(@no)==2] @btn.draw = 3 IFEND[]
+					}
+					ELSE[$BT.OVER(@no)!=""]
+					{
+						  IF[@BT.MST(@no)==1] @btn.draw = 2
+						ELSE[@BT.MST(@no)==2] @btn.draw = 2 IFEND[]
+					}
+					ELSE[$BT.ON(@no)!=""]
+					{
+						IF[@BT.MST(@no)==2] @btn.draw = 3 IFEND[]
+					}
+					IFEND[]
+				}
+				ELSE[] //スイッチON状態なら
+				{
+					@btn.draw = 3
+
+					IF[$BT.ONOVER(@no)!="" && @BT.MST(@no)!=0] @btn.draw = 4 IFEND[] //マウス乗っていて、かつONOVER画像があればonover
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		ELSE[] //NA状態である
+		{
+			@btn.draw=5
+
+			IF[$BT.NA(@no)==""] @btn.draw=1 IFEND[]	//NA状態だけどNA画像がない場合は、OFFを表示しておく.
+		}
+		IFEND[]
+
+
+		IF[@BT.ANTIME(@no,@btn.draw-1)>0] //アニメ自動モードなら
+		{
+			LOOP[]
+			{
+				IF[@BT.ANTM(@no)>@BT.ANTIME(@no,@btn.draw-1)]
+				{
+					@BT.ANTM(@no)-=@BT.ANTIME(@no,@btn.draw-1)
+
+					IF[@BT.ANLPTYPE(@no,@btn.draw-1)==0] //順
+						@BT.ANCM(@no,@btn.draw-1)+=1
+						IF[@BT.ANCM(@no,@btn.draw-1)>@BT.ANNUM(@no,@btn.draw-1)] @BT.ANCM(@no,@btn.draw-1)=1 IFEND[]
+					ELSE[@BT.ANLPTYPE(@no,@btn.draw-1)==1] //逆
+						@BT.ANCM(@no,@btn.draw-1)-=1
+						IF[@BT.ANCM(@no,@btn.draw-1)<1] @BT.ANCM(@no,@btn.draw-1)=@BT.ANNUM(@no,@btn.draw-1) IFEND[]
+					ELSE[@BT.ANLPTYPE(@no,@btn.draw-1)==2 && @BT.ANNUM(@no,@btn.draw-1)>=2] //順＆逆
+						@BT.ANCM(@no,@btn.draw-1)+=1
+						IF[@BT.ANCM(@no,@btn.draw-1)>@BT.ANNUM(@no,@btn.draw-1)] @BT.ANCM(@no,@btn.draw-1)=@BT.ANNUM(@no,@btn.draw-1)-1;@BT.ANLPTYPE(@no,@btn.draw-1)=4 IFEND[]
+					ELSE[@BT.ANLPTYPE(@no,@btn.draw-1)==3 && @BT.ANNUM(@no,@btn.draw-1)>=2] //逆＆順
+						@BT.ANCM(@no,@btn.draw-1)-=1
+						IF[@BT.ANCM(@no,@btn.draw-1)<1] @BT.ANCM(@no,@btn.draw-1)=2;@BT.ANLPTYPE(@no,@btn.draw-1)=5 IFEND[]
+					ELSE[@BT.ANLPTYPE(@no,@btn.draw-1)==4 && @BT.ANNUM(@no,@btn.draw-1)>=2] //順＆逆の逆のターン
+						@BT.ANCM(@no,@btn.draw-1)-=1
+						IF[@BT.ANCM(@no,@btn.draw-1)<1] @BT.ANCM(@no,@btn.draw-1)=2;@BT.ANLPTYPE(@no,@btn.draw-1)=2 IFEND[]
+					ELSE[@BT.ANLPTYPE(@no,@btn.draw-1)==5 && @BT.ANNUM(@no,@btn.draw-1)>=2] //逆＆順の順のターン
+						@BT.ANCM(@no,@btn.draw-1)+=1
+						IF[@BT.ANCM(@no,@btn.draw-1)>@BT.ANNUM(@no,@btn.draw-1)] @BT.ANCM(@no,@btn.draw-1)=@BT.ANNUM(@no,@btn.draw-1)-1;@BT.ANLPTYPE(@no,@btn.draw-1)=3 IFEND[]
+					IFEND[]
+
+					LOOPCONTINUE[]
+				}
+				IFEND[]
+				LOOPBREAK[]
+			}
+			LOOPEND[]
+
+			//経過時間加算
+			@BT.ANTM(@no)+=@mTADD
+
+		}
+		IFEND[]
+
+	}
+	IFEND[]
+
+
+	//描画
+	STR[$id]
+	INT[@mA=@BT.A(@no)]
+	INT[@mNO100=@BT.NO(@no)*100]
+	INT[@mCM1=@BT.ANCM(@no,0)*(@btn.draw==1)]
+	INT[@mCM2=@BT.ANCM(@no,1)*(@btn.draw==2)]
+	INT[@mCM3=@BT.ANCM(@no,2)*(@btn.draw==3)]
+	INT[@mCM4=@BT.ANCM(@no,3)*(@btn.draw==4)]
+	INT[@mCM5=@BT.ANCM(@no,4)*(@btn.draw==5)]
+/*
+	IF[$BT.OFF(@no)   !="" && (@btn.draw==1 || @btn.draw.old==1)] LOOP[SET=@BT.ANNUM(@no,0)] $id="BT.OFF"   +$(@mNO100+@_LC);CG[ID=$id A=@mA E=(@mCM1==@_LC)] LOOPEND[] IFEND[]
+	IF[$BT.OVER(@no)  !="" && (@btn.draw==2 || @btn.draw.old==2)] LOOP[SET=@BT.ANNUM(@no,1)] $id="BT.OVER"  +$(@mNO100+@_LC);CG[ID=$id A=@mA E=(@mCM2==@_LC)] LOOPEND[] IFEND[]
+	IF[$BT.ON(@no)    !="" && (@btn.draw==3 || @btn.draw.old==3)] LOOP[SET=@BT.ANNUM(@no,2)] $id="BT.ON"    +$(@mNO100+@_LC);CG[ID=$id A=@mA E=(@mCM3==@_LC)] LOOPEND[] IFEND[]
+	IF[$BT.ONOVER(@no)!="" && (@btn.draw==4 || @btn.draw.old==4)] LOOP[SET=@BT.ANNUM(@no,3)] $id="BT.ONOVER"+$(@mNO100+@_LC);CG[ID=$id A=@mA E=(@mCM4==@_LC)] LOOPEND[] IFEND[]
+	IF[$BT.NA(@no)    !="" && (@btn.draw==5 || @btn.draw.old==5)] LOOP[SET=@BT.ANNUM(@no,4)] $id="BT.NA"    +$(@mNO100+@_LC);CG[ID=$id A=@mA E=(@mCM5==@_LC)] LOOPEND[] IFEND[]
+*/
+	IF[@btn.draw==1 || @btn.draw.old==1] LOOP[SET=@BT.ANNUM(@no,0)] $id="BT.OFF"   +$(@mNO100+@_LC);CG[ID=$id A=@mA E=(@mCM1==@_LC)] LOOPEND[] IFEND[]
+	IF[@btn.draw==2 || @btn.draw.old==2] LOOP[SET=@BT.ANNUM(@no,1)] $id="BT.OVER"  +$(@mNO100+@_LC);CG[ID=$id A=@mA E=(@mCM2==@_LC)] LOOPEND[] IFEND[]
+	IF[@btn.draw==3 || @btn.draw.old==3] LOOP[SET=@BT.ANNUM(@no,2)] $id="BT.ON"    +$(@mNO100+@_LC);CG[ID=$id A=@mA E=(@mCM3==@_LC)] LOOPEND[] IFEND[]
+	IF[@btn.draw==4 || @btn.draw.old==4] LOOP[SET=@BT.ANNUM(@no,3)] $id="BT.ONOVER"+$(@mNO100+@_LC);CG[ID=$id A=@mA E=(@mCM4==@_LC)] LOOPEND[] IFEND[]
+	IF[@btn.draw==5 || @btn.draw.old==5] LOOP[SET=@BT.ANNUM(@no,4)] $id="BT.NA"    +$(@mNO100+@_LC);CG[ID=$id A=@mA E=(@mCM5==@_LC)] LOOPEND[] IFEND[]
+
+	@BT.STATUS(@no) = @btn.draw // ボタン描画状態
+
+	#=es.BT.DRAW.NO.LEnd
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■ボタン押下処理
+//--------------------------------------------------------------------
+#=es.BT.DOWN
+{
+	INT[@mLC1 = @_PINT(1)]
+	INT[@mLC2]
+
+	//-----------------------------------------------------------
+	// ドラッグボタン
+	//-----------------------------------------------------------
+	IF[@BT.SLIDE.SX(@mLC1)!=0 || @BT.SLIDE.SY(@mLC1)!=0]
+	{
+		//ドラッグフラグON
+		@BT.DD.FLAG = 1
+
+		//ドラッグボタン番号取得
+		@BT.DD.NO = @mLC1
+		//マウスクリック座標取得
+		@BT.DD.X  = @_MOUSE_X
+		@BT.DD.Y  = @_MOUSE_Y
+		//@BT.DD.CX = @_MOUSE_X
+		//@BT.DD.CY = @_MOUSE_Y
+
+		//クリックした位置が中心点
+		@BT.DX(@mLC1) = (@BT.GX(@BT.GROUP1(@mLC1)) + @BT.X(@mLC1) + @BT.SLIDE.X(@mLC1)) - @_MOUSE_X
+		@BT.DY(@mLC1) = (@BT.GY(@BT.GROUP1(@mLC1)) + @BT.Y(@mLC1) + @BT.SLIDE.Y(@mLC1)) - @_MOUSE_Y
+//\_dmes("@BT.DX="+$(@BT.DX(@mLC1))+", @BT.DY="+$(@BT.DY(@mLC1)))
+
+	}
+	IFEND[]
+
+	//-----------------------------------------------------------
+	// ラジオボタン
+	//-----------------------------------------------------------
+	IF[@BT.RADIO(@mLC1)>0]
+	{
+		//ここで同じグループのON状態を解除.
+		@mLC2 = @BT.RADIO(@mLC1)
+
+		LOOP[SET=@BT.NUM]
+		{
+			IF[@BT.ES(@_LC) & @BT.ES2(@_LC)] // ボタンが有効なら.
+			{
+				IF[@mLC2 == @BT.RADIO(@_LC)] // 同じグループ番号なら.
+				{
+					@BT.SW(@_LC) = 0
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+
+		@BT.SW(@mLC1) = 1
+
+	}
+	//-----------------------------------------------------------
+	// 通常ボタン
+	//-----------------------------------------------------------
+	ELSE[]
+	{
+		IF[@BT.TYPE(@mLC1)==2]
+		{
+			@BT.SW(@mLC1) = 1 - @BT.SW(@mLC1)
+		}
+		ELSE[]
+		{
+			@BT.SW(@mLC1) = 0
+			IF[@BT.TMAX(@mLC1)>0] @BT.T(@mLC1)=@BT.TMAX(@mLC1)+1 IFEND[]
+		}
+		IFEND[]
+
+//\_dmes("$BT.ON(@mLC1)="+$BT.ON(@mLC1)+", @mLC1="+$(@mLC1)+", sw="+$(@BT.SW(@mLC1)))
+	}
+	IFEND[]
+
+	//ボタンの種類が通常レイヤ以外なら、ボタンクリック時処理を有効にする
+	IF[@BT.TYPE(@mLC1)>0]
+		@BT.F.ON(@mLC1) = 1
+	IFEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//
+//■ボタンドラッグ処理
+//
+//--------------------------------------------------------------------
+#=es.BT.DD
+{
+	INT[@mX]
+	INT[@mY]
+	STR[$BNO]
+	INT[@dragbtnshow=0] //0=overを表示/1=onを表示
+
+	IF[@BT.DD.FLAG]
+	{
+		IF[@_MOUSE_L<0] //マウス離された
+		{
+			$BNO=$(@BT.NO(@BT.DD.NO)*100+1)
+
+			IF[@dragbtnshow==0]
+				CG[ID="BT.OVER"  +$BNO E=0]
+			ELSE[]
+				CG[ID="BT.ON"    +$BNO E=0]
+			IFEND[]
+
+			@BT.DD.FLAG=0
+			@BT.DD.NO=0
+		}
+		ELSE[] //まだドラッグされている
+		{
+			IF[@BT.SLIDE.SX(@BT.DD.NO)!=0 || @BT.SLIDE.SY(@BT.DD.NO)!=0] //ドラッグボタンならば
+			{
+				IF[(@BT.DD.X != @_MOUSE_X+@BT.DX(@BT.DD.NO)) || (@BT.DD.Y != @_MOUSE_Y+@BT.DY(@BT.DD.NO))]
+				{
+					@BT.DD.X  = @_MOUSE_X+@BT.DX(@BT.DD.NO)
+					@BT.DD.Y  = @_MOUSE_Y+@BT.DY(@BT.DD.NO)
+
+					@mX = @BT.DD.X - @BT.X(@BT.DD.NO)
+					@mY = @BT.DD.Y - @BT.Y(@BT.DD.NO)
+
+					\_range(@mX, 0, @BT.SLIDE.SX(@BT.DD.NO))
+					\_range(@mY, 0, @BT.SLIDE.SY(@BT.DD.NO))
+
+					@BT.SLIDE.X(@BT.DD.NO) = @mX
+					@BT.SLIDE.Y(@BT.DD.NO) = @mY
+
+					$BNO=$(@BT.NO(@BT.DD.NO)*100+1)
+					CG[ID="BT.OFF"   +$BNO E=0 X=@BT.GX(@BT.GROUP1(@BT.DD.NO))+@BT.X(@BT.DD.NO)+@mX Y=@BT.GY(@BT.GROUP1(@BT.DD.NO))+@BT.Y(@BT.DD.NO)+@mY]
+				IF[@dragbtnshow==0]
+					CG[ID="BT.OVER"  +$BNO E=1 X=@BT.GX(@BT.GROUP1(@BT.DD.NO))+@BT.X(@BT.DD.NO)+@mX Y=@BT.GY(@BT.GROUP1(@BT.DD.NO))+@BT.Y(@BT.DD.NO)+@mY]
+					CG[ID="BT.ON"    +$BNO E=0 X=@BT.GX(@BT.GROUP1(@BT.DD.NO))+@BT.X(@BT.DD.NO)+@mX Y=@BT.GY(@BT.GROUP1(@BT.DD.NO))+@BT.Y(@BT.DD.NO)+@mY]
+				ELSE[]
+					CG[ID="BT.OVER"  +$BNO E=0 X=@BT.GX(@BT.GROUP1(@BT.DD.NO))+@BT.X(@BT.DD.NO)+@mX Y=@BT.GY(@BT.GROUP1(@BT.DD.NO))+@BT.Y(@BT.DD.NO)+@mY]
+					CG[ID="BT.ON"    +$BNO E=1 X=@BT.GX(@BT.GROUP1(@BT.DD.NO))+@BT.X(@BT.DD.NO)+@mX Y=@BT.GY(@BT.GROUP1(@BT.DD.NO))+@BT.Y(@BT.DD.NO)+@mY]
+				IFEND[]
+					CG[ID="BT.ONOVER"+$BNO E=0 X=@BT.GX(@BT.GROUP1(@BT.DD.NO))+@BT.X(@BT.DD.NO)+@mX Y=@BT.GY(@BT.GROUP1(@BT.DD.NO))+@BT.Y(@BT.DD.NO)+@mY]
+					CG[ID="BT.NA"    +$BNO E=0 X=@BT.GX(@BT.GROUP1(@BT.DD.NO))+@BT.X(@BT.DD.NO)+@mX Y=@BT.GY(@BT.GROUP1(@BT.DD.NO))+@BT.Y(@BT.DD.NO)+@mY]
+
+					@BT.F.DRAG(@BT.DD.NO)=1
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■ボタン表示→非表示
+//  グループ名の指定の有無で挙動が変わる
+//--------------------------------------------------------------------
+#=es.BT.A0.ALL
+{
+	STR[$grp=$_PSTR(1)]
+
+	IF[$grp==""]
+	{
+		LOOP[SET=@BT.NUM] @BT.A(@_LC)=0 LOOPEND[]
+	}
+	ELSE[]
+	{
+		LOOP[SET=@BT.NUM] IF[$grp==$BT.GRP(@_LC)] @BT.A(@_LC)=0 IFEND[] LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.A0
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.A(@no)=0
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■ボタン非表示→表示
+//  グループ名の指定の有無で挙動が変わる
+//--------------------------------------------------------------------
+#=es.BT.A1.ALL
+{
+	STR[$grp=$_PSTR(1)]
+
+	IF[$grp==""]
+	{
+		LOOP[SET=@BT.NUM] @BT.A(@_LC)=256 LOOPEND[]
+	}
+	ELSE[]
+	{
+		LOOP[SET=@BT.NUM] IF[$grp==$BT.GRP(@_LC)] @BT.A(@_LC)=256 IFEND[] LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.A1
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.A(@no)=256
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■ボタンアニメ指定コマ表示
+//--------------------------------------------------------------------
+#=es.BT.AN
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.ANCM(@no,0) = @_PINT(3)
+	@BT.ANCM(@no,1) = @_PINT(3)
+	@BT.ANCM(@no,2) = @_PINT(3)
+	@BT.ANCM(@no,3) = @_PINT(3)
+	@BT.ANCM(@no,4) = @_PINT(3)
+	@BT.ANCM(@no,5) = @_PINT(3)
+
+	return[]
+}
+
+
+
+//--------------------------------------------------------------------
+//■N/A
+//--------------------------------------------------------------------
+#=es.BT.N1
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.N(@no)=1
+
+	return[]
+}
+
+#=es.BT.N0
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.N(@no)=0
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■ボタン可視→不可視
+//--------------------------------------------------------------------
+#=es.BT.ES0.ALL
+{
+	STR[$grp=$_PSTR(1)]
+
+	IF[$grp==""]
+	{
+		LOOP[SET=@BT.NUM] @BT.ES(@_LC)=0 LOOPEND[]
+	}
+	ELSE[]
+	{
+		LOOP[SET=@BT.NUM] IF[$grp==$BT.GRP(@_LC)] @BT.ES(@_LC)=0 IFEND[] LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+#=es.BT.ES20.ALL
+{
+	STR[$grp=$_PSTR(1)]
+
+	IF[$grp==""]
+	{
+		LOOP[SET=@BT.NUM] @BT.ES2(@_LC)=0 LOOPEND[]
+	}
+	ELSE[]
+	{
+		LOOP[SET=@BT.NUM] IF[$grp==$BT.GRP(@_LC)] @BT.ES2(@_LC)=0 IFEND[] LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.ES0
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.ES(@no)=0
+
+	return[]
+}
+#=es.BT.ES20
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.ES2(@no)=0
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■ボタン不可視→可視
+//--------------------------------------------------------------------
+#=es.BT.ES1.ALL
+{
+	STR[$grp=$_PSTR(1)]
+
+	IF[$grp==""]
+	{
+		LOOP[SET=@BT.NUM] @BT.ES(@_LC)=1 LOOPEND[]
+	}
+	ELSE[]
+	{
+		LOOP[SET=@BT.NUM] IF[$grp==$BT.GRP(@_LC)] @BT.ES(@_LC)=1 IFEND[] LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+#=es.BT.ES21.ALL
+{
+	STR[$grp=$_PSTR(1)]
+
+	IF[$grp==""]
+	{
+		LOOP[SET=@BT.NUM] @BT.ES2(@_LC)=1 LOOPEND[]
+	}
+	ELSE[]
+	{
+		LOOP[SET=@BT.NUM] IF[$grp==$BT.GRP(@_LC)] @BT.ES2(@_LC)=1 IFEND[] LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.ES1
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.ES(@no)=1
+
+	return[]
+}
+#=es.BT.ES21
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.ES2(@no)=1
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■ボタン機能有効→無効
+//--------------------------------------------------------------------
+#=es.BT.W0.ALL
+{
+	STR[$grp=$_PSTR(1)]
+
+	IF[$grp==""]
+	{
+		LOOP[SET=@BT.NUM] @BT.W(@_LC)=0 LOOPEND[]
+	}
+	ELSE[]
+	{
+		LOOP[SET=@BT.NUM] IF[$grp==$BT.GRP(@_LC)] @BT.W(@_LC)=0 IFEND[] LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.W0
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.W(@no)=0
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■ボタン機能無効→有効
+//--------------------------------------------------------------------
+#=es.BT.W1.ALL
+{
+	STR[$grp=$_PSTR(1)]
+
+	IF[$grp==""]
+	{
+		LOOP[SET=@BT.NUM] @BT.W(@_LC)=1 LOOPEND[]
+	}
+	ELSE[]
+	{
+		LOOP[SET=@BT.NUM] IF[$grp==$BT.GRP(@_LC)] @BT.W(@_LC)=1 IFEND[] LOOPEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.W1
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	@BT.W(@no)=1
+
+	return[]
+}
+
+#=es.BT.ACTIVEGROUP
+{
+	@BT.GROUPNO = @_PINT(1) // グループ番号
+	GOSUB[#=es.BT.DRAW]	//ボタン描画
+	return[]
+}
+
+#=es.BT.ACTIVEGROUP.ADD
+{
+	@BT.GROUPNO += @_PINT(1) // グループ番号
+	GOSUB[#=es.BT.DRAW]	//ボタン描画
+	return[]
+}
+
+/*
+///xS作成
+#=es.BT.CG.CHANGE
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	$BT.OFF(@no)	="";IF[$_PSTR(3)!=""] $BT.OFF(@no)		= $_PSTR(3) IFEND[] // OFF時の画像
+	$BT.OVER(@no)	="";IF[$_PSTR(4)!=""] $BT.OVER(@no)		= $_PSTR(4) IFEND[] // OVER時の画像
+	$BT.ON(@no)		="";IF[$_PSTR(5)!=""] $BT.ON(@no)		= $_PSTR(5) IFEND[] // ON時の画像
+	$BT.ONOVER(@no)	="";IF[$_PSTR(6)!=""] $BT.ONOVER(@no)	= $_PSTR(6) IFEND[] // ONOVER時の画像
+	$BT.NA(@no)		="";IF[$_PSTR(7)!=""] $BT.NA(@no)		= $_PSTR(7) IFEND[] // 無効時の画像
+	$BT.MASK(@no)	="";IF[$_PSTR(8)!=""] $BT.MASK(@no)		= $_PSTR(8) IFEND[] // MASK画像
+
+//	$BT.OFF(@no)	="";IF[$_PSTR(3)!=""] $BT.OFF(@no)		= $CGSYS.PATH+$_PSTR(3) IFEND[] // OFF時の画像
+//	$BT.OVER(@no)	="";IF[$_PSTR(4)!=""] $BT.OVER(@no)		= $CGSYS.PATH+$_PSTR(4) IFEND[] // OVER時の画像
+//	$BT.ON(@no)		="";IF[$_PSTR(5)!=""] $BT.ON(@no)		= $CGSYS.PATH+$_PSTR(5) IFEND[] // ON時の画像
+//	$BT.ONOVER(@no)	="";IF[$_PSTR(6)!=""] $BT.ONOVER(@no)	= $CGSYS.PATH+$_PSTR(6) IFEND[] // ONOVER時の画像
+//	$BT.NA(@no)		="";IF[$_PSTR(7)!=""] $BT.NA(@no)		= $CGSYS.PATH+$_PSTR(7) IFEND[] // 無効時の画像
+//	$BT.MASK(@no)	="";IF[$_PSTR(8)!=""] $BT.MASK(@no)		= $CGSYS.PATH+$_PSTR(8) IFEND[] // MASK画像
+
+//	IF[$BT.OFF(@no) !=""] FILEACT[FILE=$BT.OFF(@no)  CGCASH=1] IFEND[]	// OFF
+	CG[ID="BT.OFF"+$(@BT.NO(@no)*100+1) Z=@BTUSE.Z+@BT.Z(@no) FILE=$BT.OFF(@no)]
+
+	return[]
+}
+*/
+
+
+//--------------------------------------------------------------------
+//
+//■ボタンキャッシュ処理
+//
+//--------------------------------------------------------------------
+#=es.BTCASH
+{
+	@BTCASHMODE=1
+
+//		GOSUB[#=$BTUSE.LBL( @_PINT(1) )]
+//		\BTDEF.LOAD($_PSTR(1))
+
+///x
+		\_gosub("ES.CONFIG.BTDEF")
+	//	\BTDEF.LOAD("ES.CONFIG")
+		\BT.END(ES.CONFIG)
+
+	@BTCASHMODE=0
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//
+//■ボタン使用開始処理
+//
+//--------------------------------------------------------------------
+#=es.BTDEF.GROUP
+{
+	$BT.GRPNAME = $_PSTR(1)
+
+	@BTUSE.Z  = @_PINT(2)
+	IF[@BTUSE.Z <= 0] @BTUSE.Z = @es.Z.BT IFEND[]
+
+//β4
+@BTUSE.Z = @es.Z.BT
+
+	return[]
+}
+
+#=es.BTDEF.LOAD
+{
+	@es.SCRIPTPOSSAVE.FORBIT+=1
+
+	\_gosub($_PSTR(1)+".BTDEF", @_PINT(2))
+//	\BT.GO
+
+
+//	@BT.GROUPNO = 0
+
+	IF[0] //最初からボタン選択されている状態にする
+	{
+		@BT.CURSORMODE = 1
+		@BT.CURSORMODE.X = @_MOUSE_X
+		@BT.CURSORMODE.Y = @_MOUSE_Y
+		\BT.NO.GET(@BT.ACTIVE, $BT.C.START, @BT.C.START2)
+	}
+	ELSE[] //しない
+	{
+		@BT.ACTIVE = 0
+		@BT.CURSORMODE = 0
+	}
+	IFEND[]
+
+//\_log("●●●"+$BT.GRPNAME+".BTDEF   ボタン数:"+$(@BT.NUM))
+//LOOP[SET=@BT.NUM] \_log("["+$(@_LC)+"] Z="+$(@BT.Z(@_LC))+", "+$BT.GRP(@_LC)+", "+$BT.OFF(@_LC)) LOOPEND[]
+
+//	GOSUB[#=es.BT.TASK.MAIN] //即表示
+
+	\_gosub($_PSTR(1)+".BTLOOP") //ボタン処理
+	GOSUB[#=es.BT.DRAW]
+
+	@es.SCRIPTPOSSAVE.FORBIT-=1
+	IF[@es.SCRIPTPOSSAVE.FORBIT<0] @es.SCRIPTPOSSAVE.FORBIT=0 IFEND[] //一応.
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//
+//■ボタン群セット
+//
+//--------------------------------------------------------------------
+
+#=es.BT.CG.SET
+{
+	@H.COM(@e_CG)+=1;$P.S1(@e_CG)=$_PSTR(1);$P.S2(@e_CG)=$_PSTR(2);$P.S3(@e_CG)=$_PSTR(3);$P.S4(@e_CG)=$_PSTR(4);$P.S5(@e_CG)=$_PSTR(5);@P.I1(@e_CG)=@_PINT(6);return[]
+}
+
+#=es.BT.CG.AN.SET
+{
+	@H.COM(@e_CGAN)+=1;$P.S1(@e_CGAN)=$_PSTR(1);$P.S2(@e_CGAN)=$_PSTR(2);$P.S3(@e_CGAN)=$_PSTR(3);$P.S4(@e_CGAN)=$_PSTR(4);$P.S5(@e_CGAN)=$_PSTR(5);$P.S6(@e_CGAN)=$_PSTR(6);return[]
+}
+
+#=es.BT.AN.NUM.SET
+{
+	@H.COM(@e_ANNUM)+=1;@P.I1(@e_ANNUM)=@_PINT(1);@P.I2(@e_ANNUM)=@_PINT(2);@P.I3(@e_ANNUM)=@_PINT(3);@P.I4(@e_ANNUM)=@_PINT(4);@P.I5(@e_ANNUM)=@_PINT(5);@P.I6(@e_ANNUM)=@_PINT(6);return[]
+}
+
+#=es.BT.AN.TIME.SET
+{
+	@H.COM(@e_ANTIME)+=1;@P.I1(@e_ANTIME)=@_PINT(1);@P.I2(@e_ANTIME)=@_PINT(2);@P.I3(@e_ANTIME)=@_PINT(3);@P.I4(@e_ANTIME)=@_PINT(4);@P.I5(@e_ANTIME)=@_PINT(5);@P.I6(@e_ANTIME)=@_PINT(6);return[]
+}
+
+#=es.BT.AN.LPTYPE.SET
+{
+	@H.COM(@e_ANLPTYPE)+=1;@P.I1(@e_ANLPTYPE)=@_PINT(1);@P.I2(@e_ANLPTYPE)=@_PINT(2);@P.I3(@e_ANLPTYPE)=@_PINT(3);@P.I4(@e_ANLPTYPE)=@_PINT(4);@P.I5(@e_ANLPTYPE)=@_PINT(5);@P.I6(@e_ANLPTYPE)=@_PINT(6)
+	\_range(@P.I1(@e_ANLPTYPE), 0, 3)
+	\_range(@P.I2(@e_ANLPTYPE), 0, 3)
+	\_range(@P.I3(@e_ANLPTYPE), 0, 3)
+	\_range(@P.I4(@e_ANLPTYPE), 0, 3)
+	\_range(@P.I5(@e_ANLPTYPE), 0, 3)
+	\_range(@P.I6(@e_ANLPTYPE), 0, 3)
+	return[]
+}
+
+#=es.BT.SEQ.SET
+{
+	@H.COM(@e_SEQ)+=1;@P.I1(@e_SEQ)=@_PINT(1);@P.I2(@e_SEQ)=@_PINT(2);@P.I3(@e_SEQ)=@_PINT(3);@P.I4(@e_SEQ)=@_PINT(4);@P.I5(@e_SEQ)=@_PINT(5);return[]
+}
+
+/*
+#=es.BT.PAC.SET
+{
+	@H.COM(@e_PAC)+=1;@P.I1(@e_PAC)=@_PINT(1);@P.I2(@e_PAC)=@_PINT(2);@P.I3(@e_PAC)=@_PINT(3);@P.I4(@e_PAC)=@_PINT(4);@P.I5(@e_PAC)=@_PINT(5);return[]
+}
+*/
+
+#=es.BT.XY.SET
+{
+	@H.COM(@e_X) +=1;@P.I1(@e_X)  = @_PINT(1)	// Ｘ座標
+	@H.COM(@e_Y) +=1;@P.I1(@e_Y)  = @_PINT(2)	// Ｙ座標
+	@H.COM(@e_SX)+=1;@P.I1(@e_SX) =   0			// サイズ指定Ｘ(0=デフォルトサイズ)
+	@H.COM(@e_SY)+=1;@P.I1(@e_SY) =   0			// サイズ指定Ｘ(0=デフォルトサイズ)
+	@H.COM(@e_PX)+=1;@P.I1(@e_PX) = 100			// サイズ指定Ｘ(100=デフォルトサイズ)
+	@H.COM(@e_PY)+=1;@P.I1(@e_PY) = 100			// サイズ指定Ｘ(100=デフォルトサイズ)
+	return[]
+}
+
+#=es.BT.Z.SET	{ @H.COM(@e_Z)+=1;@P.I1(@e_Z)=@_PINT(1);return[] } // Ｚ座標
+#=es.BT.VAL.SET	{ @H.COM(@e_VAL)+=1;@P.I1(@e_VAL)=@_PINT(1);return[] } // 戻り値
+#=es.BT.TH.SET	{ @H.COM(@e_TH)+=1;@P.I1(@e_TH)=@_PINT(1);return[] } // スルーフラグ
+
+/*
+#=es.BT.DD.XY.SET
+{
+	@BT.DX(0)=@_PINT(1) // ドラッグ位置
+	@BT.DY(0)=@_PINT(2) // ドラッグ位置
+	return[]
+}
+*/
+
+#=es.BT.MAP.A.SET	{ @H.COM(@e_MAPA)+=1;@P.I1(@e_MAPA)=@_PINT(1);return[] } // α値
+
+#=es.BT.MAP.CG.SET
+{
+	IF[$_PSTR(1)!=""] @H.COM(@e_MAPCG)+=1;$P.S1(@e_MAPCG)=$CGSYS.PATH+$_PSTR(1) IFEND[] // MASK画像
+	return[]
+}
+
+#=es.BT.NAME.SET	{ @H.COM(@e_NAME)+=1;$P.S1(@e_NAME)=$_PSTR(1);return[] } // ボタン名
+
+#=es.BT.KEY.SET
+{
+	STR[$s(4)]
+	INT[@mLC]
+
+	@H.COM(@e_KEY)+=1
+	@H.COM(@e_KEYNUM)+=1
+
+	LOOP[SET=(8)]
+	{
+		@mLC=@_LC
+		IF[@mLC==1]
+			@P.I1(@e_KEY)=0
+			@P.I1(@e_KEYNUM)=0
+		IFEND[]
+		IF[@mLC==2]
+			@P.I2(@e_KEY)=0
+			@P.I2(@e_KEYNUM)=0
+		IFEND[]
+		IF[@mLC==3]
+			@P.I3(@e_KEY)=0
+			@P.I3(@e_KEYNUM)=0
+		IFEND[]
+		IF[@mLC==4]
+			@P.I4(@e_KEY)=0
+			@P.I4(@e_KEYNUM)=0
+		IFEND[]
+		IF[@mLC==5]
+			@P.I5(@e_KEY)=0
+			@P.I5(@e_KEYNUM)=0
+		IFEND[]
+		IF[@mLC==6]
+			@P.I6(@e_KEY)=0
+			@P.I6(@e_KEYNUM)=0
+		IFEND[]
+		IF[@mLC==7]
+			@P.I7(@e_KEY)=0
+			@P.I7(@e_KEYNUM)=0
+		IFEND[]
+		IF[@mLC==8]
+			@P.I8(@e_KEY)=0
+			@P.I8(@e_KEYNUM)=0
+		IFEND[]
+
+		\_strsplit.str($_PSTR(@mLC), "+");
+
+		LOOP[SET=(4)] $s(@_LC-1)=$_RSTR(@_LC) LOOPEND[]
+
+		LOOP[SET=(4)]
+		{
+			\_strtocode($s(@_LC-1))
+
+//			@BT.KEY(0,@mLC-1) += @_RINT(1)*((@_LC==4)*@es.POW2(48)+(@_LC==3)*@es.POW2(32)+(@_LC==2)*@es.POW2(16)+(@_LC==1))
+//			IF[@_RINT(1)>0] @BT.KEY.NUM(0,@mLC-1) = @_LC IFEND[]
+
+			IF[@mLC==1]
+				@P.I1(@e_KEY) += @_RINT(1)*((@_LC==4)*@es.POW2(48)+(@_LC==3)*@es.POW2(32)+(@_LC==2)*@es.POW2(16)+(@_LC==1))
+				IF[@_RINT(1)>0] @P.I1(@e_KEYNUM) = @_LC IFEND[]
+			IFEND[]
+			IF[@mLC==2]
+				@P.I2(@e_KEY) += @_RINT(1)*((@_LC==4)*@es.POW2(48)+(@_LC==3)*@es.POW2(32)+(@_LC==2)*@es.POW2(16)+(@_LC==1))
+				IF[@_RINT(1)>0] @P.I2(@e_KEYNUM) = @_LC IFEND[]
+			IFEND[]
+			IF[@mLC==3]
+				@P.I3(@e_KEY) += @_RINT(1)*((@_LC==4)*@es.POW2(48)+(@_LC==3)*@es.POW2(32)+(@_LC==2)*@es.POW2(16)+(@_LC==1))
+				IF[@_RINT(1)>0] @P.I3(@e_KEYNUM) = @_LC IFEND[]
+			IFEND[]
+			IF[@mLC==4]
+				@P.I4(@e_KEY) += @_RINT(1)*((@_LC==4)*@es.POW2(48)+(@_LC==3)*@es.POW2(32)+(@_LC==2)*@es.POW2(16)+(@_LC==1))
+				IF[@_RINT(1)>0] @P.I4(@e_KEYNUM) = @_LC IFEND[]
+			IFEND[]
+			IF[@mLC==5]
+				@P.I5(@e_KEY) += @_RINT(1)*((@_LC==4)*@es.POW2(48)+(@_LC==3)*@es.POW2(32)+(@_LC==2)*@es.POW2(16)+(@_LC==1))
+				IF[@_RINT(1)>0] @P.I5(@e_KEYNUM) = @_LC IFEND[]
+			IFEND[]
+			IF[@mLC==6]
+				@P.I6(@e_KEY) += @_RINT(1)*((@_LC==4)*@es.POW2(48)+(@_LC==3)*@es.POW2(32)+(@_LC==2)*@es.POW2(16)+(@_LC==1))
+				IF[@_RINT(1)>0] @P.I6(@e_KEYNUM) = @_LC IFEND[]
+			IFEND[]
+			IF[@mLC==7]
+				@P.I7(@e_KEY) += @_RINT(1)*((@_LC==4)*@es.POW2(48)+(@_LC==3)*@es.POW2(32)+(@_LC==2)*@es.POW2(16)+(@_LC==1))
+				IF[@_RINT(1)>0] @P.I7(@e_KEYNUM) = @_LC IFEND[]
+			IFEND[]
+			IF[@mLC==8]
+				@P.I8(@e_KEY) += @_RINT(1)*((@_LC==4)*@es.POW2(48)+(@_LC==3)*@es.POW2(32)+(@_LC==2)*@es.POW2(16)+(@_LC==1))
+				IF[@_RINT(1)>0] @P.I8(@e_KEYNUM) = @_LC IFEND[]
+			IFEND[]
+
+		}
+		LOOPEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+#=es.BT.KEY.S.SET
+{
+	@H.COM(@e_KEYS)+=1
+
+//	LOOP[SET=(8)]
+//	{
+//		\_strtocode($_PSTR(@_LC)); @BT.KEY.S(0,@_LC-1) = @_RINT(1)
+//	}
+//	LOOPEND[]
+
+	\_strtocode($_PSTR(1)); @P.I1(@e_KEYS) = @_RINT(1)
+	\_strtocode($_PSTR(2)); @P.I2(@e_KEYS) = @_RINT(1)
+	\_strtocode($_PSTR(3)); @P.I3(@e_KEYS) = @_RINT(1)
+	\_strtocode($_PSTR(4)); @P.I4(@e_KEYS) = @_RINT(1)
+	\_strtocode($_PSTR(5)); @P.I5(@e_KEYS) = @_RINT(1)
+	\_strtocode($_PSTR(6)); @P.I6(@e_KEYS) = @_RINT(1)
+	\_strtocode($_PSTR(7)); @P.I7(@e_KEYS) = @_RINT(1)
+	\_strtocode($_PSTR(8)); @P.I8(@e_KEYS) = @_RINT(1)
+	return[]
+}
+
+
+#=es.BT.SE.SET
+{
+	@H.COM(@e_SE)+=1
+	$P.S1(@e_SE)=$SSE.PATH+$_PSTR(1)
+	$P.S2(@e_SE)=$SSE.PATH+$_PSTR(2)
+	return[]
+}
+
+
+#=es.BT.GROUP.SET
+{
+	@H.COM(@e_GRP)+=1
+	@P.I1(@e_GRP)=@_PINT(1) // グループ番号
+	@P.I2(@e_GRP)=@_PINT(2) // グループ番号
+	@P.I3(@e_GRP)=@_PINT(3) // グループ番号
+	@P.I4(@e_GRP)=@_PINT(4) // グループ番号
+
+	return[]
+}
+
+#=es.BT.RADIO.SET	{ @H.COM(@e_RADIO)+=1;@P.I1(@e_RADIO)=@_PINT(1);return[] } // グループ番号
+
+
+#=es.BT.SLIDE.SET
+{
+	@H.COM(@e_SLIDE)+=1
+	@P.I1(@e_SLIDE)=@_PINT(1) // スライド範囲X
+	@P.I2(@e_SLIDE)=@_PINT(2) // スライド範囲Y
+	@P.I3(@e_SLIDE)=@_PINT(3) // ドラッグ中心位置Ｘ
+	@P.I4(@e_SLIDE)=@_PINT(4) // ドラッグ中心位置Ｙ
+
+	IF[@P.I1(@e_SLIDE)!=0 && @P.I2(@e_SLIDE)!=0] \_mes("スライド指定範囲XY のどちらかは 0 にしてください。") END[] IFEND[]
+	IF[@P.I3(@e_SLIDE)>0 && @P.I4(@e_SLIDE)>0] \_mes("ドラッグ中心位置指定XY のどちらかは 0 にしてください。") END[] IFEND[]
+
+	return[]
+}
+
+/*
+#=es.BT.PINT.SET
+{
+	@BT.PINT(0, 0) = @_PINT(1)
+	@BT.PINT(0, 1) = @_PINT(2)
+	@BT.PINT(0, 2) = @_PINT(3)
+	@BT.PINT(0, 3) = @_PINT(4)
+	return[]
+}
+
+#=es.BT.PSTR.SET
+{
+	$BT.PSTR(0, 0) = $_PSTR(1)
+	$BT.PSTR(0, 1) = $_PSTR(2)
+	$BT.PSTR(0, 2) = $_PSTR(3)
+	$BT.PSTR(0, 3) = $_PSTR(4)
+	return[]
+}
+*/
+
+
+#=es.BT.E.SET		{ @H.COM(@e_E)+=1;@P.I1(@e_E)=@_PINT(1);return[] } // 可視不可視
+#=es.BT.E2.SET		{ @H.COM(@e_E2)+=1;@P.I1(@e_E2)=@_PINT(1);return[] } // 可視不可視
+#=es.BT.A.SET		{ @H.COM(@e_A)+=1;@P.I1(@e_A)=@_PINT(1);return[] } // 可視不可視
+#=es.BT.T.SET		{ @H.COM(@e_T)+=1;@P.I1(@e_T)=@_PINT(1);return[] } //ON時間
+#=es.BT.N.SET		{ @H.COM(@e_N)+=1;@P.I1(@e_N)=@_PINT(1);return[] } // NA状態
+#=es.BT.W.SET		{ @H.COM(@e_W)+=1;@P.I1(@e_W)=@_PINT(1);return[] } // 機能有効無効
+#=es.BT.MODE.SET	{ @H.COM(@e_MODE)+=1;@P.I1(@e_MODE)=@_PINT(1);return[] } // 描画モード
+#=es.BT.TYPE.SET	{ @H.COM(@e_TYPE)+=1;@P.I1(@e_TYPE)=@_PINT(1);return[] } // ボタン種類
+#=es.BT.BTFLAG.SET	{ @H.COM(@e_BTFLAG)+=1;@P.I1(@e_BTFLAG)=@_PINT(1);return[] } // 
+
+#=es.BT.CURSOR.SET
+{
+	@H.COM(@e_CURSOR.UP)   +=1;$P.S1(@e_CURSOR.UP)   =$_PSTR(1);@P.I1(@e_CURSOR.UP)   =@_PINT(2) // 上
+	@H.COM(@e_CURSOR.DOWN) +=1;$P.S1(@e_CURSOR.DOWN) =$_PSTR(3);@P.I1(@e_CURSOR.DOWN) =@_PINT(4) // 下
+	@H.COM(@e_CURSOR.LEFT) +=1;$P.S1(@e_CURSOR.LEFT) =$_PSTR(5);@P.I1(@e_CURSOR.LEFT) =@_PINT(6) // 左
+	@H.COM(@e_CURSOR.RIGHT)+=1;$P.S1(@e_CURSOR.RIGHT)=$_PSTR(7);@P.I1(@e_CURSOR.RIGHT)=@_PINT(8) // 右
+	return[]
+}
+
+/*
+//動的変更ver.(暫定)
+//
+#=es.BT.CURSOR.LR.SET.SET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	$BT.C.LEFT(@no)		= $_PSTR(3) // 左
+	@BT.C.LEFT2(@no)	= @_PINT(4) // 左
+	$BT.C.RIGHT(@no)	= $_PSTR(5) // 右
+	@BT.C.RIGHT2(@no)	= @_PINT(6) // 右
+	return[]
+}
+
+//動的変更VER.暫定
+#=es.BT.CURSOR.UD.SET.SET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	$BT.C.UP(@no)		= $_PSTR(3) // 上
+	@BT.C.UP2(@no)		= @_PINT(4) // 上
+	$BT.C.DOWN(@no)		= $_PSTR(5) // 下
+	@BT.C.DOWN2(@no)	= @_PINT(6) // 下
+	return[]
+}
+*/
+
+#=es.BT.CURSOR.U.SET		{ @H.COM(@e_CURSOR.UP)+=1;$P.S1(@e_CURSOR.UP)=$_PSTR(1);@P.I1(@e_CURSOR.UP)=@_PINT(2);return[] }
+#=es.BT.CURSOR.D.SET		{ @H.COM(@e_CURSOR.DOWN)+=1;$P.S1(@e_CURSOR.DOWN)=$_PSTR(1);@P.I1(@e_CURSOR.DOWN)=@_PINT(2);return[] }
+#=es.BT.CURSOR.L.SET		{ @H.COM(@e_CURSOR.LEFT)+=1;$P.S1(@e_CURSOR.LEFT)=$_PSTR(1);@P.I1(@e_CURSOR.LEFT)=@_PINT(2);return[] }
+#=es.BT.CURSOR.R.SET		{ @H.COM(@e_CURSOR.RIGHT)+=1;$P.S1(@e_CURSOR.RIGHT)=$_PSTR(1);@P.I1(@e_CURSOR.RIGHT)=@_PINT(2);return[] }
+#=es.BT.CURSOR.START.SET	{ @H.COM(@e_CURSOR.START)+=1;@P.I1(@e_CURSOR.START)=1;return[] } // カーソル開始ボタン
+
+
+//----------------------------------------------------------------------------
+//■空いているキュー番号取得
+//----------------------------------------------------------------------------
+#=es.BT.QUE.EMPTYGET
+{
+	INT[@ret]
+	LOOP[SET=@QUE.MAX]
+	{
+		IF[@Q.FLAG(@_LC)==0] @ret=@_LC;LOOPBREAK[] IFEND[]
+//		IF[@Q.COM(@_LC)==0] @ret=@_LC;LOOPBREAK[] IFEND[]
+	}
+	LOOPEND[]
+
+	IF[@ret==0] \_mes("キューエラー");END[] IFEND[]
+
+	return[rint=@ret]
+}
+
+#=es.BT.SET //SETADD.SET
+{
+	STR[$LBL  = $_PSTR(1)] // ラベル名
+	INT[@LBL2 = @_PINT(2)] // ラベル名２
+
+	IF[$LBL==""] GO[#=es.BT.SET.LEnd] IFEND[]
+
+	INT[@wn]
+
+	@H.COM(@e_BTSET)+=1
+	$P.S1(@e_BTSET)=$LBL
+	@P.I1(@e_BTSET)=@LBL2
+
+	LOOP[SET=(48)-1]
+	{
+		IF[@H.COM(@_LC)>0]
+		{
+			GOSUB[#=es.BT.QUE.EMPTYGET];@wn=@_RINT(1)
+
+			@Q.COM(@wn)		= @_LC
+		//	$Q.NAME(@wn)	= $
+			$Q.SPID(@wn)	= $LBL+"."+$(@LBL2)
+			@Q.I1(@wn)		= @P.I1(@_LC)
+			@Q.I2(@wn)		= @P.I2(@_LC)
+			@Q.I3(@wn)		= @P.I3(@_LC)
+			@Q.I4(@wn)		= @P.I4(@_LC)
+			@Q.I5(@wn)		= @P.I5(@_LC)
+			@Q.I6(@wn)		= @P.I6(@_LC)
+			@Q.I7(@wn)		= @P.I7(@_LC)
+			@Q.I8(@wn)		= @P.I8(@_LC)
+			$Q.S1(@wn)		= $P.S1(@_LC)
+			$Q.S2(@wn)		= $P.S2(@_LC)
+			$Q.S3(@wn)		= $P.S3(@_LC)
+			$Q.S4(@wn)		= $P.S4(@_LC)
+			$Q.S5(@wn)		= $P.S5(@_LC)
+			$Q.S6(@wn)		= $P.S6(@_LC)
+			$Q.S7(@wn)		= $P.S7(@_LC)
+			$Q.S8(@wn)		= $P.S8(@_LC)
+			$Q.LBL(@wn)		= $LBL
+			@Q.LBL2(@wn)	= @LBL2
+
+			@Q.GUNO(@wn)	= @GUNO
+			@GUNO+=1
+
+			@Q.FLAG(@wn)	= 1
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	LOOP[SET=(48)]
+	{
+		@H.COM(@_LC-1)=0
+
+		@P.I1(@_LC-1)=0
+		@P.I2(@_LC-1)=0
+		@P.I3(@_LC-1)=0
+		@P.I4(@_LC-1)=0
+		@P.I5(@_LC-1)=0
+		@P.I6(@_LC-1)=0
+		@P.I7(@_LC-1)=0
+		@P.I8(@_LC-1)=0
+		$P.S1(@_LC-1)=""
+		$P.S2(@_LC-1)=""
+		$P.S3(@_LC-1)=""
+		$P.S4(@_LC-1)=""
+		$P.S5(@_LC-1)=""
+		$P.S6(@_LC-1)=""
+		$P.S7(@_LC-1)=""
+		$P.S8(@_LC-1)=""
+	}
+	LOOPEND[]
+
+
+	#=es.BT.SET.LEnd
+//	return[]
+}
+
+
+
+
+#=es.BT.GO
+{
+	STR[$path]
+
+	LOOP[SET=@QUE.MAX]
+	{
+		IF[@Q.FLAG(@_LC)==1]
+		{
+
+				IF[@Q.COM(@_LC)==@e_CG]
+				{
+						//	= $P.S1(@_LC)
+						//	= $P.S2(@_LC)
+						//	= $P.S3(@_LC)
+						//	= $P.S4(@_LC)
+						//	= $P.S5(@_LC)
+						//	= @P.I1(@_LC)
+
+						INT[@e]
+						IF[@Q.I1(@_LC)] $path=$CGSYS.PATH ELSE[] $path=$CG.PATH IFEND[]
+
+						$BT.FILE(0)  =$Q.S1(@_LC)+$Q.S2(@_LC)+$Q.S3(@_LC)+$Q.S4(@_LC)+$Q.S5(@_LC)
+						$BT.OFF(0)   =""
+						$BT.OVER(0)  =""
+						$BT.ON(0)    =""
+						$BT.ONOVER(0)=""
+						$BT.NA(0)    =""
+
+						IF[$Q.S1(@_LC)!="" && $Q.S2(@_LC)=="" && $Q.S3(@_LC)=="" && $Q.S4(@_LC)=="" && $Q.S5(@_LC)==""] //第２パラメータ以降が省略されていたら
+						{
+							//ファイル名末尾を調査し、_bt3/_bt4/_bt3n/_bt4n なら連結ボタンとして読み込む
+							\_strlower($Q.S1(@_LC))
+							\_strright($_RSTR(1), 4)
+							IF[$_RSTR(1)=="_bt3"]
+							{
+								$BT.OFF(0) =$path+$Q.S1(@_LC)
+								$BT.OVER(0)="*"
+								$BT.ON(0)  ="*"
+								@BT.SEQ(0) =3
+							}
+							ELSE[$_RSTR(1)=="_bt4"]
+							{
+								$BT.OFF(0)   =$path+$Q.S1(@_LC)
+								$BT.OVER(0)  ="*"
+								$BT.ON(0)    ="*"
+								$BT.ONOVER(0)="*"
+								@BT.SEQ(0)   =4
+							}
+							ELSE[]
+							{
+								//_off, _over, _on, _onover, _na を勝手に探しにいく.(※png固定)
+								$BT.OFF(0)=$path+$Q.S1(@_LC)
+								FILEINFO[EXIST=1 FILE=$path+$Q.S1(@_LC)+"_off.png"    LET=@e];IF[@e] $BT.OFF(0)    = $path+$Q.S1(@_LC)+"_off"    IFEND[] // OFF時の画像
+								FILEINFO[EXIST=1 FILE=$path+$Q.S1(@_LC)+"_over.png"   LET=@e];IF[@e] $BT.OVER(0)   = $path+$Q.S1(@_LC)+"_over"   IFEND[] // OVER時の画像
+								FILEINFO[EXIST=1 FILE=$path+$Q.S1(@_LC)+"_on.png"     LET=@e];IF[@e] $BT.ON(0)     = $path+$Q.S1(@_LC)+"_on"     IFEND[] // ON時の画像
+								FILEINFO[EXIST=1 FILE=$path+$Q.S1(@_LC)+"_onover.png" LET=@e];IF[@e] $BT.ONOVER(0) = $path+$Q.S1(@_LC)+"_onover" IFEND[] // ONOVER時の画像
+								FILEINFO[EXIST=1 FILE=$path+$Q.S1(@_LC)+"_na.png"     LET=@e];IF[@e] $BT.NA(0)     = $path+$Q.S1(@_LC)+"_na"     IFEND[] // NA時の画像
+							}
+							IFEND[]
+
+						}
+						ELSE[]
+						{
+							IF[$Q.S1(@_LC)!=""] $BT.OFF(0)    = $path+$Q.S1(@_LC) IFEND[] // OFF時の画像
+							IF[$Q.S2(@_LC)!=""] $BT.OVER(0)   = $path+$Q.S2(@_LC) IFEND[] // OVER時の画像
+							IF[$Q.S3(@_LC)!=""] $BT.ON(0)     = $path+$Q.S3(@_LC) IFEND[] // ON時の画像
+							IF[$Q.S4(@_LC)!=""] $BT.ONOVER(0) = $path+$Q.S4(@_LC) IFEND[] // ONOVER時の画像
+							IF[$Q.S5(@_LC)!=""] $BT.NA(0)     = $path+$Q.S5(@_LC) IFEND[] // NA時の画像
+						}
+						IFEND[]
+
+						IF[$BT.OFF(0)==""] \_mes("ボタン画像指定が間違っています。") END[] IFEND[]
+
+						@BT.A(0)			= 256 // 不透明度(0～256)
+						@BT.ES(0)			=   1 // 可視不可視(1/0)
+						@BT.ES2(0)			=   1 // 可視不可視2(1/0)
+						@BT.N(0)			=   0 // NA有効無効(1/0)
+						@BT.W(0)			=   1 // 機能有効無効(1/0)
+						@BT.MST(0)			=   0 // 
+						@BT.OLD.MST(0)		=   0 // 
+
+						@BT.ANTM(0)			=   0 // アニメ・現在の時間
+
+						LOOP[SET=6]
+						{
+							@BT.ANCM(0,@_LC-1)		=   1 // アニメ・現在のコマ
+							@BT.ANNUM(0,@_LC-1)		=   1 // アニメ枚数
+							@BT.ANTIME(0,@_LC-1)	=   0 // アニメコマ時間
+							@BT.ANLPTYPE(0,@_LC-1)	=   0 // アニメループ種類
+						}
+						LOOPEND[]
+
+					//	@BT.CGLOAD(0)		=   1 // ＣＧを先読みしておくか否か
+						@BT.SW(0)			=   0 // ボタンON/OFF
+						@BT.STATUS(0)		=	0 // ボタン描画状態
+				}
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_CGAN]
+				{
+						//	= $P.S1(@_LC)
+						//	= $P.S2(@_LC)
+						//	= $P.S3(@_LC)
+						//	= $P.S4(@_LC)
+						//	= $P.S5(@_LC)
+						//	= $P.S6(@_LC)
+
+					//	IF[@_PINT(4)] $path=$CGSYS.PATH ELSE[] $path=$CG.PATH IFEND[]
+						$path=$CGSYS.PATH
+
+						$BT.FILE(0)  =$Q.S1(@_LC)+$Q.S2(@_LC)+$Q.S3(@_LC)+$Q.S4(@_LC)+$Q.S5(@_LC)
+						$BT.OFF(0)   =""
+						$BT.OVER(0)  =""
+						$BT.ON(0)    =""
+						$BT.ONOVER(0)=""
+						$BT.NA(0)    =""
+
+						IF[$Q.S1(@_LC)!=""] $BT.OFF(0)    = $path+$Q.S1(@_LC) IFEND[] // OFF時の画像
+						IF[$Q.S2(@_LC)!=""] $BT.OVER(0)   = $path+$Q.S2(@_LC) IFEND[] // OVER時の画像
+						IF[$Q.S3(@_LC)!=""] $BT.ON(0)     = $path+$Q.S3(@_LC) IFEND[] // ON時の画像
+						IF[$Q.S4(@_LC)!=""] $BT.ONOVER(0) = $path+$Q.S4(@_LC) IFEND[] // ONOVER時の画像
+						IF[$Q.S5(@_LC)!=""] $BT.NA(0)     = $path+$Q.S5(@_LC) IFEND[] // NA時の画像
+
+						IF[$BT.OFF(0)==""] \_mes("ボタン画像指定が間違っています。") END[] IFEND[]
+
+						@BT.A(0)			= 256 // 不透明度(0～256)
+						@BT.ES(0)			=   1 // 可視不可視(1/0)
+						@BT.ES2(0)			=   1 // 可視不可視2(1/0)
+						@BT.N(0)			=   0 // NA有効無効(1/0)
+						@BT.W(0)			=   1 // 機能有効無効(1/0)
+						@BT.MST(0)			=   0 // 
+						@BT.OLD.MST(0)		=   0 // 
+
+						@BT.ANTM(0)			=   0 // アニメ・現在の時間
+
+						LOOP[SET=6]
+						{
+							@BT.ANCM(0,@_LC-1)		=   1 // アニメ・現在のコマ
+							@BT.ANNUM(0,@_LC-1)		=   1 // アニメ枚数
+							@BT.ANTIME(0,@_LC-1)	=   0 // アニメコマ時間
+							@BT.ANLPTYPE(0,@_LC-1)	=   0 // アニメループ種類
+						}
+						LOOPEND[]
+
+					//	@BT.CGLOAD(0)		=   1 // ＣＧを先読みしておくか否か
+						@BT.SW(0)			=   0 // ボタンON/OFF
+						@BT.STATUS(0)		=	0 // ボタン描画状態
+				}
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_NAME]		$BT.NAME(0)		= $Q.S1(@_LC)	IFEND[] // ボタン名
+				IF[@Q.COM(@_LC)==@e_A]			@BT.A(0)		= @Q.I1(@_LC)	IFEND[] // 可視不可視
+				IF[@Q.COM(@_LC)==@e_E]			@BT.ES(0)		= @Q.I1(@_LC)	IFEND[] // 可視不可視
+				IF[@Q.COM(@_LC)==@e_E2]			@BT.ES2(0)		= @Q.I1(@_LC)	IFEND[] // 可視不可視
+				IF[@Q.COM(@_LC)==@e_N]			@BT.N(0)		= @Q.I1(@_LC)	IFEND[] // NA状態
+				IF[@Q.COM(@_LC)==@e_T]			@BT.TMAX(0)		= @Q.I1(@_LC)	IFEND[] // ON時間
+				IF[@Q.COM(@_LC)==@e_W]			@BT.W(0)		= @Q.I1(@_LC)	IFEND[] // 機能有効無効
+				IF[@Q.COM(@_LC)==@e_X]			@BT.X(0)		= @Q.I1(@_LC)	IFEND[] // Ｘ座標
+				IF[@Q.COM(@_LC)==@e_Y]			@BT.Y(0)		= @Q.I1(@_LC)	IFEND[] // Ｙ座標
+				IF[@Q.COM(@_LC)==@e_Z]			@BT.Z(0)		= @Q.I1(@_LC)	IFEND[] // Ｚ座標
+				IF[@Q.COM(@_LC)==@e_SX]			@BT.SX(0)		= @Q.I1(@_LC)	IFEND[] // サイズ指定Ｘ(0=デフォルトサイズ)
+				IF[@Q.COM(@_LC)==@e_SY]			@BT.SY(0)		= @Q.I1(@_LC)	IFEND[] // サイズ指定Ｙ(0=デフォルトサイズ)
+				IF[@Q.COM(@_LC)==@e_PX]			@BT.PX(0)		= @Q.I1(@_LC)	IFEND[] // サイズ指定Ｘ(100=デフォルトサイズ)
+				IF[@Q.COM(@_LC)==@e_PY]			@BT.PY(0)		= @Q.I1(@_LC)	IFEND[] // サイズ指定Ｙ(100=デフォルトサイズ)
+				IF[@Q.COM(@_LC)==@e_RADIO]		@BT.RADIO(0)	= @Q.I1(@_LC)	IFEND[] // グループ番号
+				IF[@Q.COM(@_LC)==@e_MODE]		@BT.MODE(0)		= @Q.I1(@_LC)	IFEND[] // 描画モード
+				IF[@Q.COM(@_LC)==@e_TYPE]		@BT.TYPE(0)		= @Q.I1(@_LC)	IFEND[] // ボタン種類
+				IF[@Q.COM(@_LC)==@e_BTFLAG]		@BT.BTFLAG(0)	= @Q.I1(@_LC)	IFEND[] // 
+				IF[@Q.COM(@_LC)==@e_VAL]		@BT.VAL(0)		= @Q.I1(@_LC)	IFEND[] // 戻り値
+				IF[@Q.COM(@_LC)==@e_TH]			@BT.TH(0)		= @Q.I1(@_LC)	IFEND[] // スルー
+				IF[@Q.COM(@_LC)==@e_MAPA]		@BT.MAP.A(0)	= @Q.I1(@_LC)	IFEND[] // 
+				IF[@Q.COM(@_LC)==@e_MAPCG]		$BT.MASK(0)		= $Q.S1(@_LC)	IFEND[] // MASK画像
+
+				IF[@Q.COM(@_LC)==@e_KEY]
+				{
+					@BT.KEY(0,0) = @Q.I1(@_LC)
+					@BT.KEY(0,1) = @Q.I2(@_LC)
+					@BT.KEY(0,2) = @Q.I3(@_LC)
+					@BT.KEY(0,3) = @Q.I4(@_LC)
+					@BT.KEY(0,4) = @Q.I5(@_LC)
+					@BT.KEY(0,5) = @Q.I6(@_LC)
+					@BT.KEY(0,6) = @Q.I7(@_LC)
+					@BT.KEY(0,7) = @Q.I8(@_LC)
+				}
+				IFEND[]
+				IF[@Q.COM(@_LC)==@e_KEYS]
+				{
+					@BT.KEY.S(0,0) = @Q.I1(@_LC)
+					@BT.KEY.S(0,1) = @Q.I2(@_LC)
+					@BT.KEY.S(0,2) = @Q.I3(@_LC)
+					@BT.KEY.S(0,3) = @Q.I4(@_LC)
+					@BT.KEY.S(0,4) = @Q.I5(@_LC)
+					@BT.KEY.S(0,5) = @Q.I6(@_LC)
+					@BT.KEY.S(0,6) = @Q.I7(@_LC)
+					@BT.KEY.S(0,7) = @Q.I8(@_LC)
+				}
+				IFEND[]
+				IF[@Q.COM(@_LC)==@e_KEYNUM]
+				{
+					@BT.KEY.NUM(0,0) = @Q.I1(@_LC)
+					@BT.KEY.NUM(0,1) = @Q.I2(@_LC)
+					@BT.KEY.NUM(0,2) = @Q.I3(@_LC)
+					@BT.KEY.NUM(0,3) = @Q.I4(@_LC)
+					@BT.KEY.NUM(0,4) = @Q.I5(@_LC)
+					@BT.KEY.NUM(0,5) = @Q.I6(@_LC)
+					@BT.KEY.NUM(0,6) = @Q.I7(@_LC)
+					@BT.KEY.NUM(0,7) = @Q.I8(@_LC)
+				}
+				IFEND[]
+
+
+				IF[@Q.COM(@_LC)==@e_GRP]
+				{
+					@BT.GROUP1(0)	= @Q.I1(@_LC)
+					@BT.GROUP2(0)	= @Q.I2(@_LC)
+					@BT.GROUPMIN(0)	= @Q.I3(@_LC)
+					@BT.GROUPMAX(0)	= @Q.I4(@_LC)
+				}
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_SLIDE]
+				{
+					@BT.SLIDE.SX(0) = @Q.I1(@_LC) // スライド範囲X
+					@BT.SLIDE.SY(0) = @Q.I2(@_LC) // スライド範囲Y
+					@BT.DCX(0) = @Q.I3(@_LC) // ドラッグ中心位置Ｘ
+					@BT.DCY(0) = @Q.I4(@_LC) // ドラッグ中心位置Ｙ
+				}
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_SEQ]
+				{
+					@BT.SEQ.OFF(0)		= @Q.I1(@_LC)
+					@BT.SEQ.OVER(0)		= @Q.I2(@_LC)
+					@BT.SEQ.ON(0)		= @Q.I3(@_LC)
+					@BT.SEQ.ONOVER(0)	= @Q.I4(@_LC)
+					@BT.SEQ.NA(0)		= @Q.I5(@_LC)
+				}
+				IFEND[]
+	/*
+				IF[@Q.COM(@_LC)==@e_PAC]
+				{
+					@BT.PAC.OFF(0)		= @Q.I1(@_LC)
+					@BT.PAC.OVER(0)		= @Q.I2(@_LC)
+					@BT.PAC.ON(0)		= @Q.I3(@_LC)
+					@BT.PAC.ONOVER(0)	= @Q.I4(@_LC)
+					@BT.PAC.NA(0)		= @Q.I5(@_LC)
+				}
+				IFEND[]
+	*/
+				IF[@Q.COM(@_LC)==@e_SE]
+					$BT.SSE.OVER(0)	= $Q.S1(@_LC)
+					$BT.SSE.ON(0)	= $Q.S2(@_LC)
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_CURSOR.UP]
+					$BT.C.UP(0)		= $Q.S1(@_LC) // 上
+					@BT.C.UP2(0)	= @Q.I1(@_LC) // 上
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_CURSOR.DOWN]
+					$BT.C.DOWN(0)	= $Q.S1(@_LC) // 下
+					@BT.C.DOWN2(0)	= @Q.I1(@_LC) // 下
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_CURSOR.LEFT]
+					$BT.C.LEFT(0)	= $Q.S1(@_LC) // 左
+					@BT.C.LEFT2(0)	= @Q.I1(@_LC) // 左
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_CURSOR.RIGHT]
+					$BT.C.RIGHT(0)	= $Q.S1(@_LC) // 右
+					@BT.C.RIGHT2(0)	= @Q.I1(@_LC) // 右
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_CURSOR.START]
+					@BT.C.STARTFLAG = @Q.I1(@_LC) // カーソル開始ボタン
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_ANNUM]
+				{
+					@BT.ANNUM(0,0)	= @Q.I1(@_LC)
+					@BT.ANNUM(0,1)	= @Q.I2(@_LC)
+					@BT.ANNUM(0,2)	= @Q.I3(@_LC)
+					@BT.ANNUM(0,3)	= @Q.I4(@_LC)
+					@BT.ANNUM(0,4)	= @Q.I5(@_LC)
+					@BT.ANNUM(0,5)	= @Q.I6(@_LC)
+				}
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_ANTIME]
+				{
+					@BT.ANTIME(0,0)	= @Q.I1(@_LC)
+					@BT.ANTIME(0,1)	= @Q.I2(@_LC)
+					@BT.ANTIME(0,2)	= @Q.I3(@_LC)
+					@BT.ANTIME(0,3)	= @Q.I4(@_LC)
+					@BT.ANTIME(0,4)	= @Q.I5(@_LC)
+					@BT.ANTIME(0,5)	= @Q.I6(@_LC)
+				}
+				IFEND[]
+
+				IF[@Q.COM(@_LC)==@e_ANLPTYPE]
+				{
+					@BT.ANLPTYPE(0,0)	= @Q.I1(@_LC)
+					@BT.ANLPTYPE(0,1)	= @Q.I2(@_LC)
+					@BT.ANLPTYPE(0,2)	= @Q.I3(@_LC)
+					@BT.ANLPTYPE(0,3)	= @Q.I4(@_LC)
+					@BT.ANLPTYPE(0,4)	= @Q.I5(@_LC)
+					@BT.ANLPTYPE(0,5)	= @Q.I6(@_LC)
+				}
+				IFEND[]
+
+				//
+				INT[@GUNO]
+
+				IF[@Q.COM(@_LC)==@e_BTSET]
+				{
+					INT[@no]
+					\BT.NO.GET(@no, $BT.GRPNAME+"."+$Q.LBL(@_LC), @Q.LBL2(@_LC))
+					IF[@no==0]
+					{
+						GOSUB[#=es.BT.GO.MAIN pstr=$Q.LBL(@_LC) pint2=@Q.LBL2(@_LC)]
+
+						@GUNO=@Q.GUNO(@_LC)
+
+						LOOP[SET=@QUE.MAX]
+						{
+							IF[@Q.FLAG(@_LC)==1]
+							{
+								IF[@Q.GUNO(@_LC)<@GUNO]
+								{
+									@Q.FLAG(@_LC) = 0
+								}
+								IFEND[]
+							}
+							IFEND[]
+						}
+						LOOPEND[]
+
+					}
+					ELSE[]
+					{
+						@GUNO=@Q.GUNO(@_LC)
+
+						LOOP[SET=@QUE.MAX]
+						{
+							IF[@Q.FLAG(@_LC)==1]
+							{
+								//ＣＧ再読込はエラー.
+								IF[$path!=""] //CG/CGAN が指定されている
+								{
+									\_mes("[エラー]同じボタンが再読込されました。"+$_CHR(13)+$BT.GRPNAME+"."+$Q.LBL(@_LC));END[]
+								}
+								IFEND[]
+
+								IF[@Q.GUNO(@_LC)<@GUNO]
+								{
+									IF[@Q.COM(@_LC)==@e_A]
+									{
+										\BT.A.SET($BT.GRPNAME+"."+$Q.LBL(@_LC),@Q.LBL2(@_LC),@BT.A(0))
+									//	STR[$BNO=$(@BT.NO(@no)*100+1)]
+									//	@BT.A(@no) = @a
+									//	\_range(@BT.A(@no), 0, 256)
+									}
+									IFEND[]
+									IF[@Q.COM(@_LC)==@e_X]
+									{
+										\BT.X.SET($BT.GRPNAME+"."+$Q.LBL(@_LC),@Q.LBL2(@_LC),@BT.X(0))
+									}
+									IFEND[]
+									IF[@Q.COM(@_LC)==@e_Y]
+									{
+										\BT.Y.SET($BT.GRPNAME+"."+$Q.LBL(@_LC),@Q.LBL2(@_LC),@BT.Y(0))
+									}
+									IFEND[]
+
+									@Q.FLAG(@_LC) = 0
+								}
+								IFEND[]
+							}
+							IFEND[]
+						}
+						LOOPEND[]
+					}
+					IFEND[]
+
+				}
+				IFEND[]
+
+
+				//キュー初期化
+				@Q.GUNO(@_LC)	= 0
+				@Q.COM(@_LC)	= 0
+				@Q.I1(@_LC)		= 0
+				@Q.I2(@_LC)		= 0
+				@Q.I3(@_LC)		= 0
+				@Q.I4(@_LC)		= 0
+				@Q.I5(@_LC)		= 0
+				@Q.I6(@_LC)		= 0
+				$Q.S1(@_LC)		= ""
+				$Q.S2(@_LC)		= ""
+				$Q.S3(@_LC)		= ""
+				$Q.S4(@_LC)		= ""
+				$Q.S5(@_LC)		= ""
+				$Q.S6(@_LC)		= ""
+				$Q.LBL(@_LC)	= ""
+				@Q.LBL2(@_LC)	= 0
+
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+
+	return[]
+
+}
+
+
+#=es.BT.GO.MAIN
+{
+
+	$BT.LBL(0)  = $_PSTR(1) // ラベル名
+	@BT.LBL2(0) = @_PINT(2) // ラベル名２
+//	$BT.LBLS(0) = $_PSTR(1)+"="+$(@_PINT(2)) // ラベル名(高速サーチ用)
+
+	IF[$BT.LBL(0)==""] GO[#=es.BT.GO.MAIN.LEnd] IFEND[]
+
+	STR[$GrpName = $BT.GRPNAME]
+	INT[@sx]
+
+	IF[@BT.NUM==@BT.MAX] \_mes("ボタン使用最大数を超えました。") END[] IFEND[]
+
+	INT[@mLC=0]
+
+	IF[@BT.TYPE(0)==-1] //ボタン種類自動判別
+	{
+		@BT.TYPE(0)=0
+		IF[$BT.OVER(0)	!=""] @BT.TYPE(0)=1 IFEND[]
+		IF[$BT.ON(0)	!=""] @BT.TYPE(0)=1 IFEND[]
+		IF[$BT.ONOVER(0)!=""] @BT.TYPE(0)=2 IFEND[] //onoverがあるということは、on状態が維持されているという前提があるから
+	}
+	IFEND[]
+
+	IF[@BT.RADIO(0)>0] //ラジオボタンは ON 必須。
+	{
+		IF[$BT.ON(0)==""] \_mes("["+$BT.LBL(0)+"]"+"ラジオボタンで、"+$_CHR(13)+$_CHR(10)+"ON画像が存在していないか指定がありません。"+$_CHR(13)+$_CHR(10)+$_CHR(13)+$_CHR(10)+"※エラーが発生したのは、OFFが "+$BT.OFF(0)+" で定義されているボタンです。") END[] IFEND[]
+		@BT.TYPE(0)=3
+	}
+	IFEND[]
+
+	IF[@BTCASHMODE==0]
+	{
+
+		//\_log("■■■優先順位 "+$@BT.Z(0)+" から、適切な格納番号を探します。")
+
+			//優先順位から、適切な格納番号を探す.
+			//
+//			INT[@mLC=@BT.NUM+1]
+///*
+			LOOP[SET=@BT.NUM]
+			{
+				IF[@BT.Z(0)<@BT.Z(@_LC)] @mLC=@_LC;LOOPBREAK[] IFEND[]
+			}
+			LOOPEND[]
+			IF[@mLC==0] @mLC=@BT.NUM+1 IFEND[]
+
+		//\_log("■■■適切な格納番号="+$(@mLC))
+
+			//それ以降の番号をずらし、挿入する形にする
+			//
+			GOSUB[#=es.BT.PUSH.NO.SET pint=@mLC pint2=@BT.NUM-@mLC+1] //pint1=1:push, pint2=開始地点, pint3=num
+/*
+			LOOP[SET=@BT.NUM-@mLC+1]
+				GOSUB[#=es.BT.MOVE.NO.SET pint=(@BT.NUM-@_LC+1)+1 pint2=(@BT.NUM-@_LC+1)] //dst ← src
+			LOOPEND[]
+*/
+
+//*/
+
+			@BT.NUM+=1
+			@BT.GNO+=1
+
+		//	IF[$BT.NAME(0)=="■SKIP"] \_dmes("■SKIP BTN.NO="+$(@mLC)) IFEND[]
+		//	IF[$BT.NAME(0)=="■LOG"]  \_dmes("■LOG BTN.NO="+$(@mLC)) IFEND[]
+
+			GOSUB[#=es.BT.END.NO.EXEC pint=@mLC]
+///x
+//			@BT.F.INIT(@mLC) = 1
+
+			$BT.LBL(@mLC)		= $GrpName+"."+$BT.LBL(0)
+			@BT.LBL2(@mLC)		= @BT.LBL2(0)
+			$BT.LBLS(@mLC)		= $GrpName+"."+$BT.LBL(0)+"="+$(@BT.LBL2(0))
+
+			$BT.NAME(@mLC)		= $BT.NAME(0)
+			$BT.GRP(@mLC)		= $GrpName
+		//	@BT.NO(@mLC)		= @mLC
+			@BT.NO(@mLC)		= @BT.GNO
+			@BT.A(@mLC)			= @BT.A(0)
+			@BT.ES(@mLC)		= @BT.ES(0)
+			@BT.ES2(@mLC)		= @BT.ES2(0)
+			@BT.N(@mLC)			= @BT.N(0)
+			@BT.W(@mLC)			= @BT.W(0)
+			@BT.MST(@mLC)		= @BT.MST(0)
+			@BT.OLD.MST(@mLC)	= @BT.OLD.MST(0)
+			@BT.T(@mLC)			= @BT.T(0)
+			@BT.TMAX(@mLC)		= @BT.TMAX(0)
+			@BT.IX(@mLC)		= @BT.X(0) //※IXでなくX
+			@BT.IY(@mLC)		= @BT.Y(0) //※IYでなくY
+			@BT.IZ(@mLC)		= @BT.Z(0) //※IZでなくZ
+			@BT.X(@mLC)			= @BT.X(0)
+			@BT.Y(@mLC)			= @BT.Y(0)
+			@BT.Z(@mLC)			= @BT.Z(0)
+			@BT.VAL(@mLC)		= @BT.VAL(0)
+			@BT.TH(@mLC)		= @BT.TH(0)
+			@BT.SX(@mLC)		= @BT.SX(0)
+			@BT.SY(@mLC)		= @BT.SY(0)
+			@BT.PX(@mLC)		= @BT.PX(0)
+			@BT.PY(@mLC)		= @BT.PY(0)
+			@BT.DX(@mLC)		= @BT.DX(0)
+			@BT.DY(@mLC)		= @BT.DY(0)
+			@BT.DCX(@mLC)		= @BT.DCX(0)
+			@BT.DCY(@mLC)		= @BT.DCY(0)
+			@BT.MODE(@mLC)		= @BT.MODE(0)
+			@BT.TYPE(@mLC)		= @BT.TYPE(0)
+			@BT.BTFLAG(@mLC)	= @BT.BTFLAG(0)
+			@BT.SEQ(@mLC)		= @BT.SEQ(0)
+
+			@BT.ANTM(@mLC)		= @BT.ANTM(0)
+
+			LOOP[SET=6]
+			{
+				@BT.ANCM(@mLC,@_LC-1)		= @BT.ANCM(0,@_LC-1)
+				@BT.ANNUM(@mLC,@_LC-1)		= @BT.ANNUM(0,@_LC-1)
+				@BT.ANTIME(@mLC,@_LC-1)		= @BT.ANTIME(0,@_LC-1)
+				@BT.ANLPTYPE(@mLC,@_LC-1)	= @BT.ANLPTYPE(0,@_LC-1)
+			}
+			LOOPEND[]
+
+			$BT.C.UP(@mLC)		= ""
+			$BT.C.DOWN(@mLC)	= ""
+			$BT.C.LEFT(@mLC)	= ""
+			$BT.C.RIGHT(@mLC)	= ""
+			IF[$BT.C.UP(0)   !=""] $BT.C.UP(@mLC)    = $GrpName+"."+$BT.C.UP(0)    IFEND[]
+			IF[$BT.C.DOWN(0) !=""] $BT.C.DOWN(@mLC)  = $GrpName+"."+$BT.C.DOWN(0)  IFEND[]
+			IF[$BT.C.LEFT(0) !=""] $BT.C.LEFT(@mLC)  = $GrpName+"."+$BT.C.LEFT(0)  IFEND[]
+			IF[$BT.C.RIGHT(0)!=""] $BT.C.RIGHT(@mLC) = $GrpName+"."+$BT.C.RIGHT(0) IFEND[]
+			@BT.C.UP2(@mLC)	= @BT.C.UP2(0)
+			@BT.C.DOWN2(@mLC)	= @BT.C.DOWN2(0)
+			@BT.C.LEFT2(@mLC)	= @BT.C.LEFT2(0)
+			@BT.C.RIGHT2(@mLC)	= @BT.C.RIGHT2(0)
+
+			IF[@BT.C.STARTFLAG]
+			{
+				@BT.C.STARTFLAG = 0
+				$BT.C.START  = $BT.LBL(@mLC)
+				@BT.C.START2 = @BT.LBL2(@mLC)
+			}
+			IFEND[]
+
+			@BT.MAP.A(@mLC)	= @BT.MAP.A(0)
+
+			$BT.SSE.OVER(@mLC)	= $BT.SSE.OVER(0)
+			$BT.SSE.ON(@mLC)	= $BT.SSE.ON(0)
+
+			$BT.FILE(@mLC)		= $BT.FILE(0)	// 
+			$BT.OFF(@mLC)		= $BT.OFF(0)	// OFF時の画像
+			$BT.OVER(@mLC)		= $BT.OVER(0)	// OVER時の画像
+			$BT.ON(@mLC)		= $BT.ON(0)		// ON時の画像
+			$BT.ONOVER(@mLC)	= $BT.ONOVER(0)	// ONOVER時の画像
+			$BT.NA(@mLC)		= $BT.NA(0)		// 無効時の画像
+			$BT.MASK(@mLC)		= $BT.MASK(0)	// MASK画像
+			IF[$BT.NA(@mLC)==""] $BT.NA(@mLC)=$BT.OFF(@mLC) IFEND[] // 無効時の画像
+
+			@BT.L.INIT(@mLC)		= 0
+			@BT.L.OVER(@mLC)		= 0
+			@BT.L.OVER.ONCE(@mLC)	= 0
+			@BT.L.LEAVE(@mLC)		= 0
+			@BT.L.LEAVE.ONCE(@mLC)	= 0
+			@BT.L.ON(@mLC)			= 0
+			@BT.L.DRAG(@mLC)		= 0
+
+			IF[$BT.LBL(@mLC)!=""]
+			{
+				\_label.info.exist($BT.LBL(@mLC)+".INIT");			@BT.L.INIT(@mLC)		= @_RINT(1)
+				\_label.info.exist($BT.LBL(@mLC)+".OVER");			@BT.L.OVER(@mLC)		= @_RINT(1)
+				\_label.info.exist($BT.LBL(@mLC)+".OVER.ONCE");		@BT.L.OVER.ONCE(@mLC)	= @_RINT(1)
+				\_label.info.exist($BT.LBL(@mLC)+".LEAVE");			@BT.L.LEAVE(@mLC)		= @_RINT(1)
+				\_label.info.exist($BT.LBL(@mLC)+".LEAVE.ONCE");	@BT.L.LEAVE.ONCE(@mLC)	= @_RINT(1)
+				\_label.info.exist($BT.LBL(@mLC)+".ON");			@BT.L.ON(@mLC)			= @_RINT(1)
+				\_label.info.exist($BT.LBL(@mLC)+".DRAG");			@BT.L.DRAG(@mLC)		= @_RINT(1)
+			}
+			IFEND[]
+
+			LOOP[SET=(8)]
+			{
+				@BT.KEY(@mLC,@_LC-1) = @BT.KEY(0,@_LC-1)
+				@BT.KEY.S(@mLC,@_LC-1) = @BT.KEY.S(0,@_LC-1)
+				@BT.KEY.NUM(@mLC,@_LC-1) = @BT.KEY.NUM(0,@_LC-1)
+			}
+			LOOPEND[]
+
+		//	@BT.CGLOAD(@mLC)	= @BT.CGLOAD(0)
+			@BT.SW(@mLC)		= @BT.SW(0)
+			@BT.STATUS(@mLC)	= @BT.STATUS(0)
+
+			@BT.GROUP1(@mLC)	= @BT.GROUP1(0)
+			@BT.GROUP2(@mLC)	= @BT.GROUP2(0)
+			@BT.GROUPMIN(@mLC)	= @BT.GROUPMIN(0)
+			@BT.GROUPMAX(@mLC)	= @BT.GROUPMAX(0)
+			@BT.RADIO(@mLC)		= @BT.RADIO(0)
+
+			@BT.SLIDE.SX(@mLC)	= @BT.SLIDE.SX(0)
+			@BT.SLIDE.SY(@mLC)	= @BT.SLIDE.SY(0)
+			@BT.SLIDE.X(@mLC)	= @BT.SLIDE.X(0)
+			@BT.SLIDE.Y(@mLC)	= @BT.SLIDE.Y(0)
+
+	}
+	IFEND[]
+
+
+	//----------------------------------------------------------------------
+	// 読込
+	//----------------------------------------------------------------------
+	STR[$off   ="BT.OFF"+$(@BT.NO(@mLC)*100+1)]
+	STR[$over  ="BT.OVER"+$(@BT.NO(@mLC)*100+1)]
+	STR[$on    ="BT.ON"+$(@BT.NO(@mLC)*100+1)]
+	STR[$onover="BT.ONOVER"+$(@BT.NO(@mLC)*100+1)]
+	STR[$na    ="BT.NA"+$(@BT.NO(@mLC)*100+1)]
+	STR[$mask  ="BT.MASK"+$(@BT.NO(@mLC)*100+1)]
+
+	IF[@BTCASHMODE==0]
+	{
+		//アニメ
+		IF[@BT.ANNUM(@mLC,0)>1]
+		{
+			LOOP[SET=@BT.ANNUM(@mLC,0)]
+			{
+				\_inttostr(@_LC,2) //２桁の文字列にする
+				CG[ID="BT.OFF"+$(@BT.NO(@mLC)*100+@_LC) Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.OFF(@mLC)+$_RSTR(1)]
+		        CG[ID="BT.OFF"+$(@BT.NO(@mLC)*100+@_LC) E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=@BT.MODE(@mLC)]
+			}
+			LOOPEND[]
+
+			IF[$BT.OVER(@mLC)!=""]
+			{
+				LOOP[SET=@BT.ANNUM(@mLC,1)]
+				{
+					\_inttostr(@_LC,2) //２桁の文字列にする
+					CG[ID="BT.OVER"+$(@BT.NO(@mLC)*100+@_LC) Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.OVER(@mLC)+$_RSTR(1)]
+			        CG[ID="BT.OVER"+$(@BT.NO(@mLC)*100+@_LC) E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=@BT.MODE(@mLC)]
+				}
+				LOOPEND[]
+			}
+			IFEND[]
+
+			IF[$BT.ON(@mLC)!=""]
+			{
+				LOOP[SET=@BT.ANNUM(@mLC,2)]
+				{
+					\_inttostr(@_LC,2) //２桁の文字列にする
+					CG[ID="BT.ON"+$(@BT.NO(@mLC)*100+@_LC) Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.ON(@mLC)+$_RSTR(1)]
+			        CG[ID="BT.ON"+$(@BT.NO(@mLC)*100+@_LC) E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=@BT.MODE(@mLC)]
+				}
+				LOOPEND[]
+			}
+			IFEND[]
+
+			IF[$BT.ONOVER(@mLC)!=""]
+			{
+				LOOP[SET=@BT.ANNUM(@mLC,3)]
+				{
+					\_inttostr(@_LC,2) //２桁の文字列にする
+					CG[ID="BT.ONOVER"+$(@BT.NO(@mLC)*100+@_LC) Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.ONOVER(@mLC)+$_RSTR(1)]
+			        CG[ID="BT.ONOVER"+$(@BT.NO(@mLC)*100+@_LC) E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=@BT.MODE(@mLC)]
+				}
+				LOOPEND[]
+			}
+			IFEND[]
+
+			IF[$BT.NA(@mLC)!=""]
+			{
+				LOOP[SET=@BT.ANNUM(@mLC,4)]
+				{
+					\_inttostr(@_LC,2) //２桁の文字列にする
+					CG[ID="BT.NA"+$(@BT.NO(@mLC)*100+@_LC) Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.NA(@mLC)+$_RSTR(1)]
+			        CG[ID="BT.NA"+$(@BT.NO(@mLC)*100+@_LC) E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=@BT.MODE(@mLC)]
+				}
+				LOOPEND[]
+			}
+			IFEND[]
+		}
+		ELSE[]
+		{
+
+		//----------------------------------------------------------------------
+		// OFF
+		//----------------------------------------------------------------------
+		IF[1]
+		{
+			IF[@BT.SEQ(@mLC)==4]
+			{
+				CG[ID="BT.OFF.TMP" Z=1 FILE=$BT.OFF(@mLC)]
+
+				CG[ID=$off Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+
+				CGINFO[ID="BT.OFF.TMP" SX=1 LET=@sx];@sx/=4
+				CGACT[ID="BT.OFF.TMP" ID2=$off COPY2=1 X=0 X2=@sx-1]
+			}
+			ELSE[@BT.SEQ(@mLC)==3]
+			{
+				CG[ID="BT.OFF.TMP" Z=1 FILE=$BT.OFF(@mLC)]
+
+				CG[ID=$off Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+
+				CGINFO[ID="BT.OFF.TMP" SX=1 LET=@sx];@sx/=3
+				CGACT[ID="BT.OFF.TMP" ID2=$off COPY2=1 X=0 X2=@sx-1]
+			}
+			ELSE[]
+			{
+				//同名のファイルがすでに読み込まれていないかチェック
+			//	GOSUB[#=es.BT.FILE.EXIST.CHECK pstr=$BT.OFF(@mLC) pint2=@mLC]
+			//	IF[$_RSTR(1)!=""]
+				IF[0]
+				{
+					CG[ID=$off Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+					CGACT[COPY2=1 ID=$_RSTR(1) ID2=$off]
+				}
+				ELSE[]
+				{
+			//		IF[$BT.OFF(@mLC) !=""] FILEACT[FILE=$BT.OFF(@mLC)  CGCASH=1] IFEND[]	// OFF
+					CG[ID=$off Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.OFF(@mLC)]
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+		CG[ID=$off E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=@BT.MODE(@mLC)]
+
+		//----------------------------------------------------------------------
+		// OVER
+		//----------------------------------------------------------------------
+		IF[$BT.OVER(@mLC)!=""]
+		{
+			IF[@BT.SEQ(@mLC)==4]
+			{
+				CG[ID=$over Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+
+				CGINFO[ID="BT.OFF.TMP" SX=1 LET=@sx];@sx/=4
+				CGACT[ID="BT.OFF.TMP" ID2=$over COPY2=1 X=@sx X2=@sx*2-1]
+			}
+			ELSE[@BT.SEQ(@mLC)==3]
+			{
+				CG[ID=$over Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+
+				CGINFO[ID="BT.OFF.TMP" SX=1 LET=@sx];@sx/=3
+				CGACT[ID="BT.OFF.TMP" ID2=$over COPY2=1 X=@sx X2=@sx*2-1]
+			}
+			ELSE[]
+			{
+				//同名のファイルがすでに読み込まれていないかチェック
+		//		GOSUB[#=es.BT.FILE.EXIST.CHECK pstr=$BT.OVER(@mLC) pint2=@mLC]
+		//		IF[$_RSTR(1)!=""]
+				IF[0]
+				{
+					CG[ID=$over Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+					CGACT[COPY2=1 ID=$_RSTR(1) ID2=$over]
+				}
+				ELSE[]
+				{
+		//			IF[$BT.OVER(@mLC)!=""] FILEACT[FILE=$BT.OVER(@mLC) CGCASH=1] IFEND[]	// OVER
+					CG[ID=$over Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.OVER(@mLC)]
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+		CG[ID=$over E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=@BT.MODE(@mLC)]
+
+		//----------------------------------------------------------------------
+		// ON
+		//----------------------------------------------------------------------
+		IF[$BT.ON(@mLC)!=""]
+		{
+			IF[@BT.SEQ(@mLC)==4]
+			{
+				CG[ID=$on Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+
+				CGINFO[ID="BT.OFF.TMP" SX=1 LET=@sx];@sx/=4
+				CGACT[ID="BT.OFF.TMP" ID2=$on COPY2=1 X=@sx*2 X2=@sx*3-1]
+			}
+			ELSE[@BT.SEQ(@mLC)==3]
+			{
+				CG[ID=$on Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+
+				CGINFO[ID="BT.OFF.TMP" SX=1 LET=@sx];@sx/=3
+				CGACT[ID="BT.OFF.TMP" ID2=$on COPY2=1 X=@sx*2 X2=@sx*3-1]
+			}
+			ELSE[]
+			{
+				//同名のファイルがすでに読み込まれていないかチェック
+		//		GOSUB[#=es.BT.FILE.EXIST.CHECK pstr=$BT.ON(@mLC) pint2=@mLC]
+		//		IF[$_RSTR(1)!=""]
+				IF[0]
+				{
+					CG[ID=$on Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+					CGACT[COPY2=1 ID=$_RSTR(1) ID2=$on]
+				}
+				ELSE[]
+				{
+		//			IF[$BT.ON(@mLC)  !=""] FILEACT[FILE=$BT.ON(@mLC)   CGCASH=1] IFEND[]	// ON
+					CG[ID=$on Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.ON(@mLC)]
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+		CG[ID=$on E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=@BT.MODE(@mLC)]
+
+		//----------------------------------------------------------------------
+		// ONOVER
+		//----------------------------------------------------------------------
+		IF[$BT.ONOVER(@mLC)!=""]
+		{
+			IF[@BT.SEQ(@mLC)==4]
+			{
+				CG[ID=$onover Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+
+				CGINFO[ID="BT.OFF.TMP" SX=1 LET=@sx];@sx/=4
+				CGACT[ID="BT.OFF.TMP" ID2=$onover COPY2=1 X=@sx*3 X2=@sx*4-1]
+			}
+			ELSE[]
+			{
+				//同名のファイルがすでに読み込まれていないかチェック
+		//		GOSUB[#=es.BT.FILE.EXIST.CHECK pstr=$BT.ONOVER(@mLC) pint2=@mLC]
+		//		IF[$_RSTR(1)!=""]
+				IF[0]
+				{
+					CG[ID=$onover Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+					CGACT[COPY2=1 ID=$_RSTR(1) ID2=$onover]
+				}
+				ELSE[]
+				{
+		//			IF[$BT.ONOVER(@mLC)  !=""] FILEACT[FILE=$BT.ONOVER(@mLC)   CGCASH=1] IFEND[]	// ON
+					CG[ID=$onover Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.ONOVER(@mLC)]
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+		CG[ID=$onover E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=@BT.MODE(@mLC)]
+
+		//----------------------------------------------------------------------
+		// NA
+		//----------------------------------------------------------------------
+		IF[$BT.NA(@mLC)!=""]
+		{
+			IF[@BT.SEQ(@mLC)==5]
+			{
+				CG[ID=$na Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+
+				CGINFO[ID="BT.OFF.TMP" SX=1 LET=@sx];@sx/=5
+				CGACT[ID="BT.OFF.TMP" ID2=$na COPY2=1 X=@sx*4 X2=@sx*5-1]
+			}
+			ELSE[@BT.SEQ(@mLC)==4]
+			{
+				CG[ID=$na Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+
+				CGINFO[ID="BT.OFF.TMP" SX=1 LET=@sx];@sx/=4
+				CGACT[ID="BT.OFF.TMP" ID2=$na COPY2=1 X=0 X2=@sx-1] //※offの画像を参照していることに注意
+			}
+			ELSE[@BT.SEQ(@mLC)==3]
+			{
+				CG[ID=$na Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+
+				CGINFO[ID="BT.OFF.TMP" SX=1 LET=@sx];@sx/=3
+				CGACT[ID="BT.OFF.TMP" ID2=$na COPY2=1 X=0 X2=@sx-1] //※offの画像を参照していることに注意
+			}
+			ELSE[]
+			{
+				//同名のファイルがすでに読み込まれていないかチェック
+		//		GOSUB[#=es.BT.FILE.EXIST.CHECK pstr=$BT.NA(@mLC) pint2=@mLC]
+		//		IF[$_RSTR(1)!=""]
+				IF[0]
+				{
+					CG[ID=$na Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+					CGACT[COPY2=1 ID=$_RSTR(1) ID2=$na]
+				}
+				ELSE[]
+				{
+		//			IF[$BT.NA(@mLC)  !=""] FILEACT[FILE=$BT.NA(@mLC)   CGCASH=1] IFEND[]	// NA
+					CG[ID=$na Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.NA(@mLC)]
+				}
+				IFEND[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+		CG[ID=$na E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=@BT.MODE(@mLC)]
+
+		//----------------------------------------------------------------------
+		// MASK
+		//----------------------------------------------------------------------
+		IF[$BT.MASK(@mLC)!=""]
+		{
+			//同名のファイルがすでに読み込まれていないかチェック
+	//		GOSUB[#=es.BT.FILE.EXIST.CHECK pstr=$BT.MASK(@mLC) pint2=@mLC]
+	//		IF[$_RSTR(1)!=""]
+			IF[0]
+			{
+				CG[ID=$mask Z=@BTUSE.Z+@BT.Z(@mLC) FILE=""]
+				CGACT[COPY2=1 ID=$_RSTR(1) ID2=$mask]
+			}
+			ELSE[]
+			{
+	//			IF[$BT.MASK(@mLC)!=""] FILEACT[FILE=$BT.MASK(@mLC)   CGCASH=1] IFEND[]	// MASK
+				CG[ID=$mask Z=@BTUSE.Z+@BT.Z(@mLC) FILE=$BT.MASK(@mLC)]
+			}
+			IFEND[]
+		}
+		IFEND[]
+		CG[ID=$mask E=0 X=@BT.GX(@BT.GROUP1(@mLC))+@BT.X(@mLC) Y=@BT.GY(@BT.GROUP1(@mLC))+@BT.Y(@mLC) MODE=0]
+
+		}
+		IFEND[]
+
+
+		//----------------------------------------------------------------------
+		// サイズ情報取得
+		//----------------------------------------------------------------------
+		CGINFO[ID=$off SX=1 LET=@BT.SX(@mLC)]
+		CGINFO[ID=$off SY=1 LET=@BT.SY(@mLC)]
+
+		IF[@BT.DCX(@mLC)<0] @BT.DCX(@mLC)=@BT.SX(@mLC)/2 IFEND[]
+		IF[@BT.DCY(@mLC)<0] @BT.DCY(@mLC)=@BT.SY(@mLC)/2 IFEND[]
+
+
+	}
+	ELSE[] //キャッシュ
+	{
+//\_dmes("CASHED → "+$BT.OFF(@mLC))
+		IF[$BT.OFF(@mLC)	!=""] FILEACT[FILE=$BT.OFF(@mLC)    CGCASH=1] IFEND[]	// OFF
+		IF[$BT.OVER(@mLC)	!=""] FILEACT[FILE=$BT.OVER(@mLC)   CGCASH=1] IFEND[]	// OVER
+		IF[$BT.ON(@mLC)		!=""] FILEACT[FILE=$BT.ON(@mLC)     CGCASH=1] IFEND[]	// ON
+		IF[$BT.ONOVER(@mLC)	!=""] FILEACT[FILE=$BT.ONOVER(@mLC) CGCASH=1] IFEND[]	// ONOVER
+		IF[$BT.NA(@mLC)		!=""] FILEACT[FILE=$BT.NA(@mLC)     CGCASH=1] IFEND[]	// NA
+		IF[$BT.MASK(@mLC)	!=""] FILEACT[FILE=$BT.MASK(@mLC)   CGCASH=1] IFEND[]	// MASK
+
+	}
+	IFEND[]
+
+//\_log("★追加 ["+$(@BT.NO(@mLC)*100+1)+"] "+$BT.LBL(@mLC))
+//LOOP[SET=@BT.NUM] \_log("["+$(@_LC)+"] Z="+$(@BT.Z(@_LC))+", "+$BT.GRP(@_LC)+", "+$BT.OFF(@_LC)) LOOPEND[]
+
+	#=es.BT.GO.MAIN.LEnd
+
+	CGEND[ID="BT.OFF.TMP"]
+
+	//----------------------------------------------------------------------
+	// 初期化
+	//----------------------------------------------------------------------
+		GOSUB[#=es.BT.END.NO.EXEC pint=0]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//
+//■同名のファイルがすでに存在しているかチェック
+//
+//--------------------------------------------------------------------
+#=es.BT.FILE.EXIST.CHECK
+{
+	STR[$name=$_PSTR(1)]
+	INT[@no  =@_PINT(2)]
+	STR[$ret]
+
+	LOOP[SET=@BT.NUM]
+	{
+		IF[@_LC==@no] LOOPCONTINUE[] IFEND[]
+
+		IF[$BT.OFF(@_LC)	==$name] $ret="BT.OFF"   +$(@_LC); LOOPBREAK[] IFEND[]
+		IF[$BT.OVER(@_LC)	==$name] $ret="BT.OVER"  +$(@_LC); LOOPBREAK[] IFEND[]
+		IF[$BT.ON(@_LC)		==$name] $ret="BT.ON"    +$(@_LC); LOOPBREAK[] IFEND[]
+		IF[$BT.ONOVER(@_LC)	==$name] $ret="BT.ONOVER"+$(@_LC); LOOPBREAK[] IFEND[]
+		IF[$BT.NA(@_LC)		==$name] $ret="BT.NA"    +$(@_LC); LOOPBREAK[] IFEND[]
+		IF[$BT.MASK(@_LC)	==$name] $ret="BT.MASK"  +$(@_LC); LOOPBREAK[] IFEND[]
+	}
+	LOOPEND[]
+
+	//IF[$ret!=""] \_dmes("name = "+$name) IFEND[]
+
+	return[rstr=$ret]
+}
+
+
+
+//--------------------------------------------------------------------
+//
+//■ボタンデータクリア
+//
+//--------------------------------------------------------------------
+#=es.BT.END.SET
+{
+	STR[$GRP =$_PSTR(1)]
+	STR[$BLB1=$_PSTR(2)]
+	INT[@BLB2=@_PINT(3)]
+
+	INT[@num=@BT.NUM] //逐次削除していくため @BT.NUM が動的に変化するため、予め別の変数へ格納する
+	INT[@no]
+
+	IF[$GRP!=""]
+	{
+		IF[$BLB1==""]
+		{
+			LOOP[SET=@num]
+			{
+				@no=@num-@_LC+1 //逆順に消していく
+
+				IF[$GRP==$BT.GRP(@no)]
+				{
+	//				\_log("□□□削除: ["+$@no+"] Z="+$@BT.Z(@no)+", "+$BT.LBL(@no)+", "+$BT.OFF(@no))
+					GOSUB[#=es.BT.END.NO.SET PINT=@no]
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+		}
+		ELSE[]
+		{
+			LOOP[SET=@num]
+			{
+				@no=@num-@_LC+1 //逆順に消していく
+
+				IF[$GRP==$BT.GRP(@no)]
+				{
+					IF[$BLB1==$BT.LBL(@no) && @BLB2==@BT.LBL2(@no)]
+					{
+		//				\_log("□□□削除: ["+$@no+"] Z="+$@BT.Z(@no)+", "+$BT.LBL(@no)+", "+$BT.OFF(@no))
+						GOSUB[#=es.BT.END.NO.SET PINT=@no]
+					}
+					IFEND[]
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+		}
+		IFEND[]
+	}
+	ELSE[]
+	{
+			LOOP[SET=@num]
+			{
+				@no=@num-@_LC+1 //逆順に消していく
+
+	//			\_log("□□□削除: ["+$@no+"] Z="+$@BT.Z(@no)+", "+$BT.LBL(@no)+", "+$BT.OFF(@no))
+				GOSUB[#=es.BT.END.NO.SET PINT=@no]
+			}
+			LOOPEND[]
+
+	}
+	IFEND[]
+
+//	\BTBUF.CLEAR
+
+//	@BT.GROUP1(0)   = 0
+//	@BT.GROUP2(0)   = 0
+//	@BT.GROUPMIN(0) = 0
+//	@BT.GROUPMAX(0) = 0
+//	@BT.RADIO(0)    = 0
+
+//	@BT.NUM = 0
+
+//	@BT.CURSORMODE		= 0
+//	@BT.CURSORMODE.X	= 0
+//	@BT.CURSORMODE.Y	= 0
+//	@BT.ACTIVE			= 0
+//	@BT.C.STARTFLAG	= 0
+//	$BT.C.START		= ""
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■指定ボタンのデータをクリア
+//--------------------------------------------------------------------
+#=es.BT.END.NO.SET
+{
+	INT[@no=@_PINT(1)]
+	STR[$BNO]
+
+	IF[@no>0 && @BT.NO(@no)>0]
+	{
+		@BT.NUM-=1
+
+		LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CGEND[ID="BT.OFF"   +$BNO] LOOPEND[]
+		LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CGEND[ID="BT.OVER"  +$BNO] LOOPEND[]
+		LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CGEND[ID="BT.ON"    +$BNO] LOOPEND[]
+		LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CGEND[ID="BT.ONOVER"+$BNO] LOOPEND[]
+		LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CGEND[ID="BT.NA"    +$BNO] LOOPEND[]
+		LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CGEND[ID="BT.MASK"  +$BNO] LOOPEND[]
+
+//\_log("□□□["+$@no+"] Z="+$@BT.Z(@no)+", "+$BT.GRP(@no)+", "+$BT.OFF(@no)+" 消します。")
+
+		//それ以降の番号をずらし、挿入する形にする
+		//
+		GOSUB[#=es.BT.POP.NO.SET pint=@no pint2=@BT.NUM-@no+1] //pint1=2:pop, pint2=開始地点, pint3=num
+/*
+		LOOP[SET=@BT.NUM+1-@no]
+			GOSUB[#=es.BT.MOVE.NO.SET pint=(@no+@_LC-1) pint2=(@no+@_LC-1)+1] //dst ← src
+		LOOPEND[]
+*/
+
+		@no=@BT.NUM+1
+
+		GOSUB[#=es.BT.END.NO.EXEC pint=@no]
+
+//LOOP[SET=@BT.NUM] \_log("["+$@_LC+"] Z="+$@BT.Z(@_LC)+", "+$BT.GRP(@_LC)+", "+$BT.OFF(@_LC)) LOOPEND[]
+
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.END.NO.EXEC
+{
+	INT[@no=@_PINT(1)]
+
+		$BT.NAME(@no)			= "" // 
+		$BT.GRP(@no)			= "" // 
+		@BT.NO(@no)				=  0 // 
+		@BT.A(@no)				=  0 // 可視不可視(1/0)
+		@BT.ES(@no)				=  0 // 可視不可視(1/0)
+		@BT.ES2(@no)			=  0 // 可視不可視2(1/0)
+		@BT.N(@no)				=  0 // NA有効無効(1/0)
+		@BT.W(@no)				=  0 // 機能有効無効(1/0)
+		@BT.MST(@no)			=  0 // マウス状態
+		@BT.OLD.MST(@no)		=  0 // マウス状態
+		@BT.T(@no)				=  0 // ON残り時間
+		@BT.TMAX(@no)			=  0 // ON時間
+		@BT.IX(@no)				=  0 // 初期位置Ｘ座標
+		@BT.IY(@no)				=  0 // 初期位置Ｙ座標
+		@BT.IZ(@no)				=  0 // 初期位置Ｚ座標
+		@BT.X(@no)				=  0 // Ｘ座標
+		@BT.Y(@no)				=  0 // Ｙ座標
+		@BT.Z(@no)				=  0 // Ｚ座標
+		@BT.VAL(@no)			=  0 // 
+		@BT.TH(@no)				=  0 // スルー
+		@BT.SX(@no)				=  0 // サイズ指定Ｘ(0=デフォルトサイズ)
+		@BT.SY(@no)				=  0 // サイズ指定Ｙ(0=デフォルトサイズ)
+		@BT.PX(@no)				=  0 // サイズ指定Ｘ(100=デフォルトサイズ)
+		@BT.PY(@no)				=  0 // サイズ指定Ｙ(100=デフォルトサイズ)
+		@BT.DX(@no)				=  0 // ドラッグ位置Ｘ
+		@BT.DY(@no)				=  0 // ドラッグ位置Ｙ
+		@BT.DCX(@no)			= -1 // ドラッグ中心位置Ｘ
+		@BT.DCY(@no)			= -1 // ドラッグ中心位置Ｙ
+		@BT.MODE(@no)			=  0 // 描画モード(0～18)
+		@BT.TYPE(@no)			= -1 // ボタンタイプ
+		@BT.BTFLAG(@no)			=  0 // 
+		@BT.SEQ(@no)			= -1 // 連結ボタン
+		@BT.MAP.A(@no)			=  0 // 反応α値
+
+		@BT.ANTM(@no)			=  0 // 現在の時間
+		LOOP[SET=6]
+		{
+			@BT.ANCM(@no,@_LC-1)	 =  1 // 現在のコマ
+			@BT.ANNUM(@no,@_LC-1)	 =  1 // アニメ枚数
+			@BT.ANTIME(@no,@_LC-1)	 =  0 // アニメコマ時間
+			@BT.ANLPTYPE(@no,@_LC-1) =  0 // アニメループ種類
+		}
+		LOOPEND[]
+
+		$BT.C.UP(@no)			= "" // カーソル上
+		$BT.C.DOWN(@no)			= "" // カーソル下
+		$BT.C.LEFT(@no)			= "" // カーソル左
+		$BT.C.RIGHT(@no)		= "" // カーソル右
+		@BT.C.UP2(@no)			=  0 // カーソル上
+		@BT.C.DOWN2(@no)		=  0 // カーソル下
+		@BT.C.LEFT2(@no)		=  0 // カーソル左
+		@BT.C.RIGHT2(@no)		=  0 // カーソル右
+
+		$BT.LBL(@no)			= "" //
+		@BT.LBL2(@no)			=  0 //
+		$BT.LBLS(@no)			= "" //
+
+		@BT.L.INIT(@no)			=  0 //
+		@BT.L.OVER(@no)			=  0 //
+		@BT.L.OVER.ONCE(@no)	=  0 //
+		@BT.L.LEAVE(@no)		=  0 //
+		@BT.L.LEAVE.ONCE(@no)	=  0 //
+		@BT.L.ON(@no)			=  0 //
+		@BT.L.DRAG(@no)			=  0 //
+
+		@BT.F.INIT(@no)			=  1 //
+		@BT.F.OVER(@no)			=  0 //
+		@BT.F.OVER.ONCE(@no)	=  0 //
+		@BT.F.LEAVE(@no)		=  0 //
+		@BT.F.LEAVE.ONCE(@no)	=  0 //
+		@BT.F.ON(@no)			=  0 //
+		@BT.F.DRAG(@no)			=  0 //
+
+		$BT.SSE.OVER(@no)		= ""
+		$BT.SSE.ON(@no)			= ""
+
+		$BT.FILE(@no)			= ""
+		$BT.OFF(@no)			= ""
+		$BT.OVER(@no)			= ""
+		$BT.ON(@no)				= ""
+		$BT.ONOVER(@no)			= ""
+		$BT.NA(@no)				= ""
+		$BT.MASK(@no)			= ""
+
+
+		INT[@mLC]
+		LOOP[SET=(8)] // キーコード
+		{
+			@mLC=@_LC-1
+
+			@BT.KEY(@no,@mLC)		= 0
+			@BT.KEY.S(@no,@mLC)		= 0
+			@BT.KEY.NUM(@no,@mLC)	= 0
+		}
+		LOOPEND[]
+
+//		@BT.CGLOAD(@no)		= 0 // ＣＧを先読みしておくか否か
+		@BT.SW(@no)			= 0 // ボタンON/OFF状態
+		@BT.STATUS(0)		= 0 //
+
+		@BT.GROUP1(@no)		= 0
+		@BT.GROUP2(@no)		= 0
+		@BT.GROUPMIN(@no)	= 0
+		@BT.GROUPMAX(@no)	= 0
+		@BT.RADIO(@no)		= 0
+
+		@BT.SLIDE.SX(@no)	= 0
+		@BT.SLIDE.SY(@no)	= 0
+		@BT.SLIDE.X(@no)	= 0
+		@BT.SLIDE.Y(@no)	= 0
+
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■ボタンデータを１つずらす
+// @no の位置にデータ挿入
+//--------------------------------------------------------------------
+#=es.BT.PUSH.NO.SET
+{
+	INT[@no =@_PINT(1)]
+	INT[@num=@_PINT(2)]
+
+
+		VARACT[SET=$BT.NAME()		PUSH=@no]			// 
+		VARACT[SET=$BT.GRP()		PUSH=@no]			// 
+		VARACT[SET=$BT.LBL()		PUSH=@no]			// 
+		VARACT[SET=@BT.LBL2()		PUSH=@no]			// 
+		VARACT[SET=$BT.LBLS()		PUSH=@no]			// 
+		VARACT[SET=@BT.NO()			PUSH=@no]			// 
+		VARACT[SET=@BT.A()			PUSH=@no]			// 可視不可視(1/0)
+		VARACT[SET=@BT.ES()			PUSH=@no]			// 可視不可視(1/0)
+		VARACT[SET=@BT.ES2()		PUSH=@no]			// 可視不可視2(1/0)
+		VARACT[SET=@BT.N()			PUSH=@no]			// NA有効無効(1/0)
+		VARACT[SET=@BT.W()			PUSH=@no]			// 機能有効無効(1/0)
+		VARACT[SET=@BT.MST()		PUSH=@no]			// マウス状態
+		VARACT[SET=@BT.OLD.MST()	PUSH=@no]			// マウス状態
+		VARACT[SET=@BT.T()			PUSH=@no]			// ON残り時間
+		VARACT[SET=@BT.TMAX()		PUSH=@no]			// ON時間
+		VARACT[SET=@BT.IX()			PUSH=@no]			// 初期位置Ｘ座標
+		VARACT[SET=@BT.IY()			PUSH=@no]			// 初期位置Ｙ座標
+		VARACT[SET=@BT.IZ()			PUSH=@no]			// 初期位置Ｚ座標
+		VARACT[SET=@BT.X()			PUSH=@no]			// Ｘ座標
+		VARACT[SET=@BT.Y()			PUSH=@no]			// Ｙ座標
+		VARACT[SET=@BT.Z()			PUSH=@no]			// Ｚ座標
+		VARACT[SET=@BT.VAL()		PUSH=@no]			// 
+		VARACT[SET=@BT.TH()			PUSH=@no]			// スルー
+		VARACT[SET=@BT.SX()			PUSH=@no]			// サイズ指定Ｘ(0=デフォルトサイズ)
+		VARACT[SET=@BT.SY()			PUSH=@no]			// サイズ指定Ｙ(0=デフォルトサイズ)
+		VARACT[SET=@BT.PX()			PUSH=@no]			// サイズ指定Ｘ(100=デフォルトサイズ)
+		VARACT[SET=@BT.PY()			PUSH=@no]			// サイズ指定Ｙ(100=デフォルトサイズ)
+		VARACT[SET=@BT.DX()			PUSH=@no]			// ドラッグ位置Ｘ
+		VARACT[SET=@BT.DY()			PUSH=@no]			// ドラッグ位置Ｙ
+		VARACT[SET=@BT.DCX()		PUSH=@no]			// ドラッグ中心位置Ｘ
+		VARACT[SET=@BT.DCY()		PUSH=@no]			// ドラッグ中心位置Ｙ
+		VARACT[SET=@BT.MODE()		PUSH=@no]			// 描画モード(0～18)
+		VARACT[SET=@BT.TYPE()		PUSH=@no]			// ボタンタイプ
+		VARACT[SET=@BT.BTFLAG()		PUSH=@no]			// 
+		VARACT[SET=@BT.SEQ()		PUSH=@no]			// 連結ボタン
+		VARACT[SET=@BT.MAP.A()		PUSH=@no]			// 反応α値
+
+		VARACT[SET=@BT.ANTM()		PUSH=@no]			// 
+
+
+	INT[@mLC]
+
+	INT[@tmp_s]
+	INT[@tmp_d]
+	LOOP[SET=@num]
+	{
+		@tmp_d=(@BT.NUM-@_LC+1)+1
+		@tmp_s=(@BT.NUM-@_LC+1)
+
+		LOOP[SET=6]
+		{
+			@mLC=@_LC-1
+
+			@BT.ANCM(@tmp_d,@mLC)		= @BT.ANCM(@tmp_s,@mLC)		// 
+			@BT.ANNUM(@tmp_d,@mLC)		= @BT.ANNUM(@tmp_s,@mLC)	// アニメ枚数
+			@BT.ANTIME(@tmp_d,@mLC)		= @BT.ANTIME(@tmp_s,@mLC)	// アニメコマ時間
+			@BT.ANLPTYPE(@tmp_d,@mLC)	= @BT.ANLPTYPE(@tmp_s,@mLC)	// アニメループ種類
+		}
+		LOOPEND[]
+	}
+	LOOPEND[]
+
+		VARACT[SET=@BT.L.INIT()			PUSH=@no]		//
+		VARACT[SET=@BT.L.OVER()			PUSH=@no]		//
+		VARACT[SET=@BT.L.OVER.ONCE()	PUSH=@no]		//
+		VARACT[SET=@BT.L.LEAVE()		PUSH=@no]		//
+		VARACT[SET=@BT.L.LEAVE.ONCE()	PUSH=@no]		//
+		VARACT[SET=@BT.L.ON()			PUSH=@no]		//
+		VARACT[SET=@BT.L.DRAG()			PUSH=@no]		//
+
+		VARACT[SET=@BT.F.INIT()			PUSH=@no]		//
+		VARACT[SET=@BT.F.OVER()			PUSH=@no]		//
+		VARACT[SET=@BT.F.OVER.ONCE()	PUSH=@no]		//
+		VARACT[SET=@BT.F.LEAVE()		PUSH=@no]		//
+		VARACT[SET=@BT.F.LEAVE.ONCE()	PUSH=@no]		//
+		VARACT[SET=@BT.F.ON()			PUSH=@no]		//
+		VARACT[SET=@BT.F.DRAG()			PUSH=@no]		//
+
+		VARACT[SET=$BT.FILE()			PUSH=@no]		//
+		VARACT[SET=$BT.OFF()			PUSH=@no]		//
+		VARACT[SET=$BT.OVER()			PUSH=@no]		//
+		VARACT[SET=$BT.ON()				PUSH=@no]		//
+		VARACT[SET=$BT.ONOVER()			PUSH=@no]		//
+		VARACT[SET=$BT.NA()				PUSH=@no]		//
+		VARACT[SET=$BT.MASK()			PUSH=@no]		//
+
+		VARACT[SET=$BT.SSE.OVER()		PUSH=@no]		//
+		VARACT[SET=$BT.SSE.ON()			PUSH=@no]		//
+
+
+	LOOP[SET=@num]
+	{
+		@tmp_d=(@BT.NUM-@_LC+1)+1
+		@tmp_s=(@BT.NUM-@_LC+1)
+
+		LOOP[SET=(8)] // キーコード
+		{
+			@mLC=@_LC-1
+
+			@BT.KEY(@tmp_d,@mLC) = @BT.KEY(@tmp_s,@mLC)
+			@BT.KEY.S(@tmp_d,@mLC) = @BT.KEY.S(@tmp_s,@mLC)
+			@BT.KEY.NUM(@tmp_d,@mLC) = @BT.KEY.NUM(@tmp_s,@mLC)
+		}
+		LOOPEND[]
+	}
+	LOOPEND[]
+
+//		VARACT[SET=@BT.CGLOAD()			PUSH=@no]		// ＣＧを先読みしておくか否か
+		VARACT[SET=@BT.SW()				PUSH=@no]		// ボタンON/OFF状態
+		VARACT[SET=@BT.STATUS()			PUSH=@no]		// 
+
+		VARACT[SET=@BT.GROUP1()			PUSH=@no]
+		VARACT[SET=@BT.GROUP2()			PUSH=@no]
+		VARACT[SET=@BT.GROUPMIN()		PUSH=@no]
+		VARACT[SET=@BT.GROUPMAX()		PUSH=@no]
+		VARACT[SET=@BT.RADIO()			PUSH=@no]
+
+		VARACT[SET=@BT.SLIDE.SX()		PUSH=@no]
+		VARACT[SET=@BT.SLIDE.SY()		PUSH=@no]
+		VARACT[SET=@BT.SLIDE.X()		PUSH=@no]
+		VARACT[SET=@BT.SLIDE.Y()		PUSH=@no]
+
+		VARACT[SET=$BT.C.UP()			PUSH=@no]
+		VARACT[SET=$BT.C.DOWN()			PUSH=@no]
+		VARACT[SET=$BT.C.LEFT()			PUSH=@no]
+		VARACT[SET=$BT.C.RIGHT()		PUSH=@no]
+
+		VARACT[SET=@BT.C.UP2()			PUSH=@no]
+		VARACT[SET=@BT.C.DOWN2()		PUSH=@no]
+		VARACT[SET=@BT.C.LEFT2()		PUSH=@no]
+		VARACT[SET=@BT.C.RIGHT2()		PUSH=@no]
+
+
+	return[]
+}
+
+
+
+#=es.BT.POP.NO.SET
+{
+
+	INT[@no =@_PINT(1)]
+	INT[@num=@_PINT(2)]
+
+
+		VARACT[SET=$BT.NAME()		POP=@no]
+
+		VARACT[SET=$BT.GRP()		POP=@no]			// 
+		VARACT[SET=$BT.LBL()		POP=@no]			// 
+		VARACT[SET=@BT.LBL2()		POP=@no]			// 
+		VARACT[SET=$BT.LBLS()		POP=@no]			// 
+		VARACT[SET=@BT.NO()			POP=@no]			// 
+		VARACT[SET=@BT.A()			POP=@no]			// 可視不可視(1/0)
+		VARACT[SET=@BT.ES()			POP=@no]			// 可視不可視(1/0)
+		VARACT[SET=@BT.ES2()		POP=@no]			// 可視不可視2(1/0)
+		VARACT[SET=@BT.N()			POP=@no]			// NA有効無効(1/0)
+		VARACT[SET=@BT.W()			POP=@no]			// 機能有効無効(1/0)
+		VARACT[SET=@BT.MST()		POP=@no]			// マウス状態
+		VARACT[SET=@BT.OLD.MST()	POP=@no]			// マウス状態
+		VARACT[SET=@BT.T()			POP=@no]			// ON残り時間
+		VARACT[SET=@BT.TMAX()		POP=@no]			// ON時間
+		VARACT[SET=@BT.IX()			POP=@no]			// 初期位置Ｘ座標
+		VARACT[SET=@BT.IY()			POP=@no]			// 初期位置Ｙ座標
+		VARACT[SET=@BT.IZ()			POP=@no]			// 初期位置Ｚ座標
+		VARACT[SET=@BT.X()			POP=@no]			// Ｘ座標
+		VARACT[SET=@BT.Y()			POP=@no]			// Ｙ座標
+		VARACT[SET=@BT.Z()			POP=@no]			// Ｚ座標
+		VARACT[SET=@BT.VAL()		POP=@no]			// 
+		VARACT[SET=@BT.TH()			POP=@no]			// スルー
+		VARACT[SET=@BT.SX()			POP=@no]			// サイズ指定Ｘ(0=デフォルトサイズ)
+		VARACT[SET=@BT.SY()			POP=@no]			// サイズ指定Ｙ(0=デフォルトサイズ)
+		VARACT[SET=@BT.PX()			POP=@no]			// サイズ指定Ｘ(100=デフォルトサイズ)
+		VARACT[SET=@BT.PY()			POP=@no]			// サイズ指定Ｙ(100=デフォルトサイズ)
+		VARACT[SET=@BT.DX()			POP=@no]			// ドラッグ位置Ｘ
+		VARACT[SET=@BT.DY()			POP=@no]			// ドラッグ位置Ｙ
+		VARACT[SET=@BT.DCX()		POP=@no]			// ドラッグ中心位置Ｘ
+		VARACT[SET=@BT.DCY()		POP=@no]			// ドラッグ中心位置Ｙ
+		VARACT[SET=@BT.MODE()		POP=@no]			// 描画モード(0～18)
+		VARACT[SET=@BT.TYPE()		POP=@no]			// ボタンタイプ
+		VARACT[SET=@BT.BTFLAG()		POP=@no]			// 
+		VARACT[SET=@BT.SEQ()		POP=@no]			// 連結ボタン
+		VARACT[SET=@BT.MAP.A()		POP=@no]			// 反応α値
+
+		VARACT[SET=@BT.ANTM()		POP=@no]			// 
+
+
+	INT[@mLC]
+
+	INT[@tmp_s]
+	INT[@tmp_d]
+	LOOP[SET=@num]
+	{
+		@tmp_d=(@no+@_LC-1)
+		@tmp_s=(@no+@_LC-1)+1
+
+		LOOP[SET=6]
+		{
+			@mLC=@_LC-1
+
+			@BT.ANCM(@tmp_d,@mLC)		= @BT.ANCM(@tmp_s,@mLC)		// 
+			@BT.ANNUM(@tmp_d,@mLC)		= @BT.ANNUM(@tmp_s,@mLC)	// アニメ枚数
+			@BT.ANTIME(@tmp_d,@mLC)		= @BT.ANTIME(@tmp_s,@mLC)	// アニメコマ時間
+			@BT.ANLPTYPE(@tmp_d,@mLC)	= @BT.ANLPTYPE(@tmp_s,@mLC)	// アニメループ種類
+		}
+		LOOPEND[]
+
+	}
+	LOOPEND[]
+
+		VARACT[SET=@BT.L.INIT()			POP=@no]		//
+		VARACT[SET=@BT.L.OVER()			POP=@no]		//
+		VARACT[SET=@BT.L.OVER.ONCE()	POP=@no]		//
+		VARACT[SET=@BT.L.LEAVE()		POP=@no]		//
+		VARACT[SET=@BT.L.LEAVE.ONCE()	POP=@no]		//
+		VARACT[SET=@BT.L.ON()			POP=@no]		//
+		VARACT[SET=@BT.L.DRAG()			POP=@no]		//
+
+		VARACT[SET=@BT.F.INIT()			POP=@no]		//
+		VARACT[SET=@BT.F.OVER()			POP=@no]		//
+		VARACT[SET=@BT.F.OVER.ONCE()	POP=@no]		//
+		VARACT[SET=@BT.F.LEAVE()		POP=@no]		//
+		VARACT[SET=@BT.F.LEAVE.ONCE()	POP=@no]		//
+		VARACT[SET=@BT.F.ON()			POP=@no]		//
+		VARACT[SET=@BT.F.DRAG()			POP=@no]		//
+
+		VARACT[SET=$BT.FILE()			POP=@no]		//
+		VARACT[SET=$BT.OFF()			POP=@no]		//
+		VARACT[SET=$BT.OVER()			POP=@no]		//
+		VARACT[SET=$BT.ON()				POP=@no]		//
+		VARACT[SET=$BT.ONOVER()			POP=@no]		//
+		VARACT[SET=$BT.NA()				POP=@no]		//
+		VARACT[SET=$BT.MASK()			POP=@no]		//
+
+		VARACT[SET=$BT.SSE.OVER()		POP=@no]		//
+		VARACT[SET=$BT.SSE.ON()			POP=@no]		//
+
+
+	LOOP[SET=@num]
+	{
+		@tmp_d=(@no+@_LC-1)
+		@tmp_s=(@no+@_LC-1)+1
+
+		LOOP[SET=(8)] // キーコード
+		{
+			@mLC=@_LC-1
+
+			@BT.KEY(@tmp_d,@mLC) = @BT.KEY(@tmp_s,@mLC)
+			@BT.KEY.S(@tmp_d,@mLC) = @BT.KEY.S(@tmp_s,@mLC)
+			@BT.KEY.NUM(@tmp_d,@mLC) = @BT.KEY.NUM(@tmp_s,@mLC)
+		}
+		LOOPEND[]
+	}
+	LOOPEND[]
+
+//		VARACT[SET=@BT.CGLOAD()			POP=@no]		// ＣＧを先読みしておくか否か
+		VARACT[SET=@BT.SW()				POP=@no]		// ボタンON/OFF状態
+		VARACT[SET=@BT.STATUS()			POP=@no]		// 
+
+		VARACT[SET=@BT.GROUP1()			POP=@no]
+		VARACT[SET=@BT.GROUP2()			POP=@no]
+		VARACT[SET=@BT.GROUPMIN()		POP=@no]
+		VARACT[SET=@BT.GROUPMAX()		POP=@no]
+		VARACT[SET=@BT.RADIO()			POP=@no]
+
+		VARACT[SET=@BT.SLIDE.SX()		POP=@no]
+		VARACT[SET=@BT.SLIDE.SY()		POP=@no]
+		VARACT[SET=@BT.SLIDE.X()		POP=@no]
+		VARACT[SET=@BT.SLIDE.Y()		POP=@no]
+
+		VARACT[SET=$BT.C.UP()			POP=@no]
+		VARACT[SET=$BT.C.DOWN()			POP=@no]
+		VARACT[SET=$BT.C.LEFT()			POP=@no]
+		VARACT[SET=$BT.C.RIGHT()		POP=@no]
+		VARACT[SET=@BT.C.UP2()			POP=@no]
+		VARACT[SET=@BT.C.DOWN2()		POP=@no]
+		VARACT[SET=@BT.C.LEFT2()		POP=@no]
+		VARACT[SET=@BT.C.RIGHT2()		POP=@no]
+
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■カーソルキー判定
+//--------------------------------------------------------------------
+#=es.CURSOR.KEYCHECK
+{
+/*
+	INT[@r]
+	INT[@no]
+//	IF[@_KEY_UP==1 || (@_DEBUGMODE==0 && @_KEY_DOWN==1) || @_KEY_LEFT==1 || @_KEY_RIGHT==1]
+	IF[@_KEY_UP==1 || @_KEY_DOWN==1 || @_KEY_LEFT==1 || @_KEY_RIGHT==1]
+	{
+		@BT.CURSORMODE=1
+		@BT.CURSORMODE.X=@_MOUSE_X
+		@BT.CURSORMODE.Y=@_MOUSE_Y
+
+		IF[@BT.ACTIVE==0]
+		{
+			\BT.NO.GET(@BT.ACTIVE, $BT.C.START, @BT.C.START2)
+		}
+		ELSE[]
+		{
+			IF[@_KEY_UP   ==1 && $BT.C.UP(@BT.ACTIVE)   !=""] \BT.NO.GET(@BT.ACTIVE, $BT.C.UP(@BT.ACTIVE), @BT.C.UP2(@BT.ACTIVE))       IFEND[]
+			IF[@_KEY_DOWN ==1 && $BT.C.DOWN(@BT.ACTIVE) !=""] \BT.NO.GET(@BT.ACTIVE, $BT.C.DOWN(@BT.ACTIVE), @BT.C.DOWN2(@BT.ACTIVE))   IFEND[]
+			IF[@_KEY_LEFT ==1 && $BT.C.LEFT(@BT.ACTIVE) !=""] \BT.NO.GET(@BT.ACTIVE, $BT.C.LEFT(@BT.ACTIVE), @BT.C.LEFT2(@BT.ACTIVE))   IFEND[]
+			IF[@_KEY_RIGHT==1 && $BT.C.RIGHT(@BT.ACTIVE)!=""] \BT.NO.GET(@BT.ACTIVE, $BT.C.RIGHT(@BT.ACTIVE), @BT.C.RIGHT2(@BT.ACTIVE)) IFEND[]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	INT[@AX=2] //マウスあそび範囲X(0～n)
+	INT[@AY=2] //マウスあそび範囲Y(0～n)
+	IF[@BT.CURSORMODE>0]
+	{
+		IF[@_MOUSE_X < @BT.CURSORMODE.X-@AX || @_MOUSE_X > @BT.CURSORMODE.X+@AX || @_MOUSE_Y < @BT.CURSORMODE.Y-@AY || @_MOUSE_Y > @BT.CURSORMODE.Y+@AY]
+		{
+			@BT.CURSORMODE=0
+			@BT.ACTIVE=0
+		}
+		IFEND[]
+	}
+	IFEND[]
+*/
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■ショートカットキー判定
+//--------------------------------------------------------------------
+#=es.BT.KEYCHECK
+{
+	INT[@mLC1 = @_PINT(1)]
+	INT[@mLC2]
+	INT[@mFLAG]
+	INT[@mCODE]
+	INT[@mMOUSE]
+	INT[@mPushFlag]
+	INT[@mMouseFlag]
+
+	LOOP[SET=(8)]
+	{
+		@mLC2 = @_LC
+
+		@mFLAG=0
+		@mMOUSE=0
+		LOOP[SET=@BT.KEY.NUM(@mLC1,@mLC2-1)]
+		{
+			@mCODE = (@BT.KEY(@mLC1,@mLC2-1)/@es.POW2((@_LC-1)*16)&65535)
+///xS
+			IF[@mCODE==@_CODE_MOUSE_L || @mCODE==@_CODE_MOUSE_R || @mCODE==@_CODE_MOUSE_M]
+//スプライトマップビュー上をドラッグ出来るようにするための暫定措置.
+//これでは黒帯上でクリック進行対応は不完全.(ウインドウ最大化の時の黒帯に対応できない.)
+WINDOWINFO[NO=0 FULLSCREEN=1 LET=@es.I]
+WINDOWINFO[NO=0 FULLSCREEN2=1 LET=@es.J]
+IF[@es.I==0 && @es.J==0]
+			//	IF[(@_MOUSE_X>=0 && @_MOUSE_Y>=0 && @_MOUSE_X<@es.WSX && @_MOUSE_Y<@es.WSY) || @es.GSD(141,02)==1] ELSE[] LOOPCONTINUE[] IFEND[]
+				IF[(@_MOUSE_X>=0 && @_MOUSE_Y>=0 && @_MOUSE_X<@es.WSX && @_MOUSE_Y<@es.WSY)] ELSE[] LOOPCONTINUE[] IFEND[]
+IFEND[]
+				@mMOUSE=1
+			IFEND[]
+
+			IF[@_LC==@BT.KEY.NUM(@mLC1,@mLC2-1)] //最後のボタンだけは押した瞬間だけ反応させる.
+			{
+				IF[@BT.BTFLAG(@mLC1)==0]
+					@mFLAG+=(@_INP(@mCODE)==1)
+				ELSE[]
+					@mFLAG+=(@_INP(@mCODE)>0)
+				IFEND[]
+			}
+			ELSE[] //その他のボタンは押しっぱなしで反応させる.
+			{
+				@mFLAG+=(@_INP(@mCODE)>0)
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+
+		IF[@mFLAG>0 && @mFLAG==@BT.KEY.NUM(@mLC1,@mLC2-1)] @mPushFlag=@mLC2;@mMouseFlag=@mMOUSE IFEND[]
+
+	}
+	LOOPEND[]
+
+	LOOP[SET=(8)]
+	{
+		IF[@_INP( @BT.KEY.S(@mLC1,@_LC-1) )>0] @mPushFlag=10+@_LC IFEND[]
+	}
+	LOOPEND[]
+
+
+//	IF[@mPushFlag && @es.TX.CSKIP==0 && @es.TX.SKIP==0]
+	IF[@mPushFlag]
+	{
+		//押しっぱなし対応か否か
+		IF[@mPushFlag<10] //否
+		{
+			LOOP[SET=@BT.KEY.NUM(@mLC1,@mPushFlag-1)]
+			{
+				@_INP( (@BT.KEY(@mLC1,@mPushFlag-1)/@es.POW2((@_LC-1)*16)&65535) ) = 2
+			}
+			LOOPEND[]
+		}
+		IFEND[]
+	}
+	ELSE[]
+	{
+		@mPushFlag=0
+	}
+	IFEND[]
+
+///xS
+	IF[@mPushFlag>0]
+		@mPushFlag=2
+		IF[@mMouseFlag] @mPushFlag=1 IFEND[]
+	IFEND[]
+
+	return[rint=@mPushFlag rint2=@mMouseFlag]
+}
+
+
+//--------------------------------------------------------------------
+//■マウス判定
+//--------------------------------------------------------------------
+#=es.BT.MOUSECHECK
+{
+	INT[@no = @_PINT(1)]
+	INT[@col=-1]
+
+	INT[@gx=@BT.GX(@BT.GROUP1(@no))+@BT.SLIDE.X(@no)+@BT.X(@no)]
+	INT[@gy=@BT.GY(@BT.GROUP1(@no))+@BT.SLIDE.Y(@no)+@BT.Y(@no)]
+/*
+	IF[$BT.MASK(@no)==""]
+	{
+		IF[@_MOUSE_X>=@BT.X(@no) && @_MOUSE_X<=@BT.X(@no)+@BT.SX(@no) && @_MOUSE_Y>=@BT.Y(@no) && @_MOUSE_Y<=@BT.Y(@no)+@BT.SY(@no)]
+			CGINFO[ID="BT.OFF"+$(@BT.NO(@no)*100+@BT.ANCM(@no,0)) ONMOUSE2=1 LET=@col]
+		IFEND[]
+	}
+	ELSE[]
+	{
+//		IF[@_MOUSE_X>=@BT.X(@no) && @_MOUSE_X<=@BT.X(@no)+@BT.SX(@no) && @_MOUSE_Y>=@BT.Y(@no) && @_MOUSE_Y<=@BT.Y(@no)+@BT.SY(@no)]
+			CGINFO[ID="BT.MASK"+$(@BT.NO(@no)*100+@BT.ANCM(@no,5)) ONMOUSE=1 LET=@col]
+//		IFEND[]
+	}
+	IFEND[]
+*/
+	IF[@_MOUSE_X>=@gx && @_MOUSE_X<=@gx+@BT.SX(@no) && @_MOUSE_Y>=@gy && @_MOUSE_Y<=@gy+@BT.SY(@no)]
+	{
+		IF[$BT.MASK(@no)==""]
+			CGINFO[ID="BT.OFF"+$(@BT.NO(@no)*100+@BT.ANCM(@no,0)) ONMOUSE2=1 LET=@col]
+		ELSE[]
+			CGINFO[ID="BT.MASK"+$(@BT.NO(@no)*100+@BT.ANCM(@no,5)) ONMOUSE=1 LET=@col]
+		IFEND[]
+	}
+	IFEND[]
+
+	INT[@over = (@col>=@BT.MAP.A(@no))]
+	INT[@click]
+
+	@over &= (@_MOUSE_X>=0 && @_MOUSE_Y>=0 && @_MOUSE_X<@es.WSX && @_MOUSE_Y<@es.WSY)
+
+	IF[@over]
+	{
+		IF[@BT.BTFLAG(@no)==0]
+		{
+			IF[@_MOUSE_L==1]
+				IF[@BT.TH(@no)==0] @_MOUSE_L=2 IFEND[]	//ボタン１個だけ反応させる場合
+				@click=1
+			IFEND[]
+		}
+		ELSE[]
+		{
+			IF[@_MOUSE_L>0] @click=1 IFEND[]	//ボタン押下状態か否か
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[rint=@click rint2=@over]
+}
+
+/*
+//--------------------------------------------------------------------
+//■押下バッファクリア
+//--------------------------------------------------------------------
+#=es.BTBUF.CLEAR
+{
+	LOOP[SET=@BT.MAX]
+	{
+//		@BT.F.INIT(@_LC)		= 1 //
+		@BT.F.OVER(@_LC)		= 0 //
+		@BT.F.OVER.ONCE(@_LC)	= 0 //
+		@BT.F.LEAVE(@_LC)		= 0 //
+		@BT.F.LEAVE.ONCE(@_LC)	= 0 //
+		@BT.F.ON(@_LC)			= 0 //
+		@BT.F.DRAG(@_LC)		= 0 //
+
+		@BT.MST(@_LC)			= 0 //
+		@BT.OLD.MST(@_LC)		= 0 //
+	}
+	LOOPEND[]
+
+	return[]
+}
+*/
+
+//--------------------------------------------------------------------
+//■ボタンGOSUB処理
+//--------------------------------------------------------------------
+#=es.BT.GOSUB.EXEC
+{
+	INT[@MX=@_MOUSE_X]
+	INT[@MY=@_MOUSE_Y]
+	INT[@BX]
+	INT[@BY]
+	INT[@per]
+
+	LOOP[SET=@BT.NUM]
+	{
+		@BX = @MX-@BT.X(@_LC)
+		@BY = @MY-@BT.Y(@_LC)
+//ONOFF状態をパラメータとして渡す
+@es.BNO = @BT.LBL2(@_LC)
+@es.BSW = @BT.SW(@_LC)
+
+	//シナリオタスクから参照する用
+		IF[@BT.F.ON(@_LC)] @BT.OK=@BT.VAL(@_LC) IFEND[]
+
+		IF[@BT.L.INIT(@_LC)       && @BT.F.INIT(@_LC)      ]			;@BT.F.INIT(@_LC)=0			;$es.BID=$BT.LBL(@_LC);GOSUB[#=$es.BID+".INIT"       PINT=@BT.LBL2(@_LC) PINT2=@BT.ANCM(@_LC,0) PINT3=@BX PINT4=@BY] IFEND[]
+
+//		IF[@BT.L.OVER.ONCE(@_LC)  && @BT.F.OVER.ONCE(@_LC) ]			;@BT.F.OVER.ONCE(@_LC)=0	;$es.BID=$BT.LBL(@_LC);GOSUB[#=$es.BID+".OVER.ONCE"  PINT=@BT.LBL2(@_LC) PINT2=@BT.ANCM(@_LC,1) PINT3=@BX PINT4=@BY];@BT.ANTM(@_LC)=0;@BT.ANCM(@_LC,1)=1;\_dmes(clear) IFEND[]
+		IF[@BT.F.OVER.ONCE(@_LC)]
+			@BT.F.OVER.ONCE(@_LC)=0
+			IF[@BT.L.OVER.ONCE(@_LC)]
+				$es.BID=$BT.LBL(@_LC);GOSUB[#=$es.BID+".OVER.ONCE"  PINT=@BT.LBL2(@_LC) PINT2=@BT.ANCM(@_LC,1) PINT3=@BX PINT4=@BY]
+			IFEND[]
+			@BT.ANTM(@_LC)=0
+			@BT.ANCM(@_LC,1)=1
+			IF[@BT.ANLPTYPE(@_LC,1)>=4] @BT.ANLPTYPE(@_LC,1)-=2 IFEND[]
+			IF[@BT.ANLPTYPE(@_LC,1)%2] @BT.ANCM(@_LC,1)=@BT.ANNUM(@_LC,1)
+//\_dmes("cm over once="+$(@BT.ANNUM(@_LC,1)))
+IFEND[]
+//;\_dmes(clear)
+		IFEND[]
+
+		IF[@BT.L.OVER(@_LC)       && @BT.F.OVER(@_LC)      ]			;@BT.F.OVER(@_LC)=0			;$es.BID=$BT.LBL(@_LC);GOSUB[#=$es.BID+".OVER"       PINT=@BT.LBL2(@_LC) PINT2=@BT.ANCM(@_LC,1) PINT3=@BX PINT4=@BY] IFEND[]
+
+//		IF[@BT.L.LEAVE.ONCE(@_LC) && @BT.F.LEAVE.ONCE(@_LC)]			;@BT.F.LEAVE.ONCE(@_LC)=0	;$es.BID=$BT.LBL(@_LC);GOSUB[#=$es.BID+".LEAVE.ONCE" PINT=@BT.LBL2(@_LC) PINT2=@BT.ANCM(@_LC,0) PINT3=@BX PINT4=@BY];@BT.ANTM(@_LC)=0;@BT.ANCM(@_LC)=1;\_dmes(clear) IFEND[]
+		IF[@BT.F.LEAVE.ONCE(@_LC)]
+			@BT.F.LEAVE.ONCE(@_LC)=0
+			IF[@BT.L.LEAVE.ONCE(@_LC)]
+				$es.BID=$BT.LBL(@_LC);GOSUB[#=$es.BID+".LEAVE.ONCE" PINT=@BT.LBL2(@_LC) PINT2=@BT.ANCM(@_LC,0) PINT3=@BX PINT4=@BY]
+			IFEND[]
+			@BT.ANTM(@_LC)=0
+			@BT.ANCM(@_LC,0)=1
+			IF[@BT.ANLPTYPE(@_LC,0)>=4] @BT.ANLPTYPE(@_LC,0)-=2 IFEND[]
+			IF[@BT.ANLPTYPE(@_LC,0)%2] @BT.ANCM(@_LC,0)=@BT.ANNUM(@_LC,0)
+//\_dmes("cm leave once="+$(@BT.ANNUM(@_LC,0)))
+IFEND[]
+//;\_dmes(clear)
+		IFEND[]
+
+		IF[@BT.L.LEAVE(@_LC)      && @BT.F.LEAVE(@_LC)     ]			;@BT.F.LEAVE(@_LC)=0		;$es.BID=$BT.LBL(@_LC);GOSUB[#=$es.BID+".LEAVE"      PINT=@BT.LBL2(@_LC) PINT2=@BT.ANCM(@_LC,0) PINT3=@BX PINT4=@BY] IFEND[]
+
+//		IF[@BT.L.ON(@_LC)         && @BT.F.ON(@_LC)        ];@_MOUSE_L=2;@BT.F.ON(@_LC)=0			;$es.BID=$BT.LBL(@_LC);GOSUB[#=$es.BID+".ON"         PINT=@BT.LBL2(@_LC) PINT2=@BT.ANCM(@_LC,2) PINT3=@BX PINT4=@BY];@BT.ANTM(@_LC)=0;@BT.ANCM(@_LC)=1;\_dmes(clear) IFEND[]
+		IF[@BT.F.ON(@_LC)]
+			@_MOUSE_L=2
+			@BT.F.ON(@_LC)=0
+			IF[@BT.L.ON(@_LC)]
+				$es.BID=$BT.LBL(@_LC);GOSUB[#=$es.BID+".ON"         PINT=@BT.LBL2(@_LC) PINT2=@BT.ANCM(@_LC,2) PINT3=@BX PINT4=@BY]
+			IFEND[]
+			@BT.ANTM(@_LC)=0
+			@BT.ANCM(@_LC,2)=1
+			IF[@BT.ANLPTYPE(@_LC,2)>=4] @BT.ANLPTYPE(@_LC,2)-=2 IFEND[]
+			IF[@BT.ANLPTYPE(@_LC,2)%2] @BT.ANCM(@_LC,2)=@BT.ANNUM(@_LC,2)
+//\_dmes("cm on="+$(@BT.ANNUM(@_LC,2)))
+IFEND[]
+//;\_dmes(clear)
+		IFEND[]
+
+//		IF[@BT.L.DRAG(@_LC)       && @BT.F.DRAG(@_LC)      ]			;@BT.F.DRAG(@_LC)=0			;$es.BID=$BT.LBL(@_LC);GOSUB[#=$es.BID+".DRAG"       PINT=@BT.LBL2(@_LC) PINT2=@BT.ANCM(@_LC,2) PINT3=@BX PINT4=@BY] IFEND[]
+		IF[@BT.L.DRAG(@_LC)       && @BT.F.DRAG(@_LC)      ]
+		{
+			@BT.F.DRAG(@_LC)=0
+			$es.BID=$BT.LBL(@_LC)
+
+			IF[@BT.SLIDE.SX(@_LC)] @per=256*@BT.SLIDE.X(@_LC)/@BT.SLIDE.SX(@_LC) IFEND[]
+			IF[@BT.SLIDE.SY(@_LC)] @per=256*@BT.SLIDE.Y(@_LC)/@BT.SLIDE.SY(@_LC) IFEND[]
+			GOSUB[#=$es.BID+".DRAG" PINT=@BT.LBL2(@_LC) PINT2=@per]
+		}
+		IFEND[]
+
+/*///xこれはまずい。es.BT.OVER.GET が正しく働かなくなる
+		@BT.F.INIT(@_LC)=0
+		@BT.F.OVER.ONCE(@_LC)=0
+		@BT.F.OVER(@_LC)=0
+		@BT.F.LEAVE.ONCE(@_LC)=0
+		@BT.F.LEAVE(@_LC)=0
+		@BT.F.ON(@_LC)=0
+		@BT.F.DRAG(@_LC)=0
+*/
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■ボタンサーチ処理
+// ボタン名からボタン番号を取得
+//--------------------------------------------------------------------
+#=es.BT.NO.GET
+{
+/*
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	INT[@ret]
+
+	IF[$ID!=""]
+	{
+		LOOP[]
+		{
+			VARINFO[SEARCH=1 SET=$BT.LBL() STR=$ID NO=@no LET=@no]
+			IF[@no==-1] LOOPBREAK[] IFEND[]
+			IF[@NO==@BT.LBL2(@no)] @ret=@no;LOOPBREAK[] IFEND[]
+			@no+=1
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+*/
+///*
+	INT[@no]INT[@ret]
+
+	IF[$_PSTR(1)!=""]
+	{
+		VARINFO[SEARCH=1 SET=$BT.LBLS() STR=$_PSTR(1)+"="+$(@_PINT(2)) NO=0 LET=@no]
+		IF[@no!=-1] @ret=@no IFEND[]
+	}
+	IFEND[]
+//*/
+	return[rint=@ret]
+}
+
+#=es.BT.NO.GET.77
+{
+	STR[$ID =$_PSTR(1)]
+	INT[@NO =@_PINT(2)]
+	INT[@GRP=@_PINT(3)]
+	INT[@ret]
+/*
+	IF[$ID!=""]
+	{
+		LOOP[SET=@BT.NUM]
+		{
+			IF[@GRP != @BT.GROUP1(@_LC)] LOOPCONTINUE[] IFEND[]
+			IF[@NO  != @BT.LBL2(@_LC)  ] LOOPCONTINUE[] IFEND[]
+			IF[$ID  != $BT.LBL(@_LC)   ] LOOPCONTINUE[] IFEND[]
+
+			@ret=@_LC
+			LOOPBREAK[]
+		}
+		LOOPEND[]
+	}
+	IFEND[]
+*/
+	return[rint=@ret]
+}
+
+
+//--------------------------------------------------------------------
+//■ゲージ・スライダー連動処理
+//--------------------------------------------------------------------
+#=es.SLIDER.SYNC
+{
+	INT[@no=@_PINT(2)]
+	INT[@x =@_PINT(3)]
+	INT[@y =@_PINT(4)]
+	INT[@x2]
+	INT[@y2]
+	INT[@sx]
+	INT[@sy]
+	STR[$bid]
+	INT[@per]
+//	INT[@xy]
+//	INT[@sxy]
+	INT[@No]
+
+	//================= ゲージクリックでスライダーがその位置に移動する
+	IF[1]
+	{
+		//クリック位置からスライダーの座標を算出しセットする
+	//	GOSUB[#=es.BT.DD.XY.GET pstr=$_PSTR(1) pint2=@no]
+	//	@x2=@_RINT(1)
+	//	@y2=@_RINT(2)
+		\BT.SLIDE.X.SET($_PSTR(1), @no, @x+@x2) //0～sx
+		\BT.SLIDE.Y.SET($_PSTR(1), @no, @y+@y2) //0～sy
+
+		\BT.NO.GET(@No, $_PSTR(1), @no)
+		IF[@BT.SLIDE.SX(@No)] @per=256.0*@BT.SLIDE.X(@No)/@BT.SLIDE.SX(@No) IFEND[]
+		IF[@BT.SLIDE.SY(@No)] @per=256.0*@BT.SLIDE.Y(@No)/@BT.SLIDE.SY(@No) IFEND[]
+	//	IF[@BT.SLIDE.SX(@No)] @xy=@BT.SLIDE.X(@No);@sxy=@BT.SLIDE.SX(@No) IFEND[]
+	//	IF[@BT.SLIDE.SY(@No)] @xy=@BT.SLIDE.Y(@No);@sxy=@BT.SLIDE.SY(@No) IFEND[]
+	//	@per=256*@xy/@sxy
+
+			//ドラッグフラグON
+			@BT.DD.FLAG = 1
+
+			//マウスクリック座標取得
+			@BT.DD.NO = @No
+			//@BT.DD.CX = @_MOUSE_X
+			//@BT.DD.CY = @_MOUSE_Y
+			@BT.DD.X  = @_MOUSE_X
+			@BT.DD.Y  = @_MOUSE_Y
+
+			//クリックした位置にボタンの中心点を持ってくる
+			@BT.DX(@No) = -@BT.DCX(@No)
+			@BT.DY(@No) = -@BT.DCY(@No)
+
+		$bid=$es.BID
+		$es.BID=$_PSTR(1)
+		GOSUB[#=$es.BID+".DRAG" pint=@no pint2=@per]	//スライダー反映＆値セット
+		$es.BID=$bid
+
+		@_MOUSE_L=0		//そのままスライダーをドラッグできるようにする
+	}
+	ELSE[]
+	//================= ゲージクリックでスライダーが飛び飛びで移動する
+	{
+		\BT.SLIDE.SX.GET(@sx, $_PSTR(1)) //ボタンスライドサイズ取得
+		\BT.SLIDE.SY.GET(@sy, $_PSTR(1)) //ボタンスライドサイズ取得
+		\BT.SLIDE.X.GET(@x2, $_PSTR(1)) //ボタンスライド座標取得
+		\BT.SLIDE.Y.GET(@y2, $_PSTR(1)) //ボタンスライド座標取得
+
+		\_letif(@x>@x2, @x2+=10, @x2-=10); \_range(@x2, 0, @sx-1)
+		\_letif(@y>@y2, @y2+=10, @y2-=10); \_range(@y2, 0, @sy-1)
+
+		\BT.SLIDE.X.SET($_PSTR(1),, @x2) //ボタンスライド座標セット
+		\BT.SLIDE.Y.SET($_PSTR(1),, @y2) //ボタンスライド座標セット
+
+		\BT.NO.GET(@No, $_PSTR(1), @no)
+		IF[@BT.SLIDE.SX(@No)] @per=256.0*@BT.SLIDE.X(@No)/@BT.SLIDE.SX(@No) IFEND[]
+		IF[@BT.SLIDE.SY(@No)] @per=256.0*@BT.SLIDE.Y(@No)/@BT.SLIDE.SY(@No) IFEND[]
+
+			//ドラッグフラグON
+			@BT.DD.FLAG = 1
+
+			//マウスクリック座標取得
+			@BT.DD.NO = @No
+			//@BT.DD.CX = @_MOUSE_X
+			//@BT.DD.CY = @_MOUSE_Y
+			@BT.DD.X  = @_MOUSE_X
+			@BT.DD.Y  = @_MOUSE_Y
+
+		$bid=$es.BID
+		$es.BID=$_PSTR(1)
+		GOSUB[#=$es.BID+".DRAG" pint=@no pint2=@per]	//スライダー反映＆値セット
+		$es.BID=$bid
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//////
+
+
+//ボタンレイヤID(OFF) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.ID.OFF.GET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	return[rstr="BT.OFF"+$(@BT.NO(@no)*100+1)]
+}
+
+#=es.BT.ID.OVER.GET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	return[rstr="BT.OVER"+$(@BT.NO(@no)*100+1)]
+}
+
+#=es.BT.ID.ON.GET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	return[rstr="BT.ON"+$(@BT.NO(@no)*100+1)]
+}
+
+#=es.BT.ID.ONOVER.GET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	return[rstr="BT.ONOVER"+$(@BT.NO(@no)*100+1)]
+}
+
+
+//アクティブグループ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.ACTIVEGROUP.GET
+{
+	return[rint=@BT.GROUPNO]
+}
+
+//△ボタン @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.A.GET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	return[rint=@BT.A(@no)]
+}
+
+//△ボタン有効無効 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.ES.GET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	return[rint=@BT.ES(@no)]
+}
+#=es.BT.ES2.GET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	return[rint=@BT.ES2(@no)]
+}
+
+//△ボタン機能有効無効 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.W.GET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	return[rint=@BT.W(@no)]
+}
+
+#=es.BT.NONONO.GET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+//	return[rint=@no]
+	return[rint=@BT.NO(@no)]
+}
+
+/*
+//△スライド用ボタンの現在のスライダーの割合を0～256で取得 @@@@@@@@@@@
+//
+#=es.BT.SLIDE.PER.GET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	INT[@sxy]
+	INT[@xy]
+	IF[@BT.SLIDE.SX(@no)!=0]
+		@sxy=@BT.SLIDE.SX(@no)
+		@xy =@BT.SLIDE.X(@no)
+	IFEND[]
+	IF[@BT.SLIDE.SY(@no)!=0]
+		@sxy=@BT.SLIDE.SY(@no)
+		@xy =@BT.SLIDE.Y(@no)
+	IFEND[]
+
+	return[rint=256*@xy/@sxy]
+}
+*/
+
+//△ボタンXY座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.XY.GET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	return[rint=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no) rint2=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)]
+}
+
+//△ボタンXY座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.IXY.GET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	return[rint=@BT.GX(@BT.GROUP1(@no))+@BT.IX(@no) rint2=@BT.GY(@BT.GROUP1(@no))+@BT.IY(@no)]
+}
+
+//△ボタンXY座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.GXY.GET
+{
+	INT[@GRP=@_PINT(1)]
+	return[rint=@BT.GX(@GRP) rint2=@BT.GY(@GRP)]
+}
+
+//△ボタンXY座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.SXY.GET
+{
+	INT[@no]
+	\BT.NO.GET(@no, $_PSTR(1), @_PINT(2))
+
+	INT[@sx]INT[@sy]
+	CGINFO[ID="BT.OFF"+$(@BT.NO(@no)*100+1) SX=1 LET=@sx]
+	CGINFO[ID="BT.OFF"+$(@BT.NO(@no)*100+1) SY=1 LET=@sy]
+
+	return[rint=@sx rint2=@sy]
+}
+
+//△ボタンスライドXY座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.SLIDE.XY.GET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	return[rint=@BT.SLIDE.X(@no) rint2=@BT.SLIDE.Y(@no)]
+}
+
+//△ボタンスライド範囲XY @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.SLIDE.SXY.GET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	return[rint=@BT.SLIDE.SX(@no) rint2=@BT.SLIDE.SY(@no)]
+}
+
+//△ボタンドラッグ位置 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.DD.XY.GET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	return[rint=@BT.DX(@no) rint2=@BT.DY(@no)]
+}
+
+//△ボタンON/OFF @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.ONOFF.GET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	return[rint=@BT.SW(@no)]
+}
+
+//△ボタンOVER @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.OVER.GET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	return[rint=@BT.F.OVER(@no)]
+}
+
+//暫定.
+#=es.BT.OVER.CANCEL
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	@BT.F.OVER(@no)=0
+
+	return[]
+}
+
+//△ドラッグフラグ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.DD.GET
+{
+	return[rint=@BT.DD.FLAG]
+}
+
+
+//△ドラッグID判定 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.DD.ID.GET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	return[rint=(@BT.DD.FLAG==1 && @BT.DD.NO==@no)]
+}
+
+
+//▼ボタンON/OFF @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.ONOFF.SET
+{
+	STR[$ID  =$_PSTR(1)]
+	INT[@NO  =@_PINT(2)]
+	INT[@flag=@_PINT(3)]
+	INT[@no]
+	INT[@RNO]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	IF[@flag==1]
+	{
+		// ラジオボタン
+		IF[@BT.RADIO(@no)>0]
+		{
+			//同じグループのON状態を解除.
+			@RNO = @BT.RADIO(@no)
+			LOOP[SET=@BT.NUM]
+			{
+				//ボタン有効かつ同じグループ番号なら.
+				IF[(@BT.ES(@_LC) & @BT.ES2(@_LC))==1 && @RNO==@BT.RADIO(@_LC)]
+				{
+					@BT.SW(@_LC) = 0
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+		}
+		IFEND[]
+
+		IF[$BT.ON(@no)!=""]
+		{
+			@BT.SW(@no) = 1
+		}
+		IFEND[]
+	}
+	ELSE[]
+	{
+		@BT.SW(@no) = 0
+	}
+	IFEND[]
+
+	return[]
+}
+
+//▼ボタンON @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.ON.SET
+{
+	return[]
+}
+
+//▼ボタンOFF @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.OFF.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	@BT.SW(@no) = 0
+
+	return[]
+}
+
+//▼ボタンスライドX座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.SLIDE.X.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@x =@_PINT(3)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	INT[@sx=@BT.SLIDE.SX(@no)]
+
+	STR[$BNO=$(@BT.NO(@no)*100+1)]
+
+	IF[@no>0]
+	{
+		\_range(@x, 0, @sx)
+
+		@BT.SLIDE.X(@no) = @x
+
+		IF[$BT.OFF(@no)   !=""] CG[ID="BT.OFF"   +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.OVER(@no)  !=""] CG[ID="BT.OVER"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.ON(@no)    !=""] CG[ID="BT.ON"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] CG[ID="BT.ONOVER"+$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.NA(@no)    !=""] CG[ID="BT.NA"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.MASK(@no)  !=""] CG[ID="BT.MASK"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//▼ボタンスライドY座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.SLIDE.Y.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@y =@_PINT(3)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	INT[@sy=@BT.SLIDE.SY(@no)]
+
+	STR[$BNO=$(@BT.NO(@no)*100+1)]
+
+	IF[@no>0]
+	{
+		\_range(@y, 0, @sy)
+
+		@BT.SLIDE.Y(@no) = @y
+
+		IF[$BT.OFF(@no)   !=""] CG[ID="BT.OFF"   +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.OVER(@no)  !=""] CG[ID="BT.OVER"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.ON(@no)    !=""] CG[ID="BT.ON"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] CG[ID="BT.ONOVER"+$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.NA(@no)    !=""] CG[ID="BT.NA"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.MASK(@no)  !=""] CG[ID="BT.MASK"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//▼スライド用ボタン座標を割合からセット(0～256) @@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.SLIDE.PER.SET
+{
+	STR[$ID =$_PSTR(1)]
+	INT[@NO =@_PINT(2)]
+	INT[@val=@_PINT(3)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	INT[@sx =@BT.SLIDE.SX(@no)]
+	INT[@sy =@BT.SLIDE.SY(@no)]
+
+	STR[$BNO=$(@BT.NO(@no)*100+1)]
+
+	IF[@no>0]
+	{
+		@BT.SLIDE.X(@no) = @val*@sx/256
+		@BT.SLIDE.Y(@no) = 0
+
+		IF[$BT.OFF(@no)   !=""] CG[ID="BT.OFF"   +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.OVER(@no)  !=""] CG[ID="BT.OVER"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.ON(@no)    !=""] CG[ID="BT.ON"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] CG[ID="BT.ONOVER"+$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.NA(@no)    !=""] CG[ID="BT.NA"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+		IF[$BT.MASK(@no)  !=""] CG[ID="BT.MASK"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)+@BT.SLIDE.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)+@BT.SLIDE.Y(@no)] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//▼ボタンX座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.X.INIT
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	STR[$BNO]
+
+	IF[@no>0]
+	{
+		@BT.X(@no) = @BT.IX(@no)
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.X.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@x =@_PINT(3)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	STR[$BNO]
+
+	IF[@no>0]
+	{
+		@BT.X(@no) = @x
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.X.ADD
+{
+	STR[$ID   =$_PSTR(1)]
+	INT[@NO   =@_PINT(2)]
+	INT[@x    =@_PINT(3)]
+	INT[@limit=@_PINT(4)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	INT[@src = @BT.X(@no)]
+
+	STR[$BNO]
+
+	IF[@no>0]
+	{
+		@BT.X(@no) += @x
+		IF[@BT.X(@no)>@limit] @BT.X(@no)=@limit IFEND[]
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+	}
+	IFEND[]
+
+	return[rint=@BT.X(@no)-@src]
+}
+
+#=es.BT.X.SUB
+{
+	STR[$ID   =$_PSTR(1)]
+	INT[@NO   =@_PINT(2)]
+	INT[@x    =@_PINT(3)]
+	INT[@limit=@_PINT(4)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	INT[@src = @BT.X(@no)]
+
+	STR[$BNO]
+
+	IF[@no>0]
+	{
+		@BT.X(@no) -= @x
+//\_dmes("no="+$(@no)+", X="+$(@BT.X(@no)))
+		IF[@BT.X(@no)<@limit] @BT.X(@no)=@limit IFEND[]
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no)] LOOPEND[] IFEND[]
+	}
+	IFEND[]
+
+	return[rint=@BT.X(@no)-@src]
+}
+
+//▼ボタンY座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.Y.INIT
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	STR[$BNO]
+
+	IF[@no>0]
+	{
+		@BT.Y(@no) = @BT.IY(@no)
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.Y.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@y =@_PINT(3)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	STR[$BNO]
+
+	IF[@no>0]
+	{
+		@BT.Y(@no) = @y
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.Y.GRP.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@y =@_PINT(3)]
+	INT[@GRP=@_PINT(4)]
+	INT[@no]
+	\BT.NO.GET.77(@no, $ID, @NO, @GRP)
+
+	STR[$BNO]
+
+	IF[@no>0]
+	{
+		@BT.Y(@no) = @y
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+#=es.BT.Y.GRP.SET2
+{
+	INT[@GRP=@_PINT(1)]
+	INT[@y  =@_PINT(2)]
+	INT[@no]
+
+	STR[$BNO]
+
+	@BT.GY(@GRP) = @y
+
+	LOOP[SET=@BT.NUM]
+	{
+		IF[@GRP != @BT.GROUP1(@_LC)] LOOPCONTINUE[] IFEND[]
+
+		@no=@_LC
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+#=es.BT.Y.GRP.ADD
+{
+	INT[@GRP=@_PINT(1)]
+	INT[@y  =@_PINT(2)]
+	INT[@no]
+
+	STR[$BNO]
+
+	@BT.GY(@GRP) += @y
+
+	LOOP[SET=@BT.NUM]
+	{
+		IF[@GRP != @BT.GROUP1(@_LC)] LOOPCONTINUE[] IFEND[]
+
+		@no=@_LC
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+#=es.BT.Y.ADD
+{
+	STR[$ID   =$_PSTR(1)]
+	INT[@NO   =@_PINT(2)]
+	INT[@y    =@_PINT(3)]
+	INT[@limit=@_PINT(4)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	INT[@src = @BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)]
+
+	STR[$BNO]
+
+	IF[@no>0]
+	{
+		@BT.Y(@no) += @y
+		\_range(@BT.Y(@no),, @limit)
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+	}
+	IFEND[]
+
+	return[rint=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)-@src]
+}
+
+#=es.BT.Y.SUB
+{
+	STR[$ID   =$_PSTR(1)]
+	INT[@NO   =@_PINT(2)]
+	INT[@y    =@_PINT(3)]
+	INT[@limit=@_PINT(4)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	INT[@src = @BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)]
+
+	STR[$BNO]
+
+	IF[@no>0]
+	{
+		@BT.Y(@no) -= @y
+		\_range(@BT.Y(@no), @limit)
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+	}
+	IFEND[]
+
+	return[rint=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)-@src]
+}
+
+
+//▼ボタンXY座標 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.XY.AFTER.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@x =@_PINT(3)]
+	INT[@y =@_PINT(4)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	STR[$BNO]
+
+	IF[@no>0]
+	{
+		@BT.X(@no) = @x
+		@BT.Y(@no) = @y
+
+		IF[$BT.OFF(@no)   !=""] LOOP[SET=@BT.ANNUM(@no,0)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OFF"   +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.OVER(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,1)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.OVER"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ON(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,2)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ON"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] LOOP[SET=@BT.ANNUM(@no,3)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.ONOVER"+$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.NA(@no)    !=""] LOOP[SET=@BT.ANNUM(@no,4)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.NA"    +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+		IF[$BT.MASK(@no)  !=""] LOOP[SET=@BT.ANNUM(@no,5)] $BNO=$(@BT.NO(@no)*100+@_LC) CG[ID="BT.MASK"  +$BNO X=@BT.GX(@BT.GROUP1(@no))+@BT.X(@no) Y=@BT.GY(@BT.GROUP1(@no))+@BT.Y(@no)] LOOPEND[] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//▼ボタン不透明度 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.A.AFTER.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@a =@_PINT(3)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	STR[$BNO=$(@BT.NO(@no)*100+1)]
+
+	IF[@no>0]
+	{
+		@BT.A(@no) = @a
+		\_range(@BT.A(@no), 0, 256)
+
+		IF[$BT.OFF(@no)   !=""] CG[ID="BT.OFF"   +$BNO A=@BT.A(@no)] IFEND[]
+		IF[$BT.OVER(@no)  !=""] CG[ID="BT.OVER"  +$BNO A=@BT.A(@no)] IFEND[]
+		IF[$BT.ON(@no)    !=""] CG[ID="BT.ON"    +$BNO A=@BT.A(@no)] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] CG[ID="BT.ONOVER"+$BNO A=@BT.A(@no)] IFEND[]
+		IF[$BT.NA(@no)    !=""] CG[ID="BT.NA"    +$BNO A=@BT.A(@no)] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//▼ボタン不透明度 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.A.ADD
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@a =@_PINT(3)]
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	STR[$BNO=$(@BT.NO(@no)*100+1)]
+
+	IF[@no>0]
+	{
+		@BT.A(@no) += @a
+
+		\_range(@BT.A(@no), 0, 256)
+
+		IF[$BT.OFF(@no)   !=""] CG[ID="BT.OFF"   +$BNO A=@BT.A(@no)] IFEND[]
+		IF[$BT.OVER(@no)  !=""] CG[ID="BT.OVER"  +$BNO A=@BT.A(@no)] IFEND[]
+		IF[$BT.ON(@no)    !=""] CG[ID="BT.ON"    +$BNO A=@BT.A(@no)] IFEND[]
+		IF[$BT.ONOVER(@no)!=""] CG[ID="BT.ONOVER"+$BNO A=@BT.A(@no)] IFEND[]
+		IF[$BT.NA(@no)    !=""] CG[ID="BT.NA"    +$BNO A=@BT.A(@no)] IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+///xS
+//
+//▼ボタントランジション @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//
+#=es.BT.TR.INIT
+{
+	CG[ID="BTNTR" Z=1 A=0 FILE=$_PSTR(1)]
+	return[]
+}
+
+#=es.BT.TR.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+	INT[@T =@_PINT(3)]
+
+	\_range(@T, 0, 256)
+
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	CG[ID="BT.OFF"+$(@BT.NO(@no)*100+1) TID="BTNTR" TA=016 T=@T]
+
+	return[]
+}
+
+#=es.BT.TR.END.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	CG[ID="BT.OFF"+$(@BT.NO(@no)*100+1) TID="" T=256]
+
+	return[]
+}
+
+#=es.BT.TR.END2.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	CG[ID="BT.OFF"+$(@BT.NO(@no)*100+1) TID="" T=0 E=0]
+
+	return[]
+}
+
+#=es.BT.CGCLEAR.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	CGACT[ID="BT.OFF"+$(@BT.NO(@no)*100+1) RECTPAINT3=1 SET=0]
+//	CGACT[ID="BT.OVER"+$(@BT.NO(@no)*100+1) RECTPAINT3=1 SET=0]
+//	CGACT[ID="BT.ON"+$(@BT.NO(@no)*100+1) RECTPAINT3=1 SET=0]
+//	CGACT[ID="BT.ONOVER"+$(@BT.NO(@no)*100+1) RECTPAINT3=1 SET=0]
+
+	return[]
+}
+
+#=es.BT.CGCLEAR.OVER.SET
+{
+	STR[$ID=$_PSTR(1)]
+	INT[@NO=@_PINT(2)]
+
+	INT[@no]
+	\BT.NO.GET(@no, $ID, @NO)
+
+	CGACT[ID="BT.OVER"+$(@BT.NO(@no)*100+1) RECTPAINT3=1 SET=0]
+
+	return[]
+}
+

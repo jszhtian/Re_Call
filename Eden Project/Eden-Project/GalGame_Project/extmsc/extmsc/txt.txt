@@ -1,0 +1,728 @@
+Table1:
+Index:1	Offset:236A
+Index:2	Offset:2397
+Index:3	Offset:23C4
+Index:4	Offset:23F1
+Index:5	Offset:241D
+Index:6	Offset:2449
+Index:7	Offset:2475
+Index:8	Offset:24A1
+Index:9	Offset:24CD
+Index:10	Offset:24F9
+Index:11	Offset:2525
+Index:12	Offset:2551
+Index:13	Offset:257D
+Index:14	Offset:25A9
+Index:15	Offset:25D5
+Index:16	Offset:2601
+Index:17	Offset:262D
+Index:18	Offset:2659
+Index:19	Offset:2685
+Index:20	Offset:26B1
+Index:21	Offset:26DD
+Index:22	Offset:2709
+Index:23	Offset:2735
+Index:24	Offset:2761
+Index:25	Offset:278D
+Index:26	Offset:27B9
+Index:27	Offset:27E5
+Index:28	Offset:2811
+Index:29	Offset:283D
+Index:30	Offset:2869
+Index:31	Offset:2895
+Index:32	Offset:28C1
+Index:35	Offset:28ED
+Index:33	Offset:2917
+Index:36	Offset:2943
+Index:34	Offset:296D
+Table2:
+Index:1	Offset:21E8
+Index:2	Offset:2250
+S- i13(1m(0),"第一話「乙女に潜む魔女」""プロローグ")
+P- i0(1,110,0,1m(0))
+P- i0(1,903,0,110m(0))
+P- i0(1,900,1,1m(0))
+P- i0(1,130,0,1m(0))
+P- i0(1,923,0,130m(0))
+P- i0(1,901,1,1m(0))
+P- i0(1,150,0,1m(0))
+P- i0(1,943,0,150m(0))
+P- i0(1,902,1,1m(0))
+P- i0(1,151,0,1m(0))
+P- i0(1,944,0,151m(0))
+P- i0(1,902,1,1m(0))
+P- i0(1,152,0,1m(0))
+P- i0(1,945,0,152m(0))
+P- i0(1,902,1,1m(0))
+P- i0(1,153,0,1m(0))
+P- i0(1,946,0,153m(0))
+P- i0(1,902,1,1m(0))
+P- i0(1,154,0,1m(0))
+P- i0(1,947,0,154m(0))
+P- i0(1,902,1,1m(0))
+P- i0(1,155,0,1m(0))
+P- i0(1,948,0,155m(0))
+P- i0(1,902,1,1m(0))
+P- i0(1,156,0,1m(0))
+P- i0(1,949,0,156m(0))
+P- i0(1,902,1,1m(0))
+P- i0(1,157,0,1m(0))
+P- i0(1,950,0,157m(0))
+P- i0(1,902,1,1m(0))
+P- i0(1,158,0,1m(0))
+P- i0(1,951,0,158m(0))
+P- i0(1,902,1,1m(0))
+P- i0(1,159,0,1m(0))
+P- i0(1,952,0,159m(0))
+P- i0(1,902,1,1m(0))
+M- SetFileNo(0m(4),"bg\BG51NA3A.mgr")
+M- i14(0m(4),0m(0))
+M- SetXY(0m(4),0m(0),-1440m(0))
+M- i7(0m(4),-40m(0))
+M- i16(0m(4),100m(0),2000m(0))
+M- i8(0m(4),0m(0),0m(0),60000m(0))
+P- i5(1000m(0),0)
+S- JumpSetScriptNo(2,"Scenario\01gameNN.msc")
+P- i50()
+V- PlayVoice("v\LAP00000.ogv")
+T- ShowText(0m(0),"【】/【？？？】　むかしむかし、魔女がいました。")
+V- PlayVoice("v\LAP00001.ogv")
+T- ShowText(1m(0),"【】/【？？？】　良い魔女もいました。悪い魔女もいました。_r　良い魔女たちは人々となかよく暮らしていました。")
+V- PlayVoice("v\LAP00002.ogv")
+T- ShowText(2m(0),"【】/【？？？】　ところがある日、ムネモシュネという悪い魔女が現れ、_r　星の魔法を使って人々を苦しめました。")
+M- SetFileNo(10m(0),"bg\BG51NB1A.mgr")
+M- i14(10m(0),0m(0))
+M- SetXY(10m(0),0m(0),0m(0))
+M- i7(10m(0),0m(0))
+M- i16(10m(0),100m(0),2000m(0))
+V- PlayVoice("v\LAP00003.ogv")
+T- ShowText(3m(0),"【】/【？？？】　良い魔女ステラは空から星を消して魔法を使えなくしました。_r　悪い魔女を退治すると、ステラは天に昇って月になりました。")
+V- PlayVoice("v\LAP00004.ogv")
+T- ShowText(4m(0),"【】/【？？？】　こうして夜空から星はなくなり、_r　月はいまもわたしたちを見守っています。")
+M- SetFileNo(15m(0),"bg\BG51NA1A.mgr")
+M- i14(15m(0),0m(0))
+M- SetXY(15m(0),0m(0),0m(0))
+M- i7(15m(0),0m(0))
+M- i16(15m(0),100m(0),2000m(0))
+V- PlayVoice("v\LAP00005.ogv")
+T- ShowText(5m(0),"【】/【？？？】　けれど、悪い魔女たちはこっそりと人の中に潜りこみ、_r　魔法を使って悪さをしています。")
+V- PlayVoice("v\LAP00006.ogv")
+T- ShowText(6m(0),"【】/【？？？】　そう、あなたのとなりにも……魔女はいるのです。")
+V- i1(4000m(0))
+M- SetFileNo(10m(0),"")
+M- SetFileNo(15m(0),"")
+M- SetFileNo(20m(0),"bg\BG51EA1A.mgr")
+M- SetXY(20m(0),0m(0),0m(0))
+M- SetFileNo(25m(0),"bg\BG15EB1A.mgr")
+M- i14(25m(0),0m(0))
+M- SetXY(25m(0),0m(0),0m(0))
+D- ReadFileNo(0,"",2500m(0),0)
+M- i7(20m(0),40m(0))
+M- i8(20m(0),0m(0),-1440m(0),8000m(0))
+P- i5(4000m(0),0)
+M- i16(25m(0),100m(0),4000m(0))
+P- i5(4000m(0),0)
+M- SetFileNo(20m(0),"")
+M- SetFileNo(25m(0),"")
+M- SetFileNo(0m(4),"bg\BG_BLACK.mgr")
+M- i14(0m(4),0m(0))
+D- ReadFileNo(0,"",1500m(0),0)
+P- CallOffsetTable(1m(0))
+S- JumpSetScriptNo(2,"Scenario\01gameCR01_01.msc")
+M- SetFileNo(50m(0),"g\EV07_001BA.mgr")
+M- i14(50m(0),0m(0))
+M- SetXY(50m(0),0m(0),0m(0))
+M- SetFileNo(51m(0),"g\EV07_001BB.mgr")
+M- i14(51m(0),0m(0))
+M- SetXY(51m(0),-100m(0),0m(0))
+M- i16(50m(0),100m(0),2000m(0))
+P- i5(4000m(0),0)
+M- SetFileNo(54m(0),"g\EV07_001AA.mgr")
+M- i14(54m(0),0m(0))
+M- SetXY(54m(0),0m(0),0m(0))
+M- SetFileNo(55m(0),"g\EV07_001AB.mgr")
+M- i3(55m(0),124m(0),0m(0),124m(0),720m(0))
+M- SetXY(55m(0),353m(0),-229m(0))
+M- SetFileNo(56m(0),"g\EV07_001AC.mgr")
+M- i14(56m(0),0m(0))
+M- SetXY(56m(0),0m(0),0m(0))
+M- i16(54m(0),100m(0),2000m(0))
+P- i5(2000m(0),0)
+M- i9(55m(0),124m(0),0m(0),353m(0),720m(0),2000m(0))
+M- i8(55m(0),124m(0),0m(0),2000m(0))
+P- i5(4000m(0),0)
+V- i1(1000m(0))
+V- PlaySE(1m(0),"se\SE_I01.ogv")
+V- i5(1m(0),0)
+M- i14(56m(0),100m(0))
+P- i0(1,605,0,56m(0))
+P- i0(1,606,0,0m(0))
+P- i0(1,607,0,0m(0))
+P- i0(1,608,0,50m(0))
+P- i0(1,609,0,8m(0))
+P- i0(1,610,0,6m(0))
+P- i32(1m(0),600m(0),0,0)
+P- i5(1500m(0),0)
+P- CallOffsetTable(2m(0))
+V- PlaySE(2m(0),"se\SE_G03.ogv")
+V- i5(2m(0),0)
+M- i7(51m(0),-40m(0))
+M- i16(51m(0),100m(0),500m(0))
+M- i8(51m(0),0m(0),0m(0),500m(0))
+P- i5(1000m(0),0)
+V- PlaySE(3m(0),"se\SE_G04.ogv")
+V- i5(3m(0),0)
+M- i7(51m(0),40m(0))
+M- i16(51m(0),0m(0),500m(0))
+M- i8(51m(0),100m(0),0m(0),500m(0))
+P- i5(1000m(0),0)
+P- i32(1m(0),0m(0),0,0)
+M- SetFileNo(52m(0),"g\EV07_001CA.mgr")
+M- SetXY(52m(0),0m(0),0m(0))
+D- ReadFileNo(2,"",1500m(0),0)
+M- SetFileNo(53m(0),"g\EV07_001CB.mgr")
+M- SetXY(53m(0),0m(0),0m(0))
+D- ReadFileNo(2,"",1500m(0),0)
+P- CallOffsetTable(3m(0))
+V- PlayVoice("v\VIV00000.ogv")
+T- ShowText(7m(0),"【】/【？？？】死んで当然よ……こんな男っ！")
+D- ReadFileNo(1,"",0m(0),0)
+V- PlaySE(2m(0),"se\SE_I04.ogv")
+V- i5(2m(0),0)
+M- SetFileNo(57m(0),"g\EV07_001DA.mgr")
+M- SetXY(57m(0),0m(0),0m(0))
+D- ReadFileNo(0,"",1500m(0),0)
+S- JumpSetScriptNo(2,"Scenario\01gameCR01_02.msc")
+V- PlayVoice("v\SEL00000.ogv")
+T- ShowText(8m(0),"【】/【？？？】……っ！")
+D- ReadFileNo(1,"",0m(0),0)
+S- JumpSetScriptNo(2,"Scenario\01gameCR01_03.msc")
+V- PlayVoice("v\VIV00001.ogv")
+T- ShowText(9m(0),"【】/【？？？】そう、ぜんぶ、あの娘の仕業に……ふふふっ")
+V- PlaySE(4m(0),"se\SE_E03.ogv")
+V- i5(4m(0),0)
+M- SetFileNo(50m(0),"g\EV07_001BC.mgr")
+M- SetXY(50m(0),0m(0),0m(0))
+M- SetFileNo(58m(0),"g\EV07_001EA.mgr")
+M- SetXY(58m(0),0m(0),0m(0))
+M- SetFileNo(59m(0),"g\EV07_001EB.mgr")
+M- i23(59m(0),1)
+M- i14(59m(0),0m(0))
+M- SetXY(59m(0),0m(0),0m(0))
+D- ReadFileNo(0,"",1500m(0),0)
+P- i32(1m(0),1m(0),1,1)
+S- JumpSetScriptNo(2,"Scenario\01gameCR01_04.msc")
+V- PlayVoice("v\VIV00002.ogv")
+T- ShowText(10m(0),"【】/【？？？】スピカ……ザヴィザヴァ……ポリマ！　爆ぜよ！")
+P- i32(1m(0),0m(0),0,0)
+M- SetFileNo(50m(0),"")
+M- SetFileNo(51m(0),"")
+M- SetFileNo(52m(0),"")
+M- SetFileNo(53m(0),"")
+M- SetFileNo(54m(0),"")
+M- SetFileNo(55m(0),"")
+M- SetFileNo(56m(0),"")
+M- SetFileNo(57m(0),"")
+M- SetFileNo(58m(0),"")
+M- SetFileNo(59m(0),"")
+M- i23(59m(0),0)
+M- SetFileNo(0m(4),"bg\BG_WHITE.mgr")
+M- SetXY(0m(4),0m(0),0m(0))
+D- ReadFileNo(0,"",2000m(0),0)
+P- i5(1000m(0),0)
+V- i1(3000m(0))
+V- i6(1m(0))
+V- i6(2m(0))
+V- i6(3m(0))
+V- i6(4m(0))
+V- PlaySE(1m(0),"se\SE_E04.ogv")
+V- i5(1m(0),0)
+P- i5(3000m(0),0)
+M- SetFileNo(0m(4),"bg\BG_BLACK.mgr")
+M- SetXY(0m(4),0m(0),0m(0))
+D- ReadFileNo(0,"",2000m(0),0)
+P- i5(1000m(0),0)
+P- i0(2,185,0,1m(0))
+V- PlaySE(2m(0),"se\SE_F06.ogv")
+V- i5(2m(0),1)
+M- SetFileNo(0m(4),"bg\BG43AA1A.mgr")
+M- SetXY(0m(4),0m(0),0m(0))
+D- ReadFileNo(0,"",1500m(0),0)
+M- SetFileNo(74m(0),"ef\TELOP01_001A.mgr")
+M- i14(74m(0),0m(0))
+M- i15(74m(0),100m(0))
+M- SetXY(74m(0),-20m(0),393m(0))
+M- SetFileNo(75m(0),"ef\TELOP01_001B.mgr")
+M- i14(75m(0),0m(0))
+M- i15(75m(0),100m(0))
+M- SetXY(75m(0),-30m(0),443m(0))
+P- i32(4m(0),2m(0),0,0)
+S- JumpSetScriptNo(2,"Scenario\01game.msc")
+P- CallOffsetTable(29m(0))
+T- ShowText(11m(0),"　乗合馬車は郊外の森を走り抜けていく。_r　吹きつける風は、春とはいえまだ肌寒い。")
+V- PlayVoice("v\M1A00000.ogv")
+T- ShowText(12m(0),"【初老の御者】「お客さん、リュテスは初めてかね？」")
+T- ShowText(13m(0),"　初老の御者が振り向きもせず、僕に話しかけてきた。")
+M- SetFileNo(186m(0),"f\ETF_AA01AA.mgr")
+M- SetXY(186m(0),0m(0),360m(0))
+D- ReadFileNo(1,"",0m(0),1)
+T- ShowText(14m(0),"【エトワール】「はい。アルクィンから来ました」")
+M- SetFileNo(186m(0),"")
+D- ReadFileNo(1,"",0m(0),1)
+V- PlayVoice("v\M1A00001.ogv")
+T- ShowText(15m(0),"【初老の御者】「アルクィン！　そりゃ、ずいぶんと遠くから来なさったね。_r　生まれ故郷かい？」")
+M- SetFileNo(186m(0),"f\ETF_AA07AA.mgr")
+M- SetXY(186m(0),0m(0),360m(0))
+D- ReadFileNo(1,"",0m(0),1)
+T- ShowText(16m(0),"【エトワール】「いえ、生まれたのは……サイラム、です」")
+M- SetFileNo(186m(0),"")
+D- ReadFileNo(1,"",0m(0),1)
+V- PlayVoice("v\M1A00002.ogv")
+T- ShowText(17m(0),"【初老の御者】「ああ、あの魔女で有名な……」")
+P- i32(4m(0),0m(0),0,0)
+M- SetFileNo(74m(0),"")
+M- SetFileNo(75m(0),"")
+M- SetFileNo(0m(4),"bg\BG_BLACK.mgr")
+M- SetXY(0m(4),0m(0),0m(0))
+D- ReadFileNo(0,"",1500m(0),0)
+P- i5(1000m(0),0)
+M- SetFileNo(0m(4),"bg\BG03AA1A.mgr")
+M- SetXY(0m(4),0m(0),0m(0))
+D- ReadFileNo(0,"",1500m(0),0)
+T- ShowText(18m(0),"　馬車はリュテスの街中を抜けていく。_r　敷き詰められた石畳の上を強い音を立て走っていく。")
+V- PlayVoice("v\M1A00003.ogv")
+T- ShowText(19m(0),"【初老の御者】「行き先はたしか占星法律事務所だったね。_r　やっぱり魔女の相談かい？」")
+M- SetFileNo(186m(0),"f\ETF_AA06AA.mgr")
+M- SetXY(186m(0),0m(0),360m(0))
+D- ReadFileNo(1,"",0m(0),1)
+T- ShowText(20m(0),"【エトワール】「ち、ちがいますよ。客じゃありません！　僕は占星弁護士です！」")
+M- SetFileNo(186m(0),"")
+D- ReadFileNo(1,"",0m(0),1)
+V- PlayVoice("v\M1A00004.ogv")
+T- ShowText(21m(0),"【初老の御者】「こりゃ失敬。占星術師でしたか。お若いのに大したもんだ」")
+M- SetFileNo(186m(0),"f\ETF_AA02AA.mgr")
+M- SetXY(186m(0),0m(0),360m(0))
+D- ReadFileNo(1,"",0m(0),1)
+T- ShowText(22m(0),"【エトワール】「占星術師じゃなくて、占星弁護士です。_r　法律が改正されて魔女でも人権が認められるようになったんです」")
+T- ShowText(23m(0),"【エトワール】「魔女かどうか正式に調べて、ほんとうに罪を犯したのか、そうでないのか確かめるのが僕の仕事です」")
+M- SetFileNo(186m(0),"")
+D- ReadFileNo(1,"",0m(0),1)
+V- PlayVoice("v\M1A00005.ogv")
+T- ShowText(24m(0),"【初老の御者】「うんうん。わかっとるよ。魔女を見つけて火炙りにするんだろう。_r　占星術師ってのは偉い仕事だよ」")
+T- ShowText(25m(0),"　……やれやれ。_r　どうやらまだ占星弁護士は世に知られていないらしい。")
+M- SetFileNo(0m(4),"bg\BG_BLACK.mgr")
+M- SetXY(0m(4),0m(0),0m(0))
+D- ReadFileNo(0,"",1500m(0),0)
+P- i5(1000m(0),0)
+V- i6(2m(0))
+M- SetFileNo(0m(4),"bg\BG02AA1A.mgr")
+M- SetXY(0m(4),0m(0),0m(0))
+D- ReadFileNo(0,"",1500m(0),0)
+V- PlayVoice("v\M1A00006.ogv")
+T- ShowText(26m(0),"【初老の御者】「着きましたよ、お客さん。ジャクリーン占星法律事務所」")
+T- ShowText(27m(0),"　僕は古めかしく、厳つい建物の前に立っていた。_r　ここが僕の、占星弁護士としての初めての職場か。")
+T- ShowText(28m(0),"　天涯孤独で独学で勉強した僕を受け入れてくれた、_r　唯一の占星法律事務所。")
+T- ShowText(29m(0),"　運賃にチップをはずむと、初老の御者は愛想良く笑った。")
+V- PlayVoice("v\M1A00007.ogv")
+T- ShowText(30m(0),"【初老の御者】「最近、王都じゃ八つ裂き公なんてのもいるし、お客さんも気をつけてくださいよ」")
+M- SetFileNo(186m(0),"f\ETF_AA06AA.mgr")
+M- SetXY(186m(0),0m(0),360m(0))
+D- ReadFileNo(1,"",0m(0),1)
+T- ShowText(31m(0),"【エトワール】「八つ裂き公？」")
+M- SetFileNo(186m(0),"")
+D- ReadFileNo(1,"",0m(0),1)
+V- PlayVoice("v\M1A00008.ogv")
+T- ShowText(32m(0),"【初老の御者】「そんな通り名の切り裂き魔がいるんでさぁ。くれぐれもご用心を」")
+M- SetFileNo(186m(0),"f\ETF_AA02AA.mgr")
+M- SetXY(186m(0),0m(0),360m(0))
+D- ReadFileNo(1,"",0m(0),1)
+T- ShowText(33m(0),"【エトワール】「気をつけるよ。ありがとう」")
+M- SetFileNo(186m(0),"")
+D- ReadFileNo(1,"",0m(0),1)
+V- PlayVoice("v\M1A00009.ogv")
+T- ShowText(34m(0),"【初老の御者】「たくさん魔女を捕まえておくんなさいよー」")
+T- ShowText(35m(0),"　馬車が去ると、辺りはシンと静まりかえった。")
+M- SetFileNo(186m(0),"f\ETF_AA03AA.mgr")
+M- SetXY(186m(0),0m(0),360m(0))
+D- ReadFileNo(1,"",0m(0),1)
+T- ShowText(36m(0),"【エトワール】「よし！」")
+M- SetFileNo(186m(0),"")
+D- ReadFileNo(1,"",0m(0),1)
+T- ShowText(37m(0),"　いよいよ、占星弁護士としての仕事が始まる！")
+V- i1(500m(0))
+V- PlaySE(1m(0),"v\JAC00000.ogv")
+V- i5(1m(0),0)
+T- ShowText(38m(0),"　そのとき、絹を裂くような悲鳴が聞こえた。_r　占星法律事務所の中からだ！！")
+P- CallOffsetTable(3m(0))
+V- PlaySE(2m(0),"se\SE_A02.ogv")
+V- i5(2m(0),0)
+M- SetFileNo(0m(4),"bg\BG_BLACK.mgr")
+M- SetXY(0m(4),0m(0),0m(0))
+D- ReadFileNo(2,"",500m(0),0)
+V- PlaySE(3m(0),"se\SE_B06.ogv")
+V- i5(3m(0),0)
+T- ShowText(39m(0),"　慌てて室内に飛び込んだ僕が目にしたものは……")
+M- SetFileNo(0m(4),"ev\EV02_001AA.mgr")
+M- SetXY(0m(4),0m(0),0m(0))
+M- SetFileNo(5m(0),"ev\EV02_001AB.mgr")
+M- i14(5m(0),0m(0))
+M- SetXY(5m(0),-1280m(0),-720m(0))
+D- ReadFileNo(2,"",500m(0),0)
+P- i0(1,131,0,1m(0))
+P- i0(1,924,0,131m(0))
+P- i0(1,901,1,1m(0))
+P- i0(2,117,0,1m(0))
+M- SetFileNo(186m(0),"f\ETF_AA14AA.mgr")
+M- SetXY(186m(0),0m(0),360m(0))
+D- ReadFileNo(1,"",0m(0),1)
+T- ShowText(40m(0),"【エトワール】「ジャクリーンさんっ！？」")
+M- SetFileNo(186m(0),"")
+D- ReadFileNo(1,"",0m(0),1)
+M- i16(5m(0),100m(0),2000m(0))
+M- i8(5m(0),0m(0),0m(0),10000m(0))
+T- ShowText(41m(0),"　僕の目の前で血を流し倒れている女の人は……_r　今日から僕の上司となり、雇用主となるはずだった占星弁護士……")
+T- ShowText(42m(0),"　ジャクリーン・シュプレンガーさんだった。")
+V- i1(3000m(0))
+D- ReadFileNo(1,"",0m(0),0)
+M- SetFileNo(10m(0),"bg\BG_BLACK.mgr")
+M- i14(10m(0),0m(0))
+M- SetXY(10m(0),0m(0),0m(0))
+M- i16(10m(0),100m(0),1500m(0))
+P- i5(2000m(0),0)
+M- SetFileNo(5m(0),"")
+M- SetFileNo(10m(0),"")
+M- SetFileNo(0m(4),"bg\BG_BLACK.mgr")
+M- SetXY(0m(4),0m(0),0m(0))
+D- ReadFileNo(1,"",0m(0),0)
+V- i6(1m(0))
+V- i6(2m(0))
+V- i6(3m(0))
+P- ProcessScript("Scenario\MA01_001Y.msc")
+P- return()
+P- i0(1,1000,0,300m(3))
+P- i0(1,1000,1,300m(0))
+M- i16(59m(0),100m(0),1000m(1))
+P- i5(1000m(1),0)
+P- i0(1,1000,0,300m(3))
+P- i0(1,1000,1,300m(0))
+M- i16(59m(0),0m(0),1000m(1))
+P- i5(1000m(1),0)
+P- return()
+M- i7(74m(0),-20m(0))
+M- i7(75m(0),-20m(0))
+M- i16(74m(0),100m(0),2000m(0))
+M- i16(75m(0),100m(0),2000m(0))
+M- i17(74m(0),0m(0),1500m(0))
+M- i17(75m(0),0m(0),1500m(0))
+M- i8(74m(0),0m(0),393m(0),2000m(0))
+M- i8(75m(0),0m(0),443m(0),2000m(0))
+P- i5(7000m(0),0)
+M- i7(74m(0),20m(0))
+M- i7(75m(0),20m(0))
+M- i16(74m(0),0m(0),2000m(0))
+M- i16(75m(0),0m(0),2000m(0))
+M- i17(74m(0),100m(0),1500m(0))
+M- i17(75m(0),100m(0),1500m(0))
+M- i8(74m(0),-20m(0),393m(0),2000m(0))
+M- i8(75m(0),-30m(0),443m(0),2000m(0))
+P- return()
+P- i0(2,900,0,1m(0))
+V- i0("m\BGM001a.ogv",1,0m(0))
+P- i-108()
+Unk
+P- i0(4,-2063466496,3,16777216m(0))
+P- i0(0,851974,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+Unk
+P- i0(0,0,0,262144m(0))
+P- i2(3m(-122))
+P- i1(393216m(0),13,1550647296m(0),66,825241677m(71))
+Unk
+Unk
+Unk
+P- i0(0,-335544320,-48,262144m(4))
+P- i2(3m(-121))
+P- i1(393216m(0),12,1550647296m(0),66,842018893m(71))
+Unk
+Unk
+S- SetWindowCaption("")
+P- i94()
+Unk
+P- i0(4,-2013134848,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-23()
+Unk
+P- i0(4,-1996357632,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i55(116,262144m(5),231938m(0))
+P- i0(0,1,6,12m(0))
+Unk
+Unk
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-115()
+Unk
+P- i0(4,-1962803200,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-28()
+Unk
+P- i0(4,-1946025984,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i44()
+Unk
+P- i0(4,-1929248768,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i67()
+Unk
+P- i0(4,-1912471552,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i125()
+Unk
+P- i0(4,-1895694336,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i84()
+Unk
+P- i0(4,-1878917120,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-25()
+Unk
+P- i0(4,-1862139904,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i67()
+Unk
+P- i0(4,-1845362688,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- DestroyWnd(-63,262144m(2),234242m(0))
+P- i0(0,1,6,12m(0))
+Unk
+Unk
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-15()
+Unk
+P- i0(4,-1811808256,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-50()
+Unk
+P- i0(4,-1795031040,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i67()
+Unk
+P- i0(4,-1778253824,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-10()
+Unk
+P- i0(4,-1761476608,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i0(0,67108864,0,235522m(0))
+P- i0(0,1,6,12m(0))
+Unk
+Unk
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i86()
+Unk
+P- i0(4,-1727922176,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-102()
+Unk
+P- i0(4,-1711144960,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i0(-75,67108885,0,236290m(0))
+P- i0(0,1,6,12m(0))
+Unk
+Unk
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- CallOffsetTable(67108864m(18))
+P- i0(2,924,0,1m(0))
+V- i0("m\BGM023.ogv",1,0m(0))
+P- i-88()
+Unk
+P- i0(4,-1660813312,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i25()
+Unk
+P- i0(4,-1644036096,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i109()
+Unk
+P- i0(4,-1627258880,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-14()
+Unk
+P- i0(4,-1610481664,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-20()
+Unk
+P- i0(4,-1593704448,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i-39()
+Unk
+P- i0(4,-1576927232,3,16777216m(0))
+P- i0(0,786438,0,1195531373m(0))
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i32(67108864m(18),61014528m(0),0,0)
+P- i0(1,100663296,0,1828716544m(12))
+Unk
+Unk
+Unk
+Unk
+Unk
+Unk
+P- i0(0,-251658240,17,262144m(0))
+P- i2(3m(-92))
+P- i1(393216m(0),10,1550647296m(0),86,1865306191m(79))
+Unk
+S- SetWindowCaption("")
+P- i0(0,67108864,0,238850m(0))
+P- i0(0,1,6,12m(0))
+Unk
+Unk
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i0(0,67108864,0,239106m(0))
+P- i0(0,1,6,10m(0))
+Unk
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i0(0,67108864,0,239362m(0))
+P- i0(0,1,6,12m(0))
+Unk
+Unk
+Unk
+Unk
+Unk
+Unk
+S- SetWindowCaption("")
+P- i0(0,67108864,0,-1619230976m(0))

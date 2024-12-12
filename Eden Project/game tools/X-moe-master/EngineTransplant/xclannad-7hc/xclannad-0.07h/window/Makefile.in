@@ -1,0 +1,46 @@
+@SET_MAKE@
+CC		= @CC@
+CXX		= @CXX@
+LD		= @CXX@
+AR		= ar
+RANLIB		= @RANLIB@
+
+CFLAGS= -I.. $(LOCAL_DEF) @CFLAGS@ @DEFS@ @SDL_CFLAGS@ -pthread -O2
+CXXFLAGS	= $(CFLAGS)
+LDFLAGS = @LDFLAGS@ @FT2_LIBS@ @SDL_LIBS@ @LIBS@ -pthread
+
+SRCS	= render.cc \
+	event.cc \
+	system.cc \
+	picture.cc \
+	widget.cc \
+	button.cc \
+	menuitem.cc \
+	SDL_rotozoom.cc \
+	rect.cc
+
+OBJS	 = ${SRCS:.cc=.o}
+
+all: libwindow.a test
+
+libwindow.a: ${OBJS}
+	rm -f libwindow.a
+	${AR} clq libwindow.a ${OBJS}
+	$(RANLIB) libwindow.a
+
+clean:
+	rm -f libwindow.a ${OBJS} *.bak *.core
+
+.c.o:
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+.cc.o:
+	$(CXX) -c $(CFLAGS) -o $@ $<
+
+test: $(OBJS) test.o
+	$(LD) -o test test.o $(OBJS) ../font/libfont.a ../system/libsystem.a $(LDFLAGS)
+
+.png.bin:
+	pngtopnm $<.png | ppmtopgm | dd bs=1 skip=15 > $@
+.bin.txt: runlength
+	./runlength $< > $@

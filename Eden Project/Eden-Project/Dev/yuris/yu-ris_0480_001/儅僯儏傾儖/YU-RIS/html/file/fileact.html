@@ -1,0 +1,108 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">ファイル系命令</A>＞FILEACT［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="save.html">SAVE［］</A>
+　<A HREF="saveend.html">SAVEEND［］</A>
+　<A HREF="load.html">LOAD［］</A>
+　<A HREF="fileact.html">FILEACT［］</A>
+　<A HREF="fileinfo.html">FILEINFO［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=700 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■ファイル操作命令 FILEACT[ ]</FONT>
+<FONT CLASS=t20>
+
+ファイルに対する操作（コピー、ファイルを実行）や、セーブデータや空フォルダの削除をおこないます。
+（※ただしセーブデータ以外のファイルや、中にファイルやフォルダの存在するフォルダは仕様により削除できません）
+ほかには、レイヤをBMPやPNG、JPGとしてファイルへ出力します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>FILE = ファイル名</FONT></TD><TD><FONT CLASS=t40>ファイル名を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FILE2 = ファイル名</FONT></TD><TD><FONT CLASS=t40>ファイルコピー時にコピー先のファイル名を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FOLDER = フォルダ名</FONT></TD><TD><FONT CLASS=t40>空フォルダ削除時のフォルダ名を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>EXEC = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ファイルを実行する場合に１を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>COPY = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>コピーを行う場合に１を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DELETE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>セーブデータや空フォルダに対して削除を行う場合に１を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PARAM = 文字列</FONT></TD><TD><FONT CLASS=t40>実行ファイルに渡すパラメータを指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>ID = 文字列</FONT></TD><TD><FONT CLASS=t40>レイヤをファイル出力する場合のレイヤＩＤを指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>BMP = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤをBMP(32bitのみ)でファイル出力する場合は１を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>PNG = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤをPNGでファイル出力する場合は１を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>JPG = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>レイヤをJPGでファイル出力する場合は１を指定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SET = 値</FONT></TD><TD><FONT CLASS=t40>PNG の圧縮レベルや JPG の品質レベルを指定します。<BR>PNG の場合は (高圧縮)0～9(低圧縮)、<BR>JPG の場合は (低品質)0～100(高品質) の範囲で指定します。<BR>指定しなかった場合のデフォルト値は<BR>PNG の場合は 5、JPG の場合は 90 になります。</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]「MyGame2.exe」というファイルを実行します。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEACT</FONT>[<FONT CLASS=t62>EXEC</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"MyGame2.exe"</FONT>]</FONT></B>
+
+
+[2]「MyGame2.exe」というファイルを「/abc」というパラメータを渡して実行します。
+　　（※パラメータを渡す際は必ず PARAM キーワードに記述してください。
+　　　FILE キーワードのほうに実行ファイル名とくっつけて記述しても仕様上正しく動きません）
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEACT</FONT>[<FONT CLASS=t62>EXEC</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"MyGame2.exe"</FONT> <FONT CLASS=t62>PARAM</FONT>=<FONT CLASS=t63>"/ABC"</FONT>]</FONT></B>
+
+
+[3]「readme.txt」というファイルを開きます（実行します）。
+　　この場合「.txt」拡張子に関連づけられているアプリケーション（メモ帳やエディタ等）が開きます。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEACT</FONT>[<FONT CLASS=t62>EXEC</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"readme.txt"</FONT>]</FONT></B>
+
+
+[4]「MyText.txt」というファイルを「MyText2.txt」というファイル名として複製(コピー)します。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEACT</FONT>[<FONT CLASS=t62>COPY</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"MyText.txt"</FONT> <FONT CLASS=t62>FILE2</FONT>=<FONT CLASS=t63>"MyText2.txt"</FONT>]</FONT></B>
+
+
+[5]「temp.sd」という名前のセーブデータファイルを削除します。
+　　（※セーブデータの拡張子は .sd です。また、「temp」と指定した場合は「temp.sd」を指定したことになります）
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEACT</FONT>[<FONT CLASS=t62>DELETE</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"temp.sd"</FONT>]</FONT></B>
+
+
+[6]「temp」という空のフォルダを削除します。
+　　（※空のフォルダでない場合は削除されません）
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEACT</FONT>[<FONT CLASS=t62>DELETE</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>FOLDER</FONT>=<FONT CLASS=t63>"temp"</FONT>]</FONT></B>
+
+
+[7]レイヤ「cg1」を、「test.bmp」というファイル名でファイル出力します。
+　　（※BMPファイルは強制的に32bitBMPで出力されます。ご注意ください）
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEACT</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>CG1</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"test"</FONT> <FONT CLASS=t62>BMP</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[8]レイヤ「cg1」を、「test.png」というファイル名で、圧縮レベルを９にしてファイル出力します。
+　　（※PNGキーワードは省略する事もできます。BMP/PNG/JPGキーワードを省略した場合はデフォルトでPNGになります）
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEACT</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>CG1</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"test"</FONT> <FONT CLASS=t62>PNG</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>9</FONT>]</FONT></B>
+
+
+[9]レイヤ「cg1」を、「test.jpg」というファイル名で、品質レベルを９５にしてファイル出力します。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEACT</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>CG1</FONT> <FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"test"</FONT> <FONT CLASS=t62>JPG</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>95</FONT>]</FONT></B>
+
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

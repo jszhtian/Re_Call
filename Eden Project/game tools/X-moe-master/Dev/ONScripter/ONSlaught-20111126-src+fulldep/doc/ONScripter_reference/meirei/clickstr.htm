@@ -1,0 +1,28 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>clickstr</h2>
+<h3>clickstr &lt;character string&gt;,&lt;numerical variable&gt;</h3>
+<p>
+This function forces a click wait state when the interpreter encounters the characters in the designated string.<br>
+However, if there happens to be a click wait command directly after that character, or if that character is prefaced by a 1-byte underscore (_), then this forced click wait state will not occur.<br>
+The second parameter decides whether this will be a simple wait state, or the text page will be line-fed.  If the forced click wait string happens to be shorter than (max line length - number), then the line feed will happen.<br>
+This is a function for your convenience, but watch out -- you can easily cause the next line to overflow if you're not careful.<br>
+In such situations, please decide whether you'll allow for default line breaks, or whether you'll manually insert line breaks in the appropriate places.<br>
+The character string must be in 2-byte characters.<br><br>
+　　　EX）click "」。！？",2<br>
+</p>
+
+</body>
+</html>

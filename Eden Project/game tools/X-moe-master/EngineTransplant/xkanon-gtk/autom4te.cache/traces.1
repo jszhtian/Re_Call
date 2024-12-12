@@ -1,0 +1,3753 @@
+m4trace:/usr/local/share/aclocal19/cond.m4:32: -1- AC_DEFUN([AM_CONDITIONAL], [AC_PREREQ(2.52)dnl
+ ifelse([$1], [TRUE],  [AC_FATAL([$0: invalid condition: $1])],
+	[$1], [FALSE], [AC_FATAL([$0: invalid condition: $1])])dnl
+AC_SUBST([$1_TRUE])
+AC_SUBST([$1_FALSE])
+if $2; then
+  $1_TRUE=
+  $1_FALSE='#'
+else
+  $1_TRUE='#'
+  $1_FALSE=
+fi
+AC_CONFIG_COMMANDS_PRE(
+[if test -z "${$1_TRUE}" && test -z "${$1_FALSE}"; then
+  AC_MSG_ERROR([[conditional "$1" was never defined.
+Usually this means the macro was only invoked conditionally.]])
+fi])])
+m4trace:/usr/local/share/aclocal19/header.m4:12: -1- AU_DEFUN([AM_CONFIG_HEADER], [AC_CONFIG_HEADERS($@)])
+m4trace:/usr/local/share/aclocal19/header.m4:12: -1- AC_DEFUN([AM_CONFIG_HEADER], [AC_DIAGNOSE([obsolete], [The macro `AM_CONFIG_HEADER' is obsolete.
+You should run autoupdate.])dnl
+AC_CONFIG_HEADERS($@)])
+m4trace:/usr/local/share/aclocal/codeset.m4:21: -1- AC_DEFUN([AM_LANGINFO_CODESET], [
+  AC_CACHE_CHECK([for nl_langinfo and CODESET], am_cv_langinfo_codeset,
+    [AC_TRY_LINK([#include <langinfo.h>],
+      [char* cs = nl_langinfo(CODESET);],
+      am_cv_langinfo_codeset=yes,
+      am_cv_langinfo_codeset=no)
+    ])
+  if test $am_cv_langinfo_codeset = yes; then
+    AC_DEFINE(HAVE_LANGINFO_CODESET, 1,
+      [Define if you have <langinfo.h> and nl_langinfo(CODESET).])
+  fi
+])
+m4trace:/usr/local/share/aclocal/gettext.m4:353: -1- AC_DEFUN([AM_GNU_GETTEXT], [
+  dnl Argument checking.
+  ifelse([$1], [], , [ifelse([$1], [external], , [ifelse([$1], [no-libtool], , [ifelse([$1], [use-libtool], ,
+    [errprint([ERROR: invalid first argument to AM_GNU_GETTEXT
+])])])])])
+  ifelse([$2], [], , [ifelse([$2], [need-ngettext], , [ifelse([$2], [need-formatstring-macros], ,
+    [errprint([ERROR: invalid second argument to AM_GNU_GETTEXT
+])])])])
+  define([gt_included_intl], ifelse([$1], [external], [no], [yes]))
+  define([gt_libtool_suffix_prefix], ifelse([$1], [use-libtool], [l], []))
+
+  AC_REQUIRE([AM_PO_SUBDIRS])dnl
+  ifelse(gt_included_intl, yes, [
+    AC_REQUIRE([AM_INTL_SUBDIR])dnl
+  ])
+
+  dnl Prerequisites of AC_LIB_LINKFLAGS_BODY.
+  AC_REQUIRE([AC_LIB_PREPARE_PREFIX])
+  AC_REQUIRE([AC_LIB_RPATH])
+
+  dnl Sometimes libintl requires libiconv, so first search for libiconv.
+  dnl Ideally we would do this search only after the
+  dnl      if test "$USE_NLS" = "yes"; then
+  dnl        if test "$gt_cv_func_gnugettext_libc" != "yes"; then
+  dnl tests. But if configure.in invokes AM_ICONV after AM_GNU_GETTEXT
+  dnl the configure script would need to contain the same shell code
+  dnl again, outside any 'if'. There are two solutions:
+  dnl - Invoke AM_ICONV_LINKFLAGS_BODY here, outside any 'if'.
+  dnl - Control the expansions in more detail using AC_PROVIDE_IFELSE.
+  dnl Since AC_PROVIDE_IFELSE is only in autoconf >= 2.52 and not
+  dnl documented, we avoid it.
+  ifelse(gt_included_intl, yes, , [
+    AC_REQUIRE([AM_ICONV_LINKFLAGS_BODY])
+  ])
+
+  dnl Sometimes, on MacOS X, libintl requires linking with CoreFoundation.
+  gt_INTL_MACOSX
+
+  dnl Set USE_NLS.
+  AM_NLS
+
+  ifelse(gt_included_intl, yes, [
+    BUILD_INCLUDED_LIBINTL=no
+    USE_INCLUDED_LIBINTL=no
+  ])
+  LIBINTL=
+  LTLIBINTL=
+  POSUB=
+
+  dnl If we use NLS figure out what method
+  if test "$USE_NLS" = "yes"; then
+    gt_use_preinstalled_gnugettext=no
+    ifelse(gt_included_intl, yes, [
+      AC_MSG_CHECKING([whether included gettext is requested])
+      AC_ARG_WITH(included-gettext,
+        [  --with-included-gettext use the GNU gettext library included here],
+        nls_cv_force_use_gnu_gettext=$withval,
+        nls_cv_force_use_gnu_gettext=no)
+      AC_MSG_RESULT($nls_cv_force_use_gnu_gettext)
+
+      nls_cv_use_gnu_gettext="$nls_cv_force_use_gnu_gettext"
+      if test "$nls_cv_force_use_gnu_gettext" != "yes"; then
+    ])
+        dnl User does not insist on using GNU NLS library.  Figure out what
+        dnl to use.  If GNU gettext is available we use this.  Else we have
+        dnl to fall back to GNU NLS library.
+
+        dnl Add a version number to the cache macros.
+        define([gt_api_version], ifelse([$2], [need-formatstring-macros], 3, ifelse([$2], [need-ngettext], 2, 1)))
+        define([gt_cv_func_gnugettext_libc], [gt_cv_func_gnugettext]gt_api_version[_libc])
+        define([gt_cv_func_gnugettext_libintl], [gt_cv_func_gnugettext]gt_api_version[_libintl])
+
+        AC_CACHE_CHECK([for GNU gettext in libc], gt_cv_func_gnugettext_libc,
+         [AC_TRY_LINK([#include <libintl.h>
+]ifelse([$2], [need-formatstring-macros],
+[#ifndef __GNU_GETTEXT_SUPPORTED_REVISION
+#define __GNU_GETTEXT_SUPPORTED_REVISION(major) ((major) == 0 ? 0 : -1)
+#endif
+changequote(,)dnl
+typedef int array [2 * (__GNU_GETTEXT_SUPPORTED_REVISION(0) >= 1) - 1];
+changequote([,])dnl
+], [])[extern int _nl_msg_cat_cntr;
+extern int *_nl_domain_bindings;],
+            [bindtextdomain ("", "");
+return * gettext ("")]ifelse([$2], [need-ngettext], [ + * ngettext ("", "", 0)], [])[ + _nl_msg_cat_cntr + *_nl_domain_bindings],
+            gt_cv_func_gnugettext_libc=yes,
+            gt_cv_func_gnugettext_libc=no)])
+
+        if test "$gt_cv_func_gnugettext_libc" != "yes"; then
+          dnl Sometimes libintl requires libiconv, so first search for libiconv.
+          ifelse(gt_included_intl, yes, , [
+            AM_ICONV_LINK
+          ])
+          dnl Search for libintl and define LIBINTL, LTLIBINTL and INCINTL
+          dnl accordingly. Don't use AC_LIB_LINKFLAGS_BODY([intl],[iconv])
+          dnl because that would add "-liconv" to LIBINTL and LTLIBINTL
+          dnl even if libiconv doesn't exist.
+          AC_LIB_LINKFLAGS_BODY([intl])
+          AC_CACHE_CHECK([for GNU gettext in libintl],
+            gt_cv_func_gnugettext_libintl,
+           [gt_save_CPPFLAGS="$CPPFLAGS"
+            CPPFLAGS="$CPPFLAGS $INCINTL"
+            gt_save_LIBS="$LIBS"
+            LIBS="$LIBS $LIBINTL"
+            dnl Now see whether libintl exists and does not depend on libiconv.
+            AC_TRY_LINK([#include <libintl.h>
+]ifelse([$2], [need-formatstring-macros],
+[#ifndef __GNU_GETTEXT_SUPPORTED_REVISION
+#define __GNU_GETTEXT_SUPPORTED_REVISION(major) ((major) == 0 ? 0 : -1)
+#endif
+changequote(,)dnl
+typedef int array [2 * (__GNU_GETTEXT_SUPPORTED_REVISION(0) >= 1) - 1];
+changequote([,])dnl
+], [])[extern int _nl_msg_cat_cntr;
+extern
+#ifdef __cplusplus
+"C"
+#endif
+const char *_nl_expand_alias (const char *);],
+              [bindtextdomain ("", "");
+return * gettext ("")]ifelse([$2], [need-ngettext], [ + * ngettext ("", "", 0)], [])[ + _nl_msg_cat_cntr + *_nl_expand_alias ("")],
+              gt_cv_func_gnugettext_libintl=yes,
+              gt_cv_func_gnugettext_libintl=no)
+            dnl Now see whether libintl exists and depends on libiconv.
+            if test "$gt_cv_func_gnugettext_libintl" != yes && test -n "$LIBICONV"; then
+              LIBS="$LIBS $LIBICONV"
+              AC_TRY_LINK([#include <libintl.h>
+]ifelse([$2], [need-formatstring-macros],
+[#ifndef __GNU_GETTEXT_SUPPORTED_REVISION
+#define __GNU_GETTEXT_SUPPORTED_REVISION(major) ((major) == 0 ? 0 : -1)
+#endif
+changequote(,)dnl
+typedef int array [2 * (__GNU_GETTEXT_SUPPORTED_REVISION(0) >= 1) - 1];
+changequote([,])dnl
+], [])[extern int _nl_msg_cat_cntr;
+extern
+#ifdef __cplusplus
+"C"
+#endif
+const char *_nl_expand_alias (const char *);],
+                [bindtextdomain ("", "");
+return * gettext ("")]ifelse([$2], [need-ngettext], [ + * ngettext ("", "", 0)], [])[ + _nl_msg_cat_cntr + *_nl_expand_alias ("")],
+               [LIBINTL="$LIBINTL $LIBICONV"
+                LTLIBINTL="$LTLIBINTL $LTLIBICONV"
+                gt_cv_func_gnugettext_libintl=yes
+               ])
+            fi
+            CPPFLAGS="$gt_save_CPPFLAGS"
+            LIBS="$gt_save_LIBS"])
+        fi
+
+        dnl If an already present or preinstalled GNU gettext() is found,
+        dnl use it.  But if this macro is used in GNU gettext, and GNU
+        dnl gettext is already preinstalled in libintl, we update this
+        dnl libintl.  (Cf. the install rule in intl/Makefile.in.)
+        if test "$gt_cv_func_gnugettext_libc" = "yes" \
+           || { test "$gt_cv_func_gnugettext_libintl" = "yes" \
+                && test "$PACKAGE" != gettext-runtime \
+                && test "$PACKAGE" != gettext-tools; }; then
+          gt_use_preinstalled_gnugettext=yes
+        else
+          dnl Reset the values set by searching for libintl.
+          LIBINTL=
+          LTLIBINTL=
+          INCINTL=
+        fi
+
+    ifelse(gt_included_intl, yes, [
+        if test "$gt_use_preinstalled_gnugettext" != "yes"; then
+          dnl GNU gettext is not found in the C library.
+          dnl Fall back on included GNU gettext library.
+          nls_cv_use_gnu_gettext=yes
+        fi
+      fi
+
+      if test "$nls_cv_use_gnu_gettext" = "yes"; then
+        dnl Mark actions used to generate GNU NLS library.
+        BUILD_INCLUDED_LIBINTL=yes
+        USE_INCLUDED_LIBINTL=yes
+        LIBINTL="ifelse([$3],[],\${top_builddir}/intl,[$3])/libintl.[]gt_libtool_suffix_prefix[]a $LIBICONV"
+        LTLIBINTL="ifelse([$3],[],\${top_builddir}/intl,[$3])/libintl.[]gt_libtool_suffix_prefix[]a $LTLIBICONV"
+        LIBS=`echo " $LIBS " | sed -e 's/ -lintl / /' -e 's/^ //' -e 's/ $//'`
+      fi
+
+      CATOBJEXT=
+      if test "$gt_use_preinstalled_gnugettext" = "yes" \
+         || test "$nls_cv_use_gnu_gettext" = "yes"; then
+        dnl Mark actions to use GNU gettext tools.
+        CATOBJEXT=.gmo
+      fi
+    ])
+
+    if test -n "$INTL_MACOSX_LIBS"; then
+      if test "$gt_use_preinstalled_gnugettext" = "yes" \
+         || test "$nls_cv_use_gnu_gettext" = "yes"; then
+        dnl Some extra flags are needed during linking.
+        LIBINTL="$LIBINTL $INTL_MACOSX_LIBS"
+        LTLIBINTL="$LTLIBINTL $INTL_MACOSX_LIBS"
+      fi
+    fi
+
+    if test "$gt_use_preinstalled_gnugettext" = "yes" \
+       || test "$nls_cv_use_gnu_gettext" = "yes"; then
+      AC_DEFINE(ENABLE_NLS, 1,
+        [Define to 1 if translation of program messages to the user's native language
+   is requested.])
+    else
+      USE_NLS=no
+    fi
+  fi
+
+  AC_MSG_CHECKING([whether to use NLS])
+  AC_MSG_RESULT([$USE_NLS])
+  if test "$USE_NLS" = "yes"; then
+    AC_MSG_CHECKING([where the gettext function comes from])
+    if test "$gt_use_preinstalled_gnugettext" = "yes"; then
+      if test "$gt_cv_func_gnugettext_libintl" = "yes"; then
+        gt_source="external libintl"
+      else
+        gt_source="libc"
+      fi
+    else
+      gt_source="included intl directory"
+    fi
+    AC_MSG_RESULT([$gt_source])
+  fi
+
+  if test "$USE_NLS" = "yes"; then
+
+    if test "$gt_use_preinstalled_gnugettext" = "yes"; then
+      if test "$gt_cv_func_gnugettext_libintl" = "yes"; then
+        AC_MSG_CHECKING([how to link with libintl])
+        AC_MSG_RESULT([$LIBINTL])
+        AC_LIB_APPENDTOVAR([CPPFLAGS], [$INCINTL])
+      fi
+
+      dnl For backward compatibility. Some packages may be using this.
+      AC_DEFINE(HAVE_GETTEXT, 1,
+       [Define if the GNU gettext() function is already present or preinstalled.])
+      AC_DEFINE(HAVE_DCGETTEXT, 1,
+       [Define if the GNU dcgettext() function is already present or preinstalled.])
+    fi
+
+    dnl We need to process the po/ directory.
+    POSUB=po
+  fi
+
+  ifelse(gt_included_intl, yes, [
+    dnl If this is used in GNU gettext we have to set BUILD_INCLUDED_LIBINTL
+    dnl to 'yes' because some of the testsuite requires it.
+    if test "$PACKAGE" = gettext-runtime || test "$PACKAGE" = gettext-tools; then
+      BUILD_INCLUDED_LIBINTL=yes
+    fi
+
+    dnl Make all variables we use known to autoconf.
+    AC_SUBST(BUILD_INCLUDED_LIBINTL)
+    AC_SUBST(USE_INCLUDED_LIBINTL)
+    AC_SUBST(CATOBJEXT)
+
+    dnl For backward compatibility. Some configure.ins may be using this.
+    nls_cv_header_intl=
+    nls_cv_header_libgt=
+
+    dnl For backward compatibility. Some Makefiles may be using this.
+    DATADIRNAME=share
+    AC_SUBST(DATADIRNAME)
+
+    dnl For backward compatibility. Some Makefiles may be using this.
+    INSTOBJEXT=.mo
+    AC_SUBST(INSTOBJEXT)
+
+    dnl For backward compatibility. Some Makefiles may be using this.
+    GENCAT=gencat
+    AC_SUBST(GENCAT)
+
+    dnl For backward compatibility. Some Makefiles may be using this.
+    INTLOBJS=
+    if test "$USE_INCLUDED_LIBINTL" = yes; then
+      INTLOBJS="\$(GETTOBJS)"
+    fi
+    AC_SUBST(INTLOBJS)
+
+    dnl Enable libtool support if the surrounding package wishes it.
+    INTL_LIBTOOL_SUFFIX_PREFIX=gt_libtool_suffix_prefix
+    AC_SUBST(INTL_LIBTOOL_SUFFIX_PREFIX)
+  ])
+
+  dnl For backward compatibility. Some Makefiles may be using this.
+  INTLLIBS="$LIBINTL"
+  AC_SUBST(INTLLIBS)
+
+  dnl Make all documented variables known to autoconf.
+  AC_SUBST(LIBINTL)
+  AC_SUBST(LTLIBINTL)
+  AC_SUBST(POSUB)
+])
+m4trace:/usr/local/share/aclocal/gettext.m4:481: -1- AC_DEFUN([AM_INTL_SUBDIR], [
+  AC_REQUIRE([AC_PROG_INSTALL])dnl
+  AC_REQUIRE([AM_MKINSTALLDIRS])dnl
+  AC_REQUIRE([AC_PROG_CC])dnl
+  AC_REQUIRE([AC_CANONICAL_HOST])dnl
+  AC_REQUIRE([gt_GLIBC2])dnl
+  AC_REQUIRE([AC_PROG_RANLIB])dnl
+  AC_REQUIRE([AC_ISC_POSIX])dnl
+  AC_REQUIRE([AC_HEADER_STDC])dnl
+  AC_REQUIRE([AC_C_CONST])dnl
+  AC_REQUIRE([bh_C_SIGNED])dnl
+  AC_REQUIRE([AC_C_INLINE])dnl
+  AC_REQUIRE([AC_TYPE_OFF_T])dnl
+  AC_REQUIRE([AC_TYPE_SIZE_T])dnl
+  AC_REQUIRE([gl_AC_TYPE_LONG_LONG])dnl
+  AC_REQUIRE([gt_TYPE_LONGDOUBLE])dnl
+  AC_REQUIRE([gt_TYPE_WCHAR_T])dnl
+  AC_REQUIRE([gt_TYPE_WINT_T])dnl
+  AC_REQUIRE([gl_AC_HEADER_INTTYPES_H])
+  AC_REQUIRE([gl_AC_HEADER_STDINT_H])
+  AC_REQUIRE([gt_TYPE_INTMAX_T])
+  AC_REQUIRE([gt_PRINTF_POSIX])
+  AC_REQUIRE([AC_FUNC_ALLOCA])dnl
+  AC_REQUIRE([AC_FUNC_MMAP])dnl
+  AC_REQUIRE([gl_GLIBC21])dnl
+  AC_REQUIRE([gt_INTDIV0])dnl
+  AC_REQUIRE([gl_AC_TYPE_UINTMAX_T])dnl
+  AC_REQUIRE([gt_HEADER_INTTYPES_H])dnl
+  AC_REQUIRE([gt_INTTYPES_PRI])dnl
+  AC_REQUIRE([gl_XSIZE])dnl
+  AC_REQUIRE([gt_INTL_MACOSX])dnl
+
+  AC_CHECK_TYPE([ptrdiff_t], ,
+    [AC_DEFINE([ptrdiff_t], [long],
+       [Define as the type of the result of subtracting two pointers, if the system doesn't define it.])
+    ])
+  AC_CHECK_HEADERS([argz.h limits.h locale.h nl_types.h malloc.h stddef.h \
+stdlib.h string.h unistd.h sys/param.h])
+  AC_CHECK_FUNCS([asprintf fwprintf getcwd getegid geteuid getgid getuid \
+mempcpy munmap putenv setenv setlocale snprintf stpcpy strcasecmp strdup \
+strtoul tsearch wcslen __argz_count __argz_stringify __argz_next \
+__fsetlocking])
+
+  dnl Use the _snprintf function only if it is declared (because on NetBSD it
+  dnl is defined as a weak alias of snprintf; we prefer to use the latter).
+  gt_CHECK_DECL(_snprintf, [#include <stdio.h>])
+  gt_CHECK_DECL(_snwprintf, [#include <stdio.h>])
+
+  dnl Use the *_unlocked functions only if they are declared.
+  dnl (because some of them were defined without being declared in Solaris
+  dnl 2.5.1 but were removed in Solaris 2.6, whereas we want binaries built
+  dnl on Solaris 2.5.1 to run on Solaris 2.6).
+  dnl Don't use AC_CHECK_DECLS because it isn't supported in autoconf-2.13.
+  gt_CHECK_DECL(feof_unlocked, [#include <stdio.h>])
+  gt_CHECK_DECL(fgets_unlocked, [#include <stdio.h>])
+  gt_CHECK_DECL(getc_unlocked, [#include <stdio.h>])
+
+  case $gt_cv_func_printf_posix in
+    *yes) HAVE_POSIX_PRINTF=1 ;;
+    *) HAVE_POSIX_PRINTF=0 ;;
+  esac
+  AC_SUBST([HAVE_POSIX_PRINTF])
+  if test "$ac_cv_func_asprintf" = yes; then
+    HAVE_ASPRINTF=1
+  else
+    HAVE_ASPRINTF=0
+  fi
+  AC_SUBST([HAVE_ASPRINTF])
+  if test "$ac_cv_func_snprintf" = yes; then
+    HAVE_SNPRINTF=1
+  else
+    HAVE_SNPRINTF=0
+  fi
+  AC_SUBST([HAVE_SNPRINTF])
+  if test "$ac_cv_func_wprintf" = yes; then
+    HAVE_WPRINTF=1
+  else
+    HAVE_WPRINTF=0
+  fi
+  AC_SUBST([HAVE_WPRINTF])
+
+  AM_ICONV
+  AM_LANGINFO_CODESET
+  if test $ac_cv_header_locale_h = yes; then
+    gt_LC_MESSAGES
+  fi
+
+  if test -n "$INTL_MACOSX_LIBS"; then
+    CPPFLAGS="$CPPFLAGS -I/System/Library/Frameworks/CoreFoundation.framework/Headers"
+  fi
+
+  dnl intl/plural.c is generated from intl/plural.y. It requires bison,
+  dnl because plural.y uses bison specific features. It requires at least
+  dnl bison-1.26 because earlier versions generate a plural.c that doesn't
+  dnl compile.
+  dnl bison is only needed for the maintainer (who touches plural.y). But in
+  dnl order to avoid separate Makefiles or --enable-maintainer-mode, we put
+  dnl the rule in general Makefile. Now, some people carelessly touch the
+  dnl files or have a broken "make" program, hence the plural.c rule will
+  dnl sometimes fire. To avoid an error, defines BISON to ":" if it is not
+  dnl present or too old.
+  AC_CHECK_PROGS([INTLBISON], [bison])
+  if test -z "$INTLBISON"; then
+    ac_verc_fail=yes
+  else
+    dnl Found it, now check the version.
+    AC_MSG_CHECKING([version of bison])
+changequote(<<,>>)dnl
+    ac_prog_version=`$INTLBISON --version 2>&1 | sed -n 's/^.*GNU Bison.* \([0-9]*\.[0-9.]*\).*$/\1/p'`
+    case $ac_prog_version in
+      '') ac_prog_version="v. ?.??, bad"; ac_verc_fail=yes;;
+      1.2[6-9]* | 1.[3-9][0-9]* | [2-9].*)
+changequote([,])dnl
+         ac_prog_version="$ac_prog_version, ok"; ac_verc_fail=no;;
+      *) ac_prog_version="$ac_prog_version, bad"; ac_verc_fail=yes;;
+    esac
+    AC_MSG_RESULT([$ac_prog_version])
+  fi
+  if test $ac_verc_fail = yes; then
+    INTLBISON=:
+  fi
+])
+m4trace:/usr/local/share/aclocal/gettext.m4:525: -1- AC_DEFUN([gt_INTL_MACOSX], [
+  dnl Check for API introduced in MacOS X 10.2.
+  AC_CACHE_CHECK([for CFPreferencesCopyAppValue],
+    gt_cv_func_CFPreferencesCopyAppValue,
+    [gt_save_CPPFLAGS="$CPPFLAGS"
+     CPPFLAGS="$CPPFLAGS -I/System/Library/Frameworks/CoreFoundation.framework/Headers"
+     gt_save_LIBS="$LIBS"
+     LIBS="$LIBS -framework CoreFoundation"
+     AC_TRY_LINK([#include <CFPreferences.h>],
+       [CFPreferencesCopyAppValue(NULL, NULL)],
+       [gt_cv_func_CFPreferencesCopyAppValue=yes],
+       [gt_cv_func_CFPreferencesCopyAppValue=no])
+     CPPFLAGS="$gt_save_CPPFLAGS"
+     LIBS="$gt_save_LIBS"])
+  if test $gt_cv_func_CFPreferencesCopyAppValue = yes; then
+    AC_DEFINE([HAVE_CFPREFERENCESCOPYAPPVALUE], 1,
+      [Define to 1 if you have the MacOS X function CFPreferencesCopyAppValue in the CoreFoundation framework.])
+  fi
+  dnl Check for API introduced in MacOS X 10.3.
+  AC_CACHE_CHECK([for CFLocaleCopyCurrent], gt_cv_func_CFLocaleCopyCurrent,
+    [gt_save_CPPFLAGS="$CPPFLAGS"
+     CPPFLAGS="$CPPFLAGS -I/System/Library/Frameworks/CoreFoundation.framework/Headers"
+     gt_save_LIBS="$LIBS"
+     LIBS="$LIBS -framework CoreFoundation"
+     AC_TRY_LINK([#include <CFLocale.h>], [CFLocaleCopyCurrent();],
+       [gt_cv_func_CFLocaleCopyCurrent=yes],
+       [gt_cv_func_CFLocaleCopyCurrent=no])
+     CPPFLAGS="$gt_save_CPPFLAGS"
+     LIBS="$gt_save_LIBS"])
+  if test $gt_cv_func_CFLocaleCopyCurrent = yes; then
+    AC_DEFINE([HAVE_CFLOCALECOPYCURRENT], 1,
+      [Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the CoreFoundation framework.])
+  fi
+  INTL_MACOSX_LIBS=
+  if test $gt_cv_func_CFPreferencesCopyAppValue = yes || test $gt_cv_func_CFLocaleCopyCurrent = yes; then
+    INTL_MACOSX_LIBS="-Wl,-framework -Wl,CoreFoundation"
+  fi
+  AC_SUBST([INTL_MACOSX_LIBS])
+])
+m4trace:/usr/local/share/aclocal/gettext.m4:545: -1- AC_DEFUN([gt_CHECK_DECL], [
+  AC_CACHE_CHECK([whether $1 is declared], ac_cv_have_decl_$1,
+    [AC_TRY_COMPILE([$2], [
+#ifndef $1
+  char *p = (char *) $1;
+#endif
+], ac_cv_have_decl_$1=yes, ac_cv_have_decl_$1=no)])
+  if test $ac_cv_have_decl_$1 = yes; then
+    gt_value=1
+  else
+    gt_value=0
+  fi
+  AC_DEFINE_UNQUOTED([HAVE_DECL_]translit($1, [a-z], [A-Z]), [$gt_value],
+    [Define to 1 if you have the declaration of `$1', and to 0 if you don't.])
+])
+m4trace:/usr/local/share/aclocal/gettext.m4:549: -1- AC_DEFUN([AM_GNU_GETTEXT_VERSION], [])
+m4trace:/usr/local/share/aclocal/glibc2.m4:30: -1- AC_DEFUN([gt_GLIBC2], [
+    AC_CACHE_CHECK(whether we are using the GNU C Library 2 or newer,
+      ac_cv_gnu_library_2,
+      [AC_EGREP_CPP([Lucky GNU user],
+	[
+#include <features.h>
+#ifdef __GNU_LIBRARY__
+ #if (__GLIBC__ >= 2)
+  Lucky GNU user
+ #endif
+#endif
+	],
+	ac_cv_gnu_library_2=yes,
+	ac_cv_gnu_library_2=no)
+      ]
+    )
+    AC_SUBST(GLIBC2)
+    GLIBC2="$ac_cv_gnu_library_2"
+  
+])
+m4trace:/usr/local/share/aclocal/glibc21.m4:30: -1- AC_DEFUN([gl_GLIBC21], [
+    AC_CACHE_CHECK(whether we are using the GNU C Library 2.1 or newer,
+      ac_cv_gnu_library_2_1,
+      [AC_EGREP_CPP([Lucky GNU user],
+	[
+#include <features.h>
+#ifdef __GNU_LIBRARY__
+ #if (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 1) || (__GLIBC__ > 2)
+  Lucky GNU user
+ #endif
+#endif
+	],
+	ac_cv_gnu_library_2_1=yes,
+	ac_cv_gnu_library_2_1=no)
+      ]
+    )
+    AC_SUBST(GLIBC21)
+    GLIBC21="$ac_cv_gnu_library_2_1"
+  
+])
+m4trace:/usr/local/share/aclocal/iconv.m4:18: -1- AC_DEFUN([AM_ICONV_LINKFLAGS_BODY], [
+  dnl Prerequisites of AC_LIB_LINKFLAGS_BODY.
+  AC_REQUIRE([AC_LIB_PREPARE_PREFIX])
+  AC_REQUIRE([AC_LIB_RPATH])
+
+  dnl Search for libiconv and define LIBICONV, LTLIBICONV and INCICONV
+  dnl accordingly.
+  AC_LIB_LINKFLAGS_BODY([iconv])
+])
+m4trace:/usr/local/share/aclocal/iconv.m4:73: -1- AC_DEFUN([AM_ICONV_LINK], [
+  dnl Some systems have iconv in libc, some have it in libiconv (OSF/1 and
+  dnl those with the standalone portable GNU libiconv installed).
+
+  dnl Search for libiconv and define LIBICONV, LTLIBICONV and INCICONV
+  dnl accordingly.
+  AC_REQUIRE([AM_ICONV_LINKFLAGS_BODY])
+
+  dnl Add $INCICONV to CPPFLAGS before performing the following checks,
+  dnl because if the user has installed libiconv and not disabled its use
+  dnl via --without-libiconv-prefix, he wants to use it. The first
+  dnl AC_TRY_LINK will then fail, the second AC_TRY_LINK will succeed.
+  am_save_CPPFLAGS="$CPPFLAGS"
+  AC_LIB_APPENDTOVAR([CPPFLAGS], [$INCICONV])
+
+  AC_CACHE_CHECK(for iconv, am_cv_func_iconv, [
+    am_cv_func_iconv="no, consider installing GNU libiconv"
+    am_cv_lib_iconv=no
+    AC_TRY_LINK([#include <stdlib.h>
+#include <iconv.h>],
+      [iconv_t cd = iconv_open("","");
+       iconv(cd,NULL,NULL,NULL,NULL);
+       iconv_close(cd);],
+      am_cv_func_iconv=yes)
+    if test "$am_cv_func_iconv" != yes; then
+      am_save_LIBS="$LIBS"
+      LIBS="$LIBS $LIBICONV"
+      AC_TRY_LINK([#include <stdlib.h>
+#include <iconv.h>],
+        [iconv_t cd = iconv_open("","");
+         iconv(cd,NULL,NULL,NULL,NULL);
+         iconv_close(cd);],
+        am_cv_lib_iconv=yes
+        am_cv_func_iconv=yes)
+      LIBS="$am_save_LIBS"
+    fi
+  ])
+  if test "$am_cv_func_iconv" = yes; then
+    AC_DEFINE(HAVE_ICONV, 1, [Define if you have the iconv() function.])
+  fi
+  if test "$am_cv_lib_iconv" = yes; then
+    AC_MSG_CHECKING([how to link with libiconv])
+    AC_MSG_RESULT([$LIBICONV])
+  else
+    dnl If $LIBICONV didn't lead to a usable library, we don't need $INCICONV
+    dnl either.
+    CPPFLAGS="$am_save_CPPFLAGS"
+    LIBICONV=
+    LTLIBICONV=
+  fi
+  AC_SUBST(LIBICONV)
+  AC_SUBST(LTLIBICONV)
+])
+m4trace:/usr/local/share/aclocal/iconv.m4:101: -1- AC_DEFUN([AM_ICONV], [
+  AM_ICONV_LINK
+  if test "$am_cv_func_iconv" = yes; then
+    AC_MSG_CHECKING([for iconv declaration])
+    AC_CACHE_VAL(am_cv_proto_iconv, [
+      AC_TRY_COMPILE([
+#include <stdlib.h>
+#include <iconv.h>
+extern
+#ifdef __cplusplus
+"C"
+#endif
+#if defined(__STDC__) || defined(__cplusplus)
+size_t iconv (iconv_t cd, char * *inbuf, size_t *inbytesleft, char * *outbuf, size_t *outbytesleft);
+#else
+size_t iconv();
+#endif
+], [], am_cv_proto_iconv_arg1="", am_cv_proto_iconv_arg1="const")
+      am_cv_proto_iconv="extern size_t iconv (iconv_t cd, $am_cv_proto_iconv_arg1 char * *inbuf, size_t *inbytesleft, char * *outbuf, size_t *outbytesleft);"])
+    am_cv_proto_iconv=`echo "[$]am_cv_proto_iconv" | tr -s ' ' | sed -e 's/( /(/'`
+    AC_MSG_RESULT([$]{ac_t:-
+         }[$]am_cv_proto_iconv)
+    AC_DEFINE_UNQUOTED(ICONV_CONST, $am_cv_proto_iconv_arg1,
+      [Define as const if the declaration of iconv() needs const.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/intdiv0.m4:70: -1- AC_DEFUN([gt_INTDIV0], [
+  AC_REQUIRE([AC_PROG_CC])dnl
+  AC_REQUIRE([AC_CANONICAL_HOST])dnl
+
+  AC_CACHE_CHECK([whether integer division by zero raises SIGFPE],
+    gt_cv_int_divbyzero_sigfpe,
+    [
+      AC_TRY_RUN([
+#include <stdlib.h>
+#include <signal.h>
+
+static void
+#ifdef __cplusplus
+sigfpe_handler (int sig)
+#else
+sigfpe_handler (sig) int sig;
+#endif
+{
+  /* Exit with code 0 if SIGFPE, with code 1 if any other signal.  */
+  exit (sig != SIGFPE);
+}
+
+int x = 1;
+int y = 0;
+int z;
+int nan;
+
+int main ()
+{
+  signal (SIGFPE, sigfpe_handler);
+/* IRIX and AIX (when "xlc -qcheck" is used) yield signal SIGTRAP.  */
+#if (defined (__sgi) || defined (_AIX)) && defined (SIGTRAP)
+  signal (SIGTRAP, sigfpe_handler);
+#endif
+/* Linux/SPARC yields signal SIGILL.  */
+#if defined (__sparc__) && defined (__linux__)
+  signal (SIGILL, sigfpe_handler);
+#endif
+
+  z = x / y;
+  nan = y / y;
+  exit (1);
+}
+], gt_cv_int_divbyzero_sigfpe=yes, gt_cv_int_divbyzero_sigfpe=no,
+        [
+          # Guess based on the CPU.
+          case "$host_cpu" in
+            alpha* | i[34567]86 | m68k | s390*)
+              gt_cv_int_divbyzero_sigfpe="guessing yes";;
+            *)
+              gt_cv_int_divbyzero_sigfpe="guessing no";;
+          esac
+        ])
+    ])
+  case "$gt_cv_int_divbyzero_sigfpe" in
+    *yes) value=1;;
+    *) value=0;;
+  esac
+  AC_DEFINE_UNQUOTED(INTDIV0_RAISES_SIGFPE, $value,
+    [Define if integer division by zero raises signal SIGFPE.])
+])
+m4trace:/usr/local/share/aclocal/intmax.m4:30: -1- AC_DEFUN([gt_TYPE_INTMAX_T], [
+  AC_REQUIRE([gl_AC_HEADER_INTTYPES_H])
+  AC_REQUIRE([gl_AC_HEADER_STDINT_H])
+  AC_CACHE_CHECK(for intmax_t, gt_cv_c_intmax_t,
+    [AC_TRY_COMPILE([
+#include <stddef.h>
+#include <stdlib.h>
+#if HAVE_STDINT_H_WITH_UINTMAX
+#include <stdint.h>
+#endif
+#if HAVE_INTTYPES_H_WITH_UINTMAX
+#include <inttypes.h>
+#endif
+], [intmax_t x = -1;], gt_cv_c_intmax_t=yes, gt_cv_c_intmax_t=no)])
+  if test $gt_cv_c_intmax_t = yes; then
+    AC_DEFINE(HAVE_INTMAX_T, 1,
+      [Define if you have the 'intmax_t' type in <stdint.h> or <inttypes.h>.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/inttypes-pri.m4:30: -1- AC_DEFUN([gt_INTTYPES_PRI], [
+  AC_REQUIRE([gt_HEADER_INTTYPES_H])
+  if test $gt_cv_header_inttypes_h = yes; then
+    AC_CACHE_CHECK([whether the inttypes.h PRIxNN macros are broken],
+      gt_cv_inttypes_pri_broken,
+      [
+        AC_TRY_COMPILE([#include <inttypes.h>
+#ifdef PRId32
+char *p = PRId32;
+#endif
+], [], gt_cv_inttypes_pri_broken=no, gt_cv_inttypes_pri_broken=yes)
+      ])
+  fi
+  if test "$gt_cv_inttypes_pri_broken" = yes; then
+    AC_DEFINE_UNQUOTED(PRI_MACROS_BROKEN, 1,
+      [Define if <inttypes.h> exists and defines unusable PRI* macros.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/inttypes.m4:25: -1- AC_DEFUN([gt_HEADER_INTTYPES_H], [
+  AC_CACHE_CHECK([for inttypes.h], gt_cv_header_inttypes_h,
+  [
+    AC_TRY_COMPILE(
+      [#include <sys/types.h>
+#include <inttypes.h>],
+      [], gt_cv_header_inttypes_h=yes, gt_cv_header_inttypes_h=no)
+  ])
+  if test $gt_cv_header_inttypes_h = yes; then
+    AC_DEFINE_UNQUOTED(HAVE_INTTYPES_H, 1,
+      [Define if <inttypes.h> exists and doesn't clash with <sys/types.h>.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/inttypes_h.m4:26: -1- AC_DEFUN([gl_AC_HEADER_INTTYPES_H], [
+  AC_CACHE_CHECK([for inttypes.h], gl_cv_header_inttypes_h,
+  [AC_TRY_COMPILE(
+    [#include <sys/types.h>
+#include <inttypes.h>],
+    [uintmax_t i = (uintmax_t) -1;],
+    gl_cv_header_inttypes_h=yes,
+    gl_cv_header_inttypes_h=no)])
+  if test $gl_cv_header_inttypes_h = yes; then
+    AC_DEFINE_UNQUOTED(HAVE_INTTYPES_H_WITH_UINTMAX, 1,
+      [Define if <inttypes.h> exists, doesn't clash with <sys/types.h>,
+       and declares uintmax_t. ])
+  fi
+])
+m4trace:/usr/local/share/aclocal/isc-posix.m4:24: -1- AC_DEFUN([AC_ISC_POSIX], [
+    dnl This test replaces the obsolescent AC_ISC_POSIX kludge.
+    AC_CHECK_LIB(cposix, strerror, [LIBS="$LIBS -lcposix"])
+  
+])
+m4trace:/usr/local/share/aclocal/lcmessage.m4:30: -1- AC_DEFUN([gt_LC_MESSAGES], [
+  AC_CACHE_CHECK([for LC_MESSAGES], gt_cv_val_LC_MESSAGES,
+    [AC_TRY_LINK([#include <locale.h>], [return LC_MESSAGES],
+       gt_cv_val_LC_MESSAGES=yes, gt_cv_val_LC_MESSAGES=no)])
+  if test $gt_cv_val_LC_MESSAGES = yes; then
+    AC_DEFINE(HAVE_LC_MESSAGES, 1,
+      [Define if your <locale.h> file defines LC_MESSAGES.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/lib-ld.m4:22: -1- AC_DEFUN([AC_LIB_PROG_LD_GNU], [AC_CACHE_CHECK([if the linker ($LD) is GNU ld], acl_cv_prog_gnu_ld,
+[# I'd rather use --version here, but apparently some GNU ld's only accept -v.
+case `$LD -v 2>&1 </dev/null` in
+*GNU* | *'with BFD'*)
+  acl_cv_prog_gnu_ld=yes ;;
+*)
+  acl_cv_prog_gnu_ld=no ;;
+esac])
+with_gnu_ld=$acl_cv_prog_gnu_ld
+])
+m4trace:/usr/local/share/aclocal/lib-ld.m4:110: -1- AC_DEFUN([AC_LIB_PROG_LD], [AC_ARG_WITH(gnu-ld,
+[  --with-gnu-ld           assume the C compiler uses GNU ld [default=no]],
+test "$withval" = no || with_gnu_ld=yes, with_gnu_ld=no)
+AC_REQUIRE([AC_PROG_CC])dnl
+AC_REQUIRE([AC_CANONICAL_HOST])dnl
+# Prepare PATH_SEPARATOR.
+# The user is always right.
+if test "${PATH_SEPARATOR+set}" != set; then
+  echo "#! /bin/sh" >conf$$.sh
+  echo  "exit 0"   >>conf$$.sh
+  chmod +x conf$$.sh
+  if (PATH="/nonexistent;."; conf$$.sh) >/dev/null 2>&1; then
+    PATH_SEPARATOR=';'
+  else
+    PATH_SEPARATOR=:
+  fi
+  rm -f conf$$.sh
+fi
+ac_prog=ld
+if test "$GCC" = yes; then
+  # Check if gcc -print-prog-name=ld gives a path.
+  AC_MSG_CHECKING([for ld used by GCC])
+  case $host in
+  *-*-mingw*)
+    # gcc leaves a trailing carriage return which upsets mingw
+    ac_prog=`($CC -print-prog-name=ld) 2>&5 | tr -d '\015'` ;;
+  *)
+    ac_prog=`($CC -print-prog-name=ld) 2>&5` ;;
+  esac
+  case $ac_prog in
+    # Accept absolute paths.
+    [[\\/]* | [A-Za-z]:[\\/]*)]
+      [re_direlt='/[^/][^/]*/\.\./']
+      # Canonicalize the path of ld
+      ac_prog=`echo $ac_prog| sed 's%\\\\%/%g'`
+      while echo $ac_prog | grep "$re_direlt" > /dev/null 2>&1; do
+	ac_prog=`echo $ac_prog| sed "s%$re_direlt%/%"`
+      done
+      test -z "$LD" && LD="$ac_prog"
+      ;;
+  "")
+    # If it fails, then pretend we aren't using GCC.
+    ac_prog=ld
+    ;;
+  *)
+    # If it is relative, then search for the first ld in PATH.
+    with_gnu_ld=unknown
+    ;;
+  esac
+elif test "$with_gnu_ld" = yes; then
+  AC_MSG_CHECKING([for GNU ld])
+else
+  AC_MSG_CHECKING([for non-GNU ld])
+fi
+AC_CACHE_VAL(acl_cv_path_LD,
+[if test -z "$LD"; then
+  IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS="${IFS}${PATH_SEPARATOR-:}"
+  for ac_dir in $PATH; do
+    test -z "$ac_dir" && ac_dir=.
+    if test -f "$ac_dir/$ac_prog" || test -f "$ac_dir/$ac_prog$ac_exeext"; then
+      acl_cv_path_LD="$ac_dir/$ac_prog"
+      # Check to see if the program is GNU ld.  I'd rather use --version,
+      # but apparently some GNU ld's only accept -v.
+      # Break only if it was the GNU/non-GNU ld that we prefer.
+      case `"$acl_cv_path_LD" -v 2>&1 < /dev/null` in
+      *GNU* | *'with BFD'*)
+	test "$with_gnu_ld" != no && break ;;
+      *)
+	test "$with_gnu_ld" != yes && break ;;
+      esac
+    fi
+  done
+  IFS="$ac_save_ifs"
+else
+  acl_cv_path_LD="$LD" # Let the user override the test with a path.
+fi])
+LD="$acl_cv_path_LD"
+if test -n "$LD"; then
+  AC_MSG_RESULT($LD)
+else
+  AC_MSG_RESULT(no)
+fi
+test -z "$LD" && AC_MSG_ERROR([no acceptable ld found in \$PATH])
+AC_LIB_PROG_LD_GNU
+])
+m4trace:/usr/local/share/aclocal/lib-link.m4:39: -1- AC_DEFUN([AC_LIB_LINKFLAGS], [
+  AC_REQUIRE([AC_LIB_PREPARE_PREFIX])
+  AC_REQUIRE([AC_LIB_RPATH])
+  define([Name],[translit([$1],[./-], [___])])
+  define([NAME],[translit([$1],[abcdefghijklmnopqrstuvwxyz./-],
+                               [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+  AC_CACHE_CHECK([how to link with lib[]$1], [ac_cv_lib[]Name[]_libs], [
+    AC_LIB_LINKFLAGS_BODY([$1], [$2])
+    ac_cv_lib[]Name[]_libs="$LIB[]NAME"
+    ac_cv_lib[]Name[]_ltlibs="$LTLIB[]NAME"
+    ac_cv_lib[]Name[]_cppflags="$INC[]NAME"
+  ])
+  LIB[]NAME="$ac_cv_lib[]Name[]_libs"
+  LTLIB[]NAME="$ac_cv_lib[]Name[]_ltlibs"
+  INC[]NAME="$ac_cv_lib[]Name[]_cppflags"
+  AC_LIB_APPENDTOVAR([CPPFLAGS], [$INC]NAME)
+  AC_SUBST([LIB]NAME)
+  AC_SUBST([LTLIB]NAME)
+  dnl Also set HAVE_LIB[]NAME so that AC_LIB_HAVE_LINKFLAGS can reuse the
+  dnl results of this search when this library appears as a dependency.
+  HAVE_LIB[]NAME=yes
+  undefine([Name])
+  undefine([NAME])
+])
+m4trace:/usr/local/share/aclocal/lib-link.m4:91: -1- AC_DEFUN([AC_LIB_HAVE_LINKFLAGS], [
+  AC_REQUIRE([AC_LIB_PREPARE_PREFIX])
+  AC_REQUIRE([AC_LIB_RPATH])
+  define([Name],[translit([$1],[./-], [___])])
+  define([NAME],[translit([$1],[abcdefghijklmnopqrstuvwxyz./-],
+                               [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+
+  dnl Search for lib[]Name and define LIB[]NAME, LTLIB[]NAME and INC[]NAME
+  dnl accordingly.
+  AC_LIB_LINKFLAGS_BODY([$1], [$2])
+
+  dnl Add $INC[]NAME to CPPFLAGS before performing the following checks,
+  dnl because if the user has installed lib[]Name and not disabled its use
+  dnl via --without-lib[]Name-prefix, he wants to use it.
+  ac_save_CPPFLAGS="$CPPFLAGS"
+  AC_LIB_APPENDTOVAR([CPPFLAGS], [$INC]NAME)
+
+  AC_CACHE_CHECK([for lib[]$1], [ac_cv_lib[]Name], [
+    ac_save_LIBS="$LIBS"
+    LIBS="$LIBS $LIB[]NAME"
+    AC_TRY_LINK([$3], [$4], [ac_cv_lib[]Name=yes], [ac_cv_lib[]Name=no])
+    LIBS="$ac_save_LIBS"
+  ])
+  if test "$ac_cv_lib[]Name" = yes; then
+    HAVE_LIB[]NAME=yes
+    AC_DEFINE([HAVE_LIB]NAME, 1, [Define if you have the $1 library.])
+    AC_MSG_CHECKING([how to link with lib[]$1])
+    AC_MSG_RESULT([$LIB[]NAME])
+  else
+    HAVE_LIB[]NAME=no
+    dnl If $LIB[]NAME didn't lead to a usable library, we don't need
+    dnl $INC[]NAME either.
+    CPPFLAGS="$ac_save_CPPFLAGS"
+    LIB[]NAME=
+    LTLIB[]NAME=
+  fi
+  AC_SUBST([HAVE_LIB]NAME)
+  AC_SUBST([LIB]NAME)
+  AC_SUBST([LTLIB]NAME)
+  undefine([Name])
+  undefine([NAME])
+])
+m4trace:/usr/local/share/aclocal/lib-link.m4:122: -1- AC_DEFUN([AC_LIB_RPATH], [
+  dnl Tell automake >= 1.10 to complain if config.rpath is missing.
+  m4_ifdef([AC_REQUIRE_AUX_FILE], [AC_REQUIRE_AUX_FILE([config.rpath])])
+  AC_REQUIRE([AC_PROG_CC])                dnl we use $CC, $GCC, $LDFLAGS
+  AC_REQUIRE([AC_LIB_PROG_LD])            dnl we use $LD, $with_gnu_ld
+  AC_REQUIRE([AC_CANONICAL_HOST])         dnl we use $host
+  AC_REQUIRE([AC_CONFIG_AUX_DIR_DEFAULT]) dnl we use $ac_aux_dir
+  AC_CACHE_CHECK([for shared library run path origin], acl_cv_rpath, [
+    CC="$CC" GCC="$GCC" LDFLAGS="$LDFLAGS" LD="$LD" with_gnu_ld="$with_gnu_ld" \
+    ${CONFIG_SHELL-/bin/sh} "$ac_aux_dir/config.rpath" "$host" > conftest.sh
+    . ./conftest.sh
+    rm -f ./conftest.sh
+    acl_cv_rpath=done
+  ])
+  wl="$acl_cv_wl"
+  libext="$acl_cv_libext"
+  shlibext="$acl_cv_shlibext"
+  hardcode_libdir_flag_spec="$acl_cv_hardcode_libdir_flag_spec"
+  hardcode_libdir_separator="$acl_cv_hardcode_libdir_separator"
+  hardcode_direct="$acl_cv_hardcode_direct"
+  hardcode_minus_L="$acl_cv_hardcode_minus_L"
+  dnl Determine whether the user wants rpath handling at all.
+  AC_ARG_ENABLE(rpath,
+    [  --disable-rpath         do not hardcode runtime library paths],
+    :, enable_rpath=yes)
+])
+m4trace:/usr/local/share/aclocal/lib-link.m4:532: -1- AC_DEFUN([AC_LIB_LINKFLAGS_BODY], [
+  define([NAME],[translit([$1],[abcdefghijklmnopqrstuvwxyz./-],
+                               [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+  dnl By default, look in $includedir and $libdir.
+  use_additional=yes
+  AC_LIB_WITH_FINAL_PREFIX([
+    eval additional_includedir=\"$includedir\"
+    eval additional_libdir=\"$libdir\"
+  ])
+  AC_LIB_ARG_WITH([lib$1-prefix],
+[  --with-lib$1-prefix[=DIR]  search for lib$1 in DIR/include and DIR/lib
+  --without-lib$1-prefix     don't search for lib$1 in includedir and libdir],
+[
+    if test "X$withval" = "Xno"; then
+      use_additional=no
+    else
+      if test "X$withval" = "X"; then
+        AC_LIB_WITH_FINAL_PREFIX([
+          eval additional_includedir=\"$includedir\"
+          eval additional_libdir=\"$libdir\"
+        ])
+      else
+        additional_includedir="$withval/include"
+        additional_libdir="$withval/lib"
+      fi
+    fi
+])
+  dnl Search the library and its dependencies in $additional_libdir and
+  dnl $LDFLAGS. Using breadth-first-seach.
+  LIB[]NAME=
+  LTLIB[]NAME=
+  INC[]NAME=
+  rpathdirs=
+  ltrpathdirs=
+  names_already_handled=
+  names_next_round='$1 $2'
+  while test -n "$names_next_round"; do
+    names_this_round="$names_next_round"
+    names_next_round=
+    for name in $names_this_round; do
+      already_handled=
+      for n in $names_already_handled; do
+        if test "$n" = "$name"; then
+          already_handled=yes
+          break
+        fi
+      done
+      if test -z "$already_handled"; then
+        names_already_handled="$names_already_handled $name"
+        dnl See if it was already located by an earlier AC_LIB_LINKFLAGS
+        dnl or AC_LIB_HAVE_LINKFLAGS call.
+        uppername=`echo "$name" | sed -e 'y|abcdefghijklmnopqrstuvwxyz./-|ABCDEFGHIJKLMNOPQRSTUVWXYZ___|'`
+        eval value=\"\$HAVE_LIB$uppername\"
+        if test -n "$value"; then
+          if test "$value" = yes; then
+            eval value=\"\$LIB$uppername\"
+            test -z "$value" || LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }$value"
+            eval value=\"\$LTLIB$uppername\"
+            test -z "$value" || LTLIB[]NAME="${LTLIB[]NAME}${LTLIB[]NAME:+ }$value"
+          else
+            dnl An earlier call to AC_LIB_HAVE_LINKFLAGS has determined
+            dnl that this library doesn't exist. So just drop it.
+            :
+          fi
+        else
+          dnl Search the library lib$name in $additional_libdir and $LDFLAGS
+          dnl and the already constructed $LIBNAME/$LTLIBNAME.
+          found_dir=
+          found_la=
+          found_so=
+          found_a=
+          if test $use_additional = yes; then
+            if test -n "$shlibext" && test -f "$additional_libdir/lib$name.$shlibext"; then
+              found_dir="$additional_libdir"
+              found_so="$additional_libdir/lib$name.$shlibext"
+              if test -f "$additional_libdir/lib$name.la"; then
+                found_la="$additional_libdir/lib$name.la"
+              fi
+            else
+              if test -f "$additional_libdir/lib$name.$libext"; then
+                found_dir="$additional_libdir"
+                found_a="$additional_libdir/lib$name.$libext"
+                if test -f "$additional_libdir/lib$name.la"; then
+                  found_la="$additional_libdir/lib$name.la"
+                fi
+              fi
+            fi
+          fi
+          if test "X$found_dir" = "X"; then
+            for x in $LDFLAGS $LTLIB[]NAME; do
+              AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+              case "$x" in
+                -L*)
+                  dir=`echo "X$x" | sed -e 's/^X-L//'`
+                  if test -n "$shlibext" && test -f "$dir/lib$name.$shlibext"; then
+                    found_dir="$dir"
+                    found_so="$dir/lib$name.$shlibext"
+                    if test -f "$dir/lib$name.la"; then
+                      found_la="$dir/lib$name.la"
+                    fi
+                  else
+                    if test -f "$dir/lib$name.$libext"; then
+                      found_dir="$dir"
+                      found_a="$dir/lib$name.$libext"
+                      if test -f "$dir/lib$name.la"; then
+                        found_la="$dir/lib$name.la"
+                      fi
+                    fi
+                  fi
+                  ;;
+              esac
+              if test "X$found_dir" != "X"; then
+                break
+              fi
+            done
+          fi
+          if test "X$found_dir" != "X"; then
+            dnl Found the library.
+            LTLIB[]NAME="${LTLIB[]NAME}${LTLIB[]NAME:+ }-L$found_dir -l$name"
+            if test "X$found_so" != "X"; then
+              dnl Linking with a shared library. We attempt to hardcode its
+              dnl directory into the executable's runpath, unless it's the
+              dnl standard /usr/lib.
+              if test "$enable_rpath" = no || test "X$found_dir" = "X/usr/lib"; then
+                dnl No hardcoding is needed.
+                LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }$found_so"
+              else
+                dnl Use an explicit option to hardcode DIR into the resulting
+                dnl binary.
+                dnl Potentially add DIR to ltrpathdirs.
+                dnl The ltrpathdirs will be appended to $LTLIBNAME at the end.
+                haveit=
+                for x in $ltrpathdirs; do
+                  if test "X$x" = "X$found_dir"; then
+                    haveit=yes
+                    break
+                  fi
+                done
+                if test -z "$haveit"; then
+                  ltrpathdirs="$ltrpathdirs $found_dir"
+                fi
+                dnl The hardcoding into $LIBNAME is system dependent.
+                if test "$hardcode_direct" = yes; then
+                  dnl Using DIR/libNAME.so during linking hardcodes DIR into the
+                  dnl resulting binary.
+                  LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }$found_so"
+                else
+                  if test -n "$hardcode_libdir_flag_spec" && test "$hardcode_minus_L" = no; then
+                    dnl Use an explicit option to hardcode DIR into the resulting
+                    dnl binary.
+                    LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }$found_so"
+                    dnl Potentially add DIR to rpathdirs.
+                    dnl The rpathdirs will be appended to $LIBNAME at the end.
+                    haveit=
+                    for x in $rpathdirs; do
+                      if test "X$x" = "X$found_dir"; then
+                        haveit=yes
+                        break
+                      fi
+                    done
+                    if test -z "$haveit"; then
+                      rpathdirs="$rpathdirs $found_dir"
+                    fi
+                  else
+                    dnl Rely on "-L$found_dir".
+                    dnl But don't add it if it's already contained in the LDFLAGS
+                    dnl or the already constructed $LIBNAME
+                    haveit=
+                    for x in $LDFLAGS $LIB[]NAME; do
+                      AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+                      if test "X$x" = "X-L$found_dir"; then
+                        haveit=yes
+                        break
+                      fi
+                    done
+                    if test -z "$haveit"; then
+                      LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }-L$found_dir"
+                    fi
+                    if test "$hardcode_minus_L" != no; then
+                      dnl FIXME: Not sure whether we should use
+                      dnl "-L$found_dir -l$name" or "-L$found_dir $found_so"
+                      dnl here.
+                      LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }$found_so"
+                    else
+                      dnl We cannot use $hardcode_runpath_var and LD_RUN_PATH
+                      dnl here, because this doesn't fit in flags passed to the
+                      dnl compiler. So give up. No hardcoding. This affects only
+                      dnl very old systems.
+                      dnl FIXME: Not sure whether we should use
+                      dnl "-L$found_dir -l$name" or "-L$found_dir $found_so"
+                      dnl here.
+                      LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }-l$name"
+                    fi
+                  fi
+                fi
+              fi
+            else
+              if test "X$found_a" != "X"; then
+                dnl Linking with a static library.
+                LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }$found_a"
+              else
+                dnl We shouldn't come here, but anyway it's good to have a
+                dnl fallback.
+                LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }-L$found_dir -l$name"
+              fi
+            fi
+            dnl Assume the include files are nearby.
+            additional_includedir=
+            case "$found_dir" in
+              */lib | */lib/)
+                basedir=`echo "X$found_dir" | sed -e 's,^X,,' -e 's,/lib/*$,,'`
+                additional_includedir="$basedir/include"
+                ;;
+            esac
+            if test "X$additional_includedir" != "X"; then
+              dnl Potentially add $additional_includedir to $INCNAME.
+              dnl But don't add it
+              dnl   1. if it's the standard /usr/include,
+              dnl   2. if it's /usr/local/include and we are using GCC on Linux,
+              dnl   3. if it's already present in $CPPFLAGS or the already
+              dnl      constructed $INCNAME,
+              dnl   4. if it doesn't exist as a directory.
+              if test "X$additional_includedir" != "X/usr/include"; then
+                haveit=
+                if test "X$additional_includedir" = "X/usr/local/include"; then
+                  if test -n "$GCC"; then
+                    case $host_os in
+                      linux* | gnu* | k*bsd*-gnu) haveit=yes;;
+                    esac
+                  fi
+                fi
+                if test -z "$haveit"; then
+                  for x in $CPPFLAGS $INC[]NAME; do
+                    AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+                    if test "X$x" = "X-I$additional_includedir"; then
+                      haveit=yes
+                      break
+                    fi
+                  done
+                  if test -z "$haveit"; then
+                    if test -d "$additional_includedir"; then
+                      dnl Really add $additional_includedir to $INCNAME.
+                      INC[]NAME="${INC[]NAME}${INC[]NAME:+ }-I$additional_includedir"
+                    fi
+                  fi
+                fi
+              fi
+            fi
+            dnl Look for dependencies.
+            if test -n "$found_la"; then
+              dnl Read the .la file. It defines the variables
+              dnl dlname, library_names, old_library, dependency_libs, current,
+              dnl age, revision, installed, dlopen, dlpreopen, libdir.
+              save_libdir="$libdir"
+              case "$found_la" in
+                */* | *\\*) . "$found_la" ;;
+                *) . "./$found_la" ;;
+              esac
+              libdir="$save_libdir"
+              dnl We use only dependency_libs.
+              for dep in $dependency_libs; do
+                case "$dep" in
+                  -L*)
+                    additional_libdir=`echo "X$dep" | sed -e 's/^X-L//'`
+                    dnl Potentially add $additional_libdir to $LIBNAME and $LTLIBNAME.
+                    dnl But don't add it
+                    dnl   1. if it's the standard /usr/lib,
+                    dnl   2. if it's /usr/local/lib and we are using GCC on Linux,
+                    dnl   3. if it's already present in $LDFLAGS or the already
+                    dnl      constructed $LIBNAME,
+                    dnl   4. if it doesn't exist as a directory.
+                    if test "X$additional_libdir" != "X/usr/lib"; then
+                      haveit=
+                      if test "X$additional_libdir" = "X/usr/local/lib"; then
+                        if test -n "$GCC"; then
+                          case $host_os in
+                            linux* | gnu* | k*bsd*-gnu) haveit=yes;;
+                          esac
+                        fi
+                      fi
+                      if test -z "$haveit"; then
+                        haveit=
+                        for x in $LDFLAGS $LIB[]NAME; do
+                          AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+                          if test "X$x" = "X-L$additional_libdir"; then
+                            haveit=yes
+                            break
+                          fi
+                        done
+                        if test -z "$haveit"; then
+                          if test -d "$additional_libdir"; then
+                            dnl Really add $additional_libdir to $LIBNAME.
+                            LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }-L$additional_libdir"
+                          fi
+                        fi
+                        haveit=
+                        for x in $LDFLAGS $LTLIB[]NAME; do
+                          AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+                          if test "X$x" = "X-L$additional_libdir"; then
+                            haveit=yes
+                            break
+                          fi
+                        done
+                        if test -z "$haveit"; then
+                          if test -d "$additional_libdir"; then
+                            dnl Really add $additional_libdir to $LTLIBNAME.
+                            LTLIB[]NAME="${LTLIB[]NAME}${LTLIB[]NAME:+ }-L$additional_libdir"
+                          fi
+                        fi
+                      fi
+                    fi
+                    ;;
+                  -R*)
+                    dir=`echo "X$dep" | sed -e 's/^X-R//'`
+                    if test "$enable_rpath" != no; then
+                      dnl Potentially add DIR to rpathdirs.
+                      dnl The rpathdirs will be appended to $LIBNAME at the end.
+                      haveit=
+                      for x in $rpathdirs; do
+                        if test "X$x" = "X$dir"; then
+                          haveit=yes
+                          break
+                        fi
+                      done
+                      if test -z "$haveit"; then
+                        rpathdirs="$rpathdirs $dir"
+                      fi
+                      dnl Potentially add DIR to ltrpathdirs.
+                      dnl The ltrpathdirs will be appended to $LTLIBNAME at the end.
+                      haveit=
+                      for x in $ltrpathdirs; do
+                        if test "X$x" = "X$dir"; then
+                          haveit=yes
+                          break
+                        fi
+                      done
+                      if test -z "$haveit"; then
+                        ltrpathdirs="$ltrpathdirs $dir"
+                      fi
+                    fi
+                    ;;
+                  -l*)
+                    dnl Handle this in the next round.
+                    names_next_round="$names_next_round "`echo "X$dep" | sed -e 's/^X-l//'`
+                    ;;
+                  *.la)
+                    dnl Handle this in the next round. Throw away the .la's
+                    dnl directory; it is already contained in a preceding -L
+                    dnl option.
+                    names_next_round="$names_next_round "`echo "X$dep" | sed -e 's,^X.*/,,' -e 's,^lib,,' -e 's,\.la$,,'`
+                    ;;
+                  *)
+                    dnl Most likely an immediate library name.
+                    LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }$dep"
+                    LTLIB[]NAME="${LTLIB[]NAME}${LTLIB[]NAME:+ }$dep"
+                    ;;
+                esac
+              done
+            fi
+          else
+            dnl Didn't find the library; assume it is in the system directories
+            dnl known to the linker and runtime loader. (All the system
+            dnl directories known to the linker should also be known to the
+            dnl runtime loader, otherwise the system is severely misconfigured.)
+            LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }-l$name"
+            LTLIB[]NAME="${LTLIB[]NAME}${LTLIB[]NAME:+ }-l$name"
+          fi
+        fi
+      fi
+    done
+  done
+  if test "X$rpathdirs" != "X"; then
+    if test -n "$hardcode_libdir_separator"; then
+      dnl Weird platform: only the last -rpath option counts, the user must
+      dnl pass all path elements in one option. We can arrange that for a
+      dnl single library, but not when more than one $LIBNAMEs are used.
+      alldirs=
+      for found_dir in $rpathdirs; do
+        alldirs="${alldirs}${alldirs:+$hardcode_libdir_separator}$found_dir"
+      done
+      dnl Note: hardcode_libdir_flag_spec uses $libdir and $wl.
+      acl_save_libdir="$libdir"
+      libdir="$alldirs"
+      eval flag=\"$hardcode_libdir_flag_spec\"
+      libdir="$acl_save_libdir"
+      LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }$flag"
+    else
+      dnl The -rpath options are cumulative.
+      for found_dir in $rpathdirs; do
+        acl_save_libdir="$libdir"
+        libdir="$found_dir"
+        eval flag=\"$hardcode_libdir_flag_spec\"
+        libdir="$acl_save_libdir"
+        LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }$flag"
+      done
+    fi
+  fi
+  if test "X$ltrpathdirs" != "X"; then
+    dnl When using libtool, the option that works for both libraries and
+    dnl executables is -R. The -R options are cumulative.
+    for found_dir in $ltrpathdirs; do
+      LTLIB[]NAME="${LTLIB[]NAME}${LTLIB[]NAME:+ }-R$found_dir"
+    done
+  fi
+])
+m4trace:/usr/local/share/aclocal/lib-link.m4:553: -1- AC_DEFUN([AC_LIB_APPENDTOVAR], [
+  for element in [$2]; do
+    haveit=
+    for x in $[$1]; do
+      AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+      if test "X$x" = "X$element"; then
+        haveit=yes
+        break
+      fi
+    done
+    if test -z "$haveit"; then
+      [$1]="${[$1]}${[$1]:+ }$element"
+    fi
+  done
+])
+m4trace:/usr/local/share/aclocal/lib-prefix.m4:14: -1- AC_DEFUN([AC_LIB_ARG_WITH], [AC_ARG_WITH([$1],[[$2]],[$3],[$4])])
+m4trace:/usr/local/share/aclocal/lib-prefix.m4:116: -1- AC_DEFUN([AC_LIB_PREFIX], [
+  AC_BEFORE([$0], [AC_LIB_LINKFLAGS])
+  AC_REQUIRE([AC_PROG_CC])
+  AC_REQUIRE([AC_CANONICAL_HOST])
+  AC_REQUIRE([AC_LIB_PREPARE_PREFIX])
+  dnl By default, look in $includedir and $libdir.
+  use_additional=yes
+  AC_LIB_WITH_FINAL_PREFIX([
+    eval additional_includedir=\"$includedir\"
+    eval additional_libdir=\"$libdir\"
+  ])
+  AC_LIB_ARG_WITH([lib-prefix],
+[  --with-lib-prefix[=DIR] search for libraries in DIR/include and DIR/lib
+  --without-lib-prefix    don't search for libraries in includedir and libdir],
+[
+    if test "X$withval" = "Xno"; then
+      use_additional=no
+    else
+      if test "X$withval" = "X"; then
+        AC_LIB_WITH_FINAL_PREFIX([
+          eval additional_includedir=\"$includedir\"
+          eval additional_libdir=\"$libdir\"
+        ])
+      else
+        additional_includedir="$withval/include"
+        additional_libdir="$withval/lib"
+      fi
+    fi
+])
+  if test $use_additional = yes; then
+    dnl Potentially add $additional_includedir to $CPPFLAGS.
+    dnl But don't add it
+    dnl   1. if it's the standard /usr/include,
+    dnl   2. if it's already present in $CPPFLAGS,
+    dnl   3. if it's /usr/local/include and we are using GCC on Linux,
+    dnl   4. if it doesn't exist as a directory.
+    if test "X$additional_includedir" != "X/usr/include"; then
+      haveit=
+      for x in $CPPFLAGS; do
+        AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+        if test "X$x" = "X-I$additional_includedir"; then
+          haveit=yes
+          break
+        fi
+      done
+      if test -z "$haveit"; then
+        if test "X$additional_includedir" = "X/usr/local/include"; then
+          if test -n "$GCC"; then
+            case $host_os in
+              linux* | gnu* | k*bsd*-gnu) haveit=yes;;
+            esac
+          fi
+        fi
+        if test -z "$haveit"; then
+          if test -d "$additional_includedir"; then
+            dnl Really add $additional_includedir to $CPPFLAGS.
+            CPPFLAGS="${CPPFLAGS}${CPPFLAGS:+ }-I$additional_includedir"
+          fi
+        fi
+      fi
+    fi
+    dnl Potentially add $additional_libdir to $LDFLAGS.
+    dnl But don't add it
+    dnl   1. if it's the standard /usr/lib,
+    dnl   2. if it's already present in $LDFLAGS,
+    dnl   3. if it's /usr/local/lib and we are using GCC on Linux,
+    dnl   4. if it doesn't exist as a directory.
+    if test "X$additional_libdir" != "X/usr/lib"; then
+      haveit=
+      for x in $LDFLAGS; do
+        AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+        if test "X$x" = "X-L$additional_libdir"; then
+          haveit=yes
+          break
+        fi
+      done
+      if test -z "$haveit"; then
+        if test "X$additional_libdir" = "X/usr/local/lib"; then
+          if test -n "$GCC"; then
+            case $host_os in
+              linux*) haveit=yes;;
+            esac
+          fi
+        fi
+        if test -z "$haveit"; then
+          if test -d "$additional_libdir"; then
+            dnl Really add $additional_libdir to $LDFLAGS.
+            LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-L$additional_libdir"
+          fi
+        fi
+      fi
+    fi
+  fi
+])
+m4trace:/usr/local/share/aclocal/lib-prefix.m4:139: -1- AC_DEFUN([AC_LIB_PREPARE_PREFIX], [
+  dnl Unfortunately, prefix and exec_prefix get only finally determined
+  dnl at the end of configure.
+  if test "X$prefix" = "XNONE"; then
+    acl_final_prefix="$ac_default_prefix"
+  else
+    acl_final_prefix="$prefix"
+  fi
+  if test "X$exec_prefix" = "XNONE"; then
+    acl_final_exec_prefix='${prefix}'
+  else
+    acl_final_exec_prefix="$exec_prefix"
+  fi
+  acl_save_prefix="$prefix"
+  prefix="$acl_final_prefix"
+  eval acl_final_exec_prefix=\"$acl_final_exec_prefix\"
+  prefix="$acl_save_prefix"
+])
+m4trace:/usr/local/share/aclocal/lib-prefix.m4:153: -1- AC_DEFUN([AC_LIB_WITH_FINAL_PREFIX], [
+  acl_save_prefix="$prefix"
+  prefix="$acl_final_prefix"
+  acl_save_exec_prefix="$exec_prefix"
+  exec_prefix="$acl_final_exec_prefix"
+  $1
+  exec_prefix="$acl_save_exec_prefix"
+  prefix="$acl_save_prefix"
+])
+m4trace:/usr/local/share/aclocal/longdouble.m4:28: -1- AC_DEFUN([gt_TYPE_LONGDOUBLE], [
+  AC_CACHE_CHECK([for long double], gt_cv_c_long_double,
+    [if test "$GCC" = yes; then
+       gt_cv_c_long_double=yes
+     else
+       AC_TRY_COMPILE([
+         /* The Stardent Vistra knows sizeof(long double), but does not support it.  */
+         long double foo = 0.0;
+         /* On Ultrix 4.3 cc, long double is 4 and double is 8.  */
+         int array [2*(sizeof(long double) >= sizeof(double)) - 1];
+         ], ,
+         gt_cv_c_long_double=yes, gt_cv_c_long_double=no)
+     fi])
+  if test $gt_cv_c_long_double = yes; then
+    AC_DEFINE(HAVE_LONG_DOUBLE, 1, [Define if you have the 'long double' type.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/longlong.m4:23: -1- AC_DEFUN([gl_AC_TYPE_LONG_LONG], [
+  AC_CACHE_CHECK([for long long], ac_cv_type_long_long,
+  [AC_TRY_LINK([long long ll = 1LL; int i = 63;],
+    [long long llmax = (long long) -1;
+     return ll << i | ll >> i | llmax / ll | llmax % ll;],
+    ac_cv_type_long_long=yes,
+    ac_cv_type_long_long=no)])
+  if test $ac_cv_type_long_long = yes; then
+    AC_DEFINE(HAVE_LONG_LONG, 1,
+      [Define if you have the 'long long' type.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/nls.m4:31: -1- AC_DEFUN([AM_NLS], [
+  AC_MSG_CHECKING([whether NLS is requested])
+  dnl Default is enabled NLS
+  AC_ARG_ENABLE(nls,
+    [  --disable-nls           do not use Native Language Support],
+    USE_NLS=$enableval, USE_NLS=yes)
+  AC_MSG_RESULT($USE_NLS)
+  AC_SUBST(USE_NLS)
+])
+m4trace:/usr/local/share/aclocal/nls.m4:51: -1- AC_DEFUN([AM_MKINSTALLDIRS], [
+  dnl Tell automake >= 1.10 to complain if mkinstalldirs is missing.
+  m4_ifdef([AC_REQUIRE_AUX_FILE], [AC_REQUIRE_AUX_FILE([mkinstalldirs])])
+  dnl If the AC_CONFIG_AUX_DIR macro for autoconf is used we possibly
+  dnl find the mkinstalldirs script in another subdir but $(top_srcdir).
+  dnl Try to locate it.
+  MKINSTALLDIRS=
+  if test -n "$ac_aux_dir"; then
+    case "$ac_aux_dir" in
+      /*) MKINSTALLDIRS="$ac_aux_dir/mkinstalldirs" ;;
+      *) MKINSTALLDIRS="\$(top_builddir)/$ac_aux_dir/mkinstalldirs" ;;
+    esac
+  fi
+  if test -z "$MKINSTALLDIRS"; then
+    MKINSTALLDIRS="\$(top_srcdir)/mkinstalldirs"
+  fi
+  AC_SUBST(MKINSTALLDIRS)
+])
+m4trace:/usr/local/share/aclocal/po.m4:208: -1- AC_DEFUN([AM_PO_SUBDIRS], [
+  AC_REQUIRE([AC_PROG_MAKE_SET])dnl
+  AC_REQUIRE([AC_PROG_INSTALL])dnl
+  AC_REQUIRE([AM_MKINSTALLDIRS])dnl
+  AC_REQUIRE([AM_NLS])dnl
+
+  dnl Perform the following tests also if --disable-nls has been given,
+  dnl because they are needed for "make dist" to work.
+
+  dnl Search for GNU msgfmt in the PATH.
+  dnl The first test excludes Solaris msgfmt and early GNU msgfmt versions.
+  dnl The second test excludes FreeBSD msgfmt.
+  AM_PATH_PROG_WITH_TEST(MSGFMT, msgfmt,
+    [$ac_dir/$ac_word --statistics /dev/null >&]AS_MESSAGE_LOG_FD[ 2>&1 &&
+     (if $ac_dir/$ac_word --statistics /dev/null 2>&1 >/dev/null | grep usage >/dev/null; then exit 1; else exit 0; fi)],
+    :)
+  AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
+
+  dnl Search for GNU xgettext 0.12 or newer in the PATH.
+  dnl The first test excludes Solaris xgettext and early GNU xgettext versions.
+  dnl The second test excludes FreeBSD xgettext.
+  AM_PATH_PROG_WITH_TEST(XGETTEXT, xgettext,
+    [$ac_dir/$ac_word --omit-header --copyright-holder= --msgid-bugs-address= /dev/null >&]AS_MESSAGE_LOG_FD[ 2>&1 &&
+     (if $ac_dir/$ac_word --omit-header --copyright-holder= --msgid-bugs-address= /dev/null 2>&1 >/dev/null | grep usage >/dev/null; then exit 1; else exit 0; fi)],
+    :)
+  dnl Remove leftover from FreeBSD xgettext call.
+  rm -f messages.po
+
+  dnl Search for GNU msgmerge 0.11 or newer in the PATH.
+  AM_PATH_PROG_WITH_TEST(MSGMERGE, msgmerge,
+    [$ac_dir/$ac_word --update -q /dev/null /dev/null >&]AS_MESSAGE_LOG_FD[ 2>&1], :)
+
+  dnl This could go away some day; the PATH_PROG_WITH_TEST already does it.
+  dnl Test whether we really found GNU msgfmt.
+  if test "$GMSGFMT" != ":"; then
+    dnl If it is no GNU msgfmt we define it as : so that the
+    dnl Makefiles still can work.
+    if $GMSGFMT --statistics /dev/null >/dev/null 2>&1 &&
+       (if $GMSGFMT --statistics /dev/null 2>&1 >/dev/null | grep usage >/dev/null; then exit 1; else exit 0; fi); then
+      : ;
+    else
+      GMSGFMT=`echo "$GMSGFMT" | sed -e 's,^.*/,,'`
+      AC_MSG_RESULT(
+        [found $GMSGFMT program is not GNU msgfmt; ignore it])
+      GMSGFMT=":"
+    fi
+  fi
+
+  dnl This could go away some day; the PATH_PROG_WITH_TEST already does it.
+  dnl Test whether we really found GNU xgettext.
+  if test "$XGETTEXT" != ":"; then
+    dnl If it is no GNU xgettext we define it as : so that the
+    dnl Makefiles still can work.
+    if $XGETTEXT --omit-header --copyright-holder= --msgid-bugs-address= /dev/null >/dev/null 2>&1 &&
+       (if $XGETTEXT --omit-header --copyright-holder= --msgid-bugs-address= /dev/null 2>&1 >/dev/null | grep usage >/dev/null; then exit 1; else exit 0; fi); then
+      : ;
+    else
+      AC_MSG_RESULT(
+        [found xgettext program is not GNU xgettext; ignore it])
+      XGETTEXT=":"
+    fi
+    dnl Remove leftover from FreeBSD xgettext call.
+    rm -f messages.po
+  fi
+
+  AC_OUTPUT_COMMANDS([
+    for ac_file in $CONFIG_FILES; do
+      # Support "outfile[:infile[:infile...]]"
+      case "$ac_file" in
+        *:*) ac_file=`echo "$ac_file"|sed 's%:.*%%'` ;;
+      esac
+      # PO directories have a Makefile.in generated from Makefile.in.in.
+      case "$ac_file" in */Makefile.in)
+        # Adjust a relative srcdir.
+        ac_dir=`echo "$ac_file"|sed 's%/[^/][^/]*$%%'`
+        ac_dir_suffix="/`echo "$ac_dir"|sed 's%^\./%%'`"
+        ac_dots=`echo "$ac_dir_suffix"|sed 's%/[^/]*%../%g'`
+        # In autoconf-2.13 it is called $ac_given_srcdir.
+        # In autoconf-2.50 it is called $srcdir.
+        test -n "$ac_given_srcdir" || ac_given_srcdir="$srcdir"
+        case "$ac_given_srcdir" in
+          .)  top_srcdir=`echo $ac_dots|sed 's%/$%%'` ;;
+          /*) top_srcdir="$ac_given_srcdir" ;;
+          *)  top_srcdir="$ac_dots$ac_given_srcdir" ;;
+        esac
+        # Treat a directory as a PO directory if and only if it has a
+        # POTFILES.in file. This allows packages to have multiple PO
+        # directories under different names or in different locations.
+        if test -f "$ac_given_srcdir/$ac_dir/POTFILES.in"; then
+          rm -f "$ac_dir/POTFILES"
+          test -n "$as_me" && echo "$as_me: creating $ac_dir/POTFILES" || echo "creating $ac_dir/POTFILES"
+          cat "$ac_given_srcdir/$ac_dir/POTFILES.in" | sed -e "/^#/d" -e "/^[ 	]*\$/d" -e "s,.*,     $top_srcdir/& \\\\," | sed -e "\$s/\(.*\) \\\\/\1/" > "$ac_dir/POTFILES"
+          POMAKEFILEDEPS="POTFILES.in"
+          # ALL_LINGUAS, POFILES, UPDATEPOFILES, DUMMYPOFILES, GMOFILES depend
+          # on $ac_dir but don't depend on user-specified configuration
+          # parameters.
+          if test -f "$ac_given_srcdir/$ac_dir/LINGUAS"; then
+            # The LINGUAS file contains the set of available languages.
+            if test -n "$OBSOLETE_ALL_LINGUAS"; then
+              test -n "$as_me" && echo "$as_me: setting ALL_LINGUAS in configure.in is obsolete" || echo "setting ALL_LINGUAS in configure.in is obsolete"
+            fi
+            ALL_LINGUAS_=`sed -e "/^#/d" -e "s/#.*//" "$ac_given_srcdir/$ac_dir/LINGUAS"`
+            # Hide the ALL_LINGUAS assigment from automake.
+            eval 'ALL_LINGUAS''=$ALL_LINGUAS_'
+            POMAKEFILEDEPS="$POMAKEFILEDEPS LINGUAS"
+          else
+            # The set of available languages was given in configure.in.
+            eval 'ALL_LINGUAS''=$OBSOLETE_ALL_LINGUAS'
+          fi
+          # Compute POFILES
+          # as      $(foreach lang, $(ALL_LINGUAS), $(srcdir)/$(lang).po)
+          # Compute UPDATEPOFILES
+          # as      $(foreach lang, $(ALL_LINGUAS), $(lang).po-update)
+          # Compute DUMMYPOFILES
+          # as      $(foreach lang, $(ALL_LINGUAS), $(lang).nop)
+          # Compute GMOFILES
+          # as      $(foreach lang, $(ALL_LINGUAS), $(srcdir)/$(lang).gmo)
+          case "$ac_given_srcdir" in
+            .) srcdirpre= ;;
+            *) srcdirpre='$(srcdir)/' ;;
+          esac
+          POFILES=
+          UPDATEPOFILES=
+          DUMMYPOFILES=
+          GMOFILES=
+          for lang in $ALL_LINGUAS; do
+            POFILES="$POFILES $srcdirpre$lang.po"
+            UPDATEPOFILES="$UPDATEPOFILES $lang.po-update"
+            DUMMYPOFILES="$DUMMYPOFILES $lang.nop"
+            GMOFILES="$GMOFILES $srcdirpre$lang.gmo"
+          done
+          # CATALOGS depends on both $ac_dir and the user's LINGUAS
+          # environment variable.
+          INST_LINGUAS=
+          if test -n "$ALL_LINGUAS"; then
+            for presentlang in $ALL_LINGUAS; do
+              useit=no
+              if test "%UNSET%" != "$LINGUAS"; then
+                desiredlanguages="$LINGUAS"
+              else
+                desiredlanguages="$ALL_LINGUAS"
+              fi
+              for desiredlang in $desiredlanguages; do
+                # Use the presentlang catalog if desiredlang is
+                #   a. equal to presentlang, or
+                #   b. a variant of presentlang (because in this case,
+                #      presentlang can be used as a fallback for messages
+                #      which are not translated in the desiredlang catalog).
+                case "$desiredlang" in
+                  "$presentlang"*) useit=yes;;
+                esac
+              done
+              if test $useit = yes; then
+                INST_LINGUAS="$INST_LINGUAS $presentlang"
+              fi
+            done
+          fi
+          CATALOGS=
+          if test -n "$INST_LINGUAS"; then
+            for lang in $INST_LINGUAS; do
+              CATALOGS="$CATALOGS $lang.gmo"
+            done
+          fi
+          test -n "$as_me" && echo "$as_me: creating $ac_dir/Makefile" || echo "creating $ac_dir/Makefile"
+          sed -e "/^POTFILES =/r $ac_dir/POTFILES" -e "/^# Makevars/r $ac_given_srcdir/$ac_dir/Makevars" -e "s|@POFILES@|$POFILES|g" -e "s|@UPDATEPOFILES@|$UPDATEPOFILES|g" -e "s|@DUMMYPOFILES@|$DUMMYPOFILES|g" -e "s|@GMOFILES@|$GMOFILES|g" -e "s|@CATALOGS@|$CATALOGS|g" -e "s|@POMAKEFILEDEPS@|$POMAKEFILEDEPS|g" "$ac_dir/Makefile.in" > "$ac_dir/Makefile"
+          for f in "$ac_given_srcdir/$ac_dir"/Rules-*; do
+            if test -f "$f"; then
+              case "$f" in
+                *.orig | *.bak | *~) ;;
+                *) cat "$f" >> "$ac_dir/Makefile" ;;
+              esac
+            fi
+          done
+        fi
+        ;;
+      esac
+    done],
+   [# Capture the value of obsolete ALL_LINGUAS because we need it to compute
+    # POFILES, UPDATEPOFILES, DUMMYPOFILES, GMOFILES, CATALOGS. But hide it
+    # from automake.
+    eval 'OBSOLETE_ALL_LINGUAS''="$ALL_LINGUAS"'
+    # Capture the value of LINGUAS because we need it to compute CATALOGS.
+    LINGUAS="${LINGUAS-%UNSET%}"
+   ])
+])
+m4trace:/usr/local/share/aclocal/po.m4:429: -1- AC_DEFUN([AM_POSTPROCESS_PO_MAKEFILE], [
+  # When this code is run, in config.status, two variables have already been
+  # set:
+  # - OBSOLETE_ALL_LINGUAS is the value of LINGUAS set in configure.in,
+  # - LINGUAS is the value of the environment variable LINGUAS at configure
+  #   time.
+
+changequote(,)dnl
+  # Adjust a relative srcdir.
+  ac_dir=`echo "$ac_file"|sed 's%/[^/][^/]*$%%'`
+  ac_dir_suffix="/`echo "$ac_dir"|sed 's%^\./%%'`"
+  ac_dots=`echo "$ac_dir_suffix"|sed 's%/[^/]*%../%g'`
+  # In autoconf-2.13 it is called $ac_given_srcdir.
+  # In autoconf-2.50 it is called $srcdir.
+  test -n "$ac_given_srcdir" || ac_given_srcdir="$srcdir"
+  case "$ac_given_srcdir" in
+    .)  top_srcdir=`echo $ac_dots|sed 's%/$%%'` ;;
+    /*) top_srcdir="$ac_given_srcdir" ;;
+    *)  top_srcdir="$ac_dots$ac_given_srcdir" ;;
+  esac
+
+  # Find a way to echo strings without interpreting backslash.
+  if test "X`(echo '\t') 2>/dev/null`" = 'X\t'; then
+    gt_echo='echo'
+  else
+    if test "X`(printf '%s\n' '\t') 2>/dev/null`" = 'X\t'; then
+      gt_echo='printf %s\n'
+    else
+      echo_func () {
+        cat <<EOT
+$*
+EOT
+      }
+      gt_echo='echo_func'
+    fi
+  fi
+
+  # A sed script that extracts the value of VARIABLE from a Makefile.
+  sed_x_variable='
+# Test if the hold space is empty.
+x
+s/P/P/
+x
+ta
+# Yes it was empty. Look if we have the expected variable definition.
+/^[	 ]*VARIABLE[	 ]*=/{
+  # Seen the first line of the variable definition.
+  s/^[	 ]*VARIABLE[	 ]*=//
+  ba
+}
+bd
+:a
+# Here we are processing a line from the variable definition.
+# Remove comment, more precisely replace it with a space.
+s/#.*$/ /
+# See if the line ends in a backslash.
+tb
+:b
+s/\\$//
+# Print the line, without the trailing backslash.
+p
+tc
+# There was no trailing backslash. The end of the variable definition is
+# reached. Clear the hold space.
+s/^.*$//
+x
+bd
+:c
+# A trailing backslash means that the variable definition continues in the
+# next line. Put a nonempty string into the hold space to indicate this.
+s/^.*$/P/
+x
+:d
+'
+changequote([,])dnl
+
+  # Set POTFILES to the value of the Makefile variable POTFILES.
+  sed_x_POTFILES="`$gt_echo \"$sed_x_variable\" | sed -e '/^ *#/d' -e 's/VARIABLE/POTFILES/g'`"
+  POTFILES=`sed -n -e "$sed_x_POTFILES" < "$ac_file"`
+  # Compute POTFILES_DEPS as
+  #   $(foreach file, $(POTFILES), $(top_srcdir)/$(file))
+  POTFILES_DEPS=
+  for file in $POTFILES; do
+    POTFILES_DEPS="$POTFILES_DEPS "'$(top_srcdir)/'"$file"
+  done
+  POMAKEFILEDEPS=""
+
+  if test -n "$OBSOLETE_ALL_LINGUAS"; then
+    test -n "$as_me" && echo "$as_me: setting ALL_LINGUAS in configure.in is obsolete" || echo "setting ALL_LINGUAS in configure.in is obsolete"
+  fi
+  if test -f "$ac_given_srcdir/$ac_dir/LINGUAS"; then
+    # The LINGUAS file contains the set of available languages.
+    ALL_LINGUAS_=`sed -e "/^#/d" -e "s/#.*//" "$ac_given_srcdir/$ac_dir/LINGUAS"`
+    POMAKEFILEDEPS="$POMAKEFILEDEPS LINGUAS"
+  else
+    # Set ALL_LINGUAS to the value of the Makefile variable LINGUAS.
+    sed_x_LINGUAS="`$gt_echo \"$sed_x_variable\" | sed -e '/^ *#/d' -e 's/VARIABLE/LINGUAS/g'`"
+    ALL_LINGUAS_=`sed -n -e "$sed_x_LINGUAS" < "$ac_file"`
+  fi
+  # Hide the ALL_LINGUAS assigment from automake.
+  eval 'ALL_LINGUAS''=$ALL_LINGUAS_'
+  # Compute POFILES
+  # as      $(foreach lang, $(ALL_LINGUAS), $(srcdir)/$(lang).po)
+  # Compute UPDATEPOFILES
+  # as      $(foreach lang, $(ALL_LINGUAS), $(lang).po-update)
+  # Compute DUMMYPOFILES
+  # as      $(foreach lang, $(ALL_LINGUAS), $(lang).nop)
+  # Compute GMOFILES
+  # as      $(foreach lang, $(ALL_LINGUAS), $(srcdir)/$(lang).gmo)
+  # Compute PROPERTIESFILES
+  # as      $(foreach lang, $(ALL_LINGUAS), $(top_srcdir)/$(DOMAIN)_$(lang).properties)
+  # Compute CLASSFILES
+  # as      $(foreach lang, $(ALL_LINGUAS), $(top_srcdir)/$(DOMAIN)_$(lang).class)
+  # Compute QMFILES
+  # as      $(foreach lang, $(ALL_LINGUAS), $(srcdir)/$(lang).qm)
+  # Compute MSGFILES
+  # as      $(foreach lang, $(ALL_LINGUAS), $(srcdir)/$(frob $(lang)).msg)
+  # Compute RESOURCESDLLFILES
+  # as      $(foreach lang, $(ALL_LINGUAS), $(srcdir)/$(frob $(lang))/$(DOMAIN).resources.dll)
+  case "$ac_given_srcdir" in
+    .) srcdirpre= ;;
+    *) srcdirpre='$(srcdir)/' ;;
+  esac
+  POFILES=
+  UPDATEPOFILES=
+  DUMMYPOFILES=
+  GMOFILES=
+  PROPERTIESFILES=
+  CLASSFILES=
+  QMFILES=
+  MSGFILES=
+  RESOURCESDLLFILES=
+  for lang in $ALL_LINGUAS; do
+    POFILES="$POFILES $srcdirpre$lang.po"
+    UPDATEPOFILES="$UPDATEPOFILES $lang.po-update"
+    DUMMYPOFILES="$DUMMYPOFILES $lang.nop"
+    GMOFILES="$GMOFILES $srcdirpre$lang.gmo"
+    PROPERTIESFILES="$PROPERTIESFILES \$(top_srcdir)/\$(DOMAIN)_$lang.properties"
+    CLASSFILES="$CLASSFILES \$(top_srcdir)/\$(DOMAIN)_$lang.class"
+    QMFILES="$QMFILES $srcdirpre$lang.qm"
+    frobbedlang=`echo $lang | sed -e 's/\..*$//' -e 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'`
+    MSGFILES="$MSGFILES $srcdirpre$frobbedlang.msg"
+    frobbedlang=`echo $lang | sed -e 's/_/-/g' -e 's/^sr-CS/sr-SP/' -e 's/@latin$/-Latn/' -e 's/@cyrillic$/-Cyrl/' -e 's/^sr-SP$/sr-SP-Latn/' -e 's/^uz-UZ$/uz-UZ-Latn/'`
+    RESOURCESDLLFILES="$RESOURCESDLLFILES $srcdirpre$frobbedlang/\$(DOMAIN).resources.dll"
+  done
+  # CATALOGS depends on both $ac_dir and the user's LINGUAS
+  # environment variable.
+  INST_LINGUAS=
+  if test -n "$ALL_LINGUAS"; then
+    for presentlang in $ALL_LINGUAS; do
+      useit=no
+      if test "%UNSET%" != "$LINGUAS"; then
+        desiredlanguages="$LINGUAS"
+      else
+        desiredlanguages="$ALL_LINGUAS"
+      fi
+      for desiredlang in $desiredlanguages; do
+        # Use the presentlang catalog if desiredlang is
+        #   a. equal to presentlang, or
+        #   b. a variant of presentlang (because in this case,
+        #      presentlang can be used as a fallback for messages
+        #      which are not translated in the desiredlang catalog).
+        case "$desiredlang" in
+          "$presentlang"*) useit=yes;;
+        esac
+      done
+      if test $useit = yes; then
+        INST_LINGUAS="$INST_LINGUAS $presentlang"
+      fi
+    done
+  fi
+  CATALOGS=
+  JAVACATALOGS=
+  QTCATALOGS=
+  TCLCATALOGS=
+  CSHARPCATALOGS=
+  if test -n "$INST_LINGUAS"; then
+    for lang in $INST_LINGUAS; do
+      CATALOGS="$CATALOGS $lang.gmo"
+      JAVACATALOGS="$JAVACATALOGS \$(DOMAIN)_$lang.properties"
+      QTCATALOGS="$QTCATALOGS $lang.qm"
+      frobbedlang=`echo $lang | sed -e 's/\..*$//' -e 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'`
+      TCLCATALOGS="$TCLCATALOGS $frobbedlang.msg"
+      frobbedlang=`echo $lang | sed -e 's/_/-/g' -e 's/^sr-CS/sr-SP/' -e 's/@latin$/-Latn/' -e 's/@cyrillic$/-Cyrl/' -e 's/^sr-SP$/sr-SP-Latn/' -e 's/^uz-UZ$/uz-UZ-Latn/'`
+      CSHARPCATALOGS="$CSHARPCATALOGS $frobbedlang/\$(DOMAIN).resources.dll"
+    done
+  fi
+
+  sed -e "s|@POTFILES_DEPS@|$POTFILES_DEPS|g" -e "s|@POFILES@|$POFILES|g" -e "s|@UPDATEPOFILES@|$UPDATEPOFILES|g" -e "s|@DUMMYPOFILES@|$DUMMYPOFILES|g" -e "s|@GMOFILES@|$GMOFILES|g" -e "s|@PROPERTIESFILES@|$PROPERTIESFILES|g" -e "s|@CLASSFILES@|$CLASSFILES|g" -e "s|@QMFILES@|$QMFILES|g" -e "s|@MSGFILES@|$MSGFILES|g" -e "s|@RESOURCESDLLFILES@|$RESOURCESDLLFILES|g" -e "s|@CATALOGS@|$CATALOGS|g" -e "s|@JAVACATALOGS@|$JAVACATALOGS|g" -e "s|@QTCATALOGS@|$QTCATALOGS|g" -e "s|@TCLCATALOGS@|$TCLCATALOGS|g" -e "s|@CSHARPCATALOGS@|$CSHARPCATALOGS|g" -e 's,^#distdir:,distdir:,' < "$ac_file" > "$ac_file.tmp"
+  if grep -l '@TCLCATALOGS@' "$ac_file" > /dev/null; then
+    # Add dependencies that cannot be formulated as a simple suffix rule.
+    for lang in $ALL_LINGUAS; do
+      frobbedlang=`echo $lang | sed -e 's/\..*$//' -e 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'`
+      cat >> "$ac_file.tmp" <<EOF
+$frobbedlang.msg: $lang.po
+	@echo "\$(MSGFMT) -c --tcl -d \$(srcdir) -l $lang $srcdirpre$lang.po"; \
+	\$(MSGFMT) -c --tcl -d "\$(srcdir)" -l $lang $srcdirpre$lang.po || { rm -f "\$(srcdir)/$frobbedlang.msg"; exit 1; }
+EOF
+    done
+  fi
+  if grep -l '@CSHARPCATALOGS@' "$ac_file" > /dev/null; then
+    # Add dependencies that cannot be formulated as a simple suffix rule.
+    for lang in $ALL_LINGUAS; do
+      frobbedlang=`echo $lang | sed -e 's/_/-/g' -e 's/^sr-CS/sr-SP/' -e 's/@latin$/-Latn/' -e 's/@cyrillic$/-Cyrl/' -e 's/^sr-SP$/sr-SP-Latn/' -e 's/^uz-UZ$/uz-UZ-Latn/'`
+      cat >> "$ac_file.tmp" <<EOF
+$frobbedlang/\$(DOMAIN).resources.dll: $lang.po
+	@echo "\$(MSGFMT) -c --csharp -d \$(srcdir) -l $lang $srcdirpre$lang.po -r \$(DOMAIN)"; \
+	\$(MSGFMT) -c --csharp -d "\$(srcdir)" -l $lang $srcdirpre$lang.po -r "\$(DOMAIN)" || { rm -f "\$(srcdir)/$frobbedlang.msg"; exit 1; }
+EOF
+    done
+  fi
+  if test -n "$POMAKEFILEDEPS"; then
+    cat >> "$ac_file.tmp" <<EOF
+Makefile: $POMAKEFILEDEPS
+EOF
+  fi
+  mv "$ac_file.tmp" "$ac_file"
+])
+m4trace:/usr/local/share/aclocal/printf-posix.m4:44: -1- AC_DEFUN([gt_PRINTF_POSIX], [
+  AC_REQUIRE([AC_PROG_CC])
+  AC_CACHE_CHECK([whether printf() supports POSIX/XSI format strings],
+    gt_cv_func_printf_posix,
+    [
+      AC_TRY_RUN([
+#include <stdio.h>
+#include <string.h>
+/* The string "%2$d %1$d", with dollar characters protected from the shell's
+   dollar expansion (possibly an autoconf bug).  */
+static char format[] = { '%', '2', '$', 'd', ' ', '%', '1', '$', 'd', '\0' };
+static char buf[100];
+int main ()
+{
+  sprintf (buf, format, 33, 55);
+  return (strcmp (buf, "55 33") != 0);
+}], gt_cv_func_printf_posix=yes, gt_cv_func_printf_posix=no,
+      [
+        AC_EGREP_CPP(notposix, [
+#if defined __NetBSD__ || defined _MSC_VER || defined __MINGW32__ || defined __CYGWIN__
+  notposix
+#endif
+        ], gt_cv_func_printf_posix="guessing no",
+           gt_cv_func_printf_posix="guessing yes")
+      ])
+    ])
+  case $gt_cv_func_printf_posix in
+    *yes)
+      AC_DEFINE(HAVE_POSIX_PRINTF, 1,
+        [Define if your printf() function supports format strings with positions.])
+      ;;
+  esac
+])
+m4trace:/usr/local/share/aclocal/progtest.m4:92: -1- AC_DEFUN([AM_PATH_PROG_WITH_TEST], [
+# Prepare PATH_SEPARATOR.
+# The user is always right.
+if test "${PATH_SEPARATOR+set}" != set; then
+  echo "#! /bin/sh" >conf$$.sh
+  echo  "exit 0"   >>conf$$.sh
+  chmod +x conf$$.sh
+  if (PATH="/nonexistent;."; conf$$.sh) >/dev/null 2>&1; then
+    PATH_SEPARATOR=';'
+  else
+    PATH_SEPARATOR=:
+  fi
+  rm -f conf$$.sh
+fi
+
+# Find out how to test for executable files. Don't use a zero-byte file,
+# as systems may use methods other than mode bits to determine executability.
+cat >conf$$.file <<_ASEOF
+#! /bin/sh
+exit 0
+_ASEOF
+chmod +x conf$$.file
+if test -x conf$$.file >/dev/null 2>&1; then
+  ac_executable_p="test -x"
+else
+  ac_executable_p="test -f"
+fi
+rm -f conf$$.file
+
+# Extract the first word of "$2", so it can be a program name with args.
+set dummy $2; ac_word=[$]2
+AC_MSG_CHECKING([for $ac_word])
+AC_CACHE_VAL(ac_cv_path_$1,
+[case "[$]$1" in
+  [[\\/]]* | ?:[[\\/]]*)
+    ac_cv_path_$1="[$]$1" # Let the user override the test with a path.
+    ;;
+  *)
+    ac_save_IFS="$IFS"; IFS=$PATH_SEPARATOR
+    for ac_dir in ifelse([$5], , $PATH, [$5]); do
+      IFS="$ac_save_IFS"
+      test -z "$ac_dir" && ac_dir=.
+      for ac_exec_ext in '' $ac_executable_extensions; do
+        if $ac_executable_p "$ac_dir/$ac_word$ac_exec_ext"; then
+          echo "$as_me: trying $ac_dir/$ac_word..." >&AS_MESSAGE_LOG_FD
+          if [$3]; then
+            ac_cv_path_$1="$ac_dir/$ac_word$ac_exec_ext"
+            break 2
+          fi
+        fi
+      done
+    done
+    IFS="$ac_save_IFS"
+dnl If no 4th arg is given, leave the cache variable unset,
+dnl so AC_PATH_PROGS will keep looking.
+ifelse([$4], , , [  test -z "[$]ac_cv_path_$1" && ac_cv_path_$1="$4"
+])dnl
+    ;;
+esac])dnl
+$1="$ac_cv_path_$1"
+if test ifelse([$4], , [-n "[$]$1"], ["[$]$1" != "$4"]); then
+  AC_MSG_RESULT([$]$1)
+else
+  AC_MSG_RESULT(no)
+fi
+AC_SUBST($1)dnl
+])
+m4trace:/usr/local/share/aclocal/signed.m4:17: -1- AC_DEFUN([bh_C_SIGNED], [
+  AC_CACHE_CHECK([for signed], bh_cv_c_signed,
+   [AC_TRY_COMPILE(, [signed char x;], bh_cv_c_signed=yes, bh_cv_c_signed=no)])
+  if test $bh_cv_c_signed = no; then
+    AC_DEFINE(signed, ,
+              [Define to empty if the C compiler doesn't support this keyword.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/size_max.m4:59: -1- AC_DEFUN([gl_SIZE_MAX], [
+  AC_CHECK_HEADERS(stdint.h)
+  dnl First test whether the system already has SIZE_MAX.
+  AC_MSG_CHECKING([for SIZE_MAX])
+  result=
+  AC_EGREP_CPP([Found it], [
+#include <limits.h>
+#if HAVE_STDINT_H
+#include <stdint.h>
+#endif
+#ifdef SIZE_MAX
+Found it
+#endif
+], result=yes)
+  if test -z "$result"; then
+    dnl Define it ourselves. Here we assume that the type 'size_t' is not wider
+    dnl than the type 'unsigned long'.
+    dnl The _AC_COMPUTE_INT macro works up to LONG_MAX, since it uses 'expr',
+    dnl which is guaranteed to work from LONG_MIN to LONG_MAX.
+    _AC_COMPUTE_INT([~(size_t)0 / 10], res_hi,
+      [#include <stddef.h>], result=?)
+    _AC_COMPUTE_INT([~(size_t)0 % 10], res_lo,
+      [#include <stddef.h>], result=?)
+    _AC_COMPUTE_INT([sizeof (size_t) <= sizeof (unsigned int)], fits_in_uint,
+      [#include <stddef.h>], result=?)
+    if test "$fits_in_uint" = 1; then
+      dnl Even though SIZE_MAX fits in an unsigned int, it must be of type
+      dnl 'unsigned long' if the type 'size_t' is the same as 'unsigned long'.
+      AC_TRY_COMPILE([#include <stddef.h>
+        extern size_t foo;
+        extern unsigned long foo;
+        ], [], fits_in_uint=0)
+    fi
+    if test -z "$result"; then
+      if test "$fits_in_uint" = 1; then
+        result="$res_hi$res_lo"U
+      else
+        result="$res_hi$res_lo"UL
+      fi
+    else
+      dnl Shouldn't happen, but who knows...
+      result='~(size_t)0'
+    fi
+  fi
+  AC_MSG_RESULT([$result])
+  if test "$result" != yes; then
+    AC_DEFINE_UNQUOTED([SIZE_MAX], [$result],
+      [Define as the maximum value of type 'size_t', if the system doesn't define it.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/stdint_h.m4:26: -1- AC_DEFUN([gl_AC_HEADER_STDINT_H], [
+  AC_CACHE_CHECK([for stdint.h], gl_cv_header_stdint_h,
+  [AC_TRY_COMPILE(
+    [#include <sys/types.h>
+#include <stdint.h>],
+    [uintmax_t i = (uintmax_t) -1;],
+    gl_cv_header_stdint_h=yes,
+    gl_cv_header_stdint_h=no)])
+  if test $gl_cv_header_stdint_h = yes; then
+    AC_DEFINE_UNQUOTED(HAVE_STDINT_H_WITH_UINTMAX, 1,
+      [Define if <stdint.h> exists, doesn't clash with <sys/types.h>,
+       and declares uintmax_t. ])
+  fi
+])
+m4trace:/usr/local/share/aclocal/uintmax_t.m4:30: -1- AC_DEFUN([gl_AC_TYPE_UINTMAX_T], [
+  AC_REQUIRE([gl_AC_HEADER_INTTYPES_H])
+  AC_REQUIRE([gl_AC_HEADER_STDINT_H])
+  if test $gl_cv_header_inttypes_h = no && test $gl_cv_header_stdint_h = no; then
+    AC_REQUIRE([gl_AC_TYPE_UNSIGNED_LONG_LONG])
+    test $ac_cv_type_unsigned_long_long = yes \
+      && ac_type='unsigned long long' \
+      || ac_type='unsigned long'
+    AC_DEFINE_UNQUOTED(uintmax_t, $ac_type,
+      [Define to unsigned long or unsigned long long
+       if <stdint.h> and <inttypes.h> don't define.])
+  else
+    AC_DEFINE(HAVE_UINTMAX_T, 1,
+      [Define if you have the 'uintmax_t' type in <stdint.h> or <inttypes.h>.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/ulonglong.m4:23: -1- AC_DEFUN([gl_AC_TYPE_UNSIGNED_LONG_LONG], [
+  AC_CACHE_CHECK([for unsigned long long], ac_cv_type_unsigned_long_long,
+  [AC_TRY_LINK([unsigned long long ull = 1ULL; int i = 63;],
+    [unsigned long long ullmax = (unsigned long long) -1;
+     return ull << i | ull >> i | ullmax / ull | ullmax % ull;],
+    ac_cv_type_unsigned_long_long=yes,
+    ac_cv_type_unsigned_long_long=no)])
+  if test $ac_cv_type_unsigned_long_long = yes; then
+    AC_DEFINE(HAVE_UNSIGNED_LONG_LONG, 1,
+      [Define if you have the 'unsigned long long' type.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/wchar_t.m4:20: -1- AC_DEFUN([gt_TYPE_WCHAR_T], [
+  AC_CACHE_CHECK([for wchar_t], gt_cv_c_wchar_t,
+    [AC_TRY_COMPILE([#include <stddef.h>
+       wchar_t foo = (wchar_t)'\0';], ,
+       gt_cv_c_wchar_t=yes, gt_cv_c_wchar_t=no)])
+  if test $gt_cv_c_wchar_t = yes; then
+    AC_DEFINE(HAVE_WCHAR_T, 1, [Define if you have the 'wchar_t' type.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/wint_t.m4:20: -1- AC_DEFUN([gt_TYPE_WINT_T], [
+  AC_CACHE_CHECK([for wint_t], gt_cv_c_wint_t,
+    [AC_TRY_COMPILE([#include <wchar.h>
+       wint_t foo = (wchar_t)'\0';], ,
+       gt_cv_c_wint_t=yes, gt_cv_c_wint_t=no)])
+  if test $gt_cv_c_wint_t = yes; then
+    AC_DEFINE(HAVE_WINT_T, 1, [Define if you have the 'wint_t' type.])
+  fi
+])
+m4trace:/usr/local/share/aclocal/xsize.m4:13: -1- AC_DEFUN([gl_XSIZE], [
+  dnl Prerequisites of lib/xsize.h.
+  AC_REQUIRE([gl_SIZE_MAX])
+  AC_REQUIRE([AC_C_INLINE])
+  AC_CHECK_HEADERS(stdint.h)
+])
+m4trace:linux.m4:149: -1- AC_DEFUN([AM_PATH_ALSA], [dnl Save the original CFLAGS, LDFLAGS, and LIBS
+alsa_save_CFLAGS="$CFLAGS"
+alsa_save_LDFLAGS="$LDFLAGS"
+alsa_save_LIBS="$LIBS"
+alsa_found=yes
+
+dnl
+dnl Get the cflags and libraries for alsa
+dnl
+AC_ARG_WITH(alsa-prefix,
+[  --with-alsa-prefix=PFX  Prefix where Alsa library is installed(optional)],
+[alsa_prefix="$withval"], [alsa_prefix=""])
+
+AC_ARG_WITH(alsa-inc-prefix,
+[  --with-alsa-inc-prefix=PFX  Prefix where include libraries are (optional)],
+[alsa_inc_prefix="$withval"], [alsa_inc_prefix=""])
+
+dnl FIXME: this is not yet implemented
+AC_ARG_ENABLE(alsatest,
+[  --disable-alsatest      Do not try to compile and run a test Alsa program],
+[enable_alsatest="$enableval"],
+[enable_alsatest=yes])
+
+dnl Add any special include directories
+AC_MSG_CHECKING(for ALSA CFLAGS)
+if test "$alsa_inc_prefix" != "" ; then
+	ALSA_CFLAGS="$ALSA_CFLAGS -I$alsa_inc_prefix"
+	CFLAGS="$CFLAGS -I$alsa_inc_prefix"
+fi
+AC_MSG_RESULT($ALSA_CFLAGS)
+CFLAGS="$alsa_save_CFLAGS"
+
+dnl add any special lib dirs
+AC_MSG_CHECKING(for ALSA LDFLAGS)
+if test "$alsa_prefix" != "" ; then
+	ALSA_LIBS="$ALSA_LIBS -L$alsa_prefix"
+	LDFLAGS="$LDFLAGS $ALSA_LIBS"
+fi
+
+dnl add the alsa library
+ALSA_LIBS="$ALSA_LIBS -lasound -lm -ldl -lpthread"
+LIBS="$ALSA_LIBS $LIBS"
+AC_MSG_RESULT($ALSA_LIBS)
+
+dnl Check for a working version of libasound that is of the right version.
+min_alsa_version=ifelse([$1], ,0.1.1,$1)
+AC_MSG_CHECKING(for libasound headers version >= $min_alsa_version)
+no_alsa=""
+    alsa_min_major_version=`echo $min_alsa_version | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`
+    alsa_min_minor_version=`echo $min_alsa_version | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/'`
+    alsa_min_micro_version=`echo $min_alsa_version | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\3/'`
+
+AC_LANG_SAVE
+AC_LANG_C
+AC_TRY_COMPILE([
+#include <alsa/asoundlib.h>
+], [
+/* ensure backward compatibility */
+#if !defined(SND_LIB_MAJOR) && defined(SOUNDLIB_VERSION_MAJOR)
+#define SND_LIB_MAJOR SOUNDLIB_VERSION_MAJOR
+#endif
+#if !defined(SND_LIB_MINOR) && defined(SOUNDLIB_VERSION_MINOR)
+#define SND_LIB_MINOR SOUNDLIB_VERSION_MINOR
+#endif
+#if !defined(SND_LIB_SUBMINOR) && defined(SOUNDLIB_VERSION_SUBMINOR)
+#define SND_LIB_SUBMINOR SOUNDLIB_VERSION_SUBMINOR
+#endif
+
+#  if(SND_LIB_MAJOR > $alsa_min_major_version)
+  exit(0);
+#  else
+#    if(SND_LIB_MAJOR < $alsa_min_major_version)
+#       error not present
+#    endif
+
+#   if(SND_LIB_MINOR > $alsa_min_minor_version)
+  exit(0);
+#   else
+#     if(SND_LIB_MINOR < $alsa_min_minor_version)
+#          error not present
+#      endif
+
+#      if(SND_LIB_SUBMINOR < $alsa_min_micro_version)
+#        error not present
+#      endif
+#    endif
+#  endif
+exit(0);
+],
+  [AC_MSG_RESULT(found.)],
+  [AC_MSG_RESULT(not present.)
+   ifelse([$3], , [AC_MSG_ERROR(Sufficiently new version of libasound not found.)])
+   alsa_found=no]
+)
+AC_LANG_RESTORE
+
+dnl Now that we know that we have the right version, let's see if we have the library and not just the headers.
+if test "x$enable_alsatest" = "xyes"; then
+AC_CHECK_LIB([asound], [snd_ctl_open],,
+	[ifelse([$3], , [AC_MSG_ERROR(No linkable libasound was found.)])
+	 alsa_found=no]
+)
+fi
+
+LDFLAGS="$alsa_save_LDFLAGS"
+LIBS="$alsa_save_LIBS"
+
+if test "x$alsa_found" = "xyes" ; then
+   ifelse([$2], , :, [$2])
+else
+   ALSA_CFLAGS=""
+   ALSA_LIBS=""
+   ifelse([$3], , :, [$3])
+fi
+
+dnl That should be it.  Now just export out symbols:
+AC_SUBST(ALSA_CFLAGS)
+AC_SUBST(ALSA_LIBS)
+])
+m4trace:linux.m4:320: -1- AC_DEFUN([AM_PATH_ESD], [dnl 
+dnl Get the cflags and libraries from the esd-config script
+dnl
+AC_ARG_WITH(esd-prefix,[  --with-esd-prefix=PFX   Prefix where ESD is installed (optional)],
+            esd_prefix="$withval", esd_prefix="")
+AC_ARG_WITH(esd-exec-prefix,[  --with-esd-exec-prefix=PFX Exec prefix where ESD is installed (optional)],
+            esd_exec_prefix="$withval", esd_exec_prefix="")
+AC_ARG_ENABLE(esdtest, [  --disable-esdtest       Do not try to compile and run a test ESD program],
+		    , enable_esdtest=yes)
+
+  if test x$esd_exec_prefix != x ; then
+     esd_args="$esd_args --exec-prefix=$esd_exec_prefix"
+     if test x${ESD_CONFIG+set} != xset ; then
+        ESD_CONFIG=$esd_exec_prefix/bin/esd-config
+     fi
+  fi
+  if test x$esd_prefix != x ; then
+     esd_args="$esd_args --prefix=$esd_prefix"
+     if test x${ESD_CONFIG+set} != xset ; then
+        ESD_CONFIG=$esd_prefix/bin/esd-config
+     fi
+  fi
+
+  AC_PATH_PROG(ESD_CONFIG, esd-config, no)
+  min_esd_version=ifelse([$1], ,0.2.7,$1)
+  AC_MSG_CHECKING(for ESD - version >= $min_esd_version)
+  no_esd=""
+  if test "$ESD_CONFIG" = "no" ; then
+    no_esd=yes
+  else
+    AC_LANG_SAVE
+    AC_LANG_C
+    ESD_CFLAGS=`$ESD_CONFIG $esdconf_args --cflags`
+    ESD_LIBS=`$ESD_CONFIG $esdconf_args --libs`
+
+    esd_major_version=`$ESD_CONFIG $esd_args --version | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`
+    esd_minor_version=`$ESD_CONFIG $esd_args --version | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/'`
+    esd_micro_version=`$ESD_CONFIG $esd_config_args --version | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\3/'`
+    if test "x$enable_esdtest" = "xyes" ; then
+      ac_save_CFLAGS="$CFLAGS"
+      ac_save_LIBS="$LIBS"
+      CFLAGS="$CFLAGS $ESD_CFLAGS"
+      LIBS="$LIBS $ESD_LIBS"
+dnl
+dnl Now check if the installed ESD is sufficiently new. (Also sanity
+dnl checks the results of esd-config to some extent
+dnl
+      rm -f conf.esdtest
+      AC_TRY_RUN([
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <esd.h>
+
+char*
+my_strdup (char *str)
+{
+  char *new_str;
+  
+  if (str)
+    {
+      new_str = malloc ((strlen (str) + 1) * sizeof(char));
+      strcpy (new_str, str);
+    }
+  else
+    new_str = NULL;
+  
+  return new_str;
+}
+
+int main ()
+{
+  int major, minor, micro;
+  char *tmp_version;
+
+  system ("touch conf.esdtest");
+
+  /* HP/UX 9 (%@#!) writes to sscanf strings */
+  tmp_version = my_strdup("$min_esd_version");
+  if (sscanf(tmp_version, "%d.%d.%d", &major, &minor, &micro) != 3) {
+     printf("%s, bad version string\n", "$min_esd_version");
+     exit(1);
+   }
+
+   if (($esd_major_version > major) ||
+      (($esd_major_version == major) && ($esd_minor_version > minor)) ||
+      (($esd_major_version == major) && ($esd_minor_version == minor) && ($esd_micro_version >= micro)))
+    {
+      return 0;
+    }
+  else
+    {
+      printf("\n*** 'esd-config --version' returned %d.%d.%d, but the minimum version\n", $esd_major_version, $esd_minor_version, $esd_micro_version);
+      printf("*** of ESD required is %d.%d.%d. If esd-config is correct, then it is\n", major, minor, micro);
+      printf("*** best to upgrade to the required version.\n");
+      printf("*** If esd-config was wrong, set the environment variable ESD_CONFIG\n");
+      printf("*** to point to the correct copy of esd-config, and remove the file\n");
+      printf("*** config.cache before re-running configure\n");
+      return 1;
+    }
+}
+
+],, no_esd=yes,[echo $ac_n "cross compiling; assumed OK... $ac_c"])
+       CFLAGS="$ac_save_CFLAGS"
+       LIBS="$ac_save_LIBS"
+       AC_LANG_RESTORE
+     fi
+  fi
+  if test "x$no_esd" = x ; then
+     AC_MSG_RESULT(yes)
+     ifelse([$2], , :, [$2])     
+  else
+     AC_MSG_RESULT(no)
+     if test "$ESD_CONFIG" = "no" ; then
+       echo "*** The esd-config script installed by ESD could not be found"
+       echo "*** If ESD was installed in PREFIX, make sure PREFIX/bin is in"
+       echo "*** your path, or set the ESD_CONFIG environment variable to the"
+       echo "*** full path to esd-config."
+     else
+       if test -f conf.esdtest ; then
+        :
+       else
+          echo "*** Could not run ESD test program, checking why..."
+          CFLAGS="$CFLAGS $ESD_CFLAGS"
+          LIBS="$LIBS $ESD_LIBS"
+          AC_LANG_SAVE
+          AC_LANG_C
+          AC_TRY_LINK([
+#include <stdio.h>
+#include <esd.h>
+],      [ return 0; ],
+        [ echo "*** The test program compiled, but did not run. This usually means"
+          echo "*** that the run-time linker is not finding ESD or finding the wrong"
+          echo "*** version of ESD. If it is not finding ESD, you'll need to set your"
+          echo "*** LD_LIBRARY_PATH environment variable, or edit /etc/ld.so.conf to point"
+          echo "*** to the installed location  Also, make sure you have run ldconfig if that"
+          echo "*** is required on your system"
+	  echo "***"
+          echo "*** If you have an old version installed, it is best to remove it, although"
+          echo "*** you may also be able to get things to work by modifying LD_LIBRARY_PATH"],
+        [ echo "*** The test program failed to compile or link. See the file config.log for the"
+          echo "*** exact error that occured. This usually means ESD was incorrectly installed"
+          echo "*** or that you have moved ESD since it was installed. In the latter case, you"
+          echo "*** may want to edit the esd-config script: $ESD_CONFIG" ])
+          CFLAGS="$ac_save_CFLAGS"
+          LIBS="$ac_save_LIBS"
+          AC_LANG_RESTORE
+       fi
+     fi
+     ESD_CFLAGS=""
+     ESD_LIBS=""
+     ifelse([$3], , :, [$3])
+  fi
+  AC_SUBST(ESD_CFLAGS)
+  AC_SUBST(ESD_LIBS)
+  rm -f conf.esdtest
+])
+m4trace:linux.m4:344: -1- AC_DEFUN([AM_ESD_SUPPORTS_MULTIPLE_RECORD], [dnl
+  AC_MSG_NOTICE([whether installed esd version supports multiple recording clients])
+  ac_save_ESD_CFLAGS="$ESD_CFLAGS"
+  ac_save_ESD_LIBS="$ESD_LIBS"
+  AM_PATH_ESD(0.2.21,
+    ifelse([$1], , [
+      AM_CONDITIONAL(ESD_SUPPORTS_MULTIPLE_RECORD, true)
+      AC_DEFINE(ESD_SUPPORTS_MULTIPLE_RECORD, 1,
+	[Define if you have esound with support of multiple recording clients.])],
+    [$1]),
+    ifelse([$2], , [AM_CONDITIONAL(ESD_SUPPORTS_MULTIPLE_RECORD, false)], [$2])
+    if test "x$ac_save_ESD_CFLAGS" != x ; then
+       ESD_CFLAGS="$ac_save_ESD_CFLAGS"
+    fi
+    if test "x$ac_save_ESD_LIBS" != x ; then
+       ESD_LIBS="$ac_save_ESD_LIBS"
+    fi
+  )
+])
+m4trace:/usr/X11R6/share/aclocal/gtk-2.0.m4:196: -1- AC_DEFUN([AM_PATH_GTK_2_0], [dnl 
+dnl Get the cflags and libraries from pkg-config
+dnl
+AC_ARG_ENABLE(gtktest, [  --disable-gtktest       do not try to compile and run a test GTK+ program],
+		    , enable_gtktest=yes)
+
+  pkg_config_args=gtk+-2.0
+  for module in . $4
+  do
+      case "$module" in
+         gthread) 
+             pkg_config_args="$pkg_config_args gthread-2.0"
+         ;;
+      esac
+  done
+
+  no_gtk=""
+
+  AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+
+  if test x$PKG_CONFIG != xno ; then
+    if pkg-config --atleast-pkgconfig-version 0.7 ; then
+      :
+    else
+      echo "*** pkg-config too old; version 0.7 or better required."
+      no_gtk=yes
+      PKG_CONFIG=no
+    fi
+  else
+    no_gtk=yes
+  fi
+
+  min_gtk_version=ifelse([$1], ,2.0.0,$1)
+  AC_MSG_CHECKING(for GTK+ - version >= $min_gtk_version)
+
+  if test x$PKG_CONFIG != xno ; then
+    ## don't try to run the test against uninstalled libtool libs
+    if $PKG_CONFIG --uninstalled $pkg_config_args; then
+	  echo "Will use uninstalled version of GTK+ found in PKG_CONFIG_PATH"
+	  enable_gtktest=no
+    fi
+
+    if $PKG_CONFIG --atleast-version $min_gtk_version $pkg_config_args; then
+	  :
+    else
+	  no_gtk=yes
+    fi
+  fi
+
+  if test x"$no_gtk" = x ; then
+    GTK_CFLAGS=`$PKG_CONFIG $pkg_config_args --cflags`
+    GTK_LIBS=`$PKG_CONFIG $pkg_config_args --libs`
+    gtk_config_major_version=`$PKG_CONFIG --modversion gtk+-2.0 | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`
+    gtk_config_minor_version=`$PKG_CONFIG --modversion gtk+-2.0 | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/'`
+    gtk_config_micro_version=`$PKG_CONFIG --modversion gtk+-2.0 | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\3/'`
+    if test "x$enable_gtktest" = "xyes" ; then
+      ac_save_CFLAGS="$CFLAGS"
+      ac_save_LIBS="$LIBS"
+      CFLAGS="$CFLAGS $GTK_CFLAGS"
+      LIBS="$GTK_LIBS $LIBS"
+dnl
+dnl Now check if the installed GTK+ is sufficiently new. (Also sanity
+dnl checks the results of pkg-config to some extent)
+dnl
+      rm -f conf.gtktest
+      AC_TRY_RUN([
+#include <gtk/gtk.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int 
+main ()
+{
+  int major, minor, micro;
+  char *tmp_version;
+
+  system ("touch conf.gtktest");
+
+  /* HP/UX 9 (%@#!) writes to sscanf strings */
+  tmp_version = g_strdup("$min_gtk_version");
+  if (sscanf(tmp_version, "%d.%d.%d", &major, &minor, &micro) != 3) {
+     printf("%s, bad version string\n", "$min_gtk_version");
+     exit(1);
+   }
+
+  if ((gtk_major_version != $gtk_config_major_version) ||
+      (gtk_minor_version != $gtk_config_minor_version) ||
+      (gtk_micro_version != $gtk_config_micro_version))
+    {
+      printf("\n*** 'pkg-config --modversion gtk+-2.0' returned %d.%d.%d, but GTK+ (%d.%d.%d)\n", 
+             $gtk_config_major_version, $gtk_config_minor_version, $gtk_config_micro_version,
+             gtk_major_version, gtk_minor_version, gtk_micro_version);
+      printf ("*** was found! If pkg-config was correct, then it is best\n");
+      printf ("*** to remove the old version of GTK+. You may also be able to fix the error\n");
+      printf("*** by modifying your LD_LIBRARY_PATH enviroment variable, or by editing\n");
+      printf("*** /etc/ld.so.conf. Make sure you have run ldconfig if that is\n");
+      printf("*** required on your system.\n");
+      printf("*** If pkg-config was wrong, set the environment variable PKG_CONFIG_PATH\n");
+      printf("*** to point to the correct configuration files\n");
+    } 
+  else if ((gtk_major_version != GTK_MAJOR_VERSION) ||
+	   (gtk_minor_version != GTK_MINOR_VERSION) ||
+           (gtk_micro_version != GTK_MICRO_VERSION))
+    {
+      printf("*** GTK+ header files (version %d.%d.%d) do not match\n",
+	     GTK_MAJOR_VERSION, GTK_MINOR_VERSION, GTK_MICRO_VERSION);
+      printf("*** library (version %d.%d.%d)\n",
+	     gtk_major_version, gtk_minor_version, gtk_micro_version);
+    }
+  else
+    {
+      if ((gtk_major_version > major) ||
+        ((gtk_major_version == major) && (gtk_minor_version > minor)) ||
+        ((gtk_major_version == major) && (gtk_minor_version == minor) && (gtk_micro_version >= micro)))
+      {
+        return 0;
+       }
+     else
+      {
+        printf("\n*** An old version of GTK+ (%d.%d.%d) was found.\n",
+               gtk_major_version, gtk_minor_version, gtk_micro_version);
+        printf("*** You need a version of GTK+ newer than %d.%d.%d. The latest version of\n",
+	       major, minor, micro);
+        printf("*** GTK+ is always available from ftp://ftp.gtk.org.\n");
+        printf("***\n");
+        printf("*** If you have already installed a sufficiently new version, this error\n");
+        printf("*** probably means that the wrong copy of the pkg-config shell script is\n");
+        printf("*** being found. The easiest way to fix this is to remove the old version\n");
+        printf("*** of GTK+, but you can also set the PKG_CONFIG environment to point to the\n");
+        printf("*** correct copy of pkg-config. (In this case, you will have to\n");
+        printf("*** modify your LD_LIBRARY_PATH enviroment variable, or edit /etc/ld.so.conf\n");
+        printf("*** so that the correct libraries are found at run-time))\n");
+      }
+    }
+  return 1;
+}
+],, no_gtk=yes,[echo $ac_n "cross compiling; assumed OK... $ac_c"])
+       CFLAGS="$ac_save_CFLAGS"
+       LIBS="$ac_save_LIBS"
+     fi
+  fi
+  if test "x$no_gtk" = x ; then
+     AC_MSG_RESULT(yes (version $gtk_config_major_version.$gtk_config_minor_version.$gtk_config_micro_version))
+     ifelse([$2], , :, [$2])     
+  else
+     AC_MSG_RESULT(no)
+     if test "$PKG_CONFIG" = "no" ; then
+       echo "*** A new enough version of pkg-config was not found."
+       echo "*** See http://pkgconfig.sourceforge.net"
+     else
+       if test -f conf.gtktest ; then
+        :
+       else
+          echo "*** Could not run GTK+ test program, checking why..."
+	  ac_save_CFLAGS="$CFLAGS"
+	  ac_save_LIBS="$LIBS"
+          CFLAGS="$CFLAGS $GTK_CFLAGS"
+          LIBS="$LIBS $GTK_LIBS"
+          AC_TRY_LINK([
+#include <gtk/gtk.h>
+#include <stdio.h>
+],      [ return ((gtk_major_version) || (gtk_minor_version) || (gtk_micro_version)); ],
+        [ echo "*** The test program compiled, but did not run. This usually means"
+          echo "*** that the run-time linker is not finding GTK+ or finding the wrong"
+          echo "*** version of GTK+. If it is not finding GTK+, you'll need to set your"
+          echo "*** LD_LIBRARY_PATH environment variable, or edit /etc/ld.so.conf to point"
+          echo "*** to the installed location  Also, make sure you have run ldconfig if that"
+          echo "*** is required on your system"
+	  echo "***"
+          echo "*** If you have an old version installed, it is best to remove it, although"
+          echo "*** you may also be able to get things to work by modifying LD_LIBRARY_PATH" ],
+        [ echo "*** The test program failed to compile or link. See the file config.log for the"
+          echo "*** exact error that occured. This usually means GTK+ is incorrectly installed."])
+          CFLAGS="$ac_save_CFLAGS"
+          LIBS="$ac_save_LIBS"
+       fi
+     fi
+     GTK_CFLAGS=""
+     GTK_LIBS=""
+     ifelse([$3], , :, [$3])
+  fi
+  AC_SUBST(GTK_CFLAGS)
+  AC_SUBST(GTK_LIBS)
+  rm -f conf.gtktest
+])
+m4trace:configure.in:6: -1- AC_INIT([image_pdt.h])
+m4trace:configure.in:6: -1- m4_pattern_forbid([^_?A[CHUM]_])
+m4trace:configure.in:6: -1- m4_pattern_forbid([_AC_])
+m4trace:configure.in:6: -1- m4_pattern_forbid([^LIBOBJS$], [do not use LIBOBJS directly, use AC_LIBOBJ (see section `AC_LIBOBJ vs LIBOBJS'])
+m4trace:configure.in:6: -1- m4_pattern_allow([^AS_FLAGS$])
+m4trace:configure.in:6: -1- m4_pattern_forbid([^_?m4_])
+m4trace:configure.in:6: -1- m4_pattern_forbid([^dnl$])
+m4trace:configure.in:6: -1- m4_pattern_forbid([^_?AS_])
+m4trace:configure.in:6: -1- AC_SUBST([SHELL], [${CONFIG_SHELL-/bin/sh}])
+m4trace:configure.in:6: -1- AC_SUBST([PATH_SEPARATOR])
+m4trace:configure.in:6: -1- AC_SUBST([PACKAGE_NAME], [m4_ifdef([AC_PACKAGE_NAME],      ['AC_PACKAGE_NAME'])])
+m4trace:configure.in:6: -1- AC_SUBST([PACKAGE_TARNAME], [m4_ifdef([AC_PACKAGE_TARNAME],   ['AC_PACKAGE_TARNAME'])])
+m4trace:configure.in:6: -1- AC_SUBST([PACKAGE_VERSION], [m4_ifdef([AC_PACKAGE_VERSION],   ['AC_PACKAGE_VERSION'])])
+m4trace:configure.in:6: -1- AC_SUBST([PACKAGE_STRING], [m4_ifdef([AC_PACKAGE_STRING],    ['AC_PACKAGE_STRING'])])
+m4trace:configure.in:6: -1- AC_SUBST([PACKAGE_BUGREPORT], [m4_ifdef([AC_PACKAGE_BUGREPORT], ['AC_PACKAGE_BUGREPORT'])])
+m4trace:configure.in:6: -1- AC_SUBST([exec_prefix], [NONE])
+m4trace:configure.in:6: -1- AC_SUBST([prefix], [NONE])
+m4trace:configure.in:6: -1- AC_SUBST([program_transform_name], [s,x,x,])
+m4trace:configure.in:6: -1- AC_SUBST([bindir], ['${exec_prefix}/bin'])
+m4trace:configure.in:6: -1- AC_SUBST([sbindir], ['${exec_prefix}/sbin'])
+m4trace:configure.in:6: -1- AC_SUBST([libexecdir], ['${exec_prefix}/libexec'])
+m4trace:configure.in:6: -1- AC_SUBST([datadir], ['${prefix}/share'])
+m4trace:configure.in:6: -1- AC_SUBST([sysconfdir], ['${prefix}/etc'])
+m4trace:configure.in:6: -1- AC_SUBST([sharedstatedir], ['${prefix}/com'])
+m4trace:configure.in:6: -1- AC_SUBST([localstatedir], ['${prefix}/var'])
+m4trace:configure.in:6: -1- AC_SUBST([libdir], ['${exec_prefix}/lib'])
+m4trace:configure.in:6: -1- AC_SUBST([includedir], ['${prefix}/include'])
+m4trace:configure.in:6: -1- AC_SUBST([oldincludedir], ['/usr/include'])
+m4trace:configure.in:6: -1- AC_SUBST([infodir], ['${prefix}/info'])
+m4trace:configure.in:6: -1- AC_SUBST([mandir], ['${prefix}/man'])
+m4trace:configure.in:6: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE_NAME])
+m4trace:configure.in:6: -1- AH_OUTPUT([PACKAGE_NAME], [/* Define to the full name of this package. */
+#undef PACKAGE_NAME])
+m4trace:configure.in:6: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE_TARNAME])
+m4trace:configure.in:6: -1- AH_OUTPUT([PACKAGE_TARNAME], [/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME])
+m4trace:configure.in:6: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE_VERSION])
+m4trace:configure.in:6: -1- AH_OUTPUT([PACKAGE_VERSION], [/* Define to the version of this package. */
+#undef PACKAGE_VERSION])
+m4trace:configure.in:6: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE_STRING])
+m4trace:configure.in:6: -1- AH_OUTPUT([PACKAGE_STRING], [/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING])
+m4trace:configure.in:6: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE_BUGREPORT])
+m4trace:configure.in:6: -1- AH_OUTPUT([PACKAGE_BUGREPORT], [/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT])
+m4trace:configure.in:6: -1- AC_SUBST([build_alias])
+m4trace:configure.in:6: -1- AC_SUBST([host_alias])
+m4trace:configure.in:6: -1- AC_SUBST([target_alias])
+m4trace:configure.in:6: -1- AC_SUBST([DEFS])
+m4trace:configure.in:6: -1- AC_SUBST([ECHO_C])
+m4trace:configure.in:6: -1- AC_SUBST([ECHO_N])
+m4trace:configure.in:6: -1- AC_SUBST([ECHO_T])
+m4trace:configure.in:6: -1- AC_SUBST([LIBS])
+m4trace:configure.in:16: -1- AM_CONFIG_HEADER([config.h])
+m4trace:configure.in:16: -1- _m4_warn([obsolete], [The macro `AM_CONFIG_HEADER' is obsolete.
+You should run autoupdate.], [/usr/local/share/aclocal19/header.m4:12: AM_CONFIG_HEADER is expanded from...
+configure.in:16: the top level])
+m4trace:configure.in:16: -1- AC_CONFIG_HEADERS([config.h])
+m4trace:configure.in:19: -1- AC_PROG_CC
+m4trace:configure.in:19: -1- AC_SUBST([CC])
+m4trace:configure.in:19: -1- AC_SUBST([CFLAGS])
+m4trace:configure.in:19: -1- AC_SUBST([LDFLAGS])
+m4trace:configure.in:19: -1- AC_SUBST([CPPFLAGS])
+m4trace:configure.in:19: -1- AC_SUBST([CC])
+m4trace:configure.in:19: -1- AC_SUBST([ac_ct_CC])
+m4trace:configure.in:19: -1- AC_SUBST([CC])
+m4trace:configure.in:19: -1- AC_SUBST([ac_ct_CC])
+m4trace:configure.in:19: -1- AC_SUBST([CC])
+m4trace:configure.in:19: -1- AC_SUBST([CC])
+m4trace:configure.in:19: -1- AC_SUBST([ac_ct_CC])
+m4trace:configure.in:19: -1- AC_SUBST([EXEEXT], [$ac_cv_exeext])
+m4trace:configure.in:19: -1- AC_SUBST([OBJEXT], [$ac_cv_objext])
+m4trace:configure.in:20: -1- AC_PROG_CXX
+m4trace:configure.in:20: -1- AC_SUBST([CXX])
+m4trace:configure.in:20: -1- AC_SUBST([CXXFLAGS])
+m4trace:configure.in:20: -1- AC_SUBST([LDFLAGS])
+m4trace:configure.in:20: -1- AC_SUBST([CPPFLAGS])
+m4trace:configure.in:20: -1- AC_SUBST([CXX])
+m4trace:configure.in:20: -1- AC_SUBST([ac_ct_CXX])
+m4trace:configure.in:21: -1- AC_PROG_LN_S
+m4trace:configure.in:21: -1- AC_SUBST([LN_S], [$as_ln_s])
+m4trace:configure.in:22: -1- AC_PROG_RANLIB
+m4trace:configure.in:22: -1- AC_SUBST([RANLIB])
+m4trace:configure.in:22: -1- AC_SUBST([ac_ct_RANLIB])
+m4trace:configure.in:24: -1- AC_PROG_MAKE_SET
+m4trace:configure.in:24: -1- AC_SUBST([SET_MAKE])
+m4trace:configure.in:27: -1- AC_PATH_X
+m4trace:configure.in:27: -1- AC_PROG_CPP
+m4trace:configure.in:27: -1- AC_SUBST([CPP])
+m4trace:configure.in:27: -1- AC_SUBST([CPPFLAGS])
+m4trace:configure.in:27: -1- AC_SUBST([CPP])
+m4trace:configure.in:28: -1- AC_DEFINE_TRACE_LITERAL([X_DISPLAY_MISSING])
+m4trace:configure.in:28: -1- AH_OUTPUT([X_DISPLAY_MISSING], [/* Define to 1 if the X Window System is missing or not being used. */
+#undef X_DISPLAY_MISSING])
+m4trace:configure.in:28: -1- AC_CHECK_LIB([dnet], [dnet_ntoa], [X_EXTRA_LIBS="$X_EXTRA_LIBS -ldnet"])
+m4trace:configure.in:28: -1- AC_CHECK_LIB([dnet_stub], [dnet_ntoa], [X_EXTRA_LIBS="$X_EXTRA_LIBS -ldnet_stub"])
+m4trace:configure.in:28: -1- AC_CHECK_LIB([nsl], [gethostbyname], [X_EXTRA_LIBS="$X_EXTRA_LIBS -lnsl"])
+m4trace:configure.in:28: -1- AC_CHECK_LIB([bsd], [gethostbyname], [X_EXTRA_LIBS="$X_EXTRA_LIBS -lbsd"])
+m4trace:configure.in:28: -1- AC_CHECK_LIB([socket], [connect], [X_EXTRA_LIBS="-lsocket $X_EXTRA_LIBS"], [], [$X_EXTRA_LIBS])
+m4trace:configure.in:28: -1- AC_CHECK_LIB([posix], [remove], [X_EXTRA_LIBS="$X_EXTRA_LIBS -lposix"])
+m4trace:configure.in:28: -1- AC_CHECK_LIB([ipc], [shmat], [X_EXTRA_LIBS="$X_EXTRA_LIBS -lipc"])
+m4trace:configure.in:28: -1- AC_CHECK_LIB([ICE], [IceConnectionNumber], [X_PRE_LIBS="$X_PRE_LIBS -lSM -lICE"], [], [$X_EXTRA_LIBS])
+m4trace:configure.in:28: -1- AC_SUBST([X_CFLAGS])
+m4trace:configure.in:28: -1- AC_SUBST([X_PRE_LIBS])
+m4trace:configure.in:28: -1- AC_SUBST([X_LIBS])
+m4trace:configure.in:28: -1- AC_SUBST([X_EXTRA_LIBS])
+m4trace:configure.in:29: -1- AC_HEADER_DIRENT
+m4trace:configure.in:29: -1- AH_OUTPUT([HAVE_DIRENT_H], [/* Define to 1 if you have the <dirent.h> header file, and it defines `DIR\'.
+   */
+#undef HAVE_DIRENT_H])
+m4trace:configure.in:29: -1- AH_OUTPUT([HAVE_SYS_NDIR_H], [/* Define to 1 if you have the <sys/ndir.h> header file, and it defines `DIR\'.
+   */
+#undef HAVE_SYS_NDIR_H])
+m4trace:configure.in:29: -1- AH_OUTPUT([HAVE_SYS_DIR_H], [/* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR\'.
+   */
+#undef HAVE_SYS_DIR_H])
+m4trace:configure.in:29: -1- AH_OUTPUT([HAVE_NDIR_H], [/* Define to 1 if you have the <ndir.h> header file, and it defines `DIR\'. */
+#undef HAVE_NDIR_H])
+m4trace:configure.in:30: -1- AC_HEADER_STDC
+m4trace:configure.in:30: -1- AC_SUBST([EGREP])
+m4trace:configure.in:30: -1- AC_DEFINE_TRACE_LITERAL([STDC_HEADERS])
+m4trace:configure.in:30: -1- AH_OUTPUT([STDC_HEADERS], [/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS])
+m4trace:configure.in:31: -1- AC_CHECK_HEADERS([fcntl.h sys/ioctl.h sys/time.h unistd.h])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_FCNTL_H], [/* Define to 1 if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_SYS_IOCTL_H], [/* Define to 1 if you have the <sys/ioctl.h> header file. */
+#undef HAVE_SYS_IOCTL_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_SYS_TIME_H], [/* Define to 1 if you have the <sys/time.h> header file. */
+#undef HAVE_SYS_TIME_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_UNISTD_H], [/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H])
+m4trace:configure.in:31: -1- AC_CHECK_HEADERS([sys/types.h sys/stat.h stdlib.h string.h memory.h strings.h \
+		  inttypes.h stdint.h unistd.h], [], [], [$ac_includes_default])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_SYS_TYPES_H], [/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_SYS_STAT_H], [/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_STDLIB_H], [/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_STRING_H], [/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_MEMORY_H], [/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_STRINGS_H], [/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_INTTYPES_H], [/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_STDINT_H], [/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H])
+m4trace:configure.in:31: -1- AH_OUTPUT([HAVE_UNISTD_H], [/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H])
+m4trace:configure.in:34: -1- AC_C_CONST
+m4trace:configure.in:34: -1- AC_DEFINE_TRACE_LITERAL([const])
+m4trace:configure.in:34: -1- AH_OUTPUT([const], [/* Define to empty if `const\' does not conform to ANSI C. */
+#undef const])
+m4trace:configure.in:35: -1- AC_TYPE_PID_T
+m4trace:configure.in:35: -1- AC_DEFINE_TRACE_LITERAL([pid_t])
+m4trace:configure.in:35: -1- AH_OUTPUT([pid_t], [/* Define to `int\' if <sys/types.h> does not define. */
+#undef pid_t])
+m4trace:configure.in:36: -1- AC_TYPE_SIZE_T
+m4trace:configure.in:36: -1- AC_DEFINE_TRACE_LITERAL([size_t])
+m4trace:configure.in:36: -1- AH_OUTPUT([size_t], [/* Define to `unsigned\' if <sys/types.h> does not define. */
+#undef size_t])
+m4trace:configure.in:37: -1- AC_HEADER_TIME
+m4trace:configure.in:37: -1- AC_DEFINE_TRACE_LITERAL([TIME_WITH_SYS_TIME])
+m4trace:configure.in:37: -1- AH_OUTPUT([TIME_WITH_SYS_TIME], [/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+#undef TIME_WITH_SYS_TIME])
+m4trace:configure.in:38: -1- AC_STRUCT_TM
+m4trace:configure.in:38: -1- AC_DEFINE_TRACE_LITERAL([TM_IN_SYS_TIME])
+m4trace:configure.in:38: -1- AH_OUTPUT([TM_IN_SYS_TIME], [/* Define to 1 if your <sys/time.h> declares `struct tm\'. */
+#undef TM_IN_SYS_TIME])
+m4trace:configure.in:46: -1- AC_PROG_GCC_TRADITIONAL
+m4trace:configure.in:47: -1- AC_FUNC_MEMCMP
+m4trace:configure.in:47: -1- AC_LIBSOURCE([memcmp.c])
+m4trace:configure.in:47: -1- AC_SUBST([LIB@&t@OBJS])
+m4trace:configure.in:48: -1- AC_FUNC_MMAP
+m4trace:configure.in:48: -1- AC_CHECK_HEADERS([stdlib.h unistd.h])
+m4trace:configure.in:48: -1- AH_OUTPUT([HAVE_STDLIB_H], [/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H])
+m4trace:configure.in:48: -1- AH_OUTPUT([HAVE_UNISTD_H], [/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H])
+m4trace:configure.in:48: -1- AC_CHECK_FUNCS([getpagesize])
+m4trace:configure.in:48: -1- AH_OUTPUT([HAVE_GETPAGESIZE], [/* Define to 1 if you have the `getpagesize\' function. */
+#undef HAVE_GETPAGESIZE])
+m4trace:configure.in:48: -1- AC_DEFINE_TRACE_LITERAL([HAVE_MMAP])
+m4trace:configure.in:48: -1- AH_OUTPUT([HAVE_MMAP], [/* Define to 1 if you have a working `mmap\' system call. */
+#undef HAVE_MMAP])
+m4trace:configure.in:49: -1- AC_TYPE_SIGNAL
+m4trace:configure.in:49: -1- AC_DEFINE_TRACE_LITERAL([RETSIGTYPE])
+m4trace:configure.in:49: -1- AH_OUTPUT([RETSIGTYPE], [/* Define as the return type of signal handlers (`int\' or `void\'). */
+#undef RETSIGTYPE])
+m4trace:configure.in:50: -1- AC_CHECK_FUNCS([gettimeofday mkdir snprintf lrand48 random mkstemp])
+m4trace:configure.in:50: -1- AH_OUTPUT([HAVE_GETTIMEOFDAY], [/* Define to 1 if you have the `gettimeofday\' function. */
+#undef HAVE_GETTIMEOFDAY])
+m4trace:configure.in:50: -1- AH_OUTPUT([HAVE_MKDIR], [/* Define to 1 if you have the `mkdir\' function. */
+#undef HAVE_MKDIR])
+m4trace:configure.in:50: -1- AH_OUTPUT([HAVE_SNPRINTF], [/* Define to 1 if you have the `snprintf\' function. */
+#undef HAVE_SNPRINTF])
+m4trace:configure.in:50: -1- AH_OUTPUT([HAVE_LRAND48], [/* Define to 1 if you have the `lrand48\' function. */
+#undef HAVE_LRAND48])
+m4trace:configure.in:50: -1- AH_OUTPUT([HAVE_RANDOM], [/* Define to 1 if you have the `random\' function. */
+#undef HAVE_RANDOM])
+m4trace:configure.in:50: -1- AH_OUTPUT([HAVE_MKSTEMP], [/* Define to 1 if you have the `mkstemp\' function. */
+#undef HAVE_MKSTEMP])
+m4trace:configure.in:53: -1- AC_CHECK_FUNCS([_thread_sys_sigaltstack])
+m4trace:configure.in:53: -1- AH_OUTPUT([HAVE__THREAD_SYS_SIGALTSTACK], [/* Define to 1 if you have the `_thread_sys_sigaltstack\' function. */
+#undef HAVE__THREAD_SYS_SIGALTSTACK])
+m4trace:configure.in:55: -1- AC_DEFINE_TRACE_LITERAL([WORDS_BIGENDIAN])
+m4trace:configure.in:55: -1- AH_OUTPUT([WORDS_BIGENDIAN], [/* Define to 1 if your processor stores words with the most significant byte
+   first (like Motorola and SPARC, unlike Intel and VAX). */
+#undef WORDS_BIGENDIAN])
+m4trace:configure.in:59: -1- AM_GNU_GETTEXT
+m4trace:configure.in:59: -1- AM_PO_SUBDIRS
+m4trace:configure.in:59: -1- AC_PROG_INSTALL
+m4trace:configure.in:59: -1- AC_SUBST([INSTALL_PROGRAM])
+m4trace:configure.in:59: -1- AC_SUBST([INSTALL_SCRIPT])
+m4trace:configure.in:59: -1- AC_SUBST([INSTALL_DATA])
+m4trace:configure.in:59: -1- AM_MKINSTALLDIRS
+m4trace:configure.in:59: -1- AC_SUBST([MKINSTALLDIRS])
+m4trace:configure.in:59: -1- AM_NLS
+m4trace:configure.in:59: -1- AC_SUBST([USE_NLS])
+m4trace:configure.in:59: -1- AM_PATH_PROG_WITH_TEST([MSGFMT], [msgfmt], [$ac_dir/$ac_word --statistics /dev/null >&5 2>&1 &&
+     (if $ac_dir/$ac_word --statistics /dev/null 2>&1 >/dev/null | grep usage >/dev/null; then exit 1; else exit 0; fi)], [:])
+m4trace:configure.in:59: -1- AC_SUBST([MSGFMT])
+m4trace:configure.in:59: -1- AC_SUBST([GMSGFMT], [$ac_cv_path_GMSGFMT])
+m4trace:configure.in:59: -1- AM_PATH_PROG_WITH_TEST([XGETTEXT], [xgettext], [$ac_dir/$ac_word --omit-header --copyright-holder= --msgid-bugs-address= /dev/null >&5 2>&1 &&
+     (if $ac_dir/$ac_word --omit-header --copyright-holder= --msgid-bugs-address= /dev/null 2>&1 >/dev/null | grep usage >/dev/null; then exit 1; else exit 0; fi)], [:])
+m4trace:configure.in:59: -1- AC_SUBST([XGETTEXT])
+m4trace:configure.in:59: -1- AM_PATH_PROG_WITH_TEST([MSGMERGE], [msgmerge], [$ac_dir/$ac_word --update -q /dev/null /dev/null >&5 2>&1], [:])
+m4trace:configure.in:59: -1- AC_SUBST([MSGMERGE])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_OUTPUT_COMMANDS' is obsolete.
+You should run autoupdate.], [autoconf/status.m4:318: AC_OUTPUT_COMMANDS is expanded from...
+/usr/local/share/aclocal/po.m4:208: AM_PO_SUBDIRS is expanded from...
+configure.in:59: AM_PO_SUBDIRS is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -3- _m4_warn([obsolete], [The macro `_AC_OUTPUT_COMMANDS_CNT' is obsolete.
+You should run autoupdate.], [autoconf/status.m4:321: _AC_OUTPUT_COMMANDS_CNT is expanded from...
+autoconf/status.m4:318: AC_OUTPUT_COMMANDS is expanded from...
+/usr/local/share/aclocal/po.m4:208: AM_PO_SUBDIRS is expanded from...
+configure.in:59: AM_PO_SUBDIRS is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AM_INTL_SUBDIR
+m4trace:configure.in:59: -1- AC_CANONICAL_HOST
+m4trace:configure.in:59: -1- AC_SUBST([build], [$ac_cv_build])
+m4trace:configure.in:59: -1- AC_SUBST([build_cpu], [`echo $ac_cv_build | sed 's/^\([[^-]]*\)-\([[^-]]*\)-\(.*\)$/\1/'`])
+m4trace:configure.in:59: -1- AC_SUBST([build_vendor], [`echo $ac_cv_build | sed 's/^\([[^-]]*\)-\([[^-]]*\)-\(.*\)$/\2/'`])
+m4trace:configure.in:59: -1- AC_SUBST([build_os], [`echo $ac_cv_build | sed 's/^\([[^-]]*\)-\([[^-]]*\)-\(.*\)$/\3/'`])
+m4trace:configure.in:59: -1- AC_SUBST([host], [$ac_cv_host])
+m4trace:configure.in:59: -1- AC_SUBST([host_cpu], [`echo $ac_cv_host | sed 's/^\([[^-]]*\)-\([[^-]]*\)-\(.*\)$/\1/'`])
+m4trace:configure.in:59: -1- AC_SUBST([host_vendor], [`echo $ac_cv_host | sed 's/^\([[^-]]*\)-\([[^-]]*\)-\(.*\)$/\2/'`])
+m4trace:configure.in:59: -1- AC_SUBST([host_os], [`echo $ac_cv_host | sed 's/^\([[^-]]*\)-\([[^-]]*\)-\(.*\)$/\3/'`])
+m4trace:configure.in:59: -1- gt_GLIBC2
+m4trace:configure.in:59: -1- AC_SUBST([GLIBC2])
+m4trace:configure.in:59: -1- AC_CHECK_LIB([cposix], [strerror], [LIBS="$LIBS -lcposix"])
+m4trace:configure.in:59: -1- bh_C_SIGNED
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/signed.m4:17: bh_C_SIGNED is expanded from...
+configure.in:59: bh_C_SIGNED is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([signed])
+m4trace:configure.in:59: -1- AH_OUTPUT([signed], [/* Define to empty if the C compiler doesn\'t support this keyword. */
+#undef signed])
+m4trace:configure.in:59: -1- AC_C_INLINE
+m4trace:configure.in:59: -1- AH_OUTPUT([inline], [/* Define to `__inline__\' or `__inline\' if that\'s what the C compiler
+   calls it, or to nothing if \'inline\' is not supported under any name.  */
+#ifndef __cplusplus
+#undef inline
+#endif])
+m4trace:configure.in:59: -1- AC_TYPE_OFF_T
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([off_t])
+m4trace:configure.in:59: -1- AH_OUTPUT([off_t], [/* Define to `long\' if <sys/types.h> does not define. */
+#undef off_t])
+m4trace:configure.in:59: -1- gl_AC_TYPE_LONG_LONG
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/longlong.m4:23: gl_AC_TYPE_LONG_LONG is expanded from...
+configure.in:59: gl_AC_TYPE_LONG_LONG is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LONG_LONG])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_LONG_LONG], [/* Define if you have the \'long long\' type. */
+#undef HAVE_LONG_LONG])
+m4trace:configure.in:59: -1- gt_TYPE_LONGDOUBLE
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/longdouble.m4:28: gt_TYPE_LONGDOUBLE is expanded from...
+configure.in:59: gt_TYPE_LONGDOUBLE is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LONG_DOUBLE])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_LONG_DOUBLE], [/* Define if you have the \'long double\' type. */
+#undef HAVE_LONG_DOUBLE])
+m4trace:configure.in:59: -1- gt_TYPE_WCHAR_T
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/wchar_t.m4:20: gt_TYPE_WCHAR_T is expanded from...
+configure.in:59: gt_TYPE_WCHAR_T is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_WCHAR_T])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_WCHAR_T], [/* Define if you have the \'wchar_t\' type. */
+#undef HAVE_WCHAR_T])
+m4trace:configure.in:59: -1- gt_TYPE_WINT_T
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/wint_t.m4:20: gt_TYPE_WINT_T is expanded from...
+configure.in:59: gt_TYPE_WINT_T is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_WINT_T])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_WINT_T], [/* Define if you have the \'wint_t\' type. */
+#undef HAVE_WINT_T])
+m4trace:configure.in:59: -1- gl_AC_HEADER_INTTYPES_H
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/inttypes_h.m4:26: gl_AC_HEADER_INTTYPES_H is expanded from...
+configure.in:59: gl_AC_HEADER_INTTYPES_H is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_INTTYPES_H_WITH_UINTMAX])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_INTTYPES_H_WITH_UINTMAX], [/* Define if <inttypes.h> exists, doesn\'t clash with <sys/types.h>, and
+   declares uintmax_t. */
+#undef HAVE_INTTYPES_H_WITH_UINTMAX])
+m4trace:configure.in:59: -1- gl_AC_HEADER_STDINT_H
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/stdint_h.m4:26: gl_AC_HEADER_STDINT_H is expanded from...
+configure.in:59: gl_AC_HEADER_STDINT_H is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_STDINT_H_WITH_UINTMAX])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STDINT_H_WITH_UINTMAX], [/* Define if <stdint.h> exists, doesn\'t clash with <sys/types.h>, and declares
+   uintmax_t. */
+#undef HAVE_STDINT_H_WITH_UINTMAX])
+m4trace:configure.in:59: -1- gt_TYPE_INTMAX_T
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/intmax.m4:30: gt_TYPE_INTMAX_T is expanded from...
+configure.in:59: gt_TYPE_INTMAX_T is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_INTMAX_T])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_INTMAX_T], [/* Define if you have the \'intmax_t\' type in <stdint.h> or <inttypes.h>. */
+#undef HAVE_INTMAX_T])
+m4trace:configure.in:59: -1- gt_PRINTF_POSIX
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2289: AC_TRY_RUN is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/printf-posix.m4:44: gt_PRINTF_POSIX is expanded from...
+configure.in:59: gt_PRINTF_POSIX is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_POSIX_PRINTF])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_POSIX_PRINTF], [/* Define if your printf() function supports format strings with positions. */
+#undef HAVE_POSIX_PRINTF])
+m4trace:configure.in:59: -1- AC_FUNC_ALLOCA
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_ALLOCA_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_ALLOCA_H], [/* Define to 1 if you have <alloca.h> and it should be used (not on Ultrix).
+   */
+#undef HAVE_ALLOCA_H])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_ALLOCA])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_ALLOCA], [/* Define to 1 if you have `alloca\', as a function or macro. */
+#undef HAVE_ALLOCA])
+m4trace:configure.in:59: -1- AC_LIBSOURCE([alloca.c])
+m4trace:configure.in:59: -1- AC_SUBST([ALLOCA], [alloca.$ac_objext])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([C_ALLOCA])
+m4trace:configure.in:59: -1- AH_OUTPUT([C_ALLOCA], [/* Define to 1 if using `alloca.c\'. */
+#undef C_ALLOCA])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([CRAY_STACKSEG_END])
+m4trace:configure.in:59: -1- AH_OUTPUT([CRAY_STACKSEG_END], [/* Define to one of `_getb67\', `GETB67\', `getb67\' for Cray-2 and Cray-YMP
+   systems. This function is required for `alloca.c\' support on those systems.
+   */
+#undef CRAY_STACKSEG_END])
+m4trace:configure.in:59: -1- AH_OUTPUT([STACK_DIRECTION], [/* If using the C implementation of alloca, define if you know the
+   direction of stack growth for your system; otherwise it will be
+   automatically deduced at run-time.
+	STACK_DIRECTION > 0 => grows toward higher addresses
+	STACK_DIRECTION < 0 => grows toward lower addresses
+	STACK_DIRECTION = 0 => direction of growth unknown */
+@%:@undef STACK_DIRECTION])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([STACK_DIRECTION])
+m4trace:configure.in:59: -1- gl_GLIBC21
+m4trace:configure.in:59: -1- AC_SUBST([GLIBC21])
+m4trace:configure.in:59: -1- gt_INTDIV0
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2289: AC_TRY_RUN is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/intdiv0.m4:70: gt_INTDIV0 is expanded from...
+configure.in:59: gt_INTDIV0 is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([INTDIV0_RAISES_SIGFPE])
+m4trace:configure.in:59: -1- AH_OUTPUT([INTDIV0_RAISES_SIGFPE], [/* Define if integer division by zero raises signal SIGFPE. */
+#undef INTDIV0_RAISES_SIGFPE])
+m4trace:configure.in:59: -1- gl_AC_TYPE_UINTMAX_T
+m4trace:configure.in:59: -1- gl_AC_TYPE_UNSIGNED_LONG_LONG
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/ulonglong.m4:23: gl_AC_TYPE_UNSIGNED_LONG_LONG is expanded from...
+configure.in:59: gl_AC_TYPE_UNSIGNED_LONG_LONG is required by...
+/usr/local/share/aclocal/uintmax_t.m4:30: gl_AC_TYPE_UINTMAX_T is expanded from...
+configure.in:59: gl_AC_TYPE_UINTMAX_T is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_UNSIGNED_LONG_LONG])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_UNSIGNED_LONG_LONG], [/* Define if you have the \'unsigned long long\' type. */
+#undef HAVE_UNSIGNED_LONG_LONG])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([uintmax_t])
+m4trace:configure.in:59: -1- AH_OUTPUT([uintmax_t], [/* Define to unsigned long or unsigned long long if <stdint.h> and
+   <inttypes.h> don\'t define. */
+#undef uintmax_t])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_UINTMAX_T])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_UINTMAX_T], [/* Define if you have the \'uintmax_t\' type in <stdint.h> or <inttypes.h>. */
+#undef HAVE_UINTMAX_T])
+m4trace:configure.in:59: -1- gt_HEADER_INTTYPES_H
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/inttypes.m4:25: gt_HEADER_INTTYPES_H is expanded from...
+configure.in:59: gt_HEADER_INTTYPES_H is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_INTTYPES_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_INTTYPES_H], [/* Define if <inttypes.h> exists and doesn\'t clash with <sys/types.h>. */
+#undef HAVE_INTTYPES_H])
+m4trace:configure.in:59: -1- gt_INTTYPES_PRI
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/inttypes-pri.m4:30: gt_INTTYPES_PRI is expanded from...
+configure.in:59: gt_INTTYPES_PRI is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([PRI_MACROS_BROKEN])
+m4trace:configure.in:59: -1- AH_OUTPUT([PRI_MACROS_BROKEN], [/* Define if <inttypes.h> exists and defines unusable PRI* macros. */
+#undef PRI_MACROS_BROKEN])
+m4trace:configure.in:59: -1- gl_XSIZE
+m4trace:configure.in:59: -1- gl_SIZE_MAX
+m4trace:configure.in:59: -1- AC_CHECK_HEADERS([stdint.h])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STDINT_H], [/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H])
+m4trace:configure.in:59: -1- _m4_warn([cross], [AC_RUN_IFELSE called without default to allow cross compiling], [autoconf/general.m4:2281: AC_RUN_IFELSE is expanded from...
+/usr/local/share/aclocal/size_max.m4:59: gl_SIZE_MAX is expanded from...
+configure.in:59: gl_SIZE_MAX is required by...
+/usr/local/share/aclocal/xsize.m4:13: gl_XSIZE is expanded from...
+configure.in:59: gl_XSIZE is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- _m4_warn([cross], [AC_RUN_IFELSE called without default to allow cross compiling], [autoconf/general.m4:2281: AC_RUN_IFELSE is expanded from...
+/usr/local/share/aclocal/size_max.m4:59: gl_SIZE_MAX is expanded from...
+configure.in:59: gl_SIZE_MAX is required by...
+/usr/local/share/aclocal/xsize.m4:13: gl_XSIZE is expanded from...
+configure.in:59: gl_XSIZE is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- _m4_warn([cross], [AC_RUN_IFELSE called without default to allow cross compiling], [autoconf/general.m4:2281: AC_RUN_IFELSE is expanded from...
+/usr/local/share/aclocal/size_max.m4:59: gl_SIZE_MAX is expanded from...
+configure.in:59: gl_SIZE_MAX is required by...
+/usr/local/share/aclocal/xsize.m4:13: gl_XSIZE is expanded from...
+configure.in:59: gl_XSIZE is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+/usr/local/share/aclocal/size_max.m4:59: gl_SIZE_MAX is expanded from...
+configure.in:59: gl_SIZE_MAX is required by...
+/usr/local/share/aclocal/xsize.m4:13: gl_XSIZE is expanded from...
+configure.in:59: gl_XSIZE is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([SIZE_MAX])
+m4trace:configure.in:59: -1- AH_OUTPUT([SIZE_MAX], [/* Define as the maximum value of type \'size_t\', if the system doesn\'t define
+   it. */
+#undef SIZE_MAX])
+m4trace:configure.in:59: -1- AC_CHECK_HEADERS([stdint.h])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STDINT_H], [/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H])
+m4trace:configure.in:59: -1- gt_INTL_MACOSX
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:525: gt_INTL_MACOSX is expanded from...
+configure.in:59: gt_INTL_MACOSX is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_CFPREFERENCESCOPYAPPVALUE])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_CFPREFERENCESCOPYAPPVALUE], [/* Define to 1 if you have the MacOS X function CFPreferencesCopyAppValue in
+   the CoreFoundation framework. */
+#undef HAVE_CFPREFERENCESCOPYAPPVALUE])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:525: gt_INTL_MACOSX is expanded from...
+configure.in:59: gt_INTL_MACOSX is required by...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_CFLOCALECOPYCURRENT])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_CFLOCALECOPYCURRENT], [/* Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the
+   CoreFoundation framework. */
+#undef HAVE_CFLOCALECOPYCURRENT])
+m4trace:configure.in:59: -1- AC_SUBST([INTL_MACOSX_LIBS])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([ptrdiff_t])
+m4trace:configure.in:59: -1- AH_OUTPUT([ptrdiff_t], [/* Define as the type of the result of subtracting two pointers, if the system
+   doesn\'t define it. */
+#undef ptrdiff_t])
+m4trace:configure.in:59: -1- AC_CHECK_HEADERS([argz.h limits.h locale.h nl_types.h malloc.h stddef.h \
+stdlib.h string.h unistd.h sys/param.h])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_ARGZ_H], [/* Define to 1 if you have the <argz.h> header file. */
+#undef HAVE_ARGZ_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_LIMITS_H], [/* Define to 1 if you have the <limits.h> header file. */
+#undef HAVE_LIMITS_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_LOCALE_H], [/* Define to 1 if you have the <locale.h> header file. */
+#undef HAVE_LOCALE_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_NL_TYPES_H], [/* Define to 1 if you have the <nl_types.h> header file. */
+#undef HAVE_NL_TYPES_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_MALLOC_H], [/* Define to 1 if you have the <malloc.h> header file. */
+#undef HAVE_MALLOC_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STDDEF_H], [/* Define to 1 if you have the <stddef.h> header file. */
+#undef HAVE_STDDEF_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STDLIB_H], [/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STRING_H], [/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_UNISTD_H], [/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_SYS_PARAM_H], [/* Define to 1 if you have the <sys/param.h> header file. */
+#undef HAVE_SYS_PARAM_H])
+m4trace:configure.in:59: -1- AC_CHECK_FUNCS([asprintf fwprintf getcwd getegid geteuid getgid getuid \
+mempcpy munmap putenv setenv setlocale snprintf stpcpy strcasecmp strdup \
+strtoul tsearch wcslen __argz_count __argz_stringify __argz_next \
+__fsetlocking])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_ASPRINTF], [/* Define to 1 if you have the `asprintf\' function. */
+#undef HAVE_ASPRINTF])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_FWPRINTF], [/* Define to 1 if you have the `fwprintf\' function. */
+#undef HAVE_FWPRINTF])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_GETCWD], [/* Define to 1 if you have the `getcwd\' function. */
+#undef HAVE_GETCWD])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_GETEGID], [/* Define to 1 if you have the `getegid\' function. */
+#undef HAVE_GETEGID])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_GETEUID], [/* Define to 1 if you have the `geteuid\' function. */
+#undef HAVE_GETEUID])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_GETGID], [/* Define to 1 if you have the `getgid\' function. */
+#undef HAVE_GETGID])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_GETUID], [/* Define to 1 if you have the `getuid\' function. */
+#undef HAVE_GETUID])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_MEMPCPY], [/* Define to 1 if you have the `mempcpy\' function. */
+#undef HAVE_MEMPCPY])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_MUNMAP], [/* Define to 1 if you have the `munmap\' function. */
+#undef HAVE_MUNMAP])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_PUTENV], [/* Define to 1 if you have the `putenv\' function. */
+#undef HAVE_PUTENV])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_SETENV], [/* Define to 1 if you have the `setenv\' function. */
+#undef HAVE_SETENV])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_SETLOCALE], [/* Define to 1 if you have the `setlocale\' function. */
+#undef HAVE_SETLOCALE])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_SNPRINTF], [/* Define to 1 if you have the `snprintf\' function. */
+#undef HAVE_SNPRINTF])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STPCPY], [/* Define to 1 if you have the `stpcpy\' function. */
+#undef HAVE_STPCPY])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STRCASECMP], [/* Define to 1 if you have the `strcasecmp\' function. */
+#undef HAVE_STRCASECMP])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STRDUP], [/* Define to 1 if you have the `strdup\' function. */
+#undef HAVE_STRDUP])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STRTOUL], [/* Define to 1 if you have the `strtoul\' function. */
+#undef HAVE_STRTOUL])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_TSEARCH], [/* Define to 1 if you have the `tsearch\' function. */
+#undef HAVE_TSEARCH])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_WCSLEN], [/* Define to 1 if you have the `wcslen\' function. */
+#undef HAVE_WCSLEN])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE___ARGZ_COUNT], [/* Define to 1 if you have the `__argz_count\' function. */
+#undef HAVE___ARGZ_COUNT])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE___ARGZ_STRINGIFY], [/* Define to 1 if you have the `__argz_stringify\' function. */
+#undef HAVE___ARGZ_STRINGIFY])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE___ARGZ_NEXT], [/* Define to 1 if you have the `__argz_next\' function. */
+#undef HAVE___ARGZ_NEXT])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE___FSETLOCKING], [/* Define to 1 if you have the `__fsetlocking\' function. */
+#undef HAVE___FSETLOCKING])
+m4trace:configure.in:59: -1- gt_CHECK_DECL([_snprintf], [#include <stdio.h>])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:545: gt_CHECK_DECL is expanded from...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_DECL__SNPRINTF])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_DECL__SNPRINTF], [/* Define to 1 if you have the declaration of `_snprintf\', and to 0 if you
+   don\'t. */
+#undef HAVE_DECL__SNPRINTF])
+m4trace:configure.in:59: -1- gt_CHECK_DECL([_snwprintf], [#include <stdio.h>])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:545: gt_CHECK_DECL is expanded from...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_DECL__SNWPRINTF])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_DECL__SNWPRINTF], [/* Define to 1 if you have the declaration of `_snwprintf\', and to 0 if you
+   don\'t. */
+#undef HAVE_DECL__SNWPRINTF])
+m4trace:configure.in:59: -1- gt_CHECK_DECL([feof_unlocked], [#include <stdio.h>])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:545: gt_CHECK_DECL is expanded from...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_DECL_FEOF_UNLOCKED])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_DECL_FEOF_UNLOCKED], [/* Define to 1 if you have the declaration of `feof_unlocked\', and to 0 if you
+   don\'t. */
+#undef HAVE_DECL_FEOF_UNLOCKED])
+m4trace:configure.in:59: -1- gt_CHECK_DECL([fgets_unlocked], [#include <stdio.h>])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:545: gt_CHECK_DECL is expanded from...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_DECL_FGETS_UNLOCKED])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_DECL_FGETS_UNLOCKED], [/* Define to 1 if you have the declaration of `fgets_unlocked\', and to 0 if
+   you don\'t. */
+#undef HAVE_DECL_FGETS_UNLOCKED])
+m4trace:configure.in:59: -1- gt_CHECK_DECL([getc_unlocked], [#include <stdio.h>])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:545: gt_CHECK_DECL is expanded from...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_DECL_GETC_UNLOCKED])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_DECL_GETC_UNLOCKED], [/* Define to 1 if you have the declaration of `getc_unlocked\', and to 0 if you
+   don\'t. */
+#undef HAVE_DECL_GETC_UNLOCKED])
+m4trace:configure.in:59: -1- AC_SUBST([HAVE_POSIX_PRINTF])
+m4trace:configure.in:59: -1- AC_SUBST([HAVE_ASPRINTF])
+m4trace:configure.in:59: -1- AC_SUBST([HAVE_SNPRINTF])
+m4trace:configure.in:59: -1- AC_SUBST([HAVE_WPRINTF])
+m4trace:configure.in:59: -1- AM_ICONV
+m4trace:configure.in:59: -1- AM_ICONV_LINK
+m4trace:configure.in:59: -1- AM_ICONV_LINKFLAGS_BODY
+m4trace:configure.in:59: -1- AC_LIB_PREPARE_PREFIX
+m4trace:configure.in:59: -1- AC_LIB_RPATH
+m4trace:configure.in:59: -1- AC_LIB_PROG_LD
+m4trace:configure.in:59: -1- AC_LIB_PROG_LD_GNU
+m4trace:configure.in:59: -1- AC_LIB_LINKFLAGS_BODY([iconv])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([
+    eval additional_includedir=\"$includedir\"
+    eval additional_libdir=\"$libdir\"
+  ])
+m4trace:configure.in:59: -1- AC_LIB_ARG_WITH([libiconv-prefix], [  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libdir], [
+    if test "X$withval" = "Xno"; then
+      use_additional=no
+    else
+      if test "X$withval" = "X"; then
+        AC_LIB_WITH_FINAL_PREFIX([
+          eval additional_includedir=\"$includedir\"
+          eval additional_libdir=\"$libdir\"
+        ])
+      else
+        additional_includedir="$withval/include"
+        additional_libdir="$withval/lib"
+      fi
+    fi
+])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([
+          eval additional_includedir=\"$includedir\"
+          eval additional_libdir=\"$libdir\"
+        ])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- AC_LIB_APPENDTOVAR([CPPFLAGS], [$INCICONV])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/iconv.m4:73: AM_ICONV_LINK is expanded from...
+/usr/local/share/aclocal/iconv.m4:101: AM_ICONV is expanded from...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/iconv.m4:73: AM_ICONV_LINK is expanded from...
+/usr/local/share/aclocal/iconv.m4:101: AM_ICONV is expanded from...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_ICONV])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_ICONV], [/* Define if you have the iconv() function. */
+#undef HAVE_ICONV])
+m4trace:configure.in:59: -1- AC_SUBST([LIBICONV])
+m4trace:configure.in:59: -1- AC_SUBST([LTLIBICONV])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+/usr/local/share/aclocal/iconv.m4:101: AM_ICONV is expanded from...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([ICONV_CONST])
+m4trace:configure.in:59: -1- AH_OUTPUT([ICONV_CONST], [/* Define as const if the declaration of iconv() needs const. */
+#undef ICONV_CONST])
+m4trace:configure.in:59: -1- AM_LANGINFO_CODESET
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/codeset.m4:21: AM_LANGINFO_CODESET is expanded from...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LANGINFO_CODESET])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_LANGINFO_CODESET], [/* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
+#undef HAVE_LANGINFO_CODESET])
+m4trace:configure.in:59: -1- gt_LC_MESSAGES
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/lcmessage.m4:30: gt_LC_MESSAGES is expanded from...
+/usr/local/share/aclocal/gettext.m4:481: AM_INTL_SUBDIR is expanded from...
+configure.in:59: AM_INTL_SUBDIR is required by...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LC_MESSAGES])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_LC_MESSAGES], [/* Define if your <locale.h> file defines LC_MESSAGES. */
+#undef HAVE_LC_MESSAGES])
+m4trace:configure.in:59: -1- AC_SUBST([INTLBISON])
+m4trace:configure.in:59: -1- gt_INTL_MACOSX
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:525: gt_INTL_MACOSX is expanded from...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_CFPREFERENCESCOPYAPPVALUE])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_CFPREFERENCESCOPYAPPVALUE], [/* Define to 1 if you have the MacOS X function CFPreferencesCopyAppValue in
+   the CoreFoundation framework. */
+#undef HAVE_CFPREFERENCESCOPYAPPVALUE])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:525: gt_INTL_MACOSX is expanded from...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_CFLOCALECOPYCURRENT])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_CFLOCALECOPYCURRENT], [/* Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the
+   CoreFoundation framework. */
+#undef HAVE_CFLOCALECOPYCURRENT])
+m4trace:configure.in:59: -1- AC_SUBST([INTL_MACOSX_LIBS])
+m4trace:configure.in:59: -1- AM_NLS
+m4trace:configure.in:59: -1- AC_SUBST([USE_NLS])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_LIB_LINKFLAGS_BODY([intl])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([
+    eval additional_includedir=\"$includedir\"
+    eval additional_libdir=\"$libdir\"
+  ])
+m4trace:configure.in:59: -1- AC_LIB_ARG_WITH([libintl-prefix], [  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for libintl in includedir and libdir], [
+    if test "X$withval" = "Xno"; then
+      use_additional=no
+    else
+      if test "X$withval" = "X"; then
+        AC_LIB_WITH_FINAL_PREFIX([
+          eval additional_includedir=\"$includedir\"
+          eval additional_libdir=\"$libdir\"
+        ])
+      else
+        additional_includedir="$withval/include"
+        additional_libdir="$withval/lib"
+      fi
+    fi
+])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([
+          eval additional_includedir=\"$includedir\"
+          eval additional_libdir=\"$libdir\"
+        ])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+autoconf/general.m4:1799: AC_CACHE_VAL is expanded from...
+autoconf/general.m4:1808: AC_CACHE_CHECK is expanded from...
+/usr/local/share/aclocal/gettext.m4:353: AM_GNU_GETTEXT is expanded from...
+configure.in:59: the top level])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([ENABLE_NLS])
+m4trace:configure.in:59: -1- AH_OUTPUT([ENABLE_NLS], [/* Define to 1 if translation of program messages to the user\'s native
+   language is requested. */
+#undef ENABLE_NLS])
+m4trace:configure.in:59: -1- AC_LIB_APPENDTOVAR([CPPFLAGS], [$INCINTL])
+m4trace:configure.in:59: -1- AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_GETTEXT])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_GETTEXT], [/* Define if the GNU gettext() function is already present or preinstalled. */
+#undef HAVE_GETTEXT])
+m4trace:configure.in:59: -1- AC_DEFINE_TRACE_LITERAL([HAVE_DCGETTEXT])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_DCGETTEXT], [/* Define if the GNU dcgettext() function is already present or preinstalled.
+   */
+#undef HAVE_DCGETTEXT])
+m4trace:configure.in:59: -1- AC_SUBST([BUILD_INCLUDED_LIBINTL])
+m4trace:configure.in:59: -1- AC_SUBST([USE_INCLUDED_LIBINTL])
+m4trace:configure.in:59: -1- AC_SUBST([CATOBJEXT])
+m4trace:configure.in:59: -1- AC_SUBST([DATADIRNAME])
+m4trace:configure.in:59: -1- AC_SUBST([INSTOBJEXT])
+m4trace:configure.in:59: -1- AC_SUBST([GENCAT])
+m4trace:configure.in:59: -1- AC_SUBST([INTLOBJS])
+m4trace:configure.in:59: -1- AC_SUBST([INTL_LIBTOOL_SUFFIX_PREFIX])
+m4trace:configure.in:59: -1- AC_SUBST([INTLLIBS])
+m4trace:configure.in:59: -1- AC_SUBST([LIBINTL])
+m4trace:configure.in:59: -1- AC_SUBST([LTLIBINTL])
+m4trace:configure.in:59: -1- AC_SUBST([POSUB])
+m4trace:configure.in:60: -2- AC_CHECK_LIB([intl], [gettext])
+m4trace:configure.in:60: -2- AH_OUTPUT([HAVE_LIBINTL], [/* Define to 1 if you have the `intl\' library (-lintl). */
+#undef HAVE_LIBINTL])
+m4trace:configure.in:60: -2- AC_DEFINE_TRACE_LITERAL([HAVE_LIBINTL])
+m4trace:configure.in:65: -1- AC_CHECK_LIB([Xxf86vm], [XF86VidModeQueryVersion], [], [], [-lX11 -lXext])
+m4trace:configure.in:65: -1- AH_OUTPUT([HAVE_LIBXXF86VM], [/* Define to 1 if you have the `Xxf86vm\' library (-lXxf86vm). */
+#undef HAVE_LIBXXF86VM])
+m4trace:configure.in:65: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LIBXXF86VM])
+m4trace:configure.in:66: -1- AC_CHECK_LIB([z], [zlibVersion])
+m4trace:configure.in:66: -1- AH_OUTPUT([HAVE_LIBZ], [/* Define to 1 if you have the `z\' library (-lz). */
+#undef HAVE_LIBZ])
+m4trace:configure.in:66: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LIBZ])
+m4trace:configure.in:70: -1- AC_CHECK_LIB([png], [png_write_end])
+m4trace:configure.in:70: -1- AH_OUTPUT([HAVE_LIBPNG], [/* Define to 1 if you have the `png\' library (-lpng). */
+#undef HAVE_LIBPNG])
+m4trace:configure.in:70: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LIBPNG])
+m4trace:configure.in:72: -1- AC_SUBST([VISARC_LIBS])
+m4trace:configure.in:74: -1- AC_SUBST([AVIPLAY], [$ac_cv_path_AVIPLAY])
+m4trace:configure.in:75: -1- AC_SUBST([MPLAYER], [$ac_cv_path_MPLAYER])
+m4trace:configure.in:76: -1- AC_DEFINE_TRACE_LITERAL([AVIPLAY])
+m4trace:configure.in:76: -1- AH_OUTPUT([AVIPLAY], [/* avi file player */
+#undef AVIPLAY])
+m4trace:configure.in:77: -1- AC_DEFINE_TRACE_LITERAL([MPLAYER])
+m4trace:configure.in:77: -1- AH_OUTPUT([MPLAYER], [/* mpeg file player */
+#undef MPLAYER])
+m4trace:configure.in:88: -1- AC_SUBST([mp3cmd], [$ac_cv_path_mp3cmd])
+m4trace:configure.in:95: -1- AC_SUBST([mp3cmd], [$ac_cv_path_mp3cmd])
+m4trace:configure.in:100: -1- AC_DEFINE_TRACE_LITERAL([MP3CMD])
+m4trace:configure.in:100: -1- AH_OUTPUT([MP3CMD], [/* mp3 file player command */
+#undef MP3CMD])
+m4trace:configure.in:101: -1- AC_DEFINE_TRACE_LITERAL([MP3ARG])
+m4trace:configure.in:101: -1- AH_OUTPUT([MP3ARG], [/* mp3 file player command line argument */
+#undef MP3ARG])
+m4trace:configure.in:115: -1- _m4_warn([obsolete], [The macro `AC_TRY_CPP' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2107: AC_TRY_CPP is expanded from...
+configure.in:115: the top level])
+m4trace:configure.in:128: -1- AC_DEFINE_TRACE_LITERAL([FreeBSD_PTHREAD_ERROR])
+m4trace:configure.in:128: -1- AH_OUTPUT([FreeBSD_PTHREAD_ERROR], [/* FreeBSD pthread bug */
+#undef FreeBSD_PTHREAD_ERROR])
+m4trace:configure.in:131: -1- AM_PATH_GTK_2_0([2.6.0])
+m4trace:configure.in:131: -1- AC_SUBST([PKG_CONFIG], [$ac_cv_path_PKG_CONFIG])
+m4trace:configure.in:131: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2289: AC_TRY_RUN is expanded from...
+/usr/X11R6/share/aclocal/gtk-2.0.m4:196: AM_PATH_GTK_2_0 is expanded from...
+configure.in:131: the top level])
+m4trace:configure.in:131: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+/usr/X11R6/share/aclocal/gtk-2.0.m4:196: AM_PATH_GTK_2_0 is expanded from...
+configure.in:131: the top level])
+m4trace:configure.in:131: -1- AC_SUBST([GTK_CFLAGS])
+m4trace:configure.in:131: -1- AC_SUBST([GTK_LIBS])
+m4trace:configure.in:144: -1- AM_PATH_ALSA([0.9.0])
+m4trace:configure.in:144: -1- _m4_warn([obsolete], [The macro `AC_LANG_SAVE' is obsolete.
+You should run autoupdate.], [autoconf/lang.m4:166: AC_LANG_SAVE is expanded from...
+linux.m4:149: AM_PATH_ALSA is expanded from...
+configure.in:144: the top level])
+m4trace:configure.in:144: -1- _m4_warn([obsolete], [instead of using `AC_LANG', `AC_LANG_SAVE',
+and `AC_LANG_RESTORE', you should use `AC_LANG_PUSH' and `AC_LANG_POP'.], [autoconf/lang.m4:166: AC_LANG_SAVE is expanded from...
+linux.m4:149: AM_PATH_ALSA is expanded from...
+configure.in:144: the top level])
+m4trace:configure.in:144: -1- _m4_warn([obsolete], [The macro `AC_LANG_C' is obsolete.
+You should run autoupdate.], [autoconf/c.m4:71: AC_LANG_C is expanded from...
+linux.m4:149: AM_PATH_ALSA is expanded from...
+configure.in:144: the top level])
+m4trace:configure.in:144: -1- _m4_warn([obsolete], [The macro `AC_TRY_COMPILE' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2180: AC_TRY_COMPILE is expanded from...
+linux.m4:149: AM_PATH_ALSA is expanded from...
+configure.in:144: the top level])
+m4trace:configure.in:144: -1- _m4_warn([obsolete], [The macro `AC_LANG_RESTORE' is obsolete.
+You should run autoupdate.], [autoconf/lang.m4:172: AC_LANG_RESTORE is expanded from...
+linux.m4:149: AM_PATH_ALSA is expanded from...
+configure.in:144: the top level])
+m4trace:configure.in:144: -1- AC_CHECK_LIB([asound], [snd_ctl_open], [], [ifelse([], , [AC_MSG_ERROR(No linkable libasound was found.)])
+	 alsa_found=no
+])
+m4trace:configure.in:144: -1- AH_OUTPUT([HAVE_LIBASOUND], [/* Define to 1 if you have the `asound\' library (-lasound). */
+#undef HAVE_LIBASOUND])
+m4trace:configure.in:144: -1- AC_DEFINE_TRACE_LITERAL([HAVE_LIBASOUND])
+m4trace:configure.in:144: -1- AC_SUBST([ALSA_CFLAGS])
+m4trace:configure.in:144: -1- AC_SUBST([ALSA_LIBS])
+m4trace:configure.in:165: -1- AM_PATH_ESD([0.2.0], [have_esd=yes], [have_esd=no])
+m4trace:configure.in:165: -1- AC_SUBST([ESD_CONFIG], [$ac_cv_path_ESD_CONFIG])
+m4trace:configure.in:165: -1- _m4_warn([obsolete], [The macro `AC_LANG_SAVE' is obsolete.
+You should run autoupdate.], [autoconf/lang.m4:166: AC_LANG_SAVE is expanded from...
+linux.m4:320: AM_PATH_ESD is expanded from...
+configure.in:165: the top level])
+m4trace:configure.in:165: -1- _m4_warn([obsolete], [instead of using `AC_LANG', `AC_LANG_SAVE',
+and `AC_LANG_RESTORE', you should use `AC_LANG_PUSH' and `AC_LANG_POP'.], [autoconf/lang.m4:166: AC_LANG_SAVE is expanded from...
+linux.m4:320: AM_PATH_ESD is expanded from...
+configure.in:165: the top level])
+m4trace:configure.in:165: -1- _m4_warn([obsolete], [The macro `AC_LANG_C' is obsolete.
+You should run autoupdate.], [autoconf/c.m4:71: AC_LANG_C is expanded from...
+linux.m4:320: AM_PATH_ESD is expanded from...
+configure.in:165: the top level])
+m4trace:configure.in:165: -1- _m4_warn([obsolete], [The macro `AC_TRY_RUN' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2289: AC_TRY_RUN is expanded from...
+linux.m4:320: AM_PATH_ESD is expanded from...
+configure.in:165: the top level])
+m4trace:configure.in:165: -1- _m4_warn([obsolete], [The macro `AC_LANG_RESTORE' is obsolete.
+You should run autoupdate.], [autoconf/lang.m4:172: AC_LANG_RESTORE is expanded from...
+linux.m4:320: AM_PATH_ESD is expanded from...
+configure.in:165: the top level])
+m4trace:configure.in:165: -1- _m4_warn([obsolete], [The macro `AC_LANG_SAVE' is obsolete.
+You should run autoupdate.], [autoconf/lang.m4:166: AC_LANG_SAVE is expanded from...
+linux.m4:320: AM_PATH_ESD is expanded from...
+configure.in:165: the top level])
+m4trace:configure.in:165: -1- _m4_warn([obsolete], [instead of using `AC_LANG', `AC_LANG_SAVE',
+and `AC_LANG_RESTORE', you should use `AC_LANG_PUSH' and `AC_LANG_POP'.], [autoconf/lang.m4:166: AC_LANG_SAVE is expanded from...
+linux.m4:320: AM_PATH_ESD is expanded from...
+configure.in:165: the top level])
+m4trace:configure.in:165: -1- _m4_warn([obsolete], [The macro `AC_LANG_C' is obsolete.
+You should run autoupdate.], [autoconf/c.m4:71: AC_LANG_C is expanded from...
+linux.m4:320: AM_PATH_ESD is expanded from...
+configure.in:165: the top level])
+m4trace:configure.in:165: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+You should run autoupdate.], [autoconf/general.m4:2223: AC_TRY_LINK is expanded from...
+linux.m4:320: AM_PATH_ESD is expanded from...
+configure.in:165: the top level])
+m4trace:configure.in:165: -1- _m4_warn([obsolete], [The macro `AC_LANG_RESTORE' is obsolete.
+You should run autoupdate.], [autoconf/lang.m4:172: AC_LANG_RESTORE is expanded from...
+linux.m4:320: AM_PATH_ESD is expanded from...
+configure.in:165: the top level])
+m4trace:configure.in:165: -1- AC_SUBST([ESD_CFLAGS])
+m4trace:configure.in:165: -1- AC_SUBST([ESD_LIBS])
+m4trace:configure.in:170: -1- AC_SUBST([ESD_CFLAGS])
+m4trace:configure.in:171: -1- AC_SUBST([ESD_LIBS])
+m4trace:configure.in:202: -1- AC_SUBST([OSDEPDEF])
+m4trace:configure.in:203: -1- AC_SUBST([OSDEPLIB])
+m4trace:configure.in:269: -1- AC_SUBST([SRC_CDROM])
+m4trace:configure.in:272: -1- AC_DEFINE_TRACE_LITERAL([CDROM_DEVICE])
+m4trace:configure.in:272: -1- AH_OUTPUT([CDROM_DEVICE], [/* cdrom device */
+#undef CDROM_DEVICE])
+m4trace:configure.in:277: -1- AC_DEFINE_TRACE_LITERAL([ENABLE_ALSA])
+m4trace:configure.in:277: -1- AH_OUTPUT([ENABLE_ALSA], [/* enable ALSA library */
+#undef ENABLE_ALSA])
+m4trace:configure.in:285: -1- AC_DEFINE_TRACE_LITERAL([ALSACARD])
+m4trace:configure.in:285: -1- AH_OUTPUT([ALSACARD], [/* alsa card no */
+#undef ALSACARD])
+m4trace:configure.in:288: -1- AC_CHECK_LIB([asound], [snd_mixer_element_read], [ALSAMIX_H=audioMix_alsa.h])
+m4trace:configure.in:289: -1- AC_SUBST([ALSAMIX_H])
+m4trace:configure.in:298: -1- AC_DEFINE_TRACE_LITERAL([AUDIODEV])
+m4trace:configure.in:298: -1- AH_OUTPUT([AUDIODEV], [/* aduio device */
+#undef AUDIODEV])
+m4trace:configure.in:299: -1- AC_DEFINE_TRACE_LITERAL([MIXERDEV])
+m4trace:configure.in:299: -1- AH_OUTPUT([MIXERDEV], [/* mixer device */
+#undef MIXERDEV])
+m4trace:configure.in:315: -1- AC_SUBST([AUDIO_IO])
+m4trace:configure.in:330: -1- AC_SUBST([data_root_dir])
+m4trace:configure.in:331: -1- AC_SUBST([save_root_dir])
+m4trace:configure.in:337: -1- AC_DEFINE_TRACE_LITERAL([MaxPDTImage])
+m4trace:configure.in:337: -1- AH_OUTPUT([MaxPDTImage], [/* pdt cache deal */
+#undef MaxPDTImage])
+m4trace:configure.in:338: -1- AC_DEFINE_TRACE_LITERAL([BACKLOG_LEN])
+m4trace:configure.in:338: -1- AH_OUTPUT([BACKLOG_LEN], [/* backlog length */
+#undef BACKLOG_LEN])
+m4trace:configure.in:341: -1- AC_CONFIG_FILES([Makefile contrib/Makefile])
+m4trace:configure.in:341: -1- _m4_warn([obsolete], [AC_OUTPUT should be used without arguments.
+You should run autoupdate.], [])
+m4trace:configure.in:341: -1- AC_SUBST([LIB@&t@OBJS], [$ac_libobjs])
+m4trace:configure.in:341: -1- AC_SUBST([LTLIBOBJS], [$ac_ltlibobjs])

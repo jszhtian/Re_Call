@@ -1,0 +1,199 @@
+$sc_04a
+_Day=4,
+_DayTime=0,
+
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+&725"…………。"&726"…………………。"_Mode=1,
+52("_GRPName","e01r1")
+42("DrawCG","00Draw.dat")
+52("_BGMName","BGM09")
+42("BGM","00Sound.dat")
+#:NameSuffix
+&727"「……あぁ、これが母さんの尻……ここから俺、俺……」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0369e
+&728"「懐かしいの……？　ふふ、もっと触っていいのよ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&729"「いいの！？」"_Mode=0,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+_Mode=3,
+52("_BGMName","")
+42("BGM","00sound.dat")
+100("",3,4,0,0)
+100("SE180",1,4,0,0)
+52("_CharNameB","fc_cb111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","c")42("Start","02CharChip.dat")#夢　子=w0554c
+&730"「いいワケがないでしょう？」"42("DEL","02CharChip.dat")&731"ゆ、夢子？　一体どこからっ。"52("_CharNameB","fc_ab111")_CosSel=1,
+_Glass=1,
+_Cheek=1,
+52("_CCName","a")42("Start","02CharChip.dat")#まりる=w0646a
+&732"「覚悟はできてんでしょうねぇ……」"42("DEL","02CharChip.dat")&733"まりるまでっ！！"&734"２人とも、その手に持った刃物は本当に危ない。"&735"世の中には話せばわかる事が沢山あると思わないか。"100("",3,4,0,0)
+#２　人=w0001x
+&736"「問答無用っ！！」"100("",3,2,0,0)
+100("SE204",0,2,0,0)
+_Mode=1,
+52("_GRPName","white")
+42("DrawBG","00Draw.dat")
+&737"ギャァアアアアッ！　小指がぁぁぁ！！"&738"…………。"&739"へっ……小指？"_Mode=1,
+52("_GRPName","bg02a")
+42("DrawBG","00Draw.dat")
+100("",3,2,0,0)
+100("SE016",0,2,0,0)
+#:NameSuffix
+&740"「ハァッ！　はぁ……はぁ……？」"52("_BGMName","BGM02")
+42("BGM","00Sound.dat")
+_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","da")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0420d
+&741"「はい、おはよー」"42("DEL","02CharChip.dat")&742"目を覚ますとりあねーちゃんに顔を笑いながら眺められていた。"#:NameSuffix
+&743"「なにしてんの……？」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dd")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0421d
+&744"「んー？　うわ言でまりると夢子の名前呼びながら苦しんでる顔がもうケッサクだったから、見てたんだけど？」"42("DEL","02CharChip.dat")#:NameSuffix
+&745"「起こしてくれよ……ナイフ持ったまりるとドス持った夢子に追っかけられる夢だぞ。超怖かったんだからな……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","da")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0422d
+&746"「知らないわよー。自業自得っしょ」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+&747"りあねーちゃんが視線をずらす。"&748"その先には朝方に帰ってきたらしい母さんが眠っていた。"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜
+&749"「…………」"42("DEL","02CharChip.dat")#:NameSuffix
+&750"（自業自得……）"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","db")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0423d
+&751"「……アンタ。いっつもこうやって皆の為に朝までがんばる母さんに、何したのかわかってんでしょうね？」"42("DEL","02CharChip.dat")#:NameSuffix
+&752"「わかってる……反省もしてる……」"&753"ここでりあねーちゃんに謝ったって何も解決にはならないこともわかっている。"&754"夢子とまりるなんか特に大激怒だった。"&755"俺には感謝の気持ちが足りない。"&756"要はそう言う事なんだろう。"&757"だからまずは酷い苦痛に耐えた……耐えきった。"#:NameSuffix
+&758"「タコ紐と正座の上にのっかってくる絵里沙の苦痛、俺は忘れないよ……」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","da")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0424d
+&759"「反省してんなら、ちゃんと本人に謝んのよ」"42("DEL","02CharChip.dat")#:NameSuffix
+&760"「うん」"&761"今起すわけにはいかないから、学園から戻ってきたらちゃんと謝ろう……。"&762"…………。"#:NameSuffix
+&763"「イタタッ！　それはそうと、いい加減この指のタコ紐外してくれ」"&764"まりるによって昨晩結ばれた、手枷代わりの小指でグルグル巻きにされたタコ紐。"&765"しかも背中側に手の甲を向けられた挙句クロスしている腕は、予想以上に動かせなかった。"&766"動くと細くて荒いタコ紐が小指に食い込んでイタイのなんのって……。"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","db")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0425d
+&767"「頼み方がなぁ……」"42("DEL","02CharChip.dat")#:NameSuffix
+&768"「ヴィクトリアお姉様、卑しいワタクシめの小指の枷を外してはいただけませんでしょうか」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","da")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0426d
+&769"「……ま、いいか……ほい」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+100("",3,2,0,0)
+100("SE246",0,2,0,0)
+&770"ゆるっと小指の拘束感がなくなり、昨晩から固まりっぱなしだった肩から力が抜ける。"#:NameSuffix
+&771"「はぁぁ……自由って素晴しい！　おっと」"52("_CCName","e")42("Start","02CharChip.dat")#魔　菜
+&772"「…………」"42("DEL","02CharChip.dat")&773"歓喜の声をあげてから、俺は慌てて口元を押さえる。"&774"母さんには、ゆっくり寝といて欲しい。"#:NameSuffix
+&775"「……ハッ！？　もう登校時間ギリじゃんっ！」"&776"とてもじゃないが飯をくってる暇はない。"&777"できるだけ急いで、しかしあまり音をたてない様に、登校準備を済ませる。"#:NameSuffix
+&778"「いってき」"100("",3,2,0,0)
+100("SE025",0,2,0,0)
+_X=20,
+_Y=20,
+_WaitTime=0,
+80(1,"01Quake.dat")
+_WaitTime=2000,
+42("Wait","00Wait.dat")
+_ThreNum=1,
+42("QuakeEnd","01Quake.dat")
+#:NameSuffix
+&779"「マフゥッ！！」"&780"唐突に制服の背中を掴まれ、息が止まる。"#:NameSuffix
+&781"「いっつも思うんだけど声掛ければ充分でしょうっ！？」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","da")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0427d
+&782"「そんなことより、牛乳くらい飲んでけ」"42("DEL","02CharChip.dat")#:NameSuffix
+&783"「くうぅ、いただきますっ！」"&784"これは言わばウチの決りのようなモンだった。"&785"朝飯抜いても牛乳抜くなって。"&786"だれか家族の中に牛乳万能説を信じてる奴がいるんだろうか。"#:NameSuffix
+&787"「プハッ、ごちそーさま！　いってきます！」"_Target=@CharC,
+_CharX=0,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","dd")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0428d
+&788"「はいはーい」"42("DEL","02CharChip.dat")100("",3,2,0,0)
+100("SE059",0,2,0,0)
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛
+&789"「…………」"42("DEL","02CharChip.dat")_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Target=@CharL,
+_CharX=-200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","da")
+42("DrawChar","00Draw.dat")
+52("_CCName","d")42("Start","02CharChip.dat")#理　愛=w0429d
+&790"「……アイツ帰ってきたらちゃんと話しくらいは聞いてやんなよ？　母さん」"42("DEL","02CharChip.dat")_Target=@CharR,
+_CharX=200,
+_CosSel=4,
+_Glass=1,
+_Cheek=1,
+_UpFlg=1,
+52("_GRPName","ea")
+42("DrawChar","00Draw.dat")
+52("_CCName","e")42("Start","02CharChip.dat")#魔　菜=w0370e
+&791"「……わかっているわ」"42("DEL","02CharChip.dat")_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+_Target=-1,
+52("_GRPName","")
+42("DrawChar","00Draw.dat")
+_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+&792"…………。"&793"…………………。"
+42("start","01Rand.dat")
+
+41("sc_e02","sc_e02.dat")

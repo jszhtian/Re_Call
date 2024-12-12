@@ -1,0 +1,380 @@
+//=========================================================================
+//
+//■クイックロード
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.QLOAD."]
+
+	S_INT[@qsaveno]
+	S_INT[@col]
+	S_INT[@Thumb_A=080]
+	S_INT[@Thumb_FNO(5+1)]
+
+	S_INT[@ACTIVE_NO=0]
+
+	S_INT[@EF=050]
+
+	S_INT[@qsavenum=1]
+/*
+	S_INT[@qs_thumb_lx  = 395] //左端サムネの座標X
+	S_INT[@qs_thumb_ly  = 261] //左端サムネの座標Y
+	S_INT[@qs_thumb_spx = 100] //X間隔
+
+	S_INT[@qs_thumb_sx  = 092] //サムネサイズX
+	S_INT[@qs_thumb_sy  = 052] //サムネサイズY
+*/
+}
+
+#=ES.QLOAD.BTDEF
+{
+	\BTDEF.GROUP(ES.QLOAD)
+
+	//■枠
+	\BT.NAME("■枠")
+	\BT.CGSYS("saveload/dialog_qload")
+	\BT.XYZ(162, 232+@EF, 1030000000)
+	\BT.SET(TIP.DIALOG)
+
+	//■キャンセル用ボタン
+	\BT.NAME("■枠")
+	\BT.CGSYS("saveload/btn_back_off")
+	\BT.XYZ(800, 600, 1030000000)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.BACK)
+
+	return[]
+
+}
+
+
+#=ES.QLOAD.INIT
+{
+	IF[@es.STATE==0]
+	{
+//		\BT.W0.ALL(ES.SEL)
+
+		INT[@QSaveNo]
+
+		@QSaveNo = @es.STATE2
+
+		//ロードするファイル名取得
+		\_inttostr(@QSaveNo, @es.sdketa)
+		STR[$Name="save"+$_RSTR(1)+".sd"]
+
+		//クイックセーブデータが有効か
+		GOSUB[#=es.SaveDataCheck pstr=$Name]
+		IF[@_RINT(1)==0]
+		{
+			//システムメッセージ：クイックデータがありません
+		//	@es.SM=1;@es.SMNO=5
+
+			//システムボイス：クイックデータなし
+			//ボイス再生
+			\_gosub(ES.QLOADCONF.VoicePlay.3)
+
+			@es.STATE=102
+		}
+		ELSE[]
+		{
+			GOSUB[#=ES.SEL.HIDE]
+			GOSUB[#=ES.CSEL.HIDE]
+
+			GOSUB[#=ES.QLOAD.REF]
+			\SS.FADE.TASK(150)
+
+			//リストの上から 1 番目のファイル名を取得する
+			GOSUB[#=ES.QSAVEFILENAME.GET PINT=1]
+			@qsaveno=@_RINT(1)
+	//		@qsaveno=@Thumb_FNO(@_LC)
+
+	//		@es.STATE=100
+			@es.STATE=101
+
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.QLOAD.LOOP
+{
+	INT[@chk]
+	INT[@yval]
+
+	IF[@es.STATE==1] //BACK (QLOADCONFでキャンセル)
+	{
+		GOSUB[#=ES.QLOAD.REF]
+/*		\BT.Y.SUB($BID+"TIP.DIALOG",, 9999999, 232);@yval=@_RINT(1)
+		LOOP[SET=@qsavenum]
+		{
+			CG[ID="SLTHUMBTEMP"+$(@_LC) Y+=@yval]
+			CG[ID="SLTHUMBTEMP"+$(@_LC+@qsavenum) y+=@yval]
+		}
+		LOOPEND[]
+*/
+		\SS.FADE.TASK(200)
+		@es.STATE=100
+	}
+	IFEND[]
+
+
+	IF[@es.STATE==100] //LOOP
+	{
+		@chk=0
+/*
+		//サムネイル選択処理
+		LOOP[SET=@qsavenum]
+		{
+			CGINFO[ID="SLTHUMBTEMP"+$(@_LC) ONMOUSE=1 LET=@col]
+			IF[@col!=-1]
+			{
+				@chk+=1
+
+				IF[@ACTIVE_NO!=@_LC]
+				{
+					@ACTIVE_NO=@_LC
+					\SSE("sysse/sse02")
+				}
+				IFEND[]
+
+				CG[ID="SLTHUMBTEMP"+$(@_LC+@qsavenum) A=000]
+				IF[@_MOUSE_L==2]
+				{
+					\SSE("sysse/sse03")
+
+					@_MOUSE_L=3
+			//		\_dmes("["+$(@_LC)+"] FN:"+$(@Thumb_FNO(@_LC)))
+					@qsaveno=@Thumb_FNO(@_LC)
+					@es.STATE=101
+					LOOPBREAK[]
+				}
+				IFEND[]
+			}
+			ELSE[]
+			{
+				CG[ID="SLTHUMBTEMP"+$(@_LC+@qsavenum) A=@Thumb_A]
+			}
+			IFEND[]
+		}
+		LOOPEND[]
+
+		IF[@chk==0]
+		{
+			@ACTIVE_NO=0
+		}
+		IFEND[]
+*/
+	}
+	IFEND[]
+
+	IF[@es.STATE==101] //QLOADCONF
+	{
+		\es.S.GOSUB.OVER("ES.QLOADCONF", 0, @qsaveno)
+	}
+	IFEND[]
+	IF[@es.STATE==102] //BACK (クイックデータがない)
+	{
+//		\BT.W1.ALL(ES.SEL)
+		\es.S.RETURN(1, 0)
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+
+//リストの上から n 番目のファイル名を取得する
+#=ES.QSAVEFILENAME.GET
+{
+	INT[@NO=@_PINT(1)] //リストの上から何番目
+	INT[@sno=0]
+
+	//セーブデータ番号を探す
+	//
+	LOOP[SET=@qsavenum]
+	{
+		IF[@es.GSD(151,@NO)==@_LC]
+		{
+			@sno=@es.sdqsaveno+@_LC-1
+			LOOPBREAK[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@sno]
+}
+
+
+#=es.QSAVE.INSERT
+{
+	INT[@no]
+
+	LOOP[SET=@qsavenum]
+	{
+		IF[@es.GSD(151,@_LC)>0]
+		{
+			@es.GSD(151,@_LC)+=1
+			IF[@es.GSD(151,@_LC) > @qsavenum] @es.GSD(151,@_LC)=0 IFEND[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	//空いているリストのところに1を挿入する(上の処理により、空きは必ず存在する)
+	LOOP[SET=@qsavenum]
+	{
+		IF[@es.GSD(151,@_LC)==0]
+		{
+			@es.GSD(151,@_LC)=1
+			@no=@_LC
+			LOOPBREAK[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@no]
+}
+
+
+//リストの上から n 番目のファイル名を取得する
+#=ES.ASAVEFILENAME.GET
+{
+	INT[@NO=@_PINT(1)] //リストの上から何番目
+	INT[@sno=0]
+
+	//セーブデータ番号を探す
+	//
+	LOOP[SET=(50)]
+	{
+		IF[@es.GSD(092,@NO)==@_LC]
+		{
+			@sno=@es.sdautosaveno+@_LC-1
+			LOOPBREAK[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@sno]
+}
+
+
+#=es.ASAVE.INSERT
+{
+	INT[@no]
+
+	LOOP[SET=(50)]
+	{
+		IF[@es.GSD(092,@_LC)>0]
+		{
+			@es.GSD(092,@_LC)+=1
+			IF[@es.GSD(092,@_LC) > (50)] @es.GSD(092,@_LC)=0 IFEND[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	//空いているリストのところに1を挿入する(上の処理により、空きは必ず存在する)
+	LOOP[SET=(50)]
+	{
+		IF[@es.GSD(092,@_LC)==0]
+		{
+			@es.GSD(092,@_LC)=1
+			@no=@_LC
+			LOOPBREAK[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@no]
+}
+
+
+#=ES.QLOAD.REF
+{
+/*
+	INT[@mLC]
+	INT[@sno]
+
+	LOOP[SET=@qsavenum]
+	{
+		@mLC=@_LC
+
+		//リストの上から @_LC 番目のファイル名を取得する
+		GOSUB[#=ES.QSAVEFILENAME.GET PINT=@mLC]
+		@sno=@_RINT(1)
+
+		@Thumb_FNO(@mLC) = @sno
+
+		//------------------------------------------------------
+		// プレート一旦非表示
+		//------------------------------------------------------
+			CG[ID="SLTHUMBTEMP"+$(@mLC) Z=1 FILE="" A=0]
+			CGACT[ID="SLTHUMBTEMP"+$(@mLC) RECTPAINT3=1 SET=@es.COL.CLEAR]
+			//上に乗せる黒
+			CG[ID="SLTHUMBTEMP"+$(@mLC+@qsavenum) Z=1000000000000000+@mLC+@qsavenum X=@qs_thumb_lx+(@mLC-1)*@qs_thumb_spx Y=@qs_thumb_ly+@EF SX=@qs_thumb_sx SY=@qs_thumb_sy FILE="" A=@Thumb_A]
+			CGACT[ID="SLTHUMBTEMP"+$(@mLC+@qsavenum) RECTPAINT3=1 SET=0xff000000]
+
+		//------------------------------------------------------
+		// セーブデータが有効か
+		//------------------------------------------------------
+			\es.SL.CHECK(@sno)
+			IF[@_RINT(1)==0] LOOPCONTINUE[] IFEND[]
+
+		//------------------------------------------------------
+		// サムネイル画像読込
+		//------------------------------------------------------
+			\es.SL.LOADCG("SLTHUMBTEMP"+$(@mLC), @sno, 0003)
+
+			CGACT[ID="SLTHUMBTEMP"+$(@mLC) SIZE2=1 SX=@qs_thumb_sx*4 SY=@qs_thumb_sy*4]
+			CGACT[ID="SLTHUMBTEMP"+$(@mLC) SIZE4=1 SX=@qs_thumb_sx*2 SY=@qs_thumb_sy*2]
+			CGACT[ID="SLTHUMBTEMP"+$(@mLC) SIZE4=1 SX=@qs_thumb_sx   SY=@qs_thumb_sy]
+
+			CG[ID="SLTHUMBTEMP"+$(@mLC) X=@qs_thumb_lx+(@mLC-1)*@qs_thumb_spx Y=@qs_thumb_ly+@EF Z=1000000000000000+@mLC]
+	}
+	LOOPEND[]
+*/
+
+	return[]
+}
+
+#=ES.QLOAD.END
+{
+	//画面消去
+	LOOP[SET=@qsavenum]
+	{
+		CGEND[ID="SLTHUMBTEMP"+$(@_LC)]
+		CGEND[ID="SLTHUMBTEMP"+$(@_LC+@qsavenum)]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[キャンセル]ボタン -----------------------------------------------
+//
+#=ES.QLOAD.BTN.NO.ON
+{
+	\BT.W1.ALL(ES.SEL)
+	\es.S.RETURN //キャンセル(ES_Scenarioへ)
+	return[]
+}
+
+

@@ -1,0 +1,29 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>systemcall</h2>
+<h3>systemcall &lt;function&gt;</h3>
+<p>
+Works identically to the system menu.<br>
+If you use it in things like select/selgosub, then you'll end up with something not very different from the title screen.<br>
+(In this case, it would probably be better to temporarily toggle off right-click menu functionality through rmode)<br>
+The available commands are exactly the same as the ones utilize by rmenu.<br>
+<br>
+If you call "systemcall rmenu", this is the same as calling the right-click menu itself.<br>
+You'd use this when you wanted right-click menu functionality during a button wait state.  Once you exit this right-click menu, the interpreter continues its execution one line below the systemcall command.<br>
+(This can leave the screen and the interpreter stack in an inconsistent state, so be careful when using this command.)
+</p>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+//============================================================================
+//
+//■ERIS 直前の選択肢へ戻る確認
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+}
+
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.PREVSELCONF.LOOP
+{
+	IF[@es.STATE==0]
+	{
+		//ロードするファイル名取得
+		\_inttostr(@es.sdprevselno, @es.sdketa)
+		STR[$Name="save"+$_RSTR(1)+".sd"]
+
+		//セーブデータが有効か
+		GOSUB[#=es.SaveDataCheck pstr=$Name]
+		IF[@_RINT(1)==0]
+		{
+			\BT.END(ES.PREVSELCONF)
+			@es.STATE=102
+			IFBREAK[LV=2]
+		}
+		IFEND[]
+
+		//システム起動回数チェック
+		INT[@Ret]
+		LOAD[FILE=$Name DNO=0002 LET=@Ret]
+		IF[@Ret!=@es.GSD(141,01)]
+		{
+			\BT.END(ES.PREVSELCONF)
+			@es.STATE=102
+			IFBREAK[LV=2]
+		}
+		IFEND[]
+
+		IF[@es.GSD(114,14)>0] //直前の選択肢に戻る確認
+		{
+			//ボイス再生
+			\_gosub(ES.PREVSELCONF.VoicePlay.1)
+			@es.STATE=1
+		}
+		ELSE[]
+		{
+			\BT.END(ES.PREVSELCONF)
+			@es.STATE=101
+		}
+		IFEND[]
+	}
+	IFEND[]
+	IF[@es.STATE==1] //FADE
+	{
+		\SS.FADE(200)
+		@es.STATE=100
+	}
+	IFEND[]
+	IF[@es.STATE==100] //LOOP
+	{
+	}
+	IFEND[]
+
+	IF[@es.STATE==101] //PREVSELLOAD
+	{
+		GOSUB[#=ES.PREVSELCONF.PREVSELLOAD]
+		\es.S.RETURN.LBL("ES.GAMEMAIN", 997, 0)
+	}
+	IFEND[]
+	IF[@es.STATE==102] //BACK
+	{
+		\es.S.RETURN
+//		\es.S.RETURN.LBL("ES.GAMEMAIN", 997, 0)
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+#=ES.PREVSELCONF.PREVSELLOAD
+{
+	//スクリーンショット撮る
+	\es.CGTSS
+
+	//ボイス再生
+	\_gosub(ES.PREVSELCONF.VoicePlay.2)
+
+	//@es.sdprevselno 番にセット
+	@es.SL.NO = @es.sdprevselno
+
+	// ロード
+	\LOAD(@es.SL.NO, 0) //GOSUB[#=es.LOAD ～]
+
+	return[]
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[はい]ボタン -----------------------------------------------------
+//
+#=ES.PREVSELCONF.BTN.YES.ON { @es.STATE=101; return[] }
+
+//■[いいえ]ボタン ---------------------------------------------------
+//
+#=ES.PREVSELCONF.BTN.NO.ON { @es.STATE=102; return[] }
+
+
+//====================================================================
+//
+//■直前の選択肢へ戻る確認(DIALOG版)
+//
+//====================================================================
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.PREVSELCONFDLG.LOOP
+{
+	WAIT[FRAME=1] //最新の画面を表示させておくため.
+
+	INT[@Ret=1]
+	STR[$cap]
+
+	IF[@es.GSD(114,14)==1] //直前の選択肢に戻る確認
+	{
+		//ボイス再生
+		\_gosub(ES.PREVSELCONF.VoicePlay.2)
+
+		WINDOWINFO[NO=0 CAPTION=1 LET=$cap]
+		$cap="確認"
+		DIALOG[STR=$T(13,28) CAPTION=$cap YESNO=1 LET=@Ret]
+	}
+	IFEND[]
+
+	IF[@Ret==1]
+	{
+		GO[#=ES.PREVSELCONF.PREVSELLOAD]
+	}
+	IFEND[]
+
+	\es.S.RETURN.LBL("ES.GAMEMAIN", 999, 0)
+
+	return[]
+}
+
+

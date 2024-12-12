@@ -1,0 +1,407 @@
+//============================================================================
+//
+// ERIS メイン画面設計
+//
+//
+//・ERIS ver0.87  012→013 変更点
+//　　・メッセージウィンドウ設定に \TX.CLICK.KEY, \TX.SKIP.KEY を追加。
+//　　　メッセージ送りキーとスキップキーを定義できるようにしました。
+//
+//・ERIS ver0.80  011→012 変更点
+//　　・テキスト設定の \TX.BOLD を実装
+//
+//・ERIS ver0.70  010→011 変更点
+//　　・ウィンドウ画像設定に \TX.A.DEF を追加
+//
+//・ERIS ver0.60  009→010 変更点
+//　　・テキスト設定に \TX.COLOR.KIDOKU を追加
+//
+//・ERIS ver0.57  008→009 変更点
+//　　・「どの画像にどの機能を割り振るかの設定」に @es.CNUM.MAIN.MENU を追加
+//　　・ボタン定義にメニューボタン追加
+//
+//・ERIS ver0.56  007→008 変更点
+//　　・\TX.FILE, \TXN.FILE に機能追加
+//　　・選択肢関係を選択肢設計ファイルへ移行
+//　　・\TX.CLICKICON.FILE 追加
+//　　・ボタン番号の自由化
+//
+//============================================================================
+\VER.MAINDEF(013) //定義Version
+//============================================================================
+
+//-------------------------------------------------------------------------
+//
+// 全般
+//
+//  ※(未)と記している部分は未実装の項目です。
+//
+//-------------------------------------------------------------------------
+#=es.SceneGameMain.Define
+
+
+	//---------------------------------------------------------------------
+	// メッセージウィンドウ設定
+	//---------------------------------------------------------------------
+
+	//ウィンドウ画像設定
+	//  \TX.FILE( １枚目 ，２枚目 )
+	//　２つ画像を指定できますが、これはウィンドウの透過度を変える時に利用します。
+	//　１枚目は普通に表示される画像で、
+	//　２枚目はウィンドウ透過度が反映される画像です。
+	//  ２枚目のレイヤ優先順位は１枚目より下になります。
+	//　もし透過度を変えたくない場合や必要ない場合は、２枚目の画像指定を省略してください。
+	//
+		\TX.FILE("cg/main/novel_back", "cg/main/novel_back2")  // ファイル名
+		\TX.XY(000, 000)                    // 表示ＸＹ座標
+		\TX.A.DEF(192)                      // ウィンドウ透過度(0～256)
+
+	//テキスト設定
+		\TX.TL.XY(030,030,720,540)      // 表示開始ＸＹ座標、サイズＸＹ
+
+
+	//テキスト設定
+		\TX.SPEED.DEF(32)               // テキスト表示速度初期値(0～256)(初回起動時にセットされる)
+		\TX.WAIT.DEF(64)                // テキスト文末停止時間初期値(0～256)(初回起動時にセットされる)
+		\TX.FONT.DEF("ＭＳ ゴシック")   // デフォルトフォント
+		\TX.SIZE.M(24)                  // フォントサイズＭ
+		\TX.SIZE.L(32)                  // フォントサイズＬ
+		\TX.SIZE.LL(48)                 // フォントサイズＬＬ
+		\TX.SIZE.S(16)                  // フォントサイズＳ
+		\TX.SIZE.SS(12)                 // フォントサイズＳＳ
+		\TX.SPACE.XY(0,0)               // 文字間隔および行間隔(実際の行間隔はこれにルビサイズ＆ルビ行間隔分が足されます)
+		                                // (ルビ機能を無効にすればそのぶん行間隔は詰まります　※β版仕様)
+		\TX.COLOR(0xFFFFFF)             // テキストの標準色(RGB指定)
+		\TX.COLOR.KIDOKU(0x88eeff)      // 既読テキストの標準色(RGB指定)
+		\TX.BOLD(0)                     // 太字フォントにする(=1)／しない(=0)
+		\TX.VERTICAL(0)                 // (未)縦書きモード
+		\TX.SHADE(1)                    // 影を付ける(=1)／付けない(=0)
+		\TX.SHADE.COLOR(0x000000)       // 影の色(RGB指定)
+		\TX.SHADE.XY(1,1)               // 影を付ける場合の影の位置座標（相対座標指定）
+		                                // （例：2,1 なら右に２ピクセル、下に１ピクセルの意）
+
+	//ルビ設定
+		\TX.RUBY(1)                     // ルビ機能の有効(=1)／無効(=0)
+		\TX.RUBY.TYPE(0)                // (未)ルビの振り方
+		\TX.RUBY.SIZE(12)               // ルビサイズ
+		\TX.RUBY.SPACE.XY(0,0)          // ルビ文字間隔および行間隔
+		\TX.RUBY.COLOR(-1)              // 色(RGB指定)(-1の場合はテキストの色に従う)
+		\TX.RUBY.STR("≪", "／", "≫")  // ルビ設定開始/中間/終了文字
+		\TX.RUBY.SHADE(1)               // 影を付ける(=1)／付けない(=0)
+		\TX.RUBY.SHADE.COLOR(-1)        // 影の色(RGB指定)(-1の場合はテキスト影の色に従う)
+
+	//アイコン設定
+		\TX.ICON.FLAG(1)                             // テキストアイコンを使用する(=1)/しない(=0)
+		\TX.ICON.XY(660,550)                         // 表示ＸＹ座標
+		\TX.ICON.FILE("cg/main/texticon/icon_")      // 改頁待ちアイコン・ファイル名(末尾に01～64の数字が付いたファイル名を読みに行きます)
+		\TX.ICON.NUM(16)                             // 改頁待ちアイコン・アニメパターン数(1～64)
+		\TX.ICON.SPEED(8)                            // 改頁待ちアイコン・アニメ速度(2～256)
+		\TX.CLICKICON.FILE("cg/main/texticon/icon_c") // クリック待ちアイコン・ファイル名(末尾に01～64の数字が付いたファイル名を読みに行きます)
+		\TX.CLICKICON.NUM(2)                          // クリック待ちアイコン・アニメパターン数(1～64)
+		\TX.CLICKICON.SPEED(32)                       // クリック待ちアイコン・アニメ速度(2～256)
+
+	//入力設定
+		\TX.CLICK.KEY("MOUSE_L", "MOUSE_D", "ENTER", "DOWN") //メッセージ送りキー
+		\TX.SKIP.KEY("CTRL", "", "", "")                     //スキップキー
+
+
+	//---------------------------------------------------------------------
+	// 名前ウィンドウ設定
+	//---------------------------------------------------------------------
+
+	//画像設定
+	//  \TXN.FILE( １枚目 ，２枚目 )
+	//　２つ画像を指定できますが、これはウィンドウの透過度を変える時に利用します。
+	//　１枚目は普通に表示される画像で、
+	//　２枚目はウィンドウ透過度が反映される画像です。
+	//  ２枚目のレイヤ優先順位は１枚目より下になります。
+	//　もし透過度を変えたくない場合や必要ない場合は、２枚目の画像指定を省略してください。
+	//
+		\TXN.FILE("", "")                // ファイル名
+		\TXN.XY(030, 412)                // 表示ＸＹ座標
+
+	//表示設定
+		\TXN.HIDE(1)                     // 名前が表示されていない時は非表示にする(=1)／しない(=0)
+
+	//テキストレイヤ設定
+		\TXN.TL.XY(30,418,176,30)        // 表示開始ＸＹ座標、サイズＸＹ
+
+	//テキスト設定
+		\TXN.ALIGN.X(1)                  // 表示方法(0=左揃え／1=中央揃え)
+		\TXN.SIZE(24)                    // フォントサイズ
+		\TXN.COLOR(-1)                   // デフォルトテキスト色(RGB指定)(-1の場合はテキストの色に従う)
+		\TXN.SHADE(1)                    // 影を付ける(=1)／付けない(=0)
+		\TXN.SHADE.COLOR(-1)             // 影の色(RGB指定)(-1の場合はテキスト影の色に従う)
+		\TXN.SHADE.XY(1,1)               // 影を付ける場合の影の位置座標（相対座標指定）
+		                                 // （例：2,1 なら右に２ピクセル、下に１ピクセルの意）
+
+
+	//---------------------------------------------------------------------
+	// 日付・時間ウィンドウ設定
+	//---------------------------------------------------------------------
+
+	//有効無効
+		\DATE.FLAG(1)                      // 日付・時間ウィンドウ機能を利用する(=1)／しない(=0)
+
+	//画像設定
+		\DATE.BACK.FILE("cg/date/back")    // 下地ファイル名
+		\DATE.BACK.XY(0,20)                // 表示ＸＹ座標
+
+		//\DATE.YEAR.FILE("cg/date/year_")   // (未)年ファイル名(末尾に設定した年のファイルを読みに行きます。ファイルが無い画像は非表示)
+		//\DATE.YEAR.XY(0,0)                 // (未)表示ＸＹ座標
+
+		\DATE.MONTH.FILE("cg/date/month_") // 月ファイル名(末尾に01～12が付いたファイルを読みに行きます。ファイルが無い画像は非表示)
+		\DATE.MONTH.XY(10,34)              // 表示ＸＹ座標
+
+		\DATE.DAY.FILE("cg/date/day_")     // 日ファイル名(末尾に01～31が付いたファイルを読みに行きます。ファイルが無い画像は非表示)
+		\DATE.DAY.XY(76,34)                // 表示ＸＹ座標
+
+		\DATE.WEEK.FILE("cg/date/week_")   // 週ファイル名(末尾にsun,mon,tue,wed,thu,fri,satが付いたファイルを読みに行きます。ファイルが無い画像は非表示)
+		\DATE.WEEK.XY(148,34)              // 表示ＸＹ座標
+
+		//\DATE.HOUR.FILE("cg/date/hour_")   // (未)時ファイル名(末尾に00～24が付いたファイルを読みに行きます。ファイルが無い画像は非表示)
+		//\DATE.HOUR.XY(0,0)                 // (未)表示ＸＹ座標
+
+		//\DATE.MIN.FILE("cg/date/min_")     // (未)分ファイル名(末尾に00～59が付いたファイルを読みに行きます。ファイルが無い画像は非表示)
+		//\DATE.MIN.XY(0,0)                  // (未)表示ＸＹ座標
+
+		//\DATE.SEC.FILE("cg/date/sec_")     // (未)秒ファイル名(末尾に00～59が付いたファイルを読みに行きます。ファイルが無い画像は非表示)
+		//\DATE.SEC.XY(0,0)                  // (未)表示ＸＹ座標
+
+
+	//---------------------------------------------------------------------
+	// どの画像にどの機能を割り振るかの設定
+	// 　ここで定義したボタン番号の画像が、その機能となります。
+	//   番号が大きいほうが前面に表示されます。
+	//---------------------------------------------------------------------
+		@es.CNUM.MAIN.SAVE    =11 //セーブ
+		@es.CNUM.MAIN.LOAD    =12 //ロード
+		@es.CNUM.MAIN.QSAVE   =13 //クイックセーブ
+		@es.CNUM.MAIN.QLOAD   =14 //クイックロード
+		@es.CNUM.MAIN.PREVSEL =15 //直前の選択肢へ戻る
+		@es.CNUM.MAIN.LOG     =16 //バックログ(文章履歴)
+		@es.CNUM.MAIN.VOICE   =17 //ボイス再生
+		@es.CNUM.MAIN.AUTO    =18 //オートモード
+		@es.CNUM.MAIN.SKIP    =19 //スキップモード
+		@es.CNUM.MAIN.OPTION  =20 //オプション
+		@es.CNUM.MAIN.SCREEN  =21 //フルスクリーン切替
+		@es.CNUM.MAIN.ERASE   =22 //メッセージウィンドウ消去
+		@es.CNUM.MAIN.MENU    =23 //メニュー
+		@es.CNUM.MAIN.TITLE   =24 //タイトルへ戻る
+		@es.CNUM.MAIN.EXIT    =25 //ゲームを終了する
+
+
+Return[]
+
+
+//-------------------------------------------------------------------------
+//
+// ボタン定義
+//
+//-------------------------------------------------------------------------
+#=es.SceneGameMain.BtnSet
+
+
+	//---------------------------------------------------------------------
+	//
+	// ボタン
+	//
+	// \BTN.CG( ボタンOFF時の画像, マウスが乗った時の画像 )
+	// \BTN.XY( 表示Ｘ座標, 表示Ｙ座標 )
+	// \BTN.MAP.A( α値のしきい値(この値以上の画像部分がボタンとして反応します) )
+	// \BTN.KEY( ショートカットキー{一回の押下で一回のみ反応} ) 
+	// \BTN.KEY.S( ショートカットキー{連続反応} ) 
+	// \BTN.SE( オンマウス時ＳＥ, クリック時ＳＥ ) ※ファイル名orＳＥ定義文字列
+	//
+	// \BTNDEF ← 最後にBTNDEFでボタンを登録します。
+	//
+	//---------------------------------------------------------------------
+
+	IF[@es.RPMODE==0] //通常モード時のボタン定義
+	{
+
+		//■セーブ
+	//	\BTN.CG("cg/main/button/tip_save_off", "cg/main/button/tip_save_over")
+	//	\BTN.XY(210+40*00, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTNDEF(@es.CNUM.MAIN.SAVE) //ボタン登録
+
+		//■ロード
+	//	\BTN.CG("cg/main/button/tip_load_off", "cg/main/button/tip_load_over")
+	//	\BTN.XY(210+40*01, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTNDEF(@es.CNUM.MAIN.LOAD) //ボタン登録
+
+		//■クイックセーブ
+	//	\BTN.CG("cg/main/button/tip_qsave_off", "cg/main/button/tip_qsave_over")
+	//	\BTN.XY(210+40*02, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("S")
+	//	\BTNDEF(@es.CNUM.MAIN.QSAVE) //ボタン登録
+
+		//■クイックロード
+	//	\BTN.CG("cg/main/button/tip_qload_off", "cg/main/button/tip_qload_over")
+	//	\BTN.XY(210+40*03, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("L")
+	//	\BTNDEF(@es.CNUM.MAIN.QLOAD) //ボタン登録
+
+		//■直前の選択肢へ戻る
+	//	\BTN.CG("cg/main/button/tip_prevsel_off", "cg/main/button/tip_prevsel_over")
+	//	\BTN.XY(210+40*04, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTNDEF(@es.CNUM.MAIN.PREVSEL) //ボタン登録
+
+		//■バックログ(文章履歴)
+		\BTN.CG("cg/main/button/tip_log_off", "cg/main/button/tip_log_over")
+		\BTN.XY(99999, 99999)
+		\BTN.MAP.A(1)
+		\BTN.KEY("UP", "PAGEUP", "MOUSE_U")
+		\BTNDEF(@es.CNUM.MAIN.LOG) //ボタン登録
+
+		//■ボイス再生
+	//	\BTN.CG("cg/main/button/tip_voice_off", "cg/main/button/tip_voice_over")
+	//	\BTN.XY(210+40*06, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("V")
+	//	\BTNDEF(@es.CNUM.MAIN.VOICE) //ボタン登録
+
+		//■オートモード
+	//	\BTN.CG("cg/main/button/tip_auto_off", "cg/main/button/tip_auto_over", "cg/main/button/tip_auto_over")
+	//	\BTN.XY(210+40*07, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("A")
+	//	\BTNDEF(@es.CNUM.MAIN.AUTO) //ボタン登録
+
+		//■スキップモード
+	//	\BTN.CG("cg/main/button/tip_skip_off", "cg/main/button/tip_skip_over", "cg/main/button/tip_skip_over")
+	//	\BTN.XY(210+40*08, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("K")
+	//	\BTNDEF(@es.CNUM.MAIN.SKIP) //ボタン登録
+
+		//■オプション
+	//	\BTN.CG("cg/main/button/tip_option_off", "cg/main/button/tip_option_over")
+	//	\BTN.XY(210+40*09, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("O")
+	//	\BTNDEF(@es.CNUM.MAIN.OPTION) //ボタン登録
+
+		//■フルスクリーン切替
+	//	\BTN.CG("cg/main/button/tip_screen_off", "cg/main/button/tip_screen_over")
+	//	\BTN.XY(210+40*10, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("ALT+ENTER")
+	//	\BTNDEF(@es.CNUM.MAIN.SCREEN) //ボタン登録
+
+		//■メッセージウィンドウ消去
+		\BTN.CG("cg/main/button/tip_erase_off", "cg/main/button/tip_erase_over")
+		\BTN.XY(99999, 99999)
+		\BTN.MAP.A(1)
+		\BTN.KEY("SPACE", "DELETE", "BS")
+		\BTNDEF(@es.CNUM.MAIN.ERASE) //ボタン登録
+
+		//■タイトルへ戻る
+	//	\BTN.CG("cg/main/button/tip_title_off", "cg/main/button/tip_title_over")
+	//	\BTN.XY(210+40*12, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("T")
+	//	\BTNDEF(@es.CNUM.MAIN.TITLE) //ボタン登録
+
+		//■ゲームを終了する
+	//	\BTN.CG("cg/main/button/tip_exit_off", "cg/main/button/tip_exit_over")
+	//	\BTN.XY(210+40*13, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("E")
+	//	\BTNDEF(@es.CNUM.MAIN.EXIT) //ボタン登録
+
+
+		//■メニュー
+		\BTN.CG("cg/main/button/tip_menu_off", "cg/main/button/tip_menu_over")
+		\BTN.XY(99999, 99999)
+		\BTN.MAP.A(1)
+		\BTN.KEY("MOUSE_R")
+		\BTNDEF(@es.CNUM.MAIN.MENU) //ボタン登録
+
+
+	}
+	ELSE[] //回想モード時のボタン定義
+	{
+
+		//■バックログ(文章履歴)
+		\BTN.CG("cg/main/button/tip_log_off", "cg/main/button/tip_log_over")
+		\BTN.XY(99999, 99999)
+		\BTN.MAP.A(1)
+		\BTN.KEY("UP", "PAGEUP", "MOUSE_U")
+		\BTNDEF(@es.CNUM.MAIN.LOG) //ボタン登録
+
+		//■ボイス再生
+	//	\BTN.CG("cg/main/button/tip_voice_off", "cg/main/button/tip_voice_over")
+	//	\BTN.XY(210+40*06, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("V")
+	//	\BTNDEF(@es.CNUM.MAIN.VOICE) //ボタン登録
+
+		//■オートモード
+	//	\BTN.CG("cg/main/button/tip_auto_off", "cg/main/button/tip_auto_over", "cg/main/button/tip_auto_over")
+	//	\BTN.XY(210+40*07, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("A")
+	//	\BTNDEF(@es.CNUM.MAIN.AUTO) //ボタン登録
+
+		//■スキップモード
+	//	\BTN.CG("cg/main/button/tip_skip_off", "cg/main/button/tip_skip_over", "cg/main/button/tip_skip_over")
+	//	\BTN.XY(210+40*08, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("K")
+	//	\BTNDEF(@es.CNUM.MAIN.SKIP) //ボタン登録
+
+		//■オプション
+	//	\BTN.CG("cg/main/button/tip_option_off", "cg/main/button/tip_option_over")
+	//	\BTN.XY(210+40*09, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("O")
+	//	\BTNDEF(@es.CNUM.MAIN.OPTION) //ボタン登録
+
+		//■フルスクリーン切替
+	//	\BTN.CG("cg/main/button/tip_screen_off", "cg/main/button/tip_screen_over")
+	//	\BTN.XY(210+40*10, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("ALT+ENTER")
+	//	\BTNDEF(@es.CNUM.MAIN.SCREEN) //ボタン登録
+
+		//■メッセージウィンドウ消去
+		\BTN.CG("cg/main/button/tip_erase_off", "cg/main/button/tip_erase_over")
+		\BTN.XY(99999, 99999)
+		\BTN.MAP.A(1)
+		\BTN.KEY("SPACE", "DELETE", "BS")
+		\BTNDEF(@es.CNUM.MAIN.ERASE) //ボタン登録
+
+		//■タイトルへ戻る(回想閲覧へ戻る)
+	//	\BTN.CG("cg/main/button/tip_replayend_off", "cg/main/button/tip_replayend_over")
+	//	\BTN.XY(210+40*12, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("R")
+	//	\BTNDEF(@es.CNUM.MAIN.TITLE) //ボタン登録
+
+		//■ゲームを終了する
+	//	\BTN.CG("cg/main/button/tip_exit_off", "cg/main/button/tip_exit_over")
+	//	\BTN.XY(210+40*13, 418)
+	//	\BTN.MAP.A(1)
+	//	\BTN.KEY("E")
+	//	\BTNDEF(@es.CNUM.MAIN.EXIT) //ボタン登録
+
+		//■メニュー
+		\BTN.CG("cg/main/button/tip_menu_off", "cg/main/button/tip_menu_over")
+		\BTN.XY(99999, 99999)
+		\BTN.MAP.A(1)
+		\BTN.KEY("MOUSE_R")
+		\BTNDEF(@es.CNUM.MAIN.MENU) //ボタン登録
+
+	}
+	IFEND[]
+
+
+return[]
+
+

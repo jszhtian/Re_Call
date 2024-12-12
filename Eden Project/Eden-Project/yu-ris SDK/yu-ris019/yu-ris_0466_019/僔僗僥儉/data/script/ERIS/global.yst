@@ -1,0 +1,302 @@
+//============================================================================
+//
+//■ERIS グローバル変数定義ファイル
+//
+//============================================================================
+
+
+G_INT[@es.AUTO.PER]
+
+G_INT[@es.BAIRITSU]
+G_INT[@es.HYOUJICOUNT]
+
+//--------------------------------------------------------------------
+//■ウィンドウ
+//--------------------------------------------------------------------
+G_STR[$es.WindowCaption1]
+G_STR[$es.WindowCaption2]
+G_INT[@es.WSX]
+G_INT[@es.WSY]
+G_INT[@es.SMV.SX=400]
+G_INT[@es.SMV.SY=600]
+G_INT[@es.SMV.LY=470]
+
+G_INT[@es.TXSTART]
+
+//--------------------------------------------------------------------
+//■シーン管理
+//--------------------------------------------------------------------
+G_STR[$es.S.BT(100)]
+G_INT[@es.S.ACTIVEGROUP(100)]
+G_INT[@es.S.NEST]
+G_STR[$es.S.NAME(100)]
+G_INT[@es.S.NAMENEST]
+
+G_STR[$es.S.LBL]
+G_STR[$es.S.NOW]
+G_STR[$es.S.OLD]
+G_INT[@es.S.P1]
+G_INT[@es.S.P2]
+//G_INT[@es.S.P3]
+//G_INT[@es.S.P4]
+G_INT[@es.S.R1(100)]
+G_INT[@es.S.R2(100)]
+G_INT[@es.STATE]
+G_INT[@es.STATE2]
+//G_INT[@es.STATE3]
+//G_INT[@es.STATE4]
+G_INT[@es.S.PINT(9)]
+G_INT[@es.S.RINT(9)]
+
+G_INT[@es.S.RETFLAG]
+
+G_INT[@es.SCENARIOSTOP]
+G_INT[@es.TITLEWAIT]
+
+G_STR[$es.STARTLABEL="SCENARIO_START"]
+
+G_STR[$es.ScenarioTaskID="es.ScenarioScript"] ///x
+G_STR[$es.ScriptPosData]
+//G_STR[$es.ScriptStartData]
+G_INT[@es.LoadFlag]
+
+G_INT[@es.SS.FADE.TASK]
+
+G_INT[@es.CGSNO] //場合によってはセーブデータに含める必要あり？
+
+G_STR[$es.P.GOTITLEPOS]
+G_INT[@es.P.GOTITLE]
+
+G_INT[@es.LOG.VOICE.STOP.FLAG] //ログを抜けたときにボイスを停止するフラグ.いずれシーン機能で代用.
+
+G_INT[@es.ESCALLOW]
+G_INT[@es.HELPALLOW]
+
+
+//--------------------------------------------------------------------
+//■ボタン
+//--------------------------------------------------------------------
+G_STR[$es.BID]
+G_INT[@es.BNO]
+G_INT[@es.BSW]
+
+G_INT[@es.KEYOP.THRU.COUNT]
+G_INT[@BT.OK]
+
+
+//--------------------------------------------------------------------
+//■演出用
+//--------------------------------------------------------------------
+G_INT[@INF=0] ///x一応残しておく
+G_INT[@es.SVAL =-999999999998]
+G_INT[@es.S2VAL=-999999999997]
+G_INT[@es.ZVAL =-999999999996]
+G_FLT[@es.ZEX=1000]
+
+G_INT[@es.LOADTHRU]  //ロード直後か否かフラグ
+G_INT[@es.SNOWMODE]
+G_INT[@es.RAINMODE]
+G_INT[@es.CGMODE.NODEF.FLAG] //CGに登録させないフラグ
+
+G_INT[@es.EF.SAIDO=128]
+G_INT[@es.EF.MEIDO=0x808080]
+//G_INT[@es.EF.SAIDO.DEF]
+//G_INT[@es.EF.MEIDO.DEF]
+
+G_INT[@es.MG.AUTO]
+G_INT[@es.MG.AUTONO]
+G_INT[@es.MG.AUTOSKIP]
+G_INT[@es.SP.AUTO]
+G_INT[@es.SP.AUTONO]
+G_INT[@es.SP.AUTOSKIP]
+G_INT[@es.NGSKIP]
+G_INT[@es.MOVIEFLAG] //ムービー中か判定
+
+
+//--------------------------------------------------------------------
+//■レイヤー
+//--------------------------------------------------------------------
+G_INT[@es.Z.BT]	// ボタン
+G_INT[@es.Z.SP]	// スプライト
+G_INT[@es.Z.SS]	// スクリーンショット
+
+
+//--------------------------------------------------------------------
+//■サウンド
+//--------------------------------------------------------------------
+G_STR[$es.VOICE.FILE(11)]
+G_INT[@es.CHAR.MAX=30] //MAX:31
+
+G_INT[@es.VOICEPLAYFLAG]
+//G_INT[@es.PRO.VOICEDEBUG]
+G_INT[@es.SYSVO.FLAG.TITLELOAD] //タイトル画面からのみ「続きから始める」と、「１回だけ」喋らせるためのフラグ
+
+
+//--------------------------------------------------------------------
+//■選択肢
+//--------------------------------------------------------------------
+G_STR[$es.GO.T]
+G_STR[$es.GO.F]
+G_STR[$es.GO.T2]
+G_STR[$es.GO.F2]
+G_STR[$es.GOSUB.T]
+G_STR[$es.GOSUB.F]
+G_STR[$es.GOSUB.T2]
+G_STR[$es.GOSUB.F2]
+//G_STR[$G.SELSTR]
+//G_INT[@G.SELNO]
+//G_INT[@G.SELNO2]
+G_STR[$es.SEL.GO]    //選択肢飛び先
+G_INT[@es.SEL.SEQFLAG]
+
+
+//--------------------------------------------------------------------
+//■自動選択
+//--------------------------------------------------------------------
+G_INT[@es.SELAUTOFLAG]
+G_INT[@es.SELAUTOPLAYNUM]
+G_INT[@es.SELAUTOPLAYMAX]
+G_INT[@es.SELAUTO(200,100)]
+G_INT[@SEL.NO]
+G_INT[@es.SELNO]
+G_INT[@es.CSELNO]
+G_INT[@es.B4.SEL.NO] //暫定.いずれ消去
+
+G_INT[@es.TITLE.NO]
+
+
+//--------------------------------------------------------------------
+//■テキスト
+//--------------------------------------------------------------------
+G_INT[@es.TX.SKIP]
+G_INT[@es.TX.AUTO]
+G_INT[@es.TX.IKKATSU]
+G_INT[@es.TX.CWAIT]
+G_INT[@es.TX.CSKIP]
+G_INT[@es.TX.ICON.TYPE]
+G_INT[@es.KIDOKUFLAG]
+G_INT[@es.KIDOKUCOLORFLAG]
+
+G_INT[@es.TXTASK.TX.E]
+G_INT[@es.TXTASK.SN.E]
+
+G_INT[@es.gSKIP]
+
+G_INT[@es.TEXT.TIPCLICK]
+
+
+//--------------------------------------------------------------------
+//■セーブデータ関連
+//--------------------------------------------------------------------
+G_STR[$es.SAVEPATH]
+G_INT[@G(8192)]
+G_STR[$G(8192)]
+G_INT[@L(8192)]
+G_STR[$L(8192)]
+G_INT[@T(128,128)]
+G_STR[$T(128,128)]
+G_STR[$es.GSD(256)]
+G_INT[@es.GSD(256,128)]
+G_STR[$es.LSD(256)]
+G_INT[@es.LSD(256,128)]
+
+///xS  768→650に変更
+G_INT[@es.KMD(650,160)] //255File,160*63bit=10080行分
+G_INT[@es.KMD.FLAG] //更新フラグ
+
+G_INT[@es.POW2(63)] //63ビット目はマイナスとして扱われる為.
+G_INT[@es.POW10(20)]
+G_INT[@es.64BITMAX   =9223372036854775807]
+//G_INT[@es.63BITMAX =4611686018427387903]
+G_INT[@es.63BITMAXNEO=4651686018427387903]
+G_INT[@es.63BITMAX   =4551686018427387903]
+
+
+//--------------------------------------------------------------------
+//■セーブロード
+//--------------------------------------------------------------------
+G_STR[$es.RIN.LFNAME]
+
+G_INT[@es.SL.NO]
+G_INT[@es.SL.SELPLATE]
+//G_INT[@es.MOVEPLATENO]
+//G_INT[@es.DELPLATENO]
+G_INT[@es.sdketa=5]
+G_INT[@es.sdpagenum=10]
+///xS
+G_INT[@es.sdplatenum=10]
+
+G_INT[@es.sdexist(100)]
+
+G_INT[@es.sdqsaveno   =10001]
+G_INT[@es.sdautosaveno=20001]
+G_INT[@es.sdprevselno =30001]
+
+G_INT[@es.NOSAVEFLAG] //×でゲーム終了時オートセーブしないフラグ
+//G_INT[@MAC.FIN.NOSAVE]
+G_INT[@es.AUTOSAVEFLAG]
+
+G_INT[@es.SCRIPTPOSSAVE.FORBIT]
+
+
+//--------------------------------------------------------------------
+//■定数
+//--------------------------------------------------------------------
+G_INT[@es.COL.CLEAR=0x00000000] //透過色
+
+
+//--------------------------------------------------------------------
+//■汎用一時変数
+//--------------------------------------------------------------------
+G_INT[@es.INT(10)]
+G_INT[@es.STR(10)]
+
+G_INT[@es.C]
+
+G_INT[@es.I]
+G_INT[@es.J]
+G_INT[@es.K]
+
+
+//--------------------------------------------------------------------
+//■その他
+//--------------------------------------------------------------------
+///x最後に LSD(GSD?) 化.
+G_INT[@GSD.NEXTVOICE]
+//G_INT[@GSDF.NEXTVOICE]
+G_INT[@GSD.MESWINDOW]
+//G_INT[@GSDF.MESWINDOW]
+G_INT[@es.SEL.HIDE]			//選択肢の一時的非表示
+G_INT[@es.CSEL.HIDE]		//選択肢の一時的非表示
+G_INT[@es.SND.WAIT.MODE]
+G_INT[@es.SND.TIMEWAIT.MODE]
+G_INT[@es.VO.WAIT.MODE]
+
+G_INT[@es.SP.WA.MODE]
+G_INT[@es.WA.MODE]
+G_INT[@es.RPMODE]
+G_INT[@es.ERISOFFMODE]
+G_INT[@es.BGMMODE]
+G_INT[@es.SELMODE] //選択肢モード ///x暫定的
+G_INT[@es.FADEMODE]
+G_INT[@es.ESCMODE]
+G_INT[@es.HELPMODE]
+
+G_STR[$es.SJMODE]
+
+
+//■システムメッセージ用変数
+//G_INT[@es.SM=-1]
+//G_INT[@es.SMNO=0]
+
+///xINJ
+//G_INT[@es.SSE77.SW(10)]
+
+//G_INT[@es.CASHMODE]
+
+
+G_STR[$es.SN.GOSUBLBL(16)]
+G_INT[@es.SN.GOSUBNEST]
+G_INT[@es.SN.GOSUBNESTMAX=16]
+
+

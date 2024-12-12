@@ -1,0 +1,58 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">その他命令</A>＞TRAY［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="label.html">LABEL［］</A>
+　<A HREF="labelinfo.html">LABELINFO［］</A>
+　<A HREF="macro.html">MACRO［］</A>
+　<A HREF="dialog.html">DIALOG［］</A>
+　<A HREF="tray.html">TRAY［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=500 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■トレイアイコン制御命令 TRAY[ ]</FONT>
+<FONT CLASS=t20>
+
+Windows のトレイアイコンの表示・非表示を制御します。
+表示されるアイコンはEXEアイコンが縮小されたもの(16x16ピクセル)になります。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>NAME = 文字列</FONT></TD><TD><FONT CLASS=t40>トレイアイコンの上にマウスを乗せたときに<BR>ポップアップで表示する名前を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>ID = 文字列</FONT></TD><TD><FONT CLASS=t40>トレイアイコンとして表示させるＣＧレイヤＩＤを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>MENUID = 文字列</FONT></TD><TD><FONT CLASS=t40>トレイアイコンの上で右クリックしたときに<BR>表示させるメニューレイヤセットを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>E = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>トレイアイコンの有効無効を指定<BR>デフォルトは０なため、ここを１にして初めて<BR>トレイアイコンが表示されます</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] トレイアイコンを表示する。アイコンの上にマウスを乗せると「マイアプリ」と表示され、
+　　アイコンの上で右クリックすると、レイヤセット「MYMENU」内のメニューレイヤがコンテキストメニュー(ポップアップメニュー)として表示される。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TRAY</FONT>[<FONT CLASS=t62>E</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>"マイアプリ"</FONT> <FONT CLASS=t62>MENUID</FONT>=<FONT CLASS=t63>"MYMENU/"</FONT>]</FONT></B>
+
+
+[2] トレイアイコンを非表示にする。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TRAY</FONT>[<FONT CLASS=t62>E</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

@@ -1,0 +1,45 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>break</h2>
+<h3>break</h3>
+<p>
+Break out of a single loop, proceeding to the line immediately after the loop's next statement.<br>
+You cannot use this command by itself to break completely out of nested loops, so in that case you'll need to break out of the inner loop, then break out of the outer loop.<br>
+<br>
+For instance:<br>
+;------------------------<br>
+*define<br>
+game<br>
+*start<br>
+for %0=1 to 8<br>
+    for %1=6 to 2 step -2<br>
+        %0ÅC%1<br>
+        if %0=4 & %1=4 break<br>
+    next<br>
+next<br>
+click<br>
+end<br>
+;------------------------<br>
+<br>
+<br>
+ÅyA nonrecommended methodÅz<br>
+BREAK *&lt;label name&gt;<br>
+This syntax does exist; it has the same functionality as a goto statement.<br>
+It can break you out of nested loops, but it leaves the state of the inner loop intact.<br>
+This causes a fragmentation of the stack, making it hard to debug your script later, so use this syntax with extreme caution.<br>
+</p>
+
+</body>
+</html>

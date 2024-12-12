@@ -1,0 +1,117 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">ウィンドウ系命令</A>＞WINDOW［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="window.html">WINDOW［］</A>
+　<A HREF="windowinfo.html">WINDOWINFO［］</A>
+　<A HREF="windowend.html">WINDOWEND［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=800 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■ウィンドウ設定命令 WINDOW[ ]</FONT>
+<FONT CLASS=t20>
+
+サブウィンドウを生成したり、位置やキャプションを設定したり、また「閉じる」ボタンを押したときの挙動を制御します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>NO = 値(0～3)</FONT></TD><TD><FONT CLASS=t40>対象のウィンドウ番号を指定します<BR>※０がメインウィンドウ、１～３がサブウィンドウになります</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CAPTION = 文字列</FONT></TD><TD><FONT CLASS=t40>ウィンドウのキャプションを設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>A = 値(0～256)</FONT></TD><TD><FONT CLASS=t40>ウィンドウ表示(=1～256)／非表示(=0)を設定<BR>※本来、A キーワードはウィンドウの不透明度を設定するための<BR>機能なですが、正式実装はβ５からになり、β４の段階では<BR>表示／非表示としてしか機能を持ちません。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>E = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウ表示(=1)／非表示(=0)を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>X = 値</FONT></TD><TD><FONT CLASS=t40>ウィンドウのＸ座標位置を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Y = 値</FONT></TD><TD><FONT CLASS=t40>ウィンドウのＹ座標位置を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Z = 値(0～3)</FONT></TD><TD><FONT CLASS=t40>ウィンドウの重なり順序を設定<BR>0=前面(通常)／1=常に手前に表示／2=最背面に表示／<BR>3=メインウィンドウより後ろに表示</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SX = 値</FONT></TD><TD><FONT CLASS=t40>ウィンドウサイズＸを設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SY = 値</FONT></TD><TD><FONT CLASS=t40>ウィンドウサイズＹを設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>ACTIVE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウをアクティブにする場合に１を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FULLSCREEN = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>フルスクリーン(=1)／通常スクリーン(=0)を切り替えます</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FULLSCREENBUTTON = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>最大化ボタンの有効(=1)／無効(=0)を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>MINIMIZE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ウィンドウの最小化(=1)／通常化(=0)を切り替えます</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CLOSEMODE = 値(0～2)</FONT></TD><TD><FONT CLASS=t40>閉じるボタンを押したときの挙動を設定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CGID = 文字列</FONT></TD><TD><FONT CLASS=t40>表示対象のレイヤセットを指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>MENUID = 文字列</FONT></TD><TD><FONT CLASS=t40>メニューバーとして設定するレイヤセットを指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>REGIONID = 文字列</FONT></TD><TD><FONT CLASS=t40>ウィンドウの形を設定する画像があるＣＧレイヤを指定します</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DRAGID = 文字列</FONT></TD><TD><FONT CLASS=t40>ドラッグできる場所を設定する画像があるＣＧレイヤを指定します</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]サブウィンドウ１を生成します。
+　(生成にはCAPTIONキーワードの指定が必須です)
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOW</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>CAPTION</FONT>=<FONT CLASS=t63>"テストウィンドウ"</FONT> <FONT CLASS=t62>SX</FONT>=<FONT CLASS=t63>320</FONT> <FONT CLASS=t62>SY</FONT>=<FONT CLASS=t63>240</FONT>]</FONT></B>
+
+
+[2]メインウィンドウを非表示にします。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOW</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>E</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[3]メインウィンドウを常に手前に表示するようにします。
+　 ※常に手前に表示を解除する際は 1 以外の値を指定することで解除になります。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOW</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>Z</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[4]サブウィンドウ２をアクティブにします。
+　　※但し、逆に ACTIVE=0 としても、非アクテイブには出来ません。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOW</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>2</FONT> <FONT CLASS=t62>ACTIVE</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[5]メインウィンドウをフルスクリーン表示します。
+　※ MOVIE 命令にてムービー再生中はスクリーン切り替え出来ません。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOW</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>FULLSCREEN</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[6]サブウィンドウ１に表示させるレイヤセットを「ABC」に設定します。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOW</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>CGID</FONT>=<FONT CLASS=t63>ABC</FONT>]</FONT></B>
+
+
+[7]メインウィンドウに表示させるメニューバーを、
+　　メニューレイヤセットのルートフォルダの「M0」に設定します。
+
+　　※システム起動時、メニューレイヤセットのルートフォルダはデフォルトで「M0」になり、
+　　　その階層の下にレイヤを生成していく形になっています。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOW</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>MENUID</FONT>=<FONT CLASS=t63>":/M0"</FONT>]</FONT></B>
+
+
+[8]メインウィンドウの形を、ＣＧレイヤ「MASKCG」の画像に合わせて設定します。
+
+　　※レイヤ「MASKCG」の画像の黒い色(0x000000)の部分が、ウィンドウの透過される部分になります。
+　　　それ以外の色は無視されます。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOW</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>REGIONID</FONT>=<FONT CLASS=t63>"MASKCG"</FONT>]</FONT></B>
+
+
+[9]メインウィンドウのドラッグできる部分を、ＣＧレイヤ「MASKCG」の画像に合わせて設定します。
+
+　　※レイヤ「MASKCG」の画像の黒い色(0x000000)の部分が、ドラッグ「できない」部分になります。
+　　　それ以外の色の部分はドラッグ「できる」部分になります。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>WINDOW</FONT>[<FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>0</FONT> <FONT CLASS=t62>DRAGID</FONT>=<FONT CLASS=t63>"MASKCG"</FONT>]</FONT></B>
+
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

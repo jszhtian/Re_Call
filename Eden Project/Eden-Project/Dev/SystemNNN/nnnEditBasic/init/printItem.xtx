@@ -1,0 +1,111 @@
+modename printItem
+
+backScriptFlag 1
+backScriptName backscript
+
+enterFadeInType 2
+enterFadeInTime 100
+
+filenamePlate ta_haveitem_plate
+
+lowCursor 1
+useCursorPic 0
+
+itemBlockX 2
+itemBlockY 2
+
+itemPrintX 200
+itemPrintY 300
+itemSizeX 80
+itemSizeY 60
+itemPrintNextX 120
+itemPrintNextY 100
+
+itemNamePrintFlag 1
+itemNameFontSize 24
+itemNamePrintX 10
+itemNamePrintY 5
+itemNameFontColorR 0
+itemNameFontColorG 255
+itemNameFontColorB 128
+
+
+
+itemTypeNumber 2
+
+
+filenameBG bg_item
+
+itemTypeDataNumber1 1
+itemTypeData1_1 1
+
+itemTypeDataNumber2 3
+itemTypeData2_1 2
+itemTypeData2_2 3
+itemTypeData2_3 4
+
+
+
+upFilename ta_voice_leftarrow
+downFilename ta_voice_rightarrow
+upPrintX 10
+upPrintY 300
+downPrintX 700
+downPrintY 300
+upSizeX 64
+upSizeY 64
+downSizeX 64
+downSizeY 64
+upAnimeType1 7
+upAnimePattern1 2
+upAnimeSpeed1 10
+downAnimeType1 7
+downAnimePattern1 2
+downAnimeSpeed1 10
+
+backFilename ta_voice_back
+backPrintX 700
+backPrintY 500
+backSizeX 64
+backSizeY 64
+backAnimeType1 7
+backAnimePattern1 2
+backAnimeSpeed1 30
+
+
+
+haveItemType1Button1Filename ta_voiceChara1_off
+haveItemType1Button2Filename ta_voiceChara1_on
+haveItemType2Button1Filename ta_voiceChara2_off
+haveItemType2Button2Filename ta_voiceChara2_on
+
+haveItemType1Button1PrintX 100
+haveItemType1Button1PrintY 100
+haveItemType1Button2PrintX 100
+haveItemType1Button2PrintY 100
+
+haveItemType1Button1SizeX 64
+haveItemType1Button1SizeY 64
+
+haveItemType1Button1AnimeType 7
+haveItemType1Button1AnimePattern 2
+haveItemType1Button1AnimeSpeed 10
+haveItemType1Button2AnimeType 7
+haveItemType1Button2AnimePattern 2
+haveItemType1Button2AnimeSpeed 10
+
+
+haveItemType2Button1PrintX 200
+haveItemType2Button1PrintY 100
+haveItemType2Button2PrintX 200
+haveItemType2Button2PrintY 100
+
+haveItemType2Button1SizeX 64
+haveItemType2Button1SizeY 64
+
+haveItemType2Button1AnimeType 7
+haveItemType2Button1AnimePattern 2
+haveItemType2Button1AnimeSpeed 10
+haveItemType2Button2AnimeType 7
+haveItemType2Button2AnimePattern 2
+haveItemType2Button2AnimeSpeed 10

@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">ファイル系命令</A>＞FILEINFO［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="save.html">SAVE［］</A>
+　<A HREF="saveend.html">SAVEEND［］</A>
+　<A HREF="load.html">LOAD［］</A>
+　<A HREF="fileact.html">FILEACT［］</A>
+　<A HREF="fileinfo.html">FILEINFO［］</A>
+</TD></TR></TABLE>
+
+<BR>
+
+<TABLE CELLSPACING=0 CELLPADDING=0>
+<TR>
+
+<TD WIDTH=700 VALIGN=TOP>
+<PRE>
+<FONT CLASS=t70>■ファイル情報取得命令 FILEINFO[ ]</FONT>
+<FONT CLASS=t20>
+
+指定した任意のファイルに関する情報を取得します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>FILE = ファイル名</FONT></TD><TD><FONT CLASS=t40>ファイル名を指定します。※FOLDERと同時に指定は不可</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FOLDER = フォルダ名</FONT></TD><TD><FONT CLASS=t40>フォルダ名を指定します。※FILEと同時に指定は不可</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LET = 変数名</FONT></TD><TD><FONT CLASS=t40>各種情報値を格納する変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>EXIST = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ファイル／フォルダの存在を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SIZE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ファイルのサイズを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>RELATION = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>ファイルに関連付けされている実行ファイル名を調べる場合は１を指定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]「save/save_001.sd」というファイルが存在するか否か調べる。
+　　※ver0.276 よりパックファイル内のファイルもチェックできるようになりました。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEINFO</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"save/save_001.sd"</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>EXIST</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[2]「cg」フォルダが存在するか否か調べる。
+　　※パックファイル内のフォルダの存在はまだチェックできません。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEINFO</FONT>[<FONT CLASS=t62>FOLDER</FONT>=<FONT CLASS=t63>"cg"</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>EXIST</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[3]「save/save_001.sd」というファイルのファイルサイズを取得する。
+　　※パックファイル内のファイルのサイズはまだチェックできません。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEINFO</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"save/save_001.sd"</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@FSIZE</FONT> <FONT CLASS=t62>SIZE</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[4]「script/sample.yst」ファイルに関連づけされている実行ファイル名を取得する。
+　　（例えば「メモ帳」が関連づけられていれば、notepad.exe のフルパスが取得できます）
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>FILEINFO</FONT>[<FONT CLASS=t62>FILE</FONT>=<FONT CLASS=t63>"script/sample.yst"</FONT> <FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>$FNAME</FONT> <FONT CLASS=t62>RELATION</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+</FONT></TD>
+</TR></TABLE>
+
+
+</BODY></HTML>

@@ -1,0 +1,37 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>dim</h2>
+<h3>dim ?0[10][20]</h3>
+<p>
+BASIC-style arrays.  The particular array above is named ?0, has array slots from 0-10, and then each slot has subslots from 0-20.<br>
+<br>
+mov ?0[2][5],20<br>
+;put 20 inside ?0[2][5]<br>
+mov %4,?0[3][1]<br>
+;%put the contents of ?0[3][1] inside %4.<br>
+？０［２］［３］＝?0[2][3]@<br>
+;displays the value of ?0[2][3].<br>
+In this fashion, you can use arrayed variables as if they were simple numerical variables.<br>
+
+You can make your code easier to read by using numalias:<br>
+EX）<br>
+numalias enemyparam,10<br>
+dim ?enemyparam[10]<br>
+<br>
+&lt;Caution&gt;<br>
+Remember, the contents of an array start at 0, so please be careful when allocating them!
+</p>
+</body>
+</html>

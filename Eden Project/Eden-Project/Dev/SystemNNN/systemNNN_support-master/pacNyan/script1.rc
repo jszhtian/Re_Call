@@ -1,0 +1,144 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// ì˙ñ{åÍ resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "pacNyan.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_SETUP DIALOGEX 0, 0, 279, 291
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "PacNyan"
+FONT 9, "ÇlÇr ÇoÉSÉVÉbÉN", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,43,256,50,14
+    PUSHBUTTON      "∑¨›æŸ",IDCANCEL,193,256,50,14
+    CONTROL         "TA(óßÇøäG)",IDC_CHECK_TA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,44,85,11
+    CONTROL         "BG(îwåi)",IDC_CHECK_BG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,64,80,10
+    CONTROL         "EV(ÉCÉxÉìÉg)",IDC_CHECK_EV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,83,76,11
+    CONTROL         "sys(ÉVÉXÉeÉÄ)",IDC_CHECK_SYS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,118,76,11
+    CONTROL         "SYS/TA(TAå`éÆ)",IDC_CHECK_SYSTA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,138,77,10
+    CONTROL         "SYS/SM",IDC_CHECK_SYSSM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,189,75,11
+    CONTROL         "SYS/SC",IDC_CHECK_SYSSC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,25,209,72,10
+    CONTROL         "êVÇµÇ¢Ç‡ÇÃÇÃÇ›",IDC_RADIO_ONLYNEW,"Button",BS_AUTORADIOBUTTON,172,53,78,10
+    CONTROL         "äÆëS",IDC_RADIO_COMPLETE,"Button",BS_AUTORADIOBUTTON,172,73,72,10
+    CONTROL         "å≈ÇﬂÇÈ",IDC_CHECK_PACK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,210,178,47,10
+    ICON            IDI_ICON1,IDC_STATIC,126,15,20,20
+    CONTROL         "SM/SCÇTAÇ∆ÇµÇƒèàóù",IDC_CHECK_SYSSMSCTA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,229,83,10
+    EDITTEXT        IDC_EDIT_VERSION,210,229,40,14,ES_AUTOHSCROLL
+    LTEXT           "Version",IDC_STATIC,171,229,34,8
+    GROUPBOX        "sys",IDC_STATIC,18,103,247,55
+    GROUPBOX        "sm/sc",IDC_STATIC,20,170,114,77
+    GROUPBOX        "ïœä∑ï˚ñ@",IDC_STATIC,162,37,104,56
+    LTEXT           "Ç±ÇÍÇÁÇÕÇ‹Ç∆ÇﬂÇƒ\nDWQ\\SYSÇ…ï€ë∂Ç≥ÇÍÇ‹Ç∑",IDC_STATIC,156,131,91,22
+    CONTROL         "64bit",IDC_CHECK_64bit,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,210,207,52,10
+END
+
+IDD_DIALOG_PROCESS DIALOG  0, 0, 287, 237
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "¿ﬁ≤±€∏ﬁ"
+FONT 9, "ÇlÇr ÇoÉSÉVÉbÉN"
+BEGIN
+    PUSHBUTTON      "∑¨›æŸ",IDCANCEL,219,203,50,14,WS_DISABLED
+    LTEXT           "Static",IDC_MYSTATIC,49,69,162,8
+    CONTROL         "Progress1",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,41,110,80,14
+    CONTROL         "Progress2",IDC_PROGRESS2,"msctls_progress32",WS_BORDER,41,155,194,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG_SETUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 272
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 284
+    END
+
+    IDD_DIALOG_PROCESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 280
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 230
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // ì˙ñ{åÍ resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

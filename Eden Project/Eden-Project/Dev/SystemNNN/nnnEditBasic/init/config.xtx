@@ -1,0 +1,230 @@
+modename config
+
+volumeNumber 9
+messageSpeedBarFileName ta_normalmessagevolume
+autoSpeedBarFileName ta_automessagevolume
+
+
+
+
+
+enterFadeInType 2
+enterFadeInTime 5
+enterFadeInSkipOkFlag 1
+enterFadeInColorR 0
+enterFadeInColorG 0
+enterFadeInColorB 0
+createExitScreenFlag 1
+fillExitScreenFlag 1
+
+exitFadeOutSpecialMode 4
+
+voiceCutButtonCheckAppearFlag 0
+
+MustStartPage1Flag 1
+
+pageMode 1
+modePageMax 3
+autoSpeedVolumeExistFlag 1
+
+
+filenameBG1 sys_config_bg1
+filenameBG2 sys_config_bg2
+filenameBG3 sys_config_bg3
+
+screenModeButtonPrintPage 1
+skipModeButtonPrintPage 1
+autoModeButtonPrintPage 1
+messageSpeedvolumePrintPage 1
+voicePrintPage 2
+
+
+useCommonBackSetup 1
+useCommonUpDownSetup 1
+
+
+
+
+volumeMin 60
+
+musicButton1FileName ta_dummycheckoff
+musicButton2FileName ta_dummycheckon
+soundButton1FileName ta_dummycheckoff
+soundButton2FileName ta_dummycheckon
+voiceButton1FileName ta_dummycheckoff
+voiceButton2FileName ta_dummycheckon
+movieButton1FileName ta_dummycheckoff
+movieButton2FileName ta_dummycheckon
+soundvoiceButton1FileName ta_dummycheckoff
+soundvoiceButton2FileName ta_dummycheckon
+
+musicButtonPrintX 214
+musicButtonPrintY 150
+soundButtonPrintX 214
+soundButtonPrintY 220
+voiceButtonPrintX 214
+voiceButtonPrintY 300
+movieButtonPrintX 214
+movieButtonPrintY 375
+soundvoiceButtonPrintX 214
+soundvoiceButtonPrintY 440
+
+musicButton1SizeX 32
+musicButton1SizeY 32
+
+musicButton1AnimeType1 7
+musicButton1AnimePattern1 4
+musicButton1AnimeSpeed1 10
+
+musicButton1AnimeType3 1
+musicButton1AnimePattern3 4
+musicButton1AnimeSpeed3 1
+
+
+musicButton1ClickSound 3
+musicButton2ClickSound 2
+soundButton1ClickSound 3
+soundButton2ClickSound 2
+voiceButton1ClickSound 3
+voiceButton2ClickSound 2
+movieButton1ClickSound 3
+movieButton2ClickSound 2
+soundvoiceButton1ClickSound 3
+soundvoiceButton2ClickSound 2
+
+
+musicButton1ClickTime 4
+musicButton2ClickTime 4
+soundButton1ClickTime 4
+soundButton2ClickTime 4
+voiceButton1ClickTime 4
+voiceButton2ClickTime 4
+movieButton1ClickTime 4
+movieButton2ClickTime 4
+soundvoiceButton1ClickTime 1
+soundvoiceButton2ClickTime 1
+
+musicBarFileName ta_dummyvolume
+soundBarFileName ta_dummyvolume
+voiceBarFileName ta_dummyvolume
+movieBarFileName ta_dummyvolume
+soundvoiceBarFileName ta_dummyvolume
+
+
+volumeSizeX 400
+volumeSizeY 20
+
+musicVolumePrintX 270
+musicVolumePrintY 150
+soundVolumePrintX 280
+soundVolumePrintY 220
+voiceVolumePrintX 270
+voiceVolumePrintY 300
+movieVolumePrintX 270
+movieVolumePrintY 375
+soundvoiceVolumePrintX 270
+soundvoiceVolumePrintY 440
+
+
+
+
+messageSpeedVolumePrintX 770
+messageSpeedVolumePrintY 160
+
+autoSpeedVolumePrintX 770
+autoSpeedVolumePrintY 284
+
+
+
+voiceCutButtonFlag 1
+voiceCutButtonNumber 2
+
+voiceCutButtonCustomFlag 0
+
+
+voice1Button1SizeX 32
+voice1Button1SizeY 32
+
+voice1Button1FileName ta_dummycheckoff
+voice1Button1ClickSound 3
+voice1Button2FileName ta_dummycheckon
+voice1Button2ClickSound 2
+voice1Button1PrintX 640
+voice1Button1PrintY 260
+
+voice2Button1FileName ta_dummycheckoff
+voice2Button1ClickSound 3
+voice2Button2FileName ta_dummycheckon
+voice2Button2ClickSound 2
+voice2Button1PrintX 640
+voice2Button1PrintY 400
+
+
+
+
+screen1Button1FileName ta_dummycheckoff
+screen1Button2FileName ta_dummycheckon
+screen2Button1FileName ta_dummycheckoff
+screen2Button2FileName ta_dummycheckon
+
+skip1Button1FileName ta_dummycheckoff
+skip1Button2FileName ta_dummycheckon
+skip2Button1FileName ta_dummycheckoff
+skip2Button2FileName ta_dummycheckon
+
+auto1Button1FileName ta_dummycheckoff
+auto1Button2FileName ta_dummycheckon
+auto2Button1FileName ta_dummycheckoff
+auto2Button2FileName ta_dummycheckon
+
+
+
+screen1Button1PrintX 780
+screen1Button1PrintY 434
+screen2Button1PrintX 1048
+screen2Button1PrintY 434
+screen1Button1SizeX 32
+screen1Button1SizeY 32
+
+skip1Button1PrintX 780
+skip1Button1PrintY 518
+skip2Button1PrintX 900
+skip2Button1PrintY 518
+skip1Button1SizeX 32
+skip1Button1SizeY 32
+
+auto1Button1PrintX 780
+auto1Button1PrintY 614
+auto2Button1PrintX 900
+auto2Button1PrintY 614
+auto1Button1SizeX 32
+auto1Button1SizeY 32
+
+
+screen1Button1ClickSound 3
+skip1Button1ClickSound 3
+auto1Button1ClickSound 3
+
+
+soundSeNumber 1
+voiceSeNumber 2
+messageSeNumber 13
+movieSeNumber 18
+
+
+
+windowPrintPage 3
+windowPrintFlag 1
+
+windowPrintX 40
+windowPrintY 140
+
+
+windowPercentVolumeExistFlag 1
+windowPercentVolumePrintPage 3
+
+windowPercentVolumePrintX 260
+windowPercentVolumePrintY 540
+
+windowPercentBarFileName ta_dummyvolume
+

@@ -1,0 +1,93 @@
+$sc_fg_end
+
+_BGMTime=132002,
+52("_BGMName","BGM01")42("Start","00Endroll.dat")
+
+_Day=0,
+_DayTime=0,
+
+_Mode=1,
+52("_GRPName","bg01a")
+42("DrawBG","00Draw.dat")
+52("_BGMName","BGM03")
+42("BGM","00Sound.dat")
+&11262"２人の女性をいっぺんに幸せにするなんて、普通は考えられないし、そもそも不可能だ。"&11263"誰にも認められなくて、かけおちすら考えそうにもなった。"&11264"だけど、俺はあきらめない。"&11265"二季と白幸の家に通うようになって、数ヶ月が過ぎていた。"&11266"…………。"_Mode=1,
+52("_GRPName","cc10")
+42("DrawBG","00Draw.dat")
+#:NameSuffix
+&11267"「ただいま！　動いたって本当か！？」"52("_CharNameB","fc_fj411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0099f
+&11268"「ちょっと……家の中では静かにって言ってるでしょ」"52("_CharNameB","fc_gj411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0005g
+&11269"「……しょうがないパパね」"42("DEL","02CharChip.dat")#:NameSuffix
+&11270"「すまん……もういてもたってもいられなくって……」"&11271"定時報告で送られてきたメールを見て、俺は会社を飛び出してしまっていた。"&11272"二季と白幸の待つ家に一目散だ。"52("_CharNameB","fc_fk411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0100f
+&11273"「また会社の人達に迷惑かけて……本当に子煩悩なんだから……」"42("DEL","02CharChip.dat")#:NameSuffix
+&11274"「いや、少し暇見て抜けてきただけだから、様子見たら……満足したら戻るって……重いもん持ったりしてないよな？」"52("_CharNameB","fc_fg411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0101f
+&11275"「してないってば」"42("DEL","02CharChip.dat")&11276"俺は、超狭い家で暮らし続けた鬱憤を晴らすかのように次々と思い浮かぶ間取りと、器用貧乏と言われた手先、そして詰め込み学習によって。"&11277"大手建築事務所の見習い兼雑用の事務員として素人ながら就職にも成功していた。"52("_CharNameB","fc_gl411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0006g
+&11278"「双子から生まれた子供達って、どうなるのかしら、皆が皆同じ顔？」"42("DEL","02CharChip.dat")#:NameSuffix
+&11279"「え……あー……わからないけど、それはそれで夢が溢れそうだ」"52("_CharNameB","fc_gd411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","g")42("Start","02CharChip.dat")#白　幸=w0007g
+&11280"「ふふふ、きっと皆、パパに似て家族想いになるわ」"42("DEL","02CharChip.dat")&11281"もうすぐ、俺たちに新たな幸せが訪れようとしている。"&11282"どんな困難があっても、この３人ならどんな事でも乗り越えていけるだろう。"52("_CharNameB","fc_fd411")_CosSel=4,
+_Glass=1,
+_Cheek=1,
+52("_CCName","f")42("Start","02CharChip.dat")#二　季=w0102f
+&11283"「あっ……また蹴った……」"42("DEL","02CharChip.dat")#:NameSuffix
+&11284"「狭くたってそこはとても温かい場所なんだ、ゆっくり育って、しっかり外に出て来い……」"&11285"俺は、二季と白幸のお腹に宿る命に、目一杯の祝福と共にこの喜びと幸せを伝えていこう。"_Mode=4,
+52("_BGMName","")
+42("BGM","00sound.dat")
+_AL=0,
+_Mode=1,
+52("_GRPName","white")
+42("DrawBG","00Draw.dat")
+_AL=0,
+_Mode=1,
+52("_GRPName","fin06")
+42("DrawBG","00Draw.dat")
+_WaitTime=4000,
+42("Wait","00Wait.dat")
+_AL=0,
+_Mode=1,
+52("_GRPName","black")
+42("DrawBG","00Draw.dat")
+
+120,0(@END[34],0,=,){
+_AL=0,
+_Mode=1,
+52("_GRPName","ic03")
+42("DrawBG","00Draw.dat")
+_WaitTime=4000,
+42("Wait","00Wait.dat")
+}0;
+@END=1,
+@END[6]=1,
+@END[34]=1,
+
+120,1(@END[35],6,!,){
+@END[35]=@END[1],@END[2],+,@END[3],+,@END[4],+,@END[5],+,@END[6],+,
+120,2(@END[35],6,=,){
+_AL=0,
+_Mode=1,
+52("_GRPName","ic02")
+42("DrawBG","00Draw.dat")
+_WaitTime=4000,
+42("Wait","00Wait.dat")
+}2;
+}1;
+
+149()
+41("RESET","00Init.dat")

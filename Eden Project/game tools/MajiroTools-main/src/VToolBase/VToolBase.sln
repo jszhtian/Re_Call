@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Core", "Core\Core.shproj", "{D9925CA7-C6BB-47EC-BB6F-B7BA80C65C39}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Cli", "Cli\Cli.shproj", "{34844EA0-5B59-49B6-B6F3-0FA0CC60BAD0}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Cli\Cli.projitems*{34844ea0-5b59-49b6-b6f3-0fa0cc60bad0}*SharedItemsImports = 13
+		Core\Core.projitems*{d9925ca7-c6bb-47ec-bb6f-b7ba80c65c39}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44AFF951-0EB7-4DB7-A3DB-50ED6BD258E0}
+	EndGlobalSection
+EndGlobal

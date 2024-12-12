@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{D43C1143-6E74-4802-8427-A4512A165C78}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>rorologhscn</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;ROROLOGHSCN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;ROROLOGHSCN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;ROROLOGHSCN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;ROROLOGHSCN_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="detours.h" />
+    <ClInclude Include="detver.h" />
+    <ClInclude Include="dxsdk\Include\comdecl.h" />
+    <ClInclude Include="dxsdk\Include\d3d.h" />
+    <ClInclude Include="dxsdk\Include\D3D10.h" />
+    <ClInclude Include="dxsdk\Include\D3D10effect.h" />
+    <ClInclude Include="dxsdk\Include\d3d10misc.h" />
+    <ClInclude Include="dxsdk\Include\d3d10sdklayers.h" />
+    <ClInclude Include="dxsdk\Include\D3D10shader.h" />
+    <ClInclude Include="dxsdk\Include\d3d8.h" />
+    <ClInclude Include="dxsdk\Include\d3d8caps.h" />
+    <ClInclude Include="dxsdk\Include\d3d8types.h" />
+    <ClInclude Include="dxsdk\Include\d3d9.h" />
+    <ClInclude Include="dxsdk\Include\d3d9caps.h" />
+    <ClInclude Include="dxsdk\Include\d3d9types.h" />
+    <ClInclude Include="dxsdk\Include\d3dcaps.h" />
+    <ClInclude Include="dxsdk\Include\d3drm.h" />
+    <ClInclude Include="dxsdk\Include\d3drmdef.h" />
+    <ClInclude Include="dxsdk\Include\d3drmobj.h" />
+    <ClInclude Include="dxsdk\Include\d3drmwin.h" />
+    <ClInclude Include="dxsdk\Include\d3dtypes.h" />
+    <ClInclude Include="dxsdk\Include\D3DX10.h" />
+    <ClInclude Include="dxsdk\Include\d3dx10async.h" />
+    <ClInclude Include="dxsdk\Include\D3DX10core.h" />
+    <ClInclude Include="dxsdk\Include\D3DX10math.h" />
+    <ClInclude Include="dxsdk\Include\D3DX10mesh.h" />
+    <ClInclude Include="dxsdk\Include\D3DX10tex.h" />
+    <ClInclude Include="dxsdk\Include\d3dx9.h" />
+    <ClInclude Include="dxsdk\Include\d3dx9anim.h" />
+    <ClInclude Include="dxsdk\Include\d3dx9core.h" />
+    <ClInclude Include="dxsdk\Include\d3dx9effect.h" />
+    <ClInclude Include="dxsdk\Include\d3dx9math.h" />
+    <ClInclude Include="dxsdk\Include\d3dx9mesh.h" />
+    <ClInclude Include="dxsdk\Include\d3dx9shader.h" />
+    <ClInclude Include="dxsdk\Include\d3dx9shape.h" />
+    <ClInclude Include="dxsdk\Include\d3dx9tex.h" />
+    <ClInclude Include="dxsdk\Include\d3dx9xof.h" />
+    <ClInclude Include="dxsdk\Include\ddraw.h" />
+    <ClInclude Include="dxsdk\Include\dinput.h" />
+    <ClInclude Include="dxsdk\Include\dinputd.h" />
+    <ClInclude Include="dxsdk\Include\dls1.h" />
+    <ClInclude Include="dxsdk\Include\dls2.h" />
+    <ClInclude Include="dxsdk\Include\dmdls.h" />
+    <ClInclude Include="dxsdk\Include\dmerror.h" />
+    <ClInclude Include="dxsdk\Include\dmksctrl.h" />
+    <ClInclude Include="dxsdk\Include\dmplugin.h" />
+    <ClInclude Include="dxsdk\Include\dmusbuff.h" />
+    <ClInclude Include="dxsdk\Include\dmusicc.h" />
+    <ClInclude Include="dxsdk\Include\dmusicf.h" />
+    <ClInclude Include="dxsdk\Include\dmusici.h" />
+    <ClInclude Include="dxsdk\Include\dmusics.h" />
+    <ClInclude Include="dxsdk\Include\dpaddr.h" />
+    <ClInclude Include="dxsdk\Include\dplay.h" />
+    <ClInclude Include="dxsdk\Include\dplay8.h" />
+    <ClInclude Include="dxsdk\Include\dplobby.h" />
+    <ClInclude Include="dxsdk\Include\dplobby8.h" />
+    <ClInclude Include="dxsdk\Include\dpnathlp.h" />
+    <ClInclude Include="dxsdk\Include\dsconf.h" />
+    <ClInclude Include="dxsdk\Include\dsetup.h" />
+    <ClInclude Include="dxsdk\Include\dsound.h" />
+    <ClInclude Include="dxsdk\Include\dvoice.h" />
+    <ClInclude Include="dxsdk\Include\dvp.h" />
+    <ClInclude Include="dxsdk\Include\dx7todx8.h" />
+    <ClInclude Include="dxsdk\Include\dxdiag.h" />
+    <ClInclude Include="dxsdk\Include\DxErr.h" />
+    <ClInclude Include="dxsdk\Include\dxerr8.h" />
+    <ClInclude Include="dxsdk\Include\dxerr9.h" />
+    <ClInclude Include="dxsdk\Include\dxfile.h" />
+    <ClInclude Include="dxsdk\Include\DXGI.h" />
+    <ClInclude Include="dxsdk\Include\DXGIType.h" />
+    <ClInclude Include="dxsdk\Include\dxsdkver.h" />
+    <ClInclude Include="dxsdk\Include\dxtrans.h" />
+    <ClInclude Include="dxsdk\Include\gameux.h" />
+    <ClInclude Include="dxsdk\Include\multimon.h" />
+    <ClInclude Include="dxsdk\Include\PIXPlugin.h" />
+    <ClInclude Include="dxsdk\Include\rmxfguid.h" />
+    <ClInclude Include="dxsdk\Include\rmxftmpl.h" />
+    <ClInclude Include="dxsdk\Include\strsafe.h" />
+    <ClInclude Include="dxsdk\Include\X3DAudio.h" />
+    <ClInclude Include="dxsdk\Include\xact.h" />
+    <ClInclude Include="dxsdk\Include\xact2wb.h" />
+    <ClInclude Include="dxsdk\Include\xact3d.h" />
+    <ClInclude Include="dxsdk\Include\XInput.h" />
+    <ClInclude Include="framework.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="ScriptInsert.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="detours.lib" />
+    <Library Include="dxsdk\Lib\x86\d3d10.lib" />
+    <Library Include="dxsdk\Lib\x86\d3d8.lib" />
+    <Library Include="dxsdk\Lib\x86\d3d9.lib" />
+    <Library Include="dxsdk\Lib\x86\d3dx10.lib" />
+    <Library Include="dxsdk\Lib\x86\d3dx10d.lib" />
+    <Library Include="dxsdk\Lib\x86\d3dx9.lib" />
+    <Library Include="dxsdk\Lib\x86\d3dx9d.lib" />
+    <Library Include="dxsdk\Lib\x86\d3dx9d_beta.lib" />
+    <Library Include="dxsdk\Lib\x86\d3dxof.lib" />
+    <Library Include="dxsdk\Lib\x86\ddraw.lib" />
+    <Library Include="dxsdk\Lib\x86\dinput.lib" />
+    <Library Include="dxsdk\Lib\x86\dinput8.lib" />
+    <Library Include="dxsdk\Lib\x86\dplayx.lib" />
+    <Library Include="dxsdk\Lib\x86\dsetup.lib" />
+    <Library Include="dxsdk\Lib\x86\dsound.lib" />
+    <Library Include="dxsdk\Lib\x86\DxErr.lib" />
+    <Library Include="dxsdk\Lib\x86\DxErr8.lib" />
+    <Library Include="dxsdk\Lib\x86\DxErr9.lib" />
+    <Library Include="dxsdk\Lib\x86\dxgi.lib" />
+    <Library Include="dxsdk\Lib\x86\dxguid.lib" />
+    <Library Include="dxsdk\Lib\x86\dxtrans.lib" />
+    <Library Include="dxsdk\Lib\x86\X3DAudio.lib" />
+    <Library Include="dxsdk\Lib\x86\XInput.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dxsdk\Include\d3dvec.inl" />
+    <None Include="dxsdk\Include\D3DX10math.inl" />
+    <None Include="dxsdk\Include\d3dx9math.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

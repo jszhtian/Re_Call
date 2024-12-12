@@ -1,0 +1,118 @@
+//============================================================================
+// バックログ画面設計
+//============================================================================
+#=ES.LOG.BTDEF
+
+	\BTDEF.GROUP(ES.LOG)
+
+
+		\BT.NAME("■背景")
+		\BT.CGSYS("backlog/back_1")
+		\BT.XY(000, 000)
+		\BT.Z(501)
+		\BT.SET(TIP.BG)
+
+		\BT.NAME("■背景2")
+		\BT.CGSYS("backlog/back_2")
+		\BT.XY(000, 000)
+		\BT.Z(502)
+		\BT.SET(TIP.BG2)
+
+
+		//座標や数は自動調整されます。
+		\BT.NAME("■プレート")
+		\BT.CGSYS("backlog/btn_meswindow_off", "backlog/btn_meswindow_over")
+		\BT.XY(000, 000)
+		\BT.Z(510)
+		\BT.SET(BTN.PLATE)
+
+		//座標や数は自動調整されます。
+		\BT.NAME("■音声再生ボタン")
+		\BT.CGSYS("backlog/btn_voice_off", "backlog/btn_voice_over", "backlog/btn_voice_on", "backlog/btn_voice_onover")
+		\BT.XY(000, 000)
+		\BT.Z(510)
+		\BT.SET(BTN.VOICE)
+
+
+		\BT.NAME("■ログ・最古の行へ")
+		\BT.CGSYS("backlog/btn_bbb")
+		\BT.XY(757, 060)
+		\BT.Z(510)
+		\BT.KEY("HOME")
+		\BT.T(1)
+		\BT.SET(BTN.OLD)
+
+		\BT.NAME("■高速ログ↑スクロール")
+		\BT.CGSYS("backlog/btn_bb")
+		\BT.XY(757, 077)
+		\BT.Z(510)
+		\BT.KEY("PAGEUP")
+		\BT.T(1)
+		\BT.SET(BTN.BB)
+
+		\BT.NAME("■ログ↑スクロール")
+		\BT.CGSYS("backlog/btn_b")
+		\BT.XY(757, 094)
+		\BT.Z(510)
+		\BT.KEY.S("UP", "MOUSE_U")
+		\BT.T(1)
+		\BT.SET(BTN.B)
+
+		\BT.NAME("■ログ↓スクロール")
+		\BT.CGSYS("backlog/btn_f")
+		\BT.XY(757, 480)
+		\BT.Z(510)
+		\BT.KEY.S("DOWN", "MOUSE_D")
+		\BT.T(1)
+		\BT.SET(BTN.F)
+
+		\BT.NAME("■高速ログ↓スクロール")
+		\BT.CGSYS("backlog/btn_ff")
+		\BT.XY(757, 497)
+		\BT.Z(510)
+		\BT.KEY("PAGEDOWN")
+		\BT.T(1)
+		\BT.SET(BTN.FF)
+
+		\BT.NAME("■ログ・最新のページへ")
+		\BT.CGSYS("backlog/btn_fff")
+		\BT.XY(757, 514)
+		\BT.Z(510)
+		\BT.KEY("END")
+		\BT.T(1)
+		\BT.SET(BTN.NEW)
+
+		\BT.NAME("◆スクロールバー・後ろ部分")
+		\BT.CGSYS("backlog/tip_gauge")
+		\BT.XY(757, 111)
+		\BT.Z(505)
+		\BT.SET(BTN.GAUGE)
+
+		\BT.NAME("■スクロールバー・ツマミ")
+		\BT.CGSYS("backlog/tip_slider")
+		\BT.XY(757, 111)
+		\BT.Z(530)
+		\BT.SLIDE(0,369-29+1)
+		\BT.SET(BTN.SLIDER)
+
+
+		//ページ用スラッシュ画像
+		\BT.NAME("／")
+		\BT.CGSYS("backlog/num/num_slash")
+		\BT.XY(733, 025)
+		\BT.Z(510)
+		\BT.SET(TIP.SLASH)
+
+
+
+		\BT.NAME("■戻る")
+		\BT.CGSYS("backlog/btn_back")
+		\BT.XY(727, 552)
+		\BT.MAP.A(1)
+		\BT.Z(550)
+		\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+		\BT.SET(BTN.BACK)
+
+
+RETURN[]
+

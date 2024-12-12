@@ -1,0 +1,1534 @@
+//============================================================================
+//
+//■ERIS マクロ定義
+//
+//============================================================================
+
+//値を変えると、以前のセーブデータが使えなくなりますのでご注意ください。
+//また、値を大きくしすぎると極端に重くなる可能性がありますのでご注意ください。
+//
+
+	//---------------------------------------------------------------------
+	// スプライトレイヤ数
+	//---------------------------------------------------------------------
+		macro[name=".SP.MAX" str="100" ]
+
+	//---------------------------------------------------------------------
+	// 数字バッファ数
+	//---------------------------------------------------------------------
+		macro[name=".NUMBUF.MAX" str="300" ]
+
+	//---------------------------------------------------------------------
+	// バックログ最大頁数
+	//---------------------------------------------------------------------
+		macro[name=".LOG.SIZE" str="500" ]
+
+	//---------------------------------------------------------------------
+	// ボタンレイヤ最大数
+	//---------------------------------------------------------------------
+		macro[name=".BT.MAX" str="300" ]
+
+	//---------------------------------------------------------------------
+	// テキスト文字列長最大数
+	//---------------------------------------------------------------------
+		macro[name=".TX.MAX" str="4096" ]
+
+	//---------------------------------------------------------------------
+	// 選択肢最大数
+	//---------------------------------------------------------------------
+		macro[name=".SEL.MAX" str="2000" ]
+
+	//---------------------------------------------------------------------
+	// ＣＧ鑑賞モード定義最大数
+	//---------------------------------------------------------------------
+		macro[name=".CGMODE.MAX" str="1000" ]
+		macro[name=".CGMODE.CG.MAX" str="64" ]  //1グループあたりのＣＧ枚数？
+		macro[name=".CGMODE.SBN.MAX" str="64" ] //1ＣＧあたりの差分枚数
+
+	//---------------------------------------------------------------------
+	// シーン鑑賞モード定義最大数
+	//---------------------------------------------------------------------
+		macro[name=".RPMODE.MAX" str="200" ]
+		macro[name=".RPMODE.CG.MAX" str="64" ]  //1グループあたりのＣＧ枚数？
+
+	//---------------------------------------------------------------------
+	// ムービー鑑賞モード定義最大数
+	//---------------------------------------------------------------------
+		macro[name=".MVMODE.MAX" str="50" ]
+		macro[name=".MVMODE.CG.MAX" str="64" ]  //1グループあたりのＣＧ枚数？
+
+	//---------------------------------------------------------------------
+	// ＢＧＭ鑑賞モード定義最大数
+	//---------------------------------------------------------------------
+		macro[name=".BGMMODE.MAX" str="50" ]
+
+
+
+///xあとで纏める.
+macro[name=".QUE.MAX" str="200" ]
+
+macro[name="VAR.ADD" str="VARACT[SET=$_M"+"() DIMSIZE+=1];VARINFO[SET=$_M"+"() DIMSIZE=1 LET=@es.INT(0)];$_M"+"(@es.INT(0)-1)=$_M2" ]
+
+//macro[name="ES.DEFINELOAD" str="\_gosub($_M);IF[$_M2] LOOP[SET=128];@T($_M2,@_LC-1)=@C(@_LC-1);$T($_M2,@_LC-1)=$C(@_LC-1);@C(@_LC-1)=0;$C(@_LC-1)='';LOOPEND[] IFEND[];"]
+macro[name="ES.DEFINELOAD" str="\_gosub($_M);"]
+
+macro[name=MAC.SLIDER str="#=$_M.GAUGE.ON { \SLIDER.SYNC($_M.SLIDER);return[] } #=$_M.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,256-$_M2);return[] } #=$_M.SLIDER.DRAG { $_M2=256-@_PINT(2);\GSD.REFLECT;return[] }" ]
+
+//エンディング用
+//macro[name=ENDINGMODE.ON	str=";@es.ED.SSE.VOL=000;@es.NOSAVEFLAG=1;@es.NGSKIP=1;@es.TX.AUTO=0;@es.TX.SKIP=0;SYSTEM[BACKGROUNDEXEC=0];///xCOM:20011;" ]
+//macro[name=ENDINGMODE.OFF	str=";@es.ED.SSE.VOL=256;@es.NOSAVEFLAG=0;SYSTEM[BACKGROUNDEXEC=@es.GSD(110,02)];///xCOM:20012;" ]
+
+
+//自動空白挿入機能を１回だけオフにする
+macro[name=SPACE.OFF	str=";@es.LSD(035,01)=1;"]
+
+
+//--------------------------------------------------------------------
+//■テキストカウント
+//--------------------------------------------------------------------
+	macro[name=TEXTCOUNT		str="GOSUB[#=es.TEXTCOUNT.SET pint=$_M];" def="0" ]
+	macro[name=TEXTCOUNT1		str="GOSUB[#=es.TEXTCOUNT1.SET pint=$_M];" def="0" ]
+	macro[name=TEXTCOUNT2		str="GOSUB[#=es.TEXTCOUNT2.SET pint=$_M];" def="0" ]
+	macro[name=TEXTCOUNT1.SHOW	str="GOSUB[#=es.TEXTCOUNT1.SHOW.SET pint=$_M];" def="0" ]
+	macro[name=TEXTCOUNT2.SHOW	str="GOSUB[#=es.TEXTCOUNT2.SHOW.SET pint=$_M];" def="0" ]
+
+
+//-------------------------------------------------------------------------
+//■日付ウィンドウマクロ
+//-------------------------------------------------------------------------
+	macro[name=DATE			str=";GOSUB[#=es.DATE pint=$_M pint2=$_M2 pstr3=$_M3]" def="-1" def2="-1" def3="''" ]
+	macro[name=DATE.SHOW	str=";GOSUB[#=es.DATE.EU PINT=1]" ]
+	macro[name=DATE.HIDE	str=";GOSUB[#=es.DATE.EU PINT=0]" ]
+
+	macro[name=DATE.YEAR	str=";GOSUB[#=es.DATE.YEAR.SET pint=$_M]" def="-1" ]
+	macro[name=DATE.MONTH	str=";GOSUB[#=es.DATE.MONTH.SET pint=$_M]" def="-1" ]
+	macro[name=DATE.DAY		str=";GOSUB[#=es.DATE.DAY.SET pint=$_M]" def="-1" ]
+	macro[name=DATE.WEEK	str=";GOSUB[#=es.DATE.WEEK.SET pstr=$_M]" def="''" ]
+	macro[name=DATE.HOUR	str=";GOSUB[#=es.DATE.HOUR.SET pint=$_M]" def="-1" ]
+	macro[name=DATE.MIN		str=";GOSUB[#=es.DATE.MIN.SET pint=$_M]" def="-1" ]
+	macro[name=DATE.SEC		str=";GOSUB[#=es.DATE.SEC.SET pint=$_M]" def="-1" ]
+
+
+//--------------------------------------------------------------------
+//■ＣＧ鑑賞モード
+//--------------------------------------------------------------------
+//	macro[name=CGMODE.LABEL	str="GOSUB[#=es.CGMODE.CG.SET pint=$_M pint2=$_M2 pint3=$_M3 pstr4=$_M4 pint5=1]" def="0" def2="0" def3="0" def4="''" ]
+
+	macro[name=CGMODE.CG	str="GOSUB[#=es.CGMODE.CG.SET pstr=$_M]" def="''" ]
+	macro[name=CGMODE.THUMB	str="GOSUB[#=es.CGMODE.THUMB.SET pstr=$_M]" def="''" ]
+	macro[name=CGMODE.DEF	str="GOSUB[#=es.CGMODE.DEF.SET pint=$_M pint2=$_M2 pstr3=$_M3]" def="0" def2="0" def3="''" ]
+
+
+//--------------------------------------------------------------------
+//■シーン鑑賞モード
+//--------------------------------------------------------------------
+//	macro[name=RPMODE.CG	str="GOSUB[#=es.RPMODE.CG.SET pint=$_M pint2=$_M2 pint3=$_M3 pstr4=$_M4]" def="0" def2="0" def3="0" def4="''" ]
+
+	macro[name=RPMODE.LABEL	str="GOSUB[#=es.RPMODE.LABEL.SET pstr=$_M]" def="''" ]
+	macro[name=RPMODE.THUMB	str="GOSUB[#=es.RPMODE.THUMB.SET pstr=$_M]" def="''" ]
+	macro[name=RPMODE.DEF	str="GOSUB[#=es.RPMODE.DEF.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+
+
+//--------------------------------------------------------------------
+//■ムービー鑑賞モード
+//--------------------------------------------------------------------
+//	macro[name=MVMODE.CG	str="GOSUB[#=es.MVMODE.CG.SET pint=$_M pint2=$_M2 pint3=$_M3 pstr4=$_M4]" def="0" def2="0" def3="0" def4="''" ]
+
+	macro[name=MVMODE.FILE	str="GOSUB[#=es.MVMODE.FILE.SET pstr=$_M]" def="''" ]
+//	macro[name=MVMODE.LABEL	str="GOSUB[#=es.MVMODE.LABEL.SET pstr=$_M]" def="''" ]
+	macro[name=MVMODE.THUMB	str="GOSUB[#=es.MVMODE.THUMB.SET pstr=$_M]" def="''" ]
+	macro[name=MVMODE.DEF	str="GOSUB[#=es.MVMODE.DEF.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+
+
+//--------------------------------------------------------------------
+//ＢＧＭ鑑賞モード
+//--------------------------------------------------------------------
+	macro[name=BGMMODE.FILE	str="GOSUB[#=ES.BGMMODE.FILE.SET pstr=$_M]" def="''" ]
+	macro[name=BGMMODE.DEF	str="GOSUB[#=ES.BGMMODE.DEF pint=$_M]" def="0" ]
+
+
+//--------------------------------------------------------------------
+//■終了マクロ
+//--------------------------------------------------------------------
+macro[name=END		str=";GOSUB[#=es.ERIS.END PINT=$_M]" def="0" ]
+macro[name=es.END	str=";GOSUB[#=es.ERIS.END PINT=$_M]" def="0" ]
+
+
+//--------------------------------------------------------------------
+//■
+//--------------------------------------------------------------------
+macro[name=SAVE					str="GOSUB[#=es.Save pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=LOAD					str="GOSUB[#=es.Load pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=SAVEDEL				str="GOSUB[#=es.SAVEDEL pint=$_M]" def="0" ]
+macro[name=SAVECOPY				str="GOSUB[#=es.SAVECOPY pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=AUTOSAVE				str="GOSUB[#=ES.AUTOSAVE pint=$_M]" def="0" ]
+macro[name=AUTOSAVE.SS			str="GOSUB[#=ES.AUTOSAVE.SS]" ]
+macro[name=AUTOSAVE.SS.READY	str="GOSUB[#=ES.AUTOSAVE.SS.READY]" ]
+
+macro[name=POSDATA_SET		str="GOSUB[#=es.PBackLogClear]" ]
+
+
+//macro[name=INPUT			str=";GOSUB[#=es.InputOperation];" ]
+//macro[name=INPUT_INIT		str=";GOSUB[#=es.InputOperation_Init];" ]
+
+//全てのサウンドを停止する.
+macro[name=SOUND_STOPALL	str="GOSUB[#=es.SOUND_STOPALL PINT=$_M]" def="0" ]
+
+//スクリプト位置を保存する.
+//macro[name=SCRIPTPOS_SAVE	str="TASK[ID=es.POSDATA.SET #=es.POSDATA.SET]WAIT[FRAME=$_M]" def="0" ]
+macro[name=SCRIPTPOS_SAVE	str="GOSUB[#=es.POSDATA.SET]" ]
+
+//既読
+macro[name=KIDOKU.ON		str="GOSUB[#=es.TX.KIDOKU.ON    pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=KIDOKU.CHECK		str="GOSUB[#=es.TX.KIDOKU.CHECK pint=$_M pint2=$_M2]" def="0" def2="0" ]
+
+
+//-------------------------------------------------------------------------
+//■汎用ウェイト マクロ
+//-------------------------------------------------------------------------
+//macro[name=WAIT name2=wait	str="GOSUB[#=es.Wait pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=PAUSE name2=pause	str=";LOOP[]WAIT[FRAME=1]LOOPEND[];" ]
+
+
+//-------------------------------------------------------------------------
+//■ログ出力マクロ
+//-------------------------------------------------------------------------
+macro[name=_LOG  name2=_log		str=";GOSUB[#=es.MakeLog pstr=$_M]" def="''" ]
+macro[name=_LOG2 name2=_log2	str=";GOSUB[#=es.MakeLog2 pstr=$_M]" def="''" ]
+macro[name=MAKELOG2 str=";"]
+
+
+//-------------------------------------------------------------------------
+//■シーン管理
+//-------------------------------------------------------------------------
+macro[name=es.CGFADEEXEC	str="GOSUB[#=es.CGFADEEXEC PSTR=$_M PINT2=$_M2 PINT3=$_M3 PINT4=$_M4 PINT5=$_M5 PINT6=$_M6 PINT7=$_M7]" def="''" def2="0" def3="0" def4="0" def5="0" def6="0" def7="0"]
+
+macro[name=es.CGTFADEIN		str="GOSUB[#=es.CGTFADEIN PINT=$_M PINT2=$_M2]" def="-1" def2="0" ]
+macro[name=es.CGTFADEOUT	str="GOSUB[#=es.CGTFADEOUT PINT=$_M PINT2=$_M2]" def="-1" def2="0" ]
+macro[name=es.CGSFADEIN		str="GOSUB[#=es.CGSFADEIN PINT=$_M PINT2=$_M2]" def="-1" def2="0" ]
+macro[name=es.CGSFADEOUT	str="GOSUB[#=es.CGSFADEOUT PINT=$_M PINT2=$_M2]" def="-1" def2="0" ]
+macro[name=es.CGTDEL		str="GOSUB[#=es.CGTDEL]" ]
+macro[name=es.CGTSS			str="GOSUB[#=es.CGTSS]" ]
+macro[name=es.CGSSS			str="GOSUB[#=es.CGSSS]" ]
+macro[name=es.CGSCOPY		str="GOSUB[#=es.CGSCOPY]" ]
+macro[name=es.CGTA			str="GOSUB[#=es.CGTA pint=$_M]" def="0" ]
+macro[name=es.CGSA			str="GOSUB[#=es.CGSA pint=$_M]" def="0" ]
+macro[name=es.CGSBLACK		str="GOSUB[#=es.CGSBLACK]" ]
+macro[name=es.CGTBLACK		str="GOSUB[#=es.CGTBLACK]" ]
+macro[name=es.CGSDEL		str="GOSUB[#=es.CGSDEL]" ]
+macro[name=es.CGSDELALL		str="GOSUB[#=es.CGSDELALL]" ]
+macro[name=es.CGSLOAD		str="GOSUB[#=es.CGSLOAD PSTR=$_M PINT2=$_M2]" def="''" def2="0" ]
+
+macro[name=SS.GO			str="GOSUB[#=es.SS.GO pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=SS.GOSUB			str="GOSUB[#=es.SS.GOSUB pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=SS.RETURN		str="GOSUB[#=es.SS.RETURN]" ]
+macro[name=SS.FADE			str="GOSUB[#=es.SS.FADE pint=$_M]" def="0" ]
+macro[name=SS.FADE.TASK		str="GOSUB[#=es.SS.FADE.TASK pint=$_M]" def="0" ]
+macro[name=SS.DELALL		str="GOSUB[#=es.SS.DELALL]" ]
+
+macro[name=es.WAIT				str="GOSUB[#=es.WAIT PINT=$_M PINT2=$_M2]" def="0" def2="1" ] // (待ち時間, スキップ許可)
+macro[name=es.WAIT.COUNTSTART	str="GOSUB[#=es.WAIT.COUNTSTART]" ] //ウェイト計測開始
+
+
+//-------------------------------------------------------------------------
+//■キャラ名定義
+//-------------------------------------------------------------------------
+macro[name=CHAR.NAME.MARK	str="GOSUB[#=es.CHAR.NAME.MARK.SET pstr=$_M]" def="''" ]
+macro[name=CHAR.NAME		str="GOSUB[#=es.CHAR.NAME pstr=$_M pstr2=$_M2 pstr3=$_M3 pint4=$_M4 pint5=$_M5]" def="''" def2="''" def3="''" def4="-1" def5="-1"]
+
+
+//-------------------------------------------------------------------------
+//■文字定義
+//-------------------------------------------------------------------------
+macro[name=TD.FONT			str="GOSUB[#=es.TD.FONT.SET pstr=$_M]" def="''" ]
+macro[name=TD.SIZE			str="GOSUB[#=es.TD.SIZE.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=TD.COLOR			str="GOSUB[#=es.TD.COLOR.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=TD.BOLD			str="GOSUB[#=es.TD.BOLD.SET pint=$_M]" def="0" ]
+macro[name=TD.SHADE.COLOR	str="GOSUB[#=es.TD.SHADE.COLOR.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=TD.SHADE.XY		str="GOSUB[#=es.TD.SHADE.XY.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=TD.OUTLINE.COLOR	str="GOSUB[#=es.TD.OUTLINE.COLOR.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=TDDEF			str="GOSUB[#=es.TDDEF.SET pstr=$_M]" def="''" ]
+
+macro[name=GAIJI.MARK		str="GOSUB[#=es.GAIJI.MARK.SET pstr=$_M pstr2=$_M2]" def="''" def2="''" ]
+
+
+//-------------------------------------------------------------------------
+//■デバッグ
+//-------------------------------------------------------------------------
+macro[name=DBG.STR			str="GOSUB[#=es.DBG.STR.SET pint=$_M pstr2=$_M2]" def="0" def2="''" ]
+macro[name=DBG.STR.GNO		str="GOSUB[#=es.DBG.STR.GNO.DEF pint=$_M pstr2=$_M2]" def="0" def2="''" ]
+macro[name=DBG.STR.LNO		str="GOSUB[#=es.DBG.STR.LNO.DEF pint=$_M pstr2=$_M2]" def="0" def2="''" ]
+
+
+//-------------------------------------------------------------------------
+//■ダイアログ
+//-------------------------------------------------------------------------
+macro[name=DIALOG				str="GOSUB[#=es.DIALOG.SET pstr=$_M pstr2=$_M2]" def="''" def2="''" ]
+macro[name=DIALOG.YESNO			str="GOSUB[#=es.DIALOG.YESNO.SET pstr=$_M2 pstr2=$_M3 pint3=$_M4];$_M=@_RINT(1)" def="''" def2="''" def3="''" def4="1" ]
+macro[name=DIALOG.YESNOCANCEL	str="GOSUB[#=es.DIALOG.YESNOCANCEL.SET pstr=$_M2 pstr2=$_M3 pint3=$_M4];$_M=@_RINT(1)" def="''" def2="''" def3="''" def4="1" ]
+macro[name=DIALOG.OKCANCEL		str="GOSUB[#=es.DIALOG.OKCANCEL.SET pstr=$_M2 pstr2=$_M3 pint3=$_M4];$_M=@_RINT(1)" def="''" def2="''" def3="''" def4="1" ]
+
+
+//-------------------------------------------------------------------------
+//■
+//-------------------------------------------------------------------------
+macro[name=GSD.INIT		str="GOSUB[#=es.GSD.INIT]" ]
+macro[name=GSD.SAVE		str="GOSUB[#=es.GSD.SAVE]" ]
+macro[name=GSD.REFLECT	str="GOSUB[#=es.GSD.REFLECT]" ]
+macro[name=LSD.INIT		str="GOSUB[#=es.LSD.INIT]" ]
+
+
+//-------------------------------------------------------------------------
+//■システム
+//-------------------------------------------------------------------------
+macro[name=es.STARTLABEL	str="GOSUB[#=es.STARTLABEL.SET pstr=$_M]" def="''" ]
+
+macro[name=es.TXTASK.TX.E1	str="GOSUB[#=es.TXTASK.TX.E1]" ]
+macro[name=es.TXTASK.TX.E0	str="GOSUB[#=es.TXTASK.TX.E0]" ]
+macro[name=es.TXTASK.SN.E1	str="GOSUB[#=es.TXTASK.SN.E1]" ]
+macro[name=es.TXTASK.SN.E0	str="GOSUB[#=es.TXTASK.SN.E0]" ]
+
+
+//-------------------------------------------------------------------------
+//■ボタン
+//-------------------------------------------------------------------------
+//内部用
+macro[name=BT.ES.GET		str="GOSUB[#=es.BT.ES.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(1);" def="" def2="''" def3="0" ]
+macro[name=BT.EU.GET		str="GOSUB[#=es.BT.EU.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(1);" def="" def2="''" def3="0" ]
+macro[name=BT.A.GET			str="GOSUB[#=es.BT.A.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(1);" def="" def2="''" def3="0" ]
+macro[name=BT.W.GET			str="GOSUB[#=es.BT.W.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(1);" def="" def2="''" def3="0" ]
+macro[name=BT.NONONO.GET	str="GOSUB[#=es.BT.NONONO.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(1);" def="" def2="''" def3="0" ]
+macro[name=BT.ONOFF.GET		str="GOSUB[#=es.BT.ONOFF.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(1);" def="" def2="''" def3="0" ]
+macro[name=BT.OFFON.GET		str="GOSUB[#=es.BT.ONOFF.GET pstr=$_M2 pint2=$_M3];$_M=1-@_RINT(1);" def="" def2="''" def3="0" ]
+macro[name=BT.GROUP.GET		str="GOSUB[#=es.BT.GROUP.GET pint=$_M2];$_M=@_RINT(1);" def="" def2="0" ]
+macro[name=BT.SLIDE.X.GET	str="GOSUB[#=es.BT.SLIDE.XY.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(1);" def="" def2="''" def3="0" ]
+macro[name=BT.SLIDE.Y.GET	str="GOSUB[#=es.BT.SLIDE.XY.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(2);" def="" def2="''" def3="0" ]
+macro[name=BT.SLIDE.SX.GET	str="GOSUB[#=es.BT.SLIDE.SXY.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(1);" def="" def2="''" def3="0" ]
+macro[name=BT.SLIDE.SY.GET	str="GOSUB[#=es.BT.SLIDE.SXY.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(2);" def="" def2="''" def3="0" ]
+//macro[name=BT.SLIDE.PER.GET	str="GOSUB[#=es.BT.SLIDE.PER.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(1);" def="" def2="''" def3="0" ]
+
+macro[name=BT.NO.GET		str="GOSUB[#=es.BT.NO.GET pstr=$_M2 pint2=$_M3];$_M=@_RINT(1);" def="" def2="''" def3="0" ]
+macro[name=BT.NO.GET.77		str="GOSUB[#=es.BT.NO.GET.77 pstr=$_M2 pint2=$_M3 pint3=$_M4];$_M=@_RINT(1);" def="" def2="''" def3="0" def4="0" ]
+
+macro[name=BT.ON			str="GOSUB[#=es.BT.ONOFF.SET pstr=$_M pint2=$_M2 pint3=1]" def="''" def2="0" ]
+macro[name=BT.OFF			str="GOSUB[#=es.BT.ONOFF.SET pstr=$_M pint2=$_M2 pint3=0]" def="''" def2="0" ]
+macro[name=BT.ONOFF			str="GOSUB[#=es.BT.ONOFF.SET pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="0" ]
+//ボタン処理内専用マクロ
+macro[name=BTSELF.ONOFF		str="GOSUB[#=es.BT.ONOFF.SET pstr=$es.BID pint2=@es.BNO pint3=$_M]" def="0" ]
+
+macro[name=BT.T				str="GOSUB[#=es.BT.T.SET pint=$_M]" def="0" ]
+
+macro[name=BT.A.SET			str="GOSUB[#=es.BT.A.AFTER.SET pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="0" ]
+macro[name=BT.A.ADD			str="GOSUB[#=es.BT.A.ADD pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="0" ]
+macro[name=BT.X.INIT		str="GOSUB[#=es.BT.X.INIT pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.X.SET			str="GOSUB[#=es.BT.X.SET pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="0" ]
+macro[name=BT.X.ADD			str="GOSUB[#=es.BT.X.ADD pstr=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="''" def2="0" def3="0" def4="@es.64BITMAX" ]
+macro[name=BT.X.SUB			str="GOSUB[#=es.BT.X.SUB pstr=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="''" def2="0" def3="0" def4="-@es.64BITMAX" ]
+macro[name=BT.Y.INIT		str="GOSUB[#=es.BT.Y.INIT pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.Y.SET			str="GOSUB[#=es.BT.Y.SET pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="0" ]
+macro[name=BT.XY.SET		str="GOSUB[#=es.BT.XY.AFTER.SET pstr=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="''" def2="0" def3="0" def4="0" ]
+/*
+macro[name=BT.Y.GRP.SET		str="GOSUB[#=es.BT.Y.GRP.SET pstr=$_M pint2=$_M2 pint3=$_M3 pint4=1]" def="''" def2="0" def3="0" ]
+macro[name=BT.Y.GRP.SET		str="GOSUB[#=es.BT.Y.GRP.SET pstr=$_M pint2=$_M2 pint3=$_M3 pint4=2]" def="''" def2="0" def3="0" ]
+macro[name=BT.Y.GRP.SET		str="GOSUB[#=es.BT.Y.GRP.SET pstr=$_M pint2=$_M2 pint3=$_M3 pint4=3]" def="''" def2="0" def3="0" ]
+macro[name=BT.Y.GRP.SET		str="GOSUB[#=es.BT.Y.GRP.SET pstr=$_M pint2=$_M2 pint3=$_M3 pint4=4]" def="''" def2="0" def3="0" ]
+*/
+macro[name=BT.Y.ADD			str="GOSUB[#=es.BT.Y.ADD pstr=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="''" def2="0" def3="0" def4="@es.64BITMAX" ]
+macro[name=BT.Y.SUB			str="GOSUB[#=es.BT.Y.SUB pstr=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="''" def2="0" def3="0" def4="-@es.64BITMAX" ]
+macro[name=BT.SLIDE.X.SET	str="GOSUB[#=es.BT.SLIDE.X.SET pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="0" ]
+macro[name=BT.SLIDE.Y.SET	str="GOSUB[#=es.BT.SLIDE.Y.SET pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="0" ]
+macro[name=BT.SLIDE.PER.SET	str="GOSUB[#=es.BT.SLIDE.PER.SET pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="0" ]
+
+macro[name=BT.ACTIVEGROUP		str="GOSUB[#=es.BT.ACTIVEGROUP pint=$_M]" def="0" ]
+macro[name=BT.ACTIVEGROUP.ADD	str="GOSUB[#=es.BT.ACTIVEGROUP.ADD pint=$_M]" def="0" ]
+
+
+//ボタンセット
+macro[name=BT.NAME		str="GOSUB[#=es.BT.NAME.SET pstr=$_M]" def="''" ]
+macro[name=BT.CG		str="GOSUB[#=es.BT.CG.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5]" def="''" def2="''" def3="''" def4="''" def5="''" ]
+//macro[name=BT.CG.AN		str="GOSUB[#=es.BT.CG.AN.SET pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="0" ]
+macro[name=BT.CGSYS		str="GOSUB[#=es.BT.CG.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pint6=1]" def="''" def2="''" def3="''" def4="''" def5="''" ]
+macro[name=BT.CGSYS.AN	str="GOSUB[#=es.BT.CG.AN.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" ]
+macro[name=BT.SEQ		str="GOSUB[#=es.BT.SEQ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="0" ]
+//macro[name=BT.PAC		str="GOSUB[#=es.BT.PAC.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="0" ]
+macro[name=BT.A			str="GOSUB[#=es.BT.A.SET pint=$_M]" def="0" ]
+macro[name=BT.N			str="GOSUB[#=es.BT.N.SET pint=$_M]" def="0" ]
+macro[name=BT.W			str="GOSUB[#=es.BT.W.SET pint=$_M]" def="0" ]
+macro[name=BT.XY		str="GOSUB[#=es.BT.XY.SET pint=$_M pint2=$_M2]" def="0"  def2="0" ]
+macro[name=BT.Z			str="GOSUB[#=es.BT.Z.SET pint=$_M]" def="0" ]
+macro[name=BT.VAL		str="GOSUB[#=es.BT.VAL.SET pint=$_M]" def="0" ]
+macro[name=BT.TH		str="GOSUB[#=es.BT.TH.SET pint=$_M]" def="0" ]
+macro[name=BT.MAP.A		str="GOSUB[#=es.BT.MAP.A.SET pint=$_M]" def="0" ]
+macro[name=BT.MAP.CG	str="GOSUB[#=es.BT.MAP.CG.SET pstr=$_M]" def="''" ]
+
+macro[name=BT.AN.NUM	str="GOSUB[#=es.BT.AN.NUM.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6]" def="0" def2="0" def3="0" def4="0" def5="0" def6="0" ]
+macro[name=BT.AN.TIME	str="GOSUB[#=es.BT.AN.TIME.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6]" def="0" def2="0" def3="0" def4="0" def5="0" def6="0" ]
+macro[name=BT.AN.LPTYPE	str="GOSUB[#=es.BT.AN.LPTYPE.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6]" def="0" def2="0" def3="0" def4="0" def5="0" def6="0" ]
+
+macro[name=BT.KEY		str="GOSUB[#=es.BT.KEY.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6 pstr7=$_M7 pstr8=$_M8]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" ]
+macro[name=BT.KEY.S		str="GOSUB[#=es.BT.KEY.S.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6 pstr7=$_M7 pstr8=$_M8]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" ]
+
+//macro[name=BT.CURSOR.START	str="GOSUB[#=es.BT.CURSOR.START.SET pstr=$_M]" def="''" ]
+//macro[name=BT.CURSOR			str="GOSUB[#=es.BT.CURSOR.SET pstr=$_M pint2=$_M2 pstr3=$_M3 pint4=$_M4 pstr5=$_M5 pint6=$_M6 pstr7=$_M7 pint8=$_M8]" def="''" def2="0" def3="''" def4="0" def5="''" def6="0" def7="''" def8="0" ]
+//macro[name=BT.CURSOR.U		str="GOSUB[#=es.BT.CURSOR.U.SET pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+//macro[name=BT.CURSOR.D		str="GOSUB[#=es.BT.CURSOR.D.SET pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+//macro[name=BT.CURSOR.L		str="GOSUB[#=es.BT.CURSOR.L.SET pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+//macro[name=BT.CURSOR.R		str="GOSUB[#=es.BT.CURSOR.R.SET pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+
+//macro[name=BT.LBL			str="GOSUB[#=es.BT.LBL.SET pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+//macro[name=BT.PINT		str="GOSUB[#=es.BT.PINT.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+//macro[name=BT.PSTR		str="GOSUB[#=es.BT.PSTR.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4]" def="''" def2="''" def3="''" def4="''" ]
+
+//macro[name=BT.GRP			str="GOSUB[#=es.BT.GRP.SET pstr=$_M]" def="''" ]
+macro[name=BT.RADIO			str="GOSUB[#=es.BT.RADIO.SET pint=$_M]" def="0" ]
+macro[name=BT.GROUP			str="GOSUB[#=es.BT.GROUP.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+macro[name=BT.SLIDE			str="GOSUB[#=es.BT.SLIDE.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="-1" def4="-1" ]
+macro[name=BT.E				str="GOSUB[#=es.BT.E.SET pint=$_M]" def="1" ]
+macro[name=BT.SE			str="GOSUB[#=es.BT.SE.SET pstr=$_M pstr2=$_M2]" def="''" def2="''" ]
+macro[name=BT.MODE			str="GOSUB[#=es.BT.MODE.SET pint=$_M]" def="0" ]
+macro[name=BT.TYPE			str="GOSUB[#=es.BT.TYPE.SET pint=$_M]" def="0" ]
+
+//ボタン使用
+//macro[name=BTUSE.ONOFF	str="GOSUB[#=es.BTUSE.ONOFF pint=$_M]" def="0"  ]
+//macro[name=BTCASH			str="GOSUB[#=es.BTCASH pint=$_M]" def="0" ]
+//macro[name=BT.CLEAR		str="GOSUB[#=es.BT.END.SET pint=$_M pint2=$_M2 pstr3=$_M3]" def="0" def2="-1" def3="''" ]
+//macro[name=BT.CASH		str="GOSUB[#=es.BT.CASH.SET pstr=$_M]" def="''" ]
+//macro[name=BT.LOAD		str="GOSUB[#=es.BT.LOAD.SET pstr=$_M]" def="''" ]
+macro[name=BTDEF.GROUP		str="GOSUB[#=es.BTDEF.GROUP pstr=$_M]" def="''" ]
+macro[name=BTDEF.LOAD		str="GOSUB[#=es.BTDEF.LOAD pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="0" ]
+macro[name=BT.SET			str="GOSUB[#=es.BT.SET pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.GO			str="GOSUB[#=es.BT.GO pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.END			str="GOSUB[#=es.BT.END.SET pstr=$_M pstr2=$_M2 pint3=$_M3]" def="''" def2="''" def3="0" ]
+
+//ボタン停止
+macro[name=BTSTOP			str="@BT.OK=0;LOOP[] IF[@BT.OK] $_M=@BT.OK;LOOPBREAK[] IFEND[] WAIT[FRAME=1] LOOPEND[]" def="''" ]
+
+
+//ボタン表示・非表示
+macro[name=BT.A0.ALL		str="GOSUB[#=es.BT.A0.ALL pstr=$_M]" def="''" ]
+macro[name=BT.A1.ALL		str="GOSUB[#=es.BT.A1.ALL pstr=$_M]" def="''" ]
+macro[name=BT.A0			str="GOSUB[#=es.BT.A0 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.A1			str="GOSUB[#=es.BT.A1 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.ES0.ALL		str="GOSUB[#=es.BT.ES0.ALL pstr=$_M]" def="''" ]
+macro[name=BT.ES1.ALL		str="GOSUB[#=es.BT.ES1.ALL pstr=$_M]" def="''" ]
+macro[name=BT.ES20.ALL		str="GOSUB[#=es.BT.ES20.ALL pstr=$_M]" def="''" ]
+macro[name=BT.ES21.ALL		str="GOSUB[#=es.BT.ES21.ALL pstr=$_M]" def="''" ]
+macro[name=BT.EU0.ALL		str="GOSUB[#=es.BT.EU0.ALL pstr=$_M]" def="''" ]
+macro[name=BT.EU1.ALL		str="GOSUB[#=es.BT.EU1.ALL pstr=$_M]" def="''" ]
+macro[name=BT.ES0			str="GOSUB[#=es.BT.ES0 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.ES1			str="GOSUB[#=es.BT.ES1 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.ES20			str="GOSUB[#=es.BT.ES20 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.ES21			str="GOSUB[#=es.BT.ES21 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.EU0			str="GOSUB[#=es.BT.EU0 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.EU1			str="GOSUB[#=es.BT.EU1 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.W0.ALL		str="GOSUB[#=es.BT.W0.ALL pstr=$_M]" def="''" ]
+macro[name=BT.W1.ALL		str="GOSUB[#=es.BT.W1.ALL pstr=$_M]" def="''" ]
+macro[name=BT.W0			str="GOSUB[#=es.BT.W0 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.W1			str="GOSUB[#=es.BT.W1 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.N0			str="GOSUB[#=es.BT.N0 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.N1			str="GOSUB[#=es.BT.N1 pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+
+macro[name=BT.AN			str="GOSUB[#=es.BT.AN pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="0" def3="1" ]
+
+//ボタンバッファクリア
+//macro[name=BTBUF.CLEAR		str="GOSUB[#=es.BTBUF.CLEAR]" ]
+//ボタンジャンプ
+//macro[name=BT.GO			str="IF[@es.BT.PUSH($_M)] @es.BT.PUSH($_M)=0;GO[#=$_M2] IFEND[]" def="0" def2="''" ]
+//macro[name=BT.GOSUB		str="IF[@es.BT.PUSH($_M)] @es.BT.PUSH($_M)=0;GOSUB[#=$_M2] IFEND[]" def="0" def2="''" ]
+
+macro[name=BT.CGCLEAR		str=";GOSUB[#=es.BT.CGCLEAR.SET pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+macro[name=BT.CGCLEAR.OVER	str=";GOSUB[#=es.BT.CGCLEAR.OVER.SET pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+
+
+
+//ゲージ・スライダー連動マクロ
+macro[name=SLIDER.SYNC		str="GOSUB[#=es.SLIDER.SYNC pstr=$_M pint2=$_M2 pint3=@_PINT(3) pint4=@_PINT(4)]" def="''" def2="0" ]
+
+//ボタンラベル手動ジャンプ用マクロ
+macro[name=BT.GOSUB.INIT		str=";$es.BID=$_M+$_M2;GOSUB[#=$es.BID+'.INIT' pint=$_M3 pint2=$_M4 pint3=$_M5]" def="''" def2="''" def3="0" def4="0" def5="0" ]
+macro[name=BT.GOSUB.OVER.ONCE	str=";$es.BID=$_M+$_M2;GOSUB[#=$es.BID+'.OVER.ONCE' pint=$_M3 pint2=$_M4 pint3=$_M5]" def="''" def2="''" def3="0" def4="0" def5="0" ]
+macro[name=BT.GOSUB.OVER		str=";$es.BID=$_M+$_M2;GOSUB[#=$es.BID+'.OVER' pint=$_M3 pint2=$_M4 pint3=$_M5]" def="''" def2="''" def3="0" def4="0" def5="0" ]
+macro[name=BT.GOSUB.LEAVE.ONCE	str=";$es.BID=$_M+$_M2;GOSUB[#=$es.BID+'.LEAVE.ONCE' pint=$_M3 pint2=$_M4 pint3=$_M5]" def="''" def2="''" def3="0" def4="0" def5="0" ]
+macro[name=BT.GOSUB.LEAVE		str=";$es.BID=$_M+$_M2;GOSUB[#=$es.BID+'.LEAVE' pint=$_M3 pint2=$_M4 pint3=$_M5]" def="''" def2="''" def3="0" def4="0" def5="0" ]
+macro[name=BT.GOSUB.ON			str=";$es.BID=$_M+$_M2;GOSUB[#=$es.BID+'.ON' pint=$_M3 pint2=$_M4 pint3=$_M5]" def="''" def2="''" def3="0" def4="0" def5="0" ]
+//macro[name=BT.GOSUB.DRAG		str=";$es.BID=$_M+$_M2;GOSUB[#=$es.BID+'.DRAG' pint=$_M3 pint2=$_M4 pint3=$_M5]" def="''" def2="''" def3="0" def4="0" def5="0" ]
+
+
+macro[name=UI.RELOAD			str=";\BT.END(ES.GAMEMAIN);\BTDEF.LOAD(ES.GAMEMAIN);GOSUB[#=es.BT.DRAW];" ]
+
+
+
+macro[name=es.S.GO			str="GOSUB[#=es.S.GO pstr=$_M pint2=$_M2 pint3=$_M3];" def="''" def2="0" def3="0" ]
+macro[name=es.S.GOSUB		str="GOSUB[#=es.S.GOSUB pstr=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5];" def="''" def2="0" def3="0" def4="0" def5="0" ]
+macro[name=es.S.GOSUB.OVER	str="GOSUB[#=es.S.GOSUB.OVER pstr=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5];" def="''" def2="0" def3="0" def4="0" def5="0" ]
+macro[name=es.S.RETURN		str="GOSUB[#=es.S.RETURN pint=$_M pint2=$_M2];" def="-1" def2="0" ]
+macro[name=es.S.RETURN.NUM	str="GOSUB[#=es.S.RETURN.NUM pint=$_M pint2=$_M2 pint3=$_M3];" def="1" def2="-1" def3="0" ]
+macro[name=es.S.RETURN.LBL	str="GOSUB[#=es.S.RETURN.LBL pstr=$_M pint2=$_M2 pint3=$_M3];" def="''" def2="-1" def3="0" ]
+
+
+//-------------------------------------------------------------------------
+//■数値表示
+//-------------------------------------------------------------------------
+macro[name=NUM.FILE	str="GOSUB[#=es.NUM.FILE.SET pint=$_M pstr2=$_M2]" def="0" def2="''" ]
+macro[name=NUM.CGID	str="GOSUB[#=es.NUM.CGID.SET pint=$_M pstr2=$_M2]" def="0" def2="''" ]
+macro[name=NUM.XY	str="GOSUB[#=es.NUM.XY.SET pint=$_M pint2=$_M2 pint3=$_M3]" def="0" def2="0" def3="0" ]
+macro[name=NUM.Z	str="GOSUB[#=es.NUM.Z.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=NUM.XYZ	str="GOSUB[#=es.NUM.XYZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+macro[name=NUM.SX	str="GOSUB[#=es.NUM.SX.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=NUM.DIG	str="GOSUB[#=es.NUM.DIG.SET pint=$_M pint2=$_M2 pint3=$_M3]" def="0" def2="0" def3="0" ]
+macro[name=NUM.NOT	str="GOSUB[#=es.NUM.NOT.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=NUM.MAX	str="GOSUB[#=es.NUM.MAX.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=NUM.MIN	str="GOSUB[#=es.NUM.MIN.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=NUM.VAL	str="GOSUB[#=es.NUM.VAL.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+macro[name=NUM.SET	str="GOSUB[#=es.NUM.SET pint=$_M]" def="0" ]
+
+
+//-------------------------------------------------------------------------
+//■バージョンチェック
+//-------------------------------------------------------------------------
+macro[name=VERNO.SAVEDATA str="0400"]
+
+
+
+
+//============================================================================
+//
+//■ERIS シナリオスクリプトマクロ
+//
+//============================================================================
+
+
+//-------------------------------------------------------------------------
+//■栞
+//-------------------------------------------------------------------------
+//	macro[name="栞" str="#=_栞" ]
+
+
+//-------------------------------------------------------------------------
+//■テキスト
+//-------------------------------------------------------------------------
+	//改行、改頁、クリック待ち
+	macro[name=R  name2=r  str=";_[$_CHR(0xEF)+$_CHR(0xF0)];"]
+	macro[name=P  name2=p  str=";_[$_CHR(0xEF)+$_CHR(0xF2)];"]
+	macro[name=C  name2=c  str=";_[$_CHR(0xEF)+$_CHR(0xF3)];"]
+//	macro[name=CR name2=cr str=";_[$_CHR(0xEF)+$_CHR(0xF4)];"]
+	macro[name=CR name2=cr str=";_[$_CHR(0xEF)+$_CHR(0xF3)+$_CHR(0xEF)+$_CHR(0xF0)];"]
+	macro[name=CP name2=cp str=";_[$_CHR(0xEF)+$_CHR(0xF5)+$_CHR(0xEF)+$_CHR(0xF2)];"]
+	macro[name=NR str=";GOSUB[#=es.TX.ARN.SET pint=1]" ] //その行だけR無効
+	macro[name=NP str=";GOSUB[#=es.TX.APN.SET pint=1]" ] //その行だけP無効
+	macro[name=NC str=";GOSUB[#=es.TX.ACN.SET pint=1]" ] //その行だけC無効
+
+	//自動改行、改頁、クリック待ち
+	macro[name=AR  str=";GOSUB[#=es.TX.ARL.SET pint=$_M]" def="1" ]
+	macro[name=AP  str=";GOSUB[#=es.TX.APL.SET pint=$_M]" def="1" ]
+	macro[name=AC  str=";GOSUB[#=es.TX.ACL.SET pint=$_M]" def="1" ]
+	macro[name=ARL str=";GOSUB[#=es.TX.ARL.SET pint=$_M]" def="1" ]
+	macro[name=APL str=";GOSUB[#=es.TX.APL.SET pint=$_M]" def="1" ]
+	macro[name=ACL str=";GOSUB[#=es.TX.ACL.SET pint=$_M]" def="1" ]
+	macro[name=ARF str=";GOSUB[#=es.TX.ARF.SET pint=$_M]" def="1" ]
+	macro[name=APF str=";GOSUB[#=es.TX.APF.SET pint=$_M]" def="1" ]
+	macro[name=ACF str=";GOSUB[#=es.TX.ACF.SET pint=$_M]" def="1" ]
+
+	macro[name=AUTOCRP str=";\AC($_M)\AR($_M)\AP($_M)" def="1" ]
+
+
+	//文字
+	macro[name=TS name2=ts str=";GOSUB[#=es.TextSizeChange pint=$_M pint2=$_M2]" def="-1" def2="-1" ]
+	macro[name=TC name2=tc str=";GOSUB[#=es.TextColorChange pint=$_M pint2=$_M2]" def="-1" def2="-1" ]
+	macro[name=TD name2=td str=";GOSUB[#=es.TextDefineChange pstr=$_M]" def="''" ]
+//	macro[name=TW name2=tw str=";GOSUB[#=es.TextWaitTimeChange pint=$_M]" def="0" ]
+//	macro[name=TW.FAST str="\TW(10)" ]
+//	macro[name=TW.SLOW str="\TW(80)" ]
+
+	macro[name=TX.ICON.XYAUTO	str=";GOSUB[#=es.TX.ICON.XYAUTO.SET pint=$_M]" def="0" ]
+
+	macro[name=SKIP.ON	str=";GOSUB[#=es.TX.SKIP.ON]" ]
+	macro[name=SKIP.OFF	str=";GOSUB[#=es.TX.SKIP.OFF]" ]
+
+
+	macro[name=FONT.FONT		str=";GOSUB[#=es.FONT.FONT.SET pstr=$_M]" def="''" ]
+	macro[name=FONT.XY			str=";GOSUB[#=es.FONT.XY.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+	macro[name=FONT.SIZE		str=";GOSUB[#=es.FONT.SIZE.SET pint=$_M pint2=$_M2]" def="-1" def2="-1" ]
+	macro[name=FONT.BOLD		str=";GOSUB[#=es.FONT.BOLD.SET pint=$_M]" def="0" ]
+	macro[name=FONT.COLOR		str=";GOSUB[#=es.FONT.COLOR.SET pint=$_M pint2=$_M2 pint3=$_M3]" def="-1" def2="-1" def3="0" ]
+	macro[name=FONT.SHADE		str=";GOSUB[#=es.FONT.SHADE.SET pint=$_M pint2=$_M2 pint3=$_M3]" def="0" def2="0" def3="-1" ]
+	macro[name=FONT.OUTLINE		str=";GOSUB[#=es.FONT.OUTLINE.SET pint=$_M]" def="-1" ]
+	macro[name=FONT.DRAW		str=";GOSUB[#=es.FONT.DRAW.SET pstr=$_M pstr2=$_M2]" def="''" def2="''" ]
+	macro[name=BT.FONT.DRAW		str=";GOSUB[#=es.BT.FONT.DRAW.SET pstr=$_M pint2=$_M2 pstr3=$_M3]" def="''" def2="0" def3="''" ]
+
+
+//-------------------------------------------------------------------------
+//■回想用
+//-------------------------------------------------------------------------
+	macro[name=CG.SET		str="IF[@es.RPMODE==0] GOSUB[#=es.CGMODE.CG.FLAG.SET pstr=$_M] IFEND[]" def="''" ]
+	macro[name=RP.SET		str="IF[@es.RPMODE==0] GOSUB[#=es.RPMODE.CG.FLAG.SET pstr=$_M] IFEND[]" def="''" ]
+	macro[name=MV.SET		str="IF[@es.RPMODE==0] GOSUB[#=es.MVMODE.CG.FLAG.SET pstr=$_M] IFEND[]" def="''" ]
+	macro[name=BGM.SET		str="IF[@es.RPMODE==0] GOSUB[#=es.BGMMODE.FLAG.SET pstr=$_M] IFEND[]" def="''" ]
+	macro[name=CG.SETALL	str="IF[@es.RPMODE==0] GOSUB[#=es.CGMODE.CG.SETALL pint=$_M] IFEND[]" def="-1" ] //ＣＧ鑑賞フラグ強制ON/OFF
+	macro[name=RP.SETALL	str="IF[@es.RPMODE==0] GOSUB[#=es.RPMODE.RP.SETALL pint=$_M] IFEND[]" def="-1" ] //シーン鑑賞フラグ強制ON/OFF
+	macro[name=MV.SETALL	str="IF[@es.RPMODE==0] GOSUB[#=es.MVMODE.MV.SETALL pint=$_M] IFEND[]" def="-1" ] //ムービー鑑賞フラグ強制ON/OFF
+	macro[name=BGM.SETALL	str="IF[@es.RPMODE==0] GOSUB[#=es.BGMMODE.SETALL pint=$_M] IFEND[]" def="-1" ] //ＢＧＭ鑑賞フラグ強制ON/OFF
+	macro[name=CG.CHK		str="GOSUB[#=es.CGMODE.CG.FLAG.CHK pstr=$_M2];$_M=@_RINT(1);" def="''" ]
+	macro[name=RP.CHK		str="GOSUB[#=es.RPMODE.CG.FLAG.CHK pstr=$_M2];$_M=@_RINT(1);" def="''" ]
+	macro[name=MV.CHK		str="GOSUB[#=es.MVMODE.CG.FLAG.CHK pstr=$_M2];$_M=@_RINT(1);" def="''" ]
+	macro[name=BGM.CHK		str="GOSUB[#=es.BGMMODE.FLAG.CHK pstr=$_M2];$_M=@_RINT(1);" def="''" ]
+
+	macro[name=RP.EV	str="IF[@es.RPMODE] \EV($_M,$_M2,$_M3) IFEND[]" ]
+	macro[name=RP.BG	str="IF[@es.RPMODE] \BG($_M,$_M2,$_M3) IFEND[]" ]
+	macro[name=RP.BGM	str="IF[@es.RPMODE] \BGM($_M,$_M2,$_M3) IFEND[]" ]
+	macro[name=RP.SE	str="IF[@es.RPMODE] \SE($_M,$_M2,$_M3,$_M4) IFEND[]" ]
+	macro[name=RP.SE2	str="IF[@es.RPMODE] \SE2($_M,$_M2,$_M3,$_M4) IFEND[]" ]
+	macro[name=RP.SE3	str="IF[@es.RPMODE] \SE3($_M,$_M2,$_M3,$_M4) IFEND[]" ]
+//	macro[name=RP.END	str="IF[@es.RPMODE] RETURN[] IFEND[]" ]
+
+//	macro[name=RP.END	str="IF[@es.RPMODE] \SCENE(TITLECONF);WAIT[FRAME=99999999] IFEND[]" ]
+
+///xIK
+//	macro[name=RP.END	str="IF[@es.RPMODE==0] GOSUB[#=es.RPMODE.CG.FLAG.SET pstr=$_M] ELSE[] \SCENE(TITLECONF);WAIT[FRAME=99999999] IFEND[]" def="''" ]
+	macro[name=RP.END	str="IF[@es.RPMODE==0] GOSUB[#=es.RPMODE.CG.FLAG.SET pstr=$_M] ELSE[] \GO.TITLE IFEND[]" def="''" ]
+//	macro[name=RP.END	str=";" def="''" ]
+
+
+//--------------------------------------------------------------------
+//■バックログ
+//--------------------------------------------------------------------
+//文字列をログに追加する
+macro[name=LOG.WRITE			str="GOSUB[#=es.LOG.WRITE  PSTR=$_M PSTR2=$_M2 PSTR3=$_M3 PSTR4=$_M4 PSTR5=$_M5 PINT6=$_M6 PINT7=$_M7 PINT8=$_M8]" def="''" def2="''" def3="''" def4="''" def5="''" def6="0" def7="0" def8="0" ]
+macro[name=LOG.NUM.PLUS			str="GOSUB[#=es.LOG.NUM.PLUS pint=$_M]" def="0" ]
+macro[name=LOG.NUM.PLUS.FLAG	str="GOSUB[#=es.LOG.NUM.PLUS.FLAG]" ]
+
+macro[name=LOG.ONE				str="GOSUB[#=es.LOG.ONE PSTR=$_M]" def="''" ]
+
+macro[name=LOG.W1				str="GOSUB[#=es.LOG.W1 PSTR=$_M]" def="''" ]
+macro[name=LOG.W2				str="GOSUB[#=es.LOG.W2 PSTR=$_M PSTR2=$_M2 PSTR3=$_M3 PSTR4=$_M4 PSTR5=$_M5 PSTR6=$_M6 PSTR7=$_M7 PSTR8=$_M8 PSTR9=$_M9 PSTR10=$_M10]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" def9="''" def10="''" ]
+
+macro[name=LOG.SET				str="GOSUB[#=es.LOG.SET PSTR=$_M PSTR2=$_M2]" def="''" def2="''" ]
+
+
+//-------------------------------------------------------------------------
+//■入力用マクロ
+//-------------------------------------------------------------------------
+	macro[name=INPUT.VAL	str="GOSUB[#=es.INPUT.VAL.SET pstr=$_M2 pstr2=$_M3 pstr3=$_M4];$_M=@$_RSTR(1);" def="''" def2="''" def3="''" def4="''" ]
+	macro[name=INPUT.STR	str="GOSUB[#=es.INPUT.STR.SET pstr=$_M2 pstr2=$_M3 pstr3=$_M4];$_M=$_RSTR(1);" def="''" def2="''" def3="''" def4="''" ]
+
+//-------------------------------------------------------------------------
+//■乱数用マクロ
+//-------------------------------------------------------------------------
+	macro[name=RND	str="GOSUB[#=es.RND PINT=$_M2 PINT2=$_M3 PINT3=$_M4 PINT4=$_M5 PINT5=$_M6 PINT6=$_M7 PINT7=$_M8];$_M=@_RINT(1);" def="''" def2="0" def3="0" def4="0" def5="0" def6="0" def7="0" def8="0" ]
+
+//-------------------------------------------------------------------------
+//■キャプション設定マクロ
+//-------------------------------------------------------------------------
+	macro[name=SYS.CAPTION	str="GOSUB[#=es.SYS.CAPTION.SET PSTR=$_M PSTR2=$_M2]" def="''" def2="''" ]
+	macro[name=CAPTION		str="GOSUB[#=es.CAPTION.SET PSTR=$_M]" def="''" ]
+
+//-------------------------------------------------------------------------
+//■サウンド
+//-------------------------------------------------------------------------
+	//定義
+	macro[name=BGMDEF			str="GOSUB[#=es.BGMDEF pstr=$_M pstr2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7 pint8=$_M8]" def="''" def2="''" def3="256" def4="0" def5="0" def6="-99999" def7="-99999" def8="-99999" ]
+	macro[name=SEDEF			str="GOSUB[#=es.SEDEF pstr=$_M pstr2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7 pint8=$_M8 pint9=$_M9]" def="''" def2="''" def3="256" def4="0" def5="0" def6="0" def7="-99999" def8="-99999" def9="-99999" ]
+
+	//ボイス
+	macro[name=VO.PATH.FOLDER		str="GOSUB[#=es.VO.PATH.FOLDER.SET pstr=$_M]" def="''" ]
+	macro[name=VO.PATH.STR			str="GOSUB[#=es.VO.PATH.STR.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4]" def="''" def2="''" def3="''" def4="''" ]
+	macro[name=VO.PATHDEF			str="GOSUB[#=es.VO.PATHDEF pint=$_M]" def="0" ]
+	macro[name=VO.OTHER.PATH.FOLDER	str="GOSUB[#=es.VO.OTHER.PATH.FOLDER.SET pstr=$_M]" def="''" ]
+	macro[name=VO.OTHER.PATHDEF		str="GOSUB[#=es.VO.OTHER.PATHDEF.SET pint=$_M]" def="0" ]
+
+	//各種音量取得
+///xいずれなくす
+	macro[name=VOL.MASTER.GET	str="GOSUB[#=es.VOL.MASTER.GET];$_M=@_RINT(1);" ]
+
+	macro[name=VOL.BGM.LS.GET	str="GOSUB[#=es.VOL.BGM.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.SE.LS.GET	str="GOSUB[#=es.VOL.SE.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.VO.LS.GET	str="GOSUB[#=es.VOL.VO.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.EBGM.LS.GET	str="GOSUB[#=es.VOL.EBGM.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.ESE.LS.GET	str="GOSUB[#=es.VOL.ESE.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.EVO.LS.GET	str="GOSUB[#=es.VOL.EVO.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.E2BGM.LS.GET	str="GOSUB[#=es.VOL.E2BGM.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.E2SE.LS.GET	str="GOSUB[#=es.VOL.E2SE.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.E2VO.LS.GET	str="GOSUB[#=es.VOL.E2VO.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.SBGM.LS.GET	str="GOSUB[#=es.VOL.SBGM.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.SSE.LS.GET	str="GOSUB[#=es.VOL.SSE.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.SVO.LS.GET	str="GOSUB[#=es.VOL.SVO.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.S2BGM.LS.GET	str="GOSUB[#=es.VOL.S2BGM.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.S2SE.LS.GET	str="GOSUB[#=es.VOL.S2SE.LS.GET];$_M=@_RINT(1);" ]
+	macro[name=VOL.S2VO.LS.GET	str="GOSUB[#=es.VOL.S2VO.LS.GET];$_M=@_RINT(1);" ]
+
+	macro[name=VOL.BGM.GET		str="GOSUB[#=es.VOL.BGM.GET pint=$_M2];$_M=@_RINT(1);" def2="0" ]
+	macro[name=VOL.SE.GET		str="GOSUB[#=es.VOL.SE.GET pint=$_M2];$_M=@_RINT(1);" def2="0" ]
+	macro[name=VOL.VO.GET		str="GOSUB[#=es.VOL.VO.GET pint=$_M2 pint2=$_M3];$_M=@_RINT(1);" def2="0" def3="0" ]
+	macro[name=VOL.EBGM.GET		str="GOSUB[#=es.VOL.EBGM.GET pint=$_M2];$_M=@_RINT(1);" def2="0" ]
+	macro[name=VOL.ESE.GET		str="GOSUB[#=es.VOL.ESE.GET pint=$_M2];$_M=@_RINT(1);" def2="0" ]
+	macro[name=VOL.EVO.GET		str="GOSUB[#=es.VOL.EVO.GET pint=$_M2 pint2=$_M3];$_M=@_RINT(1);" def2="0" def3="0" ]
+	macro[name=VOL.E2BGM.GET	str="GOSUB[#=es.VOL.E2BGM.GET pint=$_M2];$_M=@_RINT(1);" def2="0" ]
+	macro[name=VOL.E2SE.GET		str="GOSUB[#=es.VOL.E2SE.GET pint=$_M2];$_M=@_RINT(1);" def2="0" ]
+	macro[name=VOL.E2VO.GET		str="GOSUB[#=es.VOL.E2VO.GET pint=$_M2 pint2=$_M3];$_M=@_RINT(1);" def2="0" def3="0" ]
+	macro[name=VOL.SBGM.GET		str="GOSUB[#=es.VOL.SBGM.GET pint=$_M2];$_M=@_RINT(1);" def2="0" ]
+	macro[name=VOL.SSE.GET		str="GOSUB[#=es.VOL.SSE.GET pint=$_M2];$_M=@_RINT(1);" def2="0" ]
+	macro[name=VOL.SVO.GET		str="GOSUB[#=es.VOL.SVO.GET pint=$_M2 pint2=$_M3];$_M=@_RINT(1);" def2="0" def3="0" ]
+	macro[name=VOL.S2BGM.GET	str="GOSUB[#=es.VOL.S2BGM.GET pint=$_M2];$_M=@_RINT(1);" def2="0" ]
+	macro[name=VOL.S2SE.GET		str="GOSUB[#=es.VOL.S2SE.GET pint=$_M2];$_M=@_RINT(1);" def2="0" ]
+	macro[name=VOL.S2VO.GET		str="GOSUB[#=es.VOL.S2VO.GET pint=$_M2 pint2=$_M3];$_M=@_RINT(1);" def2="0" def3="0" ]
+
+	macro[name=VO				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=21 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=VO1				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=21 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=VO2				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=22 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=VO3				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=23 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=VO4				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=24 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=VO5				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=25 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=VO6				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=26 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=VO7				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=27 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=VO8				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=28 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=VO9				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=29 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=VO10				str="PREP[TEXTVAL=1];GOSUB[#=es.SND pint=30 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO				str="GOSUB[#=es.SND pint=51 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO1				str="GOSUB[#=es.SND pint=51 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO2				str="GOSUB[#=es.SND pint=52 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO3				str="GOSUB[#=es.SND pint=53 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO4				str="GOSUB[#=es.SND pint=54 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO5				str="GOSUB[#=es.SND pint=55 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO6				str="GOSUB[#=es.SND pint=56 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO7				str="GOSUB[#=es.SND pint=57 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO8				str="GOSUB[#=es.SND pint=58 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO9				str="GOSUB[#=es.SND pint=59 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EVO10			str="GOSUB[#=es.SND pint=60 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO				str="GOSUB[#=es.SND pint=81 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO1			str="GOSUB[#=es.SND pint=81 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO2			str="GOSUB[#=es.SND pint=82 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO3			str="GOSUB[#=es.SND pint=83 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO4			str="GOSUB[#=es.SND pint=84 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO5			str="GOSUB[#=es.SND pint=85 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO6			str="GOSUB[#=es.SND pint=86 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO7			str="GOSUB[#=es.SND pint=87 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO8			str="GOSUB[#=es.SND pint=88 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO9			str="GOSUB[#=es.SND pint=89 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2VO10			str="GOSUB[#=es.SND pint=90 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO				str="GOSUB[#=es.SND pint=111 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO1				str="GOSUB[#=es.SND pint=111 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO2				str="GOSUB[#=es.SND pint=112 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO3				str="GOSUB[#=es.SND pint=113 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO4				str="GOSUB[#=es.SND pint=114 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO5				str="GOSUB[#=es.SND pint=115 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO6				str="GOSUB[#=es.SND pint=116 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO7				str="GOSUB[#=es.SND pint=117 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO8				str="GOSUB[#=es.SND pint=118 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO9				str="GOSUB[#=es.SND pint=119 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SVO10			str="GOSUB[#=es.SND pint=120 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO				str="GOSUB[#=es.SND pint=141 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO1			str="GOSUB[#=es.SND pint=141 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO2			str="GOSUB[#=es.SND pint=142 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO3			str="GOSUB[#=es.SND pint=143 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO4			str="GOSUB[#=es.SND pint=144 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO5			str="GOSUB[#=es.SND pint=145 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO6			str="GOSUB[#=es.SND pint=146 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO7			str="GOSUB[#=es.SND pint=147 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO8			str="GOSUB[#=es.SND pint=148 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO9			str="GOSUB[#=es.SND pint=149 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2VO10			str="GOSUB[#=es.SND pint=150 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+
+//内部用(ボイスがログ等に登録されない)
+	macro[name=VO.N				str="GOSUB[#=es.SND pint=21 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+	macro[name=VO1.N			str="GOSUB[#=es.SND pint=21 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+	macro[name=VO2.N			str="GOSUB[#=es.SND pint=22 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+	macro[name=VO3.N			str="GOSUB[#=es.SND pint=23 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+	macro[name=VO4.N			str="GOSUB[#=es.SND pint=24 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+	macro[name=VO5.N			str="GOSUB[#=es.SND pint=25 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+	macro[name=VO6.N			str="GOSUB[#=es.SND pint=26 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+	macro[name=VO7.N			str="GOSUB[#=es.SND pint=27 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+	macro[name=VO8.N			str="GOSUB[#=es.SND pint=28 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+	macro[name=VO9.N			str="GOSUB[#=es.SND pint=29 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+	macro[name=VO10.N			str="GOSUB[#=es.SND pint=30 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5 pint7=1 pint8=$_M6]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" def6= "0" ]
+
+	macro[name=VO.STOP			str="GOSUB[#=es.SND pint=21 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=VO1.STOP			str="GOSUB[#=es.SND pint=21 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=VO2.STOP			str="GOSUB[#=es.SND pint=22 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=VO3.STOP			str="GOSUB[#=es.SND pint=23 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=VO4.STOP			str="GOSUB[#=es.SND pint=24 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=VO5.STOP			str="GOSUB[#=es.SND pint=25 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=VO6.STOP			str="GOSUB[#=es.SND pint=26 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=VO7.STOP			str="GOSUB[#=es.SND pint=27 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=VO8.STOP			str="GOSUB[#=es.SND pint=28 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=VO9.STOP			str="GOSUB[#=es.SND pint=29 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=VO10.STOP		str="GOSUB[#=es.SND pint=30 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=EVO.STOP			str="GOSUB[#=es.SND pint=51 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=EVO1.STOP		str="GOSUB[#=es.SND pint=51 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=EVO2.STOP		str="GOSUB[#=es.SND pint=52 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=EVO3.STOP		str="GOSUB[#=es.SND pint=53 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=EVO4.STOP		str="GOSUB[#=es.SND pint=54 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=EVO5.STOP		str="GOSUB[#=es.SND pint=55 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=EVO6.STOP		str="GOSUB[#=es.SND pint=56 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=EVO7.STOP		str="GOSUB[#=es.SND pint=57 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=EVO8.STOP		str="GOSUB[#=es.SND pint=58 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=EVO9.STOP		str="GOSUB[#=es.SND pint=59 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=EVO10.STOP		str="GOSUB[#=es.SND pint=60 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO.STOP		str="GOSUB[#=es.SND pint=81 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO1.STOP		str="GOSUB[#=es.SND pint=81 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO2.STOP		str="GOSUB[#=es.SND pint=82 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO3.STOP		str="GOSUB[#=es.SND pint=83 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO4.STOP		str="GOSUB[#=es.SND pint=84 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO5.STOP		str="GOSUB[#=es.SND pint=85 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO6.STOP		str="GOSUB[#=es.SND pint=86 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO7.STOP		str="GOSUB[#=es.SND pint=87 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO8.STOP		str="GOSUB[#=es.SND pint=88 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO9.STOP		str="GOSUB[#=es.SND pint=89 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=E2VO10.STOP		str="GOSUB[#=es.SND pint=90 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO.STOP			str="GOSUB[#=es.SND pint=111 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO1.STOP		str="GOSUB[#=es.SND pint=111 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO2.STOP		str="GOSUB[#=es.SND pint=112 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO3.STOP		str="GOSUB[#=es.SND pint=113 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO4.STOP		str="GOSUB[#=es.SND pint=114 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO5.STOP		str="GOSUB[#=es.SND pint=115 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO6.STOP		str="GOSUB[#=es.SND pint=116 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO7.STOP		str="GOSUB[#=es.SND pint=117 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO8.STOP		str="GOSUB[#=es.SND pint=118 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO9.STOP		str="GOSUB[#=es.SND pint=119 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=SVO10.STOP		str="GOSUB[#=es.SND pint=120 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO.STOP		str="GOSUB[#=es.SND pint=141 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO1.STOP		str="GOSUB[#=es.SND pint=141 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO2.STOP		str="GOSUB[#=es.SND pint=142 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO3.STOP		str="GOSUB[#=es.SND pint=143 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO4.STOP		str="GOSUB[#=es.SND pint=144 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO5.STOP		str="GOSUB[#=es.SND pint=145 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO6.STOP		str="GOSUB[#=es.SND pint=146 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO7.STOP		str="GOSUB[#=es.SND pint=147 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO8.STOP		str="GOSUB[#=es.SND pint=148 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO9.STOP		str="GOSUB[#=es.SND pint=149 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+	macro[name=S2VO10.STOP		str="GOSUB[#=es.SND pint=150 pstr2='' pint3=$_M pint4=-1 pint5=-1 pint6=0]" def="-1" ]
+
+	macro[name=SVO.POS			str="GOSUB[#=es.SND.POS.SET pint=1 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+	macro[name=S2VO.POS			str="GOSUB[#=es.SND.POS.SET pint=1 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+
+
+
+//	macro[name=VO.STOP			str="GOSUB[#=es.VOICE2.DEL]" ] //ボイス停止
+	macro[name=VO.WA			str="GOSUB[#=es.VO.WAIT pint=$_M pint2=$_M2 pint3=$_M3]" def="0" def2="0" def3="0" ]
+
+	macro[name=SE				str="GOSUB[#=es.SND pint=11 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SE1				str="GOSUB[#=es.SND pint=11 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SE2				str="GOSUB[#=es.SND pint=12 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SE3				str="GOSUB[#=es.SND pint=13 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SE4				str="GOSUB[#=es.SND pint=14 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=ESE				str="GOSUB[#=es.SND pint=41 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=ESE1				str="GOSUB[#=es.SND pint=41 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=ESE2				str="GOSUB[#=es.SND pint=42 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=ESE3				str="GOSUB[#=es.SND pint=43 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=ESE4				str="GOSUB[#=es.SND pint=44 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2SE				str="GOSUB[#=es.SND pint=71 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2SE1			str="GOSUB[#=es.SND pint=71 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2SE2			str="GOSUB[#=es.SND pint=72 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2SE3			str="GOSUB[#=es.SND pint=73 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2SE4			str="GOSUB[#=es.SND pint=74 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SSE				str="GOSUB[#=es.SND pint=101 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SSE1				str="GOSUB[#=es.SND pint=101 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SSE2				str="GOSUB[#=es.SND pint=102 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SSE3				str="GOSUB[#=es.SND pint=103 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SSE4				str="GOSUB[#=es.SND pint=104 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2SE				str="GOSUB[#=es.SND pint=131 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2SE1			str="GOSUB[#=es.SND pint=131 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2SE2			str="GOSUB[#=es.SND pint=132 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2SE3			str="GOSUB[#=es.SND pint=133 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2SE4			str="GOSUB[#=es.SND pint=134 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+
+	macro[name=SE.STOP			str="GOSUB[#=es.SND pint=11 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SE1.STOP			str="GOSUB[#=es.SND pint=11 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SE2.STOP			str="GOSUB[#=es.SND pint=12 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SE3.STOP			str="GOSUB[#=es.SND pint=13 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SE4.STOP			str="GOSUB[#=es.SND pint=14 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=ESE.STOP			str="GOSUB[#=es.SND pint=41 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=ESE1.STOP		str="GOSUB[#=es.SND pint=41 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=ESE2.STOP		str="GOSUB[#=es.SND pint=42 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=ESE3.STOP		str="GOSUB[#=es.SND pint=43 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=ESE4.STOP		str="GOSUB[#=es.SND pint=44 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=E2SE.STOP		str="GOSUB[#=es.SND pint=71 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=E2SE1.STOP		str="GOSUB[#=es.SND pint=71 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=E2SE2.STOP		str="GOSUB[#=es.SND pint=72 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=E2SE3.STOP		str="GOSUB[#=es.SND pint=73 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=E2SE4.STOP		str="GOSUB[#=es.SND pint=74 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SSE.STOP			str="GOSUB[#=es.SND pint=101 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SSE1.STOP		str="GOSUB[#=es.SND pint=101 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SSE2.STOP		str="GOSUB[#=es.SND pint=102 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SSE3.STOP		str="GOSUB[#=es.SND pint=103 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SSE4.STOP		str="GOSUB[#=es.SND pint=104 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=S2SE.STOP		str="GOSUB[#=es.SND pint=131 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=S2SE1.STOP		str="GOSUB[#=es.SND pint=131 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=S2SE2.STOP		str="GOSUB[#=es.SND pint=132 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=S2SE3.STOP		str="GOSUB[#=es.SND pint=133 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=S2SE4.STOP		str="GOSUB[#=es.SND pint=134 pstr2='' pint3=$_M]" def="-1" ]
+
+	macro[name=SE.FILE			str="GOSUB[#=es.SND.FILE.SET pint=1 pstr2=$_M]" def="''" ]
+	macro[name=SE1.FILE			str="GOSUB[#=es.SND.FILE.SET pint=1 pstr2=$_M]" def="''" ]
+	macro[name=SE2.FILE			str="GOSUB[#=es.SND.FILE.SET pint=1 pstr2=$_M]" def="''" ]
+	macro[name=SE3.FILE			str="GOSUB[#=es.SND.FILE.SET pint=1 pstr2=$_M]" def="''" ]
+	macro[name=SE4.FILE			str="GOSUB[#=es.SND.FILE.SET pint=1 pstr2=$_M]" def="''" ]
+
+	macro[name=SE.FADE			str="GOSUB[#=es.SND.FADE.SET pint=1 pint2=$_M pint3=$_M2]" def="-1" def2="-1" ]
+	macro[name=SE1.FADE			str="GOSUB[#=es.SND.FADE.SET pint=1 pint2=$_M pint3=$_M2]" def="-1" def2="-1" ]
+	macro[name=SE2.FADE			str="GOSUB[#=es.SND.FADE.SET pint=1 pint2=$_M pint3=$_M2]" def="-1" def2="-1" ]
+	macro[name=SE3.FADE			str="GOSUB[#=es.SND.FADE.SET pint=1 pint2=$_M pint3=$_M2]" def="-1" def2="-1" ]
+	macro[name=SE4.FADE			str="GOSUB[#=es.SND.FADE.SET pint=1 pint2=$_M pint3=$_M2]" def="-1" def2="-1" ]
+
+	macro[name=SE.LOOP			str="GOSUB[#=es.SND.LOOP.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SE1.LOOP			str="GOSUB[#=es.SND.LOOP.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SE2.LOOP			str="GOSUB[#=es.SND.LOOP.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SE3.LOOP			str="GOSUB[#=es.SND.LOOP.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SE4.LOOP			str="GOSUB[#=es.SND.LOOP.SET pint=1 pint2=$_M]" def="-1" ]
+
+	macro[name=SE.POS			str="GOSUB[#=es.SND.POS.SET pint=1 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+	macro[name=SE1.POS			str="GOSUB[#=es.SND.POS.SET pint=1 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+	macro[name=SE2.POS			str="GOSUB[#=es.SND.POS.SET pint=1 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+	macro[name=SE3.POS			str="GOSUB[#=es.SND.POS.SET pint=1 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+	macro[name=SE4.POS			str="GOSUB[#=es.SND.POS.SET pint=1 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+
+	macro[name=SE.VOL			str="GOSUB[#=es.SND.VOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SE1.VOL			str="GOSUB[#=es.SND.VOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SE2.VOL			str="GOSUB[#=es.SND.VOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SE3.VOL			str="GOSUB[#=es.SND.VOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SE4.VOL			str="GOSUB[#=es.SND.VOL.SET pint=1 pint2=$_M]" def="-1" ]
+
+///xS
+	macro[name=SSE77			str="GOSUB[#=es.SSE77.PLAY pint=$_M]" def="0" ]
+
+
+	macro[name=BGM				str="GOSUB[#=es.SND pint=1 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=BGM1				str="GOSUB[#=es.SND pint=1 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=BGM2				str="GOSUB[#=es.SND pint=2 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=BGM3				str="GOSUB[#=es.SND pint=3 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=BGM4				str="GOSUB[#=es.SND pint=4 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EBGM				str="GOSUB[#=es.SND pint=31 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EBGM1			str="GOSUB[#=es.SND pint=31 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EBGM2			str="GOSUB[#=es.SND pint=32 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EBGM3			str="GOSUB[#=es.SND pint=33 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=EBGM4			str="GOSUB[#=es.SND pint=34 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2BGM			str="GOSUB[#=es.SND pint=61 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2BGM1			str="GOSUB[#=es.SND pint=61 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2BGM2			str="GOSUB[#=es.SND pint=62 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2BGM3			str="GOSUB[#=es.SND pint=63 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=E2BGM4			str="GOSUB[#=es.SND pint=64 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SBGM				str="GOSUB[#=es.SND pint=91 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SBGM1			str="GOSUB[#=es.SND pint=91 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SBGM2			str="GOSUB[#=es.SND pint=92 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SBGM3			str="GOSUB[#=es.SND pint=93 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=SBGM4			str="GOSUB[#=es.SND pint=94 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2BGM			str="GOSUB[#=es.SND pint=121 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2BGM1			str="GOSUB[#=es.SND pint=121 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2BGM2			str="GOSUB[#=es.SND pint=122 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2BGM3			str="GOSUB[#=es.SND pint=123 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+	macro[name=S2BGM4			str="GOSUB[#=es.SND pint=124 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4 pint6=$_M5]" def="''" def2="-1" def3= "-1" def4= "-1" def5= "0" ]
+
+	macro[name=BGM.STOP			str="GOSUB[#=es.SND pint=1 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=BGM1.STOP		str="GOSUB[#=es.SND pint=1 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=BGM2.STOP		str="GOSUB[#=es.SND pint=2 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=BGM3.STOP		str="GOSUB[#=es.SND pint=3 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=BGM4.STOP		str="GOSUB[#=es.SND pint=4 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=EBGM.STOP		str="GOSUB[#=es.SND pint=31 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=EBGM1.STOP		str="GOSUB[#=es.SND pint=31 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=EBGM2.STOP		str="GOSUB[#=es.SND pint=32 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=EBGM3.STOP		str="GOSUB[#=es.SND pint=33 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=EBGM4.STOP		str="GOSUB[#=es.SND pint=34 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=E2BGM.STOP		str="GOSUB[#=es.SND pint=61 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=E2BGM1.STOP		str="GOSUB[#=es.SND pint=61 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=E2BGM2.STOP		str="GOSUB[#=es.SND pint=62 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=E2BGM3.STOP		str="GOSUB[#=es.SND pint=63 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=E2BGM4.STOP		str="GOSUB[#=es.SND pint=64 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SBGM.STOP		str="GOSUB[#=es.SND pint=91 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SBGM1.STOP		str="GOSUB[#=es.SND pint=91 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SBGM2.STOP		str="GOSUB[#=es.SND pint=92 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SBGM3.STOP		str="GOSUB[#=es.SND pint=93 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=SBGM4.STOP		str="GOSUB[#=es.SND pint=94 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=S2BGM.STOP		str="GOSUB[#=es.SND pint=121 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=S2BGM1.STOP		str="GOSUB[#=es.SND pint=121 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=S2BGM2.STOP		str="GOSUB[#=es.SND pint=122 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=S2BGM3.STOP		str="GOSUB[#=es.SND pint=123 pstr2='' pint3=$_M]" def="-1" ]
+	macro[name=S2BGM4.STOP		str="GOSUB[#=es.SND pint=124 pstr2='' pint3=$_M]" def="-1" ]
+
+	macro[name=BGM.FILE			str="GOSUB[#=es.SND.FILE.SET pint=0 pstr2=$_M]" def="''" ]
+	macro[name=BGM1.FILE		str="GOSUB[#=es.SND.FILE.SET pint=0 pstr2=$_M]" def="''" ]
+	macro[name=BGM2.FILE		str="GOSUB[#=es.SND.FILE.SET pint=0 pstr2=$_M]" def="''" ]
+	macro[name=BGM3.FILE		str="GOSUB[#=es.SND.FILE.SET pint=0 pstr2=$_M]" def="''" ]
+	macro[name=BGM4.FILE		str="GOSUB[#=es.SND.FILE.SET pint=0 pstr2=$_M]" def="''" ]
+
+	macro[name=BGM.FADE			str="GOSUB[#=es.SND.FADE.SET pint=0 pint2=$_M pint3=$_M2]" def="-1" def2="-1" ]
+	macro[name=BGM1.FADE		str="GOSUB[#=es.SND.FADE.SET pint=0 pint2=$_M pint3=$_M2]" def="-1" def2="-1" ]
+	macro[name=BGM2.FADE		str="GOSUB[#=es.SND.FADE.SET pint=0 pint2=$_M pint3=$_M2]" def="-1" def2="-1" ]
+	macro[name=BGM3.FADE		str="GOSUB[#=es.SND.FADE.SET pint=0 pint2=$_M pint3=$_M2]" def="-1" def2="-1" ]
+	macro[name=BGM4.FADE		str="GOSUB[#=es.SND.FADE.SET pint=0 pint2=$_M pint3=$_M2]" def="-1" def2="-1" ]
+
+	macro[name=BGM.LOOP			str="GOSUB[#=es.SND.LOOP.SET pint=0 pint2=$_M]" def="-1" ]
+	macro[name=BGM1.LOOP		str="GOSUB[#=es.SND.LOOP.SET pint=0 pint2=$_M]" def="-1" ]
+	macro[name=BGM2.LOOP		str="GOSUB[#=es.SND.LOOP.SET pint=0 pint2=$_M]" def="-1" ]
+	macro[name=BGM3.LOOP		str="GOSUB[#=es.SND.LOOP.SET pint=0 pint2=$_M]" def="-1" ]
+	macro[name=BGM4.LOOP		str="GOSUB[#=es.SND.LOOP.SET pint=0 pint2=$_M]" def="-1" ]
+
+	macro[name=BGM.POS			str="GOSUB[#=es.SND.POS.SET pint=0 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+	macro[name=BGM1.POS			str="GOSUB[#=es.SND.POS.SET pint=0 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+	macro[name=BGM2.POS			str="GOSUB[#=es.SND.POS.SET pint=0 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+	macro[name=BGM3.POS			str="GOSUB[#=es.SND.POS.SET pint=0 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+	macro[name=BGM4.POS			str="GOSUB[#=es.SND.POS.SET pint=0 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-99999" def2="-99999" def3="-99999" ]
+
+	macro[name=BGM.VOL			str="GOSUB[#=es.SND.VOL.SET pint=0 pint2=$_M]" def="-1" ]
+	macro[name=BGM1.VOL			str="GOSUB[#=es.SND.VOL.SET pint=0 pint2=$_M]" def="-1" ]
+	macro[name=BGM2.VOL			str="GOSUB[#=es.SND.VOL.SET pint=0 pint2=$_M]" def="-1" ]
+	macro[name=BGM3.VOL			str="GOSUB[#=es.SND.VOL.SET pint=0 pint2=$_M]" def="-1" ]
+	macro[name=BGM4.VOL			str="GOSUB[#=es.SND.VOL.SET pint=0 pint2=$_M]" def="-1" ]
+
+	macro[name=BGM.THRU			str="GOSUB[#=es.SND.THRU.SET pint=0 pint2=$_M]" def="1" ]
+	macro[name=BGM1.THRU		str="GOSUB[#=es.SND.THRU.SET pint=0 pint2=$_M]" def="1" ]
+	macro[name=BGM2.THRU		str="GOSUB[#=es.SND.THRU.SET pint=0 pint2=$_M]" def="1" ]
+	macro[name=BGM3.THRU		str="GOSUB[#=es.SND.THRU.SET pint=0 pint2=$_M]" def="1" ]
+	macro[name=BGM4.THRU		str="GOSUB[#=es.SND.THRU.SET pint=0 pint2=$_M]" def="1" ]
+
+	macro[name=BGM.BASEVOL		str="GOSUB[#=es.BGM.BASEVOL.SET pint=$_M]" def="-1" ]
+	macro[name=SE.BASEVOL		str="GOSUB[#=es.SE.BASEVOL.SET pint=$_M]" def="-1" ]
+	macro[name=VO.BASEVOL		str="GOSUB[#=es.VO.BASEVOL.SET pint=$_M]" def="-1" ]
+	macro[name=EBGM.BASEVOL		str="GOSUB[#=es.EBGM.BASEVOL.SET pint=$_M]" def="-1" ]
+	macro[name=SSE.BASEVOL		str="GOSUB[#=es.SSE.BASEVOL.SET pint=$_M]" def="-1" ]
+/*
+	macro[name=BGM.BASEVOL		str="GOSUB[#=es.BGM.BASEVOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=BGM1.BASEVOL		str="GOSUB[#=es.BGM.BASEVOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=BGM2.BASEVOL		str="GOSUB[#=es.BGM.BASEVOL.SET pint=2 pint2=$_M]" def="-1" ]
+	macro[name=BGM3.BASEVOL		str="GOSUB[#=es.BGM.BASEVOL.SET pint=3 pint2=$_M]" def="-1" ]
+	macro[name=BGM4.BASEVOL		str="GOSUB[#=es.BGM.BASEVOL.SET pint=4 pint2=$_M]" def="-1" ]
+
+	macro[name=SE.BASEVOL		str="GOSUB[#=es.SE.BASEVOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SE1.BASEVOL		str="GOSUB[#=es.SE.BASEVOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SE2.BASEVOL		str="GOSUB[#=es.SE.BASEVOL.SET pint=2 pint2=$_M]" def="-1" ]
+	macro[name=SE3.BASEVOL		str="GOSUB[#=es.SE.BASEVOL.SET pint=3 pint2=$_M]" def="-1" ]
+	macro[name=SE4.BASEVOL		str="GOSUB[#=es.SE.BASEVOL.SET pint=4 pint2=$_M]" def="-1" ]
+
+	macro[name=VO.BASEVOL		str="GOSUB[#=es.VO.BASEVOL.SET pint=$_M]" def="-1" ]
+
+	macro[name=EBGM.BASEVOL		str="GOSUB[#=es.EBGM.BASEVOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=EBGM1.BASEVOL	str="GOSUB[#=es.EBGM.BASEVOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=EBGM2.BASEVOL	str="GOSUB[#=es.EBGM.BASEVOL.SET pint=2 pint2=$_M]" def="-1" ]
+	macro[name=EBGM3.BASEVOL	str="GOSUB[#=es.EBGM.BASEVOL.SET pint=3 pint2=$_M]" def="-1" ]
+	macro[name=EBGM4.BASEVOL	str="GOSUB[#=es.EBGM.BASEVOL.SET pint=4 pint2=$_M]" def="-1" ]
+
+	macro[name=SSE.BASEVOL		str="GOSUB[#=es.SSE.BASEVOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SSE1.BASEVOL		str="GOSUB[#=es.SSE.BASEVOL.SET pint=1 pint2=$_M]" def="-1" ]
+	macro[name=SSE2.BASEVOL		str="GOSUB[#=es.SSE.BASEVOL.SET pint=2 pint2=$_M]" def="-1" ]
+	macro[name=SSE3.BASEVOL		str="GOSUB[#=es.SSE.BASEVOL.SET pint=3 pint2=$_M]" def="-1" ]
+	macro[name=SSE4.BASEVOL		str="GOSUB[#=es.SSE.BASEVOL.SET pint=4 pint2=$_M]" def="-1" ]
+
+*/
+
+	macro[name=BGM.WA			str="GOSUB[#=es.SND.WAIT pint=1 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-1" def2="0" def3="0" ]
+	macro[name=BGM1.WA			str="GOSUB[#=es.SND.WAIT pint=1 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-1" def2="0" def3="0" ]
+	macro[name=BGM2.WA			str="GOSUB[#=es.SND.WAIT pint=2 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-1" def2="0" def3="0" ]
+	macro[name=BGM3.WA			str="GOSUB[#=es.SND.WAIT pint=3 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-1" def2="0" def3="0" ]
+	macro[name=BGM4.WA			str="GOSUB[#=es.SND.WAIT pint=4 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-1" def2="0" def3="0" ]
+
+	macro[name=SE.WA			str="GOSUB[#=es.SND.WAIT pint=11 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-1" def2="0" def3="0" ]
+	macro[name=SE1.WA			str="GOSUB[#=es.SND.WAIT pint=11 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-1" def2="0" def3="0" ]
+	macro[name=SE2.WA			str="GOSUB[#=es.SND.WAIT pint=12 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-1" def2="0" def3="0" ]
+	macro[name=SE3.WA			str="GOSUB[#=es.SND.WAIT pint=13 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-1" def2="0" def3="0" ]
+	macro[name=SE4.WA			str="GOSUB[#=es.SND.WAIT pint=14 pint2=$_M pint3=$_M2 pint4=$_M3]" def="-1" def2="0" def3="0" ]
+
+
+	macro[name=BGM.PCHK			str="GOSUB[#=es.SND.PLAYFLAG.GET pint=00 pint2=$_M]" def="0" ]
+	macro[name=SE.PCHK			str="GOSUB[#=es.SND.PLAYFLAG.GET pint=01 pint2=$_M]" def="0" ]
+	macro[name=VO.PCHK			str="GOSUB[#=es.SND.PLAYFLAG.GET pint=02 pint2=$_M]" def="0" ]
+	macro[name=EBGM.PCHK		str="GOSUB[#=es.SND.PLAYFLAG.GET pint=03 pint2=$_M]" def="0" ]
+	macro[name=ESE.PCHK			str="GOSUB[#=es.SND.PLAYFLAG.GET pint=04 pint2=$_M]" def="0" ]
+	macro[name=EVO.PCHK			str="GOSUB[#=es.SND.PLAYFLAG.GET pint=05 pint2=$_M]" def="0" ]
+	macro[name=E2BGM.PCHK		str="GOSUB[#=es.SND.PLAYFLAG.GET pint=06 pint2=$_M]" def="0" ]
+	macro[name=E2SE.PCHK		str="GOSUB[#=es.SND.PLAYFLAG.GET pint=07 pint2=$_M]" def="0" ]
+	macro[name=E2VO.PCHK		str="GOSUB[#=es.SND.PLAYFLAG.GET pint=08 pint2=$_M]" def="0" ]
+	macro[name=SBGM.PCHK		str="GOSUB[#=es.SND.PLAYFLAG.GET pint=09 pint2=$_M]" def="0" ]
+	macro[name=SSE.PCHK			str="GOSUB[#=es.SND.PLAYFLAG.GET pint=10 pint2=$_M]" def="0" ]
+	macro[name=SVO.PCHK			str="GOSUB[#=es.SND.PLAYFLAG.GET pint=11 pint2=$_M]" def="0" ]
+	macro[name=S2BGM.PCHK		str="GOSUB[#=es.SND.PLAYFLAG.GET pint=12 pint2=$_M]" def="0" ]
+	macro[name=S2SE.PCHK		str="GOSUB[#=es.SND.PLAYFLAG.GET pint=13 pint2=$_M]" def="0" ]
+	macro[name=S2VO.PCHK		str="GOSUB[#=es.SND.PLAYFLAG.GET pint=14 pint2=$_M]" def="0" ]
+
+
+//-------------------------------------------------------------------------
+//■ＣＧ表示
+//-------------------------------------------------------------------------
+	macro[name=TR.FILE			str="GOSUB[#=es.TR.FILE.SET pstr=$_M]" def="''" ]
+	macro[name=TR.A				str="GOSUB[#=es.TR.A.SET pint=$_M]" def="4" ]
+	macro[name=TRDEF			str="GOSUB[#=es.TRDEF pstr=$_M]" def="''" ]
+
+//-------------------------------------------------------------------------
+//■背景定義
+//-------------------------------------------------------------------------
+	macro[name=BGCXY.DEF	str="GOSUB[#=es.BGCXY.DEF.SET pstr=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7 pint8=$_M8]" def="''" def2="0" def3="0" def4="0" def5="0" def6="0" def7="0" def8="0" ]
+	macro[name=CGCXY.DEF	str="GOSUB[#=es.CGCXY.DEF.SET pstr=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7 pint8=$_M8]" def="''" def2="-9999999" def3="-9999999" def4="0" def5="0" def6="0" def7="0" def8="0" ]
+
+
+//-------------------------------------------------------------------------
+// 
+//-------------------------------------------------------------------------
+	macro[name=AUTO			str=";GOSUB[#=es.MG.AUTO pint=$_M];" def="1" ]
+	macro[name=AUTO.END		str=";GOSUB[#=es.MG.AUTO.END];" ]
+
+
+//-------------------------------------------------------------------------
+// 立ち絵定義用
+//-------------------------------------------------------------------------
+	macro[name=SP.ST.FOLDER.DEF	str=";GOSUB[#=es.SP.FOLDER.DEF.SET pstr=$_M pstr2=$_M2 pstr3=$_M3]" def="''" def2="''" def3="''" ]
+	macro[name=SPC.ST.DEF		str=";GOSUB[#=es.SPC.DEF.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6]" def="''" def2="''" def3="''" def4="0" def5="0" def6="0" ]
+//	macro[name=SP.FACE.DEF		str=";GOSUB[#=es.SP.FACE.DEF.SET pstr=$_M pstr2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6]" def="''" def2="''" def3="0" def4="0" def5="0" def6="0" ]
+//	macro[name=SP.FACE.XY		str=";GOSUB[#=es.SP.FACE.XY.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+	macro[name=SPA.DEF			str=";GOSUB[#=es.SPA.DEF.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7 pint8=$_M8]" def="''" def2="''" def3="''" def4="0" def5="0" def6="0" def7="-1" def8="1" ]
+
+	//\SP.GO & \SP.WA
+//	macro[name=SP.GOWA			str=";\SP.GO($_M);\SP.WA($_M2);" ]
+
+
+//-------------------------------------------------------------------------
+//■演出マクロ
+//-------------------------------------------------------------------------
+	//[SP]
+	macro[name=SP.BG		str="GOSUB[#=es.SP.CG.SET pint=1 pstr2=$_M pstr3=$_M2 pint4=$_M3 pint5=$_M4]" def="''" def2="''" def3="0" def4="0" ]
+	macro[name=SP.EV		str="GOSUB[#=es.SP.CG.SET pint=2 pstr2=$_M pstr3=$_M2 pint4=$_M3 pint5=$_M4]" def="''" def2="''" def3="0" def4="0" ]
+	macro[name=SP.CG		str="GOSUB[#=es.SP.CG.SET pint=3 pstr2=$_M pstr3=$_M2 pint4=$_M3 pint5=$_M4]" def="''" def2="''" def3="0" def4="0" ]
+	macro[name=SP.CGSYS		str="GOSUB[#=es.SP.CG.SET pint=7 pstr2=$_M pstr3=$_M2 pint4=$_M3 pint5=$_M4]" def="''" def2="''" def3="0" def4="0" ]
+	macro[name=SP.ST		str="GOSUB[#=es.SP.ST.SET pint=5 pstr2=$_M pint3=$_M2]" def="''" def2="0" ]
+	macro[name=SP.TR		str="GOSUB[#=es.SP.TR.SET pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="-1" def3="0" ]
+	macro[name=SP.ANMV		str="GOSUB[#=es.SP.ANMV.SET pint=6 pstr2=$_M pstr3=$_M2 pint4=$_M3 pint5=$_M4]" def="''" def2="''" def3="0" def4="0" ]
+		macro[name=SP.MV	str="GOSUB[#=es.SP.ANMV.SET pint=6 pstr2=$_M pstr3=$_M2 pint4=$_M3 pint5=$_M4]" def="''" def2="''" def3="0" def4="0" ]
+	macro[name=SP.ANCG		str="GOSUB[#=es.SP.ANCG.SET pint=3 pstr2=$_M pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="''" def2="0" def3="0" def4="0" ]
+	macro[name=SP.ECG		str="GOSUB[#=es.SP.ECG.SET pint=$_M pint2=$_M2 pstr3=$_M3 pint4=$_M4 pint5=$_M5]" def="1" def2="1" def3="''" def4="0" def5="0" ]
+	macro[name=SP.TXG		str="GOSUB[#=es.SP.TXG.SET pint=$_M pstr2=$_M2]" def="0" def2="''" ]
+	macro[name=SP.TXL		str="GOSUB[#=es.SP.TXL.SET pint=$_M pstr2=$_M2]" def="0" def2="''" ]
+
+	macro[name=SP.ANLP		str="GOSUB[#=es.SP.ANLP.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="-1" def4="0" ]
+
+	macro[name=SP.SX		str="GOSUB[#=es.SP.X.SET pflt=@es.SVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=SP.ZX		str="GOSUB[#=es.SP.X.SET pflt=@es.ZVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=SP.2X		str="GOSUB[#=es.SP.X.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=SP.X			str="GOSUB[#=es.SP.X.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=CM.X			str="GOSUB[#=es.SP.X.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+
+	macro[name=SP.SY		str="GOSUB[#=es.SP.Y.SET pflt=@es.SVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=SP.ZY		str="GOSUB[#=es.SP.Y.SET pflt=@es.ZVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=SP.2Y		str="GOSUB[#=es.SP.Y.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+//	macro[name=SP.Y			str="GOSUB[#=es.SP.Y.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+
+	macro[name=SP.SZ		str="GOSUB[#=es.SP.Z.SET pflt=@es.SVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=SP.ZZ		str="GOSUB[#=es.SP.Z.SET pflt=@es.ZVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=SP.2Z		str="GOSUB[#=es.SP.Z.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+//	macro[name=SP.Z			str="GOSUB[#=es.SP.Z.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+
+	macro[name=SP.SXY		str="GOSUB[#=es.SP.XY.SET pflt=@es.SVAL pflt2=@es.SVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=SP.ZXY		str="GOSUB[#=es.SP.XY.SET pflt=@es.ZVAL pflt2=@es.ZVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=SP.2XY		str="GOSUB[#=es.SP.XY.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+//	macro[name=SP.XY		str="GOSUB[#=es.SP.XY.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+
+	macro[name=SP.SXZ		str="GOSUB[#=es.SP.XZ.SET pflt=@es.SVAL pflt2=@es.SVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=SP.ZXZ		str="GOSUB[#=es.SP.XZ.SET pflt=@es.ZVAL pflt2=@es.ZVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=SP.2XZ		str="GOSUB[#=es.SP.XZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+//	macro[name=SP.XZ		str="GOSUB[#=es.SP.XZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+
+	macro[name=SP.SYZ		str="GOSUB[#=es.SP.YZ.SET pflt=@es.SVAL pflt2=@es.SVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=SP.ZYZ		str="GOSUB[#=es.SP.YZ.SET pflt=@es.ZVAL pflt2=@es.ZVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=SP.2YZ		str="GOSUB[#=es.SP.YZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+//	macro[name=SP.YZ		str="GOSUB[#=es.SP.YZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+
+	macro[name=SP.SXYZ		str="GOSUB[#=es.SP.XYZ.SET pflt=@es.SVAL pflt2=@es.SVAL pflt3=@es.SVAL pflt4=$_M1 pflt5=$_M2 pflt6=$_M3 pint7=$_M4 pint8=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.ZXYZ		str="GOSUB[#=es.SP.XYZ.SET pflt=@es.ZVAL pflt2=@es.ZVAL pflt3=@es.ZVAL pflt4=$_M1 pflt5=$_M2 pflt6=$_M3 pint7=$_M4 pint8=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.2XYZ		str="GOSUB[#=es.SP.XYZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pflt5=$_M5 pflt6=$_M6 pint7=$_M7 pint8=$_M8 pint9=$_M9]" def="@es.ZVAL" def2="@es.ZVAL" def3="@es.ZVAL" def4="0" def5="0" def6="0" def7="0" def8="1" def9="1" ]
+//	macro[name=SP.XYZ		str="GOSUB[#=es.SP.XYZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pflt5=$_M5 pflt6=$_M6 pint7=$_M7 pint8=$_M8]" def="@es.ZVAL" def2="@es.ZVAL" def3="@es.ZVAL" def4="0" def5="0" def6="0" def7="0" def8="1" ]
+
+	macro[name=SP.SPXY		str="GOSUB[#=es.SP.SPXY.SET pint=$_M1 pint2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.S2PXY		str="GOSUB[#=es.SP.S2PXY.SET pint=$_M1 pint2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.ZPXY		str="GOSUB[#=es.SP.ZPXY.SET pint=$_M1 pint2=$_M2 pint3=$_M3]" def="0" def2="0" def3="1" ]
+
+	macro[name=SP.PXY1		str="GOSUB[#=es.SP.PXY1.SET pflt=$_M1 pflt2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.PXY2		str="GOSUB[#=es.SP.PXY2.SET pflt=$_M1 pflt2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.PXY3		str="GOSUB[#=es.SP.PXY3.SET pflt=$_M1 pflt2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.PXY4		str="GOSUB[#=es.SP.PXY4.SET pflt=$_M1 pflt2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.PXY5		str="GOSUB[#=es.SP.PXY5.SET pflt=$_M1 pflt2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.PXY6		str="GOSUB[#=es.SP.PXY6.SET pflt=$_M1 pflt2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.PXY7		str="GOSUB[#=es.SP.PXY7.SET pflt=$_M1 pflt2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.PXY8		str="GOSUB[#=es.SP.PXY8.SET pflt=$_M1 pflt2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.PXY9		str="GOSUB[#=es.SP.PXY9.SET pflt=$_M1 pflt2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.PXY10		str="GOSUB[#=es.SP.PXY10.SET pflt=$_M1 pflt2=$_M2]" def="0" def2="0" ]
+
+	macro[name=SP.SPXYZ		str="GOSUB[#=es.SP.SPXYZ.SET pint=$_M1 pint2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.S2PXYZ	str="GOSUB[#=es.SP.S2PXYZ.SET pint=$_M1 pint2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.ZPXYZ		str="GOSUB[#=es.SP.ZPXYZ.SET pint=$_M1 pint2=$_M2 pint3=$_M3]" def="0" def2="0" def3="1" ]
+
+	macro[name=SP.PXYZ1		str="GOSUB[#=es.SP.PXYZ1.SET pflt=$_M1 pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0" ]
+	macro[name=SP.PXYZ2		str="GOSUB[#=es.SP.PXYZ2.SET pflt=$_M1 pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0" ]
+	macro[name=SP.PXYZ3		str="GOSUB[#=es.SP.PXYZ3.SET pflt=$_M1 pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0" ]
+	macro[name=SP.PXYZ4		str="GOSUB[#=es.SP.PXYZ4.SET pflt=$_M1 pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0" ]
+	macro[name=SP.PXYZ5		str="GOSUB[#=es.SP.PXYZ5.SET pflt=$_M1 pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0" ]
+	macro[name=SP.PXYZ6		str="GOSUB[#=es.SP.PXYZ6.SET pflt=$_M1 pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0" ]
+	macro[name=SP.PXYZ7		str="GOSUB[#=es.SP.PXYZ7.SET pflt=$_M1 pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0" ]
+	macro[name=SP.PXYZ8		str="GOSUB[#=es.SP.PXYZ8.SET pflt=$_M1 pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0" ]
+	macro[name=SP.PXYZ9		str="GOSUB[#=es.SP.PXYZ9.SET pflt=$_M1 pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0" ]
+	macro[name=SP.PXYZ10	str="GOSUB[#=es.SP.PXYZ10.SET pflt=$_M1 pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0" ]
+
+	macro[name=SP.SA		str="GOSUB[#=es.SP.A.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.ZA		str="GOSUB[#=es.SP.A.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.2A		str="GOSUB[#=es.SP.A.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+//	macro[name=SP.A			str="GOSUB[#=es.SP.A.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+
+	macro[name=SP.SF1		str="GOSUB[#=es.SP.F1.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.ZF1		str="GOSUB[#=es.SP.F1.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.2F1		str="GOSUB[#=es.SP.F1.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+//	macro[name=SP.F1		str="GOSUB[#=es.SP.F1.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+
+	macro[name=SP.SF2		str="GOSUB[#=es.SP.F2.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.ZF2		str="GOSUB[#=es.SP.F2.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.2F2		str="GOSUB[#=es.SP.F2.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+//	macro[name=SP.F2		str="GOSUB[#=es.SP.F2.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+
+	macro[name=SP.SH		str="GOSUB[#=es.SP.H.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.ZH		str="GOSUB[#=es.SP.H.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.2H		str="GOSUB[#=es.SP.H.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+//	macro[name=SP.H			str="GOSUB[#=es.SP.H.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+
+	macro[name=SP.STP		str="GOSUB[#=es.SP.TP.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.ZTP		str="GOSUB[#=es.SP.TP.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.2TP		str="GOSUB[#=es.SP.TP.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+//	macro[name=SP.TP		str="GOSUB[#=es.SP.TP.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+
+	macro[name=SP.SBX		str="GOSUB[#=es.SP.BX.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=SP.ZBX		str="GOSUB[#=es.SP.BX.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=SP.2BX		str="GOSUB[#=es.SP.BX.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+//	macro[name=SP.BX		str="GOSUB[#=es.SP.BX.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+
+	macro[name=SP.SBY		str="GOSUB[#=es.SP.BY.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=SP.ZBY		str="GOSUB[#=es.SP.BY.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=SP.2BY		str="GOSUB[#=es.SP.BY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+//	macro[name=SP.BY		str="GOSUB[#=es.SP.BY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+
+	macro[name=SP.SBXY		str="GOSUB[#=es.SP.BXY.SET pint=@es.SVAL pint2=@es.SVAL pint3=$_M1 pint4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=SP.ZBXY		str="GOSUB[#=es.SP.BXY.SET pint=@es.ZVAL pint2=@es.ZVAL pint3=$_M1 pint4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=SP.2BXY		str="GOSUB[#=es.SP.BXY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+//	macro[name=SP.BXY		str="GOSUB[#=es.SP.BXY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+
+	macro[name=SP.SRX		str="GOSUB[#=es.SP.RX.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.ZRX		str="GOSUB[#=es.SP.RX.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.2RX		str="GOSUB[#=es.SP.RX.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+//	macro[name=SP.RX		str="GOSUB[#=es.SP.RX.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+
+	macro[name=SP.SRY		str="GOSUB[#=es.SP.RY.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.ZRY		str="GOSUB[#=es.SP.RY.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.2RY		str="GOSUB[#=es.SP.RY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+//	macro[name=SP.2RY		str="GOSUB[#=es.SP.RY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+
+	macro[name=SP.SRZ		str="GOSUB[#=es.SP.RZ.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.ZRZ		str="GOSUB[#=es.SP.RZ.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.2RZ		str="GOSUB[#=es.SP.RZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+//	macro[name=SP.2RZ		str="GOSUB[#=es.SP.RZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+
+	macro[name=SP.CLA		str="GOSUB[#=es.SP.CLA.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=SP.CLH		str="GOSUB[#=es.SP.CLH.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=SP.CLTP		str="GOSUB[#=es.SP.CLTP.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=SP.CLX		str="GOSUB[#=es.SP.CLX.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=SP.CLY		str="GOSUB[#=es.SP.CLY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=SP.CLZ		str="GOSUB[#=es.SP.CLZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=SP.CLXY		str="GOSUB[#=es.SP.CLXY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="0" ]
+	macro[name=SP.CLXZ		str="GOSUB[#=es.SP.CLXZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="0" ]
+	macro[name=SP.CLYZ		str="GOSUB[#=es.SP.CLYZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="0" ]
+	macro[name=SP.CLXYZ		str="GOSUB[#=es.SP.CLXYZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6]" def="0" def2="0" def3="0" def4="0" def5="0" def6="0" ]
+	macro[name=SP.CLBX		str="GOSUB[#=es.SP.CLBX.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=SP.CLBY		str="GOSUB[#=es.SP.CLBY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=SP.CLBXY		str="GOSUB[#=es.SP.CLBXY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="0" ]
+	macro[name=SP.CLRZ		str="GOSUB[#=es.SP.CLRZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+
+	macro[name=SP.MX		str="GOSUB[#=es.SP.MX.SET pint=$_M]" def="0" ]
+	macro[name=SP.MY		str="GOSUB[#=es.SP.MY.SET pint=$_M]" def="0" ]
+	macro[name=SP.MZ		str="GOSUB[#=es.SP.MZ.SET pint=$_M]" def="0" ]
+	macro[name=SP.MXY		str="GOSUB[#=es.SP.MXY.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.MXZ		str="GOSUB[#=es.SP.MXZ.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.MYZ		str="GOSUB[#=es.SP.MYZ.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.MXYZ		str="GOSUB[#=es.SP.MXYZ.SET pint=$_M pint2=$_M2 pint3=$_M3]" def="0" def2="0" def3="0" ]
+
+	macro[name=SP.QX		str="GOSUB[#=es.SP.QX.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.QY		str="GOSUB[#=es.SP.QY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.QZ		str="GOSUB[#=es.SP.QZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=SP.QXY		str="GOSUB[#=es.SP.QXY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.QXZ		str="GOSUB[#=es.SP.QXZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.QYZ		str="GOSUB[#=es.SP.QYZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.QXYZ		str="GOSUB[#=es.SP.QXYZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6]" def="0" def2="0" def3="0" def4="0" def5="0" def6="1" ]
+
+//	macro[name=SP.SD		str="GOSUB[#=es.SP.SD.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+//	macro[name=SP.MD		str="GOSUB[#=es.SP.MD.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.SD		str="GOSUB[#=es.SP.SD.SET pint=$_M]" def="0" ]
+	macro[name=SP.MD		str="GOSUB[#=es.SP.MD.SET pint=$_M]" def="0" ]
+/*
+///xβ4以降予定
+	macro[name=SP.ZSD		str="GOSUB[#=es.SP.ZSD.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.ZMD		str="GOSUB[#=es.SP.ZMD.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.SSD		str="GOSUB[#=es.SP.SSD.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.SMD		str="GOSUB[#=es.SP.SMD.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.2SD		str="GOSUB[#=es.SP.2SD.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=SP.2MD		str="GOSUB[#=es.SP.2MD.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+*/
+
+	macro[name=SP.BL		str="GOSUB[#=es.SP.BL.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+	macro[name=SP.SK		str="GOSUB[#=es.SP.SK.SET pint=$_M pint2=$_M2]" def="-1" def2="-1" ]
+	macro[name=SP.MP		str="GOSUB[#=es.SP.MP.SET pint=$_M pint2=$_M2]" def="0" def2="0" ]
+
+	macro[name=SP.NOP		str="GOSUB[#=es.SP.NOP.SET pint=$_M]" def="0" ]
+	macro[name=SP.END		str="GOSUB[#=es.SP.END.SET pstr=$_M]" def="''" ]
+
+//	macro[name=SP.SET		str="GOSUB[#=es.SP.SET.SET pstr=$_M pint2=$_M2 pstr3=$_M3]" def="''" def2="0" def3="''" ]
+//	macro[name=SP.SET		str="GOSUB[#=es.SP.SET.SET pstr=$_M pstr2=$_M2]" def="''" def2="''" ]
+	macro[name=SP.SET		str="GOSUB[#=es.SP.SET.SET pstr=$_M pstr2=$_M2 pint3=$_M3 pint4=$_M4]" def="''" def2="''" def3="0" def4="0" ]
+//	macro[name=SP.SETADD	str="GOSUB[#=es.SP.SETADD.SET pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+//	macro[name=SP.GO		str="GOSUB[#=es.SP.GO.SET pstr=$_M];\SCRIPTPOS_SAVE;" def="''" ]
+	macro[name=SP.GO		str="GOSUB[#=es.SP.SET.SET pstr=$_M pstr2=$_M2 pint3=$_M3 pint4=$_M4]" def="''" def2="''" def3="0" def4="0" ]
+//	macro[name=SP.STOP		str="GOSUB[#=es.SP.STOP.SET pint=$_M pint2=$_M2]" def="1" def2="0" ]
+	macro[name=SP.FIN		str="GOSUB[#=es.SP.FIN.SET pstr=$_M]" def="''" ]
+	macro[name=SP.FINISH	str="GOSUB[#=es.SP.FINISH.SET pstr=$_M pstr2=$_M2]" def="''" def2="''" ]
+	macro[name=SP.DEL		str="GOSUB[#=es.SP.DEL.SET pstr=$_M pint2=1]" def="''" ]
+	macro[name=SP.DELALL	str="GOSUB[#=es.SP.DELALL.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4]" def="''" def2="''" def3="''" def4="''" ]
+	macro[name=SP.WA		str="GOSUB[#=es.SP.WA.SET pstr=$_M pint2=$_M2 pint3=$_M3]" def="''" def2="-1" def3="0" ]
+
+//	macro[name=SP.ANSTART	str="GOSUB[#=es.SP.ANSTART.SET pint=$_M pint2=$_M2]" def="1" def2="0" ]
+//	macro[name=SP.ANSTOP	str="GOSUB[#=es.SP.ANSTOP.SET pint=$_M pint2=$_M2]" def="1" def2="0" ]
+
+//	macro[name=SP.SKIPMODE	str="GOSUB[#=es.SP.SKIPMODE.SET pint=$_M pint2=$_M2]" def="1" def2="1" ]
+	macro[name=SP.SKDEF		str="GOSUB[#=es.SP.SKDEF.SET pint=$_M pint2=$_M2]" def="1" def2="0" ]
+	macro[name=WA.SKDEF		str="GOSUB[#=es.WA.SKDEF.SET pint=$_M pint2=$_M2]" def="1" def2="0" ]
+	macro[name=BG.SKDEF		str="GOSUB[#=es.BG.SKDEF.SET pint=$_M pint2=$_M2]" def="1" def2="0" ]
+	macro[name=EV.SKDEF		str="GOSUB[#=es.EV.SKDEF.SET pint=$_M pint2=$_M2]" def="1" def2="0" ]
+	macro[name=VO.SKDEF		str="GOSUB[#=es.VO.SKDEF.SET pint=$_M]" def="0" ]
+
+//	macro[name=SP.2XY.LNO	str="GOSUB[#=es.SP.2XY.LNO.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="1" def2="0" def3="0" def4="0" def5="0" ]
+//	macro[name=SP.SIZE.LNO	str="GOSUB[#=es.SP.S.LNO.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="1" def2="0" def3="0" def4="0" def5="0" ]
+
+
+	//[CM]
+/*//まだ利用不可能
+	macro[name=CM.SA		str="GOSUB[#=es.SP.A.SET pint=@es.SVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=CM.ZA		str="GOSUB[#=es.SP.A.SET pint=@es.ZVAL pint2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=CM.2A		str="GOSUB[#=es.SP.A.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+//	macro[name=CM.A			str="GOSUB[#=es.SP.A.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="0" def5="1" ]
+*/
+	macro[name=CM.SV		str="GOSUB[#=es.SP.V.SET pflt=@es.SVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=CM.ZV		str="GOSUB[#=es.SP.V.SET pflt=@es.ZVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=CM.2V		str="GOSUB[#=es.SP.V.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+//	macro[name=CM.V			str="GOSUB[#=es.SP.V.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+
+	macro[name=CM.SW		str="GOSUB[#=es.SP.W.SET pflt=@es.SVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=CM.ZW		str="GOSUB[#=es.SP.W.SET pflt=@es.ZVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=CM.2W		str="GOSUB[#=es.SP.W.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+//	macro[name=CM.W			str="GOSUB[#=es.SP.W.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+
+	macro[name=CM.SX		str="GOSUB[#=es.SP.X.SET pflt=@es.SVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=CM.ZX		str="GOSUB[#=es.SP.X.SET pflt=@es.ZVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=CM.2X		str="GOSUB[#=es.SP.X.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+//	macro[name=CM.X			str="GOSUB[#=es.SP.X.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+
+	macro[name=CM.SY		str="GOSUB[#=es.SP.Y.SET pflt=@es.SVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=CM.ZY		str="GOSUB[#=es.SP.Y.SET pflt=@es.ZVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=CM.2Y		str="GOSUB[#=es.SP.Y.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+//	macro[name=CM.Y			str="GOSUB[#=es.SP.Y.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+
+	macro[name=CM.SZ		str="GOSUB[#=es.SP.Z.SET pflt=@es.SVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=CM.ZZ		str="GOSUB[#=es.SP.Z.SET pflt=@es.ZVAL pflt2=$_M1 pint3=$_M2 pint4=$_M3 pint5=$_M4]" def="0" def2="0" def3="1" def4="1" ]
+	macro[name=CM.2Z		str="GOSUB[#=es.SP.Z.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+//	macro[name=CM.Z			str="GOSUB[#=es.SP.Z.SET pflt=$_M pflt2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="@es.ZVAL" def2="0" def3="0" def4="1" def5="1" ]
+
+	macro[name=CM.SVW		str="GOSUB[#=es.SP.VW.SET pflt=@es.SVAL pflt2=@es.SVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=CM.ZVW		str="GOSUB[#=es.SP.VW.SET pflt=@es.ZVAL pflt2=@es.ZVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=CM.2VW		str="GOSUB[#=es.SP.VW.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+//	macro[name=CM.VW		str="GOSUB[#=es.SP.VW.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+
+	macro[name=CM.SXY		str="GOSUB[#=es.SP.XY.SET pflt=@es.SVAL pflt2=@es.SVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=CM.ZXY		str="GOSUB[#=es.SP.XY.SET pflt=@es.ZVAL pflt2=@es.ZVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=CM.2XY		str="GOSUB[#=es.SP.XY.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+//	macro[name=CM.XY		str="GOSUB[#=es.SP.XY.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+
+	macro[name=CM.SXZ		str="GOSUB[#=es.SP.XZ.SET pflt=@es.SVAL pflt2=@es.SVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=CM.ZXZ		str="GOSUB[#=es.SP.XZ.SET pflt=@es.ZVAL pflt2=@es.ZVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=CM.2XZ		str="GOSUB[#=es.SP.XZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+//	macro[name=CM.XZ		str="GOSUB[#=es.SP.XZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+
+	macro[name=CM.SYZ		str="GOSUB[#=es.SP.YZ.SET pflt=@es.SVAL pflt2=@es.SVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=CM.ZYZ		str="GOSUB[#=es.SP.YZ.SET pflt=@es.ZVAL pflt2=@es.ZVAL pflt3=$_M1 pflt4=$_M2 pint5=$_M3 pint6=$_M4 pint7=$_M5]" def="0" def2="0" def3="0" def4="1" def5="1" ]
+	macro[name=CM.2YZ		str="GOSUB[#=es.SP.YZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+//	macro[name=CM.YZ		str="GOSUB[#=es.SP.YZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="@es.ZVAL" def2="@es.ZVAL" def3="0" def4="0" def5="0" def6="1" def7="1" ]
+
+	macro[name=CM.SXYZ		str="GOSUB[#=es.SP.XYZ.SET pflt=@es.SVAL pflt2=@es.SVAL pflt3=@es.SVAL pflt4=$_M1 pflt5=$_M2 pflt6=$_M3 pint7=$_M4 pint8=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" def6="1" ]
+	macro[name=CM.ZXYZ		str="GOSUB[#=es.SP.XYZ.SET pflt=@es.ZVAL pflt2=@es.ZVAL pflt3=@es.ZVAL pflt4=$_M1 pflt5=$_M2 pflt6=$_M3 pint7=$_M4 pint8=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" def6="1" ]
+	macro[name=CM.2XYZ		str="GOSUB[#=es.SP.XYZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pflt5=$_M5 pflt6=$_M6 pint7=$_M7 pint8=$_M8 pint9=$_M9]" def="@es.ZVAL" def2="@es.ZVAL" def3="@es.ZVAL" def4="0" def5="0" def6="0" def7="0" def8="1" def9="1" ]
+//	macro[name=CM.XYZ		str="GOSUB[#=es.SP.XYZ.SET pflt=$_M pflt2=$_M2 pflt3=$_M3 pflt4=$_M4 pflt5=$_M5 pflt6=$_M6 pint7=$_M7 pint8=$_M8]" def="@es.ZVAL" def2="@es.ZVAL" def3="@es.ZVAL" def4="0" def5="0" def6="0" def7="0" def8="1" ]
+
+	macro[name=CM.QX		str="GOSUB[#=es.SP.QX.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=CM.QY		str="GOSUB[#=es.SP.QY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=CM.QZ		str="GOSUB[#=es.SP.QZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="1" ]
+	macro[name=CM.QXY		str="GOSUB[#=es.SP.QXY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=CM.QXZ		str="GOSUB[#=es.SP.QXZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=CM.QYZ		str="GOSUB[#=es.SP.QYZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="1" ]
+	macro[name=CM.QXYZ		str="GOSUB[#=es.SP.QXYZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6]" def="0" def2="0" def3="0" def4="0" def5="0" def6="1" ]
+
+//まだ利用不可能
+//	macro[name=CM.CLA		str="GOSUB[#=es.SP.CLA.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+
+	macro[name=CM.CLV		str="GOSUB[#=es.SP.CLV.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=CM.CLW		str="GOSUB[#=es.SP.CLW.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=CM.CLX		str="GOSUB[#=es.SP.CLX.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=CM.CLY		str="GOSUB[#=es.SP.CLY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=CM.CLZ		str="GOSUB[#=es.SP.CLZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="0" def4="0" ]
+	macro[name=CM.CLXY		str="GOSUB[#=es.SP.CLXY.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="0" ]
+	macro[name=CM.CLXZ		str="GOSUB[#=es.SP.CLXZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="0" ]
+	macro[name=CM.CLYZ		str="GOSUB[#=es.SP.CLYZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="0" def3="0" def4="0" def5="0" ]
+	macro[name=CM.CLXYZ		str="GOSUB[#=es.SP.CLXYZ.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6]" def="0" def2="0" def3="0" def4="0" def5="0" def6="0" ]
+
+	macro[name=CM.GO		str="GOSUB[#=es.CM.GO.SET]" ]
+	macro[name=CM.WA		str="GOSUB[#=es.SP.WA.SET pstr='LNO_CM' pint2=$_M pint3=$_M2]" def="-1" def2="0" ]
+	macro[name=CM.FINISH	str="GOSUB[#=es.SP.FINISH.SET pstr='LNO_CM']" ]
+
+//	macro[name=CMVIEW		str=";"]
+	macro[name=CMVIEW		str="GOSUB[#=es.CMVIEW.SET pint=$_M pint2=$_M2]" def="100" def2="100" ]
+
+
+	macro[name=FIN.NOSAVE	str="GOSUB[#=MAC.FIN.NOSAVE]" ]
+	macro[name=FIN			str="GOSUB[#=MAC.FIN pint=$_M pstr2=$_M2 pint3=$_M3 pint4=$_M4]" def="1000" def2="''" def3="-1" def4="1" ]
+	macro[name=FOUT			str="GOSUB[#=MAC.FOUT pint=$_M pstr2=$_M2 pstr3=$_M3 pint4=$_M4 pint5=$_M5]" def="1000" def2="''" def3="black" def4="-1" def5="0" ]
+	macro[name=BG			str="GOSUB[#=MAC.BG pstr=$_M pflt2=$_M2 pint3=$_M3 pstr4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7]" def="''" def2="-1" def3="-1" def4="''" def5="-1" def6="-2" def7="-2" ] //背景
+	macro[name=BG.CMXYZ		str="GOSUB[#=MAC.BG.CMXYZ pflt=$_M pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0"]
+	macro[name=EV			str="GOSUB[#=MAC.EV pstr=$_M pflt2=$_M2 pint3=$_M3 pstr4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7 pint8=0]" def="''" def2="-1" def3="-1" def4="''" def5="-1" def6="-2" def7="-2" ] //イベ絵
+	macro[name=EV_W			str="GOSUB[#=MAC.EV pstr=$_M pflt2=$_M2 pint3=$_M3 pstr4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7 pint8=1]" def="''" def2="-1" def3="-1" def4="''" def5="-1" def6="-2" def7="-2" ] //イベ絵
+	macro[name=EV.CMXYZ		str="GOSUB[#=MAC.EV.CMXYZ pflt=$_M pflt2=$_M2 pflt3=$_M3]" def="0" def2="0" def3="0"]
+	macro[name=FLASH		str="GOSUB[#=MAC.FLASH pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="500" def2="1" def3="0" def4="1" ]
+
+//	macro[name=ST			str="GOSUB[#=MAC.ST pstr=$_M pint2=$_M2]" def="''" def2="0" ]
+	macro[name="_ST"		str="GOSUB[#=es.STEXEC pstr=$_M pstr2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6]" def="''" def2="''" def3="-1" def4="-999999999" def5="-999999999" def6="-999999999" ]
+
+	macro[name=SD			str="GOSUB[#=es.CM.SD.SET pint=$_M]" def="128" ]
+	macro[name=MD			str="GOSUB[#=es.CM.MD.SET pint=$_M]" def="0x808080" ]
+
+	macro[name=SP.AUTO		str="GOSUB[#=es.SP.AUTO pint=$_M]" def="0" ]
+	macro[name=SP.SKIP		str="GOSUB[#=es.SP.SKIP pint=$_M]" def="1" ]
+	macro[name=SP.AUTOEND	str="GOSUB[#=es.SP.AUTOEND]" ]
+
+	//[SP.GET系]
+	macro[name=SP.EX.GET	str="GOSUB[#=es.SP.EX.GET pstr=$_M];$_M2=@_RINT(1);" def="''" def2="" ]
+	macro[name=SP.A.GET		str="GOSUB[#=es.SP.A.GET pstr=$_M];$_M2=@_RINT(1);" def="''" def2="" ]
+	macro[name=SP.NO.GET	str="GOSUB[#=es.SP.NO.GET pstr=$_M];$_M2=@_RINT(1);" def="''" def2="" ]
+
+//-------------------------------------------------------------------------
+//■フェイス画像
+//-------------------------------------------------------------------------
+	macro[name=FACE			str="GOSUB[#=es.FACE pstr=$_M]" def="''" ]
+	macro[name=FACE.DEF		str="GOSUB[#=es.FACE.DEF.SET pstr=$_M pstr2=$_M2 pint3=$_M3 pint4=$_M4]" def="''" def2="''" def3="0" def4="0" ]
+
+//-------------------------------------------------------------------------
+//■制御
+//-------------------------------------------------------------------------
+//	macro[name=GO		str=";\_log('\\GO($_M)');GO[#=$_M]" def="''" ]
+	macro[name=GO		str=";\_log('\\GO($_M)');\GSD.SAVE;\SCRIPTPOS_SAVE;GO[#=$_M]" def="''" ]
+//	macro[name=GO.TITLE	str=";IF[@es.SELAUTOFLAG];GOSUB[#=es.LSD.INIT];\GO(FLAG_INIT);IFEND[] GOSUB[#=es.GO.TITLE]" ]
+//	macro[name=GO.LOGO	str=";IF[@es.SELAUTOFLAG];GOSUB[#=es.LSD.INIT];\GO(FLAG_INIT);IFEND[] GOSUB[#=es.GO.LOGO]" ]
+//	macro[name=GO.TITLE	str=";\WA(1);\BG(black,1000);IF[@es.SELAUTOFLAG];GOSUB[#=es.LSD.INIT];\GO(FLAG_INIT);IFEND[] GO[#=SCENARIO_TITLE]" ]
+//	macro[name=GO.LOGO	str=";\WA(1);\BG(black,1000);IF[@es.SELAUTOFLAG];GOSUB[#=es.LSD.INIT];\GO(FLAG_INIT);IFEND[] GO[#=SCENARIO_LOGO]" ]
+//	macro[name=GO.TITLE	str=";\WA(1);\BG(black,1000);IF[@es.SELAUTOFLAG];GOSUB[#=es.LSD.INIT];IFEND[] GO[#=SCENARIO_TITLE]" ]
+//	macro[name=GO.LOGO	str=";\WA(1);\BG(black,1000);IF[@es.SELAUTOFLAG];GOSUB[#=es.LSD.INIT];IFEND[] GO[#=SCENARIO_LOGO]" ]
+
+//	macro[name=GO.TITLE	str=";\_dmes('タイトル画面ないのでひとまず最初に戻ります');\WA(1);GOSUB[#=ES.SCENARIO.END pint=1];IF[@es.SELAUTOFLAG];GOSUB[#=es.LSD.INIT];IFEND[] GO[#=SCENARIO_TITLE]" ]
+//	macro[name=GO.LOGO	str=";\_dmes('タイトル画面ないのでひとまず最初に戻ります');\WA(1);GOSUB[#=ES.SCENARIO.END pint=1];IF[@es.SELAUTOFLAG];GOSUB[#=es.LSD.INIT];IFEND[] GO[#=SCENARIO_LOGO]" ]
+	macro[name=GO.TITLE	str="\WA(1);\SAVEDEL(50001);GOSUB[#=ES.SCENARIO.END pint=1];IF[@es.SELAUTOFLAG];GOSUB[#=es.LSD.INIT];IFEND[] GO[#=SCENARIO_TITLE]" ]
+	macro[name=GO.LOGO	str="\WA(1);\SAVEDEL(50001);GOSUB[#=ES.SCENARIO.END pint=1];IF[@es.SELAUTOFLAG];GOSUB[#=es.LSD.INIT];IFEND[] GO[#=SCENARIO_LOGO]" ]
+
+//	macro[name=GO.IF	str=";$es.GO.T=$_M2;$es.GO.F=$_M3;IF[$_M]IF[$es.GO.T!='']\SCRIPTPOS_SAVE;GO[#=$es.GO.T]IFEND[]ELSE[$es.GO.F!='']\SCRIPTPOS_SAVE;GO[#=$es.GO.F]IFEND[]" def="0" def2="''" def3="''" ]
+	macro[name=GO.IF	str=";IF[@es.SCRIPTPOSSAVE.FORBIT]$es.GO.T2=$_M2;$es.GO.F2=$_M3;IF[$_M]IF[$es.GO.T2!='']GO[#=$es.GO.T2]IFEND[]ELSE[$es.GO.F2!='']GO[#=$es.GO.F2]IFEND[]ELSE[]$es.GO.T=$_M2;$es.GO.F=$_M3;IF[$_M]IF[$es.GO.T!='']\SCRIPTPOS_SAVE;GO[#=$es.GO.T]IFEND[]ELSE[$es.GO.F!='']\SCRIPTPOS_SAVE;GO[#=$es.GO.F]IFEND[]IFEND[]" def="0" def2="''" def3="''" ]
+
+	macro[name=GOSUB    str=";PREP[SERIAL_GNO=2];$es.SN.GOSUBLBL(@es.SN.GOSUBNEST)='_es.lbl.'+$_SERIAL_GNO2;GOSUB[#=es.SN.GSBCHK]GO[#=$_M]LABEL[#='_es.lbl.'+$_SERIAL_GNO2]" def="''" ]
+	macro[name=GOSUB.IF str=";PREP[SERIAL_GNO=2];$es.SN.GOSUBLBL(@es.SN.GOSUBNEST)='_es.lbl.'+$_SERIAL_GNO2;IF[@es.SCRIPTPOSSAVE.FORBIT];$es.GOSUB.T2=$_M2;$es.GOSUB.F2=$_M3;IF[$_M]IF[$es.GOSUB.T2!='']GOSUB[#=es.SN.GSBCHK]GO[#=$es.GOSUB.T2]IFEND[]ELSE[$es.GOSUB.F2!='']GOSUB[#=es.SN.GSBCHK]GO[#=$es.GOSUB.F2]IFEND[]ELSE[]$es.GOSUB.T=$_M2;$es.GOSUB.F=$_M3;IF[$_M]IF[$es.GOSUB.T!='']\SCRIPTPOS_SAVE;GOSUB[#=es.SN.GSBCHK]GO[#=$es.GOSUB.T]IFEND[]ELSE[$es.GOSUB.F!='']\SCRIPTPOS_SAVE;GOSUB[#=es.SN.GSBCHK]GO[#=$es.GOSUB.F]IFEND[]IFEND[]LABEL[#='_es.lbl.'+$_SERIAL_GNO2]" def="0" def2="''" def3="''"]
+	macro[name=RETURN	str=";@es.SN.GOSUBNEST-=1;\GSD.SAVE;\SCRIPTPOS_SAVE;GO[#=$es.SN.GOSUBLBL(@es.SN.GOSUBNEST)];" ]
+
+	macro[name=LET		str=";IF[@es.LOADTHRU==0];$_M;IFEND[]" ]
+	macro[name=LET.IF	str=";IF[@es.LOADTHRU==0];IF[$_M];$_M2;ELSE[];$_M3;IFEND[]IFEND[]" def="1" def2="" def3="" ]
+	macro[name=ERIS.ON	str=";GOSUB[#=es.GO.ERIS.ON pstr=$_M]" def="''" ]
+	macro[name=ERIS.OFF	str=";GOSUB[#=es.GO.ERIS.OFF pstr=$_M]" def="''" ]
+//	macro[name=LOGO		str=";GO[#=es.GO.LOGO]" ]
+	macro[name=TITLE	str=";WAIT[FRAME=1];@es.SCENARIOSTOP=1;@es.TITLEWAIT=$_M2;WAIT[FRAME=5]IF[@es.RPMODE]GO[#=$es.STARTLABEL]IFEND[];$_M=@es.TITLE.NO;" def="@es.I" def2="-1" ]
+
+
+///tri
+	macro[name=SAVE.ON	str=";GOSUB[#=es.SAVE.ON]" def="0" ]
+	macro[name=SAVE.OFF	str=";GOSUB[#=es.SAVE.OFF]" def="0" ]
+
+
+//-------------------------------------------------------------------------
+//■選択肢
+//-------------------------------------------------------------------------
+
+///x
+//	macro[name=SEL			str=                                                             "PREP[SERIAL_GNO=1]GOSUB[#=ES.SEL.N PINT=@_SERIAL_GNO]GOSUB[#=ES.SEL.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6 pstr7=$_M7 pstr8=$_M8 pstr9=$_M9 pstr10=$_M10]GO[#=$es.SEL.GO]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" def9="''" def10="''" ]
+//CL
+	macro[name=SEL			str="\SCRIPTPOS_SAVE;IF[@es.SEL.SEQFLAG]@es.SEL.SEQFLAG=0;\SCRIPTPOS_SAVE;IFEND[];PREP[SERIAL_GNO=1]GOSUB[#=ES.SEL.N PINT=@_SERIAL_GNO]GOSUB[#=ES.SEL.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6 pstr7=$_M7 pstr8=$_M8 pstr9=$_M9 pstr10=$_M10]WAIT[FRAME=1]IF[$es.SEL.GO!=''];@es.SEL.SEQFLAG=1;GO[#=$es.SEL.GO]IFEND[]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" def9="''" def10="''" ]
+//	macro[name=SEL			str="IF[@es.SEL.SEQFLAG]@es.SEL.SEQFLAG=0;\SCRIPTPOS_SAVE;IFEND[];PREP[SERIAL_GNO=1]GOSUB[#=ES.SEL.N PINT=@_SERIAL_GNO]GOSUB[#=ES.SEL.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6 pstr7=$_M7 pstr8=$_M8 pstr9=$_M9 pstr10=$_M10]WAIT[FRAME=1]IF[$es.SEL.GO!=''];@es.SEL.SEQFLAG=1;GO[#=$es.SEL.GO]IFEND[]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" def9="''" def10="''" ]
+//ノベル用
+	macro[name=NSEL			str="\SCRIPTPOS_SAVE;IF[@es.SEL.SEQFLAG]@es.SEL.SEQFLAG=0;\SCRIPTPOS_SAVE;IFEND[];PREP[SERIAL_GNO=1]GOSUB[#=ES.SEL.N PINT=@_SERIAL_GNO]GOSUB[#=ES.SEL.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6 pstr7=$_M7 pstr8=$_M8 pstr9=$_M9 pstr10=$_M10]WAIT[FRAME=1]IF[$es.SEL.GO!=''];@es.SEL.SEQFLAG=1;GO[#=$es.SEL.GO]IFEND[]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" def9="''" def10="''" ]
+//	macro[name=NSEL			str="IF[@es.SEL.SEQFLAG]@es.SEL.SEQFLAG=0;\SCRIPTPOS_SAVE;IFEND[];PREP[SERIAL_GNO=1]GOSUB[#=ES.SEL.N PINT=@_SERIAL_GNO]GOSUB[#=ES.SEL.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6 pstr7=$_M7 pstr8=$_M8 pstr9=$_M9 pstr10=$_M10]WAIT[FRAME=1]IF[$es.SEL.GO!=''];@es.SEL.SEQFLAG=1;GO[#=$es.SEL.GO]IFEND[]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" def9="''" def10="''" ]
+
+//	macro[name=SEL			str="\SP.FIN(99);WAIT[FRAME=1];PREP[SERIAL_GNO=1]GOSUB[#=ES.SEL.N PINT=@_SERIAL_GNO]GOSUB[#=ES.SEL.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6 pstr7=$_M7 pstr8=$_M8 pstr9=$_M9 pstr10=$_M10]WAIT[FRAME=1]IF[$es.SEL.GO!='']GO[#=$es.SEL.GO]IFEND[]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" def9="''" def10="''" ]
+//	macro[name=SEL			str="\SP.FIN(99);WAIT[FRAME=2];\SP.WAIT(99);WAIT[FRAME=1];PREP[SERIAL_GNO=1]GOSUB[#=ES.SEL.N PINT=@_SERIAL_GNO]GOSUB[#=ES.SEL.SET pstr=$_M pstr2=$_M2 pstr3=$_M3 pstr4=$_M4 pstr5=$_M5 pstr6=$_M6 pstr7=$_M7 pstr8=$_M8 pstr9=$_M9 pstr10=$_M10]WAIT[FRAME=1]IF[$es.SEL.GO!='']GO[#=$es.SEL.GO]IFEND[]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" def9="''" def10="''" ]
+	macro[name=SEL.STOP		str=";LOOP[]IF[@es.B4.SEL.NO]LOOPBREAK[]IFEND[]WAIT[FRAME=1]LOOPEND[];" ]
+
+//	macro[name=SEL.NO		str=";@es.SELNO=$_M;" def="0" ]
+	macro[name=SEL.TX		str="GOSUB[#=ES.SEL.TX.SET pint=$_M pstr2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5]" def="0" def2="''" def3="0" def4="0" def5="24" ]
+	macro[name=SEL.A		str="GOSUB[#=ES.SEL.A PINT=$_M PINT2=$_M2 PINT3=$_M3 PINT4=$_M4 PINT5=$_M5 PINT6=$_M6 PINT7=$_M7 PINT8=$_M8 PINT9=$_M9 PINT10=$_M10]" def="1" def2="1" def3="1" def4="1" def5="1" def6="1" def7="1" def8="1" def9="1" def10="1" ]
+	macro[name=SEL.E		str="GOSUB[#=ES.SEL.E PINT=$_M PINT2=$_M2 PINT3=$_M3 PINT4=$_M4 PINT5=$_M5 PINT6=$_M6 PINT7=$_M7 PINT8=$_M8 PINT9=$_M9 PINT10=$_M10]" def="1" def2="1" def3="1" def4="1" def5="1" def6="1" def7="1" def8="1" def9="1" def10="1" ]
+	macro[name=SEL.GO		str="GOSUB[#=ES.SEL.GO PSTR=$_M PSTR2=$_M2 PSTR3=$_M3 PSTR4=$_M4 PSTR5=$_M5 PSTR6=$_M6 PSTR7=$_M7 PSTR8=$_M8 PSTR9=$_M9 PSTR10=$_M10]" def="''" def2="''" def3="''" def4="''" def5="''" def6="''" def7="''" def8="''" def9="''" def10="''" ]
+	macro[name=SEL.AFTER	str="GOSUB[#=ES.SEL.AFTER PSTR=$_M PSTR2=$_M2]" def="''" def2="''" ]
+	macro[name=SEL.TIME		str="GOSUB[#=ES.SEL.TIME PINT=$_M]" def="0" ]
+	macro[name=SEL.RND		str="GOSUB[#=ES.SEL.RND PINT=$_M]" def="1" ]
+
+	macro[name=SEL.TX.ALIGN.X	str="GOSUB[#=ES.SEL.TX.ALIGN.X.SET pint=$_M]" def="0" ]
+
+	macro[name=CSEL			str="IF[@es.SEL.SEQFLAG]@es.SEL.SEQFLAG=0;\SCRIPTPOS_SAVE;IFEND[];GOSUB[#=ES.CSEL.SET pint=$_M2 pint2=$_M3 pint3=$_M4 pint4=$_M5];$_M=@es.LSD(093,05);\SCRIPTPOS_SAVE;" def="@es.CSELNO" def2="0" def3="-1" def4="300" def5="300" ]
+
+
+//-------------------------------------------------------------------------
+//■ムービー再生
+//-------------------------------------------------------------------------
+	macro[name=MOVIE	str="GOSUB[#=es.MOVIEPLAY.SET pstr=$_M pint2=$_M2]WAIT[FRAME=1]" def="''" def2="0" ]
+
+
+//-------------------------------------------------------------------------
+//■演出指定
+//-------------------------------------------------------------------------
+	//雪
+	macro[name=SNOW		str="GOSUB[#=es.SNOWMODE pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4 pint5=$_M5 pint6=$_M6 pint7=$_M7 pint8=$_M8 pint9=$_M9 pint10=$_M10]" def="30" def2="50" def3="50" def4="250" def5="24" def6="15" def7="8" def8="8" def9="5" def10="8" ]
+	macro[name=SNOW.END	str="GOSUB[#=es.SNOWMODE.END pint=$_M]" def="2000" ]
+
+	//雨
+	macro[name=RAIN		str="GOSUB[#=es.RAINMODE pint=$_M pint2=$_M2]" def="5" def2="1" ]
+	macro[name=RAIN.END	str="GOSUB[#=es.RAINMODE.END]" ]
+	macro[name=RAIN.DEL	str="GOSUB[#=es.RAINMODE.DEL]" ]
+
+
+//-------------------------------------------------------------------------
+//■ウェイト
+//-------------------------------------------------------------------------
+//	macro[name=WA	str=";IF[@es.MG.AUTOSKIP==0];@es.WA.TIME=$_M;@es.WA.MODE=($_M>0);@es.WA.SKIP=$_M2;IF[@es.WA.MODE]WAIT[FRAME=1]IFEND[];@es.WA.TIME=0;@es.WA.MODE=0;@es.WA.SKIP=0;IFEND[];" def="0" def2="0" ]
+	macro[name=WA	str=";GOSUB[#=es.WA.SET pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="0" def3="-2" def4="-2" ]
+
+
+//-------------------------------------------------------------------------
+//■強制オートモード
+//-------------------------------------------------------------------------
+
+	macro[name=SUPERAUTOMODE		str="GOSUB[#=es.SetSuperAutoPlayMode pint=$_M pint2=$_M2 pint3=$_M3 pint4=$_M4]" def="0" def2="20" def3="1" def4="1" ]
+	macro[name=SUPERAUTOMODE_OFF	str="GOSUB[#=es.SetSuperAutoPlayModeOFF]" ]
+
+
+//-------------------------------------------------------------------------
+//■スキップ禁止
+//-------------------------------------------------------------------------
+
+	macro[name=NOSKIP	str=";@es.NoSkip=1;"]
+
+
+//-------------------------------------------------------------------------
+//■変数エイリアス
+//-------------------------------------------------------------------------
+	macro[name=es.SuperAutoPlayMode			str="@es.GSD(125,01)" ]
+	macro[name=es.SuperAutoPlayTimeTextSp	str="@es.GSD(125,02)" ] // オートモード時のテキスト速度
+	macro[name=es.SuperAutoPlayTimeTextSt	str="@es.GSD(125,03)" ] // オートモード時の文末停止時間
+	macro[name=es.SuperAutoPlayTimeTextCl	str="@es.GSD(125,04)" ] // オートモード時のクリック許可
+	macro[name=es.SuperAutoPlayTimeTextSk	str="@es.GSD(125,05)" ] // オートモード時のスキップ許可
+
+

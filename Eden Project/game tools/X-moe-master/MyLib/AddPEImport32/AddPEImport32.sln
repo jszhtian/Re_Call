@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AddPEImport32", "AddPEImport32\AddPEImport32.vcxproj", "{05BD2D23-0B58-4600-B978-427E504D60F7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dllSample32", "dllSample32\dllSample32.vcxproj", "{E588DCFB-0EFA-4433-BDFC-8836F67E77E1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AddPEImport64", "AddPEImport64\AddPEImport64.vcxproj", "{0368B170-8F46-43DF-9C3E-F4932E5C80D0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dllSample64", "dllSample64\dllSample64.vcxproj", "{5A498C42-F152-43FF-8EF4-72FAEEE12F48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05BD2D23-0B58-4600-B978-427E504D60F7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{05BD2D23-0B58-4600-B978-427E504D60F7}.Debug|Win32.Build.0 = Debug|Win32
+		{05BD2D23-0B58-4600-B978-427E504D60F7}.Release|Win32.ActiveCfg = Release|Win32
+		{05BD2D23-0B58-4600-B978-427E504D60F7}.Release|Win32.Build.0 = Release|Win32
+		{E588DCFB-0EFA-4433-BDFC-8836F67E77E1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E588DCFB-0EFA-4433-BDFC-8836F67E77E1}.Debug|Win32.Build.0 = Debug|Win32
+		{E588DCFB-0EFA-4433-BDFC-8836F67E77E1}.Release|Win32.ActiveCfg = Release|Win32
+		{E588DCFB-0EFA-4433-BDFC-8836F67E77E1}.Release|Win32.Build.0 = Release|Win32
+		{0368B170-8F46-43DF-9C3E-F4932E5C80D0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0368B170-8F46-43DF-9C3E-F4932E5C80D0}.Debug|Win32.Build.0 = Debug|Win32
+		{0368B170-8F46-43DF-9C3E-F4932E5C80D0}.Release|Win32.ActiveCfg = Release|x64
+		{0368B170-8F46-43DF-9C3E-F4932E5C80D0}.Release|Win32.Build.0 = Release|x64
+		{5A498C42-F152-43FF-8EF4-72FAEEE12F48}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5A498C42-F152-43FF-8EF4-72FAEEE12F48}.Debug|Win32.Build.0 = Debug|Win32
+		{5A498C42-F152-43FF-8EF4-72FAEEE12F48}.Release|Win32.ActiveCfg = Release|x64
+		{5A498C42-F152-43FF-8EF4-72FAEEE12F48}.Release|Win32.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

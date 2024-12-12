@@ -1,0 +1,16 @@
+このディレクトリのファイルは、
+chikama さん作のSystem 3.5 for X Window System     Version 1.2 (安定版) から
+持ってきたものを元にしています。
+配布元は http://www.aist-nara.ac.jp/~masaki-c/private/unitbase/xsys35/index.html
+です。
+
+music server と client の通信関連や audio や cdrom のデバイスとのやり取りなど、
+主要な部分はほぼそのまま使っています。pcm mixer や c++ とのラッパなどは
+xkanon のオリジナルなものです。
+ソースの著作権は（ソースに明示していない限り）chikama さんに属します。
+また、ソースコードは GPL に従い、配布できます。
+
+当然ですが、これらのプログラムのバグについて chikama さんに問い合わせるような
+ことはしないでください。
+
+					2000/06/17 (2002/8/28 改定)	上野和紀 / jagarl

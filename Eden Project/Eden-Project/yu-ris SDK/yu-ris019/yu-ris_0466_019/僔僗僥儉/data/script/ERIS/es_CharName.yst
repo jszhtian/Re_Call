@@ -1,0 +1,115 @@
+//============================================================================
+//
+//■キャラ名処理
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@CHAR.NAME.NUM]
+	S_STR[$CHAR.NAME.SCRIPT(1)]
+	S_STR[$CHAR.NAME.OUTSTR(1)]
+	S_STR[$CHAR.NAME.OUTCG(1)]
+	S_INT[@CHAR.NAME.OUTGVAR(1)]
+	S_INT[@CHAR.NAME.OUTLVAR(1)]
+
+	S_INT[@CHAR.NAME.MARK.NUM]
+	S_STR[$CHAR.NAME.MARK(1)]
+
+	S_INT[@varlimit=8192]
+}
+
+//--------------------------------------------------------------------
+//■キャラ名定義処理
+//--------------------------------------------------------------------
+#=es.CHAR.NAME
+{
+	IF[@_PINT(4)>=@varlimit]
+	{
+		\_mes("[キャラ名定義]表示文字列変数番号が不正です。"+$(@varlimit)+" 未満で指定してください。")
+		END[]
+	}
+	IFEND[]
+
+	@CHAR.NAME.NUM += 1
+	\VAR.ADD($CHAR.NAME.SCRIPT, $_PSTR(1))
+	\VAR.ADD($CHAR.NAME.OUTSTR, $_PSTR(2))
+	\VAR.ADD($CHAR.NAME.OUTCG, $_PSTR(3))
+	\VAR.ADD(@CHAR.NAME.OUTGVAR, @_PINT(4))
+	\VAR.ADD(@CHAR.NAME.OUTLVAR, @_PINT(5))
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■キャラ名検索処理
+//  $_PSTR(1) : この文字列の中から検索する
+//
+//  @_RINT(1) : 0=見つからなかった, 1以上=キャラ名番号
+//  @_RINT(2) : キャラ名の文字数
+//  $_RSTR(3) : 出力文字
+//  $_RSTR(4) : 出力ＣＧファイル名
+//--------------------------------------------------------------------
+#=es.CHAR.NAME.SEARCH
+{
+	STR[$str]
+	INT[@lenA]
+	INT[@lenB]
+	STR[$strB]
+	INT[@CharNo]
+	INT[@mLC]
+
+	LOOP[SET=@CHAR.NAME.NUM]
+	{
+		\_strlen($CHAR.NAME.SCRIPT(@_LC));@lenA=@_RINT(1)
+		\_strlen($_PSTR(1));@lenB=@_RINT(1)
+
+		IF[@lenB >= @lenA+1]
+		{
+			\_strmid($_PSTR(1), 1, @lenA+1)
+			$strB = $_RSTR(1)
+
+			@mLC = @_LC
+
+			//キャラ名認識記号の数だけ繰り返す
+			//
+			LOOP[SET=@CHAR.NAME.MARK.NUM]
+			{
+				//キャラ名認識記号をくっつけて照らし合わせる
+				//
+				IF[$strB==$CHAR.NAME.SCRIPT(@mLC)+$CHAR.NAME.MARK(@_LC)]
+				{
+					@CharNo=@mLC
+					LOOPBREAK[LV=2]
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	//文字列変数番号の指定があるならそちらを優先
+	//
+	STR[$retOutText=$CHAR.NAME.OUTSTR(@CharNo)]
+	IF[@CHAR.NAME.OUTGVAR(@CharNo)>=0] $retOutText=$G(@CHAR.NAME.OUTGVAR(@CharNo)) IFEND[]
+	IF[@CHAR.NAME.OUTLVAR(@CharNo)>=0] $retOutText=$L(@CHAR.NAME.OUTLVAR(@CharNo)) IFEND[]
+
+	return[rint=@CharNo rint2=@lenA rstr3=$retOutText rstr4=$CHAR.NAME.OUTCG(@CharNo) rint5=@lenB]
+}
+
+
+//--------------------------------------------------------------------
+//■キャラ名認識記号定義処理
+//--------------------------------------------------------------------
+#=es.CHAR.NAME.MARK.SET
+{
+	@CHAR.NAME.MARK.NUM += 1
+	\VAR.ADD($CHAR.NAME.MARK, $_PSTR(1))
+
+	return[]
+}
+
+

@@ -1,0 +1,44 @@
+﻿<Window x:Class="ASMTools.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ASMTools"
+        mc:Ignorable="d"
+        Title="AsmTools" Height="480" Width="640" ResizeMode="NoResize">
+    <Window.Resources>
+        <RoutedUICommand x:Key="ASM2HEX"/>
+        <RoutedUICommand x:Key="HEX2ASM"/>
+        
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource ASM2HEX}" CanExecute="ASM2HEX_CanExec" Executed="ASM2HEX_Exec"/>
+        <CommandBinding Command="{StaticResource HEX2ASM}" CanExecute="HEX2ASM_CanExec" Executed="HEX2ASM_Exec"/>
+    </Window.CommandBindings>
+    <Grid Height="Auto" Width="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="27*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="ASM2HEX" Command="{StaticResource ASM2HEX}"/>
+            <Button Content="HEX2ASM" Command="{StaticResource HEX2ASM}"/>
+            <Label Content="Architecture:"/>
+            <ComboBox x:Name="Arch" SelectedIndex="0">
+                <ComboBoxItem Content="X86"/>
+                <ComboBoxItem Content="X64"/>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+            <Label>Asm:</Label>
+            <TextBox x:Name="ASMBox" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Height="185"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <Label>Opcode in bytes:</Label>
+            <TextBox x:Name="HEXBox" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Height="185"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

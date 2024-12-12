@@ -1,0 +1,51 @@
+modename selectObject
+
+
+enterFadeInType 58
+enterFadeInTime 50
+
+
+selectObjectMax 2
+objectTypeVarName 汎用選択種類
+
+resultVarNam 汎用選択番号
+returnAddNumberFlag 1
+resultAddVarName 汎用追加選択番号
+
+addPrintX 80
+addPrintY -40
+
+
+filenameBG bg_selectobject1
+
+@↓ゲーム内日付の表示↓@ @
+
+gameDateLayerPrintFlag 1
+
+gameYearPrintFlag 0
+gameMonthPrintFlag 0
+gameDayPrintFlag 1
+gameWeekPrintFlag 0
+
+gameYearSlashPrintFlag 0
+gameMonthSlashPrintFlag 0
+gameDaySlashPrintFlag 0
+
+gameWeekYouPrintFlag 1
+gameWeekBiPrintFlag 1
+
+filenamegameTimeFont ta_partyStatusSuuji32x32
+gameTimeFontSizeX 32
+gameTimeFontSizeY 32
+gameTimeFontNextX 25
+
+gameYearUpZeroPrintFlag 0
+gameMonthUpZeroPrintFlag 1
+gameDayUpZeroPrintFlag 1
+
+gameMonthPrintX 50
+gameMonthPrintY 60
+gameDayPrintX 100
+gameDayPrintY 60
+
+gameLayerFirst 1

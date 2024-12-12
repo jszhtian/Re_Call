@@ -1,0 +1,38 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=x-sjis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+<link rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#9933FF"
+vlink="#FF66FF" alink="#CC99FF" topmargin="20" leftmargin="20"
+class="page" marginheight="0" marginwidth="0">
+
+<h2>exbtn</h2>
+<h3>exbtn &lt;sprite number&gt;,&lt;button number&gt;,&lt;control string&gt;</h3>
+<p>
+This is exactly the same as spbtn, with the addition of a trailing control string.<br>
+In short, when the player mouseovers a button controlled by exbtn, the button isn't just shifted, but control over screen graphics is exerted via sprite control as per the control string.<br>
+<br>
+The control string is formuated as follows:<br>
+"C&lt;number&gt;" causes the sprite with that number to be hidden.<br>
+"P&lt;number&gt;" causes the sprite with that number to be displayed.<br>
+"P&lt;number1&gt;,&lt;number2&gt;" causes sprite number1 to be displayed in cell number2.<br>
+<br>
+You can concatenate any number of the three options in your control string.<br>
+EXÅj<br>
+"C10"<br>
+"C11P10"<br>
+"C11P10,2P9"<br>
+<br>
+When using composite buttons, there needs to be an assignment for what occurs when the mouse cursor isn't touching any part of the button.  This needs to be set in exbtn_d.<br>
+<br>
+Buttons, like any other graphic, can be loaded as image filename character strings or as sprites.
+</p>
+
+</body>
+</html>

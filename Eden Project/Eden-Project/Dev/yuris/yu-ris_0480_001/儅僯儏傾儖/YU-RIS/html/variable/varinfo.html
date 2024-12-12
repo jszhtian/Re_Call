@@ -1,0 +1,104 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">変数系命令</A>＞VARINFO［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="int.html">INT［］</A>
+　<A HREF="flt.html">FLT［］</A>
+　<A HREF="str.html">STR［］</A>
+　<A HREF="g_int.html">G_INT［］</A>
+　<A HREF="g_flt.html">G_FLT［］</A>
+　<A HREF="g_str.html">G_STR［］</A>
+　<A HREF="s_int.html">S_INT［］</A>
+　<A HREF="s_flt.html">S_FLT［］</A>
+　<A HREF="s_str.html">S_STR［］</A>
+　<A HREF="let.html">LET［］</A>
+　<A HREF="varact.html">VARACT［］</A>
+　<A HREF="varinfo.html">VARINFO［］</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■変数情報取得命令 VARINFO[ ]</FONT>
+<FONT CLASS=t20>
+
+変数に関する情報を取得します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>LET = ＠変数名</FONT></TD><TD><FONT CLASS=t40>値を格納する変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SET = ＠変数名 (＄変数名)</FONT></TD><TD><FONT CLASS=t40>調べたい変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>TYPE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>変数の型を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>LENGTH = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>文字列変数の文字数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DIMNUM = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>配列次元数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>SEARCH = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>一次元配列の要素から特定の値や文字列変数を検索する場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>INT = 配列変数</FONT></TD><TD><FONT CLASS=t40>検索時に使用。INT 型の配列変数検索時で、検索したい値を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>FLT = 配列変数</FONT></TD><TD><FONT CLASS=t40>検索時に使用。FLT 型の配列変数検索時で、検索したい値を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>STR = 文字列配列変数</FONT></TD><TD><FONT CLASS=t40>検索時に使用。STR 型の配列変数検索時で、検索したい文字列を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>NO = 値</FONT></TD><TD><FONT CLASS=t40>検索時に使用。検索開始要素番号を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DIMSIZE  = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>１次要素数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DIMSIZE2 = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>２次要素数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DIMSIZE3 = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>３次要素数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DIMSIZE4 = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>４次要素数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DIMSIZE5 = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>５次要素数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DIMSIZE6 = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>６次要素数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DIMSIZE7 = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>７次要素数を調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>DIMSIZE8 = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>８次要素数を調べる場合は１を指定</FONT></TD></TR>
+</TABLE>
+
+
+[1] 変数＠Ａの変数の型を調べる。
+
+　　※ 1…INT変数、 2…FLT変数、 3…STR変数
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARINFO</FONT>[<FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@A</FONT> <FONT CLASS=t62>TYPE</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[2] 変数＄Ａの文字数を調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARINFO</FONT>[<FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>$A</FONT> <FONT CLASS=t62>LENGTH</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[3] 配列変数＠Ｂの配列次元数を調べる。
+
+　　※配列変数の場合、SET=@B() というように記述します。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARINFO</FONT>[<FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@B()</FONT> <FONT CLASS=t62>DIMNUM</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[4] 配列変数＠Ｆの２次元目の要素数を調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARINFO</FONT>[<FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@F()</FONT> <FONT CLASS=t62>DIMSIZE2</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[5] INT 型の配列変数＠Ｆから、５０という値が入っている要素が最初に出てくる要素番号を検索する。
+　　要素番号０番目から検索開始する。
+　　見つからなかった場合は -1 が格納される。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARINFO</FONT>[<FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@F()</FONT> <FONT CLASS=t62>SEARCH</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>INT</FONT>=<FONT CLASS=t63>50</FONT>]</FONT></B>
+
+
+[6] INT 型の配列変数＠Ｆから、５０という値が入っている要素が最初に出てくる要素番号を検索する。
+　　要素番号３番目から検索開始する。
+　　見つからなかった場合は -1 が格納される。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARINFO</FONT>[<FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>@F()</FONT> <FONT CLASS=t62>SEARCH</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>INT</FONT>=<FONT CLASS=t63>50</FONT> <FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>3</FONT>]</FONT></B>
+
+
+[7] STR 型の配列変数＄Ｓから、「りんご」という値が入っている要素が最初に出てくる要素番号を検索する。
+　　要素番号５番目から検索開始する。
+　　見つからなかった場合は -1 が格納される。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>VARINFO</FONT>[<FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>SET</FONT>=<FONT CLASS=t63>$S()</FONT> <FONT CLASS=t62>SEARCH</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>STR</FONT>=<FONT CLASS=t63>"りんご"</FONT> <FONT CLASS=t62>NO</FONT>=<FONT CLASS=t63>5</FONT>]</FONT></B>
+
+
+
+</FONT>
+
+
+</BODY></HTML>

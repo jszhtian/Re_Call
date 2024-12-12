@@ -1,0 +1,172 @@
+//============================================================================
+// 汎用選択肢１画面設計
+//============================================================================
+#=ES.CSEL.BTDEF
+
+
+	\BTDEF.GROUP(ES.CSEL)
+
+
+
+	IF[@_PINT(1)==1] //1なら、サンプル用の選択肢１２までの選択画像を読み込む
+	{
+		\BT.NAME("■背景")
+		\BT.CGSYS("select/back")
+		\BT.XY(000, 000)
+		\BT.Z(01)
+		\BT.SET(TIP.BACK)
+
+
+		\BT.NAME("■選択肢画像１")
+		\BT.CGSYS("select/btn_sel01_off", "select/btn_sel01_over")
+		\BT.XY(100-10, 100)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 01)
+
+		\BT.NAME("■選択肢画像２")
+		\BT.CGSYS("select/btn_sel02_off", "select/btn_sel02_over")
+		\BT.XY(250-10+10, 100)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 02)
+
+		\BT.NAME("■選択肢画像３")
+		\BT.CGSYS("select/btn_sel03_off", "select/btn_sel03_over")
+		\BT.XY(400-10+20, 100)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 03)
+
+		\BT.NAME("■選択肢画像４")
+		\BT.CGSYS("select/btn_sel04_off", "select/btn_sel04_over")
+		\BT.XY(550-10+30, 100)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 04)
+
+
+		\BT.NAME("■選択肢画像５")
+		\BT.CGSYS("select/btn_sel05_off", "select/btn_sel05_over")
+		\BT.XY(100-10, 200)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 05)
+
+		\BT.NAME("■選択肢画像６")
+		\BT.CGSYS("select/btn_sel06_off", "select/btn_sel06_over")
+		\BT.XY(250-10+10, 200)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 06)
+
+		\BT.NAME("■選択肢画像７")
+		\BT.CGSYS("select/btn_sel07_off", "select/btn_sel07_over")
+		\BT.XY(400-10+20, 200)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 07)
+
+		\BT.NAME("■選択肢画像８")
+		\BT.CGSYS("select/btn_sel08_off", "select/btn_sel08_over")
+		\BT.XY(550-10+30, 200)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 08)
+
+
+		\BT.NAME("■選択肢画像９")
+		\BT.CGSYS("select/btn_sel09_off", "select/btn_sel09_over")
+		\BT.XY(100-10, 300)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 09)
+
+		\BT.NAME("■選択肢画像１０")
+		\BT.CGSYS("select/btn_sel10_off", "select/btn_sel10_over")
+		\BT.XY(250-10+10, 300)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 10)
+
+		\BT.NAME("■選択肢画像１１")
+		\BT.CGSYS("select/btn_sel11_off", "select/btn_sel11_over")
+		\BT.XY(400-10+20, 300)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 11)
+
+		\BT.NAME("■選択肢画像１２")
+		\BT.CGSYS("select/btn_sel12_off", "select/btn_sel12_over")
+		\BT.XY(550-10+30, 300)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 12)
+
+	}
+	IFEND[]
+
+
+	IF[@_PINT(1)==2] //2なら、サンプル用キャラ選択画像を読み込む
+	{
+		\BT.NAME("■優理選択肢画像")
+		\BT.CGSYS("select/btn_yuuri_off", "select/btn_yuuri_over")
+		\BT.XY(300, 100)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.MAP.CG("select/btn_yuuri_mask")
+		\BT.SET(BTN.SEL, 01)
+	}
+	IFEND[]
+
+
+	IF[@_PINT(1)==123] //123なら、マップ選択画面用の画像を読み込む
+	{
+
+		\BT.NAME("■背景")
+		\BT.CGSYS("mapsel/back")
+		\BT.XY(0, 0)
+		\BT.Z(10)
+		\BT.MAP.A(1)
+		\BT.MAP.CG("select/btn_yuuri_mask")
+		\BT.SET(TIP.BACK)
+
+		\BT.NAME("■ボタン１")
+		\BT.CGSYS("mapsel/btn_a_off", "mapsel/btn_a_over")
+		\BT.MAP.CG("mapsel/btn_a_mask")
+		\BT.XY(078, 139)
+		\BT.Z(100)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 01) //1個目のボタン
+
+		\BT.NAME("■ボタン２")
+		\BT.CGSYS("mapsel/btn_b_off", "mapsel/btn_b_over")
+		\BT.MAP.CG("mapsel/btn_b_mask")
+		\BT.XY(278, 139)
+		\BT.Z(100)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 02) //2個目のボタン
+
+		\BT.NAME("■ボタン３")
+		\BT.CGSYS("mapsel/btn_c_off", "mapsel/btn_c_over")
+		\BT.MAP.CG("mapsel/btn_c_mask")
+		\BT.XY(210, 266)
+		\BT.Z(100)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 03) //3個目のボタン
+
+		\BT.NAME("■ボタン４")
+		\BT.CGSYS("mapsel/btn_d_off", "mapsel/btn_d_over")
+		\BT.MAP.CG("mapsel/btn_d_mask")
+		\BT.XY(600, 266)
+		\BT.Z(100)
+		\BT.MAP.A(1)
+		\BT.SET(BTN.SEL, 04) //4個目のボタン
+
+	}
+	IFEND[]
+
+
+
+RETURN[]
+

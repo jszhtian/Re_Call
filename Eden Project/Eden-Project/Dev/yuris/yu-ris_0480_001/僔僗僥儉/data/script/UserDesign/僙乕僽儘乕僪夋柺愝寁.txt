@@ -1,0 +1,1045 @@
+//============================================================================
+// セーブ画面設計
+//============================================================================
+#=ES.SAVE.BTDEF
+
+	\BTDEF.GROUP(ES.SAVE)
+
+
+	//■背景
+	\BT.NAME("背景")
+	\BT.CGSYS("saveload/back_save")
+	\BT.XY(000, 000)
+	\BT.Z(1010)
+	\BT.SET(TIP.BG)
+
+
+	//■New!マーク(座標は上のほうで設定している『相対表示座標』をもとに自動で決定されます)
+	\BT.NAME("New!マーク")
+	\BT.CGSYS("saveload/tip_new")
+	\BT.XY(000, 000)
+	\BT.Z(1200)
+	\BT.SET(TIP.NEW)
+
+
+	//■Page01～10
+	\BT.NAME("■Page01")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page01")
+	\BT.XY(025+33*0, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 01)
+
+	\BT.NAME("■Page02")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page02")
+	\BT.XY(025+33*1, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 02)
+
+	\BT.NAME("■Page03")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page03")
+	\BT.XY(025+33*2, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 03)
+
+	\BT.NAME("■Page04")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page04")
+	\BT.XY(025+33*3, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 04)
+
+	\BT.NAME("■Page05")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page05")
+	\BT.XY(025+33*4, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 05)
+
+	\BT.NAME("■Page06")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page06")
+	\BT.XY(025+33*5, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 06)
+
+	\BT.NAME("■Page07")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page07")
+	\BT.XY(025+33*6, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 07)
+
+	\BT.NAME("■Page08")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page08")
+	\BT.XY(025+33*7, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 08)
+
+	\BT.NAME("■Page09")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page09")
+	\BT.XY(025+33*8, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 09)
+
+	\BT.NAME("■Page10")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page10")
+	\BT.XY(025+33*9, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 10)
+
+
+
+	//■←→
+	\BT.NAME("■←←")
+	\BT.CGSYS("saveload/btn_prev")
+	\BT.XY(025+33*11, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGEFIRST)
+
+	\BT.NAME("■←")
+	\BT.CGSYS("saveload/btn_prev")
+	\BT.XY(025+33*13, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGEPREV)
+
+	\BT.NAME("■→")
+	\BT.CGSYS("saveload/btn_next")
+	\BT.XY(025+33*18, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGENEXT)
+
+	\BT.NAME("■→→")
+	\BT.CGSYS("saveload/btn_next")
+	\BT.XY(025+33*20, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGELAST)
+
+
+	//■ページ用／
+	\BT.NAME("■／")
+	\BT.CGSYS("saveload/tip_／")
+	\BT.XY(025+33*16+0, 055)
+	\BT.Z(1100)
+	\BT.SET(TIP.SLASH, 1)
+
+
+
+	//■プレート01～10、サムネイル01～10
+	\BT.NAME("■プレート01")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*0)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 01)
+
+		\BT.NAME("■サムネイル01")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(057-25+31, 091+92*0+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 01)
+
+			\BT.NAME("■テキスト01")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(057-25+130, 091+92*0+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 01)
+
+	\BT.NAME("■プレート02")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*1)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 02)
+
+		\BT.NAME("■サムネイル02")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(057-25+31, 091+92*1+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 02)
+
+			\BT.NAME("■テキスト02")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(057-25+130, 091+92*1+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 02)
+
+	\BT.NAME("■プレート03")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*2)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 03)
+
+		\BT.NAME("■サムネイル03")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(057-25+31, 091+92*2+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 03)
+
+			\BT.NAME("■テキスト03")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(057-25+130, 091+92*2+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 03)
+
+	\BT.NAME("■プレート04")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*3)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 04)
+
+		\BT.NAME("■サムネイル04")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(057-25+31, 091+92*3+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 04)
+
+			\BT.NAME("■テキスト04")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(057-25+130, 091+92*3+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 04)
+
+	\BT.NAME("■プレート05")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*4)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 05)
+
+		\BT.NAME("■サムネイル05")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(057-25+31, 091+92*4+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 05)
+
+			\BT.NAME("■テキスト05")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(057-25+130, 091+92*4+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 05)
+
+	\BT.NAME("■プレート06")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*0)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 06)
+
+		\BT.NAME("■サムネイル06")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(413+31, 091+92*0+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 06)
+
+			\BT.NAME("■テキスト06")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(413+130, 091+92*0+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 06)
+
+	\BT.NAME("■プレート07")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*1)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 07)
+
+		\BT.NAME("■サムネイル07")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(413+31, 091+92*1+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 07)
+
+			\BT.NAME("■テキスト07")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(413+130, 091+92*1+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 07)
+
+	\BT.NAME("■プレート08")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*2)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 08)
+
+		\BT.NAME("■サムネイル08")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(413+31, 091+92*2+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 08)
+
+			\BT.NAME("■テキスト08")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(413+130, 091+92*2+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 08)
+
+	\BT.NAME("■プレート09")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*3)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 09)
+
+		\BT.NAME("■サムネイル09")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(413+31, 091+92*3+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 09)
+
+			\BT.NAME("■テキスト09")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(413+130, 091+92*3+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 09)
+
+	\BT.NAME("■プレート10")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*4)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 10)
+
+		\BT.NAME("■サムネイル10")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(413+31, 091+92*4+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 10)
+
+			\BT.NAME("■テキスト10")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(413+130, 091+92*4+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 10)
+
+
+/*
+	\BT.NAME("■QuickPlate01")
+	\BT.CGSYS("saveload/tip_plate")
+	\BT.XY(404, 454)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 11)
+*/
+
+
+
+
+
+	//■Check01～10
+	\BT.NAME("■Check1")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*0)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 01)
+
+	\BT.NAME("■Check2")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*1)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 02)
+
+	\BT.NAME("■Check3")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*2)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 03)
+
+	\BT.NAME("■Check4")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*3)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 04)
+
+	\BT.NAME("■Check5")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*4)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 05)
+
+	\BT.NAME("■Check6")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*0)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 06)
+
+	\BT.NAME("■Check7")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*1)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 07)
+
+	\BT.NAME("■Check8")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*2)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 08)
+
+	\BT.NAME("■Check9")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*3)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 09)
+
+	\BT.NAME("■Check10")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*4)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 10)
+
+
+
+
+
+	//----------------------------------------------------------------
+	//■シーン鑑賞へ戻る
+	//----------------------------------------------------------------
+		IF[@es.RPMODE==1] //シーン鑑賞中であれば
+		{
+			//◆シーン鑑賞へ戻る
+			\BT.CGSYS("saveload/btn_rpmode_bt3")
+			\BT.XY(341, 554)
+			\BT.Z(1100)
+			\BT.SET(BTN.RPMODE)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■タイトルへ戻る
+	//----------------------------------------------------------------
+		IF[@es.S.NAMENEST>0]
+			IF[$es.S.NAME(@es.S.NAMENEST-1)!="ES.TITLE"] //タイトル画面モードじゃなければ表示
+			{
+				//◆タイトルへ戻る
+				\BT.CGSYS("saveload/btn_title_bt3")
+				\BT.XY(396, 554)
+				\BT.Z(1100)
+				\BT.SET(BTN.TITLE, 0) //1=Windowsダイアログ
+			}
+			IFEND[]
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■終了
+	//----------------------------------------------------------------
+		//◆END
+		\BT.CGSYS("saveload/btn_end_bt3")
+		\BT.XY(451, 554)
+		\BT.Z(1100)
+		\BT.SET(BTN.END, 0) //1=Windowsダイアログ
+
+
+
+	\BT.NAME("■ロード画面へ")
+	\BT.CGSYS("saveload/btn_load")
+	\BT.XY(506, 554)
+	\BT.Z(1100)
+	\BT.SET(BTN.LOAD)
+
+	\BT.NAME("■移動")
+	\BT.CGSYS("saveload/btn_move")
+	\BT.XY(561, 554)
+	\BT.Z(1100)
+	\BT.SET(BTN.MOVE)
+
+	\BT.NAME("■削除")
+	\BT.CGSYS("saveload/btn_delete")
+	\BT.XY(616, 554)
+	\BT.Z(1100)
+	\BT.SET(BTN.DELETE)
+
+	\BT.NAME("■コピー")
+	\BT.CGSYS("saveload/btn_copy")
+	\BT.XY(671, 554)
+	\BT.Z(1100)
+	\BT.SET(BTN.COPY)
+
+	\BT.NAME("■戻る")
+	\BT.CGSYS("saveload/btn_back")
+	\BT.XY(726, 554)
+	\BT.Z(1100)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.BACK)
+
+
+RETURN[]
+
+
+
+//============================================================================
+// ロード画面設計
+//============================================================================
+#=ES.LOAD.BTDEF
+
+	\BTDEF.GROUP(ES.LOAD)
+
+
+	//■背景
+	\BT.NAME("背景")
+	\BT.CGSYS("saveload/back_load")
+	\BT.XY(000, 000)
+	\BT.Z(1010)
+	\BT.SET(TIP.BG)
+
+
+	//■New!マーク(座標は上のほうで設定している『相対表示座標』をもとに自動で決定されます)
+	\BT.NAME("New!マーク")
+	\BT.CGSYS("saveload/tip_new")
+	\BT.XY(000, 000)
+	\BT.Z(1200)
+	\BT.SET(TIP.NEW)
+
+
+	//■Page01～10
+	\BT.NAME("■Page01")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page01")
+	\BT.XY(025+33*0, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 01)
+
+	\BT.NAME("■Page02")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page02")
+	\BT.XY(025+33*1, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 02)
+
+	\BT.NAME("■Page03")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page03")
+	\BT.XY(025+33*2, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 03)
+
+	\BT.NAME("■Page04")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page04")
+	\BT.XY(025+33*3, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 04)
+
+	\BT.NAME("■Page05")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page05")
+	\BT.XY(025+33*4, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 05)
+
+	\BT.NAME("■Page06")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page06")
+	\BT.XY(025+33*5, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 06)
+
+	\BT.NAME("■Page07")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page07")
+	\BT.XY(025+33*6, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 07)
+
+	\BT.NAME("■Page08")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page08")
+	\BT.XY(025+33*7, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 08)
+
+	\BT.NAME("■Page09")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page09")
+	\BT.XY(025+33*8, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 09)
+
+	\BT.NAME("■Page10")
+	\BT.RADIO(1)
+	\BT.CGSYS("saveload/btn_page10")
+	\BT.XY(025+33*9, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGE, 10)
+
+
+
+	//■←→
+	\BT.NAME("■←←")
+	\BT.CGSYS("saveload/btn_prev")
+	\BT.XY(025+33*11, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGEFIRST)
+
+	\BT.NAME("■←")
+	\BT.CGSYS("saveload/btn_prev")
+	\BT.XY(025+33*13, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGEPREV)
+
+	\BT.NAME("■→")
+	\BT.CGSYS("saveload/btn_next")
+	\BT.XY(025+33*18, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGENEXT)
+
+	\BT.NAME("■→→")
+	\BT.CGSYS("saveload/btn_next")
+	\BT.XY(025+33*20, 053)
+	\BT.Z(1100)
+	\BT.SET(BTN.PAGELAST)
+
+
+	//■ページ用／
+	\BT.NAME("■／")
+	\BT.CGSYS("saveload/tip_／")
+	\BT.XY(025+33*16+0, 055)
+	\BT.Z(1100)
+	\BT.SET(TIP.SLASH, 1)
+
+
+
+	//■プレート01～10、サムネイル01～10
+	\BT.NAME("■プレート01")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*0)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 01)
+
+		\BT.NAME("■サムネイル01")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(057-25+31, 091+92*0+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 01)
+
+			\BT.NAME("■テキスト01")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(057-25+130, 091+92*0+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 01)
+
+	\BT.NAME("■プレート02")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*1)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 02)
+
+		\BT.NAME("■サムネイル02")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(057-25+31, 091+92*1+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 02)
+
+			\BT.NAME("■テキスト02")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(057-25+130, 091+92*1+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 02)
+
+	\BT.NAME("■プレート03")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*2)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 03)
+
+		\BT.NAME("■サムネイル03")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(057-25+31, 091+92*2+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 03)
+
+			\BT.NAME("■テキスト03")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(057-25+130, 091+92*2+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 03)
+
+	\BT.NAME("■プレート04")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*3)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 04)
+
+		\BT.NAME("■サムネイル04")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(057-25+31, 091+92*3+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 04)
+
+			\BT.NAME("■テキスト04")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(057-25+130, 091+92*3+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 04)
+
+	\BT.NAME("■プレート05")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*4)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 05)
+
+		\BT.NAME("■サムネイル05")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(057-25+31, 091+92*4+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 05)
+
+			\BT.NAME("■テキスト05")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(057-25+130, 091+92*4+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 05)
+
+	\BT.NAME("■プレート06")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*0)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 06)
+
+		\BT.NAME("■サムネイル06")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(413+31, 091+92*0+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 06)
+
+			\BT.NAME("■テキスト06")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(413+130, 091+92*0+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 06)
+
+	\BT.NAME("■プレート07")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*1)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 07)
+
+		\BT.NAME("■サムネイル07")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(413+31, 091+92*1+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 07)
+
+			\BT.NAME("■テキスト07")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(413+130, 091+92*1+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 07)
+
+	\BT.NAME("■プレート08")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*2)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 08)
+
+		\BT.NAME("■サムネイル08")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(413+31, 091+92*2+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 08)
+
+			\BT.NAME("■テキスト08")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(413+130, 091+92*2+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 08)
+
+	\BT.NAME("■プレート09")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*3)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 09)
+
+		\BT.NAME("■サムネイル09")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(413+31, 091+92*3+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 09)
+
+			\BT.NAME("■テキスト09")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(413+130, 091+92*3+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 09)
+
+	\BT.NAME("■プレート10")
+	\BT.CGSYS("saveload/btn_plate_back")
+	\BT.MAP.CG("saveload/btn_plate_back_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*4)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 10)
+
+		\BT.NAME("■サムネイル10")
+		\BT.CGSYS("saveload/btn_thumb", "saveload/btn_thumb")
+		\BT.XY(413+31, 091+92*4+5)
+		\BT.Z(1101)
+		\BT.TYPE(0)
+		\BT.SET(BTN.THUMB, 10)
+
+			\BT.NAME("■テキスト10")
+			\BT.CGSYS("saveload/tip_txspace")
+			\BT.XY(413+130, 091+92*4+4)
+			\BT.Z(1102)
+			\BT.TYPE(0)
+			\BT.SET(TIP.TX, 10)
+
+/*
+	\BT.NAME("■QuickPlate01")
+	\BT.CGSYS("saveload/tip_plate")
+	\BT.XY(404, 454)
+	\BT.Z(1100)
+	\BT.SET(BTN.PLATE, 11)
+*/
+
+
+	//■Check01～10
+	\BT.NAME("■Check1")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*0)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 01)
+
+	\BT.NAME("■Check2")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*1)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 02)
+
+	\BT.NAME("■Check3")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*2)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 03)
+
+	\BT.NAME("■Check4")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*3)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 04)
+
+	\BT.NAME("■Check5")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(057-25, 091+92*4)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 05)
+
+	\BT.NAME("■Check6")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*0)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 06)
+
+	\BT.NAME("■Check7")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*1)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 07)
+
+	\BT.NAME("■Check8")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*2)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 08)
+
+	\BT.NAME("■Check9")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*3)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 09)
+
+	\BT.NAME("■Check10")
+	\BT.CGSYS("saveload/btn_plate")
+	\BT.MAP.CG("saveload/btn_plate_mask")
+	\BT.MAP.A(1)
+	\BT.XY(413, 091+92*4)
+	\BT.Z(1101)
+	\BT.SET(BTN.PLATECHECK, 10)
+
+
+
+
+	//----------------------------------------------------------------
+	//■シーン鑑賞へ戻る
+	//----------------------------------------------------------------
+		IF[@es.RPMODE==1] //シーン鑑賞中であれば
+		{
+			//◆シーン鑑賞へ戻る
+			\BT.CGSYS("saveload/btn_rpmode_bt3")
+			\BT.XY(341, 554)
+			\BT.Z(1100)
+			\BT.SET(BTN.RPMODE)
+		}
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■タイトルへ戻る
+	//----------------------------------------------------------------
+		IF[@es.S.NAMENEST>0]
+			IF[$es.S.NAME(@es.S.NAMENEST-1)!="ES.TITLE"] //タイトル画面モードじゃなければ表示
+			{
+				//◆タイトルへ戻る
+				\BT.CGSYS("saveload/btn_title_bt3")
+				\BT.XY(396, 554)
+				\BT.Z(1100)
+				\BT.SET(BTN.TITLE, 0) //1=Windowsダイアログ
+			}
+			IFEND[]
+		IFEND[]
+
+	//----------------------------------------------------------------
+	//■終了
+	//----------------------------------------------------------------
+		//◆END
+		\BT.CGSYS("saveload/btn_end_bt3")
+		\BT.XY(451, 554)
+		\BT.Z(1100)
+		\BT.SET(BTN.END, 0) //1=Windowsダイアログ
+
+
+
+	\BT.NAME("■セーブ画面へ")
+	\BT.CGSYS("saveload/btn_save")
+	\BT.XY(506, 554)
+	\BT.Z(1100)
+	\BT.SET(BTN.SAVE)
+
+	\BT.NAME("■移動")
+	\BT.CGSYS("saveload/btn_move")
+	\BT.XY(561, 554)
+	\BT.Z(1100)
+	\BT.SET(BTN.MOVE)
+
+	\BT.NAME("■削除")
+	\BT.CGSYS("saveload/btn_delete")
+	\BT.XY(616, 554)
+	\BT.Z(1100)
+	\BT.SET(BTN.DELETE)
+
+	\BT.NAME("■コピー")
+	\BT.CGSYS("saveload/btn_copy")
+	\BT.XY(671, 554)
+	\BT.Z(1100)
+	\BT.SET(BTN.COPY)
+
+	\BT.NAME("■戻る")
+	\BT.CGSYS("saveload/btn_back")
+	\BT.XY(726, 554)
+	\BT.Z(1100)
+	\BT.KEY("ESC", "BS", "SPACE", "MOUSE_R")
+	\BT.SET(BTN.BACK)
+
+
+RETURN[]
+

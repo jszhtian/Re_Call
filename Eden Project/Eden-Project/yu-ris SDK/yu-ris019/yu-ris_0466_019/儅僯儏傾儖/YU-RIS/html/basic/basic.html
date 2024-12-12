@@ -1,0 +1,128 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="./top.html">概要</A>＞基本文法</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="./basic.html">[基本文法]</A>
+　<A HREF="./variable.html">[変数]</A>
+　<A HREF="./svariable.html">[システム変数]</A>
+　<A HREF="./macro.html">[マクロ]</A>
+　<A HREF="./layer.html">[ＣＧレイヤ]</A>
+　<A HREF="./task.html">[タスク]</A>
+　<A HREF="./input.html">[入力]</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■基本文法</FONT>
+<FONT CLASS=t20>
+
+<FONT CLASS=t60><U>●コマンド</U></FONT>
+
+基本的なコマンド（命令）の書き方は、
+
+	<B><FONT CLASS=t50><FONT CLASS=t54>コマンド</FONT>[<FONT CLASS=t52>キーワード</FONT>＝<FONT CLASS=t53>値<FONT CLASS=t50>or</FONT>式</FONT>]</FONT></B>
+
+となります。
+
+例えば、<B>TEXT</B>コマンドの<B>SIZE</B>キーワードを設定する場合は、
+
+	<B><FONT CLASS=t50><FONT CLASS=t54>TEXT</FONT>[<FONT CLASS=t52>SIZE</FONT>=<FONT CLASS=t53>24</FONT>]</FONT></B><FONT CLASS=t20>　（※この場合文字サイズを24pxに設定します）</FONT>
+
+のように記述します。
+複数のキーワードを一度に記述することもできます。
+その場合、キーワードとキーワードの間には一文字以上の空白が必要です。
+
+	<B><FONT CLASS=t50><FONT CLASS=t54>CG</FONT>[<FONT CLASS=t52>ID</FONT>=<FONT CLASS=t53>ABC</FONT> <FONT CLASS=t52>X</FONT>=<FONT CLASS=t53>40</FONT> <FONT CLASS=t52>Y</FONT>=<FONT CLASS=t53>300+40*2</FONT>]</FONT></B><FONT CLASS=t20>　（※この場合レイヤ「ＡＢＣ」の表示座標を設定します）</FONT>
+
+キーワードの記述の順番の指定はありません。
+つまり、上の記述は、次のようにも書けます。
+
+	<B><FONT CLASS=t50><FONT CLASS=t54>CG</FONT>[<FONT CLASS=t52>Y</FONT>=<FONT CLASS=t53>300+40*2</FONT> <FONT CLASS=t52>X</FONT>=<FONT CLASS=t53>40</FONT> <FONT CLASS=t52>ID</FONT>=<FONT CLASS=t53>ABC</FONT>]</FONT></B><FONT CLASS=t20></FONT>
+
+
+また、コマンドを同じ行に続けて２つ以上書くことも出来ます。
+
+	<B><FONT CLASS=t50><FONT CLASS=t54>WAIT</FONT>[<FONT CLASS=t52>TIME</FONT>=<FONT CLASS=t53>1000</FONT>]<FONT CLASS=t54>GO</FONT>[<FONT CLASS=t52>#</FONT>=<FONT CLASS=t53>"LABEL_001"</FONT>]</FONT></B>
+
+
+式は、「＋」「－」「＊」「／」「（括弧）」を用いた四則演算式の記述が可能です。
+また、割り算で余りを求める「％」も記述可能です。
+式の計算順序も一般の計算順序と同じです。
+「２＋５＊２」 ならば、５＊２が先に計算されるので １２ となります。
+
+
+数値は１６進数表記での記述も可能です。
+INT[@A = 0xFF] で、255 という値が格納されます。
+INT[@A = 0xFFFFFFFFFFFFFFFF] とすると、-1 が格納されます。
+
+
+式には比較演算子も使用できます。
+@A = (5 < 10)
+と記述すれば、真として１が変数Ａに格納されます。(それに対し偽の値は０)
+またビット演算子「&」「|」「^」も使用できます。
+
+@A = (@B & 4) / 4
+と記述すれば、変数Ｂの下から３ビット目のビットの値(０ or １)を取得できます。
+
+<FONT CLASS=t60><U>
+●テキスト表示
+</U></FONT>
+まず全角文字は全てテキスト表示文字として扱われます。
+<FONT CLASS=t40>
+	あいうえお			←(「あいうえお」と表示される)
+	CG[ID=BG FILE="～"]かきくけこ	←(「かきくけこ」と表示される)
+</FONT>
+
+そして、半角カナ文字も表示文字として扱えるようになりました。（※Ver0.226以降）
+<FONT CLASS=t40>
+	恵一「新しいﾊﾟｿｺﾝが欲しいなぁ」
+</FONT>
+
+また改行、改頁、クリック待ちを行うには、マクロ　\[r]、\[p]、\[c] を使用します。
+<FONT CLASS=t40>
+	あいうえお\[r]かきくけこ\[c]さしすせそ\[p]たちつてと\[r]
+</FONT>
+
+マクロ名の後に続く文字が<B>全角文字</B>や<B>改行</B>、<B>マクロ文字</B>の場合に限り、
+角括弧（［ ］）の記述を省略することが出来ます。
+<FONT CLASS=t40>
+	あいうえお\rかきくけこ\r\cさしすせそ\pたちつてと\c\p
+</FONT>
+
+変数の値を表示することも出来ます。（※Ver0.167より仕様変更）
+書き方としては、アンダーバーを使い、
+<FONT CLASS=t40>
+	_[式]
+</FONT>
+という形になります。
+<FONT CLASS=t40>
+	INT[@BANANA = 250]	←(変数 BANANA が宣言され、初期値250が入る)
+	_[@BANANA]		←(変数 BANANA の値を表示)
+</FONT>
+上の例のように、＠の後の変数名を角括弧でくくって記述をすることで、
+変数の値が表示されることになります。
+文字表示と組み合わせると、
+<FONT CLASS=t40>
+	INT[@OYATSU]			←(変数 OYATSU が宣言される)
+	@OYATSU = 300			←(変数 OYATSU に300を代入)
+	おやつは_[@OYATSU]円までです。
+</FONT>
+となります。
+また、式を記述できますので、
+<FONT CLASS=t40>
+	_[2+3*4]
+</FONT>
+と書くこともでき、結果として 14 が表示されます。
+
+
+
+<BR></FONT></TD>
+
+
+
+</BODY></HTML>

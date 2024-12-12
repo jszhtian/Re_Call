@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Window size="1024,768">
+	<VerticalLayout width="1024" height="768" pos="0,0,1024,768" bkimage="file='res/bg.png'" bordersize="1">
+		<HorizontalLayout inset="746,593,0,0">
+			<Button name="Install" width="204" height="117" normalimage="file='res/Setup_up.png'" hotimage="file='res/Setup_hot.png'" />
+		</HorizontalLayout>
+	</VerticalLayout>
+</Window>

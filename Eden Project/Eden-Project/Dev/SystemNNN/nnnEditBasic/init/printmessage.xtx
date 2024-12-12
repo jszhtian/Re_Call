@@ -1,0 +1,74 @@
+modename printmessage
+
+nameCenterFlag 0
+nameLengthMax 16
+
+
+useAutoModeWait 1
+noVoicelastWait1 5000
+noVoicelastWait2 300
+noVoicelastWait3 100
+noVoicelastWait4 50
+noVoicelastWait5 5
+
+voicelastWait1 500
+voicelastWait2 300
+voicelastWait3 100
+voicelastWait4 50
+voicelastWait5 5
+
+customMessageSpeed 1
+messageSpeed1 3
+messageSpeed2 40
+messageSpeed3 60
+messageSpeed4 120
+messageSpeed5 10000
+
+effectFontColorR 128
+effectFontColorG 255
+effectFontColorB 192
+
+
+fontSize 28
+printX 80
+printY 500
+nextY 30
+nameFlag 1
+
+LPrintX 124
+LPrintY 60
+LNextX 1
+LNextY 34
+fullMessageNumber 12
+LBlickX 1
+LBlockY 28
+
+LPrintOptionFlag 1
+
+space 5
+nameSpace 0
+
+nameFontSize 28
+
+nameX 60
+nameY 416
+
+colorCustomFlag 1
+nameColorChangeFlag 1
+
+	colorR 255	
+	colorG 255
+	colorB 255
+	shadeColorR 81
+	shadeColorG 48
+	shadeColorB 14
+
+	nameColorR 255
+	nameColorG 255
+	nameColorB 255
+	nameShadeColorR 96
+	nameShadeColorG 57
+	nameShadeColorB 0
+
+autoNameWindowFlag 1
+

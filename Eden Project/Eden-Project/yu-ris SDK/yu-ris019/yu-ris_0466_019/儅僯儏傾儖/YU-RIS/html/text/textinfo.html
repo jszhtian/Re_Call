@@ -1,0 +1,49 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">テキスト系命令</A>＞TEXTINFO［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="text.html">TEXT［］</A>
+　<A HREF="textinfo.html">TEXTINFO［］</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■テキスト情報取得命令 TEXTINFO[ ]</FONT>
+<FONT CLASS=t20>
+
+テキストに関する各種情報を取得します。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>LET = 変数名</FONT></TD><TD><FONT CLASS=t40>情報値を格納する変数を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CX = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>テキストカーソル座標Ｘを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CY = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>テキストカーソル座標Ｙを調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CLICK = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>現在クリック待ち状態か否か調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>AUTORETURN = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>自動改行設定か否か調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>AUTOPAGE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>自動改頁設定か否か調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>AUTOCLICK = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>自動クリック待ち設定か否か調べる場合は１を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>OUTPUTMODE = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>テキスト出力モードを調べる場合は１を指定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1] テキストの出力モードを調べる。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TEXTINFO</FONT>[<FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>OUTPUTMODE</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[2] クリック待ち状態か否かを調べる。(基本的に別タスクから使用)
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>TEXTINFO</FONT>[<FONT CLASS=t62>LET</FONT>=<FONT CLASS=t63>@CHECK</FONT> <FONT CLASS=t62>CLICK</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+</FONT>
+
+
+</BODY></HTML>

@@ -1,0 +1,177 @@
+//=========================================================================
+//
+//■コンフィグ・フォント選択
+//
+//=========================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.CONFIGSELFONT."]
+
+	S_INT[@mFontListNo=1]
+	S_INT[@mFontNum]
+	S_INT[@selbarflag]
+
+	S_INT[@FS.SY]
+
+}
+
+//--------------------------------------------------------------------
+//■INIT
+//--------------------------------------------------------------------
+#=ES.CONFIGSELFONT.INIT
+{
+	INT[@fontlist.num=@T(18,09)]
+	GOSUB[#=es.FONT.NUM.GET];@mFontNum=@_RINT(1)
+
+//@mFontNum=3
+	//フォント数がスクロールするまでもない量なら、スクロールまわりのチップを無効に
+	IF[@mFontNum<=@fontlist.num]
+		\BT.ES0($BID+"FONT.SLIDER")
+		\BT.N1($BID+"FONT.GAUGE")
+		\BT.N1($BID+"FONT.UP")
+		\BT.N1($BID+"FONT.DOWN")
+	IFEND[]
+
+	\BT.ES0($BID+"FONT.BAR")
+
+	GOSUB[#=es.FONT.Disabled]
+
+	GOSUB[#=es.FONTLIST.SHOW pint=@mFontListNo]
+
+	//---------------------------------------------------------------------
+	// 
+	//---------------------------------------------------------------------
+	GOSUB[#=es.TDDEF.SEARCH pstr=$T(18,04)]
+	@FS.SY = @_RINT(1) % 65536
+
+	IF[$_RSTR(8)!=""] \_txfont($_RSTR(8)) IFEND[]
+
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.CONFIGSELFONT.LOOP
+{
+	IF[@es.STATE==0] //FADE
+	{
+		\SS.FADE(0)
+		@es.STATE=100
+	}
+	IFEND[]
+
+	IF[@es.STATE==100] //LOOP
+	{
+		INT[@lx=@T(18,05)]
+		INT[@ly=@T(18,06)]
+		INT[@lsx=@T(18,07)]
+		INT[@lsy=@FS.SY+@T(18,08)]
+
+		@selbarflag=0
+
+		GOSUB[#=es.BT.DD.GET]
+		IF[@_RINT(1)==0]
+		{
+			LOOP[SET=@T(18,09)]
+			{
+				IF[@_MOUSE_X>=@lx && @_MOUSE_Y>=@ly+@lsy*(@_LC-1) && @_MOUSE_X<@lx+@lsx && @_MOUSE_Y<@ly+@lsy*(@_LC) && @mFontNum>=@mFontListNo+@_LC-1]
+				{
+					@selbarflag=@_LC
+					\BT.ES1($BID+"FONT.BAR")
+					\BT.X.SET($BID+"FONT.BAR",, @lx              )
+					\BT.Y.SET($BID+"FONT.BAR",, @ly+@lsy*(@_LC-1))
+				}
+				IFEND[]
+			}
+			LOOPEND[]
+
+			IF[@selbarflag==0] \BT.ES0($BID+"FONT.BAR") IFEND[]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[FONT.CLOSE]ボタン -----------------------------------------------
+//
+#=ES.CONFIGSELFONT.FONT.CLOSE.ON
+{
+	\es.S.RETURN; return[]
+}
+
+//■[FONT.BAR]ボタン -------------------------------------------------
+//
+#=ES.CONFIGSELFONT.FONT.BAR.ON
+{
+	@es.GSD(113,01) = @mFontListNo+@selbarflag-1
+	GOSUB[#=es.FONT.NAME.GET pint=@es.GSD(113,01)]
+//	$T(36,11) = $_RSTR(1)		// デフォルトフォントとして設定
+	$es.GSD(113) = $_RSTR(1)	// デフォルトフォントとして設定
+	\es.S.RETURN; return[]
+}
+
+//■[フォント] -------------------------------------------------------
+//
+#=ES.CONFIGSELFONT.FONT.GAUGE.ON    { \SLIDER.SYNC($BID+"FONT.SLIDER");return[] } //ゲージ
+#=ES.CONFIGSELFONT.FONT.SLIDER.DRAG //スライダー
+{
+	INT[@sy]INT[@y]
+
+	\BT.SLIDE.SY.GET($es.BID)(@sy) //ボタンスライドサイズ取得
+	\BT.SLIDE.Y.GET($es.BID)(@y) //ボタンスライド座標取得
+
+	@mFontListNo = 1 + ((@mFontNum-@T(18,09)) * @y / @sy)
+	GOSUB[#=es.FONTLIST.SHOW pint=@mFontListNo]
+
+	return[]
+}
+
+//■[フォント△]ボタン -----------------------------------------------
+//
+#=ES.CONFIGSELFONT.FONT.UP.ON
+{
+//	INT[@xx=@_PINT(2)]
+	INT[@yy=@_PINT(3)]
+	INT[@y]INT[@sy]
+
+	@mFontListNo -= 1
+	IF[@mFontListNo<1] @mFontListNo=1 IFEND[]
+	GOSUB[#=es.FONTLIST.SHOW pint=@mFontListNo]
+
+	\BT.SLIDE.SY.GET($BID+"FONT.SLIDER")(@sy) //ボタンスライドサイズ取得
+	@y = @sy * (@mFontListNo-1) / @mFontNum
+	\BT.SLIDE.Y.SET($BID+"FONT.SLIDER",, @y) //ボタンスライド座標セット
+
+	return[]
+}
+
+//■[フォント▽]ボタン -----------------------------------------------
+//
+#=ES.CONFIGSELFONT.FONT.DOWN.ON
+{
+//	INT[@xx=@_PINT(2)]
+	INT[@yy=@_PINT(3)]
+	INT[@y]INT[@sy]
+
+	@mFontListNo += 1
+	IF[@mFontListNo>@mFontNum-@T(18,09)+1] @mFontListNo=@mFontNum-@T(18,09)+1 IFEND[]
+	GOSUB[#=es.FONTLIST.SHOW pint=@mFontListNo]
+
+	\BT.SLIDE.SY.GET($BID+"FONT.SLIDER")(@sy) //ボタンスライドサイズ取得
+	@y = @sy * (@mFontListNo+@T(18,09)-1) / @mFontNum
+
+	\BT.SLIDE.Y.SET($BID+"FONT.SLIDER",, @y) //ボタンスライド座標セット
+
+	return[]
+}
+

@@ -1,0 +1,1591 @@
+//============================================================================
+//
+//■コンフィグ
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.CONFIG."]
+
+	S_INT[@VOICEPLAYFLAG.SE]
+	S_INT[@VOICEPLAYFLAG.ESE]
+	S_INT[@VOICEPLAYFLAG.E2SE]
+	S_INT[@VOICEPLAYFLAG.SSE]
+	S_INT[@VOICEPLAYFLAG.S2SE]
+	S_INT[@VOICEPLAYFLAG.VO]
+	S_INT[@VOICEPLAYFLAG.EVO]
+	S_INT[@VOICEPLAYFLAG.E2VO]
+	S_INT[@VOICEPLAYFLAG.SVO]
+	S_INT[@VOICEPLAYFLAG.S2VO]
+
+	S_INT[@VOICEPLAYFLAG.VOC]
+	S_INT[@VOICEPLAYFLAG.EVOC]
+	S_INT[@VOICEPLAYFLAG.E2VOC]
+	S_INT[@VOICEPLAYFLAG.SVOC]
+	S_INT[@VOICEPLAYFLAG.S2VOC]
+
+	S_INT[@SMTX.FLAG]
+	S_INT[@SMTX.COUNT]
+	S_INT[@SMTX.STARTTIME]
+//	S_INT[@SMTX.FF(50)]
+	S_STR[$SMTX.STR(50)]
+	S_INT[@activeno=1]
+
+	S_INT[@TX.COLOR]
+	S_INT[@TX.COLOR2]
+	S_INT[@TX.SHADE.X]
+	S_INT[@TX.SHADE.Y]
+	S_INT[@TX.SHADE.COLOR]
+	S_INT[@TX.OUTLINE.COLOR]
+
+	S_INT[@const.SAMPLETEXTTAB = (3)]
+
+}
+
+//--------------------------------------------------------------------
+//■LOOP
+//--------------------------------------------------------------------
+#=ES.CONFIG.LOOP
+{
+	LOOP[SET=1]
+	{
+		IF[@es.STATE==10]
+		{
+			\BT.ACTIVEGROUP(@activeno)
+
+//			\_gosub(ES.CONFIG.VoicePlay.1)	//ボイス再生
+			@es.STATE=11
+		}
+		IFEND[]
+		IF[@es.STATE==11]
+		{
+			@es.STATE=12
+		}
+		IFEND[]
+		IF[@es.STATE==12]
+		{
+			GOSUB[#=ES.CONFIG.INITIALIZE]
+			@es.STATE=13
+			LOOPBREAK[]
+		}
+		IFEND[]
+		IF[@es.STATE==13] //FADE
+		{
+			\SS.FADE(250)
+			@es.STATE=100
+		}
+		IFEND[]
+		IF[@es.STATE==100] //LOOP
+		{
+			//----------------------------------- サンプルテキスト表示処理
+			//
+			GOSUB[#=ES.CONFIG.SMTX.EXEC]
+
+			//----------------------------------- ボイス再生終了チェック
+			//
+			IF[@VOICEPLAYFLAG.SE] \SE.PCHK(3) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.SE.TEST",, 0);@VOICEPLAYFLAG.SE=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.ESE] \ESE.PCHK(3) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.ESE.TEST",, 0);@VOICEPLAYFLAG.ESE=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.E2SE] \E2SE.PCHK(3) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.E2SE.TEST",, 0);@VOICEPLAYFLAG.E2SE=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.SSE] \SSE.PCHK(3) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.SSE.TEST",, 0);@VOICEPLAYFLAG.SSE=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.S2SE] \S2SE.PCHK(3) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.S2SE.TEST",, 0);@VOICEPLAYFLAG.S2SE=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.VO] \VO.PCHK(10) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.VO.TEST",, 0);@VOICEPLAYFLAG.VO=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.EVO] \EVO.PCHK(5) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.EVO.TEST",, 0);@VOICEPLAYFLAG.EVO=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.E2VO] \E2VO.PCHK(5) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.E2VO.TEST",, 0);@VOICEPLAYFLAG.E2VO=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.SVO] \SVO.PCHK(5) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.SVO.TEST",, 0);@VOICEPLAYFLAG.SVO=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.S2VO] \S2VO.PCHK(5) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.S2VO.TEST",, 0);@VOICEPLAYFLAG.S2VO=0 IFEND[] IFEND[]
+
+			//キャラ別
+			IF[@VOICEPLAYFLAG.VOC] \VO.PCHK(10) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.CHARA.TEST", @VOICEPLAYFLAG.VOC, 0);@VOICEPLAYFLAG.VOC=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.EVOC] \EVO.PCHK(5) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.CHARA.EVO.TEST", @VOICEPLAYFLAG.EVOC, 0);@VOICEPLAYFLAG.EVOC=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.E2VOC] \E2VO.PCHK(5) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.CHARA.E2VO.TEST", @VOICEPLAYFLAG.E2VOC, 0);@VOICEPLAYFLAG.E2VOC=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.SVOC] \SVO.PCHK(5) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.CHARA.SVO.TEST", @VOICEPLAYFLAG.SVOC, 0);@VOICEPLAYFLAG.SVOC=0 IFEND[] IFEND[]
+			IF[@VOICEPLAYFLAG.S2VOC] \S2VO.PCHK(5) IF[@_RINT(1)==0] \BT.ONOFF($BID+"VOL.CHARA.S2VO.TEST", @VOICEPLAYFLAG.S2VOC, 0);@VOICEPLAYFLAG.S2VOC=0 IFEND[] IFEND[]
+
+		}
+		IFEND[]
+
+		IF[@es.STATE==200] //コンフィグ設定初期化
+		{
+			GOSUB[#=ES.CONFIG.INITEXEC]
+			GOSUB[#=ES.CONFIG.INITIALIZE]
+
+			\BT.END(ES.CONFIG)
+			\BTDEF.LOAD(ES.CONFIG)
+
+			GOSUB[#=ES.CONFIG.REF]
+
+	//		GOSUB[#=ES.CONFIG.REF]
+	//		GOSUB[#=es.BT.DRAW]	//ボタン描画 (設定初期化後のフラッシュ防止とかに必要)
+
+			@es.STATE=100
+			\SS.FADE(10)
+			LOOPCONTINUE[]
+		}
+		IFEND[]
+		IF[@es.STATE==201] //コンフィグ設定初期化(DIALOG)
+		{
+			GOSUB[#=ES.CONFIG.INITEXEC]
+			GOSUB[#=ES.CONFIG.INITIALIZE]
+
+			\BT.END(ES.CONFIG)
+			\BTDEF.LOAD(ES.CONFIG)
+
+			GOSUB[#=ES.CONFIG.REF]
+
+			@es.STATE=100
+			LOOPCONTINUE[]
+		}
+		IFEND[]
+
+		IF[@es.STATE==202] //コンフィグ設定初期化確認から戻った
+		{
+			IF[@es.S.RINT(1)==1] @es.STATE=200 IFEND[] //OK
+			IF[@es.S.RINT(1)==0] @es.STATE=901 IFEND[] //CANCEL
+		}
+		IFEND[]
+
+		IF[@es.STATE==901] //設定初期化/タイトル確認/終了確認/シーン鑑賞確認からBACK
+		{
+			@es.STATE=12 //CANCEL
+			LOOPCONTINUE[]
+		}
+		IFEND[]
+
+		IF[@es.STATE==998] //フォント選択からBACK
+		{
+			GOSUB[#=ES.CONFIG.INITIALIZE]
+			@es.STATE=100
+		//	\SS.FADE(0) //一瞬ボタンが見えてしまう。
+			\es.CGTDEL //こっちにする。
+			LOOPCONTINUE[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■コンフィグ画面 Initialize
+//--------------------------------------------------------------------
+#=ES.CONFIG.INITIALIZE
+{
+	//サンプルテキスト
+	STR[$tmp="これはサンプルテキストです。自由に設定してください。"]
+
+	\_strlen($tmp);INT[@len=@_RINT(1)]
+	LOOP[SET=@len] \_strmid($tmp,@_LC,1)($SMTX.STR(@_LC)) LOOPEND[]
+//	$SMTX.STR(15)+=" "
+
+	//サンプルテキスト用レイヤ生成
+	CGEND[ID=SMTX ]
+	CGEND[ID=SMTX2]
+	CG[ID=SMTX  Z=@es.Z.BT+2000 SX=600 SY=100 X=060 Y=-600 FILE=""]
+	CG[ID=SMTX2 Z=@es.Z.BT+2000 SX=600 SY=100 X=100 Y=-600 FILE=""]
+	CGACT[ID=SMTX  RECTPAINT3=1 SET=0]
+	CGACT[ID=SMTX2 RECTPAINT3=1 SET=0]
+
+		\FONT.COLOR( 0xffffff )
+		\FONT.SIZE( 19 )
+		\FONT.XY( 10, 10 )
+		\FONT.BOLD( 1 )
+	//	\FONT.SHADE( 2, 2, 0x000000 )
+		\FONT.OUTLINE( 0x000000 )
+	//	\FONT.COLOR( 0xffffff, 0x6699bb )
+		\FONT.DRAW("SMTX2", "このウィンドウはバックログ用のサンプルです。")
+
+		\FONT.COLOR( 0xffffff )
+		\FONT.SIZE( 19 )
+		\FONT.XY( 10, 10+19+2 )
+		\FONT.BOLD( 1 )
+	//	\FONT.SHADE( 2, 2, 0x000000 )
+		\FONT.OUTLINE( 0x000000 )
+	//	\FONT.COLOR( 0xffffff, 0x6699bb )
+		\FONT.DRAW("SMTX2", "背景透過度の設定のみ可能です。")
+
+	GOSUB[#=ES.CONFIG.SMTX.INIT]
+
+	GOSUB[#=ES.CONFIG.REF]
+
+	\_gosub(es.Original.CfgInit)
+
+	GOSUB[#=es.BT.DRAW]	//ボタン描画 (設定初期化後のフラッシュ防止とかに必要)
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■コンフィグ画面 END
+//--------------------------------------------------------------------
+#=ES.CONFIG.END
+{
+///xS
+	//--------------------------------------------
+	// 設定保存
+	//--------------------------------------------
+		\GSD.SAVE
+
+	//--------------------------------------------
+	// フォント非表示
+	//--------------------------------------------
+		GOSUB[#=es.FONT.Disabled]
+		GOSUB[#=es.FONT.Disabled.2]
+
+	//--------------------------------------------
+	// レイヤ初期化
+	//--------------------------------------------
+		CGEND[ID=SMTX ]
+		CGEND[ID=SMTX2]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■設定初期化処理
+//--------------------------------------------------------------------
+#=ES.CONFIG.INITEXEC
+{
+	//----------------------------------------------------------------
+	// ボイス再生
+	//----------------------------------------------------------------
+		\_gosub(ES.CONFIG.VoicePlay.3)
+
+	//----------------------------------------------------------------
+	// フォント表示
+	//----------------------------------------------------------------
+		@es.GSD(113,01) = 0
+	//	GOSUB[#=es.FONT.NAME.GET pint=@es.GSD(113,01)]
+	//	$T(36,11) = $_RSTR(1)  // デフォルトフォント
+		$es.GSD(113) = $T(36,11)	// デフォルトフォント
+
+	//----------------------------------------------------------------
+	// 初期化
+	//----------------------------------------------------------------
+		IF[0]
+		{
+			GOSUB[#=es.GSD.INIT.CFG pint=0] //全初期化
+		}
+		ELSE[]
+		{
+			GOSUB[#=es.BT.ACTIVEGROUP.GET]
+			GOSUB[#=es.GSD.INIT.CFG pint=@_RINT(1)] //タブ毎に初期化
+		}
+		IFEND[]
+
+		GOSUB[#=ES.CONFIG.INITIALIZE]
+
+		GOSUB[#=es.VOICE.DEL]
+
+		\GSD.REFLECT
+		GOSUB[#=es.SOUND.SETVOL]
+
+	return[]
+}
+
+
+//--------------------------------------------------------------------
+//■コンフィグ画面リフレッシュ
+//--------------------------------------------------------------------
+#=ES.CONFIG.REF
+{
+	GOSUB[#=es.BT.ACTIVEGROUP.GET];IF[@_RINT(1)>0] @activeno=@_RINT(1) IFEND[]
+	\BT.ACTIVEGROUP(@activeno)
+	\BT.ON($BID+"BTN.TAB", @activeno)
+
+	///x必要か確認.
+//	LOOP[SET=@es.CHAR.MAX] \BT.OFF($BID+"VOL.CHARA.MUTE.OFF", @_LC) LOOPEND[]
+
+	//フォント表示
+	GOSUB[#=es.FONT.Disabled]
+	GOSUB[#=es.FONT.Disabled.2]
+	IF[@activeno==@T(18,10)] GOSUB[#=es.FONT.Enabled] IFEND[]
+
+	//サンプルテキスト
+	IF[@activeno==@const.SAMPLETEXTTAB]
+	{
+		CG[ID=SMTX  E=1]
+		CG[ID=SMTX2 E=1]
+	}
+	ELSE[]
+	{
+		CG[ID=SMTX  E=0]
+		CG[ID=SMTX2 E=0]
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+//----------------------------------------------------------------
+//■サンプルテキスト表示処理
+//----------------------------------------------------------------
+#=ES.CONFIG.SMTX.EXEC
+{
+//	LOOP[SET=31] @SMTX.FF(@_LC)=0 LOOPEND[]
+
+	INT[@hx]
+	INT[@hy]
+	INT[@now]
+	INT[@TX.SPD]
+	INT[@TX.SX=22]
+	INT[@TX.SY=22]
+
+	//----------------------------------------------------------------
+	// フォント変更
+	//----------------------------------------------------------------
+	//	\_txfont($LOG.TX.FONT.DEF)
+	//	STR[$fonttemp = $_RSTR(1)]
+//		GOSUB[#=es.TX.FONT.DEF.GET]
+//		\_txfont($_RSTR(1))
+//		\_txfont()
+//		STR[$fonttemp = $_RSTR(1)]
+
+//\_txsize(@TX.SX, @TX.SY)
+
+	IF[@SMTX.FLAG==1]
+	{
+		LOOP[]
+		{
+			@now=@_OS_TIME(1)
+
+			//GOSUB[#=es.TX.SPD.GET]
+			@TX.SPD=@es.GSD(120,01)
+
+
+			IF[@now-@SMTX.STARTTIME >= @TX.SPD * 100 / 256]
+			{
+//\_dmes($@TX.SPD)
+				@SMTX.STARTTIME += @TX.SPD * 100 / 256
+			//	@SMTX.STARTTIME-=(@now-@SMTX.STARTTIME-200)
+//				@SMTX.FF(@SMTX.COUNT)=1
+				@SMTX.COUNT+=1
+
+				IF[@SMTX.COUNT<(15)]
+					@hx=10+@TX.SX*(@SMTX.COUNT-   1);@hy=10+00
+				ELSE[]
+					@hx=10+@TX.SX*(@SMTX.COUNT-(15));@hy=10+(@TX.SY+5)
+				IFEND[]
+
+				IF[@SMTX.COUNT>=(27)]
+				{
+					//CG[ID=CFG.TX.GAIJI E=0 Z=1 FILE="cgsys/main/gaiji_01_24"]
+					//CGACT[MERGE2=1 ID=CFG.TX.GAIJI ID2=SMTX2 X=@hx+1 Y=@hy+1]
+					//CGEND[ID=TX.GAIJI]
+
+					@SMTX.COUNT=@_OS_TIME(1)
+					@SMTX.FLAG=2
+					LOOPBREAK[]
+				}
+				IFEND[]
+
+
+				\FONT.COLOR( 0xffffff )
+				\FONT.SIZE( 22 )
+				\FONT.XY( @hx , @hy )
+				IF[@es.GSD(115,14)==1] \FONT.BOLD( 1 )						IFEND[]
+				IF[@es.GSD(115,09)==1] \FONT.SHADE( 1, 1, 0x000000 )		IFEND[]
+				IF[@es.GSD(115,08)==1] \FONT.OUTLINE( 0x000000 )			IFEND[]
+				IF[@es.GSD(115,15)==1] \FONT.COLOR( 0xffffff, 0x6699bb )	IFEND[]
+				\FONT.DRAW("SMTX", $SMTX.STR(@SMTX.COUNT))
+
+				LOOPCONTINUE[]
+			}
+			ELSE[]
+			{
+				LOOPBREAK[]
+			}
+			IFEND[]
+
+		}
+		LOOPEND[]
+
+	}
+	IFEND[]
+
+	IF[@SMTX.FLAG==2]
+	{
+		IF[@_OS_TIME(1)-@SMTX.COUNT > (@es.GSD(120,02)+25)*20] //500～5620ms
+		{
+			GOSUB[#=ES.CONFIG.SMTX.INIT]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+
+	//----------------------------------------------------------------
+	// フォント元に戻す
+	//----------------------------------------------------------------
+//		\_txfont($fonttemp)
+
+	return[]
+}
+
+
+//サンプルテキスト初期化
+#=ES.CONFIG.SMTX.INIT
+{
+	@SMTX.FLAG		= 1
+	@SMTX.COUNT		= 0
+	@SMTX.STARTTIME	= @_OS_TIME(1)
+	CGACT[ID=SMTX RECTPAINT3=1 SET=0]
+	return[]
+}
+
+#=ES.CONFIG.FONT.REF
+{
+	GOSUB[#=ES.CONFIG.SMTX.INIT]	//サンプルテキスト初期化
+	GOSUB[#=es.FONT.Enabled]		//フォント更新
+	return[]
+}
+
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[テキスト速度] ---------------------------------------------------
+//
+#=ES.CONFIG.TX.SP.SLIDER.VDEF { @es.GSD(120,01)=@T(36,03);return[] }
+#=ES.CONFIG.TX.SP.GAUGE.ON    { \SLIDER.SYNC($BID+"TX.SP.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.TX.SP.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,256-@es.GSD(120,01));return[] } //スライダー
+#=ES.CONFIG.TX.SP.SLIDER.DRAG { @es.GSD(120,01)=256-@_PINT(2);\GSD.REFLECT;return[] } //スライダー
+#=ES.CONFIG.TX.SP.SEL.ON      { @es.GSD(120,01)=256-@_PINT(1);\GSD.REFLECT;return[] }
+#=ES.CONFIG.TX.SP.SEL.INIT    { \BT.ON($es.BID,256-@es.GSD(120,01));return[] }
+
+//■[既読時のテキスト速度] -------------------------------------------
+//
+#=ES.CONFIG.KTX.SP.SLIDER.VDEF { @es.GSD(112,02)=@T(36,43);return[] }
+#=ES.CONFIG.KTX.SP.GAUGE.ON    { \SLIDER.SYNC($BID+"KTX.SP.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.KTX.SP.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,256-@es.GSD(112,02));return[] } //スライダー
+#=ES.CONFIG.KTX.SP.SLIDER.DRAG { @es.GSD(112,02)=256-@_PINT(2);\GSD.REFLECT;return[] } //スライダー
+#=ES.CONFIG.KTX.SP.SEL.ON      { @es.GSD(112,02)=256-@_PINT(1);\GSD.REFLECT;return[] }
+#=ES.CONFIG.KTX.SP.SEL.INIT    { \BT.ON($es.BID,256-@es.GSD(112,02));return[] }
+//■[既読テキストの最速表示]
+#=ES.CONFIG.KTX.FAST.VDEF      { @es.GSD(112,02)=@T(36,43);return[] }
+#=ES.CONFIG.KTX.FAST.INIT      { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(112,02)^@es.BNO);return[] }
+#=ES.CONFIG.KTX.FAST.ON        { @es.GSD(112,02)=@es.BSW^@es.BNO;return[] }
+
+//■[オート速度] -----------------------------------------------------
+//
+#=ES.CONFIG.AUTO.SP.SLIDER.VDEF { @es.GSD(120,02)=@T(36,04);return[] }
+#=ES.CONFIG.AUTO.SP.GAUGE.ON    { \SLIDER.SYNC($BID+"AUTO.SP.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.AUTO.SP.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,256-@es.GSD(120,02));return[] } //スライダー
+#=ES.CONFIG.AUTO.SP.SLIDER.DRAG { @es.GSD(120,02)=256-@_PINT(2);\GSD.REFLECT;return[] } //スライダー
+#=ES.CONFIG.AUTO.SP.SEL.ON      { @es.GSD(120,02)=256-@_PINT(1);\GSD.REFLECT;return[] }
+#=ES.CONFIG.AUTO.SP.SEL.INIT    { \BT.ON($es.BID,256-@es.GSD(120,02));return[] }
+
+//■[スキップ速度] ---------------------------------------------------
+//
+#=ES.CONFIG.SKIP.SP.SLIDER.VDEF { @es.GSD(120,04)=@T(36,05);return[] }
+#=ES.CONFIG.SKIP.SP.GAUGE.ON    { \SLIDER.SYNC($BID+"SKIP.SP.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.SKIP.SP.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,256-@es.GSD(120,04));return[] } //スライダー
+#=ES.CONFIG.SKIP.SP.SLIDER.DRAG { @es.GSD(120,04)=256-@_PINT(2);\GSD.REFLECT;return[] } //スライダー
+#=ES.CONFIG.SKIP.SP.SEL.ON      { @es.GSD(120,04)=256-@_PINT(1);\GSD.REFLECT;return[] }
+#=ES.CONFIG.SKIP.SP.SEL.INIT    { \BT.ON($es.BID,256-@es.GSD(120,04));return[] }
+
+//■[ウィンドウ透過度] -----------------------------------------------
+//
+#=ES.CONFIG.WINDOW.A.SLIDER.VDEF { @es.GSD(120,03)=@T(36,01);return[] }
+#=ES.CONFIG.WINDOW.A.GAUGE.ON    { \SLIDER.SYNC($BID+"WINDOW.A.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.WINDOW.A.SLIDER.INIT	//スライダー
+{
+	\BT.SLIDE.PER.SET($es.BID,,@es.GSD(120,03))
+	\BT.A.SET($BID+"TIP.MES.PREVIEW",2,@es.GSD(120,03))
+	return[]
+}
+#=ES.CONFIG.WINDOW.A.SLIDER.DRAG	//スライダー
+{
+	@es.GSD(120,03)=@_PINT(2);\GSD.REFLECT
+	\BT.A.SET($BID+"TIP.MES.PREVIEW",2,@es.GSD(120,03))
+	return[]
+}
+#=ES.CONFIG.WINDOW.A.SEL.ON
+{
+	@es.GSD(120,03)=@_PINT(1);\GSD.REFLECT
+	\BT.A.SET($BID+"TIP.MES.PREVIEW",2,@es.GSD(120,03))
+	return[]
+}
+#=ES.CONFIG.WINDOW.A.SEL.INIT
+{
+	\BT.ON($es.BID,@es.GSD(120,03))
+	\BT.A.SET($BID+"TIP.MES.PREVIEW",2,@es.GSD(120,03))
+	return[]
+}
+
+//■[バックログ透過度] -----------------------------------------------
+//
+#=ES.CONFIG.LOG.A.SLIDER.VDEF { @es.GSD(115,10)=@T(36,02);return[] }
+#=ES.CONFIG.LOG.A.GAUGE.ON    { \SLIDER.SYNC($BID+"LOG.A.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.LOG.A.SLIDER.INIT	//スライダー
+{
+	\BT.SLIDE.PER.SET($es.BID,,@es.GSD(115,10))
+	\BT.A.SET($BID+"TIP.LOG.PREVIEW",2,@es.GSD(115,10))
+	return[]
+}
+#=ES.CONFIG.LOG.A.SLIDER.DRAG	//スライダー
+{
+	@es.GSD(115,10)=@_PINT(2);\GSD.REFLECT
+	\BT.A.SET($BID+"TIP.LOG.PREVIEW",2,@es.GSD(115,10))
+	return[]
+}
+#=ES.CONFIG.LOG.A.SEL.ON
+{
+	@es.GSD(115,10)=@_PINT(1);\GSD.REFLECT
+	\BT.A.SET($BID+"TIP.LOG.PREVIEW",2,@es.GSD(115,10))
+	return[]
+}
+#=ES.CONFIG.LOG.A.SEL.INIT
+{
+	\BT.ON($es.BID,@es.GSD(115,10))
+	\BT.A.SET($BID+"TIP.LOG.PREVIEW",2,@es.GSD(115,10))
+	return[]
+}
+
+//■[全体音量] -------------------------------------------------------
+//
+#=ES.CONFIG.VOL.MASTER.SLIDER.VDEF { @es.GSD(001,01)=@T(27,01);return[] }
+#=ES.CONFIG.VOL.MASTER.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.MASTER.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.MASTER.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,01));return[] } //スライダー
+#=ES.CONFIG.VOL.MASTER.SLIDER.DRAG { @es.GSD(001,01)=@_PINT(2);GOSUB[#=es.SND.SETVOL.MASTER];return[] } //スライダー
+#=ES.CONFIG.VOL.MASTER.VOL.ON      { @es.GSD(001,01)=@_PINT(1);GOSUB[#=es.SND.SETVOL.MASTER];return[] }
+#=ES.CONFIG.VOL.MASTER.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,01));return[] }
+
+//■[全体音量・ミュート] ---------------------------------------------
+//
+#=ES.CONFIG.VOL.MASTER.MUTE.VDEF { @es.GSD(001,05)=1;return[] }
+#=ES.CONFIG.VOL.MASTER.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,05)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.MASTER.MUTE.ON   { @es.GSD(001,05)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.MASTER];return[] }
+
+//■[BGM音量] --------------------------------------------------------
+//
+#=ES.CONFIG.VOL.BGM.SLIDER.VDEF { @es.GSD(001,02)=@T(27,02);return[] }
+#=ES.CONFIG.VOL.BGM.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.BGM.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.BGM.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,02));return[] } //スライダー
+#=ES.CONFIG.VOL.BGM.SLIDER.DRAG { @es.GSD(001,02)=@_PINT(2);GOSUB[#=es.SND.SETVOL.BGM.LS];return[] } //スライダー
+#=ES.CONFIG.VOL.BGM.VOL.ON      { @es.GSD(001,02)=@_PINT(1);GOSUB[#=es.SND.SETVOL.BGM.LS];return[] }
+#=ES.CONFIG.VOL.BGM.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,02));return[] }
+
+//■[BGM音量・ミュート] ----------------------------------------------
+//
+#=ES.CONFIG.VOL.BGM.MUTE.VDEF { @es.GSD(001,06)=1;return[] }
+#=ES.CONFIG.VOL.BGM.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,06)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.BGM.MUTE.ON   { @es.GSD(001,06)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.BGM.LS];return[] }
+
+//■[効果音音量] -----------------------------------------------------
+//
+#=ES.CONFIG.VOL.SE.SLIDER.VDEF { @es.GSD(001,03)=@T(27,03);return[] }
+#=ES.CONFIG.VOL.SE.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.SE.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.SE.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,03));return[] } //スライダー
+#=ES.CONFIG.VOL.SE.SLIDER.DRAG { @es.GSD(001,03)=@_PINT(2);GOSUB[#=es.SND.SETVOL.SE.LS];return[] } //スライダー
+#=ES.CONFIG.VOL.SE.VOL.ON      { @es.GSD(001,03)=@_PINT(1);GOSUB[#=es.SND.SETVOL.SE.LS];return[] }
+#=ES.CONFIG.VOL.SE.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,03));return[] }
+
+//■[効果音音量ミュート] ---------------------------------------------
+//
+#=ES.CONFIG.VOL.SE.MUTE.VDEF { @es.GSD(001,07)=1;return[] }
+#=ES.CONFIG.VOL.SE.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,07)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.SE.MUTE.ON   { @es.GSD(001,07)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.SE.LS];return[] }
+
+//■[音声全体音量] ---------------------------------------------------
+//
+#=ES.CONFIG.VOL.VO.SLIDER.VDEF { @es.GSD(001,04)=@T(27,04);return[] }
+#=ES.CONFIG.VOL.VO.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.VO.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.VO.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,04));return[] } //スライダー
+//#=ES.CONFIG.VOL.VO.SLIDER.DRAG { @es.GSD(001,04)=@_PINT(2);GOSUB[#=es.SND.SETVOL.VO];GOSUB[#=es.SND.SETVOL.EVO];GOSUB[#=es.SND.SETVOL.E2VO];return[] } //スライダー
+#=ES.CONFIG.VOL.VO.SLIDER.DRAG { @es.GSD(001,04)=@_PINT(2);GOSUB[#=es.SOUND.SETVOL];return[] } //スライダー
+#=ES.CONFIG.VOL.VO.VOL.ON      { @es.GSD(001,04)=@_PINT(1);GOSUB[#=es.SOUND.SETVOL];return[] }
+#=ES.CONFIG.VOL.VO.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,04));return[] }
+
+//■[音声全体音量・ミュート] -----------------------------------------
+//
+#=ES.CONFIG.VOL.VO.MUTE.VDEF { @es.GSD(001,08)=1;return[] }
+#=ES.CONFIG.VOL.VO.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,08)^@es.BNO);return[] }
+//#=ES.CONFIG.VOL.VO.MUTE.ON   { @es.GSD(001,08)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.VO];GOSUB[#=es.SND.SETVOL.EVO];GOSUB[#=es.SND.SETVOL.E2VO];return[] }
+#=ES.CONFIG.VOL.VO.MUTE.ON   { @es.GSD(001,08)=@es.BSW^@es.BNO;GOSUB[#=es.SOUND.SETVOL];return[] }
+
+//■[全体環境音量] ---------------------------------------------------
+//
+#=ES.CONFIG.VOL.EMASTER.SLIDER.VDEF { @es.GSD(001,11)=256;return[] }
+#=ES.CONFIG.VOL.EMASTER.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.EMASTER.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.EMASTER.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,11));return[] } //スライダー
+#=ES.CONFIG.VOL.EMASTER.SLIDER.DRAG { @es.GSD(001,11)=@_PINT(2);GOSUB[#=es.SND.SETVOL.EMASTER];return[] } //スライダー
+#=ES.CONFIG.VOL.EMASTER.VOL.ON      { @es.GSD(001,11)=@_PINT(1);GOSUB[#=es.SND.SETVOL.EMASTER];return[] }
+#=ES.CONFIG.VOL.EMASTER.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,11));return[] }
+
+//■[全体環境音量・ミュート] -----------------------------------------
+//
+#=ES.CONFIG.VOL.EMASTER.MUTE.VDEF { @es.GSD(001,15)=1;return[] }
+#=ES.CONFIG.VOL.EMASTER.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,15)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.EMASTER.MUTE.ON   { @es.GSD(001,15)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.EMASTER];return[] }
+
+//■[環境BGM音量] ----------------------------------------------------
+//
+#=ES.CONFIG.VOL.EBGM.SLIDER.VDEF { @es.GSD(001,12)=256;return[] }
+#=ES.CONFIG.VOL.EBGM.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.EBGM.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.EBGM.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,12));return[] } //スライダー
+#=ES.CONFIG.VOL.EBGM.SLIDER.DRAG { return[] } //スライダー
+
+//■[環境BGM音量ミュート] --------------------------------------------
+//
+#=ES.CONFIG.VOL.EBGM.MUTE.VDEF { @es.GSD(001,16)=1;return[] }
+#=ES.CONFIG.VOL.EBGM.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,16)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.EBGM.MUTE.ON   { @es.GSD(001,16)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.EBGM];return[] }
+
+//■[環境効果音音量] -------------------------------------------------
+//
+#=ES.CONFIG.VOL.ESE.SLIDER.VDEF { @es.GSD(001,13)=@T(27,13);return[] }
+#=ES.CONFIG.VOL.ESE.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.ESE.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.ESE.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,13));return[] } //スライダー
+#=ES.CONFIG.VOL.ESE.SLIDER.DRAG { @es.GSD(001,13)=@_PINT(2);GOSUB[#=es.SND.SETVOL.ESE];GOSUB[#=es.SND.SETVOL.ESE.LS];return[] } //スライダー
+
+//■[環境効果音音量ミュート] -----------------------------------------
+//
+#=ES.CONFIG.VOL.ESE.MUTE.VDEF { @es.GSD(001,17)=1;return[] }
+#=ES.CONFIG.VOL.ESE.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,17)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.ESE.MUTE.ON   { @es.GSD(001,17)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.ESE];GOSUB[#=es.SND.SETVOL.ESE.LS];return[] }
+
+//■[環境ボイス音量] -------------------------------------------------
+//
+#=ES.CONFIG.VOL.EVO.SLIDER.VDEF { @es.GSD(001,14)=256;return[] }
+#=ES.CONFIG.VOL.EVO.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.EVO.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.EVO.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,14));return[] } //スライダー
+#=ES.CONFIG.VOL.EVO.SLIDER.DRAG { @es.GSD(001,14)=@_PINT(2);GOSUB[#=es.SND.SETVOL.EVO];GOSUB[#=es.SND.SETVOL.EVO.LS];return[] } //スライダー
+#=ES.CONFIG.VOL.EVO.VOL.ON      { @es.GSD(001,14)=@_PINT(1);GOSUB[#=es.SND.SETVOL.EVO];GOSUB[#=es.SND.SETVOL.EVO.LS];return[] }
+#=ES.CONFIG.VOL.EVO.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,14));return[] }
+
+//■[環境ボイス音量ミュート] -----------------------------------------
+//
+#=ES.CONFIG.VOL.EVO.MUTE.VDEF { @es.GSD(001,18)=1;return[] }
+#=ES.CONFIG.VOL.EVO.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,18)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.EVO.MUTE.ON   { @es.GSD(001,18)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.EVO];GOSUB[#=es.SND.SETVOL.EVO.LS];return[] }
+
+//■[全体環境音量] ---------------------------------------------------
+//
+#=ES.CONFIG.VOL.E2MASTER.SLIDER.VDEF { @es.GSD(001,21)=256;return[] }
+#=ES.CONFIG.VOL.E2MASTER.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.E2MASTER.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.E2MASTER.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,21));return[] } //スライダー
+#=ES.CONFIG.VOL.E2MASTER.SLIDER.DRAG { @es.GSD(001,21)=@_PINT(2);GOSUB[#=es.SND.SETVOL.E2MASTER];return[] } //スライダー
+#=ES.CONFIG.VOL.E2MASTER.VOL.ON      { @es.GSD(001,21)=@_PINT(1);GOSUB[#=es.SND.SETVOL.E2MASTER];return[] }
+#=ES.CONFIG.VOL.E2MASTER.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,21));return[] }
+
+//■[全体環境音量・ミュート] -----------------------------------------
+//
+#=ES.CONFIG.VOL.E2MASTER.MUTE.VDEF { @es.GSD(001,25)=1;return[] }
+#=ES.CONFIG.VOL.E2MASTER.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,25)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.E2MASTER.MUTE.ON   { @es.GSD(001,25)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.E2MASTER];return[] }
+
+//■[環境BGM音量] ----------------------------------------------------
+//
+#=ES.CONFIG.VOL.E2BGM.SLIDER.VDEF { @es.GSD(001,22)=256;return[] }
+#=ES.CONFIG.VOL.E2BGM.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.E2BGM.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.E2BGM.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,22));return[] } //スライダー
+#=ES.CONFIG.VOL.E2BGM.SLIDER.DRAG { return[] } //スライダー
+
+//■[環境BGM音量ミュート] --------------------------------------------
+//
+#=ES.CONFIG.VOL.E2BGM.MUTE.VDEF { @es.GSD(001,26)=1;return[] }
+#=ES.CONFIG.VOL.E2BGM.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,26)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.E2BGM.MUTE.ON   { @es.GSD(001,26)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.E2BGM];return[] }
+
+//■[環境効果音音量] -------------------------------------------------
+//
+#=ES.CONFIG.VOL.E2SE.SLIDER.VDEF { @es.GSD(001,23)=256;return[] }
+#=ES.CONFIG.VOL.E2SE.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.E2SE.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.E2SE.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,23));return[] } //スライダー
+#=ES.CONFIG.VOL.E2SE.SLIDER.DRAG { @es.GSD(001,23)=@_PINT(2);GOSUB[#=es.SND.SETVOL.E2SE];GOSUB[#=es.SND.SETVOL.E2SE.LS];return[] } //スライダー
+
+//■[環境効果音音量ミュート] -----------------------------------------
+//
+#=ES.CONFIG.VOL.E2SE.MUTE.VDEF { @es.GSD(001,27)=1;return[] }
+#=ES.CONFIG.VOL.E2SE.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,27)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.E2SE.MUTE.ON   { @es.GSD(001,27)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.E2SE];GOSUB[#=es.SND.SETVOL.E2SE.LS];return[] }
+
+//■[環境ボイス音量] -------------------------------------------------
+//
+#=ES.CONFIG.VOL.E2VO.SLIDER.VDEF { @es.GSD(001,24)=256;return[] }
+#=ES.CONFIG.VOL.E2VO.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.E2VO.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.E2VO.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,24));return[] } //スライダー
+#=ES.CONFIG.VOL.E2VO.SLIDER.DRAG { @es.GSD(001,24)=@_PINT(2);GOSUB[#=es.SND.SETVOL.E2VO];GOSUB[#=es.SND.SETVOL.E2VO.LS];return[] } //スライダー
+#=ES.CONFIG.VOL.E2VO.VOL.ON      { @es.GSD(001,24)=@_PINT(1);GOSUB[#=es.SND.SETVOL.E2VO];GOSUB[#=es.SND.SETVOL.E2VO.LS];return[] }
+#=ES.CONFIG.VOL.E2VO.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,24));return[] }
+
+//■[環境ボイス音量ミュート] -----------------------------------------
+//
+#=ES.CONFIG.VOL.E2VO.MUTE.VDEF { @es.GSD(001,28)=1;return[] }
+#=ES.CONFIG.VOL.E2VO.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,28)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.E2VO.MUTE.ON   { @es.GSD(001,28)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.E2VO];GOSUB[#=es.SND.SETVOL.E2VO.LS];return[] }
+
+//■[全体システム音量] -----------------------------------------------
+//
+#=ES.CONFIG.VOL.SMASTER.SLIDER.VDEF { @es.GSD(001,31)=256;return[] }
+#=ES.CONFIG.VOL.SMASTER.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.SMASTER.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.SMASTER.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,31));return[] } //スライダー
+#=ES.CONFIG.VOL.SMASTER.SLIDER.DRAG { @es.GSD(001,31)=@_PINT(2);GOSUB[#=es.SND.SETVOL.SMASTER];return[] } //スライダー
+#=ES.CONFIG.VOL.SMASTER.VOL.ON      { @es.GSD(001,31)=@_PINT(1);GOSUB[#=es.SND.SETVOL.SMASTER];return[] }
+#=ES.CONFIG.VOL.SMASTER.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,31));return[] }
+
+//■[全体システム音量・ミュート] -------------------------------------
+//
+#=ES.CONFIG.VOL.SMASTER.MUTE.VDEF { @es.GSD(001,35)=1;return[] }
+#=ES.CONFIG.VOL.SMASTER.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,35)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.SMASTER.MUTE.ON   { @es.GSD(001,35)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.SMASTER];return[] }
+
+//■[システムBGM音量] ------------------------------------------------
+//
+#=ES.CONFIG.VOL.SBGM.SLIDER.VDEF { @es.GSD(001,32)=256;return[] }
+#=ES.CONFIG.VOL.SBGM.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.SBGM.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.SBGM.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,32));return[] } //スライダー
+#=ES.CONFIG.VOL.SBGM.SLIDER.DRAG { return[] } //スライダー
+
+//■[システムBGM音量ミュート] ----------------------------------------
+//
+#=ES.CONFIG.VOL.SBGM.MUTE.VDEF { @es.GSD(001,36)=1;return[] }
+#=ES.CONFIG.VOL.SBGM.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,36)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.SBGM.MUTE.ON   { @es.GSD(001,36)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.SBGM];return[] }
+
+//■[システム効果音音量] ---------------------------------------------
+//
+#=ES.CONFIG.VOL.SSE.SLIDER.VDEF { @es.GSD(001,33)=@T(27,33);return[] }
+#=ES.CONFIG.VOL.SSE.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.SSE.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.SSE.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,33));return[] } //スライダー
+#=ES.CONFIG.VOL.SSE.SLIDER.DRAG { @es.GSD(001,33)=@_PINT(2);GOSUB[#=es.SND.SETVOL.SSE];GOSUB[#=es.SND.SETVOL.SSE.LS];GOSUB[#=es.SND.SETVOL.SVO];GOSUB[#=es.SND.SETVOL.SVO.LS];return[] } //スライダー
+
+//■[システム効果音音量ミュート] -------------------------------------
+//
+#=ES.CONFIG.VOL.SSE.MUTE.VDEF { @es.GSD(001,37)=1;return[] }
+#=ES.CONFIG.VOL.SSE.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,37)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.SSE.MUTE.ON   { @es.GSD(001,37)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.SSE];GOSUB[#=es.SND.SETVOL.SSE.LS];GOSUB[#=es.SND.SETVOL.SVO];GOSUB[#=es.SND.SETVOL.SVO.LS];return[] }
+
+//■[システムボイス音量] ---------------------------------------------
+//
+#=ES.CONFIG.VOL.SVO.SLIDER.VDEF { @es.GSD(001,34)=@T(27,34);return[] }
+#=ES.CONFIG.VOL.SVO.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.SVO.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.SVO.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,34));return[] } //スライダー
+#=ES.CONFIG.VOL.SVO.SLIDER.DRAG { @es.GSD(001,34)=@_PINT(2);GOSUB[#=es.SND.SETVOL.SVO];return[] } //スライダー
+#=ES.CONFIG.VOL.SVO.VOL.ON      { @es.GSD(001,34)=@_PINT(1);GOSUB[#=es.SND.SETVOL.SVO];return[] }
+#=ES.CONFIG.VOL.SVO.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,34));return[] }
+
+//■[システムボイス音量ミュート] -------------------------------------
+//
+#=ES.CONFIG.VOL.SVO.MUTE.VDEF { @es.GSD(001,38)=1;return[] }
+#=ES.CONFIG.VOL.SVO.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,38)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.SVO.MUTE.ON   { @es.GSD(001,38)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.SVO];return[] }
+
+//■[全体システム音量] -----------------------------------------------
+//
+#=ES.CONFIG.VOL.S2MASTER.SLIDER.VDEF { @es.GSD(001,41)=256;return[] }
+#=ES.CONFIG.VOL.S2MASTER.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.S2MASTER.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.S2MASTER.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,41));return[] } //スライダー
+#=ES.CONFIG.VOL.S2MASTER.SLIDER.DRAG { @es.GSD(001,41)=@_PINT(2);GOSUB[#=es.SND.SETVOL.S2MASTER];return[] } //スライダー
+#=ES.CONFIG.VOL.S2MASTER.VOL.ON      { @es.GSD(001,41)=@_PINT(1);GOSUB[#=es.SND.SETVOL.S2MASTER];return[] }
+#=ES.CONFIG.VOL.S2MASTER.VOL.INIT    { \BT.ON($es.BID,@es.GSD(001,41));return[] }
+
+//■[全体システム音量・ミュート] -------------------------------------
+//
+#=ES.CONFIG.VOL.S2MASTER.MUTE.VDEF { @es.GSD(001,45)=1;return[] }
+#=ES.CONFIG.VOL.S2MASTER.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,45)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.S2MASTER.MUTE.ON   { @es.GSD(001,45)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.S2MASTER];return[] }
+
+//■[システムBGM音量] ------------------------------------------------
+//
+#=ES.CONFIG.VOL.S2BGM.SLIDER.VDEF { @es.GSD(001,42)=256;return[] }
+#=ES.CONFIG.VOL.S2BGM.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.S2BGM.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.S2BGM.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,42));return[] } //スライダー
+#=ES.CONFIG.VOL.S2BGM.SLIDER.DRAG { return[] } //スライダー
+
+//■[システムBGM音量ミュート] ----------------------------------------
+//
+#=ES.CONFIG.VOL.S2BGM.MUTE.VDEF { @es.GSD(001,46)=1;return[] }
+#=ES.CONFIG.VOL.S2BGM.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,46)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.S2BGM.MUTE.ON   { @es.GSD(001,46)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.S2BGM];return[] }
+
+//■[システム効果音音量] ---------------------------------------------
+//
+#=ES.CONFIG.VOL.S2SE.SLIDER.VDEF { @es.GSD(001,43)=@T(27,33);return[] }
+#=ES.CONFIG.VOL.S2SE.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.S2SE.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.S2SE.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,43));return[] } //スライダー
+#=ES.CONFIG.VOL.S2SE.SLIDER.DRAG { @es.GSD(001,43)=@_PINT(2);GOSUB[#=es.SND.SETVOL.S2SE];return[] } //スライダー
+
+//■[システム効果音音量ミュート] -------------------------------------
+//
+#=ES.CONFIG.VOL.S2SE.MUTE.VDEF { @es.GSD(001,47)=1;return[] }
+#=ES.CONFIG.VOL.S2SE.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,47)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.S2SE.MUTE.ON   { @es.GSD(001,47)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.S2SE];return[] }
+
+//■[システムボイス] -------------------------------------------------
+//
+#=ES.CONFIG.VOL.S2VO.SLIDER.VDEF { @es.GSD(001,44)=@T(27,34);return[] }
+#=ES.CONFIG.VOL.S2VO.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.S2VO.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VOL.S2VO.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(001,44));return[] } //スライダー
+#=ES.CONFIG.VOL.S2VO.SLIDER.DRAG { @es.GSD(001,44)=@_PINT(2);GOSUB[#=es.SND.SETVOL.SE];return[] } //スライダー
+
+//■[システムボイスミュート] -----------------------------------------
+//
+#=ES.CONFIG.VOL.S2VO.MUTE.VDEF { @es.GSD(001,48)=1;return[] }
+#=ES.CONFIG.VOL.S2VO.MUTE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(001,48)^@es.BNO);return[] }
+#=ES.CONFIG.VOL.S2VO.MUTE.ON   { @es.GSD(001,48)=@es.BSW^@es.BNO;GOSUB[#=es.SND.SETVOL.SE];return[] }
+
+//■[音声再生時のＢＧＭ減衰率] ---------------------------------------
+//
+#=ES.CONFIG.VO.HILIGHT.SLIDER.VDEF { @es.GSD(029,01)=@T(14,01);return[] }
+#=ES.CONFIG.VO.HILIGHT.GAUGE.ON    { \SLIDER.SYNC($BID+"VO.HILIGHT.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.VO.HILIGHT.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(029,01));return[] } //スライダー
+#=ES.CONFIG.VO.HILIGHT.SLIDER.DRAG { @es.GSD(029,01)=@_PINT(2);\GSD.REFLECT;return[] } //スライダー
+#=ES.CONFIG.VO.HILIGHT.VOL.ON      { @es.GSD(029,01)=@_PINT(1);\GSD.REFLECT;return[] }
+#=ES.CONFIG.VO.HILIGHT.VOL.INIT    { \BT.ON($es.BID,@es.GSD(029,01));return[] }
+
+//■[キャラ別音声音量] -----------------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.SLIDER.VDEF { @es.GSD(009,@_PINT(1))=@T(27,04);return[] }
+#=ES.CONFIG.VOL.CHARA.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.CHARA.SLIDER",@_PINT(1));return[] } //ゲージ
+#=ES.CONFIG.VOL.CHARA.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,@_PINT(1),@es.GSD(009,@_PINT(1)));return[] } //スライダー
+#=ES.CONFIG.VOL.CHARA.SLIDER.DRAG { @es.GSD(009,@_PINT(1))=@_PINT(2);GOSUB[#=es.SOUND.SETVOL];return[] } //スライダー
+
+//■[キャラ別音声音量ミュート] ---------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.MUTE.ON.VDEF
+#=ES.CONFIG.VOL.CHARA.MUTE.OFF.VDEF { @es.GSD(010,@_PINT(1))=1;return[] }
+#=ES.CONFIG.VOL.CHARA.MUTE.ON.INIT
+#=ES.CONFIG.VOL.CHARA.MUTE.OFF.INIT
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF($BID+"VOL.CHARA.MUTE.ON" , @no, (@es.GSD(010,@no)==1)) //1=ON／0=OFF
+	\BT.ONOFF($BID+"VOL.CHARA.MUTE.OFF", @no, (@es.GSD(010,@no)==0)) //OFF
+		\BT.ONOFF($BID+"VOL.CHARA.FACE"    , @no, (@es.GSD(010,@no)==1)) //
+	return[]
+}
+#=ES.CONFIG.VOL.CHARA.MUTE.ON.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(010,@no))
+	GOSUB[#=es.SOUND.SETVOL]
+		\BT.ONOFF($BID+"VOL.CHARA.FACE", @no, @es.GSD(010,@no)) //キャラアイコン
+	return[]
+}
+#=ES.CONFIG.VOL.CHARA.MUTE.OFF.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(010,@no));@es.GSD(010,@no)=1-@es.GSD(010,@no)
+	GOSUB[#=es.SOUND.SETVOL]
+		\BT.ONOFF($BID+"VOL.CHARA.FACE", @no, @es.GSD(010,@no)) //キャラアイコン
+	return[]
+}
+
+//■[キャラ別EVO音声音量] --------------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.EVO.SLIDER.VDEF { @es.GSD(013,@_PINT(1))=256;return[] }
+#=ES.CONFIG.VOL.CHARA.EVO.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.CHARA.EVO.SLIDER",@_PINT(1));return[] } //ゲージ
+#=ES.CONFIG.VOL.CHARA.EVO.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,@_PINT(1),@es.GSD(013,@_PINT(1)));return[] } //スライダー
+#=ES.CONFIG.VOL.CHARA.EVO.SLIDER.DRAG { @es.GSD(013,@_PINT(1))=@_PINT(2);GOSUB[#=es.SOUND.SETVOL];return[] } //スライダー
+
+//■[キャラ別EVO音声音量ミュート] ------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.EVO.MUTE.ON.VDEF
+#=ES.CONFIG.VOL.CHARA.EVO.MUTE.OFF.VDEF { @es.GSD(014,@_PINT(1))=1;return[] }
+#=ES.CONFIG.VOL.CHARA.EVO.MUTE.ON.INIT
+#=ES.CONFIG.VOL.CHARA.EVO.MUTE.OFF.INIT
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF($BID+"VOL.CHARA.EVO.MUTE.ON" , @no, (@es.GSD(014,@no)==1)) //1=ON／0=OFF
+	\BT.ONOFF($BID+"VOL.CHARA.EVO.MUTE.OFF", @no, (@es.GSD(014,@no)==0)) //OFF
+	return[]
+}
+#=ES.CONFIG.VOL.CHARA.EVO.MUTE.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(014,@no))
+	GOSUB[#=es.SOUND.SETVOL]
+	return[]
+}
+#=ES.CONFIG.VOL.CHARA.EVO.MUTE.OFF.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(014,@no));@es.GSD(014,@no)=1-@es.GSD(014,@no)
+	GOSUB[#=es.SOUND.SETVOL]
+	return[]
+}
+
+//■[キャラ別E2VO音声音量] -------------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.E2VO.SLIDER.VDEF { @es.GSD(017,@_PINT(1))=256;return[] }
+#=ES.CONFIG.VOL.CHARA.E2VO.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.CHARA.E2VO.SLIDER",@_PINT(1));return[] } //ゲージ
+#=ES.CONFIG.VOL.CHARA.E2VO.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,@_PINT(1),@es.GSD(017,@_PINT(1)));return[] } //スライダー
+#=ES.CONFIG.VOL.CHARA.E2VO.SLIDER.DRAG { @es.GSD(017,@_PINT(1))=@_PINT(2);GOSUB[#=es.SOUND.SETVOL];return[] } //スライダー
+
+//■[キャラ別E2VO音声音量ミュート] -----------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.E2VO.MUTE.ON.VDEF
+#=ES.CONFIG.VOL.CHARA.E2VO.MUTE.OFF.VDEF { @es.GSD(018,@_PINT(1))=1;return[] }
+#=ES.CONFIG.VOL.CHARA.E2VO.MUTE.ON.INIT
+#=ES.CONFIG.VOL.CHARA.E2VO.MUTE.OFF.INIT
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF($BID+"VOL.CHARA.E2VO.MUTE.ON" , @no, (@es.GSD(018,@no)==1)) //1=ON／0=OFF
+	\BT.ONOFF($BID+"VOL.CHARA.E2VO.MUTE.OFF", @no, (@es.GSD(018,@no)==0)) //OFF
+	return[]
+}
+#=ES.CONFIG.VOL.CHARA.E2VO.MUTE.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(018,@no))
+	GOSUB[#=es.SOUND.SETVOL]
+	return[]
+}
+#=ES.CONFIG.VOL.CHARA.E2VO.MUTE.OFF.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(018,@no));@es.GSD(018,@no)=1-@es.GSD(018,@no)
+	GOSUB[#=es.SOUND.SETVOL]
+	return[]
+}
+
+//■[キャラ別SVO音声音量] --------------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.SVO.SLIDER.VDEF { @es.GSD(021,@_PINT(1))=256;return[] }
+#=ES.CONFIG.VOL.CHARA.SVO.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.CHARA.SVO.SLIDER",@_PINT(1));return[] } //ゲージ
+#=ES.CONFIG.VOL.CHARA.SVO.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,@_PINT(1),@es.GSD(021,@_PINT(1)));return[] } //スライダー
+#=ES.CONFIG.VOL.CHARA.SVO.SLIDER.DRAG { @es.GSD(021,@_PINT(1))=@_PINT(2);GOSUB[#=es.SOUND.SETVOL];return[] } //スライダー
+
+//■[キャラ別SVO音声音量ミュート] ------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.SVO.MUTE.ON.VDEF
+#=ES.CONFIG.VOL.CHARA.SVO.MUTE.OFF.VDEF { @es.GSD(022,@_PINT(1))=1;return[] }
+#=ES.CONFIG.VOL.CHARA.SVO.MUTE.ON.INIT
+#=ES.CONFIG.VOL.CHARA.SVO.MUTE.OFF.INIT
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF($BID+"VOL.CHARA.SVO.MUTE.ON" , @no, (@es.GSD(022,@no)==1)) //1=ON／0=OFF
+	\BT.ONOFF($BID+"VOL.CHARA.SVO.MUTE.OFF", @no, (@es.GSD(022,@no)==0)) //OFF
+	return[]
+}
+#=ES.CONFIG.VOL.CHARA.SVO.MUTE.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(022,@no))
+	GOSUB[#=es.SOUND.SETVOL]
+	return[]
+}
+#=ES.CONFIG.VOL.CHARA.SVO.MUTE.OFF.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(022,@no));@es.GSD(022,@no)=1-@es.GSD(022,@no)
+	GOSUB[#=es.SOUND.SETVOL]
+	return[]
+}
+
+//■[キャラ別S2VO音声音量] -------------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.S2VO.SLIDER.VDEF { @es.GSD(025,@_PINT(1))=256;return[] }
+#=ES.CONFIG.VOL.CHARA.S2VO.GAUGE.ON    { \SLIDER.SYNC($BID+"VOL.CHARA.S2VO.SLIDER",@_PINT(1));return[] } //ゲージ
+#=ES.CONFIG.VOL.CHARA.S2VO.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,@_PINT(1),@es.GSD(025,@_PINT(1)));return[] } //スライダー
+#=ES.CONFIG.VOL.CHARA.S2VO.SLIDER.DRAG { @es.GSD(025,@_PINT(1))=@_PINT(2);GOSUB[#=es.SOUND.SETVOL];return[] } //スライダー
+
+//■[キャラ別S2VO音声音量ミュート] -----------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.S2VO.MUTE.ON.VDEF
+#=ES.CONFIG.VOL.CHARA.S2VO.MUTE.OFF.VDEF { @es.GSD(026,@_PINT(1))=1;return[] }
+#=ES.CONFIG.VOL.CHARA.S2VO.MUTE.ON.INIT
+#=ES.CONFIG.VOL.CHARA.S2VO.MUTE.OFF.INIT
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF($BID+"VOL.CHARA.S2VO.MUTE.ON" , @no, (@es.GSD(026,@no)==1)) //1=ON／0=OFF
+	\BT.ONOFF($BID+"VOL.CHARA.S2VO.MUTE.OFF", @no, (@es.GSD(026,@no)==0)) //OFF
+	return[]
+}
+#=ES.CONFIG.VOL.CHARA.S2VO.MUTE.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(026,@no))
+	GOSUB[#=es.SOUND.SETVOL]
+	return[]
+}
+#=ES.CONFIG.VOL.CHARA.S2VO.MUTE.OFF.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(026,@no));@es.GSD(026,@no)=1-@es.GSD(026,@no)
+	GOSUB[#=es.SOUND.SETVOL]
+	return[]
+}
+
+
+//■[スキップボタンでの未読スキップ] ---------------------------------
+//
+#=ES.CONFIG.SKIP.BTN.VDEF { @es.GSD(110,04)=@T(36,42);return[] }
+#=ES.CONFIG.SKIP.BTN.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(110,04)^@es.BNO);return[] }
+#=ES.CONFIG.SKIP.BTN.ON   { @es.GSD(110,04)=@es.BSW^@es.BNO;return[] }
+
+//■[CTRLキーでの未読スキップ] ---------------------------------------
+//
+#=ES.CONFIG.SKIP.CTRL.VDEF { @es.GSD(110,05)=@T(36,41);return[] }
+#=ES.CONFIG.SKIP.CTRL.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(110,05)^@es.BNO);return[] }
+#=ES.CONFIG.SKIP.CTRL.ON   { @es.GSD(110,05)=@es.BSW^@es.BNO;return[] }
+
+//■[既読文章の色を変える] -------------------------------------------
+//
+#=ES.CONFIG.KTX.COL.VDEF { @es.GSD(110,09)=@T(36,44);return[] }
+#=ES.CONFIG.KTX.COL.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(110,09)^@es.BNO);return[] }
+#=ES.CONFIG.KTX.COL.ON   { @es.GSD(110,09)=@es.BSW^@es.BNO;return[] }
+
+//■[選択済の選択肢の色を変える] -------------------------------------
+//
+#=ES.CONFIG.KSEL.COL.VDEF { @es.GSD(110,08)=@T(36,45);return[] }
+#=ES.CONFIG.KSEL.COL.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(110,08)^@es.BNO);return[] }
+#=ES.CONFIG.KSEL.COL.ON   { @es.GSD(110,08)=@es.BSW^@es.BNO;return[] }
+
+//■[選択肢通過後もオート持続] ---------------------------------------
+//
+#=ES.CONFIG.SEL.AUTO.VDEF { @es.GSD(110,06)=@T(22,06);return[] }
+#=ES.CONFIG.SEL.AUTO.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(110,06)^@es.BNO);return[] }
+#=ES.CONFIG.SEL.AUTO.ON   { @es.GSD(110,06)=@es.BSW^@es.BNO;return[] }
+
+//■[選択肢通過後もスキップ持続] -------------------------------------
+//
+#=ES.CONFIG.SEL.SKIP.VDEF { @es.GSD(110,07)=@T(22,07);return[] }
+#=ES.CONFIG.SEL.SKIP.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(110,07)^@es.BNO);return[] }
+#=ES.CONFIG.SEL.SKIP.ON   { @es.GSD(110,07)=@es.BSW^@es.BNO;return[] }
+
+//■[非アクティブ時でも動作させる] -----------------------------------
+//
+#=ES.CONFIG.NOACTIVE.VDEF { @es.GSD(110,02)=@T(17,07);return[] }
+#=ES.CONFIG.NOACTIVE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(110,02)^@es.BNO);return[] }
+#=ES.CONFIG.NOACTIVE.ON   { @es.GSD(110,02)=@es.BSW^@es.BNO;\GSD.REFLECT;return[] }
+
+//■[ウィンドウを常に手前に表示する] ---------------------------------
+//
+#=ES.CONFIG.ALWAYSTOP.VDEF { @es.GSD(110,01)=@T(17,08);return[] }
+#=ES.CONFIG.ALWAYSTOP.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(110,01)^@es.BNO);return[] }
+#=ES.CONFIG.ALWAYSTOP.ON   { @es.GSD(110,01)=@es.BSW^@es.BNO;\GSD.REFLECT;return[] }
+
+//■[スクリーンセーバーの起動を防止する] -----------------------------
+//
+#=ES.CONFIG.SCRSAVER.VDEF { @es.GSD(110,03)=@T(17,02);return[] }
+#=ES.CONFIG.SCRSAVER.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(110,03)^@es.BNO);return[] }
+#=ES.CONFIG.SCRSAVER.ON   { @es.GSD(110,03)=@es.BSW^@es.BNO;\GSD.REFLECT;return[] }
+
+//■[画面モード(フルスクリーンモード)] -------------------------------
+//
+//#=ES.CONFIG.SCREEN.VDEF { return[] }
+#=ES.CONFIG.SCREEN.INIT
+{
+///xS $es.BID,@es.BNO だと、GOSUB[#=ES.CONFIG.SCREEN.INIT] として直接飛んだときに、
+//     違う内容が入っている場合があり、うまく動かない.
+//
+//	\BT.ONOFF($es.BID, 0, (@es.GSD(141,02)==1)) //1=ON
+//	\BT.ONOFF($es.BID, 1, (@es.GSD(141,02)==0)) //0=OFF
+	\BT.ONOFF("ES.CONFIG.SCREEN", 0, (@es.GSD(141,02)==1)) //1=ON
+	\BT.ONOFF("ES.CONFIG.SCREEN", 1, (@es.GSD(141,02)==0)) //0=OFF
+	return[]
+}
+#=ES.CONFIG.SCREEN.ON
+{
+	\BT.ONOFF.GET($es.BID, 0)(@es.GSD(141,02)) //1=ON／0=OFF
+	WINDOW[NO=0 FULLSCREEN=@es.GSD(141,02)]
+//	WINDOW[NO=0 Z=@es.GSD(141,02)] //前面or常に手前
+	WINDOW[NO=0 Z=@es.GSD(110,01)] //前面or常に手前
+	return[]
+}
+
+//■[画面エフェクトスキップ] -----------------------------------------
+//
+#=ES.CONFIG.EFFECT.FAST.VDEF { @es.GSD(112,01)=0;return[] }
+#=ES.CONFIG.EFFECT.FAST.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(112,01)^@es.BNO);return[] }
+#=ES.CONFIG.EFFECT.FAST.ON   { @es.GSD(112,01)=@es.BSW^@es.BNO;return[] }
+
+//■[ムービー再生] ---------------------------------------------------
+//
+#=ES.CONFIG.YMV.SHOW.VDEF { @es.GSD(110,12)=1;return[] }
+#=ES.CONFIG.YMV.SHOW.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(110,12)^@es.BNO);return[] }
+#=ES.CONFIG.YMV.SHOW.ON   { @es.GSD(110,12)=@es.BSW^@es.BNO;return[] }
+
+//■[テキストカウント] -----------------------------------------------
+//
+#=ES.CONFIG.TEXTCOUNT.VDEF { @es.GSD(115,02)=1;return[] }
+#=ES.CONFIG.TEXTCOUNT.INIT { \BT.ON($es.BID,@es.GSD(115,02));return[] }
+#=ES.CONFIG.TEXTCOUNT.ON   { @es.GSD(115,02)=@_PINT(1);return[] }
+
+//■[セーブ確認] -----------------------------------------------------
+//
+#=ES.CONFIG.CONF.SAVE.VDEF { @es.GSD(114,06)=@T(13,11);return[] }
+#=ES.CONFIG.CONF.SAVE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,06)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.SAVE.ON   { @es.GSD(114,06)=@es.BSW^@es.BNO;return[] }
+
+//■[上書きセーブ確認] -----------------------------------------------
+//
+#=ES.CONFIG.CONF.SAVE.OW.VDEF { @es.GSD(114,07)=@T(13,13);return[] }
+#=ES.CONFIG.CONF.SAVE.OW.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,07)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.SAVE.OW.ON   { @es.GSD(114,07)=@es.BSW^@es.BNO;return[] }
+
+//■[ロード確認] -----------------------------------------------------
+//
+#=ES.CONFIG.CONF.LOAD.VDEF { @es.GSD(114,08)=@T(13,15);return[] }
+#=ES.CONFIG.CONF.LOAD.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,08)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.LOAD.ON   { @es.GSD(114,08)=@es.BSW^@es.BNO;return[] }
+
+//■[クイックセーブ確認] ---------------------------------------------
+//
+#=ES.CONFIG.CONF.QSAVE.VDEF { @es.GSD(114,04)=@T(13,07);return[] }
+#=ES.CONFIG.CONF.QSAVE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,04)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.QSAVE.ON   { @es.GSD(114,04)=@es.BSW^@es.BNO;return[] }
+
+//■[クイックロード確認] ---------------------------------------------
+//
+#=ES.CONFIG.CONF.QLOAD.VDEF { @es.GSD(114,05)=@T(13,09);return[] }
+#=ES.CONFIG.CONF.QLOAD.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,05)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.QLOAD.ON   { @es.GSD(114,05)=@es.BSW^@es.BNO;return[] }
+
+//■[直前の選択肢に戻る確認] -----------------------------------------
+//
+#=ES.CONFIG.CONF.PREVSEL.VDEF { @es.GSD(114,14)=@T(13,27);return[] }
+#=ES.CONFIG.CONF.PREVSEL.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,14)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.PREVSEL.ON   { @es.GSD(114,14)=@es.BSW^@es.BNO;return[] }
+
+//■[セーブデータ移動確認] -------------------------------------------
+//
+#=ES.CONFIG.CONF.SAVEMOVE.VDEF { @es.GSD(114,11)=@T(13,21);return[] }
+#=ES.CONFIG.CONF.SAVEMOVE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,11)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.SAVEMOVE.ON   { @es.GSD(114,11)=@es.BSW^@es.BNO;return[] }
+
+//■[セーブデータコピー確認] -----------------------------------------
+//
+#=ES.CONFIG.CONF.SAVECOPY.VDEF { @es.GSD(114,09)=@T(13,17);return[] }
+#=ES.CONFIG.CONF.SAVECOPY.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,09)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.SAVECOPY.ON   { @es.GSD(114,09)=@es.BSW^@es.BNO;return[] }
+
+//■[セーブデータ上書きコピー確認] -----------------------------------
+//
+#=ES.CONFIG.CONF.SAVECOPY.OW.VDEF { @es.GSD(114,10)=@T(13,19);return[] }
+#=ES.CONFIG.CONF.SAVECOPY.OW.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,10)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.SAVECOPY.OW.ON   { @es.GSD(114,10)=@es.BSW^@es.BNO;return[] }
+
+//■[セーブデータ削除確認] -------------------------------------------
+//
+#=ES.CONFIG.CONF.SAVEDEL.VDEF { @es.GSD(114,12)=@T(13,23);return[] }
+#=ES.CONFIG.CONF.SAVEDEL.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,12)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.SAVEDEL.ON   { @es.GSD(114,12)=@es.BSW^@es.BNO;return[] }
+
+//■[設定初期化確認] -------------------------------------------------
+//
+#=ES.CONFIG.CONF.CFGINIT.VDEF { @es.GSD(114,13)=@T(13,25);return[] }
+#=ES.CONFIG.CONF.CFGINIT.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,13)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.CFGINIT.ON   { @es.GSD(114,13)=@es.BSW^@es.BNO;return[] }
+
+//■[シーン鑑賞へ戻る確認] -------------------------------------------
+//
+#=ES.CONFIG.CONF.REPLAYEND.VDEF { @es.GSD(114,03)=@T(13,05);return[] }
+#=ES.CONFIG.CONF.REPLAYEND.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,03)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.REPLAYEND.ON   { @es.GSD(114,03)=@es.BSW^@es.BNO;return[] }
+
+//■[タイトル確認] ---------------------------------------------------
+//
+#=ES.CONFIG.CONF.TITLE.VDEF { @es.GSD(114,02)=@T(13,03);return[] }
+#=ES.CONFIG.CONF.TITLE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,02)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.TITLE.ON   { @es.GSD(114,02)=@es.BSW^@es.BNO;return[] }
+
+//■[終了確認] -------------------------------------------------------
+//
+#=ES.CONFIG.CONF.END.VDEF { @es.GSD(114,01)=@T(13,01);return[] }
+#=ES.CONFIG.CONF.END.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(114,01)^@es.BNO);return[] }
+#=ES.CONFIG.CONF.END.ON   { @es.GSD(114,01)=@es.BSW^@es.BNO;return[] }
+
+
+//■[フォント・太字ボタン] -------------------------------------------
+//
+#=ES.CONFIG.FONT.BOLD.VDEF { @es.GSD(115,14)=@T(36,12);return[] }
+#=ES.CONFIG.FONT.BOLD.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(115,14)^@es.BNO);return[] }
+#=ES.CONFIG.FONT.BOLD.ON   { @es.GSD(115,14)=@es.BSW^@es.BNO;GOSUB[#=ES.CONFIG.FONT.REF];return[] }
+
+//■[フォント・影ボタン] ---------------------------------------------
+//
+#=ES.CONFIG.FONT.SHADE.VDEF { @es.GSD(115,09)=@T(36,13);return[] }
+#=ES.CONFIG.FONT.SHADE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(115,09)^@es.BNO);return[] }
+#=ES.CONFIG.FONT.SHADE.ON   { @es.GSD(115,09)=@es.BSW^@es.BNO;GOSUB[#=ES.CONFIG.FONT.REF];return[] }
+
+//■[フォント・袋文字ボタン] -----------------------------------------
+//
+#=ES.CONFIG.FONT.OUTLINE.VDEF { @es.GSD(115,08)=@T(36,14);return[] }
+#=ES.CONFIG.FONT.OUTLINE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(115,08)^@es.BNO);return[] }
+#=ES.CONFIG.FONT.OUTLINE.ON   { @es.GSD(115,08)=@es.BSW^@es.BNO;GOSUB[#=ES.CONFIG.FONT.REF];return[] }
+
+//■[フォント・グラデーションボタン] ---------------------------------
+//
+#=ES.CONFIG.FONT.GRADATION.VDEF { @es.GSD(115,15)=@T(36,15);return[] }
+#=ES.CONFIG.FONT.GRADATION.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(115,15)^@es.BNO);return[] }
+#=ES.CONFIG.FONT.GRADATION.ON   { @es.GSD(115,15)=@es.BSW^@es.BNO;GOSUB[#=ES.CONFIG.FONT.REF];return[] }
+
+//■[FONT.CLOSE]ボタン -----------------------------------------------
+//
+#=ES.CONFIG.FONT.CLOSE.ON
+{
+	\es.S.GOSUB.OVER("ES.CONFIGSELFONT", 0, 0, 998, 0); return[]
+}
+
+//■[オート時に音声再生が終わるまで待つ] -----------------------------
+//
+#=ES.CONFIG.VO.AUTO.VDEF { @es.GSD(111,01)=@T(36,46);return[] }
+//#=ES.CONFIG.VO.AUTO.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(111,01)^@es.BNO);return[] }
+#=ES.CONFIG.VO.AUTO.INIT
+{
+	\BT.ONOFF("ES.CONFIG.VO.AUTO", 0, (@es.GSD(111,01)==1)) //
+	\BT.ONOFF("ES.CONFIG.VO.AUTO", 1, (@es.GSD(111,01)==0)) //
+	\BT.ONOFF("ES.CONFIG.VO.AUTO", 2, (@es.GSD(111,01)==2)) //
+	return[]
+}
+//#=ES.CONFIG.VO.AUTO.ON   { @es.GSD(111,01)=@es.BSW^@es.BNO;\_dmes("="+$(@es.GSD(111,01)));return[] }
+#=ES.CONFIG.VO.AUTO.ON
+{
+	IF[@_PINT(1)<=1] @es.GSD(111,01)=@es.BSW^@es.BNO IFEND[]
+	IF[@_PINT(1)==2] @es.GSD(111,01)=2 IFEND[]
+}
+
+//■[音声再生の停止タイミング(メッセージ改行後もボイス再生を残す)] ---
+//
+#=ES.CONFIG.VO.STOP.VDEF { @es.GSD(111,02)=@T(36,47);return[] }
+#=ES.CONFIG.VO.STOP.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(111,02)^@es.BNO);return[] }
+#=ES.CONFIG.VO.STOP.ON   { @es.GSD(111,02)=@es.BSW^@es.BNO;return[] }
+
+//■[ボイスのループ再生] ---------------------------------------------
+//
+#=ES.CONFIG.VO.LOOPPLAY.VDEF { @es.GSD(111,03)=0;return[] }
+#=ES.CONFIG.VO.LOOPPLAY.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(111,03)^@es.BNO);return[] }
+#=ES.CONFIG.VO.LOOPPLAY.ON   { @es.GSD(111,03)=@es.BSW^@es.BNO;return[] }
+
+//■[次音声アイコン] -------------------------------------------------
+//
+#=ES.CONFIG.NEXTVOICE.VDEF { @es.GSD(115,03)=1;return[] }
+#=ES.CONFIG.NEXTVOICE.INIT { \BT.ONOFF($es.BID,@es.BNO,@es.GSD(115,03)^@es.BNO);return[] }
+#=ES.CONFIG.NEXTVOICE.ON   { @es.GSD(115,03)=@es.BSW^@es.BNO;return[] }
+
+//■[キャラアイコン] -------------------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.FACE.ON
+{
+	INT[@no=@_PINT(1)]
+	\BT.ONOFF.GET($es.BID, @no)(@es.GSD(010,@no))
+	GOSUB[#=es.SOUND.SETVOL]
+	//キャラボイスONOFF
+	\BT.ONOFF($BID+"VOL.CHARA.MUTE.ON", @no, @es.GSD(010,@no))
+	//アイコン自体をクリックしてもONOFFひっくり返らないようにするための処理
+	//\BT.ONOFF.GET(,,@no)(@ret)
+	//\BT.ONOFF(,@no, 1-@ret)
+	return[]
+}
+
+
+
+
+
+///xINJ
+#=ES.CONFIG.VOL.SE.TEST.ON
+{
+	IF[@VOICEPLAYFLAG.SE==0] \_gosub("ES.CONFIG.VoicePlay.SE")
+	ELSE[]                   \_gosub("ES.CONFIG.VoiceStop")
+	IFEND[]
+
+	@VOICEPLAYFLAG.SE = 1 - @VOICEPLAYFLAG.SE
+	\BT.ONOFF($es.BID,, @VOICEPLAYFLAG.SE)
+
+	return[]
+}
+
+#=ES.CONFIG.VOL.ESE.TEST.ON
+{
+	IF[@VOICEPLAYFLAG.ESE==0] \_gosub("ES.CONFIG.VoicePlay.ESE")
+	ELSE[]                    \_gosub("ES.CONFIG.VoiceStop")
+	IFEND[]
+
+	@VOICEPLAYFLAG.ESE = 1 - @VOICEPLAYFLAG.ESE
+	\BT.ONOFF($es.BID,, @VOICEPLAYFLAG.ESE)
+
+	return[]
+}
+
+#=ES.CONFIG.VOL.E2SE.TEST.ON
+{
+	IF[@VOICEPLAYFLAG.E2SE==0] \_gosub("ES.CONFIG.VoicePlay.E2SE")
+	ELSE[]                     \_gosub("ES.CONFIG.VoiceStop")
+	IFEND[]
+
+	@VOICEPLAYFLAG.E2SE = 1 - @VOICEPLAYFLAG.E2SE
+	\BT.ONOFF($es.BID,, @VOICEPLAYFLAG.E2SE)
+
+	return[]
+}
+
+#=ES.CONFIG.VOL.SSE.TEST.ON
+{
+	IF[@VOICEPLAYFLAG.SSE==0] \_gosub("ES.CONFIG.VoicePlay.SSE")
+	ELSE[]                    \_gosub("ES.CONFIG.VoiceStop")
+	IFEND[]
+
+	@VOICEPLAYFLAG.SSE = 1 - @VOICEPLAYFLAG.SSE
+	\BT.ONOFF($es.BID,, @VOICEPLAYFLAG.SSE)
+
+	return[]
+}
+
+#=ES.CONFIG.VOL.S2SE.TEST.ON
+{
+	IF[@VOICEPLAYFLAG.S2SE==0] \_gosub("ES.CONFIG.VoicePlay.S2SE")
+	ELSE[]                     \_gosub("ES.CONFIG.VoiceStop")
+	IFEND[]
+
+	@VOICEPLAYFLAG.S2SE = 1 - @VOICEPLAYFLAG.S2SE
+	\BT.ONOFF($es.BID,, @VOICEPLAYFLAG.S2SE)
+
+	return[]
+}
+
+#=ES.CONFIG.VOL.VO.TEST.ON
+{
+	IF[@VOICEPLAYFLAG.VO==0] \_gosub("ES.CONFIG.VoicePlay.VO")
+	ELSE[]                   \_gosub("ES.CONFIG.VoiceStop")
+	IFEND[]
+
+	@VOICEPLAYFLAG.VO = 1 - @VOICEPLAYFLAG.VO
+	\BT.ONOFF($es.BID,, @VOICEPLAYFLAG.VO)
+
+	return[]
+}
+
+#=ES.CONFIG.VOL.EVO.TEST.ON
+{
+	IF[@VOICEPLAYFLAG.EVO==0] \_gosub("ES.CONFIG.VoicePlay.EVO")
+	ELSE[]                    \_gosub("ES.CONFIG.VoiceStop")
+	IFEND[]
+
+	@VOICEPLAYFLAG.EVO = 1 - @VOICEPLAYFLAG.EVO
+	\BT.ONOFF($es.BID,, @VOICEPLAYFLAG.EVO)
+
+	return[]
+}
+
+#=ES.CONFIG.VOL.E2VO.TEST.ON
+{
+	IF[@VOICEPLAYFLAG.E2VO==0] \_gosub("ES.CONFIG.VoicePlay.E2VO")
+	ELSE[]                     \_gosub("ES.CONFIG.VoiceStop")
+	IFEND[]
+
+	@VOICEPLAYFLAG.E2VO = 1 - @VOICEPLAYFLAG.E2VO
+	\BT.ONOFF($es.BID,, @VOICEPLAYFLAG.E2VO)
+
+	return[]
+}
+
+#=ES.CONFIG.VOL.SVO.TEST.ON
+{
+	IF[@VOICEPLAYFLAG.SVO==0] \_gosub("ES.CONFIG.VoicePlay.SVO")
+	ELSE[]                    \_gosub("ES.CONFIG.VoiceStop")
+	IFEND[]
+
+	@VOICEPLAYFLAG.SVO = 1 - @VOICEPLAYFLAG.SVO
+	\BT.ONOFF($es.BID,, @VOICEPLAYFLAG.SVO)
+
+	return[]
+}
+
+#=ES.CONFIG.VOL.S2VO.TEST.ON
+{
+	IF[@VOICEPLAYFLAG.S2VO==0] \_gosub("ES.CONFIG.VoicePlay.S2VO")
+	ELSE[]                     \_gosub("ES.CONFIG.VoiceStop")
+	IFEND[]
+
+	@VOICEPLAYFLAG.S2VO = 1 - @VOICEPLAYFLAG.S2VO
+	\BT.ONOFF($es.BID,, @VOICEPLAYFLAG.S2VO)
+
+	return[]
+}
+
+//■[キャラ別音量テスト] ---------------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.TEST.ON
+{
+	INT[@no=@_PINT(1)]
+
+	IF[@VOICEPLAYFLAG.VOC!=@no] @VOICEPLAYFLAG.VOC=0 IFEND[]
+
+	IF[@VOICEPLAYFLAG.VOC==0]
+	{
+		\BT.ONOFF($es.BID, @no, 1)
+		\_gosub("ES.CONFIG.VoicePlay.VOC", @no)
+		@VOICEPLAYFLAG.VOC = @no
+	}
+	ELSE[]
+	{
+		\BT.ONOFF($es.BID, @no, 0)
+		GOSUB[#=es.VOICE.DEL] // ボイス停止
+	//	\_gosub("ES.CONFIG.VoiceStop")
+		@VOICEPLAYFLAG.VOC = 0
+	}
+	IFEND[]
+
+	return[]
+}
+
+///xINJ
+#=ES.CONFIG.VOL.CHARA.EVO.TEST.ON
+{
+	INT[@no=@_PINT(1)]
+
+	IF[@VOICEPLAYFLAG.EVOC!=@no] @VOICEPLAYFLAG.EVOC=0 IFEND[]
+
+	IF[@VOICEPLAYFLAG.EVOC==0]
+	{
+		\BT.ONOFF($es.BID, @no, 1)
+		\_gosub("ES.CONFIG.VoicePlay.EVOC", @no)
+		@VOICEPLAYFLAG.EVOC = @no
+	}
+	ELSE[]
+	{
+		\BT.ONOFF($es.BID, @no, 0)
+		\_gosub("ES.CONFIG.VoiceStop")
+		@VOICEPLAYFLAG.EVOC = 0
+	}
+	IFEND[]
+
+	return[]
+}
+
+///xINJ
+#=ES.CONFIG.VOL.CHARA.E2VO.TEST.ON
+{
+	INT[@no=@_PINT(1)]
+
+	IF[@VOICEPLAYFLAG.E2VOC!=@no] @VOICEPLAYFLAG.E2VOC=0 IFEND[]
+
+	IF[@VOICEPLAYFLAG.E2VOC==0]
+	{
+		\BT.ONOFF($es.BID, @no, 1)
+		\_gosub("ES.CONFIG.VoicePlay.E2VOC", @no)
+		@VOICEPLAYFLAG.E2VOC = @no
+	}
+	ELSE[]
+	{
+		\BT.ONOFF($es.BID, @no, 0)
+		\_gosub("ES.CONFIG.VoiceStop")
+		@VOICEPLAYFLAG.E2VOC = 0
+	}
+	IFEND[]
+
+	return[]
+}
+
+
+
+//■[システムボイス選択] ---------------------------------------------
+//
+#=ES.CONFIG.VOL.CHARA.SYSVOICE.VDEF { @es.GSD(035,01)=1;return[] }
+#=ES.CONFIG.VOL.CHARA.SYSVOICE.INIT { \BT.ON($es.BID,@es.GSD(035,01));return[] }
+#=ES.CONFIG.VOL.CHARA.SYSVOICE.ON   { @es.GSD(035,01)=@_PINT(1);return[] }
+
+
+
+//■[E-mote 髪揺れ量] ------------------------------------------------
+//
+#=ES.CONFIG.EMOTE.HAIR.SLIDER.VDEF { @es.GSD(131,01)=@T(51,11);return[] }
+#=ES.CONFIG.EMOTE.HAIR.GAUGE.ON    { \SLIDER.SYNC($BID+"EMOTE.HAIR.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.EMOTE.HAIR.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(131,01));return[] } //スライダー
+#=ES.CONFIG.EMOTE.HAIR.SLIDER.DRAG { @es.GSD(131,01)=@_PINT(2);\GSD.REFLECT;return[] } //スライダー
+
+//■[E-mote 胸揺れ量] ------------------------------------------------
+//
+#=ES.CONFIG.EMOTE.BUST.SLIDER.VDEF { @es.GSD(131,02)=@T(51,12);return[] }
+#=ES.CONFIG.EMOTE.BUST.GAUGE.ON    { \SLIDER.SYNC($BID+"EMOTE.BUST.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.EMOTE.BUST.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(131,02));return[] } //スライダー
+#=ES.CONFIG.EMOTE.BUST.SLIDER.DRAG { @es.GSD(131,02)=@_PINT(2);\GSD.REFLECT;return[] } //スライダー
+
+//■[E-mote パーツ揺れ量] --------------------------------------------
+//
+#=ES.CONFIG.EMOTE.PARTS.SLIDER.VDEF { @es.GSD(131,03)=@T(51,13);return[] }
+#=ES.CONFIG.EMOTE.PARTS.GAUGE.ON    { \SLIDER.SYNC($BID+"EMOTE.PARTS.SLIDER");return[] } //ゲージ
+#=ES.CONFIG.EMOTE.PARTS.SLIDER.INIT { \BT.SLIDE.PER.SET($es.BID,,@es.GSD(131,03));return[] } //スライダー
+#=ES.CONFIG.EMOTE.PARTS.SLIDER.DRAG { @es.GSD(131,03)=@_PINT(2);\GSD.REFLECT;return[] } //スライダー
+
+
+
+//■[タブ]ボタン -----------------------------------------------------
+//
+#=ES.CONFIG.BTN.TAB.ON { \BT.ACTIVEGROUP(@es.BNO);GOSUB[#=ES.CONFIG.REF];return[] }
+
+//■[設定初期化]ボタン -----------------------------------------------
+//
+#=ES.CONFIG.BTN.CFGINIT.ON
+{
+	IF[@es.GSD(114,13)]
+		\_gosub(ES.CONFIGINITCONF.VoicePlay.1)	//ボイス再生
+		IF[@_PINT(1)==0] //設定初期化確認
+			\es.S.GOSUB.OVER("ES.CONFIGINITCONF", 0, 0, 202, 0)
+		IFEND[]
+		IF[@_PINT(1)==1] //設定初期化確認(DIALOG)
+			GOSUB[#=ES.CONFIGINITCONF.DIALOG]
+			IF[@_RINT(1)==1]
+				@es.STATE=201 //設定初期化(DIALOG)
+			IFEND[]
+		IFEND[]
+	ELSE[]
+		@es.STATE=200 //設定初期化
+	IFEND[]
+	return[]
+}
+
+//■[タイトル]ボタン -------------------------------------------------
+//
+#=ES.CONFIG.BTN.TITLE.ON
+{
+	IF[@_PINT(1)==0] //タイトル確認
+		\es.S.GOSUB.OVER("ES.TITLECONF", 0, 0, 901, 0)
+	IFEND[]
+	IF[@_PINT(1)==1] //タイトル確認(DIALOG)
+		GOSUB[#=ES.TITLECONF.DIALOG]
+		IF[@_RINT(1)==1]
+			GOSUB[#=es.CGTSS.2]
+			\es.S.RETURN.LBL("ES.GAMEMAIN", 900, 0)
+		IFEND[]
+	IFEND[]
+	return[]
+}
+
+//■[シーン鑑賞]ボタン -----------------------------------------------
+//
+#=ES.CONFIG.BTN.RPMODE.ON
+{
+	IF[@_PINT(1)==0] //シーン鑑賞確認
+		\es.S.GOSUB.OVER("ES.RPMODECONF", 0, 0, 901, 0); return[]
+	IFEND[]
+	IF[@_PINT(1)==1] //シーン鑑賞確認(DIALOG)
+
+	IFEND[]
+	return[]
+}
+
+//■[終了]ボタン -----------------------------------------------------
+//
+#=ES.CONFIG.BTN.END.ON
+{
+	IF[@_PINT(1)==0] //終了確認
+		\es.S.GOSUB.OVER("ES.ENDCONF", 0, 0, 901, 0)
+	IFEND[]
+	IF[@_PINT(1)==1] //終了確認(DIALOG)
+		GOSUB[#=ES.ENDCONF.DIALOG]
+	IFEND[]
+	return[]
+}
+
+//■[戻る]ボタン -----------------------------------------------------
+//
+#=ES.CONFIG.BTN.BACK.ON
+{
+	\GSD.SAVE	//ファイルに保存する
+	\_gosub(ES.CONFIG.VoiceStop.1)	//ボイス停止
+//	\es.S.RETURN(1, 0)	//タイトル/メニュー/ゲームメインへ
+	\es.S.RETURN
+	return[]
+}
+

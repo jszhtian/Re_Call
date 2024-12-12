@@ -1,0 +1,83 @@
+<HTML><HEAD><TITLE>YU-RIS マニュアル</TITLE><LINK REL=STYLESHEET TYPE="text/css" HREF="../css/ysstyle.css"></HEAD>
+<BODY STYLE="margin:0pt 0pt 0pt 0pt" BGCOLOR=#000000>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=20 CLASS=MAX>
+<TR><TD BGCOLOR=#303060 CLASS=t30>
+<B CLASS=t30>■<A HREF="../top.html">TOP</A>＞<A HREF="../ref.html">命令一覧</A>＞<A HREF="./top.html">メニュー系命令</A>＞<B CLASS=t30>MENU［］</B>
+</TD></TR></TABLE>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 HEIGHT=40 CLASS=MAX>
+<TR><TD BGCOLOR=#606080 CLASS=t20>
+　<A HREF="menu.html">MENU［］</A>
+　<A HREF="menuact.html">MENUACT［］</A>
+　<A HREF="menuinfo.html">MENUINFO［］</A>
+　<A HREF="menuend.html">MENUEND［］</A>
+</TD></TR></TABLE>
+
+<PRE>
+<FONT CLASS=t70>■メニューレイヤ設定命令 MENU[ ]</FONT>
+<FONT CLASS=t20>
+
+
+メニューレイヤ(またはレイヤセット)を生成したり、属性を設定します。
+
+システム起動時、メニューレイヤセットのルートフォルダはデフォルトで「M0」になり、
+その階層の下にレイヤを生成していく形になっています。
+
+メニューを設定しただけでは何も起こらず、
+実際に設定したメニューをウィンドウのメニューバーとして反映させるには、
+WINDOW 命令の MENUID キーワードを実行します。
+また、その後メニューを設定変更などをし、それを反映させる場合にも
+再び WINDOW 命令の MENUID キーワードで反映処理を行わなくてはなりません。
+
+
+キーワード
+<TABLE CLASS=T1 BORDER=1 CELLSPACING=0 CELLPADDING=4>
+<TR><TD><FONT CLASS=t40>ID = 文字列</FONT></TD><TD><FONT CLASS=t40>レイヤＩＤを指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>NAME = 文字列</FONT></TD><TD><FONT CLASS=t40>メニュー項目名を設定します。<BR>※名前を無記入("")にした場合、セパレータ(区切り線)になります。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>E = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>項目の存在の有効(１)／無効(０)を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>A = 値(0～256)</FONT></TD><TD><FONT CLASS=t40>０を設定すると項目が灰色になり選択できないようになります。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>Z = 値</FONT></TD><TD><FONT CLASS=t40>レイヤの優先順位（Ｚ）を指定</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CHECK = 値(0/1)</FONT></TD><TD><FONT CLASS=t40>チェックマークの有無(1=有/0=無)を設定します。</FONT></TD></TR>
+<TR><TD><FONT CLASS=t40>CODE = 値</FONT></TD><TD><FONT CLASS=t40>メニューが選択されたか否かを検出するための値を指定</FONT></TD></TR>
+</TABLE>
+
+
+
+[1]レイヤー「ＡＢＣ」に、「終了」という項目名でレイヤを作成する。また、CODE 値を 5 に設定する。
+
+　　※実際に メニューバーの「終了」の項目が選択されると、システム変数 @_MENUCODE に 5 の値が格納されます。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MENU</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>ABC</FONT> <FONT CLASS=t62>Z</FONT>=<FONT CLASS=t63>1</FONT> <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>"終了"</FONT> <FONT CLASS=t62>CODE</FONT>=<FONT CLASS=t63>5</FONT>]</FONT></B>
+
+
+[2]レイヤ「ABC」にチェックマークを付ける。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MENU</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>ABC</FONT> <FONT CLASS=t62>CHECK</FONT>=<FONT CLASS=t63>1</FONT>]</FONT></B>
+
+
+[3]レイヤ「ABC」を灰色表示にして選択できないようにする。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MENU</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>ABC</FONT> <FONT CLASS=t62>A</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[4]レイヤ「ABC」を無効にする。（項目自体が一時的に存在しない状態となります）
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MENU</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>ABC</FONT> <FONT CLASS=t62>E</FONT>=<FONT CLASS=t63>0</FONT>]</FONT></B>
+
+
+[5]レイヤ「ABC」をセパレータ(区切り線)にする。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MENU</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>ABC</FONT> <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>""</FONT>]</FONT></B>
+
+
+[6] 優先度10 のレイヤセット「ABC」を生成する。
+
+　　<B><FONT CLASS=t60><FONT CLASS=t64>MENU</FONT>[<FONT CLASS=t62>ID</FONT>=<FONT CLASS=t63>ABC/</FONT> <FONT CLASS=t62>NAME</FONT>=<FONT CLASS=t63>"ファイル"</FONT> <FONT CLASS=t62>Z</FONT>=<FONT CLASS=t63>10</FONT>]</FONT></B>
+
+
+
+</FONT>
+
+
+</BODY></HTML>

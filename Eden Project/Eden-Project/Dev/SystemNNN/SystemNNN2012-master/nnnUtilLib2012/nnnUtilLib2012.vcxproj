@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_ver2_Win7|Win32">
+      <Configuration>Debug_ver2_Win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Win7|Win32">
+      <Configuration>Debug_Win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_ver2_win7|Win32">
+      <Configuration>Release_ver2_win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Win7|Win32">
+      <Configuration>Release_Win7</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B9CEDE60-96AA-4270-B2F2-F11AC013A5BD}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>nnnUtilLib2012</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>nnnUtilLib2017D</TargetName>
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.17134.0\um;C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.17134.0\shared;D:\ogg\sdk\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">
+    <TargetName>nnnUtilLib2017_Win7D</TargetName>
+    <IncludePath>D:\ogg\sdk\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">
+    <TargetName>nnnUtilLib2017_ver2_Win7D</TargetName>
+    <IncludePath>D:\ogg\sdk\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.17134.0\um;C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.17134.0\shared;D:\ogg\sdk\include;$(IncludePath)</IncludePath>
+    <TargetName>nnnUtilLib2017</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+    <IncludePath>D:\ogg\sdk\include;$(IncludePath)</IncludePath>
+    <TargetName>nnnUtilLib2017_Win7</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'">
+    <OutDir>..\..\systemNNNLib\</OutDir>
+    <IncludePath>D:\ogg\sdk\include;$(IncludePath)</IncludePath>
+    <TargetName>nnnUtilLib2017_ver2_Win7</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/D __USE_XAUDIO2__ %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(IntDir)nnnUtilLib2017D.pdb</ProgramDataBaseFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/D __USE_XAUDIO2__ %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/D __SYSTEMNNN_VER2__ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\allPackData.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\allPackFile.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\allPackHash.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\animeControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\autoSaveDataList.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\autoSaveSubData.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\autoSelectControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\basicSetup.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\calcuWeek.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\cgDataControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\cgVoice.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\chartList.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonAnimeParts.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonBackButton.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonButton.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonButtonGroup.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonCheckButton.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonGameVersion.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonKeyList.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonMessageWindow.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonMode.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonMultiStateButton.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonOkCancel.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\commonPartyStatusData.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\commonPlayStatusData.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonRadioButton.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonRadioButtonGroup.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonResultData.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonSystemFile.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonUpdownBack.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\commonUpDownButtonGroup.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\currentDirControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\cutinControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\cutinMessageWindow.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\cutinNameData.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\CViewControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\dataFileSetup.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\faceControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\fft.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\floatingLayer.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\fpsPrint.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\fukaPrint.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\gameMouse.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\gameUtil.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\getCommandLineParam.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\haveItemData.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\inputStatus.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\menuButtonGroup.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\menuButtonSetup.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\mepachiControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\messageCursor.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\mixerControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\mmlControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\musicControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\myDbgNew.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\Myfont.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\myFontCache.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\myIme.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\myKeyStatus.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\myLocale.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\mymessage.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\myMouseStatus.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\mymousestruct.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\mySaveFolder.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\myScrollBar.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\mySlider.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\myTextInputBox.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\myTextStore.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\nameColor.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\namelist.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\nnnButtonStatus.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\nnnlog.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\nnnUtilLibCompileDesc.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\notice.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\oggDecoder.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\oggStreamDecoder.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\okikaeData.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\omakeClassSupport.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\pagePrint.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\polygonShape.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\printAnimeLayer.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\printCard.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\printCardGaze.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\printCardPower.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\printGameDate.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\printPlayerStatus.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\printSpectrum.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\rubiFont.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\saijitsuList.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\sceneDataControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\sceneList.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\sceneOptionButton.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\sceneVoice.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\scriptcommand.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\scriptDefine.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\scriptSoundControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\scriptVoiceControl.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\selectObjectSetup.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\setupList.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\shakin.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\shopItemData.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\softKey.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\StdAfx.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\SteamWork.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\superButtonPicture.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\superButtonSetup.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\suuji.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\suujiPair.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\systempicture.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\tableList.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\taihi.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\userFont.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\varNumber.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\waveData.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\waveMusic.h" />
+    <ClInclude Include="..\..\SystemNNN\nnnUtilLib\waveMusicXAudio2.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\wheelmouse.h" />
+    <ClInclude Include="..\..\systemNNN\nnnUtilLib\wm_user.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\allPackData.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\allPackFile.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\allPackHash.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\animeControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\autoSaveDataList.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\autoSaveSubData.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\autoSelectControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\basicSetup.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\calcuWeek.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\cgDataControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\cgVoice.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\chartList.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonAnimeParts.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonBackButton.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonButton.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonButtonGroup.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonCheckButton.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonGameVersion.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonMessageWindow.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonMultiStateButton.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonOkCancel.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\commonPartyStatusData.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\commonPlayStatusData.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonRadioButton.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonRadioButtonGroup.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonResultData.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonSystemFile.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonUpdownBack.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\commonUpDownButtonGroup.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\currentDirControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\cutincontrol.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\cutinMessageWindow.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\cutinnamedata.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\CViewControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\dataFileSetup.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\faceControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\fft.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\floatinglayer.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\fpsPrint.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\fukaPrint.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\gameMouse.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\gameUtil.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\getCommandLineParam.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\haveItemData.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\inputStatus.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\menuButtonGroup.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\menubuttonsetup.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\mepachiControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\messageCursor.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\mixerControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\mmlControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\musicControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\myfont.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\myFontCache.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\myIme.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\myKeyStatus.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\myLocale.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\mymessage.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\myMouseStatus.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\mysavefolder.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\myScrollBar.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\mySlider.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\mytextinputbox.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\myTextStore.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\nameColor.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\namelist.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\nnnlog.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\nnnUtilLibCompileDesc.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\notice.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\oggDecoder.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\oggStreamDecoder.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\okikaeData.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\omakeClassSupport.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\pagePrint.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\polygonShape.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\printAnimeLayer.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\printCard.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\printCardGaze.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\printCardPower.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\printGameDate.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\printPlayerStatus.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\printspectrum.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\rubiFont.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\saijitsuList.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\sceneDataControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\sceneList.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\sceneOptionButton.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\sceneVoice.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\scriptSoundControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\scriptVoiceControl.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\selectObjectSetup.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\setupList.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\shakin.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\shopItemData.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\softKey.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\StdAfx.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\SteamWork.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\superButtonPicture.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\superButtonSetup.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\suuji.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\suujiPair.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\systempicture.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\tablelist.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\taihi.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\userFont.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\varNumber.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\wavedata.cpp" />
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\wavemusic.cpp" />
+    <ClCompile Include="..\..\SystemNNN\nnnUtilLib\waveMusicXAudio2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_Win7|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_ver2_Win7|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Win7|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_ver2_win7|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\systemNNN\nnnUtilLib\wheelmouse.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

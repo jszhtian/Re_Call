@@ -1,0 +1,96 @@
+//============================================================================
+//
+//■中心点登録＆検索処理
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_INT[@CGCXY.DEF.NUM]
+	S_STR[$CGCXY.DEF.KEY(1)] //KEY
+	S_INT[@CGCXY.DEF.TYPE(1)]//TYPE
+	S_INT[@CGCXY.DEF.CX(1)]  //CX
+	S_INT[@CGCXY.DEF.CY(1)]  //CY
+	S_FLT[@CGCXY.DEF.BBX(1)] //BBX
+	S_FLT[@CGCXY.DEF.BBY(1)] //BBY
+	S_FLT[@CGCXY.DEF.BGZ(1)] //BGZ
+	S_FLT[@CGCXY.DEF.CMV(1)] //CMV
+	S_FLT[@CGCXY.DEF.CMW(1)] //CMW
+	S_FLT[@CGCXY.DEF.CMX(1)] //CMX
+	S_FLT[@CGCXY.DEF.CMY(1)] //CMY
+	S_FLT[@CGCXY.DEF.CMZ(1)] //CMZ
+
+}
+
+//--------------------------------------------------------------------
+//■スプライト定義処理
+//--------------------------------------------------------------------
+#=es.CGCXY.DEF.SET
+{
+	@CGCXY.DEF.NUM+=1
+	\VAR.ADD(@CGCXY.DEF.TYPE, @_PINT(1))
+	\_strlower($_PSTR(2));\VAR.ADD($CGCXY.DEF.KEY, $_RSTR(1))
+	\VAR.ADD(@CGCXY.DEF.CX  , @_PINT(3))
+	\VAR.ADD(@CGCXY.DEF.CY  , @_PINT(4))
+	\VAR.ADD(@CGCXY.DEF.BGZ , @_PINT(5))
+	\VAR.ADD(@CGCXY.DEF.CMV , @_PINT(6))
+//	\VAR.ADD(@CGCXY.DEF.CMW , @_PINT(6))
+	\VAR.ADD(@CGCXY.DEF.CMX , @_PINT(7))
+	\VAR.ADD(@CGCXY.DEF.CMY , @_PINT(8))
+	\VAR.ADD(@CGCXY.DEF.CMZ , @_PINT(9))
+	return[]
+}
+
+//--------------------------------------------------------------------
+//■スプライト検索処理
+//  $_PSTR(1) : この文字列の中から検索する
+//  @_PINT(2) : 画像種別(0=CG/1=BG)
+//
+//  @_RINT(1) : CX
+//  @_RINT(2) : CY
+//  @_RINT(3) : BGZ
+//  @_RINT(4) : CMV
+//  @_RINT(5) : CMX
+//  @_RINT(6) : CMY
+//  @_RINT(7) : CMZ
+//--------------------------------------------------------------------
+#=es.CGCXY.DEF.SEARCH
+{
+	STR[$chk]
+	\_strlower($_PSTR(1))($chk)
+
+	INT[@ret1=-9999999]
+	INT[@ret2=-9999999]
+	INT[@ret3]
+	INT[@ret4]
+	INT[@ret5]
+	INT[@ret6]
+	INT[@ret7]
+	LOOP[SET=@CGCXY.DEF.NUM]
+	{
+		IF[@_PINT(2)==@CGCXY.DEF.TYPE(@_LC)]
+		{
+			\_strlen($CGCXY.DEF.KEY(@_LC))
+			\_strleft($chk, @_RINT(1))
+			IF[$_RSTR(1)==$CGCXY.DEF.KEY(@_LC)]
+			{
+//\_dmes($CGCXY.DEF.KEY(@_LC))
+				@ret1=@CGCXY.DEF.CX(@_LC)
+				@ret2=@CGCXY.DEF.CY(@_LC)
+				@ret3=@CGCXY.DEF.BGZ(@_LC)
+				@ret4=@CGCXY.DEF.CMV(@_LC)
+			//	@ret5=@CGCXY.DEF.CMW(@_LC)
+				@ret5=@CGCXY.DEF.CMX(@_LC)
+				@ret6=@CGCXY.DEF.CMY(@_LC)
+				@ret7=@CGCXY.DEF.CMZ(@_LC)
+				LOOPBREAK[]
+			}
+			IFEND[]
+		}
+		IFEND[]
+	}
+	LOOPEND[]
+
+	return[rint=@ret1 rint2=@ret2 rint3=@ret3 rint4=@ret4 rint5=@ret5 rint6=@ret6 rint7=@ret7]
+}
+

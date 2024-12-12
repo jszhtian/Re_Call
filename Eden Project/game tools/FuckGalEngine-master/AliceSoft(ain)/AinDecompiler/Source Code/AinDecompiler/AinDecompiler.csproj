@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D6F2287C-E855-47D9-830D-2CF00B98A0B6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AinDecompiler</RootNamespace>
+    <AssemblyName>AinDecompiler</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ScintillaNet, Version=2.5.0.0, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ScintillaNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AinFile.cs" />
+    <Compile Include="AinTypes.cs" />
+    <Compile Include="AlternativeNames.cs" />
+    <Compile Include="ArgumentKinds.cs" />
+    <Compile Include="AssemblerProjectReader.cs" />
+    <Compile Include="AssemblerProjectWriter.cs" />
+    <Compile Include="AssembleOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssembleOptionsForm.Designer.cs">
+      <DependentUpon>AssembleOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CharacterWidthCache.cs" />
+    <Compile Include="CodeDisplayState.cs" />
+    <Compile Include="CodeSearchCache.cs" />
+    <Compile Include="CollectionWithIndex.cs" />
+    <Compile Include="Compiler\CodeGenerator.cs" />
+    <Compile Include="Compiler\Compiler-Getinitialvalues.cs" />
+    <Compile Include="Compiler\Compiler-Getsymbols.cs" />
+    <Compile Include="Compiler\Compiler-types.cs" />
+    <Compile Include="Compiler\Compiler.cs" />
+    <Compile Include="Compiler\FirstPass.cs" />
+    <Compile Include="Compiler\KeywordTable.cs" />
+    <Compile Include="Compiler\MultipleDictionary.cs" />
+    <Compile Include="Compiler\MyEnumerator.cs" />
+    <Compile Include="Compiler\MyEnumerator2.cs" />
+    <Compile Include="Compiler\SecondPass.cs" />
+    <Compile Include="Compiler\TokenExpression.cs" />
+    <Compile Include="Compiler\TokenType.cs" />
+    <Compile Include="CompositeInstructions.cs" />
+    <Compile Include="DataTypeExtensions.cs" />
+    <Compile Include="DecompiledCodeCache.cs" />
+    <Compile Include="DefaultArgumentFinder.cs" />
+    <Compile Include="DictionaryWrapper.cs" />
+    <Compile Include="DisassemblyOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DisassemblyOptionsForm.Designer.cs">
+      <DependentUpon>DisassemblyOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditMetadata2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditMetadata2.Designer.cs">
+      <DependentUpon>EditMetadata2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EncodingDetector.cs" />
+    <Compile Include="EnumerationTypeEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnumerationTypeEditor.Designer.cs">
+      <DependentUpon>EnumerationTypeEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorsListForm.Designer.cs">
+      <DependentUpon>ErrorsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportImportStringsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportImportStringsForm.Designer.cs">
+      <DependentUpon>ExportImportStringsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportImportTextNewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportImportTextNewForm.Designer.cs">
+      <DependentUpon>ExportImportTextNewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FindDefaultValueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindDefaultValueForm.Designer.cs">
+      <DependentUpon>FindDefaultValueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsExtensions.cs" />
+    <Compile Include="FunctionSearch2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FunctionSearch2.Designer.cs">
+      <DependentUpon>FunctionSearch2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CycleChecker.cs" />
+    <Compile Include="DataType.cs" />
+    <Compile Include="Decompiler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DisassemblerForListFile.cs" />
+    <Compile Include="Expression.cs" />
+    <Compile Include="ExpressionDataType.cs" />
+    <Compile Include="ExpressionDisplayer.cs" />
+    <Compile Include="ExpressionStatic.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="ExplorerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExplorerForm.Designer.cs">
+      <DependentUpon>ExplorerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionEnumerator.cs" />
+    <Compile Include="HistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistoryForm.Designer.cs">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Instruction.cs" />
+    <Compile Include="InstructionExtensions.cs" />
+    <Compile Include="Interfaces.cs" />
+    <Compile Include="Metadata.cs" />
+    <Compile Include="MetadataEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MetadataEditorForm.Designer.cs">
+      <DependentUpon>MetadataEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MetadataFile.cs" />
+    <Compile Include="ModifiedShiftJis.cs" />
+    <Compile Include="MyBackgroundWorker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyIndentedTextWriter.cs" />
+    <Compile Include="MyTextReader.cs" />
+    <Compile Include="MyTextReader2.cs" />
+    <Compile Include="RecentFilesList.cs" />
+    <Compile Include="TextReaderWrapper.cs" />
+    <Compile Include="MyTypeConverter.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="Operator.cs" />
+    <Compile Include="PopupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForm.Designer.cs">
+      <DependentUpon>PopupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgressForm.Designer.cs">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AssembleOptionsForm.resx">
+      <DependentUpon>AssembleOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisassemblyOptionsForm.resx">
+      <DependentUpon>DisassemblyOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditMetadata2.resx">
+      <DependentUpon>EditMetadata2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnumerationTypeEditor.resx">
+      <DependentUpon>EnumerationTypeEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ErrorsListForm.resx">
+      <DependentUpon>ErrorsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportImportStringsForm.resx">
+      <DependentUpon>ExportImportStringsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportImportTextNewForm.resx">
+      <DependentUpon>ExportImportTextNewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindDefaultValueForm.resx">
+      <DependentUpon>FindDefaultValueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FunctionSearch2.resx">
+      <DependentUpon>FunctionSearch2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExplorerForm.resx">
+      <DependentUpon>ExplorerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistoryForm.resx">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MetadataEditorForm.resx">
+      <DependentUpon>MetadataEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupForm.resx">
+      <DependentUpon>PopupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgressForm.resx">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyGridForm.resx">
+      <DependentUpon>PropertyGridForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReassembleForm.resx">
+      <DependentUpon>ReassembleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectFontForm.resx">
+      <DependentUpon>SelectFontForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpreadEnumerationTypeForm.resx">
+      <DependentUpon>SpreadEnumerationTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextPromptForm.resx">
+      <DependentUpon>TextPromptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranslateVariableNamesForm.resx">
+      <DependentUpon>TranslateVariableNamesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="translation\TranslationProgressDialogBox.resx">
+      <DependentUpon>TranslationProgressDialogBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordWrapForm.resx">
+      <DependentUpon>WordWrapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="tools\crage\cui\System4.cui">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PropertyGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertyGridForm.Designer.cs">
+      <DependentUpon>PropertyGridForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReassembleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReassembleForm.Designer.cs">
+      <DependentUpon>ReassembleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExpressionMap.cs" />
+    <Compile Include="RegistryUtility.cs" />
+    <Compile Include="SelectFontForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectFontForm.Designer.cs">
+      <DependentUpon>SelectFontForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpreadEnumerationTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpreadEnumerationTypeForm.Designer.cs">
+      <DependentUpon>SpreadEnumerationTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StringExportImport.cs" />
+    <Compile Include="IntUtil.cs" />
+    <Compile Include="TemporaryFile.cs" />
+    <Compile Include="TextImportExport2.cs" />
+    <Compile Include="TextPromptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextPromptForm.Designer.cs">
+      <DependentUpon>TextPromptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TinyStopwatch.cs" />
+    <Compile Include="Token.cs" />
+    <Compile Include="TranslateVariableNamesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TranslateVariableNamesForm.Designer.cs">
+      <DependentUpon>TranslateVariableNamesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="translation\BackgroundTranslation.cs" />
+    <Compile Include="translation\Extensions.cs" />
+    <Compile Include="translation\ExtentList.cs" />
+    <Compile Include="translation\JapaneseTextUtil.cs" />
+    <Compile Include="translation\MySortedList.cs" />
+    <Compile Include="translation\RegularExpressionMatchList.cs" />
+    <Compile Include="translation\Romanizer.cs" />
+    <Compile Include="translation\TextUtility.cs" />
+    <Compile Include="translation\TranslationOptions.cs" />
+    <Compile Include="translation\TranslationProgressDialogBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="translation\TranslationProgressDialogBox.Designer.cs">
+      <DependentUpon>TranslationProgressDialogBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="translation\Translator.cs" />
+    <Compile Include="ScintillaState.cs" />
+    <Compile Include="VariableExtensions.cs" />
+    <Compile Include="VariableTracer.cs" />
+    <Compile Include="WordWrapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WordWrapForm.Designer.cs">
+      <DependentUpon>WordWrapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WordWrapOptions.cs" />
+    <Compile Include="WordWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\WordWrapOptions.datasource" />
+    <None Include="Resources\back1.png" />
+    <None Include="Resources\back2.png" />
+    <Content Include="SciLexer.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SciLexer64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test5.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\arc_conv.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\crage\acui_core.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\crage\crage.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\crage\io_request.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\crage\libbz2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\crage\locale.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\crage\package_core.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\crage\plugin.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\crage\resource_core.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\crage\utility.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\crage\zlib1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tools\readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,22 @@
+﻿生成启动时间为 2024/5/27 19:11:44。
+     1>项目“D:\A_WorkSpace\tools\T\game tools\rUGP\afhook-3f613a097c07d3d9fb9969a130ea6d859b544f8a\plugin\afhook\afhook.vcxproj”在节点 2 上(Build 个目标)。
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(364,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Microsoft Research\Detours Express 3.0\include" /IC:\Users\Bartosz\Downloads\lpng1610\lpng1610 /I"C:\Users\Bartosz\Downloads\lpng1610\zlib-1.2.8" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D AFHOOK_DEVMODE /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D AFHOOK_EXPORTS /D _USING_V110_SDK71_ /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"afhook_dev\\" /Fd"afhook_dev\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CGameFunctions.cpp CHookEngine.cpp CImageWriter.cpp CLogger.cpp CResourceManager.cpp CUtils.cpp CWindowsFunctions.cpp
+         CGameFunctions.cpp
+     1>d:\a_workspace\tools\t\game tools\rugp\afhook-3f613a097c07d3d9fb9969a130ea6d859b544f8a\plugin\afhook\CImageWriter.h(8): fatal error C1083: 无法打开包括文件: “png.h”: No such file or directory
+         CHookEngine.cpp
+     1>d:\a_workspace\tools\t\game tools\rugp\afhook-3f613a097c07d3d9fb9969a130ea6d859b544f8a\plugin\afhook\CImageWriter.h(8): fatal error C1083: 无法打开包括文件: “png.h”: No such file or directory
+         CImageWriter.cpp
+     1>d:\a_workspace\tools\t\game tools\rugp\afhook-3f613a097c07d3d9fb9969a130ea6d859b544f8a\plugin\afhook\CImageWriter.h(8): fatal error C1083: 无法打开包括文件: “png.h”: No such file or directory
+         CLogger.cpp
+         CResourceManager.cpp
+     1>d:\a_workspace\tools\t\game tools\rugp\afhook-3f613a097c07d3d9fb9969a130ea6d859b544f8a\plugin\afhook\CImageWriter.h(8): fatal error C1083: 无法打开包括文件: “png.h”: No such file or directory
+         CUtils.cpp
+         CWindowsFunctions.cpp
+     1>d:\a_workspace\tools\t\game tools\rugp\afhook-3f613a097c07d3d9fb9969a130ea6d859b544f8a\plugin\afhook\CImageWriter.h(8): fatal error C1083: 无法打开包括文件: “png.h”: No such file or directory
+     1>已完成生成项目“D:\A_WorkSpace\tools\T\game tools\rUGP\afhook-3f613a097c07d3d9fb9969a130ea6d859b544f8a\plugin\afhook\afhook.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:02.51

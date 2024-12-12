@@ -1,0 +1,1034 @@
+//============================================================================
+//
+//■ERIS ゲームメイン
+//
+//============================================================================
+
+//■スタティック変数宣言
+{
+	S_STR[$BID="ES.GAMEMAIN."]
+
+	S_INT[@flag_1=10]
+	S_INT[@flag_2=10]
+	S_INT[@flag_3=10]
+	S_INT[@flag_4=10]
+	S_INT[@flag_4A=10]
+	S_INT[@flag_5=10]
+	S_INT[@flag_6=10]
+	S_INT[@flag_7=10]
+	S_INT[@flag_8=10]
+	//S_INT[@c]
+	//S_INT[@d]
+
+	S_INT[@e.TITLE		=01]
+	S_INT[@e.MOVIE		=02]
+	S_INT[@e.LOG		=19]
+	S_INT[@e.CONFIG		=03]
+	S_INT[@e.SAVE		=04]
+	S_INT[@e.LOAD		=05]
+	S_INT[@e.QSAVE		=06]
+	S_INT[@e.QLOAD		=07]
+	S_INT[@e.SKIP		=08]
+	S_INT[@e.VOICE		=09]
+	S_INT[@e.AUTO		=10]
+	S_INT[@e.ERASE		=11]
+	S_INT[@e.TITLECONF	=12]
+	S_INT[@e.ENDCONF	=13]
+	S_INT[@e.PREVSEL	=14]
+	S_INT[@e.MENU		=15]
+	S_INT[@e.RPMODECONF	=16]
+
+}
+
+
+
+//=========================================================================
+//■ボタン表示非表示処理
+//=========================================================================
+#=ES.GAMEMAIN.BTLOOP.REFRESH
+{
+	@flag_1=1
+	@flag_2=1
+	@flag_3=1
+	@flag_4=1
+	@flag_4A=1
+	@flag_5=1
+	@flag_6=1
+	@flag_7=1
+	@flag_8=1
+	return[]
+}
+#=ES.GAMEMAIN.BTLOOP
+{
+	INT[@flag]
+
+	GOSUB[#=es.TX.LEN.GET]	//テキスト存在チェック
+	INT[@txlen=@_RINT(1)]
+
+	GOSUB[#=es.TXN.EX.GET]	//名前存在チェック
+	INT[@txex=@_RINT(1)]
+
+
+	@GSD.MESWINDOW = (@es.SCENARIOSTOP==0)
+
+
+	//------------------------------------------------------------
+	//●メッセージウィンドウ
+	//------------------------------------------------------------
+	@flag  = 1
+	@flag *= (@GSD.MESWINDOW==1)
+	@flag *= (@es.WA.MODE<=1)
+	@flag *= (@es.SP.WA.MODE<=1)
+	@flag *= (@es.SND.WAIT.MODE==0)
+	@flag *= (@es.SND.TIMEWAIT.MODE==0)
+	@flag *= (@es.MG.AUTO==0)
+	@flag *= (@txlen>=1 || @es.SELMODE==1)
+	@flag *= (@es.TXSTART || @es.SELMODE==1)
+	@flag *= (@es.SELMODE!=2)
+	IF[@flag]
+	{
+//		IF[@GSDF.MESWINDOW==0]
+//		IF[@flag_1==0]
+		{
+			\BT.ES1($BID+"TIP.MESW")
+			\BT.ES1($BID+"TIP.MESW.TX")
+			\BT.ES1($BID+"TIP.MESW.A")
+			\BT.A.SET($BID+"TIP.MESW.A",,@es.GSD(120,03))
+			@flag_1=1
+		}
+//		IFEND[]
+
+//		@c+=1
+//DEBUGLIST[ADD=@flag_1 STR="@flag_1"]
+//DEBUGLIST[ADD=@c STR="@c"]
+
+//		@GSDF.MESWINDOW=1
+	}
+	ELSE[]
+	{
+//		IF[@GSDF.MESWINDOW==1]
+//		IF[@flag_1>0]
+		{
+			\BT.ES0($BID+"TIP.MESW")
+			\BT.ES0($BID+"TIP.MESW.TX")
+			\BT.ES0($BID+"TIP.MESW.A")
+			@flag_1-=1
+		}
+//		IFEND[]
+
+//		@d+=1
+//DEBUGLIST[ADD=@flag_1 STR="@flag_1"]
+//DEBUGLIST[ADD=@d STR="@d"]
+
+//		@GSDF.MESWINDOW=0
+	}
+	IFEND[]
+
+
+	//------------------------------------------------------------
+	//●名前ウィンドウ
+	//------------------------------------------------------------
+	@flag  = 1
+	@flag *= (@GSD.MESWINDOW==1)
+	@flag *= (@es.WA.MODE<=1)
+	@flag *= (@es.SP.WA.MODE<=1)
+	@flag *= (@es.SND.WAIT.MODE==0)
+	@flag *= (@es.SND.TIMEWAIT.MODE==0)
+	@flag *= (@es.MG.AUTO==0)
+	@flag *= (@txlen>=1 || @es.SELMODE==1)
+	@flag *= (@es.TXSTART || @es.SELMODE==1)
+	@flag *= (@T(36,32)==0 || (@T(36,32)==1 && @txex==1)) //名前がある時だけ表示
+	IF[@flag]
+	{
+//		IF[@flag_2==0]
+		{
+			\BT.ES1($BID+"TIP.NAMEW")
+			\BT.ES1($BID+"TIP.NAMEW.TX")
+			\BT.ES1($BID+"TIP.NAMEW.A")
+			\BT.A.SET($BID+"TIP.NAMEW.A",,@es.GSD(120,03))
+			@flag_2=1
+		}
+//		IFEND[]
+	}
+	ELSE[]
+	{
+//		IF[@flag_2>0]
+		{
+			\BT.ES0($BID+"TIP.NAMEW")
+			\BT.ES0($BID+"TIP.NAMEW.TX")
+			\BT.ES0($BID+"TIP.NAMEW.A")
+			\BT.A.SET($BID+"TIP.NAMEW.A",,@es.GSD(120,03))
+			@flag_2-=1
+		}
+//		IFEND[]
+	}
+	IFEND[]
+
+
+	//------------------------------------------------------------
+	//●テキストアイコン
+	//------------------------------------------------------------
+	@flag  = 1
+	@flag *= (@GSD.MESWINDOW==1)
+	@flag *= ($es.S.NOW=="ES.GAMEMAIN")
+	@flag *= (@es.SELMODE==0)
+	@flag *= (@es.TX.CWAIT==1)
+	@flag *= (@es.WA.MODE<=1)
+	@flag *= (@es.SP.WA.MODE<=1)
+	@flag *= (@es.SND.WAIT.MODE==0)
+	@flag *= (@es.SND.TIMEWAIT.MODE==0)
+	@flag *= (@es.MG.AUTO==0)
+	@flag *= (@txlen>=1 || @es.SELMODE==1)
+	@flag *= (@es.TXSTART || @es.SELMODE==1)
+	IF[@flag]
+	{
+//		IF[@flag_3==0] //オート切った時に正しく表示されなくなる
+//		{
+			\BT.ES1($BID+"TIP.TX.REPAGEICON")
+			\BT.ES1($BID+"TIP.TX.RETURNICON")
+			\BT.ES1($BID+"TIP.AUTOICON")
+			\BT.ES1($BID+"TIP.SKIPICON")
+			GOSUB[#=es.TX.ICON.EXEC]
+//			@flag_3=1
+//		}
+//		IFEND[]
+	}
+	ELSE[]
+	{
+//		IF[@flag_3>0]
+//		{
+			\BT.ES0($BID+"TIP.TX.REPAGEICON")
+			\BT.ES0($BID+"TIP.TX.RETURNICON")
+			\BT.ES0($BID+"TIP.AUTOICON")
+		//	\BT.ES0($BID+"TIP.SKIPICON")
+//			@flag_3-=1
+//		}
+//		IFEND[]
+	}
+	IFEND[]
+
+
+	//------------------------------------------------------------
+	//●フェイスウィンドウ
+	//------------------------------------------------------------
+	@flag  = 1
+	@flag *= (@GSD.MESWINDOW==1)
+	@flag *= (@es.WA.MODE<=1)
+	@flag *= (@es.SP.WA.MODE<=1)
+	@flag *= (@es.SND.WAIT.MODE==0)
+	@flag *= (@es.SND.TIMEWAIT.MODE==0)
+	@flag *= (@es.MG.AUTO==0)
+	@flag *= (@txlen>=1 || @es.SELMODE==1)
+	@flag *= (@es.TXSTART || @es.SELMODE==1)
+	@flag *= ($es.LSD(1)!="")
+	IF[@flag]
+	{
+	//	IF[@flag_4==0]
+	//	{
+			//フェイスウィンドウ表示
+			\BT.ES1("ES.GAMEMAIN.TIP.FACE")
+			\BT.ES1("ES.GAMEMAIN.TIP.FACE.BACK")
+			@flag_4=1
+	//	}
+	//	IFEND[]
+	}
+	ELSE[]
+	{
+	//	IF[@flag_4>0]
+	//	{
+			//フェイスウィンドウ非表示
+			\BT.ES0("ES.GAMEMAIN.TIP.FACE")
+			\BT.ES0("ES.GAMEMAIN.TIP.FACE.BACK")
+	//		@flag_4-=1
+	//	}
+	//	IFEND[]
+	}
+	IFEND[]
+
+
+	//------------------------------------------------------------
+	//●日付
+	//------------------------------------------------------------
+	IF[@T(10,01)]
+	{
+		@flag  = 1
+		@flag *= (@GSD.MESWINDOW==1)
+		@flag *= (@es.WA.MODE<=1)
+		@flag *= (@es.SP.WA.MODE<=1)
+		@flag *= (@es.SND.WAIT.MODE==0)
+		@flag *= (@es.SND.TIMEWAIT.MODE==0)
+		@flag *= (@es.MG.AUTO==0)
+		@flag *= (@txlen>=1 || @es.SELMODE==1)
+		@flag *= (@es.TXSTART || @es.SELMODE==1)
+		@flag *= (@es.LSD(031,10))
+		IF[@flag]
+		{
+//			IF[@flag_4A==0]
+			{
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.BACK")
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.YEAR", 1)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.YEAR", 2)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.YEAR", 3)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.YEAR", 4)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.MONTH", 1)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.MONTH", 2)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.DAY", 1)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.DAY", 2)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.WEEK")
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.HOUR", 1)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.HOUR", 2)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.MIN", 1)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.MIN", 2)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.SEC", 1)
+				\BT.ES1("ES.GAMEMAIN.TIP.DATE.SEC", 2)
+//				@flag_4A=1
+			}
+//			IFEND[]
+		}
+		ELSE[]
+		{
+//			IF[@flag_4A>0]
+			{
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.BACK")
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.YEAR", 1)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.YEAR", 2)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.YEAR", 3)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.YEAR", 4)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.MONTH", 1)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.MONTH", 2)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.DAY", 1)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.DAY", 2)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.WEEK")
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.HOUR", 1)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.HOUR", 2)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.MIN", 1)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.MIN", 2)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.SEC", 1)
+				\BT.ES0("ES.GAMEMAIN.TIP.DATE.SEC", 2)
+//				@flag_4A-=1
+			}
+//			IFEND[]
+		}
+		IFEND[]
+	}
+	IFEND[]
+
+
+	//------------------------------------------------------------
+	//●ボイスアイコン
+	//------------------------------------------------------------
+	@flag  = 1
+	@flag *= (@GSD.MESWINDOW==1)
+	@flag *= (@es.WA.MODE<=1)
+	@flag *= (@es.SP.WA.MODE<=1)
+	@flag *= (@es.SND.WAIT.MODE==0)
+	@flag *= (@es.SND.TIMEWAIT.MODE==0)
+	@flag *= (@es.MG.AUTO==0)
+	@flag *= (@txlen>=1)
+	@flag *= (@es.SELMODE==0)
+	@flag *= ($es.VOICE.FILE(1)+$es.VOICE.FILE(2)+$es.VOICE.FILE(3)+$es.VOICE.FILE(4)+$es.VOICE.FILE(5)+$es.VOICE.FILE(6)+$es.VOICE.FILE(7)+$es.VOICE.FILE(8)+$es.VOICE.FILE(9)+$es.VOICE.FILE(10)!="")
+	@flag *= (@es.TXSTART)
+	IF[@flag]
+	{
+//		IF[@flag_5==0]
+		{
+			\BT.N0($BID+"BTN.VOICE")
+	//		\BT.ONOFF($BID+"BTN.VOICE",,@es.VOICEPLAYFLAG)
+			@flag_5=1
+		}
+//		IFEND[]
+	}
+	ELSE[]
+	{
+//		IF[@flag_5>0]
+		{
+			\BT.N1($BID+"BTN.VOICE")
+			@flag_5-=1
+		}
+//		IFEND[]
+	}
+	IFEND[]
+
+
+	//------------------------------------------------------------
+	//●次音声アイコン
+	//------------------------------------------------------------
+	@flag  = 1
+	@flag *= (@GSD.MESWINDOW==1)
+	@flag *= (@es.GSD(115,03)==1) // 次音声アイコン表示フラグ
+	@flag *= (@GSD.NEXTVOICE==1) // 次音声アイコンフラグ
+	@flag *= (@es.WA.MODE<=1)
+	@flag *= (@es.SP.WA.MODE<=1)
+	@flag *= (@es.SND.WAIT.MODE==0)
+	@flag *= (@es.SND.TIMEWAIT.MODE==0)
+	@flag *= (@es.MG.AUTO==0)
+	@flag *= (@txlen>=1 || @es.SELMODE==1)
+	@flag *= (@es.TXSTART || @es.SELMODE==1)
+	IF[@flag]
+	{
+//		IF[@flag_6==0]
+		{
+			\BT.ES1($BID+"TIP.NEXTVOICEICON")
+			@flag_6=1
+		}
+//		IFEND[]
+	}
+	ELSE[]
+	{
+//		IF[@flag_6>0]
+		{
+			\BT.ES0($BID+"TIP.NEXTVOICEICON")
+			@flag_6-=1
+		}
+//		IFEND[]
+	}
+	IFEND[]
+
+
+	//------------------------------------------------------------
+	//●テキストカウント
+	//------------------------------------------------------------
+	@flag  = 1
+	@flag *= (@GSD.MESWINDOW==1)
+	@flag *= (@es.GSD(115,02)>0) // テキストカウント表示フラグ
+	@flag *= (@es.WA.MODE<=1)
+	@flag *= (@es.SP.WA.MODE<=1)
+	@flag *= (@es.SND.WAIT.MODE==0)
+	@flag *= (@es.SND.TIMEWAIT.MODE==0)
+	@flag *= (@es.MG.AUTO==0)
+	@flag *= (@txlen>=1 || @es.SELMODE==1)
+	@flag *= (@es.TXSTART || @es.SELMODE==1)
+	IF[@flag]
+	{
+//		IF[@flag_7==0]
+		{
+			\BT.ES1($BID+"TIP.COUNTICON")
+			GOSUB[#=es.TEXTCOUNT]
+			@flag_7=1
+		}
+//		IFEND[]
+	}
+	ELSE[]
+	{
+//		IF[@flag_7>0]
+		{
+			\BT.ES0($BID+"TIP.COUNTICON")
+			@flag_7-=1
+		}
+//		IFEND[]
+	}
+	IFEND[]
+
+
+	//------------------------------------------------------------
+	//●AUTOアイコン処理
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.AUTOICON.MAIN]
+
+
+	//------------------------------------------------------------
+	//●SKIPアイコン処理
+	//------------------------------------------------------------
+		GOSUB[#=es.TX.SKIPICON.MAIN]
+
+
+	//------------------------------------------------------------
+	//●その他のボタン
+	//------------------------------------------------------------
+	@flag  = 1
+	@flag *= (@GSD.MESWINDOW==1)
+	@flag *= (@es.WA.MODE<=1)
+	@flag *= (@es.SP.WA.MODE<=1)
+	@flag *= (@es.SND.WAIT.MODE==0)
+	@flag *= (@es.SND.TIMEWAIT.MODE==0)
+	@flag *= (@es.MG.AUTO==0)
+	@flag *= (@txlen>=1 || @es.SELMODE==1 || @es.SELMODE==2)
+	@flag *= (@es.TXSTART || @es.SELMODE==1 || @es.SELMODE==2)
+	IF[@flag]
+	{
+//		IF[@flag_8==0]
+		{
+	//		\BT.ES1($BID+"TIP.CLICK")
+	//		\BT.ES1($BID+"TIP.CTRLSKIP")
+			\BT.ES1($BID+"BTN.SAVE")
+			\BT.ES1($BID+"BTN.LOAD")
+			\BT.ES1($BID+"BTN.QSAVE")
+			\BT.ES1($BID+"BTN.QLOAD")
+			\BT.ES1($BID+"BTN.PREVSEL")
+			\BT.ES1($BID+"BTN.LOG")
+			\BT.ES1($BID+"BTN.VOICE")
+			\BT.ES1($BID+"BTN.AUTO")
+			\BT.ES1($BID+"BTN.SKIP")
+			\BT.ES1($BID+"BTN.CONFIG")
+			\BT.ES1($BID+"BTN.SCREEN")
+			\BT.ES1($BID+"BTN.ERASE")
+			\BT.ES1($BID+"BTN.TITLE", 0)
+			\BT.ES1($BID+"BTN.TITLE", 1)
+			\BT.ES1($BID+"BTN.RPMODE", 0)
+			\BT.ES1($BID+"BTN.RPMODE", 1)
+			\BT.ES1($BID+"BTN.END", 0)
+			\BT.ES1($BID+"BTN.END", 1)
+			\BT.ES1($BID+"BTN.MENU")
+			@flag_8=1
+		}
+//		IFEND[]
+	}
+	ELSE[]
+	{
+//		IF[@flag_8>0]
+		{
+	//		\BT.ES0($BID+"TIP.CLICK")
+	//		\BT.ES0($BID+"TIP.CTRLSKIP")
+			\BT.ES0($BID+"BTN.SAVE")
+			\BT.ES0($BID+"BTN.LOAD")
+			\BT.ES0($BID+"BTN.QSAVE")
+			\BT.ES0($BID+"BTN.QLOAD")
+			\BT.ES0($BID+"BTN.PREVSEL")
+			\BT.ES0($BID+"BTN.LOG")
+			\BT.ES0($BID+"BTN.VOICE")
+			\BT.ES0($BID+"BTN.AUTO")
+			\BT.ES0($BID+"BTN.SKIP")
+			\BT.ES0($BID+"BTN.CONFIG")
+			\BT.ES0($BID+"BTN.SCREEN")
+			\BT.ES0($BID+"BTN.ERASE")
+			\BT.ES0($BID+"BTN.TITLE", 0)
+			\BT.ES0($BID+"BTN.TITLE", 1)
+			\BT.ES0($BID+"BTN.RPMODE", 0)
+			\BT.ES0($BID+"BTN.RPMODE", 1)
+			\BT.ES0($BID+"BTN.END", 0)
+			\BT.ES0($BID+"BTN.END", 1)
+			\BT.ES0($BID+"BTN.MENU")
+			@flag_8-=1
+		}
+//		IFEND[]
+	}
+	IFEND[]
+
+	// AUTO/SKIPボタン
+		\BT.ONOFF($BID+"BTN.AUTO",, @es.TX.AUTO)
+		\BT.ONOFF($BID+"BTN.SKIP",, @es.TX.SKIP)
+
+
+	RETURN[]
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//■ボタン処理
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//■[CLICK]ボタン ----------------------------------------------------
+//
+#=ES.GAMEMAIN.TIP.CLICK.ON
+{
+	@es.TEXT.TIPCLICK = 1
+	return[]
+}
+
+//■[TEMPLATE1]ボタン ------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.TEMPLATE1.ON
+{
+	// サムネ用にスクリーンショットを撮っておく
+	GOSUB[#=ES.SCENARIO.SS]
+
+	@es.SCENARIOSTOP=@e.SAVE;\es.S.GOSUB("ES.TEMPLATE1", 0, 0, 1, 0)
+
+	return[]
+}
+
+//■[CGMODE]ボタン ---------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.CGMODE.ON
+{
+	@es.SCENARIOSTOP=@e.SAVE;\es.S.GOSUB("ES.CGMODE", 0, 0, 1, 0)
+	return[]
+}
+
+//■[SAVE]ボタン -----------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.SAVE.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+	// サムネ用にスクリーンショットを撮っておく
+	GOSUB[#=ES.SCENARIO.SS]
+
+	@es.SCENARIOSTOP=@e.SAVE;\es.S.GOSUB("ES.SAVE", 0, 0, 1, 0)
+
+//	IFEND[]
+	return[]
+}
+
+//■[LOAD]ボタン -----------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.LOAD.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+	//	@es.TX.IKKATSU=1
+
+	// サムネ用にスクリーンショットを撮っておく
+	GOSUB[#=ES.SCENARIO.SS]
+
+	@es.SCENARIOSTOP=@e.LOAD;\es.S.GOSUB("ES.LOAD", 0, 0, 1, 0)
+
+//	IFEND[]
+	return[]
+}
+
+//■[QSAVE]ボタン ----------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.QSAVE.ON
+{
+	IF[@es.TX.AUTO]
+	{
+		GOSUB[#=ES.AUTO.LOOP]
+		GO[#=ES.GAMEMAIN.BTN.QSAVE.ON.LEnd]
+	}
+	IFEND[]
+
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	IF[@L(8111)==0]
+
+		//	@es.TX.IKKATSU=1
+
+		// サムネ用にスクリーンショットを撮っておく
+		GOSUB[#=ES.SCENARIO.SS]
+
+		@es.SCENARIOSTOP=@e.QSAVE;\es.S.GOSUB.OVER("ES.QSAVE", 0, 0, 1, 0)
+//		@es.SCENARIOSTOP=@e.QSAVE;\es.S.GOSUB("ES.QSAVE", 0, 0, 1, 0)
+
+//	IFEND[]
+
+//	IFEND[]
+
+	#=ES.GAMEMAIN.BTN.QSAVE.ON.LEnd
+
+	return[]
+}
+
+//■[QSAVEDLG]ボタン -------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.QSAVEDLG.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	IF[@L(8111)==0]
+
+		//	@es.TX.IKKATSU=1
+
+		// サムネ用にスクリーンショットを撮っておく
+		GOSUB[#=ES.SCENARIO.SS]
+
+		@es.SCENARIOSTOP=@e.QSAVE;\es.S.GOSUB("ES.QSAVEDLG", 0, 0, 1, 0)
+
+//	IFEND[]
+
+//	IFEND[]
+	return[]
+}
+
+//■[QLOAD]ボタン ----------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.QLOAD.ON
+{
+	IF[@es.TX.AUTO]
+	{
+		GOSUB[#=ES.AUTO.LOOP]
+		GO[#=ES.GAMEMAIN.BTN.QLOAD.ON.LEnd]
+	}
+	IFEND[]
+
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+
+//ロードするファイル名取得
+\_inttostr(@es.sdqsaveno, @es.sdketa)
+STR[$Name="save"+$_RSTR(1)+".sd"]
+
+//クイックセーブデータが有効か
+GOSUB[#=es.SaveDataCheck pstr=$Name]
+IF[@_RINT(1)]
+{
+//	@es.SCENARIOSTOP=@e.QLOAD;\es.S.GOSUB.OVER("ES.QLOAD", 0, @es.sdqsaveno, 1, 0)
+	@es.SCENARIOSTOP=@e.QLOAD;\es.S.GOSUB.OVER("ES.QLOADCONF", 0, @es.sdqsaveno, 1, 0)
+}
+IFEND[]
+
+//	IFEND[]
+
+	#=ES.GAMEMAIN.BTN.QLOAD.ON.LEnd
+
+	return[]
+}
+
+//■[QLOADDLG]ボタン -------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.QLOADDLG.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+	@es.SCENARIOSTOP=@e.QLOAD;\es.S.GOSUB("ES.QLOADCONFDLG", 0, @es.sdqsaveno, 1, 0)
+
+//	IFEND[]
+	return[]
+}
+
+//■[PREVSEL]ボタン --------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.PREVSEL.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+	@es.SCENARIOSTOP=@e.PREVSEL;\es.S.GOSUB.OVER("ES.PREVSELCONF", 0, 0, 1, 0)
+
+//	IFEND[]
+	return[]
+}
+
+//■[LOG]ボタン ------------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.LOG.ON
+{
+	IF[@es.TX.AUTO]
+	{
+		GOSUB[#=ES.AUTO.LOOP]
+		GO[#=ES.GAMEMAIN.BTN.LOG.ON.LEnd]
+	}
+	IFEND[]
+
+///xS
+	@es.VOICEPLAYFLAG=0
+
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+	@es.SCENARIOSTOP=@e.LOG;\es.S.GOSUB("ES.LOG", 0, 0, 1, 0)
+
+//	IFEND[]
+
+	#=ES.GAMEMAIN.BTN.LOG.ON.LEnd
+
+	return[]
+}
+
+//■[SKIP]ボタン -----------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.SKIP.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+//	@es.SCENARIOSTOP=@e.SKIP;\es.S.GOSUB("ES.SKIP", 0, 0, 1, 0)
+	GOSUB[#=ES.SKIP.LOOP]
+
+//	IFEND[]
+	return[]
+}
+
+//■[CTRLSKIP]ボタン -------------------------------------------------
+//
+#=ES.GAMEMAIN.TIP.CTRLSKIP.ON
+{
+	@es.TX.CSKIP=1; return[]
+}
+
+//■[VOICE]ボタン ----------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.VOICE.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+///x暫定.本来は es.Button の @_INP()==2 で必要ないはず.
+//@_KEY_ENTER=3
+
+	INT[@r]
+	\BT.ONOFF.GET($es.BID)(@r)
+	IF[@r] //ボイス再生
+
+//		@es.SCENARIOSTOP=@e.VOICE;\es.S.GOSUB("ES.VOICEPLAY", 0, 0, 1, 0)
+		@es.VOICEPLAYFLAG=1
+
+		IF[@es.GSD(111,03)==1] //ボイスループ再生
+			\VO1($es.VOICE.FILE( 1),,,0)
+			\VO2($es.VOICE.FILE( 2),,,0)
+			\VO3($es.VOICE.FILE( 3),,,0)
+			\VO4($es.VOICE.FILE( 4),,,0)
+			\VO5($es.VOICE.FILE( 5),,,0)
+			\VO6($es.VOICE.FILE( 6),,,0)
+			\VO7($es.VOICE.FILE( 7),,,0)
+			\VO8($es.VOICE.FILE( 8),,,0)
+			\VO9($es.VOICE.FILE( 9),,,0)
+			\VO10($es.VOICE.FILE(10),,,0)
+		ELSE[]
+			\VO1($es.VOICE.FILE( 1))
+			\VO2($es.VOICE.FILE( 2))
+			\VO3($es.VOICE.FILE( 3))
+			\VO4($es.VOICE.FILE( 4))
+			\VO5($es.VOICE.FILE( 5))
+			\VO6($es.VOICE.FILE( 6))
+			\VO7($es.VOICE.FILE( 7))
+			\VO8($es.VOICE.FILE( 8))
+			\VO9($es.VOICE.FILE( 9))
+			\VO10($es.VOICE.FILE(10))
+		IFEND[]
+
+	ELSE[] //ボイス停止
+
+		@es.VOICEPLAYFLAG=0
+		GOSUB[#=es.VOICE.DEL] // ボイス停止
+
+	IFEND[]
+
+//	IFEND[]
+	return[]
+}
+
+//■[AUTO]ボタン -----------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.AUTO.ON
+{
+///x暫定.本来は es.Button の @_INP()==2 で必要ないはず.
+//@_KEY_ENTER=3
+
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.SCENARIOSTOP=@e.AUTO;\es.S.GOSUB("ES.AUTO", 0, 0, 1, 0)
+	GOSUB[#=ES.AUTO.LOOP]
+
+//	IFEND[]
+	return[]
+}
+
+//■[CONFIG]ボタン ---------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.CONFIG.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+	// サムネ用にスクリーンショットを撮っておく
+	GOSUB[#=ES.SCENARIO.SS]
+
+	@es.SCENARIOSTOP=@e.CONFIG;\es.S.GOSUB("ES.CONFIG", 10, 0, 1, 0)
+
+//	IFEND[]
+	return[]
+}
+
+//■[ERASE]ボタン ----------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.ERASE.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+	//	@es.SCENARIOSTOP=@e.ERASE;\es.S.GO("ES.WINDOWERASE", 0, 0, 1, 0)
+
+	IF[@es.TX.AUTO]
+	{
+		GOSUB[#=ES.AUTO.LOOP]
+		GO[#=ES.GAMEMAIN.BTN.ERASE.ON.LEnd]
+	}
+	IFEND[]
+
+//	GOSUB[#=ES.SEL.HIDE]
+//	GOSUB[#=ES.CSEL.HIDE]
+//	\BT.ES20.ALL("ES.GAMEMAIN");GOSUB[#=es.BT.DRAW]
+
+	@es.SCENARIOSTOP=@e.ERASE;\es.S.GOSUB("ES.WINDOWERASE", 0, 0, 1, 2) //第4引数
+
+//	IFEND[]
+
+	#=ES.GAMEMAIN.BTN.ERASE.ON.LEnd
+
+	return[]
+}
+
+//■[TITLE]ボタン ----------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.TITLE.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+//	IF[@es.TX.SKIP==0 && @es.TX.AUTO==0]
+
+	IF[@_PINT(1)==0] //タイトル確認
+		@es.SCENARIOSTOP=@e.TITLECONF;\es.S.GOSUB.OVER("ES.TITLECONF", 0, 0, 901, 0)
+	IFEND[]
+	IF[@_PINT(1)==1] //タイトル確認(DIALOG)
+		GOSUB[#=ES.TITLECONF.DIALOG]
+		IF[@_RINT(1)==1]
+			GOSUB[#=es.CGTSS.2]
+			\es.S.RETURN.LBL("ES.GAMEMAIN", 900, 0)
+		IFEND[]
+	IFEND[]
+//	\es.S.GOSUB("ES.TITLECONF", 0, 0, 901, 0)
+//	@es.SCENARIOSTOP=@e.TITLECONF;\es.S.GOSUB("ES.TITLECONF", 0, 0, 901, 0)
+
+//	IFEND[]
+
+//	IFEND[]
+	return[]
+}
+
+//■[RPMODE]ボタン ---------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.RPMODE.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+//	IF[@es.TX.SKIP==0 && @es.TX.AUTO==0]
+
+	IF[@_PINT(1)==0] //シーン鑑賞へ戻る確認
+		@es.SCENARIOSTOP=@e.RPMODECONF;\es.S.GOSUB.OVER("ES.RPMODECONF", 0, 0, 901, 0)
+	IFEND[]
+	IF[@_PINT(1)==1] //シーン鑑賞へ戻る確認(DIALOG)
+
+	IFEND[]
+//	\es.S.GOSUB("ES.TITLECONF", 0, 0, 901, 0)
+//	@es.SCENARIOSTOP=@e.TITLECONF;\es.S.GOSUB("ES.TITLECONF", 0, 0, 901, 0)
+
+//	IFEND[]
+
+//	IFEND[]
+	return[]
+}
+
+//■[END]ボタン ------------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.END.ON
+{
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+	IF[@_PINT(1)==0] //終了確認
+		@es.SCENARIOSTOP=@e.ENDCONF;\es.S.GOSUB.OVER("ES.ENDCONF", 0, 0, 1, 0)
+	IFEND[]
+	IF[@_PINT(1)==1] //終了確認(DIALOG)
+		GOSUB[#=ES.ENDCONF.DIALOG]
+	IFEND[]
+
+//	@es.SCENARIOSTOP=@e.ENDCONF;\es.S.GOSUB("ES.ENDCONF", 0, 0, 1, 0)
+
+//	IFEND[]
+	return[]
+}
+
+//■[SCREEN]ボタン ---------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.SCREEN.ON
+{
+	GOSUB[#=ES.SCREENCHANGE.LOOP]
+	return[]
+}
+
+//■[MENU]ボタン -----------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.MENU.ON
+{
+	IF[@es.TX.AUTO]
+	{
+		GOSUB[#=ES.AUTO.LOOP]
+		GO[#=ES.GAMEMAIN.BTN.MENU.ON.LEnd]
+	}
+	IFEND[]
+
+//	IF[@es.SELMODE>0 || (@es.SELMODE==0 && @es.TX.CWAIT)]
+
+//	@es.TX.IKKATSU=1
+
+	//サムネ用にスクリーンショットを撮っておく
+	GOSUB[#=ES.SCENARIO.SS]
+
+//	@es.SCENARIOSTOP=@e.MENU;\es.S.GOSUB.OVER("ES.MENU", 0, 0, 1, 0)
+	@es.SCENARIOSTOP=@e.MENU;\es.S.GOSUB("ES.MENU", 0, 0, 1, 0)
+
+//	IFEND[]
+
+	#=ES.GAMEMAIN.BTN.MENU.ON.LEnd
+
+	return[]
+}
+
+/*
+//■[OPENCLOSE]ボタン ------------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.OPENCLOSE.INIT
+{
+	\BT.ACTIVEGROUP( 1+@es.GSD(096,01) )
+	return[]
+}
+
+#=ES.GAMEMAIN.BTN.OPENCLOSE.ON
+{
+	@es.GSD(096,01) = 1 - @es.GSD(096,01)
+	\BT.ACTIVEGROUP( 1+@es.GSD(096,01) )
+	return[]
+}
+*/
+
+
+//■[SCENARIOGO]ボタン -----------------------------------------------
+//
+#=ES.GAMEMAIN.BTN.SCENARIOGO.ON
+{
+	@es.SCENARIOSTOP=17
+
+		@es.TX.IKKATSU=1
+
+		$es.SJMODE = "" //ここに GOジャンプさせたいラベルを記入
+		GOSUB[#=es.CGTSS.2]
+		\es.S.RETURN.LBL("ES.GAMEMAIN", 902, 0)
+
+	@es.SCENARIOSTOP=0
+	return[]
+}
+
+
+//====================================================================
+//■WINDOWSERASE
+//
+#=ES.WINDOWERASE.INIT
+{
+	\_gosub(es.WindowErase.VoicePlay.1)	//ボイス再生
+	@es.STATE=0
+	return[]
+}
+
+#=ES.WINDOWERASE.LOOP
+{
+	IF[@es.STATE==0]
+	{
+		\SS.FADE(0)
+		@es.STATE=1
+	}
+	IFEND[]
+	return[]
+}
+
+//■[SHOW]ボタン -----------------------------------------------------
+//
+#=ES.WINDOWERASE.BTN.MESWSHOW.ON
+{
+	\es.S.RETURN
+	return[]
+}
+
